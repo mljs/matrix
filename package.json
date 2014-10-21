@@ -1,0 +1,42 @@
+{
+  "name": "dm-matrix",
+  "version": "1.0.0",
+  "description": "Matrix manipulation and computation library",
+  "main": "src/index.js",
+  "directories": {
+    "lib": "src",
+    "test": "test"
+  },
+  "scripts": {
+    "test": "./node_modules/.bin/mocha --require should --reporter spec --recursive --bail"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/targos/dm-matrix"
+  },
+  "keywords": [
+    "matrix",
+    "decomposition",
+    "SVD",
+    "singular",
+    "value",
+    "EVD",
+    "eigenvalue",
+    "LU",
+    "Qr",
+    "Cholesky",
+    "data",
+    "mining",
+    "datamining"
+  ],
+  "author": "Michaël Zasso",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/targos/dm-matrix/issues"
+  },
+  "homepage": "https://github.com/targos/dm-matrix",
+  "devDependencies": {
+    "mocha": "^1.21.5",
+    "should": "^4.1.0"
+  }
+}
