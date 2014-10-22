@@ -33,7 +33,7 @@
   },
   "homepage": "https://github.com/mljs/matrix",
   "devDependencies": {
-    " mocha-better-spec-reporter": "latest",
+    "mocha-better-spec-reporter": "latest",
     "mocha": "latest",
     "should": "latest",
     "should-approximately-deep": "latest"
