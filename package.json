@@ -1,5 +1,5 @@
 {
-  "name": "dm-matrix",
+  "name": "ml-matrix",
   "version": "1.0.0",
   "description": "Matrix manipulation and computation library",
   "main": "src/index.js",
@@ -8,12 +8,9 @@
     "test": "test"
   },
   "scripts": {
-    "test": "./node_modules/.bin/mocha --require should --reporter spec --recursive --bail"
+    "test": "mocha --require should-approximately-deep --reporter mocha-better-spec-reporter --recursive"
   },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/targos/dm-matrix"
-  },
+  "repository": "mljs/matrix",
   "keywords": [
     "matrix",
     "decomposition",
@@ -32,11 +29,13 @@
   "author": "Michaël Zasso",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/targos/dm-matrix/issues"
+    "url": "https://github.com/mljs/matrix/issues"
   },
-  "homepage": "https://github.com/targos/dm-matrix",
+  "homepage": "https://github.com/mljs/matrix",
   "devDependencies": {
-    "mocha": "^1.21.5",
-    "should": "^4.1.0"
+    " mocha-better-spec-reporter": "latest",
+    "mocha": "latest",
+    "should": "latest",
+    "should-approximately-deep": "latest"
   }
 }

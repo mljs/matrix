@@ -15,10 +15,10 @@ function slice(arr) {
 }
 
 function MatrixError(message) {
-    this.name = "MatrixError";
-    this.message = message || "Unknown matrix error";
+    this.message = message || 'Unknown matrix error';
 }
-MatrixError.prototype = new Error;
+MatrixError.prototype = Object.create(Error.prototype);
+MatrixError.prototype.name = 'MatrixError';
 MatrixError.prototype.constructor = MatrixError;
 
 function throwError(message) {
@@ -41,12 +41,16 @@ function Matrix(nRows, nColumns) {
         if (typeof nColumns === 'undefined') {
             throwError('Data must be a 2D array');
         }
-        for (; i < nRows; i++) {
-            if (matrix[i].length !== nColumns) {
-                throwError('Inconsistent array dimensions');
-            } else if (newInstance) {
-                matrix[i] = slice(matrix[i]);
+        if (nRows > 0 && nColumns > 0) {
+            for (; i < nRows; i++) {
+                if (matrix[i].length !== nColumns) {
+                    throwError('Inconsistent array dimensions');
+                } else if (newInstance) {
+                    matrix[i] = slice(matrix[i]);
+                }
             }
+        } else {
+            throwError('Invalid dimensions: ' + nRows + 'x' + nColumns);
         }
     } else if (typeof nRows === 'number') { // Create empty matrix
         if (nRows > 0 && nColumns > 0) {
@@ -1453,5 +1457,7 @@ Matrix.prototype.abs = function abs() {
         }
     }
 };
+
+Matrix.MatrixError = MatrixError;
 
 module.exports = Matrix;
