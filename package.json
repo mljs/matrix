@@ -1,41 +1,43 @@
 {
-  "name": "ml-matrix",
-  "version": "1.0.0",
-  "description": "Matrix manipulation and computation library",
-  "main": "src/index.js",
-  "directories": {
-    "lib": "src",
-    "test": "test"
-  },
-  "scripts": {
-    "test": "mocha --require should-approximately-deep --reporter mocha-better-spec-reporter --recursive"
-  },
-  "repository": "mljs/matrix",
-  "keywords": [
-    "matrix",
-    "decomposition",
-    "SVD",
-    "singular",
-    "value",
-    "EVD",
-    "eigenvalue",
-    "LU",
-    "Qr",
-    "Cholesky",
-    "data",
-    "mining",
-    "datamining"
-  ],
-  "author": "Michaël Zasso",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/mljs/matrix/issues"
-  },
-  "homepage": "https://github.com/mljs/matrix",
-  "devDependencies": {
-    "mocha-better-spec-reporter": "latest",
-    "mocha": "latest",
-    "should": "latest",
-    "should-approximately-deep": "latest"
-  }
+    "name": "ml-matrix",
+    "version": "1.0.0",
+    "description": "Matrix manipulation and computation library",
+    "main": "src/index.js",
+    "directories": {
+        "lib": "src",
+        "test": "test"
+    },
+    "scripts": {
+        "test": "mocha --require should-approximately-deep --reporter mocha-better-spec-reporter --recursive"
+    },
+    "repository": "mljs/matrix",
+    "keywords": [
+        "matrix",
+        "decomposition",
+        "SVD",
+        "singular",
+        "value",
+        "EVD",
+        "eigenvalue",
+        "LU",
+        "Qr",
+        "Cholesky",
+        "data",
+        "mining",
+        "datamining",
+        "machine",
+        "learning"
+    ],
+    "author": "Michaël Zasso",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/mljs/matrix/issues"
+    },
+    "homepage": "https://github.com/mljs/matrix",
+    "devDependencies": {
+        "mocha-better-spec-reporter": "latest",
+        "mocha": "latest",
+        "should": "latest",
+        "should-approximately-deep": "latest"
+    }
 }
