@@ -1,4 +1,6 @@
-var Matrix = require('../');
+'use strict';
+
+var Matrix = require('..');
 
 exports.getSquareArray = function getSquareArray() {
     return [
