@@ -29,7 +29,7 @@ MatrixError.prototype.constructor = MatrixError;
  */
 function Matrix(nRows, nColumns) {
     var i = 0, rows, columns, matrix, newInstance;
-    if (nRows instanceof Array) {
+    if (Array.isArray(nRows)) {
         newInstance = nColumns;
         matrix = newInstance ? slice(nRows) : nRows;
         nRows = matrix.length;
@@ -220,7 +220,7 @@ Matrix.stack = function stack(arg1) {
         }
         return r;
     }
-    else if (arg1 instanceof Array) {
+    else if (Array.isArray(arg1)) {
         var matrix = Matrix.empty(arguments.length, arg1.length);
         for (i = 0; i < arguments.length; i++)
             matrix.setRow(i, arguments[i]);
