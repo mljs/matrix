@@ -1287,6 +1287,8 @@ Matrix.prototype.dot = function dot(other) {
  * @returns {Matrix}
  */
 Matrix.prototype.mmul = function mmul(other) {
+    if (!Matrix.isMatrix(other))
+        throw new MatrixError('parameter "other" must be a matrix');
     if (this.columns !== other.rows)
         console.warn('Number of columns of left matrix are not equal to number of rows of right matrix.');
 

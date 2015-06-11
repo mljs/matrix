@@ -27,7 +27,7 @@ function SingularValueDecomposition(value, options) {
     var swapped = false;
     if (m < n) {
         if (!autoTranspose) {
-            console.warn('WARNING: Computing SVD on a matrix with more columns than rows.');
+            console.warn('Computing SVD on a matrix with more columns than rows. Consider enabling autoTranspose');
         } else {
             a = a.transpose();
             m = a.rows;
