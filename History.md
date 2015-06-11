@@ -1,3 +1,10 @@
+0.0.4 / 2015-06-11
+==================
+
+* authorize call of decompositions without new
+* fix bug in svd.inverse
+* check for matrix argument in mmul
+
 0.0.3 / 2015-04-24
 ==================
 
