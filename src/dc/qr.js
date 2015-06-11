@@ -5,6 +5,9 @@ var hypotenuse = require('./util').hypotenuse;
 
 //https://github.com/lutzroeder/Mapack/blob/master/Source/QrDecomposition.cs
 function QrDecomposition(value) {
+    if (!(this instanceof QrDecomposition)) {
+        return new QrDecomposition(value);
+    }
     value = Matrix.checkMatrix(value);
 
     var qr = value.clone(),

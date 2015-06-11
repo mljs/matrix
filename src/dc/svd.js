@@ -5,6 +5,9 @@ var hypotenuse = require('./util').hypotenuse;
 
 // https://github.com/lutzroeder/Mapack/blob/master/Source/SingularValueDecomposition.cs
 function SingularValueDecomposition(value, options) {
+    if (!(this instanceof SingularValueDecomposition)) {
+        return new SingularValueDecomposition(value, options);
+    }
     value = Matrix.checkMatrix(value);
 
     options = options || {};

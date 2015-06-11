@@ -4,6 +4,9 @@ var Matrix = require('../matrix');
 
 // https://github.com/lutzroeder/Mapack/blob/master/Source/LuDecomposition.cs
 function LuDecomposition(matrix) {
+    if (!(this instanceof LuDecomposition)) {
+        return new LuDecomposition(matrix);
+    }
     matrix = Matrix.checkMatrix(matrix);
 
     var lu = matrix.clone(),

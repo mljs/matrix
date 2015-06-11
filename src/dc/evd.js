@@ -5,6 +5,9 @@ var hypotenuse = require('./util').hypotenuse;
 
 // https://github.com/lutzroeder/Mapack/blob/master/Source/EigenvalueDecomposition.cs
 function EigenvalueDecomposition(matrix) {
+    if (!(this instanceof EigenvalueDecomposition)) {
+        return new EigenvalueDecomposition(matrix);
+    }
     matrix = Matrix.checkMatrix(matrix);
     if (!matrix.isSquare()) {
         throw new Error('Matrix is not a square matrix');

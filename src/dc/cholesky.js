@@ -4,6 +4,9 @@ var Matrix = require('../matrix');
 
 // https://github.com/lutzroeder/Mapack/blob/master/Source/CholeskyDecomposition.cs
 function CholeskyDecomposition(value) {
+    if (!(this instanceof CholeskyDecomposition)) {
+        return new CholeskyDecomposition(value);
+    }
     value = Matrix.checkMatrix(value);
     if (!value.isSymmetric())
         throw new Error('Matrix is not symmetric');
