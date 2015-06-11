@@ -1,7 +1,8 @@
-0.0.5 / head
-============
+0.1.0 / 2015-06-11
+==================
 
 * use standard errors, remove MatrixError
+* implement getColumnVector and getRowVector
 
 0.0.4 / 2015-06-11
 ==================
