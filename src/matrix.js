@@ -620,6 +620,15 @@ Matrix.prototype.getRow = function getRow(index) {
 };
 
 /**
+ * Returns a new row vector from the given row index
+ * @param {number} index - Row index
+ * @returns {Matrix}
+ */
+Matrix.prototype.getRowVector = function getRowVector(index) {
+    return Matrix.rowVector(this.getRow(index));
+};
+
+/**
  * Sets a row at the given index
  * @param {number} index - Row index
  * @param {Array|Matrix} array - Array or vector
@@ -696,6 +705,15 @@ Matrix.prototype.getColumn = function getColumn(index) {
         column[i] = this[i][index];
     }
     return column;
+};
+
+/**
+ * Returns a new column vector from the given column index
+ * @param {number} index - Column index
+ * @returns {Matrix}
+ */
+Matrix.prototype.getColumnVector = function getColumnVector(index) {
+    return Matrix.columnVector(this.getColumn(index));
 };
 
 /**
