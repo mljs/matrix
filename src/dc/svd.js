@@ -431,8 +431,9 @@ SingularValueDecomposition.prototype = {
         for (i = 0; i < scols; i++) {
             if (Math.abs(this.s[i]) <= e) {
                 Ls[i][i] = 0;
+            } else {
+                Ls[i][i] = 1 / this.s[i];
             }
-            else Ls[i][i] = 1 / this.s[i];
         }
 
 
@@ -468,6 +469,8 @@ SingularValueDecomposition.prototype = {
             for (j = 0; j < vcols; j++) {
                 if (Math.abs(this.s[j]) > e) {
                     X[i][j] = this.V[i][j] / this.s[j];
+                } else {
+                    X[i][j] = 0;
                 }
             }
         }
