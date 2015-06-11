@@ -9,6 +9,8 @@ describe('Matrix creation', function () {
         var matrix = new Matrix(array);
         matrix.should.equal(array);
         Matrix.isMatrix(matrix).should.be.true;
+        matrix.should.be.instanceof(Matrix);
+        Array.isArray(matrix).should.be.true;
     });
     it('should create a new array if asked', function () {
         var array = util.getSquareArray();
@@ -16,11 +18,11 @@ describe('Matrix creation', function () {
         matrix.should.not.equal(array);
     });
     it('should throw with wrong arguments', function () {
-        Matrix.bind(null, 0).should.throw(Matrix.MatrixError, /^Invalid dimensions: 0xundefined$/);
-        Matrix.bind(null, [[]]).should.throw(Matrix.MatrixError, /^Invalid dimensions: 1x0$/);
-        Matrix.bind(null, [0, 1, 2, 3]).should.throw(Matrix.MatrixError, /^Data must be a 2D array$/);
-        Matrix.bind(null, [[0, 1], [0, 1, 2]]).should.throw(Matrix.MatrixError, /^Inconsistent array dimensions$/);
-        Matrix.bind(null).should.throw(Matrix.MatrixError, /^Invalid arguments$/);
+        Matrix.bind(null, 0).should.throw(RangeError, /^Invalid dimensions: 0xundefined$/);
+        Matrix.bind(null, [[]]).should.throw(RangeError, /^Invalid dimensions: 1x0$/);
+        Matrix.bind(null, [0, 1, 2, 3]).should.throw(TypeError, /^Data must be a 2D array$/);
+        Matrix.bind(null, [[0, 1], [0, 1, 2]]).should.throw(RangeError, /^Inconsistent array dimensions$/);
+        Matrix.bind(null).should.throw(TypeError, /^Invalid arguments$/);
     });
     it('should correctly set rows, columns and values', function () {
         var matrix = util.getSquareMatrix();
@@ -36,7 +38,7 @@ describe('Matrix creation', function () {
         check2.should.exactly(matrix);
         (function() {
             Matrix.checkMatrix();
-        }).should.throw(Matrix.MatrixError, /^Argument has to be a matrix$/);
+        }).should.throw(TypeError, /^Argument has to be a matrix$/);
     });
     it('should create a matrix from 1D array', function () {
         var matrix = Matrix.from1DArray(3, 2, [0, 1, 2, 3, 4, 5]);
@@ -44,6 +46,6 @@ describe('Matrix creation', function () {
         matrix.columns.should.exactly(2);
         (function () {
             var matrix = Matrix.from1DArray(3, 2, [0, 1, 2, 3]);
-        }).should.throw(Matrix.MatrixError, /^Data length does not match given dimensions$/);
+        }).should.throw(RangeError, /^Data length does not match given dimensions$/);
     });
 });

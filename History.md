@@ -1,3 +1,8 @@
+0.0.5 / head
+============
+
+* use standard errors, remove MatrixError
+
 0.0.4 / 2015-06-11
 ==================
 
