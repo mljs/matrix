@@ -1,7 +1,9 @@
 'use strict';
 
-var Matrix = require('../matrix');
-var hypotenuse = require('./util').hypotenuse;
+const Matrix = require('../matrix');
+const util = require('./util');
+const hypotenuse = util.hypotenuse;
+const getFilled2DArray = util.getFilled2DArray;
 
 // https://github.com/lutzroeder/Mapack/blob/master/Source/EigenvalueDecomposition.cs
 function EigenvalueDecomposition(matrix) {
@@ -14,7 +16,7 @@ function EigenvalueDecomposition(matrix) {
     }
 
     var n = matrix.columns,
-        V = Matrix.zeros(n, n),
+        V = getFilled2DArray(n, n, 0),
         d = new Array(n),
         e = new Array(n),
         value = matrix,
@@ -30,7 +32,7 @@ function EigenvalueDecomposition(matrix) {
         tql2(n, e, d, V);
     }
     else {
-        var H = Matrix.zeros(n, n),
+        var H = getFilled2DArray(n, n, 0),
             ort = new Array(n);
         for (j = 0; j < n; j++) {
             for (i = 0; i < n; i++) {
@@ -55,6 +57,9 @@ EigenvalueDecomposition.prototype = {
         return this.e;
     },
     get eigenvectorMatrix() {
+        if (!Matrix.isMatrix(this.V)) {
+            this.V = new Matrix(this.V);
+        }
         return this.V;
     },
     get diagonalMatrix() {
