@@ -1465,6 +1465,7 @@ Matrix.prototype.abs = function abs() {
             this[i][j] = Math.abs(this[i][j]);
         }
     }
+    return this;
 };
 
 module.exports = Matrix;
