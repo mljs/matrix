@@ -1,2 +1,10 @@
 .idea
 node_modules
+
+test/matrix/benchmark.js
+
+test/matrix/benchmark.js
+
+test/matrix/benchmark2.js
+
+test/matrix/myTest.js
