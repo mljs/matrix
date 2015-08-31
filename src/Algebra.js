@@ -7,7 +7,7 @@
 
 'use strict';
 
-var Matrix = require('ml-matrix');
+var Matrix = require('./matrix');
 
 function matrix(A,B){
     return new Matrix(A,B);
