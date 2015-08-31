@@ -7,7 +7,28 @@
 
 'use strict';
 
-var Matrix = require('./matrix');
+var Matrix = require('ml-matrix');
+
+function matrix(A,B){
+    return new Matrix(A,B);
+}
+
+function ones(rows, cols){
+    return Matrix.ones(rows,cols);
+}
+
+function eye(rows, cols){
+    return Matrix.eye(rows, cols);
+}
+
+function zeros(rows, cols){
+    return Matrix.zeros(rows, cols);
+}
+
+function random(rows, cols){
+    console.log(rows +" "+cols);
+    return Matrix.rand(rows,cols);
+}
 
 function transpose(A){
     if(typeof A == 'number')
@@ -223,5 +244,10 @@ module.exports = {
     sqrt:sqrt,
     exp:exp,
     dotPow:dotPow,
-    abs:abs
+    abs:abs,
+    matrix:matrix,
+    ones:ones,
+    zeros:zeros,
+    random:random,
+    eye:eye
 };
