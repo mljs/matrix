@@ -152,12 +152,15 @@ Matrix.rand = function rand(rows, columns) {
 
 /**
  * Creates an identity matrix with the given dimension. Values of the diagonal will be 1 and other will be 0.
- * @param {number} n - Number of rows and columns
- * @returns {Matrix} - The new matrix
+ * @param {number} rows - Number of rows
+ * @param {number} [columns] - Number of columns (Default: rows)
+ * @returns {Matrix} - The new identity matrix
  */
-Matrix.eye = function eye(n) {
-    var matrix = Matrix.zeros(n, n), l = matrix.rows;
-    for (var i = 0; i < l; i++) {
+Matrix.eye = function eye(rows, columns) {
+    if (columns === undefined) columns = rows;
+    var min = Math.min(rows, columns);
+    var matrix = Matrix.zeros(rows, columns);
+    for (var i = 0; i < min; i++) {
         matrix[i][i] = 1;
     }
     return matrix;
@@ -166,11 +169,17 @@ Matrix.eye = function eye(n) {
 /**
  * Creates a diagonal matrix based on the given array.
  * @param {Array} data - Array containing the data for the diagonal
- * @returns {Matrix} - The new matrix
+ * @param {number} [rows] - Number of rows (Default: data.length)
+ * @param {number} [columns] - Number of columns (Default: rows)
+ * @returns {Matrix} - The new diagonal matrix
  */
-Matrix.diag = function diag(data) {
-    var l = data.length, matrix = Matrix.zeros(l, l);
-    for (var i = 0; i < l; i++) {
+Matrix.diag = function diag(data, rows, columns) {
+    var l = data.length;
+    if (rows === undefined) rows = l;
+    if (columns === undefined) columns = rows;
+    var min = Math.min(l, rows, columns);
+    var matrix = Matrix.zeros(rows, columns);
+    for (var i = 0; i < min; i++) {
         matrix[i][i] = data[i];
     }
     return matrix;
@@ -1213,10 +1222,9 @@ Matrix.prototype.minColumnIndex = function minColumnIndex(index) {
  * @returns {Array}
  */
 Matrix.prototype.diag = function diag() {
-    if (!this.isSquare())
-        throw new TypeError('Only square matrices have a diagonal.');
-    var diag = new Array(this.rows);
-    for (var i = 0, ii = this.rows; i < ii; i++) {
+    var min = Math.min(this.rows, this.columns);
+    var diag = new Array(min);
+    for (var i = 0; i < min; i++) {
         diag[i] = this[i][i];
     }
     return diag;
@@ -1445,10 +1453,9 @@ Matrix.prototype.subMatrixColumn = function subMatrixColumn(indices, startRow, e
  * @returns {number}
  */
 Matrix.prototype.trace = function trace() {
-    if (!this.isSquare())
-        throw new TypeError('The matrix is not square');
-    var trace = 0, i = 0, l = this.rows;
-    for (; i < l; i++) {
+    var min = Math.min(this.rows, this.columns);
+    var trace = 0;
+    for (var i = 0; i < min; i++) {
         trace += this[i][i];
     }
     return trace;
