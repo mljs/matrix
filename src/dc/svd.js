@@ -1,7 +1,9 @@
 'use strict';
 
-var Matrix = require('../matrix');
-var hypotenuse = require('./util').hypotenuse;
+const Matrix = require('../matrix');
+const util = require('./util');
+const hypotenuse = util.hypotenuse;
+const getFilled2DArray = util.getFilled2DArray;
 
 // https://github.com/lutzroeder/Mapack/blob/master/Source/SingularValueDecomposition.cs
 function SingularValueDecomposition(value, options) {
@@ -12,8 +14,7 @@ function SingularValueDecomposition(value, options) {
 
     options = options || {};
 
-    var a = value.clone(),
-        m = value.rows,
+    var m = value.rows,
         n = value.columns,
         nu = Math.min(m, n);
 
@@ -25,11 +26,13 @@ function SingularValueDecomposition(value, options) {
     var autoTranspose = options.autoTranspose === true;
 
     var swapped = false;
+    var a;
     if (m < n) {
         if (!autoTranspose) {
+            a = value.clone();
             console.warn('Computing SVD on a matrix with more columns than rows. Consider enabling autoTranspose');
         } else {
-            a = a.transpose();
+            a = value.transpose();
             m = a.rows;
             n = a.columns;
             swapped = true;
@@ -37,11 +40,13 @@ function SingularValueDecomposition(value, options) {
             wantu = wantv;
             wantv = aux;
         }
+    } else {
+        a = value.clone();
     }
 
     var s = new Array(Math.min(m + 1, n)),
-        U = Matrix.zeros(m, nu),
-        V = Matrix.zeros(n, n),
+        U = getFilled2DArray(m, nu, 0),
+        V = getFilled2DArray(n, n, 0),
         e = new Array(n),
         work = new Array(m);
 
@@ -412,9 +417,15 @@ SingularValueDecomposition.prototype = {
         return (Math.pow(2, -52) / 2) * Math.max(this.m, this.n) * this.s[0];
     },
     get leftSingularVectors() {
+        if (!Matrix.isMatrix(this.U)) {
+            this.U = new Matrix(this.U);
+        }
         return this.U;
     },
     get rightSingularVectors() {
+        if (!Matrix.isMatrix(this.V)) {
+            this.V = new Matrix(this.V);
+        }
         return this.V;
     },
     get diagonalMatrix() {
@@ -436,10 +447,12 @@ SingularValueDecomposition.prototype = {
             }
         }
 
+        var U = this.U;
+        var V = this.rightSingularVectors;
 
-        var VL = this.V.mmul(Ls),
-            vrows = this.V.rows,
-            urows = this.U.rows,
+        var VL = V.mmul(Ls),
+            vrows = V.rows,
+            urows = U.length,
             VLU = Matrix.zeros(vrows, urows),
             j, k, sum;
 
@@ -447,7 +460,7 @@ SingularValueDecomposition.prototype = {
             for (j = 0; j < urows; j++) {
                 sum = 0;
                 for (k = 0; k < scols; k++) {
-                    sum += VL[i][k] * this.U[j][k];
+                    sum += VL[i][k] * U[j][k];
                 }
                 VLU[i][j] = sum;
             }
@@ -459,24 +472,27 @@ SingularValueDecomposition.prototype = {
         return this.solve(Matrix.diag(value));
     },
     inverse: function () {
+        var V = this.V;
         var e = this.threshold,
-            vrows = this.V.rows,
-            vcols = this.V.columns,
+            vrows = V.length,
+            vcols = V[0].length,
             X = new Matrix(vrows, this.s.length),
             i, j;
 
         for (i = 0; i < vrows; i++) {
             for (j = 0; j < vcols; j++) {
                 if (Math.abs(this.s[j]) > e) {
-                    X[i][j] = this.V[i][j] / this.s[j];
+                    X[i][j] = V[i][j] / this.s[j];
                 } else {
                     X[i][j] = 0;
                 }
             }
         }
 
-        var urows = this.U.rows,
-            ucols = this.U.columns,
+        var U = this.U;
+
+        var urows = U.length,
+            ucols = U[0].length,
             Y = new Matrix(vrows, urows),
             k, sum;
 
@@ -484,7 +500,7 @@ SingularValueDecomposition.prototype = {
             for (j = 0; j < urows; j++) {
                 sum = 0;
                 for (k = 0; k < ucols; k++) {
-                    sum += X[i][k] * this.U[j][k];
+                    sum += X[i][k] * U[j][k];
                 }
                 Y[i][j] = sum;
             }

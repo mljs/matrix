@@ -131,7 +131,7 @@ describe('Singular value decomposition', function () {
 
         it('right singular vectors (0)', function () {
             var V = [[0, 0], [0, 0], [0, 0], [0, 0]];
-            target.rightSingularVectors.should.eql(V);
+            target.rightSingularVectors.should.approximatelyDeep(V, 1e-6);
         });
 
         it('diagonal', function () {
@@ -150,7 +150,7 @@ describe('Singular value decomposition', function () {
 
         it('left singular vectors', function () {
             var U = [[0, 0], [0, 0]];
-            target.leftSingularVectors.should.eql(U);
+            target.leftSingularVectors.should.approximatelyDeep(U, 1e-6);
         });
 
         it('right singular vectors', function () {

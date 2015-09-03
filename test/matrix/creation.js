@@ -4,13 +4,18 @@ var Matrix = require('../../');
 var util = require('../util');
 
 describe('Matrix creation', function () {
-    it('should change original prototype', function () {
+    it('should create a new object', function () {
         var array = util.getSquareArray();
         var matrix = new Matrix(array);
-        matrix.should.equal(array);
-        Matrix.isMatrix(matrix).should.be.true;
+        matrix.should.not.equal(array);
+    });
+    it('should extend Array', function () {
+        var array = util.getSquareArray();
+        var matrix = new Matrix(array);
+        Matrix.isMatrix(matrix).should.be.true();
         matrix.should.be.instanceof(Matrix);
-        Array.isArray(matrix).should.be.true;
+        matrix.should.be.instanceof(Array);
+        Array.isArray(matrix).should.be.true();
     });
     it('should create a new array if asked', function () {
         var array = util.getSquareArray();
@@ -18,11 +23,11 @@ describe('Matrix creation', function () {
         matrix.should.not.equal(array);
     });
     it('should throw with wrong arguments', function () {
-        Matrix.bind(null, 0).should.throw(RangeError, /^Invalid dimensions: 0xundefined$/);
-        Matrix.bind(null, [[]]).should.throw(RangeError, /^Invalid dimensions: 1x0$/);
-        Matrix.bind(null, [0, 1, 2, 3]).should.throw(TypeError, /^Data must be a 2D array$/);
-        Matrix.bind(null, [[0, 1], [0, 1, 2]]).should.throw(RangeError, /^Inconsistent array dimensions$/);
-        Matrix.bind(null).should.throw(TypeError, /^Invalid arguments$/);
+        (function(){ new Matrix(0) }).should.throw(TypeError, /^First argument must be a positive number or an array$/);
+        (function(){ new Matrix([[]]) }).should.throw(TypeError, /^Data must be a 2D array with at least one element$/);
+        (function(){ new Matrix([0, 1, 2, 3]) }).should.throw(TypeError, /^Data must be a 2D array/);
+        (function(){ new Matrix([[0, 1], [0, 1, 2]]) }).should.throw(RangeError, /^Inconsistent array dimensions$/);
+        (function(){ new Matrix() }).should.throw(TypeError, /^First argument must be a positive number or an array$/);
     });
     it('should correctly set rows, columns and values', function () {
         var matrix = util.getSquareMatrix();
@@ -33,7 +38,7 @@ describe('Matrix creation', function () {
     it('should correctly check if argument is a matrix', function () {
         var array = util.getSquareArray();
         var matrix = Matrix.checkMatrix(array);
-        Matrix.isMatrix(matrix).should.be.true;
+        Matrix.isMatrix(matrix).should.be.true();
         var check2 = Matrix.checkMatrix(matrix);
         check2.should.exactly(matrix);
         (function() {

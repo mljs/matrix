@@ -1,6 +1,6 @@
 'use strict';
 
-var Matrix = require('../matrix');
+const Matrix = require('../matrix');
 
 // https://github.com/lutzroeder/Mapack/blob/master/Source/LuDecomposition.cs
 function LuDecomposition(matrix) {
