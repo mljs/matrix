@@ -17,7 +17,7 @@ describe('Matrix#abs', function () {
 
     it('should convert all elements to absolute value (in-place)', function () {
         matrix.abs();
-        matrix.should.eql([
+        matrix.to2DArray().should.eql([
             [0, 1, 2],
             [3, 4, 5],
             [6, 7, 8],
