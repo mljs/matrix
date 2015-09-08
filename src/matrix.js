@@ -344,175 +344,6 @@ class Matrix extends Array {
     }
 
     /**
-     * Adds a scalar or values from another matrix (in place)
-     * @param {number|Matrix} value
-     * @returns {Matrix} this
-     */
-    add(value) {
-        if (typeof value === 'number') return this.addS(value);
-        return this.addM(value);
-    }
-
-    /**
-     * Adds a scalar to each element of the matrix (in place)
-     * @param {number} value
-     * @returns {Matrix} this
-     */
-    addS(value) {
-        for (var i = 0; i < this.rows; i++) {
-            for (var j = 0; j < this.columns; j++) {
-                this[i][j] += value;
-            }
-        }
-        return this;
-    }
-
-    /**
-     * Adds the value of each element of matrix to the corresponding element of this (in place)
-     * @param {Matrix} matrix
-     * @returns {Matrix} this
-     */
-    addM(matrix) {
-        checkDimensions(this, matrix);
-        for (var i = 0; i < this.rows; i++) {
-            for (var j = 0; j < this.columns; j++) {
-                this[i][j] += matrix[i][j];
-            }
-        }
-        return this;
-    }
-
-    /**
-     * Subtracts a scalar or values from another matrix (in place)
-     * @param {number|Matrix} value
-     * @returns {Matrix} this
-     */
-    sub(value) {
-        if (typeof value === 'number') return this.subS(value);
-        return this.subM(value);
-    }
-
-    /**
-     * Subtracts a scalar from each element of the matrix (in place)
-     * @param {number} value
-     * @returns {Matrix} this
-     */
-    subS(value) {
-        for (var i = 0; i < this.rows; i++) {
-            for (var j = 0; j < this.columns; j++) {
-                this[i][j] -= value;
-            }
-        }
-        return this;
-    }
-
-    /**
-     * Subtracts the value of each element of matrix from the corresponding element of this (in place)
-     * @param {Matrix} matrix
-     * @returns {Matrix} this
-     */
-    subM(matrix) {
-        checkDimensions(this, matrix);
-        for (var i = 0; i < this.rows; i++) {
-            for (var j = 0; j < this.columns; j++) {
-                this[i][j] -= matrix[i][j];
-            }
-        }
-        return this;
-    }
-
-    /**
-     * Multiplies a scalar or values from another matrix (in place)
-     * @param {number|Matrix} value
-     * @returns {Matrix} this
-     */
-    mul(value) {
-        if (typeof value === 'number') return this.mulS(value);
-        return this.mulM(value);
-    }
-
-    /**
-     * Multiplies a scalar with each element of the matrix (in place)
-     * @param {number} value
-     * @returns {Matrix} this
-     */
-    mulS(value) {
-        for (var i = 0; i < this.rows; i++) {
-            for (var j = 0; j < this.columns; j++) {
-                this[i][j] *= value;
-            }
-        }
-        return this;
-    }
-
-    /**
-     * Multiplies the value of each element of matrix with the corresponding element of this (in place)
-     * @param {Matrix} matrix
-     * @returns {Matrix} this
-     */
-    mulM(matrix) {
-        checkDimensions(this, matrix);
-        for (var i = 0; i < this.rows; i++) {
-            for (var j = 0; j < this.columns; j++) {
-                this[i][j] *= matrix[i][j];
-            }
-        }
-        return this;
-    }
-
-    /**
-     * Divides by a scalar or values from another matrix (in place)
-     * @param {number|Matrix} value
-     * @returns {Matrix} this
-     */
-    div(value) {
-        if (typeof value === 'number') return this.divS(value);
-        return this.divM(value);
-    }
-
-    /**
-     * Divides each element of the matrix by a scalar (in place)
-     * @param {number} value
-     * @returns {Matrix} this
-     */
-    divS(value) {
-        for (var i = 0; i < this.rows; i++) {
-            for (var j = 0; j < this.columns; j++) {
-                this[i][j] /= value;
-            }
-        }
-        return this;
-    }
-
-    /**
-     * Divides each element of this by the corresponding element of matrix (in place)
-     * @param {Matrix} matrix
-     * @returns {Matrix} this
-     */
-    divM(matrix) {
-        checkDimensions(this, matrix);
-        for (var i = 0; i < this.rows; i++) {
-            for (var j = 0; j < this.columns; j++) {
-                this[i][j] /= matrix[i][j];
-            }
-        }
-        return this;
-    }
-
-    /**
-     * Sets each element of the matrix to its absolute value (in place)
-     * @returns {Matrix} this
-     */
-    abs() {
-        for (var i = 0; i < this.rows; i++) {
-            for (var j = 0; j < this.columns; j++) {
-                this[i][j] = Math.abs(this[i][j]);
-            }
-        }
-        return this;
-    }
-
-    /**
      * Returns a new array from the given row index
      * @param {number} index - Row index
      * @returns {Array}
@@ -1364,4 +1195,115 @@ function checkDimensions(matrix, otherMatrix) {
 
 function compareNumbers(a, b) {
     return a - b;
+}
+
+/*
+Add dynamically instance and static methods for mathematical operations
+ */
+
+const inplaceOperator = `
+(function %name%(value) {
+    if (typeof value === 'number') return this.%name%S(value);
+    return this.%name%M(value);
+})
+`;
+
+const inplaceOperatorScalar = `
+(function %name%S(value) {
+    for (var i = 0; i < this.rows; i++) {
+        for (var j = 0; j < this.columns; j++) {
+            this[i][j] = this[i][j] %op% value;
+        }
+    }
+    return this;
+})
+`;
+
+const inplaceOperatorMatrix = `
+(function %name%M(matrix) {
+    checkDimensions(this, matrix);
+    for (var i = 0; i < this.rows; i++) {
+        for (var j = 0; j < this.columns; j++) {
+            this[i][j] = this[i][j] %op% matrix[i][j];
+        }
+    }
+    return this;
+})
+`;
+
+const staticOperator = `
+(function %name%(matrix, value) {
+    const newMatrix = new Matrix(matrix);
+    return newMatrix.%name%(value);
+})
+`;
+
+const inplaceMethod = `
+(function %name%() {
+    for (var i = 0; i < this.rows; i++) {
+        for (var j = 0; j < this.columns; j++) {
+            this[i][j] = %method%(this[i][j]);
+        }
+    }
+    return this;
+})
+`;
+
+const staticMethod = `
+(function %name%(matrix) {
+    const newMatrix = new Matrix(matrix);
+    return newMatrix.%name%();
+})
+`;
+
+const operators = [
+    // Arithmetic operators
+    ['+', 'add'],
+    ['-', 'sub', 'subtract'],
+    ['*', 'mul', 'multiply'],
+    ['/', 'div', 'divide'],
+    ['%', 'mod', 'modulus'],
+    // Bitwise operators
+    ['&', 'and'],
+    ['|', 'or'],
+    ['^', 'xor'],
+    ['<<', 'leftShift'],
+    ['>>', 'rightShift'],
+    ['>>>', 'zeroRightShift']
+];
+
+for (let operator of operators) {
+    for (let i = 1; i < operator.length; i++) {
+        Matrix.prototype[operator[i]] = eval(fillTemplateFunction(inplaceOperator, {name: operator[i], op: operator[0]}));
+        Matrix.prototype[operator[i] + 'S'] = eval(fillTemplateFunction(inplaceOperatorScalar, {name: operator[i] + 'S', op: operator[0]}));
+        Matrix.prototype[operator[i] + 'M'] = eval(fillTemplateFunction(inplaceOperatorMatrix, {name: operator[i] + 'M', op: operator[0]}));
+
+        Matrix[operator[i]] = eval(fillTemplateFunction(staticOperator, {name: operator[i]}));
+    }
+}
+
+const methods = [
+    ['~', 'not']
+];
+
+[
+    'abs', 'acos', 'acosh', 'asin', 'asinh', 'atan', 'atanh', 'cbrt', 'ceil',
+    'clz32', 'cos', 'cosh', 'exp', 'expm1', 'floor', 'fround', 'log', 'log1p',
+    'log10', 'log2', 'round', 'sign', 'sin', 'sinh', 'sqrt', 'tan', 'tanh', 'trunc'
+].forEach(function (mathMethod) {
+    methods.push(['Math.' + mathMethod, mathMethod]);
+});
+
+for (let method of methods) {
+    for (let i = 1; i < method.length; i++) {
+        Matrix.prototype[method[i]] = eval(fillTemplateFunction(inplaceMethod, {name: method[i], method: method[0]}));
+        Matrix[method[i]] = eval(fillTemplateFunction(staticMethod, {name: method[i]}));
+    }
+}
+
+function fillTemplateFunction(template, values) {
+    for (var i in values) {
+        template = template.replace(new RegExp('%' + i + '%', 'g'), values[i]);
+    }
+    return template;
 }
