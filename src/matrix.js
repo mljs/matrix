@@ -174,6 +174,42 @@ class Matrix extends Array {
     }
 
     /**
+     * Returns a matrix whose elements are the minimum between matrix1 and matrix2
+     * @param matrix1
+     * @param matrix2
+     * @returns {Matrix}
+     */
+    static min(matrix1, matrix2) {
+        const rows = matrix1.length;
+        const columns = matrix1[0].length;
+        let result = new Matrix(rows, columns);
+        for (var i = 0; i < rows; i++) {
+            for(var j = 0; j < columns; j++) {
+                result[i][j] = Math.min(matrix1[i][j], matrix2[i][j]);
+            }
+        }
+        return result;
+    }
+
+    /**
+     * Returns a matrix whose elements are the maximum between matrix1 and matrix2
+     * @param matrix1
+     * @param matrix2
+     * @returns {Matrix}
+     */
+    static max(matrix1, matrix2) {
+        const rows = matrix1.length;
+        const columns = matrix1[0].length;
+        let result = new Matrix(rows, columns);
+        for (var i = 0; i < rows; i++) {
+            for(var j = 0; j < columns; j++) {
+                result[i][j] = Math.max(matrix1[i][j], matrix2[i][j]);
+            }
+        }
+        return result;
+    }
+
+    /**
      * Check that the provided value is a Matrix and tries to instantiate one if not
      * @param value - The value to check
      * @returns {Matrix}
