@@ -13,14 +13,14 @@ class Matrix extends Array {
     constructor(nRows, nColumns) {
         if (Matrix.isMatrix(nRows)) {
             return nRows.clone();
-        } else if (typeof nRows === 'number' && nRows > 0) { // Create an empty matrix
+        } else if (Number.isInteger(nRows) && nRows > 0) { // Create an empty matrix
             super(nRows);
-            if (typeof nColumns === 'number' && nColumns > 0) {
+            if (Number.isInteger(nColumns) && nColumns > 0) {
                 for (var i = 0; i < nRows; i++) {
                     this[i] = new Array(nColumns);
                 }
             } else {
-                throw new TypeError('nColumns must be a positive number');
+                throw new TypeError('nColumns must be a positive integer');
             }
         } else if (Array.isArray(nRows)) { // Copy the values from the 2D array
             var matrix = nRows;
@@ -240,6 +240,9 @@ class Matrix extends Array {
      * @returns {Matrix} this
      */
     apply(callback) {
+        if (typeof callback !== 'function') {
+            throw new TypeError('callback must be a function');
+        }
         let ii = this.rows;
         let jj = this.columns;
         for (var i = 0; i < ii; i++) {
