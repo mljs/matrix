@@ -1198,6 +1198,16 @@ function compareNumbers(a, b) {
 }
 
 /*
+Synonyms
+ */
+
+Matrix.random = Matrix.rand;
+Matrix.diagonal = Matrix.diag;
+Matrix.prototype.diagonal = Matrix.prototype.diag;
+Matrix.identity = Matrix.eye;
+Matrix.prototype.negate = Matrix.prototype.neg;
+
+/*
 Add dynamically instance and static methods for mathematical operations
  */
 
