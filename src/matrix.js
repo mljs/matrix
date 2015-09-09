@@ -1268,8 +1268,8 @@ const operators = [
     ['|', 'or'],
     ['^', 'xor'],
     ['<<', 'leftShift'],
-    ['>>', 'rightShift'],
-    ['>>>', 'zeroRightShift']
+    ['>>', 'signPropagatingRightShift'],
+    ['>>>', 'rightShift', 'zeroFillRightShift']
 ];
 
 for (let operator of operators) {
