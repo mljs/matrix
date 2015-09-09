@@ -10,6 +10,8 @@ Matrix manipulation and computation library
 
 `$ npm install ml-matrix`
 
+## [Documentation](./Documentation.md)
+
 ## License
 
   [MIT](./LICENSE)

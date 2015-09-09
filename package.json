@@ -8,7 +8,8 @@
     "test": "test"
   },
   "scripts": {
-    "test": "mocha --require should-approximately-deep --reporter mocha-better-spec-reporter --recursive"
+    "test": "mocha --require should-approximately-deep --reporter mocha-better-spec-reporter --recursive",
+    "doc": "jsdoc2md src/matrix.js > Documentation.md"
   },
   "repository": {
     "type": "git",
@@ -40,6 +41,7 @@
   "devDependencies": {
     "benchmark": "^1.0.0",
     "csv-parse": "^1.0.0",
+    "jsdoc-to-markdown": "^1.1.1",
     "mathjs": "^2.1.1",
     "mocha": "^2.2.5",
     "mocha-better-spec-reporter": "^2.1.1",

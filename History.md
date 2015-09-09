@@ -1,3 +1,12 @@
+1.0.0 / HEAD
+==================
+
+* add static min and max methods
+* add fullname synonyms for some methods
+* support all arithmetic operators and Math functions including static versions
+* convert project to use ES2015 classes
+* fix abs method not returning `this`
+
 0.1.0 / 2015-06-11
 ==================
 
