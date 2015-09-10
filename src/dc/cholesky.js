@@ -47,7 +47,7 @@ function CholeskyDecomposition(value) {
 }
 
 CholeskyDecomposition.prototype = {
-    get leftTriangularFactor() {
+    get lowerTriangularMatrix() {
         return this.L;
     },
     solve: function (value) {
