@@ -1,6 +1,7 @@
-1.0.0 / HEAD
+1.0.0 / 2015-09-10
 ==================
 
+* rename xxxFactor to xxxMatrix in decompositions
 * add static min and max methods
 * add fullname synonyms for some methods
 * support all arithmetic operators and Math functions including static versions
