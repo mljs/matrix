@@ -98,7 +98,7 @@ QrDecomposition.prototype = {
         }
         return true;
     },
-    get upperTriangularFactor() {
+    get upperTriangularMatrix() {
         var qr = this.QR,
             n = qr.columns,
             X = new Matrix(n, n),
@@ -116,7 +116,7 @@ QrDecomposition.prototype = {
         }
         return X;
     },
-    get orthogonalFactor() {
+    get orthogonalMatrix() {
         var qr = this.QR,
             rows = qr.rows,
             columns = qr.columns,

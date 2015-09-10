@@ -3,7 +3,7 @@
 const Matrix = require('../..');
 const Cho = Matrix.DC.CHO;
 
-describe.only('Cholesky decomposition', function () {
+describe('Cholesky decomposition', function () {
     it('should compute lower triangular matrix', function () {
         // http://ch.mathworks.com/help/matlab/ref/chol.html
         let matrix = new Matrix([

@@ -92,7 +92,7 @@ LuDecomposition.prototype = {
             determinant *= data[j][j];
         return determinant;
     },
-    get lowerTriangularFactor() {
+    get lowerTriangularMatrix() {
         var data = this.LU,
             rows = data.rows,
             columns = data.columns,
@@ -110,7 +110,7 @@ LuDecomposition.prototype = {
         }
         return X;
     },
-    get upperTriangularFactor() {
+    get upperTriangularMatrix() {
         var data = this.LU,
             rows = data.rows,
             columns = data.columns,
