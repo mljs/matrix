@@ -1,6 +1,6 @@
 {
   "name": "ml-matrix",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Matrix manipulation and computation library",
   "main": "src/index.js",
   "directories": {
@@ -37,7 +37,9 @@
   "bugs": {
     "url": "https://github.com/mljs/matrix/issues"
   },
-  "engines": { "node": ">=2.0.0" },
+  "engines": {
+    "node": ">=2.0.0"
+  },
   "homepage": "https://github.com/mljs/matrix",
   "devDependencies": {
     "benchmark": "^1.0.0",
