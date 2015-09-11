@@ -37,6 +37,7 @@
   "bugs": {
     "url": "https://github.com/mljs/matrix/issues"
   },
+  "engines": { "node": ">=2.0.0" },
   "homepage": "https://github.com/mljs/matrix",
   "devDependencies": {
     "benchmark": "^1.0.0",
