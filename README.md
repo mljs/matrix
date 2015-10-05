@@ -10,7 +10,8 @@ Matrix manipulation and computation library
 
 `$ npm install ml-matrix`
 
-:warning: This library uses ES2015 classes and extends Array. It is not compatible with versions of Node.js/io.js <2.0.0
+:warning: This library uses ES2015 classes and extends Array. It is not compatible with versions of Node.js/io.js <2.0.0  
+Supported browsers are: Google Chrome, Safari and Microsoft Edge.
 
 ## [Documentation](./Documentation.md)
 

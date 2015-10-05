@@ -1,12 +1,12 @@
 'use strict';
 
-const Matrix = require('./matrix');
+var Matrix = require('./matrix');
 
-const SingularValueDecomposition = require('./dc/svd');
-const EigenvalueDecomposition = require('./dc/evd');
-const LuDecomposition = require('./dc/lu');
-const QrDecomposition = require('./dc/qr');
-const CholeskyDecomposition = require('./dc/cholesky');
+var SingularValueDecomposition = require('./dc/svd');
+var EigenvalueDecomposition = require('./dc/evd');
+var LuDecomposition = require('./dc/lu');
+var QrDecomposition = require('./dc/qr');
+var CholeskyDecomposition = require('./dc/cholesky');
 
 function inverse(matrix) {
     matrix = Matrix.checkMatrix(matrix);

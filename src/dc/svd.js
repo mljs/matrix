@@ -1,9 +1,9 @@
 'use strict';
 
-const Matrix = require('../matrix');
-const util = require('./util');
-const hypotenuse = util.hypotenuse;
-const getFilled2DArray = util.getFilled2DArray;
+var Matrix = require('../matrix');
+var util = require('./util');
+var hypotenuse = util.hypotenuse;
+var getFilled2DArray = util.getFilled2DArray;
 
 // https://github.com/lutzroeder/Mapack/blob/master/Source/SingularValueDecomposition.cs
 function SingularValueDecomposition(value, options) {

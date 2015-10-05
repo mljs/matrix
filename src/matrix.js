@@ -51,11 +51,11 @@ class Matrix extends Array {
      * @returns {Matrix} - The new matrix
      */
     static from1DArray(newRows, newColumns, newData) {
-        let length = newRows * newColumns;
+        var length = newRows * newColumns;
         if (length !== newData.length) {
             throw new RangeError('Data length does not match given dimensions');
         }
-        let newMatrix = new Matrix(newRows, newColumns);
+        var newMatrix = new Matrix(newRows, newColumns);
         for (var row = 0; row < newRows; row++) {
             for (var column = 0; column < newColumns; column++) {
                 newMatrix[row][column] = newData[row * newColumns + column];
@@ -70,7 +70,7 @@ class Matrix extends Array {
      * @returns {Matrix} - The new matrix
      */
     static rowVector(newData) {
-        let vector = new Matrix(1, newData.length);
+        var vector = new Matrix(1, newData.length);
         for (var i = 0; i < newData.length; i++) {
             vector[0][i] = newData[i];
         }
@@ -83,7 +83,7 @@ class Matrix extends Array {
      * @returns {Matrix} - The new matrix
      */
     static columnVector(newData) {
-        let vector = new Matrix(newData.length, 1);
+        var vector = new Matrix(newData.length, 1);
         for (var i = 0; i < newData.length; i++) {
             vector[i][0] = newData[i];
         }
@@ -129,7 +129,7 @@ class Matrix extends Array {
      */
     static rand(rows, columns, rng) {
         if (rng === undefined) rng = Math.random;
-        let matrix = Matrix.empty(rows, columns);
+        var matrix = Matrix.empty(rows, columns);
         for (var i = 0; i < rows; i++) {
             for (var j = 0; j < rows; j++) {
                 matrix[i][j] = rng();
@@ -146,8 +146,8 @@ class Matrix extends Array {
      */
     static eye(rows, columns) {
         if (columns === undefined) columns = rows;
-        const min = Math.min(rows, columns);
-        let matrix = Matrix.zeros(rows, columns);
+        var min = Math.min(rows, columns);
+        var matrix = Matrix.zeros(rows, columns);
         for (var i = 0; i < min; i++) {
             matrix[i][i] = 1;
         }
@@ -162,11 +162,11 @@ class Matrix extends Array {
      * @returns {Matrix} - The new diagonal matrix
      */
     static diag(data, rows, columns) {
-        const l = data.length;
+        var l = data.length;
         if (rows === undefined) rows = l;
         if (columns === undefined) columns = rows;
-        const min = Math.min(l, rows, columns);
-        let matrix = Matrix.zeros(rows, columns);
+        var min = Math.min(l, rows, columns);
+        var matrix = Matrix.zeros(rows, columns);
         for (var i = 0; i < min; i++) {
             matrix[i][i] = data[i];
         }
@@ -180,9 +180,9 @@ class Matrix extends Array {
      * @returns {Matrix}
      */
     static min(matrix1, matrix2) {
-        const rows = matrix1.length;
-        const columns = matrix1[0].length;
-        let result = new Matrix(rows, columns);
+        var rows = matrix1.length;
+        var columns = matrix1[0].length;
+        var result = new Matrix(rows, columns);
         for (var i = 0; i < rows; i++) {
             for(var j = 0; j < columns; j++) {
                 result[i][j] = Math.min(matrix1[i][j], matrix2[i][j]);
@@ -198,9 +198,9 @@ class Matrix extends Array {
      * @returns {Matrix}
      */
     static max(matrix1, matrix2) {
-        const rows = matrix1.length;
-        const columns = matrix1[0].length;
-        let result = new Matrix(rows, columns);
+        var rows = matrix1.length;
+        var columns = matrix1[0].length;
+        var result = new Matrix(rows, columns);
         for (var i = 0; i < rows; i++) {
             for(var j = 0; j < columns; j++) {
                 result[i][j] = Math.max(matrix1[i][j], matrix2[i][j]);
@@ -243,8 +243,8 @@ class Matrix extends Array {
         if (typeof callback !== 'function') {
             throw new TypeError('callback must be a function');
         }
-        let ii = this.rows;
-        let jj = this.columns;
+        var ii = this.rows;
+        var jj = this.columns;
         for (var i = 0; i < ii; i++) {
             for (var j = 0; j < jj; j++) {
                 callback.call(this, i, j);
@@ -258,7 +258,7 @@ class Matrix extends Array {
      * @returns {Matrix}
      */
     clone() {
-        let newMatrix = new Matrix(this.rows, this.columns);
+        var newMatrix = new Matrix(this.rows, this.columns);
         for (var row = 0; row < this.rows; row++) {
             for (var column = 0; column < this.columns; column++) {
                 newMatrix[row][column] = this[row][column];
@@ -272,7 +272,7 @@ class Matrix extends Array {
      * @returns {Array}
      */
     to1DArray() {
-        let array = new Array(this.size);
+        var array = new Array(this.size);
         for (var i = 0; i < this.rows; i++) {
             for (var j = 0; j < this.columns; j++) {
                 array[i * this.columns + j] = this[i][j];
@@ -286,7 +286,7 @@ class Matrix extends Array {
      * @returns {Array}
      */
     to2DArray() {
-        let copy = new Array(this.rows);
+        var copy = new Array(this.rows);
         for (var i = 0; i < this.rows; i++) {
             copy[i] = [].concat(this[i]);
         }
@@ -468,7 +468,7 @@ class Matrix extends Array {
      */
     getColumn(index) {
         checkColumnIndex(this, index);
-        let column = new Array(this.rows);
+        var column = new Array(this.rows);
         for (var i = 0; i < this.rows; i++) {
             column[i] = this[i][index];
         }
@@ -544,7 +544,7 @@ class Matrix extends Array {
     swapColumns(column1, column2) {
         checkColumnIndex(this, column1);
         checkColumnIndex(this, column2);
-        let temp, row;
+        var temp, row;
         for (var i = 0; i < this.rows; i++) {
             row = this[i];
             temp = row[column1];
@@ -706,7 +706,7 @@ class Matrix extends Array {
      * @returns {number}
      */
     max() {
-        let v = this[0][0];
+        var v = this[0][0];
         for (var i = 0; i < this.rows; i++) {
             for (var j = 0; j < this.columns; j++) {
                 if (this[i][j] > v) {
@@ -722,8 +722,8 @@ class Matrix extends Array {
      * @returns {Array}
      */
     maxIndex() {
-        let v = this[0][0];
-        let idx = [0, 0];
+        var v = this[0][0];
+        var idx = [0, 0];
         for (var i = 0; i < this.rows; i++) {
             for (var j = 0; j < this.columns; j++) {
                 if (this[i][j] > v) {
@@ -741,7 +741,7 @@ class Matrix extends Array {
      * @returns {number}
      */
     min() {
-        let v = this[0][0];
+        var v = this[0][0];
         for (var i = 0; i < this.rows; i++) {
             for (var j = 0; j < this.columns; j++) {
                 if (this[i][j] < v) {
@@ -757,8 +757,8 @@ class Matrix extends Array {
      * @returns {Array}
      */
     minIndex() {
-        let v = this[0][0];
-        let idx = [0, 0];
+        var v = this[0][0];
+        var idx = [0, 0];
         for (var i = 0; i < this.rows; i++) {
             for (var j = 0; j < this.columns; j++) {
                 if (this[i][j] < v) {
@@ -778,7 +778,7 @@ class Matrix extends Array {
      */
     maxRow(row) {
         checkRowIndex(this, row);
-        let v = this[row][0];
+        var v = this[row][0];
         for (var i = 1; i < this.columns; i++) {
             if (this[row][i] > v) {
                 v = this[row][i];
@@ -794,8 +794,8 @@ class Matrix extends Array {
      */
     maxRowIndex(row) {
         checkRowIndex(this, row);
-        let v = this[row][0];
-        let idx = [row, 0];
+        var v = this[row][0];
+        var idx = [row, 0];
         for (var i = 1; i < this.columns; i++) {
             if (this[row][i] > v) {
                 v = this[row][i];
@@ -812,7 +812,7 @@ class Matrix extends Array {
      */
     minRow(row) {
         checkRowIndex(this, row);
-        let v = this[row][0];
+        var v = this[row][0];
         for (var i = 1; i < this.columns; i++) {
             if (this[row][i] < v) {
                 v = this[row][i];
@@ -828,8 +828,8 @@ class Matrix extends Array {
      */
     minRowIndex(row) {
         checkRowIndex(this, row);
-        let v = this[row][0];
-        let idx = [row, 0];
+        var v = this[row][0];
+        var idx = [row, 0];
         for (var i = 1; i < this.columns; i++) {
             if (this[row][i] < v) {
                 v = this[row][i];
@@ -846,7 +846,7 @@ class Matrix extends Array {
      */
     maxColumn(column) {
         checkColumnIndex(this, column);
-        let v = this[0][column];
+        var v = this[0][column];
         for (var i = 1; i < this.rows; i++) {
             if (this[i][column] > v) {
                 v = this[i][column];
@@ -862,8 +862,8 @@ class Matrix extends Array {
      */
     maxColumnIndex(column) {
         checkColumnIndex(this, column);
-        let v = this[0][column];
-        let idx = [0, column];
+        var v = this[0][column];
+        var idx = [0, column];
         for (var i = 1; i < this.rows; i++) {
             if (this[i][column] > v) {
                 v = this[i][column];
@@ -880,7 +880,7 @@ class Matrix extends Array {
      */
     minColumn(column) {
         checkColumnIndex(this, column);
-        let v = this[0][column];
+        var v = this[0][column];
         for (var i = 1; i < this.rows; i++) {
             if (this[i][column] < v) {
                 v = this[i][column];
@@ -896,8 +896,8 @@ class Matrix extends Array {
      */
     minColumnIndex(column) {
         checkColumnIndex(this, column);
-        let v = this[0][column];
-        let idx = [0, column];
+        var v = this[0][column];
+        var idx = [0, column];
         for (var i = 1; i < this.rows; i++) {
             if (this[i][column] < v) {
                 v = this[i][column];
@@ -912,8 +912,8 @@ class Matrix extends Array {
      * @returns {Array}
      */
     diag() {
-        const min = Math.min(this.rows, this.columns);
-        let diag = new Array(min);
+        var min = Math.min(this.rows, this.columns);
+        var diag = new Array(min);
         for (var i = 0; i < min; i++) {
             diag[i] = this[i][i];
         }
@@ -925,7 +925,7 @@ class Matrix extends Array {
      * @returns {number}
      */
     sum() {
-        let v = 0;
+        var v = 0;
         for (var i = 0; i < this.rows; i++) {
             for (var j = 0; j < this.columns; j++) {
                 v += this[i][j];
@@ -947,7 +947,7 @@ class Matrix extends Array {
      * @returns {number}
      */
     prod() {
-        let prod = 1;
+        var prod = 1;
         for (var i = 0; i < this.rows; i++) {
             for (var j = 0; j < this.columns; j++) {
                 prod *= this[i][j];
@@ -961,7 +961,7 @@ class Matrix extends Array {
      * @returns {Matrix} this
      */
     cumulativeSum() {
-        let sum = 0;
+        var sum = 0;
         for (var i = 0; i < this.rows; i++) {
             for (var j = 0; j < this.columns; j++) {
                 sum += this[i][j];
@@ -978,7 +978,7 @@ class Matrix extends Array {
      */
     dot(vector2) {
         if (Matrix.isMatrix(vector2)) vector2 = vector2.to1DArray();
-        let vector1 = this.to1DArray();
+        var vector1 = this.to1DArray();
         if (vector1.length !== vector2.length) {
             throw new RangeError('vectors do not have the same size');
         }
@@ -998,13 +998,13 @@ class Matrix extends Array {
         if (this.columns !== other.rows)
             console.warn('Number of columns of left matrix are not equal to number of rows of right matrix.');
 
-        const m = this.rows;
-        const n = this.columns;
-        const p = other.columns;
+        var m = this.rows;
+        var n = this.columns;
+        var p = other.columns;
 
-        let result = new Matrix(m, p);
+        var result = new Matrix(m, p);
 
-        let Bcolj = new Array(n);
+        var Bcolj = new Array(n);
         for (var j = 0; j < p; j++) {
             for (var k = 0; k < n; k++)
                 Bcolj[k] = other[k][j];
@@ -1027,7 +1027,7 @@ class Matrix extends Array {
      * @returns {Matrix}
      */
     transpose() {
-        let result = new Matrix(this.columns, this.rows);
+        var result = new Matrix(this.columns, this.rows);
         for (var i = 0; i < this.rows; i++) {
             for (var j = 0; j < this.columns; j++) {
                 result[j][i] = this[i][j];
@@ -1074,7 +1074,7 @@ class Matrix extends Array {
         if ((startRow > endRow) || (startColumn > endColumn) || (startRow < 0) || (startRow >= this.rows) || (endRow < 0) || (endRow >= this.rows) || (startColumn < 0) || (startColumn >= this.columns) || (endColumn < 0) || (endColumn >= this.columns)) {
             throw new RangeError('Argument out of range');
         }
-        let newMatrix = new Matrix(endRow - startRow + 1, endColumn - startColumn + 1);
+        var newMatrix = new Matrix(endRow - startRow + 1, endColumn - startColumn + 1);
         for (var i = startRow; i <= endRow; i++) {
             for (var j = startColumn; j <= endColumn; j++) {
                 newMatrix[i - startRow][j - startColumn] = this[i][j];
@@ -1097,7 +1097,7 @@ class Matrix extends Array {
             throw new RangeError('Argument out of range');
         }
 
-        let newMatrix = new Matrix(indices.length, endColumn - startColumn + 1);
+        var newMatrix = new Matrix(indices.length, endColumn - startColumn + 1);
         for (var i = 0; i < indices.length; i++) {
             for (var j = startColumn; j <= endColumn; j++) {
                 if (indices[i] < 0 || indices[i] >= this.rows) {
@@ -1123,7 +1123,7 @@ class Matrix extends Array {
             throw new RangeError('Argument out of range');
         }
 
-        let newMatrix = new Matrix(endRow - startRow + 1, indices.length);
+        var newMatrix = new Matrix(endRow - startRow + 1, indices.length);
         for (var i = 0; i < indices.length; i++) {
             for (var j = startRow; j <= endRow; j++) {
                 if (indices[i] < 0 || indices[i] >= this.columns) {
@@ -1140,8 +1140,8 @@ class Matrix extends Array {
      * @returns {number}
      */
     trace() {
-        const min = Math.min(this.rows, this.columns);
-        let trace = 0;
+        var min = Math.min(this.rows, this.columns);
+        var trace = 0;
         for (var i = 0; i < min; i++) {
             trace += this[i][i];
         }
@@ -1161,7 +1161,7 @@ module.exports = Matrix;
  * @param {boolean} [outer]
  */
 function checkRowIndex(matrix, index, outer) {
-    const max = outer ? matrix.rows : matrix.rows - 1;
+    var max = outer ? matrix.rows : matrix.rows - 1;
     if (index < 0 || index > max)
         throw new RangeError('Row index out of range');
 }
@@ -1214,7 +1214,7 @@ function checkColumnVector(matrix, vector, copy) {
  * @param {boolean} [outer]
  */
 function checkColumnIndex(matrix, index, outer) {
-    const max = outer ? matrix.columns : matrix.columns - 1;
+    var max = outer ? matrix.columns : matrix.columns - 1;
     if (index < 0 || index > max)
         throw new RangeError('Column index out of range');
 }
@@ -1250,14 +1250,14 @@ Matrix.prototype.negate = Matrix.prototype.neg;
 Add dynamically instance and static methods for mathematical operations
  */
 
-const inplaceOperator = `
+var inplaceOperator = `
 (function %name%(value) {
     if (typeof value === 'number') return this.%name%S(value);
     return this.%name%M(value);
 })
 `;
 
-const inplaceOperatorScalar = `
+var inplaceOperatorScalar = `
 (function %name%S(value) {
     for (var i = 0; i < this.rows; i++) {
         for (var j = 0; j < this.columns; j++) {
@@ -1268,7 +1268,7 @@ const inplaceOperatorScalar = `
 })
 `;
 
-const inplaceOperatorMatrix = `
+var inplaceOperatorMatrix = `
 (function %name%M(matrix) {
     checkDimensions(this, matrix);
     for (var i = 0; i < this.rows; i++) {
@@ -1280,14 +1280,14 @@ const inplaceOperatorMatrix = `
 })
 `;
 
-const staticOperator = `
+var staticOperator = `
 (function %name%(matrix, value) {
-    const newMatrix = new Matrix(matrix);
+    var newMatrix = new Matrix(matrix);
     return newMatrix.%name%(value);
 })
 `;
 
-const inplaceMethod = `
+var inplaceMethod = `
 (function %name%() {
     for (var i = 0; i < this.rows; i++) {
         for (var j = 0; j < this.columns; j++) {
@@ -1298,14 +1298,14 @@ const inplaceMethod = `
 })
 `;
 
-const staticMethod = `
+var staticMethod = `
 (function %name%(matrix) {
-    const newMatrix = new Matrix(matrix);
+    var newMatrix = new Matrix(matrix);
     return newMatrix.%name%();
 })
 `;
 
-const operators = [
+var operators = [
     // Arithmetic operators
     ['+', 'add'],
     ['-', 'sub', 'subtract'],
@@ -1321,8 +1321,8 @@ const operators = [
     ['>>>', 'rightShift', 'zeroFillRightShift']
 ];
 
-for (let operator of operators) {
-    for (let i = 1; i < operator.length; i++) {
+for (var operator of operators) {
+    for (var i = 1; i < operator.length; i++) {
         Matrix.prototype[operator[i]] = eval(fillTemplateFunction(inplaceOperator, {name: operator[i], op: operator[0]}));
         Matrix.prototype[operator[i] + 'S'] = eval(fillTemplateFunction(inplaceOperatorScalar, {name: operator[i] + 'S', op: operator[0]}));
         Matrix.prototype[operator[i] + 'M'] = eval(fillTemplateFunction(inplaceOperatorMatrix, {name: operator[i] + 'M', op: operator[0]}));
@@ -1331,7 +1331,7 @@ for (let operator of operators) {
     }
 }
 
-const methods = [
+var methods = [
     ['~', 'not']
 ];
 
@@ -1343,8 +1343,8 @@ const methods = [
     methods.push(['Math.' + mathMethod, mathMethod]);
 });
 
-for (let method of methods) {
-    for (let i = 1; i < method.length; i++) {
+for (var method of methods) {
+    for (var i = 1; i < method.length; i++) {
         Matrix.prototype[method[i]] = eval(fillTemplateFunction(inplaceMethod, {name: method[i], method: method[0]}));
         Matrix[method[i]] = eval(fillTemplateFunction(staticMethod, {name: method[i]}));
     }
