@@ -84,10 +84,14 @@ describe('Matrix creation', function () {
         Matrix.ones(2, 3).to2DArray().should.eql([[1, 1, 1], [1, 1, 1]]);
     });
     it('random', function () {
-        var random = Matrix.rand(2, 2);
-        var random2 = Matrix.rand(2, 2);
+        var random = Matrix.rand(2, 3);
+        var random2 = Matrix.rand(2, 3);
         random.to2DArray().should.not.eql(random2.to2DArray());
-        random[0][0].should.be.within(0, 1);
+        for (var i = 0; i < 2; i++) {
+            for (var j = 0; j < 3; j++) {
+                random[i][j].should.be.within(0, 1);
+            }
+        }
     });
     it('random with custom RNG', function () {
         function fakeRNG() { return 2; }

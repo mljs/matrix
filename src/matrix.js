@@ -131,7 +131,7 @@ class Matrix extends Array {
         if (rng === undefined) rng = Math.random;
         var matrix = Matrix.empty(rows, columns);
         for (var i = 0; i < rows; i++) {
-            for (var j = 0; j < rows; j++) {
+            for (var j = 0; j < columns; j++) {
                 matrix[i][j] = rng();
             }
         }
