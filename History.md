@@ -1,3 +1,8 @@
+1.0.3 / 2015-11-19
+==================
+
+* random not correctly filling rectangular matrices
+
 1.0.2 / 2015-10-05
 ==================
 
