@@ -1,13 +1,15 @@
 {
   "name": "ml-matrix",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Matrix manipulation and computation library",
   "main": "src/index.js",
   "directories": {
     "lib": "src",
     "test": "test"
   },
-  "files": ["src"],
+  "files": [
+    "src"
+  ],
   "scripts": {
     "test": "mocha --require should-approximately-deep --reporter mocha-better-spec-reporter --recursive",
     "doc": "jsdoc2md src/matrix.js > Documentation.md"
