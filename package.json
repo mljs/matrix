@@ -45,7 +45,7 @@
   },
   "homepage": "https://github.com/mljs/matrix",
   "devDependencies": {
-    "benchmark": "^1.0.0",
+    "benchmark": "^2.0.0",
     "csv-parse": "^1.0.0",
     "jsdoc-to-markdown": "^1.1.1",
     "mathjs": "^2.1.1",
