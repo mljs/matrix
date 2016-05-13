@@ -991,6 +991,7 @@ class Matrix extends Array {
 
     /**
      * Returns the matrix product between this and other
+     * @param {Matrix} other
      * @returns {Matrix}
      */
     mmul(other) {
@@ -1017,6 +1018,33 @@ class Matrix extends Array {
                     s += Arowi[k] * Bcolj[k];
 
                 result[i][j] = s;
+            }
+        }
+        return result;
+    }
+
+    /**
+     * Returns the Kronecker product (also known as tensor product) between this and other
+     * See https://en.wikipedia.org/wiki/Kronecker_product
+     * @param {Matrix} other
+     * @return {Matrix}
+     */
+    kroneckerProduct(other) {
+        other = Matrix.checkMatrix(other);
+
+        var m = this.rows;
+        var n = this.columns;
+        var p = other.rows;
+        var q = other.columns;
+
+        var result = new Matrix(m * p, n * q);
+        for (var i = 0; i < m; i++) {
+            for (var j = 0; j < n; j++) {
+                for (var k = 0; k < p; k++) {
+                    for (var l = 0; l < q; l++) {
+                        result[p * i + k][q * j + l] = this[i][j] * other[k][l];
+                    }
+                }
             }
         }
         return result;
@@ -1245,6 +1273,7 @@ Matrix.diagonal = Matrix.diag;
 Matrix.prototype.diagonal = Matrix.prototype.diag;
 Matrix.identity = Matrix.eye;
 Matrix.prototype.negate = Matrix.prototype.neg;
+Matrix.prototype.tensorProduct = Matrix.prototype.kroneckerProduct;
 
 /*
 Add dynamically instance and static methods for mathematical operations
