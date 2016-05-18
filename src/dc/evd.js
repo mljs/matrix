@@ -25,7 +25,7 @@ function EigenvalueDecomposition(matrix) {
     if (matrix.isSymmetric()) {
         for (i = 0; i < n; i++) {
             for (j = 0; j < n; j++) {
-                V[i][j] = value.get([i][j]);
+                V[i][j] = value.get(i, j);
             }
         }
         tred2(n, e, d, V);
@@ -36,7 +36,7 @@ function EigenvalueDecomposition(matrix) {
             ort = new Array(n);
         for (j = 0; j < n; j++) {
             for (i = 0; i < n; i++) {
-                H[i][j] = value.get([i][j]);
+                H[i][j] = value.get(i, j);
             }
         }
         orthes(n, H, ort, V);
