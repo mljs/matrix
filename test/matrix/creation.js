@@ -115,4 +115,8 @@ describe('Matrix creation', function () {
         Matrix.diag(arr, 2, 4).to2DArray().should.eql([[1, 0, 0, 0], [0, 2, 0, 0]]);
         Matrix.diag(arr, 4, 4).to2DArray().should.eql([[1, 0, 0, 0], [0, 2, 0, 0], [0, 0, 3, 0], [0, 0, 0, 0]]);
     });
+    it('regression test for Symbol.species (V8 5.1)', function () {
+        var matrix = Matrix.ones(1, 2);
+        matrix.map(x => 1).should.eql([1]);
+    });
 });

@@ -1177,6 +1177,7 @@ class Matrix extends Array {
     }
 }
 
+Matrix[Symbol.species] = Array;
 Matrix.prototype.klass = 'Matrix';
 
 module.exports = Matrix;
