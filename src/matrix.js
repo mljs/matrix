@@ -43,6 +43,11 @@ class Matrix extends Array {
         this.columns = nColumns;
     }
 
+    // Native array methods should return instances of Array, not Matrix
+    static get [Symbol.species]() {
+        return Array;
+    }
+
     /**
      * Constructs a Matrix with the chosen dimensions from a 1D array
      * @param {number} newRows - Number of rows
@@ -1177,7 +1182,6 @@ class Matrix extends Array {
     }
 }
 
-Matrix[Symbol.species] = Array;
 Matrix.prototype.klass = 'Matrix';
 
 module.exports = Matrix;

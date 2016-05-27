@@ -1,4 +1,4 @@
-1.1.3 / 2016-05-27
+1.1.4 / 2016-05-27
 ==================
 
 * add support of Symbol.species for Chrome 51
