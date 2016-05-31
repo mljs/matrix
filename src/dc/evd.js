@@ -1,14 +1,19 @@
 'use strict';
 
-var Matrix = require('../matrix');
-var util = require('./util');
-var hypotenuse = util.hypotenuse;
-var getFilled2DArray = util.getFilled2DArray;
+const Matrix = require('../matrix');
+const util = require('./util');
+const hypotenuse = util.hypotenuse;
+const getFilled2DArray = util.getFilled2DArray;
+
+const defaultOptions = {
+    assumeSymmetric: false
+};
 
 // https://github.com/lutzroeder/Mapack/blob/master/Source/EigenvalueDecomposition.cs
-function EigenvalueDecomposition(matrix) {
+function EigenvalueDecomposition(matrix, options) {
+    options = Object.assign({}, defaultOptions, options);
     if (!(this instanceof EigenvalueDecomposition)) {
-        return new EigenvalueDecomposition(matrix);
+        return new EigenvalueDecomposition(matrix, options);
     }
     matrix = Matrix.checkMatrix(matrix);
     if (!matrix.isSquare()) {
@@ -22,7 +27,14 @@ function EigenvalueDecomposition(matrix) {
         value = matrix,
         i, j;
 
-    if (matrix.isSymmetric()) {
+    var isSymmetric = false;
+    if (options.assumeSymmetric) {
+        isSymmetric = true;
+    } else {
+        isSymmetric = matrix.isSymmetric();
+    }
+
+    if (isSymmetric) {
         for (i = 0; i < n; i++) {
             for (j = 0; j < n; j++) {
                 V[i][j] = value.get(i, j);
