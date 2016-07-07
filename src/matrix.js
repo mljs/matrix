@@ -2,14 +2,12 @@
 
 /**
  * Real matrix
+ * @class Matrix
+ * @param {number|Array|Matrix} nRows - Number of rows of the new matrix,
+ * 2D array containing the data or Matrix instance to clone
+ * @param {number} [nColumns] - Number of columns of the new matrix
  */
 class Matrix extends Array {
-    /**
-     * @constructor
-     * @param {number|Array|Matrix} nRows - Number of rows of the new matrix,
-     * 2D array containing the data or Matrix instance to clone
-     * @param {number} [nColumns] - Number of columns of the new matrix
-     */
     constructor(nRows, nColumns) {
         if (Matrix.isMatrix(nRows)) {
             return nRows.clone();
