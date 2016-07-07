@@ -1,3 +1,13 @@
+<a name="1.2.0"></a>
+# [1.2.0](https://github.com/mljs/matrix/compare/v1.1.5...v1.2.0) (2016-07-07)
+
+
+### Features
+
+* add support for Math.pow ([2524b73](https://github.com/mljs/matrix/commit/2524b73))
+
+
+
 1.1.5 / 2016-05-31
 ==================
 
