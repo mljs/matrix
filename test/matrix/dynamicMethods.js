@@ -67,4 +67,27 @@ describe('Dynamic methods on matrices', function () {
         });
     });
 
+    describe('with args', function () {
+        it('inplace MathPow', function () {
+            matrix = matrix.subMatrix(0, 2, 0, 2);
+            matrix.pow(2);
+            matrix.to2DArray().should.eql([
+                [0, 1, 4],
+                [9, 16, 25],
+                [36, 49, 64]
+            ]);
+        });
+
+        it('static MathPow', function () {
+            matrix = matrix.subMatrix(0, 2, 0, 2);
+            var newMatrix = Matrix.pow(matrix, 2);
+            newMatrix.should.not.eql(matrix);
+            newMatrix.to2DArray().should.eql([
+                [0, 1, 4],
+                [9, 16, 25],
+                [36, 49, 64]
+            ]);
+        });
+    });
+
 });

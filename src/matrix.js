@@ -1339,6 +1339,24 @@ var staticMethod = `
 })
 `;
 
+var inplaceMethodWithArgs = `
+(function %name%(...args) {
+    for (var i = 0; i < this.rows; i++) {
+        for (var j = 0; j < this.columns; j++) {
+            this[i][j] = %method%(this[i][j], ...args);
+        }
+    }
+    return this;
+})
+`;
+
+var staticMethodWithArgs = `
+(function %name%(matrix, ...args) {
+    var newMatrix = new Matrix(matrix);
+    return newMatrix.%name%(...args);
+})
+`;
+
 var operators = [
     // Arithmetic operators
     ['+', 'add'],
@@ -1356,12 +1374,15 @@ var operators = [
 ];
 
 for (var operator of operators) {
+    var inplaceOp = eval(fillTemplateFunction(inplaceOperator, {name: operator[1], op: operator[0]}));
+    var inplaceOpS = eval(fillTemplateFunction(inplaceOperatorScalar, {name: operator[1] + 'S', op: operator[0]}));
+    var inplaceOpM = eval(fillTemplateFunction(inplaceOperatorMatrix, {name: operator[1] + 'M', op: operator[0]}));
+    var staticOp = eval(fillTemplateFunction(staticOperator, {name: operator[1]}));
     for (var i = 1; i < operator.length; i++) {
-        Matrix.prototype[operator[i]] = eval(fillTemplateFunction(inplaceOperator, {name: operator[i], op: operator[0]}));
-        Matrix.prototype[operator[i] + 'S'] = eval(fillTemplateFunction(inplaceOperatorScalar, {name: operator[i] + 'S', op: operator[0]}));
-        Matrix.prototype[operator[i] + 'M'] = eval(fillTemplateFunction(inplaceOperatorMatrix, {name: operator[i] + 'M', op: operator[0]}));
-
-        Matrix[operator[i]] = eval(fillTemplateFunction(staticOperator, {name: operator[i]}));
+        Matrix.prototype[operator[i]] = inplaceOp;
+        Matrix.prototype[operator[i] + 'S'] = inplaceOpS;
+        Matrix.prototype[operator[i] + 'M'] = inplaceOpM;
+        Matrix[operator[i]] = staticOp;
     }
 }
 
@@ -1378,9 +1399,24 @@ var methods = [
 });
 
 for (var method of methods) {
+    var inplaceMeth = eval(fillTemplateFunction(inplaceMethod, {name: method[1], method: method[0]}));
+    var staticMeth = eval(fillTemplateFunction(staticMethod, {name: method[1]}));
     for (var i = 1; i < method.length; i++) {
-        Matrix.prototype[method[i]] = eval(fillTemplateFunction(inplaceMethod, {name: method[i], method: method[0]}));
-        Matrix[method[i]] = eval(fillTemplateFunction(staticMethod, {name: method[i]}));
+        Matrix.prototype[method[i]] = inplaceMeth;
+        Matrix[method[i]] = staticMeth;
+    }
+}
+
+var methodsWithArgs = [
+    ['Math.pow', 'pow']
+];
+
+for (var methodWithArg of methodsWithArgs) {
+    var inplaceMethWithArgs = eval(fillTemplateFunction(inplaceMethodWithArgs, {name: methodWithArg[1], method: methodWithArg[0]}));
+    var staticMethWithArgs = eval(fillTemplateFunction(staticMethodWithArgs, {name: methodWithArg[1]}));
+    for (var i = 1; i < methodWithArg.length; i++) {
+        Matrix.prototype[methodWithArg[i]] = inplaceMethWithArgs;
+        Matrix[methodWithArg[i]] = staticMethWithArgs;
     }
 }
 
