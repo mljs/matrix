@@ -1,3 +1,13 @@
+<a name="1.2.1"></a>
+## [1.2.1](https://github.com/mljs/matrix/compare/v1.2.0...v1.2.1) (2016-07-07)
+
+
+### Bug Fixes
+
+* do not use rest parameters ([2c4502e](https://github.com/mljs/matrix/commit/2c4502e))
+
+
+
 <a name="1.2.0"></a>
 # [1.2.0](https://github.com/mljs/matrix/compare/v1.1.5...v1.2.0) (2016-07-07)
 
