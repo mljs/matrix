@@ -1338,10 +1338,10 @@ var staticMethod = `
 `;
 
 var inplaceMethodWithArgs = `
-(function %name%(...args) {
+(function %name%(%args%) {
     for (var i = 0; i < this.rows; i++) {
         for (var j = 0; j < this.columns; j++) {
-            this[i][j] = %method%(this[i][j], ...args);
+            this[i][j] = %method%(this[i][j], %args%);
         }
     }
     return this;
@@ -1349,9 +1349,9 @@ var inplaceMethodWithArgs = `
 `;
 
 var staticMethodWithArgs = `
-(function %name%(matrix, ...args) {
+(function %name%(matrix, %args%) {
     var newMatrix = new Matrix(matrix);
-    return newMatrix.%name%(...args);
+    return newMatrix.%name%(%args%);
 })
 `;
 
@@ -1406,13 +1406,17 @@ for (var method of methods) {
 }
 
 var methodsWithArgs = [
-    ['Math.pow', 'pow']
+    ['Math.pow', 1, 'pow']
 ];
 
 for (var methodWithArg of methodsWithArgs) {
-    var inplaceMethWithArgs = eval(fillTemplateFunction(inplaceMethodWithArgs, {name: methodWithArg[1], method: methodWithArg[0]}));
-    var staticMethWithArgs = eval(fillTemplateFunction(staticMethodWithArgs, {name: methodWithArg[1]}));
-    for (var i = 1; i < methodWithArg.length; i++) {
+    var args = 'arg0';
+    for (var i = 1; i < methodWithArg[1]; i++) {
+        args += `, arg${i}`;
+    }
+    var inplaceMethWithArgs = eval(fillTemplateFunction(inplaceMethodWithArgs, {name: methodWithArg[2], method: methodWithArg[0], args: args}));
+    var staticMethWithArgs = eval(fillTemplateFunction(staticMethodWithArgs, {name: methodWithArg[2], args: args}));
+    for (var i = 2; i < methodWithArg.length; i++) {
         Matrix.prototype[methodWithArg[i]] = inplaceMethWithArgs;
         Matrix[methodWithArg[i]] = staticMethWithArgs;
     }
