@@ -1030,8 +1030,9 @@ class Matrix extends Array {
 
     /**
      * Returns a row-by-row scaled matrix
-     * @param [min=0] - Minimum scaled value
-     * @param [max=1] - Maximum scaled value
+     * @param {Number} [min=0] - Minimum scaled value
+     * @param {Number} [max=1] - Maximum scaled value
+     * @returns {Matrix} - The scaled matrix
      */
     scaleRows(min, max) {
         min = min === undefined ? 0 : min;
@@ -1045,9 +1046,10 @@ class Matrix extends Array {
     }
 
     /**
-     * Returns a column-by-column scaled matrix
-     * @param [min=0] - Minimum scaled value
-     * @param [max=1] - Maximum scaled value
+     * Returns a new column-by-column scaled matrix
+     * @param {Number} [min=0] - Minimum scaled value
+     * @param {Number} [max=1] - Maximum scaled value
+     * @returns {Matrix} - The new scaled matrix
      */
     scaleColumns(min, max) {
         min = min === undefined ? 0 : min;
