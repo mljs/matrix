@@ -95,10 +95,20 @@ describe('utility methods', function () {
     it('scale rows', function () {
         var matrix = new Matrix([[-1,0,1],[6, 9, 7]]);
         matrix.scaleRows().to2DArray().should.eql([[0, 1/2, 1],[0, 1, 1/3]]);
+        matrix.scaleRows(1,2).to2DArray().should.eql([[1, 3/2, 2],[1, 2, 4/3]]);
+        matrix.scaleRows(-2,-1).to2DArray().should.eql([[-2, -3/2, -1],[-2, -1, -5/3]]);
+        (function () {
+            matrix.scaleRows(2,1);
+        }).should.throw(/min should be strictly smaller than max/);
     });
 
     it('scale columns', function () {
         var matrix = new Matrix([[1,2],[-5,3],[2,4]]);
         matrix.scaleColumns().to2DArray().should.eql([[6/7, 0],[0, 1/2],[1, 1]]);
+        matrix.scaleColumns(1, 2).to2DArray().should.eql([[13/7, 1],[1, 3/2],[2, 2]]);
+        matrix.scaleColumns(-2, -1).to2DArray().should.eql([[-8/7, -2],[-2, -3/2],[-1, -1]]);
+        (function () {
+            matrix.scaleColumns(2,1);
+        }).should.throw(/min should be strictly smaller than max/);
     });
 });

@@ -1037,6 +1037,9 @@ class Matrix extends Array {
     scaleRows(min, max) {
         min = min === undefined ? 0 : min;
         max = max === undefined ? 1 : max;
+        if(min >= max) {
+            throw new RangeError('min should be strictly smaller than max');
+        }
         var newMatrix = Matrix.empty(this.rows, this.columns);
         for(var i=0; i<this.rows; i++) {
             var scaled = arrayUtils.scale(this.getRow(i), {min, max});
@@ -1050,10 +1053,16 @@ class Matrix extends Array {
      * @param {Number} [min=0] - Minimum scaled value
      * @param {Number} [max=1] - Maximum scaled value
      * @returns {Matrix} - The new scaled matrix
+     * @example
+     * var matrix = new Matrix([[1,2],[-1,0]]);
+     * var scaledMatrix = matrix.scaleColumns(); // [[1,1],[0,0]]
      */
     scaleColumns(min, max) {
         min = min === undefined ? 0 : min;
         max = max === undefined ? 1 : max;
+        if(min >= max) {
+            throw new RangeError('min should be strictly smaller than max');
+        }
         var newMatrix = Matrix.empty(this.rows, this.columns);
         for(var i=0; i<this.columns; i++) {
             var scaled = arrayUtils.scale(this.getColumn(i), {
