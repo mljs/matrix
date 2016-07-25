@@ -1,3 +1,13 @@
+<a name="1.3.0"></a>
+# [1.3.0](https://github.com/mljs/matrix/compare/v1.2.1...v1.3.0) (2016-07-25)
+
+
+### Features
+
+* add methods scaleRows and scaleColumns ([8516f83](https://github.com/mljs/matrix/commit/8516f83))
+
+
+
 <a name="1.2.1"></a>
 ## [1.2.1](https://github.com/mljs/matrix/compare/v1.2.0...v1.2.1) (2016-07-07)
 
