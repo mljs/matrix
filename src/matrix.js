@@ -1,5 +1,7 @@
 'use strict';
 
+const arrayUtils = require('ml-array-utils');
+
 /**
  * Real matrix
  * @class Matrix
@@ -1025,6 +1027,43 @@ class Matrix extends Array {
         }
         return result;
     }
+
+    /**
+     * Returns a row-by-row scaled matrix
+     * @param [min=0] - Minimum scaled value
+     * @param [max=1] - Maximum scaled value
+     */
+    scaleRows(min, max) {
+        min = min === undefined ? 0 : min;
+        max = max === undefined ? 1 : max;
+        var newMatrix = Matrix.empty(this.rows, this.columns);
+        for(var i=0; i<this.rows; i++) {
+            var scaled = arrayUtils.scale(this.getRow(i), {min, max});
+            newMatrix.setRow(i, scaled);
+        }
+        return newMatrix;
+    }
+
+    /**
+     * Returns a column-by-column scaled matrix
+     * @param [min=0] - Minimum scaled value
+     * @param [max=1] - Maximum scaled value
+     */
+    scaleColumns(min, max) {
+        min = min === undefined ? 0 : min;
+        max = max === undefined ? 1 : max;
+        var newMatrix = Matrix.empty(this.rows, this.columns);
+        for(var i=0; i<this.columns; i++) {
+            var scaled = arrayUtils.scale(this.getColumn(i), {
+                min: min,
+                max: max
+            });
+            newMatrix.setColumn(i, scaled);
+        }
+        return newMatrix;
+    }
+
+
 
     /**
      * Returns the Kronecker product (also known as tensor product) between this and other

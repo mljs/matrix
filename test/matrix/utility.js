@@ -91,4 +91,14 @@ describe('utility methods', function () {
         transpose.rows.should.equal(3);
         transpose.columns.should.equal(2);
     });
+
+    it('scale rows', function () {
+        var matrix = new Matrix([[-1,0,1],[6, 9, 7]]);
+        matrix.scaleRows().to2DArray().should.eql([[0, 1/2, 1],[0, 1, 1/3]]);
+    });
+
+    it('scale columns', function () {
+        var matrix = new Matrix([[1,2],[-5,3],[2,4]]);
+        matrix.scaleColumns().to2DArray().should.eql([[6/7, 0],[0, 1/2],[1, 1]]);
+    });
 });

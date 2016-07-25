@@ -55,5 +55,8 @@
     "pretty-hrtime": "^1.0.0",
     "should": "^9.0.2",
     "should-approximately-deep": "^1.1.0"
+  },
+  "dependencies": {
+    "ml-array-utils": "^0.2.4"
   }
 }
