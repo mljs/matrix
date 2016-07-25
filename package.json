@@ -11,7 +11,7 @@
     "src"
   ],
   "scripts": {
-    "test": "mocha --require should-approximately-deep --reporter mocha-better-spec-reporter --recursive",
+    "test": "mocha --require should-approximately-deep --reporter mocha-better-spec-reporter --recursive"
   },
   "repository": {
     "type": "git",
