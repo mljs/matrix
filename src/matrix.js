@@ -366,6 +366,19 @@ class Matrix extends Array {
     }
 
     /**
+     * Creates a new matrix that is a repetition of the current matrix. New matrix has rowRep times the number of
+     * rows of the matrix, and colRep times the number of columns of the matrix
+     * @param {number} rowRep - Number of times the rows should be repeated
+     * @param {number} colRep - Number of times the columns should be re
+     */
+    rep(rowRep, colRep) {
+        rowRep = rowRep || 1;
+        colRep = colRep || 0;
+        var matrix = new Matrix(this.rows * rowRep, this.columns *colRep);
+
+    }
+
+    /**
      * Fills the matrix with a given value. All elements will be set to this value.
      * @param {number} value - New value
      * @returns {Matrix} this
@@ -1214,6 +1227,28 @@ class Matrix extends Array {
             }
         }
         return newMatrix;
+    }
+
+    /**
+     * Set a part of the matrix to the given sub-matrix
+     * @param {Matrix|Array< Array >} matrix - The source matrix from which to extract values.
+     * @param startRow - The index of the first row to set
+     * @param startColumn - The index of the first column to set
+     * @returns {Matrix}
+     */
+    setSubMatrix(matrix, startRow, startColumn) {
+        matrix = Matrix.checkMatrix(matrix);
+        var endRow = startRow + matrix.rows - 1;
+        var endColumn = startColumn + matrix.columns - 1;
+        if ((startRow > endRow) || (startColumn > endColumn) || (startRow < 0) || (startRow >= this.rows) || (endRow < 0) || (endRow >= this.rows) || (startColumn < 0) || (startColumn >= this.columns) || (endColumn < 0) || (endColumn >= this.columns)) {
+            throw new RangeError('Argument out of range');
+        }
+        for(var i = 0; i < matrix.rows; i++) {
+            for(var j=0; j<matrix.columns; j++) {
+                this[startRow + i][startColumn + j] = matrix[i][j];
+            }
+        }
+        return this;
     }
 
     /**

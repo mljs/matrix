@@ -111,4 +111,13 @@ describe('utility methods', function () {
             matrix.scaleColumns(2,1);
         }).should.throw(/min should be strictly smaller than max/);
     });
+
+    it('set sub matrix', function () {
+        var matrix = new Matrix([[1,2],[-5,3],[2,4]]);
+        matrix.setSubMatrix([[1,2]], 1, 0).to2DArray().should.eql([[1,2],[1,2],[2,4]]);
+        matrix.setSubMatrix([[10],[10]], 1, 1).to2DArray().should.eql([[1,2],[1,10],[2,10]]);
+        (function () {
+            matrix.setSubMatrix([[1,2]], 1,1);
+        }).should.throw(/Argument out of range/);
+    });
 });
