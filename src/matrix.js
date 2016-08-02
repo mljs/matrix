@@ -189,7 +189,7 @@ class Matrix extends Array {
         var columns = matrix1[0].length;
         var result = new Matrix(rows, columns);
         for (var i = 0; i < rows; i++) {
-            for(var j = 0; j < columns; j++) {
+            for (var j = 0; j < columns; j++) {
                 result[i][j] = Math.min(matrix1[i][j], matrix2[i][j]);
             }
         }
@@ -207,7 +207,7 @@ class Matrix extends Array {
         var columns = matrix1[0].length;
         var result = new Matrix(rows, columns);
         for (var i = 0; i < rows; i++) {
-            for(var j = 0; j < columns; j++) {
+            for (var j = 0; j < columns; j++) {
                 result[i][j] = Math.max(matrix1[i][j], matrix2[i][j]);
             }
         }
@@ -377,10 +377,10 @@ class Matrix extends Array {
     repeat(rowRep, colRep) {
         rowRep = rowRep || 1;
         colRep = colRep || 1;
-        var matrix = new Matrix(this.rows * rowRep, this.columns *colRep);
-        for(var i=0; i<rowRep; i++) {
-            for(var j=0; j<colRep; j++) {
-                matrix.setSubMatrix(this, this.rows*i, this.columns * j);
+        var matrix = new Matrix(this.rows * rowRep, this.columns * colRep);
+        for (var i = 0; i < rowRep; i++) {
+            for (var j = 0; j < colRep; j++) {
+                matrix.setSubMatrix(this, this.rows * i, this.columns * j);
             }
         }
         return matrix;
@@ -1058,11 +1058,11 @@ class Matrix extends Array {
     scaleRows(min, max) {
         min = min === undefined ? 0 : min;
         max = max === undefined ? 1 : max;
-        if(min >= max) {
+        if (min >= max) {
             throw new RangeError('min should be strictly smaller than max');
         }
         var newMatrix = Matrix.empty(this.rows, this.columns);
-        for(var i=0; i<this.rows; i++) {
+        for (var i = 0; i < this.rows; i++) {
             var scaled = arrayUtils.scale(this.getRow(i), {min, max});
             newMatrix.setRow(i, scaled);
         }
@@ -1081,11 +1081,11 @@ class Matrix extends Array {
     scaleColumns(min, max) {
         min = min === undefined ? 0 : min;
         max = max === undefined ? 1 : max;
-        if(min >= max) {
+        if (min >= max) {
             throw new RangeError('min should be strictly smaller than max');
         }
         var newMatrix = Matrix.empty(this.rows, this.columns);
-        for(var i=0; i<this.columns; i++) {
+        for (var i = 0; i < this.columns; i++) {
             var scaled = arrayUtils.scale(this.getColumn(i), {
                 min: min,
                 max: max
@@ -1094,7 +1094,6 @@ class Matrix extends Array {
         }
         return newMatrix;
     }
-
 
 
     /**
@@ -1251,8 +1250,8 @@ class Matrix extends Array {
         if ((startRow > endRow) || (startColumn > endColumn) || (startRow < 0) || (startRow >= this.rows) || (endRow < 0) || (endRow >= this.rows) || (startColumn < 0) || (startColumn >= this.columns) || (endColumn < 0) || (endColumn >= this.columns)) {
             throw new RangeError('Argument out of range');
         }
-        for(var i = 0; i < matrix.rows; i++) {
-            for(var j=0; j<matrix.columns; j++) {
+        for (var i = 0; i < matrix.rows; i++) {
+            for (var j = 0; j < matrix.columns; j++) {
                 this[startRow + i][startColumn + j] = matrix[i][j];
             }
         }
@@ -1361,7 +1360,7 @@ function compareNumbers(a, b) {
 }
 
 /*
-Synonyms
+ Synonyms
  */
 
 Matrix.random = Matrix.rand;
@@ -1372,7 +1371,7 @@ Matrix.prototype.negate = Matrix.prototype.neg;
 Matrix.prototype.tensorProduct = Matrix.prototype.kroneckerProduct;
 
 /*
-Add dynamically instance and static methods for mathematical operations
+ Add dynamically instance and static methods for mathematical operations
  */
 
 var inplaceOperator = `
@@ -1507,7 +1506,11 @@ for (var methodWithArg of methodsWithArgs) {
     for (var i = 1; i < methodWithArg[1]; i++) {
         args += `, arg${i}`;
     }
-    var inplaceMethWithArgs = eval(fillTemplateFunction(inplaceMethodWithArgs, {name: methodWithArg[2], method: methodWithArg[0], args: args}));
+    var inplaceMethWithArgs = eval(fillTemplateFunction(inplaceMethodWithArgs, {
+        name: methodWithArg[2],
+        method: methodWithArg[0],
+        args: args
+    }));
     var staticMethWithArgs = eval(fillTemplateFunction(staticMethodWithArgs, {name: methodWithArg[2], args: args}));
     for (var i = 2; i < methodWithArg.length; i++) {
         Matrix.prototype[methodWithArg[i]] = inplaceMethWithArgs;

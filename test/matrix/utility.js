@@ -13,6 +13,7 @@ describe('utility methods', function () {
         function notAMatrix(val) {
             Matrix.isMatrix(val).should.be.false();
         }
+
         notAMatrix();
         notAMatrix(1);
         notAMatrix('string');
@@ -34,6 +35,7 @@ describe('utility methods', function () {
         var matrix = Matrix.ones(6, 5);
         matrix[0][0] = 10;
         var called = 0;
+
         function cb(i, j) {
             called++;
             this.should.be.instanceOf(Matrix);
@@ -43,6 +45,7 @@ describe('utility methods', function () {
                 this[i][j] = 20;
             }
         }
+
         matrix.apply(cb);
         matrix[5][4].should.equal(20);
         called.should.equal(30);
@@ -93,38 +96,38 @@ describe('utility methods', function () {
     });
 
     it('scale rows', function () {
-        var matrix = new Matrix([[-1,0,1],[6, 9, 7]]);
-        matrix.scaleRows().to2DArray().should.eql([[0, 1/2, 1],[0, 1, 1/3]]);
-        matrix.scaleRows(1,2).to2DArray().should.eql([[1, 3/2, 2],[1, 2, 4/3]]);
-        matrix.scaleRows(-2,-1).to2DArray().should.eql([[-2, -3/2, -1],[-2, -1, -5/3]]);
+        var matrix = new Matrix([[-1, 0, 1], [6, 9, 7]]);
+        matrix.scaleRows().to2DArray().should.eql([[0, 1 / 2, 1], [0, 1, 1 / 3]]);
+        matrix.scaleRows(1, 2).to2DArray().should.eql([[1, 3 / 2, 2], [1, 2, 4 / 3]]);
+        matrix.scaleRows(-2, -1).to2DArray().should.eql([[-2, -3 / 2, -1], [-2, -1, -5 / 3]]);
         (function () {
-            matrix.scaleRows(2,1);
+            matrix.scaleRows(2, 1);
         }).should.throw(/min should be strictly smaller than max/);
     });
 
     it('scale columns', function () {
-        var matrix = new Matrix([[1,2],[-5,3],[2,4]]);
-        matrix.scaleColumns().to2DArray().should.eql([[6/7, 0],[0, 1/2],[1, 1]]);
-        matrix.scaleColumns(1, 2).to2DArray().should.eql([[13/7, 1],[1, 3/2],[2, 2]]);
-        matrix.scaleColumns(-2, -1).to2DArray().should.eql([[-8/7, -2],[-2, -3/2],[-1, -1]]);
+        var matrix = new Matrix([[1, 2], [-5, 3], [2, 4]]);
+        matrix.scaleColumns().to2DArray().should.eql([[6 / 7, 0], [0, 1 / 2], [1, 1]]);
+        matrix.scaleColumns(1, 2).to2DArray().should.eql([[13 / 7, 1], [1, 3 / 2], [2, 2]]);
+        matrix.scaleColumns(-2, -1).to2DArray().should.eql([[-8 / 7, -2], [-2, -3 / 2], [-1, -1]]);
         (function () {
-            matrix.scaleColumns(2,1);
+            matrix.scaleColumns(2, 1);
         }).should.throw(/min should be strictly smaller than max/);
     });
 
     it('set sub matrix', function () {
-        var matrix = new Matrix([[1,2],[-5,3],[2,4]]);
-        matrix.setSubMatrix([[1,2]], 1, 0).to2DArray().should.eql([[1,2],[1,2],[2,4]]);
-        matrix.setSubMatrix([[10],[10]], 1, 1).to2DArray().should.eql([[1,2],[1,10],[2,10]]);
+        var matrix = new Matrix([[1, 2], [-5, 3], [2, 4]]);
+        matrix.setSubMatrix([[1, 2]], 1, 0).to2DArray().should.eql([[1, 2], [1, 2], [2, 4]]);
+        matrix.setSubMatrix([[10], [10]], 1, 1).to2DArray().should.eql([[1, 2], [1, 10], [2, 10]]);
         (function () {
-            matrix.setSubMatrix([[1,2]], 1,1);
+            matrix.setSubMatrix([[1, 2]], 1, 1);
         }).should.throw(/Argument out of range/);
     });
 
     it('repeat matrix', function () {
-        var matrix = new Matrix([[1,2],[3,4]]);
-        matrix.repeat().to2DArray().should.eql([[1,2],[3,4]]);
-        matrix.repeat(2,2).to2DArray().should.eql([[1,2,1,2],[3,4,3,4],[1,2,1,2],[3,4,3,4]]);
-        matrix.repeat(1,2).to2DArray().should.eql([[1,2,1,2],[3,4,3,4]]);
+        var matrix = new Matrix([[1, 2], [3, 4]]);
+        matrix.repeat().to2DArray().should.eql([[1, 2], [3, 4]]);
+        matrix.repeat(2, 2).to2DArray().should.eql([[1, 2, 1, 2], [3, 4, 3, 4], [1, 2, 1, 2], [3, 4, 3, 4]]);
+        matrix.repeat(1, 2).to2DArray().should.eql([[1, 2, 1, 2], [3, 4, 3, 4]]);
     });
 });
