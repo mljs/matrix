@@ -370,12 +370,20 @@ class Matrix extends Array {
      * rows of the matrix, and colRep times the number of columns of the matrix
      * @param {number} rowRep - Number of times the rows should be repeated
      * @param {number} colRep - Number of times the columns should be re
+     * @example
+     * var matrix = new Matrix([[1,2]]);
+     * matrix.repeat(2); // [[1,2],[1,2]]
      */
-    rep(rowRep, colRep) {
+    repeat(rowRep, colRep) {
         rowRep = rowRep || 1;
-        colRep = colRep || 0;
+        colRep = colRep || 1;
         var matrix = new Matrix(this.rows * rowRep, this.columns *colRep);
-
+        for(var i=0; i<rowRep; i++) {
+            for(var j=0; j<colRep; j++) {
+                matrix.setSubMatrix(this, this.rows*i, this.columns * j);
+            }
+        }
+        return matrix;
     }
 
     /**

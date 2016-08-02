@@ -120,4 +120,11 @@ describe('utility methods', function () {
             matrix.setSubMatrix([[1,2]], 1,1);
         }).should.throw(/Argument out of range/);
     });
+
+    it('repeat matrix', function () {
+        var matrix = new Matrix([[1,2],[3,4]]);
+        matrix.repeat().to2DArray().should.eql([[1,2],[3,4]]);
+        matrix.repeat(2,2).to2DArray().should.eql([[1,2,1,2],[3,4,3,4],[1,2,1,2],[3,4,3,4]]);
+        matrix.repeat(1,2).to2DArray().should.eql([[1,2,1,2],[3,4,3,4]]);
+    });
 });
