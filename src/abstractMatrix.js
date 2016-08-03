@@ -1,8 +1,10 @@
 'use strict';
 
-var arrayUtils = require('ml-array-utils');
+module.exports = abstractMatrix;
 
+var arrayUtils = require('ml-array-utils');
 var util = require('./util');
+var MatrixTransposeView = require('./matrixTransposeView');
 
 function abstractMatrix(superCtor) {
     if (superCtor === undefined) superCtor = Object;
@@ -15,8 +17,6 @@ function abstractMatrix(superCtor) {
      * @param {number} [nColumns] - Number of columns of the new matrix
      */
     class Matrix extends superCtor {
-
-
         /**
          * Constructs a Matrix with the chosen dimensions from a 1D array
          * @param {number} newRows - Number of rows
@@ -71,7 +71,6 @@ function abstractMatrix(superCtor) {
          * @returns {Matrix} - The new matrix
          */
         static empty(rows, columns) {
-            debugger;
             return new this(rows, columns);
         }
 
@@ -230,20 +229,6 @@ function abstractMatrix(superCtor) {
                 }
             }
             return this;
-        }
-
-        /**
-         * Creates an exact and independent copy of the matrix
-         * @returns {Matrix}
-         */
-        clone() {
-            var newMatrix = new this.constructor(this.rows, this.columns);
-            for (var row = 0; row < this.rows; row++) {
-                for (var column = 0; column < this.columns; column++) {
-                    newMatrix.set(row, column, this.get(row, column));
-                }
-            }
-            return newMatrix;
         }
 
         /**
@@ -1184,6 +1169,13 @@ function abstractMatrix(superCtor) {
             }
             return trace;
         }
+
+        /*
+        Matrix views
+         */
+        transposeView() {
+            return new MatrixTransposeView(this);
+        }
     }
 
     Matrix.prototype.klass = 'Matrix';
@@ -1425,5 +1417,3 @@ function abstractMatrix(superCtor) {
 
     return Matrix;
 }
-
-module.exports = abstractMatrix;

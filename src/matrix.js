@@ -52,6 +52,20 @@ class Matrix extends abstractMatrix(Array) {
     }
 
     /**
+     * Creates an exact and independent copy of the matrix
+     * @returns {Matrix}
+     */
+    clone() {
+        var newMatrix = new this.constructor(this.rows, this.columns);
+        for (var row = 0; row < this.rows; row++) {
+            for (var column = 0; column < this.columns; column++) {
+                newMatrix.set(row, column, this.get(row, column));
+            }
+        }
+        return newMatrix;
+    }
+
+    /**
      * Removes a row from the given index
      * @param {number} index - Row index
      * @returns {Matrix} this
@@ -121,3 +135,4 @@ class Matrix extends abstractMatrix(Array) {
 }
 
 module.exports = Matrix;
+Matrix.abstractMatrix = abstractMatrix;
