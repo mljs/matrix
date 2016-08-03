@@ -4,7 +4,7 @@ module.exports = abstractMatrix;
 
 var arrayUtils = require('ml-array-utils');
 var util = require('./util');
-var MatrixTransposeView = require('./matrixTransposeView');
+var MatrixTransposeView = require('./views/transpose');
 
 function abstractMatrix(superCtor) {
     if (superCtor === undefined) superCtor = Object;

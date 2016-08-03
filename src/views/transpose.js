@@ -1,6 +1,6 @@
 'use strict';
 
-var abstractMatrix = require('./abstractMatrix');
+var abstractMatrix = require('../abstractMatrix');
 
 class MatrixTransposeView extends abstractMatrix() {
     constructor(matrix) {
