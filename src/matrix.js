@@ -1447,6 +1447,37 @@ var staticMethodWithArgs = `
 })
 `;
 
+var inplaceMethodWithOneArgScalar = `
+(function %name%S(%args%) {
+    for (var i = 0; i < this.rows; i++) {
+        for (var j = 0; j < this.columns; j++) {
+            this[i][j] = %method%(this[i][j], %args%);
+        }
+    }
+    return this;
+})
+`;
+var inplaceMethodWithOneArgMatrix = `
+(function %name%M(%args%) {
+    checkDimensions(this, %args%);
+    for (var i = 0; i < this.rows; i++) {
+        for (var j = 0; j < this.columns; j++) {
+            this[i][j] = %method%(this[i][j], %args%[i][j]);
+        }
+    }
+    return this;
+})
+`;
+
+var inplaceMethodWithOneArg = `
+(function %name%(value) {
+    if (typeof value === 'number') return this.%name%S(value);
+    return this.%name%M(value);
+})
+`;
+
+var staticMethodWithOneArg = staticMethodWithArgs;
+
 var operators = [
     // Arithmetic operators
     ['+', 'add'],
@@ -1506,15 +1537,35 @@ for (var methodWithArg of methodsWithArgs) {
     for (var i = 1; i < methodWithArg[1]; i++) {
         args += `, arg${i}`;
     }
-    var inplaceMethWithArgs = eval(fillTemplateFunction(inplaceMethodWithArgs, {
-        name: methodWithArg[2],
-        method: methodWithArg[0],
-        args: args
-    }));
-    var staticMethWithArgs = eval(fillTemplateFunction(staticMethodWithArgs, {name: methodWithArg[2], args: args}));
-    for (var i = 2; i < methodWithArg.length; i++) {
-        Matrix.prototype[methodWithArg[i]] = inplaceMethWithArgs;
-        Matrix[methodWithArg[i]] = staticMethWithArgs;
+    if (methodWithArg[1] !== 1) {
+        var inplaceMethWithArgs = eval(fillTemplateFunction(inplaceMethodWithArgs, {
+            name: methodWithArg[2],
+            method: methodWithArg[0],
+            args: args
+        }));
+        var staticMethWithArgs = eval(fillTemplateFunction(staticMethodWithArgs, {name: methodWithArg[2], args: args}));
+        for (var i = 2; i < methodWithArg.length; i++) {
+            Matrix.prototype[methodWithArg[i]] = inplaceMethWithArgs;
+            Matrix[methodWithArg[i]] = staticMethWithArgs;
+        }
+    } else {
+        var tmplVar = {
+            name: methodWithArg[2],
+            args: args,
+            method: methodWithArg[0]
+        };
+        console.log(tmplVar);
+        let inplaceMethod = eval(fillTemplateFunction(inplaceMethodWithOneArg, tmplVar));
+        let inplaceMethodS = eval(fillTemplateFunction(inplaceMethodWithOneArgScalar, tmplVar));
+        let inplaceMethodM = eval(fillTemplateFunction(inplaceMethodWithOneArgMatrix, tmplVar));
+        console.log(fillTemplateFunction(staticMethodWithOneArg, tmplVar));
+        let staticMethod = eval(fillTemplateFunction(staticMethodWithOneArg, tmplVar));
+        for (var i = 2; i < methodWithArg.length; i++) {
+            Matrix.prototype[methodWithArg[i]] = inplaceMethod;
+            Matrix.prototype[methodWithArg[i] + 'M'] = inplaceMethodM;
+            Matrix.prototype[methodWithArg[i] + 'S'] = inplaceMethodS;
+            Matrix[methodWithArg[i]] = staticMethod;
+        }
     }
 }
 

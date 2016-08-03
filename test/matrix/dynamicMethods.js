@@ -67,18 +67,19 @@ describe('Dynamic methods on matrices', function () {
         });
     });
 
-    describe('with args', function () {
-        it('inplace MathPow', function () {
+    describe('with one arg', function () {
+        it('inplace MathPow with scalar', function () {
             matrix = matrix.subMatrix(0, 2, 0, 2);
-            matrix.pow(2);
+            var retMatrix = matrix.pow(2);
             matrix.to2DArray().should.eql([
                 [0, 1, 4],
                 [9, 16, 25],
                 [36, 49, 64]
             ]);
+            retMatrix.should.equal(matrix);
         });
 
-        it('static MathPow', function () {
+        it('static MathPow with scalar', function () {
             matrix = matrix.subMatrix(0, 2, 0, 2);
             var newMatrix = Matrix.pow(matrix, 2);
             newMatrix.should.not.eql(matrix);
@@ -86,6 +87,25 @@ describe('Dynamic methods on matrices', function () {
                 [0, 1, 4],
                 [9, 16, 25],
                 [36, 49, 64]
+            ]);
+        });
+
+        it('inplace MathPow with matrix', function () {
+            matrix = matrix.subMatrix(0, 1, 0, 1);
+            var retMatrix = matrix.pow([[1, 10], [2, 0]]);
+            matrix.to2DArray().should.eql([
+                [0, 1],
+                [9, 1]
+            ]);
+            retMatrix.should.equal(matrix);
+        });
+
+        it('static MathPow with matrix', function () {
+            matrix = matrix.subMatrix(0, 1, 0, 1);
+            var newMatrix = Matrix.pow(matrix, [[1, 10], [2, 0]]);
+            newMatrix.to2DArray().should.eql([
+                [0, 1],
+                [9, 1]
             ]);
         });
     });
