@@ -47,11 +47,11 @@
     "benchmark": "^2.1.0",
     "csv-parse": "^1.0.0",
     "mathjs": "^3.2.1",
-    "mocha": "^2.2.5",
+    "mocha": "^3.0.0",
     "mocha-better-spec-reporter": "^3.0.0",
     "numeric": "^1.2.6",
     "pretty-hrtime": "^1.0.0",
-    "should": "^9.0.2",
+    "should": "^10.0.0",
     "should-approximately-deep": "^1.1.0"
   },
   "dependencies": {
