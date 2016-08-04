@@ -1,6 +1,7 @@
 'use strict';
 
 var Matrix = require('../../');
+var  MatrixTransposeView = require('../../src/views/transpose');
 var util = require('../util');
 var assert = require('assert');
 
@@ -146,5 +147,12 @@ describe('Matrix creation', function () {
         var matrix = new Matrix([[1, 1, 1], [1, 1, 1]]);
         var view = matrix.transposeView();
         matrix.transpose().mmul(matrix).should.eql(view.mmul(matrix));
+    });
+
+    it('Symbol.species should work on static evaluated methods', function () {
+        var a = [[1,2]];
+        var b = [[3,1]];
+        Matrix.subtract(a, b).to2DArray().should.eql([[-2, 1]]);
+        MatrixTransposeView.subtract(a, b).to2DArray().should.eql([[-2, 1]]);
     });
 });
