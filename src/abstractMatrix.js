@@ -1221,6 +1221,14 @@ function abstractMatrix(superCtor) {
         flipColumnView() {
             return new MatrixFlipColumnView(this);
         }
+
+        subMatrixView(startRow, endRow, startColumn, endColumn) {
+            return new MatrixSubView(this, startRow, endRow, startColumn, endColumn);
+        }
+
+        selectionView(rowIndices, columnIndices) {
+            return new MatrixSelectionView(this, rowIndices, columnIndices);
+        }
     }
 
     Matrix.prototype.klass = 'Matrix';
