@@ -6,6 +6,7 @@ var arrayUtils = require('ml-array-utils');
 var util = require('./util');
 var MatrixTransposeView = require('./views/transpose');
 var MatrixRowView = require('./views/row');
+var MatrixSubView = require('./views/sub');
 
 function abstractMatrix(superCtor) {
     if (superCtor === undefined) superCtor = Object;
@@ -1181,6 +1182,10 @@ function abstractMatrix(superCtor) {
         rowView(row) {
             util.checkRowIndex(this, row);
             return new MatrixRowView(this, row);
+        }
+
+        subMatrixView(rowIndices, columnIndices, startColumn, endColumn) {
+            return new MatrixSubView(this, rowIndices, columnIndices, startColumn, endColumn);
         }
     }
 
