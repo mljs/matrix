@@ -121,7 +121,7 @@ describe('utility methods', function () {
         matrix.setSubMatrix([[10], [10]], 1, 1).to2DArray().should.eql([[1, 2], [1, 10], [2, 10]]);
         (function () {
             matrix.setSubMatrix([[1, 2]], 1, 1);
-        }).should.throw(/Argument out of range/);
+        }).should.throw(RangeError);
     });
 
     it('selection matrix', function () {
