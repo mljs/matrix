@@ -1571,7 +1571,7 @@ function abstractMatrix(superCtor) {
 
     var staticOperator = `
 (function %name%(matrix, value) {
-    var newMatrix = new this(matrix);
+    var newMatrix = new this[Symbol.species](matrix);
     return newMatrix.%name%(value);
 })
 `;
@@ -1589,7 +1589,7 @@ function abstractMatrix(superCtor) {
 
     var staticMethod = `
 (function %name%(matrix) {
-    var newMatrix = new this(matrix);
+    var newMatrix = new this[Symbol.species](matrix);
     return newMatrix.%name%();
 })
 `;
@@ -1607,7 +1607,7 @@ function abstractMatrix(superCtor) {
 
     var staticMethodWithArgs = `
 (function %name%(matrix, %args%) {
-    var newMatrix = new this(matrix);
+    var newMatrix = new this[Symbol.species](matrix);
     return newMatrix.%name%(%args%);
 })
 `;
