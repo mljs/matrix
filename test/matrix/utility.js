@@ -124,6 +124,12 @@ describe('utility methods', function () {
         }).should.throw(/Argument out of range/);
     });
 
+    it('selection matrix', function () {
+        var matrix = new Matrix([[1, 2], [-5, 3], [2, 4]]);
+        var selMatrix = matrix.selection([2,1], [1]);
+        selMatrix.to2DArray().should.eql([[4],[3]]);
+    });
+
     it('repeat matrix', function () {
         var matrix = new Matrix([[1, 2], [3, 4]]);
         matrix.repeat().to2DArray().should.eql([[1, 2], [3, 4]]);

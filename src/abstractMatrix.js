@@ -7,6 +7,7 @@ var util = require('./util');
 var MatrixTransposeView = require('./views/transpose');
 var MatrixRowView = require('./views/row');
 var MatrixSubView = require('./views/sub');
+var MatrixSelectionView = require('./views/selection');
 
 function abstractMatrix(superCtor) {
     if (superCtor === undefined) superCtor = Object;
@@ -1158,6 +1159,25 @@ function abstractMatrix(superCtor) {
         }
 
         /**
+         * Return a new matrix based on a selection of rows and columns
+         * @param {Array<number>} rowIndices - The row indices to select. Order matters and an index can be more than once.
+         * @param {Array<number>} columnIndices - The column indices to select. Order matters and an index can be use more than once.
+         * @returns {Matrix} The new matrix
+         */
+        selection(rowIndices, columnIndices) {
+            var indices = util.checkIndices(this, rowIndices, columnIndices);
+            var newMatrix = new this.constructor(rowIndices.length, columnIndices.length);
+            for (var i = 0; i < indices.row.length; i++) {
+                var rowIndex = indices.row[i];
+                for (var j = 0; j < indices.column.length; j++) {
+                    var columnIndex = indices.column[j];
+                    newMatrix[i][j] = this.get(rowIndex, columnIndex);
+                }
+            }
+            return newMatrix;
+        }
+
+        /**
          * Returns the trace of the matrix (sum of the diagonal elements)
          * @returns {number}
          */
@@ -1182,8 +1202,12 @@ function abstractMatrix(superCtor) {
             return new MatrixRowView(this, row);
         }
 
-        subMatrixView(rowIndices, columnIndices, startColumn, endColumn) {
-            return new MatrixSubView(this, rowIndices, columnIndices, startColumn, endColumn);
+        subMatrixView(startRow, endRow, startColumn, endColumn) {
+            return new MatrixSubView(this, startRow, endRow, startColumn, endColumn);
+        }
+
+        selectionView(rowIndices, columnIndices) {
+            return new MatrixSelectionView(this, rowIndices, columnIndices);
         }
     }
 
