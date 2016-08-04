@@ -15,11 +15,11 @@ describe('Row view', function () {
         mrv1.get(0, 3).should.equal(5);
         mrv2.get(0, 3).should.equal(1);
 
-        mrv1.get(2, 2).should.equal(1);
-        mrv2.get(2, 2).should.equal(1);
+        mrv1.get(0, 2).should.equal(1);
+        mrv2.get(0, 2).should.equal(1);
 
-        mrv1.get(3, 4).should.equal(1);
-        mrv2.get(3, 4).should.equal(10);
+        mrv1.get(0, 4).should.equal(1);
+        mrv2.get(0, 4).should.equal(10);
 
         mrv1.to1DArray().should.eql([1, 1, 1, 5, 1, 1, 1, 1]);
         mrv2.to1DArray().should.eql([1, 1, 1, 1, 10, 1, 1, 1]);
