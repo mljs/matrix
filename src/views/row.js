@@ -1,14 +1,11 @@
 'use strict';
 
-var abstractMatrix = require('../abstractMatrix');
+var BaseView = require('./base');
 
-class MatrixRowView extends abstractMatrix() {
+class MatrixRowView extends BaseView {
     constructor(matrix, row) {
-        super();
-        this.matrix = matrix;
+        super(matrix, 1, matrix.columns);
         this.row = row;
-        this.rows = 1;
-        this.columns = matrix.columns;
     }
 
     set(rowIndex, columnIndex, value) {

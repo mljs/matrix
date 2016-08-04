@@ -1,13 +1,10 @@
 'use strict';
 
-var abstractMatrix = require('../abstractMatrix');
+var BaseView = require('./base');
 
-class MatrixTransposeView extends abstractMatrix() {
+class MatrixTransposeView extends BaseView {
     constructor(matrix) {
-        super();
-        this.matrix = matrix;
-        this.rows = matrix.columns;
-        this.columns = matrix.rows;
+        super(matrix, matrix.columns, matrix.rows);
     }
 
     set(rowIndex, columnIndex, value) {
