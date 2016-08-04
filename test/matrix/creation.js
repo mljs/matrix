@@ -10,6 +10,7 @@ describe('Matrix creation', function () {
         var matrix = new Matrix(array);
         matrix.should.not.equal(array);
     });
+
     it('should extend Array', function () {
         var array = util.getSquareArray();
         var matrix = new Matrix(array);
@@ -18,32 +19,37 @@ describe('Matrix creation', function () {
         Matrix.isMatrix(matrix).should.be.true();
         Array.isArray(matrix).should.be.true();
     });
+
     it('should clone existing matrix', function () {
         var original = util.getSquareMatrix();
         var matrix = new Matrix(original);
         matrix.should.not.equal(original);
         matrix.should.eql(original);
     });
+
     it('should create an empty matrix', function () {
         var matrix = new Matrix(3, 9);
         matrix.rows.should.equal(3);
         matrix.columns.should.equal(9);
         assert.strictEqual(matrix[0][0], undefined);
     });
+
     it('should throw with wrong arguments', function () {
-        (function(){ new Matrix(6) }).should.throw(TypeError, /^nColumns must be a positive integer/);
-        (function(){ new Matrix(0) }).should.throw(TypeError, /^First argument must be a positive number or an array$/);
+        (function(){ new Matrix(6, -1) }).should.throw(TypeError, /^nColumns must be a positive integer/);
+        (function(){ new Matrix(0, 0) }).should.throw(TypeError, /^First argument must be a positive number or an array$/);
         (function(){ new Matrix([[]]) }).should.throw(TypeError, /^Data must be a 2D array with at least one element$/);
         (function(){ new Matrix([0, 1, 2, 3]) }).should.throw(TypeError, /^Data must be a 2D array/);
         (function(){ new Matrix([[0, 1], [0, 1, 2]]) }).should.throw(RangeError, /^Inconsistent array dimensions$/);
         (function(){ new Matrix() }).should.throw(TypeError, /^First argument must be a positive number or an array$/);
     });
+
     it('should correctly set rows, columns and values', function () {
         var matrix = util.getSquareMatrix();
         matrix.rows.should.exactly(3);
         matrix.columns.should.exactly(3);
         matrix[1][2].should.exactly(7);
     });
+
     it('should correctly check if argument is a matrix', function () {
         var array = util.getSquareArray();
         var matrix = Matrix.checkMatrix(array);
@@ -54,6 +60,7 @@ describe('Matrix creation', function () {
             Matrix.checkMatrix();
         }).should.throw(TypeError, /^Argument has to be a matrix$/);
     });
+
     it('should create a matrix from 1D array', function () {
         var matrix = Matrix.from1DArray(3, 2, [0, 1, 2, 3, 4, 5]);
         matrix.rows.should.exactly(3);
@@ -62,27 +69,33 @@ describe('Matrix creation', function () {
             Matrix.from1DArray(3, 2, [0, 1, 2, 3]);
         }).should.throw(RangeError, /^Data length does not match given dimensions$/);
     });
+
     it('row vector', function () {
         var vector = Matrix.rowVector([0, 1, 2, 3]);
         vector.rows.should.equal(1);
         vector.columns.should.equal(4);
         vector.to2DArray().should.eql([[0, 1, 2, 3]]);
     });
+
     it('column vector', function () {
         var vector = Matrix.columnVector([0, 1, 2, 3]);
         vector.rows.should.equal(4);
         vector.columns.should.equal(1);
         vector.to2DArray().should.eql([[0], [1], [2], [3]]);
     });
+
     it('empty', function () {
         Matrix.empty(3, 3).should.eql(new Matrix(3, 3));
     });
+
     it('zeros', function () {
         Matrix.zeros(2, 3).to2DArray().should.eql([[0, 0, 0], [0, 0, 0]]);
     });
+
     it('ones', function () {
         Matrix.ones(2, 3).to2DArray().should.eql([[1, 1, 1], [1, 1, 1]]);
     });
+
     it('random', function () {
         var random = Matrix.rand(2, 3);
         var random2 = Matrix.rand(2, 3);
@@ -93,10 +106,12 @@ describe('Matrix creation', function () {
             }
         }
     });
+
     it('random with custom RNG', function () {
         function fakeRNG() { return 2; }
         Matrix.rand(2, 2, fakeRNG).to2DArray().should.eql([[2, 2], [2, 2]]);
     });
+
     it('eye/identity', function () {
         var eye1 = Matrix.eye(3);
         eye1.should.eql(Matrix.identity(3));
@@ -105,6 +120,7 @@ describe('Matrix creation', function () {
         var eye2 = Matrix.eye(3, 2);
         eye2.to2DArray().should.eql([[1, 0], [0, 1], [0, 0]]);
     });
+
     it('diag/diagonal', function () {
         var arr = [1, 2, 3];
         var diag = Matrix.diag(arr);
@@ -115,8 +131,15 @@ describe('Matrix creation', function () {
         Matrix.diag(arr, 2, 4).to2DArray().should.eql([[1, 0, 0, 0], [0, 2, 0, 0]]);
         Matrix.diag(arr, 4, 4).to2DArray().should.eql([[1, 0, 0, 0], [0, 2, 0, 0], [0, 0, 3, 0], [0, 0, 0, 0]]);
     });
+
     it('regression test for Symbol.species (V8 5.1)', function () {
         var matrix = Matrix.ones(1, 2);
         matrix.map(x => 1).should.eql([1]);
+    });
+
+    it('Symbol.species should work for views', function () {
+        var matrix = new Matrix([[1, 1, 1], [1, 1, 1]]);
+        var view = matrix.transposeView();
+        matrix.transpose().mmul(matrix).should.eql(view.mmul(matrix));
     });
 });

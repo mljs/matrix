@@ -1,10 +1,14 @@
 'use strict';
 
+require('./symbol-species');
 var abstractMatrix = require('./abstractMatrix');
 var util = require('./util');
 
 class Matrix extends abstractMatrix(Array) {
     constructor(nRows, nColumns) {
+        if (arguments.length === 1 && typeof nRows === 'number') {
+            return new Array(nRows);
+        }
         if (Matrix.isMatrix(nRows)) {
             return nRows.clone();
         } else if (Number.isInteger(nRows) && nRows > 0) { // Create an empty matrix
@@ -37,11 +41,6 @@ class Matrix extends abstractMatrix(Array) {
         this.columns = nColumns;
     }
 
-    // Native array methods should return instances of Array, not Matrix
-    static get [Symbol.species]() {
-        return Array;
-    }
-
     set(rowIndex, columnIndex, value) {
         this[rowIndex][columnIndex] = value;
         return this;
@@ -56,7 +55,7 @@ class Matrix extends abstractMatrix(Array) {
      * @returns {Matrix}
      */
     clone() {
-        var newMatrix = new this.constructor(this.rows, this.columns);
+        var newMatrix = new this.constructor[Symbol.species](this.rows, this.columns);
         for (var row = 0; row < this.rows; row++) {
             for (var column = 0; column < this.columns; column++) {
                 newMatrix.set(row, column, this.get(row, column));

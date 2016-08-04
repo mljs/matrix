@@ -1,6 +1,7 @@
 'use strict';
 
 var abstractMatrix = require('../abstractMatrix');
+var Matrix;
 
 class BaseView extends abstractMatrix() {
     constructor(matrix, rows, columns) {
@@ -10,9 +11,11 @@ class BaseView extends abstractMatrix() {
         this.columns = columns;
     }
 
-    // Native array methods should return instances of Array, not Matrix
-    static get[Symbol.species]() {
-        return require('../matrix');
+    static get [Symbol.species]() {
+        if (!Matrix) {
+            Matrix = require('../matrix');
+        }
+        return Matrix;
     }
 }
 

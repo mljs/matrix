@@ -8,6 +8,9 @@ var MatrixTransposeView = require('./views/transpose');
 var MatrixRowView = require('./views/row');
 var MatrixSubView = require('./views/sub');
 var MatrixSelectionView = require('./views/selection');
+var MatrixColumnView = require('./views/column');
+var MatrixFlipRowView = require('./views/flipRow');
+var MatrixFlipColumnView = require('./views/flipColumn');
 
 function abstractMatrix(superCtor) {
     if (superCtor === undefined) superCtor = Object;
@@ -20,6 +23,10 @@ function abstractMatrix(superCtor) {
      * @param {number} [nColumns] - Number of columns of the new matrix
      */
     class Matrix extends superCtor {
+        static get [Symbol.species]() {
+            return this;
+        }
+
         /**
          * Constructs a Matrix with the chosen dimensions from a 1D array
          * @param {number} newRows - Number of rows
@@ -341,7 +348,7 @@ function abstractMatrix(superCtor) {
         repeat(rowRep, colRep) {
             rowRep = rowRep || 1;
             colRep = colRep || 1;
-            var matrix = new this.constructor(this.rows * rowRep, this.columns * colRep);
+            var matrix = new this.constructor[Symbol.species](this.rows * rowRep, this.columns * colRep);
             for (var i = 0; i < rowRep; i++) {
                 for (var j = 0; j < colRep; j++) {
                     matrix.setSubMatrix(this, this.rows * i, this.columns * j);
@@ -931,7 +938,7 @@ function abstractMatrix(superCtor) {
             var n = this.columns;
             var p = other.columns;
 
-            var result = new this.constructor(m, p);
+            var result = new this.constructor[Symbol.species](m, p);
 
             var Bcolj = new Array(n);
             for (var j = 0; j < p; j++) {
@@ -1012,7 +1019,7 @@ function abstractMatrix(superCtor) {
             var p = other.rows;
             var q = other.columns;
 
-            var result = new this.constructor(m * p, n * q);
+            var result = new this.constructor[Symbol.species](m * p, n * q);
             for (var i = 0; i < m; i++) {
                 for (var j = 0; j < n; j++) {
                     for (var k = 0; k < p; k++) {
@@ -1030,7 +1037,7 @@ function abstractMatrix(superCtor) {
          * @returns {Matrix}
          */
         transpose() {
-            var result = new this.constructor(this.columns, this.rows);
+            var result = new this.constructor[Symbol.species](this.columns, this.rows);
             for (var i = 0; i < this.rows; i++) {
                 for (var j = 0; j < this.columns; j++) {
                     result.set(j, i, this.get(i, j));
@@ -1075,7 +1082,7 @@ function abstractMatrix(superCtor) {
          */
         subMatrix(startRow, endRow, startColumn, endColumn) {
             util.checkRange(this, startRow, endRow, startColumn, endColumn);
-            var newMatrix = new this.constructor(endRow - startRow + 1, endColumn - startColumn + 1);
+            var newMatrix = new this.constructor[Symbol.species](endRow - startRow + 1, endColumn - startColumn + 1);
             for (var i = startRow; i <= endRow; i++) {
                 for (var j = startColumn; j <= endColumn; j++) {
                     newMatrix[i - startRow][j - startColumn] = this.get(i, j);
@@ -1098,7 +1105,7 @@ function abstractMatrix(superCtor) {
                 throw new RangeError('Argument out of range');
             }
 
-            var newMatrix = new this.constructor(indices.length, endColumn - startColumn + 1);
+            var newMatrix = new this.constructor[Symbol.species](indices.length, endColumn - startColumn + 1);
             for (var i = 0; i < indices.length; i++) {
                 for (var j = startColumn; j <= endColumn; j++) {
                     if (indices[i] < 0 || indices[i] >= this.rows) {
@@ -1124,7 +1131,7 @@ function abstractMatrix(superCtor) {
                 throw new RangeError('Argument out of range');
             }
 
-            var newMatrix = new this.constructor(endRow - startRow + 1, indices.length);
+            var newMatrix = new this.constructor[Symbol.species](endRow - startRow + 1, indices.length);
             for (var i = 0; i < indices.length; i++) {
                 for (var j = startRow; j <= endRow; j++) {
                     if (indices[i] < 0 || indices[i] >= this.columns) {
@@ -1202,12 +1209,17 @@ function abstractMatrix(superCtor) {
             return new MatrixRowView(this, row);
         }
 
-        subMatrixView(startRow, endRow, startColumn, endColumn) {
-            return new MatrixSubView(this, startRow, endRow, startColumn, endColumn);
+        columnView(column) {
+            util.checkColumnIndex(this, column);
+            return new MatrixColumnView(this, column);
         }
 
-        selectionView(rowIndices, columnIndices) {
-            return new MatrixSelectionView(this, rowIndices, columnIndices);
+        flipRowView() {
+            return new MatrixFlipRowView(this);
+        }
+
+        flipColumnView() {
+            return new MatrixFlipColumnView(this);
         }
     }
 
