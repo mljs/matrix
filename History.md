@@ -1,3 +1,26 @@
+<a name="2.0.0"></a>
+# [2.0.0](https://github.com/mljs/matrix/compare/v1.4.0...v2.0.0) (2016-08-04)
+
+
+### Features
+
+* add column view ([5ff6680](https://github.com/mljs/matrix/commit/5ff6680))
+* add concept of abstract matrix ([cbefc9b](https://github.com/mljs/matrix/commit/cbefc9b))
+* add flipColumn and flipRow views ([55ee4a6](https://github.com/mljs/matrix/commit/55ee4a6))
+* add method subMatrixView ([aa1df18](https://github.com/mljs/matrix/commit/aa1df18))
+* add row view ([a9e99f2](https://github.com/mljs/matrix/commit/a9e99f2))
+* add selection method and selection view ([59aa861](https://github.com/mljs/matrix/commit/59aa861))
+* add transposeView ([fb0a0c9](https://github.com/mljs/matrix/commit/fb0a0c9))
+* make use of Symbol.species to allow creating new matrices in any class ([eaee5de](https://github.com/mljs/matrix/commit/eaee5de))
+
+
+### BREAKING CHANGES
+
+* This is a non trivial change and could potentially break existing code.
+There is no known backward incompatibility though.
+
+
+
 <a name="1.4.0"></a>
 # [1.4.0](https://github.com/mljs/matrix/compare/v1.3.0...v1.4.0) (2016-08-03)
 
