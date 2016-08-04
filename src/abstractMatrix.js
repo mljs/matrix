@@ -1073,9 +1073,7 @@ function abstractMatrix(superCtor) {
          * @returns {Matrix}
          */
         subMatrix(startRow, endRow, startColumn, endColumn) {
-            if ((startRow > endRow) || (startColumn > endColumn) || (startRow < 0) || (startRow >= this.rows) || (endRow < 0) || (endRow >= this.rows) || (startColumn < 0) || (startColumn >= this.columns) || (endColumn < 0) || (endColumn >= this.columns)) {
-                throw new RangeError('Argument out of range');
-            }
+            util.checkRange(this, startRow, endRow, startColumn, endColumn);
             var newMatrix = new this.constructor(endRow - startRow + 1, endColumn - startColumn + 1);
             for (var i = startRow; i <= endRow; i++) {
                 for (var j = startColumn; j <= endColumn; j++) {
