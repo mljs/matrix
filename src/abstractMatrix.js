@@ -7,6 +7,8 @@ var util = require('./util');
 var MatrixTransposeView = require('./views/transpose');
 var MatrixRowView = require('./views/row');
 var MatrixColumnView = require('./views/column');
+var MatrixFlipRowView = require('./views/flipRow');
+var MatrixFlipColumnView = require('./views/flipColumn');
 
 function abstractMatrix(superCtor) {
     if (superCtor === undefined) superCtor = Object;
@@ -1191,6 +1193,14 @@ function abstractMatrix(superCtor) {
         columnView(column) {
             util.checkColumnIndex(this, column);
             return new MatrixColumnView(this, column);
+        }
+
+        flipRowView() {
+            return new MatrixFlipRowView(this);
+        }
+
+        flipColumnView() {
+            return new MatrixFlipColumnView(this);
         }
     }
 
