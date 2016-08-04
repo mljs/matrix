@@ -1406,7 +1406,7 @@ function abstractMatrix(superCtor) {
          */
         selection(rowIndices, columnIndices) {
             var indices = util.checkIndices(this, rowIndices, columnIndices);
-            var newMatrix = new this.constructor(rowIndices.length, columnIndices.length);
+            var newMatrix = new this.constructor[Symbol.species](rowIndices.length, columnIndices.length);
             for (var i = 0; i < indices.row.length; i++) {
                 var rowIndex = indices.row[i];
                 for (var j = 0; j < indices.column.length; j++) {
