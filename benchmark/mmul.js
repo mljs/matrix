@@ -15,7 +15,7 @@ Matrix.prototype.mmul_strassen = function(x, y){
     var r2 = y.rows;
     var c2 = y.columns;
     if(c1 != r2){
-        // console.log(`Multiplying ${r1} x ${c1} and ${r2} x ${c2} matrix: dimensions do not match.`)
+       console.log(`Multiplying ${r1} x ${c1} and ${r2} x ${c2} matrix: dimensions do not match.`)
     }
 
     // Put a matrix into the top left of a matrix of zeros.
@@ -46,7 +46,7 @@ Matrix.prototype.mmul_strassen = function(x, y){
     // Our recursive multiplication function.
     function block_mult(a, b, rows, cols){
         // For small matrices, resort to naive multiplication.
-        if (rows <= 128 || cols <= 128){
+        if (rows <= 512 || cols <= 512){
             //console.log(`multiplication de ${a} et ${b}`)
             //console.log(a.mmul(b));
             return a.mmul(b); // a is equivalent to this
@@ -68,80 +68,37 @@ Matrix.prototype.mmul_strassen = function(x, y){
 
         var half_rows = parseInt(a.rows / 2);
         var half_cols = parseInt(a.columns / 2);
-        // console.log(half_rows)
         // Subdivide input matrices.
         var a11 = a.subMatrix(0, half_rows -1, 0, half_cols - 1);
-        // console.log("a11 : ")
-        // console.log(a11)
         var b11 = b.subMatrix(0, half_rows -1, 0, half_cols - 1);
-        // console.log("b11 : ")
-        // console.log(b11)
 
         var a12 = a.subMatrix(0, half_rows -1, half_cols, a.columns - 1);
-        // console.log("a12 : ")
-        // console.log(a12)
         var b12 = b.subMatrix(0, half_rows -1,  half_cols, b.columns - 1);
-        // console.log("b12 : ")
-        // console.log(b12)
 
         var a21 = a.subMatrix(half_rows, a.rows - 1,  0, half_cols - 1);
-        // console.log("a21 : ")
-        // console.log(a21)
         var b21 = b.subMatrix(half_rows, b.rows - 1,  0, half_cols - 1);
-        // console.log("b21 : ")
-        // console.log(b21)
 
         var a22 = a.subMatrix(half_rows, a.rows - 1, half_cols, a.columns - 1);
-        // console.log("a22 : ")
-        // console.log(a22)
         var b22 = b.subMatrix(half_rows, b.rows - 1, half_cols, b.columns - 1);
-        // console.log("b22 : ")
-        // console.log(b22)
 
-        // console.log(half_rows)
-        // console.log(half_cols)
         // Compute intermediate values.
         var m1 = block_mult(Matrix.add(a11,a22), Matrix.add(b11,b22), half_rows, half_cols);
-        // console.log("m1")
-        // console.log(m1)
         var m2 = block_mult(Matrix.add(a21,a22), b11, half_rows, half_cols);
-        // console.log("m2")
-        // console.log(m2)
         var m3 = block_mult(a11, Matrix.sub(b12, b22), half_rows, half_cols);
-        // console.log("m3")
-        // console.log(m3)
         var m4 = block_mult(a22, Matrix.sub(b21,b11), half_rows, half_cols);
-        // console.log("m4")
-        // console.log(m4)
         var m5 = block_mult(Matrix.add(a11,a12), b22, half_rows, half_cols);
-        // console.log("m5")
-        // console.log(m5)
         var m6 = block_mult(Matrix.sub(a21, a11), Matrix.add(b11, b12), half_rows, half_cols);
-        // console.log("m6")
-        // console.log(m6)
         var m7 = block_mult(Matrix.sub(a12,a22), Matrix.add(b21,b22), half_rows, half_cols);
-        // console.log("m7")
-        // console.log(m7)
 
         // Combine intermediate values into the output.
         var c11 = Matrix.add(m1, m4);
         c11.sub(m5);
         c11.add(m7);
-        //var c11 = m1.add(m4).sub(m5).add(m7);
         var c12 = Matrix.add(m3,m5);
         var c21 = Matrix.add(m2,m4);
         var c22 = Matrix.sub(m1,m2);
         c22.add(m3);
         c22.add(m6);
-
-        /*console.log("c11")
-        console.log(c11)
-        console.log("c12")
-        console.log(c12)
-        console.log("c21")
-        console.log(c21)
-        console.log("c22")
-        console.log(c22)*/
 
         //Crop output to the desired size (undo dynamic padding).
         var resultat = Matrix.zeros(2*c11.rows, 2*c11.columns);
@@ -176,20 +133,16 @@ Matrix.prototype.mmul2 = function (other) {
     return result;
 };
 
-//var m = Matrix.rand(x, y);
-//var m2 = Matrix.rand(y, x);
+var m = Matrix.rand(x, y);
+var m2 = Matrix.rand(y, x);
 
-var m = Matrix.ones(x,y);
-m = m.mul(4);
-var m2 = Matrix.ones(y,x);
 console.time("r1");
 var r1 = m.mmul(m2);
 console.timeEnd("r1")
 console.time("r2")
 var r2 = m.mmul_strassen(m, m2);
 console.timeEnd("r2")
-//var assert = require('assert');
-//assert.deepEqual(r1,r2);
+
 /*suite
     .add('mmul1', function() {
         m.mmul(m2);
