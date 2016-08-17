@@ -136,4 +136,10 @@ describe('utility methods', function () {
         matrix.repeat(2, 2).to2DArray().should.eql([[1, 2, 1, 2], [3, 4, 3, 4], [1, 2, 1, 2], [3, 4, 3, 4]]);
         matrix.repeat(1, 2).to2DArray().should.eql([[1, 2, 1, 2], [3, 4, 3, 4]]);
     });
+
+    it('mmul strassen', function (){
+        var matrix = new Matrix([[2,4],[7,1]]);
+        var matrix2 = new Matrix([[2,1],[1,1]]);
+        matrix.mmul_strassen(matrix2).to2DArray().should.eql([[8,6], [15,8]]);
+    });
 });
