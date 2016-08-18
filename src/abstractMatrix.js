@@ -978,12 +978,13 @@ function abstractMatrix(superCtor) {
         }
 
         /**
-         * Returns the matrix product between x and y. Need to be optimize to become useful
+         * Returns the matrix product between x and y. More efficient than mmul(other) only when we multiply squared matrix and when the size of the matrix is > 1000.
          * @param {Matrix} x
          * @param {Matrix} y
          * @returns {Matrix}
          */
-        mmul_strassen = function(x, y){
+        mmul_strassen(y){
+            var x = this.clone();
             var r1 = x.rows;
             var c1 = x.columns;
             var r2 = y.rows;
@@ -991,15 +992,6 @@ function abstractMatrix(superCtor) {
             if(c1 != r2){
                 console.log(`Multiplying ${r1} x ${c1} and ${r2} x ${c2} matrix: dimensions do not match.`)
             }
-
-            // Make sure both matrices are the same size.
-            // This is exclusively for simplicity:
-            // this algorithm can be implemented with matrices of different sizes.
-
-            var r = Math.max(r1, r2);
-            var c = Math.max(c1, c2);
-            var x = embed(x, r, c);
-            var y = embed(y, r, c);
 
             // Put a matrix into the top left of a matrix of zeros.
             // `rows` and `cols` are the dimensions of the output matrix.
@@ -1016,16 +1008,22 @@ function abstractMatrix(superCtor) {
                 }
             }
 
+
+            // Make sure both matrices are the same size.
+            // This is exclusively for simplicity:
+            // this algorithm can be implemented with matrices of different sizes.
+
+            var r = Math.max(r1, r2);
+            var c = Math.max(c1, c2);
+            var x = embed(x, r, c);
+            var y = embed(y, r, c);
+
             // Our recursive multiplication function.
             function block_mult(a, b, rows, cols){
                 // For small matrices, resort to naive multiplication.
-                if (rows <= 128 || cols <= 128){
+                if (rows <= 512 || cols <= 512){
                     return a.mmul(b); // a is equivalent to this
                 }
-                /*else if (rows == 2 || cols == 2){
-                 return strassen_2x2(a,b); // a is equivalent to this
-                 }*/
-
 
                 // Apply dynamic padding.
                 if ((rows % 2 == 1) && (cols % 2 == 1)) {
@@ -1066,10 +1064,14 @@ function abstractMatrix(superCtor) {
                 var m7 = block_mult(Matrix.sub(a12,a22), Matrix.add(b21,b22), half_rows, half_cols);
 
                 // Combine intermediate values into the output.
-                var c11 = Matrix.add(m1, m4).sub(m5).add(m7);
+                var c11 = Matrix.add(m1, m4);
+                c11.sub(m5);
+                c11.add(m7);
                 var c12 = Matrix.add(m3,m5);
                 var c21 = Matrix.add(m2,m4);
-                var c22 = Matrix.sub(m1,m2).add(m3).add(m6);
+                var c22 = Matrix.sub(m1,m2);
+                c22.add(m3);
+                c22.add(m6);
 
                 //Crop output to the desired size (undo dynamic padding).
                 var resultat = Matrix.zeros(2*c11.rows, 2*c11.columns);
@@ -1079,8 +1081,8 @@ function abstractMatrix(superCtor) {
                 resultat = resultat.setSubMatrix(c22, c11.rows, c11.columns);
                 return resultat.subMatrix(0, rows - 1, 0, cols - 1);
             }
-
-            return  block_mult(x, y, r, c);
+            var resultat_final =  block_mult(x, y, r, c);
+            return resultat_final;
         };
 
         /**
@@ -1323,7 +1325,7 @@ function abstractMatrix(superCtor) {
         }
 
         /*
-        Matrix views
+         Matrix views
          */
         transposeView() {
             return new MatrixTransposeView(this);
