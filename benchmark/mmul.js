@@ -9,39 +9,6 @@ var suite = new Benchmark.Suite;
 
 var Matrix = require('../src/index');
 
-function strassen_2x2(a,b){
-    var a11 = a.get(0,0);
-    var b11 = b.get(0,0);
-    var a12 = a.get(0,1);
-    var b12 = b.get(0,1);
-    var a21 = a.get(1,0);
-    var b21 = b.get(1,0);
-    var a22 = a.get(1,1);
-    var b22 = b.get(1,1);
-
-    // Compute intermediate values.
-    var m1 = (a11+a22)*(b11+b22);
-    var m2 = (a21+a22)*b11;
-    var m3 = a11*(b12-b22);
-    var m4 = a22*(b21-b11);
-    var m5 = (a11+a12)*b22;
-    var m6 = (a21-a11)*(b11+b12);
-    var m7 = (a12-a22)*(b21+b22);
-
-    // Combine intermediate values into the output.
-    var c11 =m1+m4-m5+m7;
-    var c12 = m3+m5;
-    var c21 = m2+m4;
-    var c22 = m1-m2+m3+m6;
-
-    var c = new Matrix(2,2);
-    c.set(0,0,c11);
-    c.set(0,1,c12);
-    c.set(1,0,c21);
-    c.set(1,1,c22);
-    return c;
-}
-
 // bad, very bad...
 function strassen_nxn(a,b){
     if(a.rows == 2){
@@ -90,38 +57,80 @@ function strassen_nxn(a,b){
 
 var m = Matrix.randInt(x, y);
 var m2 = Matrix.randInt(y, x);
+var a0 = m.clone();
+var a1 = m.clone();
 
-/*console.log("test avec strassen n by n")
-console.time("r0");
-var r0 = m.mmul_strassen_2(m, m2);
-console.timeEnd("r0")*/
-console.log("test avec une implementation standard")
-console.time("r1");
-var r1 = m.mmul(m2);
-console.timeEnd("r1")
-console.log("test avec une implementation de Strassen basee sur du Dynamic Padding")
-console.time("r2")
-var r2 = m.mmul_strassen(m, m2);
-console.timeEnd("r2")
-if(x == 2 && y == 2){
+/*if(x == 2 && y == 2){
     console.log("Test avec Strassen 2*2")
     console.time("r3")
-    var r3 =strassen_2x2(m, m2);
+    var r3 =strassen_2x2(a0, m2);
     console.timeEnd("r3")
 }
-
-/*suite
-    .add('mmul1', function() {
-        m.mmul(m2);
-    })
-    .add('mmul2', function() {
-        m.mmul_strassen(m, m2);
-    })
-    .on('cycle', function(event) {
-         console.log(String(event.target));
-    })
-    .on('complete', function() {
-         console.log('Fastest is ' + this.filter('fastest').map('name'));
-    })
-    .run();
-*/
+if(x == 3 && y == 3){
+    console.log("Test avec Strassen 3*3")
+    console.time("r3")
+    var r3 =strassen_3x3(a1, m2);
+    console.timeEnd("r3")
+}*/
+if(x == 2 && y == 2){
+    suite
+        .add('mmul1', function() {
+            m.mmul(m2);
+        })
+        .add('mmul_strassen', function() {
+            m.mmul_strassen(m, m2);
+        })
+        .add('strassen 2x2', function() {
+            m.strassen_2x2(m2); // a0 is a copy of m
+        })
+        .on('cycle', function(event) {
+            console.log(String(event.target));
+        })
+        .on('complete', function() {
+            console.log('Fastest is ' + this.filter('fastest').map('name'));
+        })
+        .run();
+}
+else if(x == 3 && y == 3){
+    suite
+        .add('mmul1', function() {
+            m.mmul(m2);
+        })
+        .add('mmul_strassen', function() {
+            m.mmul_strassen(m, m2);
+        })
+        .add('strassen 3x3', function() {
+            m.strassen_3x3(m2); // a0 is a copy of m
+        })
+        .on('cycle', function(event) {
+            console.log(String(event.target));
+        })
+        .on('complete', function() {
+            console.log('Fastest is ' + this.filter('fastest').map('name'));
+        })
+        .run();
+}
+else if(Math.max(x,y) < 200){
+    suite
+        .add('mmul1', function() {
+            m.mmul(m2);
+        })
+        .add('mmul_strassen', function() {
+            m.mmul_strassen(m, m2);
+        })
+        .on('cycle', function(event) {
+            console.log(String(event.target));
+        })
+        .on('complete', function() {
+            console.log('Fastest is ' + this.filter('fastest').map('name'));
+        })
+        .run();
+}
+else{
+    console.time("mmul");
+    var r1 = m.mmul(m2);
+    console.timeEnd("mmul")
+    console.time("mmul strassen dynamic padding")
+    var r2 = m.mmul_strassen(m, m2);
+    console.timeEnd("mmul strassen dynamic padding")
+}
