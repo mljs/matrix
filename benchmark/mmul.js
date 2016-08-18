@@ -8,6 +8,40 @@ var Benchmark = require('benchmark');
 var suite = new Benchmark.Suite;
 
 var Matrix = require('../src/index');
+var math = require('mathjs');
+
+function strassen_2x2(a,b){
+    var a11 = a.get(0,0);
+    var b11 = b.get(0,0);
+    var a12 = a.get(0,1);
+    var b12 = b.get(0,1);
+    var a21 = a.get(1,0);
+    var b21 = b.get(1,0);
+    var a22 = a.get(1,1);
+    var b22 = b.get(1,1);
+
+    // Compute intermediate values.
+    var m1 = (a11+a22)*(b11+b22);
+    var m2 = (a21+a22)*b11;
+    var m3 = a11*(b12-b22);
+    var m4 = a22*(b21-b11);
+    var m5 = (a11+a12)*b22;
+    var m6 = (a21-a11)*(b11+b12);
+    var m7 = (a12-a22)*(b21+b22);
+
+    // Combine intermediate values into the output.
+    var c11 =m1+m4-m5+m7;
+    var c12 = m3+m5;
+    var c21 = m2+m4;
+    var c22 = m1-m2+m3+m6;
+
+    var c = new Matrix(2,2);
+    c.set(0,0,c11);
+    c.set(0,1,c12);
+    c.set(1,0,c21);
+    c.set(1,1,c22);
+    return c;
+}
 
 Matrix.prototype.mmul_strassen = function(x, y){
     var r1 = x.rows;
@@ -17,6 +51,15 @@ Matrix.prototype.mmul_strassen = function(x, y){
     if(c1 != r2){
        console.log(`Multiplying ${r1} x ${c1} and ${r2} x ${c2} matrix: dimensions do not match.`)
     }
+
+    // Make sure both matrices are the same size.
+    // This is exclusively for simplicity:
+    // this algorithm can be implemented with matrices of different sizes.
+
+    var r = Math.max(r1, r2);
+    var c = Math.max(c1, c2);
+    var x = embed(x, r, c);
+    var y = embed(y, r, c);
 
     // Put a matrix into the top left of a matrix of zeros.
     // `rows` and `cols` are the dimensions of the output matrix.
@@ -33,24 +76,16 @@ Matrix.prototype.mmul_strassen = function(x, y){
         }
     }
 
-
-    // Make sure both matrices are the same size.
-    // This is exclusively for simplicity:
-    // this algorithm can be implemented with matrices of different sizes.
-
-    var r = Math.max(r1, r2);
-    var c = Math.max(c1, c2);
-    var x = embed(x, r, c);
-    var y = embed(y, r, c);
-
     // Our recursive multiplication function.
     function block_mult(a, b, rows, cols){
         // For small matrices, resort to naive multiplication.
-        if (rows <= 512 || cols <= 512){
-            //console.log(`multiplication de ${a} et ${b}`)
-            //console.log(a.mmul(b));
+        if (rows <= 128 || cols <= 128){
             return a.mmul(b); // a is equivalent to this
         }
+        /*else if (rows == 2 || cols == 2){
+            return strassen_2x2(a,b); // a is equivalent to this
+        }*/
+
 
         // Apply dynamic padding.
         if ((rows % 2 == 1) && (cols % 2 == 1)) {
@@ -91,14 +126,10 @@ Matrix.prototype.mmul_strassen = function(x, y){
         var m7 = block_mult(Matrix.sub(a12,a22), Matrix.add(b21,b22), half_rows, half_cols);
 
         // Combine intermediate values into the output.
-        var c11 = Matrix.add(m1, m4);
-        c11.sub(m5);
-        c11.add(m7);
+        var c11 = Matrix.add(m1, m4).sub(m5).add(m7);
         var c12 = Matrix.add(m3,m5);
         var c21 = Matrix.add(m2,m4);
-        var c22 = Matrix.sub(m1,m2);
-        c22.add(m3);
-        c22.add(m6);
+        var c22 = Matrix.sub(m1,m2).add(m3).add(m6);
 
         //Crop output to the desired size (undo dynamic padding).
         var resultat = Matrix.zeros(2*c11.rows, 2*c11.columns);
@@ -109,39 +140,27 @@ Matrix.prototype.mmul_strassen = function(x, y){
         return resultat.subMatrix(0, rows - 1, 0, cols - 1);
     }
 
-    var resultat_final =  block_mult(x, y, r, c);
-    return resultat_final;
+    return  block_mult(x, y, r, c);
 };
 
-Matrix.prototype.mmul2 = function (other) {
-    other = Matrix.checkMatrix(other);
-    if (this.columns !== other.rows)
-        console.warn('Number of columns of left matrix are not equal to number of rows of right matrix.');
+var m = Matrix.randInt(x, y);
+var m2 = Matrix.randInt(y, x);
 
-    var m = this.rows;
-    var n = this.columns;
-    var p = other.columns;
-
-    var result = Matrix.zeros(m, p);
-    for (var i = 0; i < m; i++) {
-        for (var k = 0; k < n; k++) {
-            for (var j = 0; j < p; j++) {
-                result[i][j] += this[i][k] * other[k][j];
-            }
-        }
-    }
-    return result;
-};
-
-var m = Matrix.rand(x, y);
-var m2 = Matrix.rand(y, x);
-
+console.log("test avec une implementation standard")
 console.time("r1");
 var r1 = m.mmul(m2);
 console.timeEnd("r1")
+console.log("test avec une implementation de Strassen basee sur du Dynamic Padding")
 console.time("r2")
 var r2 = m.mmul_strassen(m, m2);
 console.timeEnd("r2")
+if(x == 2 && y == 2){
+    console.log("Test avec Strassen 2*2")
+    console.time("r3")
+    var r3 =strassen_2x2(m, m2);
+    console.timeEnd("r3")
+    console.log("Test avec math.js")
+}
 
 /*suite
     .add('mmul1', function() {
