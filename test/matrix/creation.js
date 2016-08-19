@@ -121,6 +121,11 @@ describe('Matrix creation', function () {
         eye2.to2DArray().should.eql([[1, 0], [0, 1], [0, 0]]);
     });
 
+    it('eye with other value than 1', function () {
+        var eye1 = Matrix.eye(3, 3, 3);
+        eye1.to2DArray().should.eql([[3, 0, 0], [0, 3, 0], [0, 0, 3]]);
+    });
+
     it('diag/diagonal', function () {
         var arr = [1, 2, 3];
         var diag = Matrix.diag(arr);

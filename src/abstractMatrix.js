@@ -123,17 +123,37 @@ function abstractMatrix(superCtor) {
         }
 
         /**
+         * Creates a matrix with the given dimensions. Values will be randomly set.
+         * @param {number} rows - Number of rows
+         * @param {number} columns - Number of columns
+         * @param {function} [rng] - Random number generator (default: Math.random)
+         * @returns {Matrix} The new matrix
+         */
+        static randInt(rows, columns, rng) {
+            if (rng === undefined) rng = Math.random;
+            var matrix = this.empty(rows, columns);
+            for (var i = 0; i < rows; i++) {
+                for (var j = 0; j < columns; j++) {
+                    var value = parseInt(rng()*1000);
+                    matrix.set(i, j, value);
+                }
+            }
+            return matrix;
+        }
+
+        /**
          * Creates an identity matrix with the given dimension. Values of the diagonal will be 1 and others will be 0.
          * @param {number} rows - Number of rows
          * @param {number} [columns] - Number of columns (Default: rows)
          * @returns {Matrix} - The new identity matrix
          */
-        static eye(rows, columns) {
+        static eye(rows, columns, value) {
+            if (value === undefined) value = 1
             if (columns === undefined) columns = rows;
             var min = Math.min(rows, columns);
             var matrix = this.zeros(rows, columns);
             for (var i = 0; i < min; i++) {
-                matrix.set(i, i, 1);
+                matrix.set(i, i, value);
             }
             return matrix;
         }
@@ -958,6 +978,217 @@ function abstractMatrix(superCtor) {
             return result;
         }
 
+        strassen_2x2(other){
+            var result = new this.constructor[Symbol.species](2, 2);
+            const a11 = this.get(0,0);
+            const b11 = other.get(0,0);
+            const a12 = this.get(0,1);
+            const b12 = other.get(0,1);
+            const a21 = this.get(1,0);
+            const b21 = other.get(1,0);
+            const a22 = this.get(1,1);
+            const b22 = other.get(1,1);
+
+            // Compute intermediate values.
+            const m1 = (a11+a22)*(b11+b22);
+            const m2 = (a21+a22)*b11;
+            const m3 = a11*(b12-b22);
+            const m4 = a22*(b21-b11);
+            const m5 = (a11+a12)*b22;
+            const m6 = (a21-a11)*(b11+b12);
+            const m7 = (a12-a22)*(b21+b22);
+
+            // Combine intermediate values into the output.
+            const c00 =m1+m4-m5+m7;
+            const c01 = m3+m5;
+            const c10 = m2+m4;
+            const c11 = m1-m2+m3+m6;
+
+            result.set(0,0,c00);
+            result.set(0,1,c01);
+            result.set(1,0,c10);
+            result.set(1,1,c11);
+            return result;
+        }
+
+        strassen_3x3(other){
+            var result = new this.constructor[Symbol.species](3, 3);
+
+            const a00 = this.get(0,0);
+            const a01 = this.get(0,1);
+            const a02 = this.get(0,2);
+            const a10 = this.get(1,0);
+            const a11 = this.get(1,1);
+            const a12 = this.get(1,2);
+            const a20 = this.get(2,0);
+            const a21 = this.get(2,1);
+            const a22 = this.get(2,2);
+
+            const b00 = other.get(0,0);
+            const b01 = other.get(0,1);
+            const b02 = other.get(0,2);
+            const b10 = other.get(1,0);
+            const b11 = other.get(1,1);
+            const b12 = other.get(1,2);
+            const b20 = other.get(2,0);
+            const b21 = other.get(2,1);
+            const b22 = other.get(2,2);
+
+            const m1 = (a00+a01+a02-a10-a11-a21-a22)*b11;
+            const m2 = (a00-a10)*(-b01+b11);
+            const m3 = a11*(-b00+b01+b10-b11-b12-b20+b22);
+            const m4 = (-a00+a10+a11)*(b00-b01+b11);
+            const m5 = (a10+a11)*(-b00+b01);
+            const m6 = a00*b00;
+            const m7 = (-a00+a20+a21)*(b00-b02+b12);
+            const m8 = (-a00+a20)*(b02-b12);
+            const m9 = (a20+a21)*(-b00+b02);
+            const m10 = (a00+a01+a02-a11-a12-a20-a21)*b12;
+            const m11 = a21*(-b00+b02+b10-b11-b12-b20+b21);
+            const m12 = (-a02+a21+a22)*(b11+b20-b21);
+            const m13 = (a02-a22)*(b11-b21);
+            const m14 = a02*b20;
+            const m15 = (a21+a22)*(-b20+b21);
+            const m16 = (-a02+a11+a12)*(b12+b20-b22);
+            const m17 = (a02-a12)*(b12-b22);
+            const m18 = (a11+a12)*(-b20+b22);
+            const m19= a01*b10;
+            const m20 = a12*b21;
+            const m21 = a10*b02;
+            const m22 = a20*b01;
+            const m23 = a22*b22;
+
+            const c00 = m6+m14+m19;
+            const c01 = m1+m4+m5+m6+m12+m14+m15;
+            const c02 = m6+m7+m9+m10+m14+m16+m18;
+            const c10 = m2+m3+m4+m6+m14+m16+m17;
+            const c11 = m2+m4+m5+m6+m20;
+            const c12 = m14+m16+m17+m18+m21;
+            const c20 = m6+m7+m8+m11+m12+m13+m14;
+            const c21 = m12+m13+m14+m15+m22;
+            const c22 = m6+m7+m8+m9+m23;
+
+            result.set(0,0,c00);
+            result.set(0,1,c01);
+            result.set(0,2,c02);
+            result.set(1,0,c10);
+            result.set(1,1,c11);
+            result.set(1,2,c12);
+            result.set(2,0,c20);
+            result.set(2,1,c21);
+            result.set(2,2,c22);
+            return result;
+        }
+
+
+        /**
+         * Returns the matrix product between x and y. More efficient than mmul(other) only when we multiply squared matrix and when the size of the matrix is > 1000.
+         * @param {Matrix} x
+         * @param {Matrix} y
+         * @returns {Matrix}
+         */
+        mmul_strassen(y){
+            var x = this.clone();
+            var r1 = x.rows;
+            var c1 = x.columns;
+            var r2 = y.rows;
+            var c2 = y.columns;
+            if(c1 != r2){
+                console.log(`Multiplying ${r1} x ${c1} and ${r2} x ${c2} matrix: dimensions do not match.`)
+            }
+
+            // Put a matrix into the top left of a matrix of zeros.
+            // `rows` and `cols` are the dimensions of the output matrix.
+            function embed(mat, rows, cols){
+                var r = mat.rows;
+                var c = mat.columns;
+                if((r==rows) && (c==cols)){
+                    return mat;
+                }
+                else{
+                    var resultat = Matrix.zeros(rows, cols);
+                    resultat = resultat.setSubMatrix(mat, 0, 0);
+                    return resultat;
+                }
+            }
+
+
+            // Make sure both matrices are the same size.
+            // This is exclusively for simplicity:
+            // this algorithm can be implemented with matrices of different sizes.
+
+            var r = Math.max(r1, r2);
+            var c = Math.max(c1, c2);
+            var x = embed(x, r, c);
+            var y = embed(y, r, c);
+
+            // Our recursive multiplication function.
+            function block_mult(a, b, rows, cols){
+                // For small matrices, resort to naive multiplication.
+                if (rows <= 512 || cols <= 512){
+                    return a.mmul(b); // a is equivalent to this
+                }
+
+                // Apply dynamic padding.
+                if ((rows % 2 == 1) && (cols % 2 == 1)) {
+                    a = embed(a, rows + 1, cols + 1);
+                    b = embed(b, rows + 1, cols + 1);
+                }
+                else if (rows % 2 == 1){
+                    a = embed(a, rows + 1, cols);
+                    b = embed(b, rows + 1, cols);
+                }
+                else if (cols % 2 == 1){
+                    a = embed(a, rows, cols + 1);
+                    b = embed(b, rows, cols + 1);
+                }
+
+                var half_rows = parseInt(a.rows / 2);
+                var half_cols = parseInt(a.columns / 2);
+                // Subdivide input matrices.
+                var a11 = a.subMatrix(0, half_rows -1, 0, half_cols - 1);
+                var b11 = b.subMatrix(0, half_rows -1, 0, half_cols - 1);
+
+                var a12 = a.subMatrix(0, half_rows -1, half_cols, a.columns - 1);
+                var b12 = b.subMatrix(0, half_rows -1,  half_cols, b.columns - 1);
+
+                var a21 = a.subMatrix(half_rows, a.rows - 1,  0, half_cols - 1);
+                var b21 = b.subMatrix(half_rows, b.rows - 1,  0, half_cols - 1);
+
+                var a22 = a.subMatrix(half_rows, a.rows - 1, half_cols, a.columns - 1);
+                var b22 = b.subMatrix(half_rows, b.rows - 1, half_cols, b.columns - 1);
+
+                // Compute intermediate values.
+                var m1 = block_mult(Matrix.add(a11,a22), Matrix.add(b11,b22), half_rows, half_cols);
+                var m2 = block_mult(Matrix.add(a21,a22), b11, half_rows, half_cols);
+                var m3 = block_mult(a11, Matrix.sub(b12, b22), half_rows, half_cols);
+                var m4 = block_mult(a22, Matrix.sub(b21,b11), half_rows, half_cols);
+                var m5 = block_mult(Matrix.add(a11,a12), b22, half_rows, half_cols);
+                var m6 = block_mult(Matrix.sub(a21, a11), Matrix.add(b11, b12), half_rows, half_cols);
+                var m7 = block_mult(Matrix.sub(a12,a22), Matrix.add(b21,b22), half_rows, half_cols);
+
+                // Combine intermediate values into the output.
+                var c11 = Matrix.add(m1, m4);
+                c11.sub(m5);
+                c11.add(m7);
+                var c12 = Matrix.add(m3,m5);
+                var c21 = Matrix.add(m2,m4);
+                var c22 = Matrix.sub(m1,m2);
+                c22.add(m3);
+                c22.add(m6);
+
+                //Crop output to the desired size (undo dynamic padding).
+                var resultat = Matrix.zeros(2*c11.rows, 2*c11.columns);
+                resultat = resultat.setSubMatrix(c11, 0, 0);
+                resultat = resultat.setSubMatrix(c12, c11.rows, 0)
+                resultat = resultat.setSubMatrix(c21, 0, c11.columns);
+                resultat = resultat.setSubMatrix(c22, c11.rows, c11.columns);
+                return resultat.subMatrix(0, rows - 1, 0, cols - 1);
+            }
+            var resultat_final =  block_mult(x, y, r, c);
+            return resultat_final;
+        };
+
         /**
          * Returns a row-by-row scaled matrix
          * @param {Number} [min=0] - Minimum scaled value
@@ -1198,7 +1429,7 @@ function abstractMatrix(superCtor) {
         }
 
         /*
-        Matrix views
+         Matrix views
          */
 
         /**
