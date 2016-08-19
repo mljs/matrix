@@ -1059,7 +1059,7 @@ function abstractMatrix(superCtor) {
             const m23 = a22*b22;
 
             const c00 = m6+m14+m19;
-            const c01 = m1+m4+m5+m5+m12+m14+m15;
+            const c01 = m1+m4+m5+m6+m12+m14+m15;
             const c02 = m6+m7+m9+m10+m14+m16+m18;
             const c10 = m2+m3+m4+m6+m14+m16+m17;
             const c11 = m2+m4+m5+m6+m20;
