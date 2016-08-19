@@ -13,7 +13,24 @@ function inverse(matrix) {
     return solve(matrix, Matrix.eye(matrix.rows));
 }
 
+/**
+ * Returns the inverse
+ * @memberOf Matrix
+ * @static
+ * @param {Matrix} matrix
+ * @return {Matrix} matrix
+ * @alias inv
+ */
 Matrix.inverse = Matrix.inv = inverse;
+
+/**
+ * Returns the inverse
+ * @memberOf Matrix
+ * @static
+ * @param {Matrix} matrix
+ * @return {Matrix} matrix
+ * @alias inv
+ */
 Matrix.prototype.inverse = Matrix.prototype.inv = function () {
     return inverse(this);
 };
