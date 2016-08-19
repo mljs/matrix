@@ -1200,32 +1200,72 @@ function abstractMatrix(superCtor) {
         /*
         Matrix views
          */
+
+        /**
+         * Returns a view of the transposition of the matrix
+         * @returns {MatrixTransposeView}
+         */
         transposeView() {
             return new MatrixTransposeView(this);
         }
 
+        /**
+         * Returns a view of the row vector with the given index
+         * @param {number} row - row index of the vector
+         * @returns {MatrixRowView}
+         */
         rowView(row) {
             util.checkRowIndex(this, row);
             return new MatrixRowView(this, row);
         }
 
+        /**
+         * Returns a view of the column vector with the given index
+         * @param {number} column - column index of the vector
+         * @returns {MatrixColumnView}
+         */
         columnView(column) {
             util.checkColumnIndex(this, column);
             return new MatrixColumnView(this, column);
         }
 
+        /**
+         * Returns a view of the matrix flipped in the row axis
+         * @returns {MatrixFlipRowView}
+         */
         flipRowView() {
             return new MatrixFlipRowView(this);
         }
 
+        /**
+         * Returns a view of the matrix flipped in the column axis
+         * @returns {MatrixFlipColumnView}
+         */
         flipColumnView() {
             return new MatrixFlipColumnView(this);
         }
 
+        /**
+         * Returns a view of a submatrix giving the index boundaries
+         * @param {number} startRow - first row index of the submatrix
+         * @param {number} endRow - last row index of the submatrix
+         * @param {number} startColumn - first column index of the submatrix
+         * @param {number} endColumn - last column index of the submatrix
+         * @returns {MatrixSubView}
+         */
         subMatrixView(startRow, endRow, startColumn, endColumn) {
             return new MatrixSubView(this, startRow, endRow, startColumn, endColumn);
         }
 
+        /**
+         * Returns a view of the cross of the row indices and the column indices
+         * @example
+         * // resulting vector is [[2], [2]]
+         * var matrix = new Matrix([[1,2,3], [4,5,6]]).selectionView([0, 0], [1])
+         * @param {Array<number>} rowIndices
+         * @param {Array<number>} columnIndices
+         * @returns {MatrixSelectionView}
+         */
         selectionView(rowIndices, columnIndices) {
             return new MatrixSelectionView(this, rowIndices, columnIndices);
         }
