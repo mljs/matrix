@@ -147,12 +147,13 @@ function abstractMatrix(superCtor) {
          * @param {number} [columns] - Number of columns (Default: rows)
          * @returns {Matrix} - The new identity matrix
          */
-        static eye(rows, columns) {
+        static eye(rows, columns, value) {
+            if (value === undefined) value = 1
             if (columns === undefined) columns = rows;
             var min = Math.min(rows, columns);
             var matrix = this.zeros(rows, columns);
             for (var i = 0; i < min; i++) {
-                matrix.set(i, i, 1);
+                matrix.set(i, i, value);
             }
             return matrix;
         }
