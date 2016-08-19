@@ -57,21 +57,7 @@ function strassen_nxn(a,b){
 
 var m = Matrix.randInt(x, y);
 var m2 = Matrix.randInt(y, x);
-var a0 = m.clone();
-var a1 = m.clone();
 
-/*if(x == 2 && y == 2){
-    console.log("Test avec Strassen 2*2")
-    console.time("r3")
-    var r3 =strassen_2x2(a0, m2);
-    console.timeEnd("r3")
-}
-if(x == 3 && y == 3){
-    console.log("Test avec Strassen 3*3")
-    console.time("r3")
-    var r3 =strassen_3x3(a1, m2);
-    console.timeEnd("r3")
-}*/
 if(x == 2 && y == 2){
     suite
         .add('mmul1', function() {
