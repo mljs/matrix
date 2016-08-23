@@ -108,7 +108,7 @@ function abstractMatrix(superCtor) {
          * Creates a matrix with the given dimensions. Values will be randomly set.
          * @param {number} rows - Number of rows
          * @param {number} columns - Number of columns
-         * @param {function} [rng] - Random number generator (default: Math.random)
+         * @param {function} [rng=Math.random] - Random number generator
          * @returns {Matrix} The new matrix
          */
         static rand(rows, columns, rng) {
@@ -123,18 +123,20 @@ function abstractMatrix(superCtor) {
         }
 
         /**
-         * Creates a matrix with the given dimensions. Values will be randomly set.
+         * Creates a matrix with the given dimensions. Values will be random integers.
          * @param {number} rows - Number of rows
          * @param {number} columns - Number of columns
-         * @param {function} [rng] - Random number generator (default: Math.random)
+         * @param {number} [maxValue=1000] - Maximum value
+         * @param {function} [rng=Math.random] - Random number generator
          * @returns {Matrix} The new matrix
          */
-        static randInt(rows, columns, rng) {
+        static randInt(rows, columns, maxValue, rng) {
+            if (maxValue === undefined) maxValue = 1000;
             if (rng === undefined) rng = Math.random;
             var matrix = this.empty(rows, columns);
             for (var i = 0; i < rows; i++) {
                 for (var j = 0; j < columns; j++) {
-                    var value = parseInt(rng()*1000);
+                    var value = Math.floor(rng() * maxValue);
                     matrix.set(i, j, value);
                 }
             }
