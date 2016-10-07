@@ -1,3 +1,22 @@
+<a name="2.1.0"></a>
+# [2.1.0](https://github.com/mljs/matrix/compare/v2.0.0...v2.1.0) (2016-10-07)
+
+
+### Bug Fixes
+
+* use Symbol.species as Matrix constructor in selection ([fee325e](https://github.com/mljs/matrix/commit/fee325e))
+* use Symbol.species in evaluated static methods ([39800f9](https://github.com/mljs/matrix/commit/39800f9))
+
+
+### Features
+
+* add fast multiplication algorithm (strassen) ([fdc1c07](https://github.com/mljs/matrix/commit/fdc1c07))
+* add maxValue option to Matrix.randInt ([e5a8541](https://github.com/mljs/matrix/commit/e5a8541))
+* add value parameter to Matrix.eye ([f52e4fd](https://github.com/mljs/matrix/commit/f52e4fd))
+* implement optimized algorithm for 2x2 and 3x3 multiplication ([4055ef9](https://github.com/mljs/matrix/commit/4055ef9))
+
+
+
 <a name="2.0.0"></a>
 # [2.0.0](https://github.com/mljs/matrix/compare/v1.4.0...v2.0.0) (2016-08-04)
 
