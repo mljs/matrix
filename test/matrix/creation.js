@@ -36,12 +36,12 @@ describe('Matrix creation', function () {
     });
 
     it('should throw with wrong arguments', function () {
-        (function(){ new Matrix(6, -1) }).should.throw(TypeError, /^nColumns must be a positive integer/);
-        (function(){ new Matrix(0, 0) }).should.throw(TypeError, /^First argument must be a positive number or an array$/);
-        (function(){ new Matrix([[]]) }).should.throw(TypeError, /^Data must be a 2D array with at least one element$/);
-        (function(){ new Matrix([0, 1, 2, 3]) }).should.throw(TypeError, /^Data must be a 2D array/);
-        (function(){ new Matrix([[0, 1], [0, 1, 2]]) }).should.throw(RangeError, /^Inconsistent array dimensions$/);
-        (function(){ new Matrix() }).should.throw(TypeError, /^First argument must be a positive number or an array$/);
+        (() => new Matrix(6, -1)).should.throw(TypeError, /^nColumns must be a positive integer/);
+        (() => new Matrix(0, 0)).should.throw(TypeError, /^First argument must be a positive number or an array$/);
+        (() => new Matrix([[]])).should.throw(TypeError, /^Data must be a 2D array with at least one element$/);
+        (() => new Matrix([0, 1, 2, 3])).should.throw(TypeError, /^Data must be a 2D array/);
+        (() => new Matrix([[0, 1], [0, 1, 2]])).should.throw(RangeError, /^Inconsistent array dimensions$/);
+        (() => new Matrix()).should.throw(TypeError, /^First argument must be a positive number or an array$/);
     });
 
     it('should correctly set rows, columns and values', function () {
@@ -57,7 +57,7 @@ describe('Matrix creation', function () {
         Matrix.isMatrix(matrix).should.be.true();
         var check2 = Matrix.checkMatrix(matrix);
         check2.should.exactly(matrix);
-        (function() {
+        (function () {
             Matrix.checkMatrix();
         }).should.throw(TypeError, /^Argument has to be a matrix$/);
     });
@@ -109,7 +109,7 @@ describe('Matrix creation', function () {
     });
 
     it('random with custom RNG', function () {
-        function fakeRNG() { return 2; }
+        var fakeRNG = () => 2;
         Matrix.rand(2, 2, fakeRNG).to2DArray().should.eql([[2, 2], [2, 2]]);
     });
 
@@ -140,7 +140,7 @@ describe('Matrix creation', function () {
 
     it('regression test for Symbol.species (V8 5.1)', function () {
         var matrix = Matrix.ones(1, 2);
-        matrix.map(x => 1).should.eql([1]);
+        matrix.map(() => 1).should.eql([1]);
     });
 
     it('Symbol.species should work for views', function () {
@@ -150,8 +150,8 @@ describe('Matrix creation', function () {
     });
 
     it('Symbol.species should work on static evaluated methods', function () {
-        var a = [[1,2]];
-        var b = [[3,1]];
+        var a = [[1, 2]];
+        var b = [[3, 1]];
         Matrix.subtract(a, b).to2DArray().should.eql([[-2, 1]]);
         MatrixTransposeView.subtract(a, b).to2DArray().should.eql([[-2, 1]]);
     });

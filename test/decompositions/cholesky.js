@@ -7,7 +7,7 @@ describe('Cholesky decomposition', function () {
     it('should compute lower triangular matrix', function () {
         // http://ch.mathworks.com/help/matlab/ref/chol.html
         let matrix = new Matrix([
-            [ 1, -1, -1, -1, -1],
+            [1, -1, -1, -1, -1],
             [-1,  2,  0,  0,  0],
             [-1,  0,  3,  1,  1],
             [-1,  0,  1,  4,  2],

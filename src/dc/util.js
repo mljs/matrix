@@ -1,12 +1,13 @@
 'use strict';
 
 exports.hypotenuse = function hypotenuse(a, b) {
+    var r;
     if (Math.abs(a) > Math.abs(b)) {
-        var r = b / a;
+        r = b / a;
         return Math.abs(a) * Math.sqrt(1 + r * r);
     }
     if (b !== 0) {
-        var r = a / b;
+        r = a / b;
         return Math.abs(b) * Math.sqrt(1 + r * r);
     }
     return 0;

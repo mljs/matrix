@@ -12,7 +12,7 @@ class MatrixSubView extends BaseView {
     }
 
     set(rowIndex, columnIndex, value) {
-        this.matrix.set(this.startRow + rowIndex, this.startColumn + columnIndex , value);
+        this.matrix.set(this.startRow + rowIndex, this.startColumn + columnIndex, value);
         return this;
     }
 

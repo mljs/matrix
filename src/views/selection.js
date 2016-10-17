@@ -12,7 +12,7 @@ class MatrixSelectionView extends BaseView {
     }
 
     set(rowIndex, columnIndex, value) {
-        this.matrix.set(this.rowIndices[rowIndex], this.columnIndices[columnIndex] , value);
+        this.matrix.set(this.rowIndices[rowIndex], this.columnIndices[columnIndex], value);
         return this;
     }
 

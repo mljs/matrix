@@ -32,7 +32,7 @@ function abstractMatrix(superCtor) {
          * @param {number} newRows - Number of rows
          * @param {number} newColumns - Number of columns
          * @param {Array} newData - A 1D array containing data for the matrix
-         * @returns {Matrix} - The new matrix
+         * @return {Matrix} - The new matrix
          */
         static from1DArray(newRows, newColumns, newData) {
             var length = newRows * newColumns;
@@ -51,7 +51,7 @@ function abstractMatrix(superCtor) {
         /**
          * Creates a row vector, a matrix with only one row.
          * @param {Array} newData - A 1D array containing data for the vector
-         * @returns {Matrix} - The new matrix
+         * @return {Matrix} - The new matrix
          */
         static rowVector(newData) {
             var vector = new this(1, newData.length);
@@ -64,7 +64,7 @@ function abstractMatrix(superCtor) {
         /**
          * Creates a column vector, a matrix with only one column.
          * @param {Array} newData - A 1D array containing data for the vector
-         * @returns {Matrix} - The new matrix
+         * @return {Matrix} - The new matrix
          */
         static columnVector(newData) {
             var vector = new this(newData.length, 1);
@@ -78,7 +78,7 @@ function abstractMatrix(superCtor) {
          * Creates an empty matrix with the given dimensions. Values will be undefined. Same as using new Matrix(rows, columns).
          * @param {number} rows - Number of rows
          * @param {number} columns - Number of columns
-         * @returns {Matrix} - The new matrix
+         * @return {Matrix} - The new matrix
          */
         static empty(rows, columns) {
             return new this(rows, columns);
@@ -88,7 +88,7 @@ function abstractMatrix(superCtor) {
          * Creates a matrix with the given dimensions. Values will be set to zero.
          * @param {number} rows - Number of rows
          * @param {number} columns - Number of columns
-         * @returns {Matrix} - The new matrix
+         * @return {Matrix} - The new matrix
          */
         static zeros(rows, columns) {
             return this.empty(rows, columns).fill(0);
@@ -98,7 +98,7 @@ function abstractMatrix(superCtor) {
          * Creates a matrix with the given dimensions. Values will be set to one.
          * @param {number} rows - Number of rows
          * @param {number} columns - Number of columns
-         * @returns {Matrix} - The new matrix
+         * @return {Matrix} - The new matrix
          */
         static ones(rows, columns) {
             return this.empty(rows, columns).fill(1);
@@ -109,7 +109,7 @@ function abstractMatrix(superCtor) {
          * @param {number} rows - Number of rows
          * @param {number} columns - Number of columns
          * @param {function} [rng=Math.random] - Random number generator
-         * @returns {Matrix} The new matrix
+         * @return {Matrix} The new matrix
          */
         static rand(rows, columns, rng) {
             if (rng === undefined) rng = Math.random;
@@ -128,7 +128,7 @@ function abstractMatrix(superCtor) {
          * @param {number} columns - Number of columns
          * @param {number} [maxValue=1000] - Maximum value
          * @param {function} [rng=Math.random] - Random number generator
-         * @returns {Matrix} The new matrix
+         * @return {Matrix} The new matrix
          */
         static randInt(rows, columns, maxValue, rng) {
             if (maxValue === undefined) maxValue = 1000;
@@ -146,12 +146,13 @@ function abstractMatrix(superCtor) {
         /**
          * Creates an identity matrix with the given dimension. Values of the diagonal will be 1 and others will be 0.
          * @param {number} rows - Number of rows
-         * @param {number} [columns] - Number of columns (Default: rows)
-         * @returns {Matrix} - The new identity matrix
+         * @param {number} [columns=rows] - Number of columns
+         * @param {number} [value=1] - Value to fill the diagonal with
+         * @return {Matrix} - The new identity matrix
          */
         static eye(rows, columns, value) {
-            if (value === undefined) value = 1
             if (columns === undefined) columns = rows;
+            if (value === undefined) value = 1;
             var min = Math.min(rows, columns);
             var matrix = this.zeros(rows, columns);
             for (var i = 0; i < min; i++) {
@@ -165,7 +166,7 @@ function abstractMatrix(superCtor) {
          * @param {Array} data - Array containing the data for the diagonal
          * @param {number} [rows] - Number of rows (Default: data.length)
          * @param {number} [columns] - Number of columns (Default: rows)
-         * @returns {Matrix} - The new diagonal matrix
+         * @return {Matrix} - The new diagonal matrix
          */
         static diag(data, rows, columns) {
             var l = data.length;
@@ -181,9 +182,9 @@ function abstractMatrix(superCtor) {
 
         /**
          * Returns a matrix whose elements are the minimum between matrix1 and matrix2
-         * @param matrix1
-         * @param matrix2
-         * @returns {Matrix}
+         * @param {Matrix} matrix1
+         * @param {Matrix} matrix2
+         * @return {Matrix}
          */
         static min(matrix1, matrix2) {
             matrix1 = this.checkMatrix(matrix1);
@@ -201,9 +202,9 @@ function abstractMatrix(superCtor) {
 
         /**
          * Returns a matrix whose elements are the maximum between matrix1 and matrix2
-         * @param matrix1
-         * @param matrix2
-         * @returns {Matrix}
+         * @param {Matrix} matrix1
+         * @param {Matrix} matrix2
+         * @return {Matrix}
          */
         static max(matrix1, matrix2) {
             matrix1 = this.checkMatrix(matrix1);
@@ -221,8 +222,8 @@ function abstractMatrix(superCtor) {
 
         /**
          * Check that the provided value is a Matrix and tries to instantiate one if not
-         * @param value - The value to check
-         * @returns {Matrix}
+         * @param {*} value - The value to check
+         * @return {Matrix}
          */
         static checkMatrix(value) {
             return Matrix.isMatrix(value) ? value : new this(value);
@@ -230,7 +231,7 @@ function abstractMatrix(superCtor) {
 
         /**
          * Returns true if the argument is a Matrix, false otherwise
-         * @param value - The value to check
+         * @param {*} value - The value to check
          * @return {boolean}
          */
         static isMatrix(value) {
@@ -238,7 +239,7 @@ function abstractMatrix(superCtor) {
         }
 
         /**
-         * @property {number} - The number of elements in the matrix.
+         * @prop {number} size - The number of elements in the matrix.
          */
         get size() {
             return this.rows * this.columns;
@@ -247,7 +248,7 @@ function abstractMatrix(superCtor) {
         /**
          * Applies a callback for each element of the matrix. The function is called in the matrix (this) context.
          * @param {function} callback - Function that will be called with two parameters : i (row) and j (column)
-         * @returns {Matrix} this
+         * @return {Matrix} this
          */
         apply(callback) {
             if (typeof callback !== 'function') {
@@ -265,7 +266,7 @@ function abstractMatrix(superCtor) {
 
         /**
          * Returns a new 1D array filled row by row with the matrix values
-         * @returns {Array}
+         * @return {Array}
          */
         to1DArray() {
             var array = new Array(this.size);
@@ -279,7 +280,7 @@ function abstractMatrix(superCtor) {
 
         /**
          * Returns a 2D array containing a copy of the data
-         * @returns {Array}
+         * @return {Array}
          */
         to2DArray() {
             var copy = new Array(this.rows);
@@ -293,35 +294,35 @@ function abstractMatrix(superCtor) {
         }
 
         /**
-         * @returns {boolean} true if the matrix has one row
+         * @return {boolean} true if the matrix has one row
          */
         isRowVector() {
             return this.rows === 1;
         }
 
         /**
-         * @returns {boolean} true if the matrix has one column
+         * @return {boolean} true if the matrix has one column
          */
         isColumnVector() {
             return this.columns === 1;
         }
 
         /**
-         * @returns {boolean} true if the matrix has one row or one column
+         * @return {boolean} true if the matrix has one row or one column
          */
         isVector() {
             return (this.rows === 1) || (this.columns === 1);
         }
 
         /**
-         * @returns {boolean} true if the matrix has the same number of rows and columns
+         * @return {boolean} true if the matrix has the same number of rows and columns
          */
         isSquare() {
             return this.rows === this.columns;
         }
 
         /**
-         * @returns {boolean} true if the matrix is square and has the same values on both sides of the diagonal
+         * @return {boolean} true if the matrix is square and has the same values on both sides of the diagonal
          */
         isSymmetric() {
             if (this.isSquare()) {
@@ -339,22 +340,24 @@ function abstractMatrix(superCtor) {
 
         /**
          * Sets a given element of the matrix. mat.set(3,4,1) is equivalent to mat[3][4]=1
+         * @abstract
          * @param {number} rowIndex - Index of the row
          * @param {number} columnIndex - Index of the column
          * @param {number} value - The new value for the element
-         * @returns {Matrix} this
+         * @return {Matrix} this
          */
-        set(rowIndex, columnIndex, value) {
+        set(rowIndex, columnIndex, value) { // eslint-disable-line no-unused-vars
             throw new Error('set method is unimplemented');
         }
 
         /**
          * Returns the given element of the matrix. mat.get(3,4) is equivalent to matrix[3][4]
+         * @abstract
          * @param {number} rowIndex - Index of the row
          * @param {number} columnIndex - Index of the column
-         * @returns {number}
+         * @return {number}
          */
-        get(rowIndex, columnIndex) {
+        get(rowIndex, columnIndex) { // eslint-disable-line no-unused-vars
             throw new Error('get method is unimplemented');
         }
 
@@ -363,6 +366,7 @@ function abstractMatrix(superCtor) {
          * rows of the matrix, and colRep times the number of columns of the matrix
          * @param {number} rowRep - Number of times the rows should be repeated
          * @param {number} colRep - Number of times the columns should be re
+         * @return {Matrix}
          * @example
          * var matrix = new Matrix([[1,2]]);
          * matrix.repeat(2); // [[1,2],[1,2]]
@@ -382,7 +386,7 @@ function abstractMatrix(superCtor) {
         /**
          * Fills the matrix with a given value. All elements will be set to this value.
          * @param {number} value - New value
-         * @returns {Matrix} this
+         * @return {Matrix} this
          */
         fill(value) {
             for (var i = 0; i < this.rows; i++) {
@@ -395,7 +399,7 @@ function abstractMatrix(superCtor) {
 
         /**
          * Negates the matrix. All elements will be multiplied by (-1)
-         * @returns {Matrix} this
+         * @return {Matrix} this
          */
         neg() {
             return this.mulS(-1);
@@ -404,7 +408,7 @@ function abstractMatrix(superCtor) {
         /**
          * Returns a new array from the given row index
          * @param {number} index - Row index
-         * @returns {Array}
+         * @return {Array}
          */
         getRow(index) {
             util.checkRowIndex(this, index);
@@ -418,7 +422,7 @@ function abstractMatrix(superCtor) {
         /**
          * Returns a new row vector from the given row index
          * @param {number} index - Row index
-         * @returns {Matrix}
+         * @return {Matrix}
          */
         getRowVector(index) {
             return this.constructor.rowVector(this.getRow(index));
@@ -428,7 +432,7 @@ function abstractMatrix(superCtor) {
          * Sets a row at the given index
          * @param {number} index - Row index
          * @param {Array|Matrix} array - Array or vector
-         * @returns {Matrix} this
+         * @return {Matrix} this
          */
         setRow(index, array) {
             util.checkRowIndex(this, index);
@@ -443,7 +447,7 @@ function abstractMatrix(superCtor) {
          * Swaps two rows
          * @param {number} row1 - First row index
          * @param {number} row2 - Second row index
-         * @returns {Matrix} this
+         * @return {Matrix} this
          */
         swapRows(row1, row2) {
             util.checkRowIndex(this, row1);
@@ -459,7 +463,7 @@ function abstractMatrix(superCtor) {
         /**
          * Returns a new array from the given column index
          * @param {number} index - Column index
-         * @returns {Array}
+         * @return {Array}
          */
         getColumn(index) {
             util.checkColumnIndex(this, index);
@@ -473,7 +477,7 @@ function abstractMatrix(superCtor) {
         /**
          * Returns a new column vector from the given column index
          * @param {number} index - Column index
-         * @returns {Matrix}
+         * @return {Matrix}
          */
         getColumnVector(index) {
             return this.constructor.columnVector(this.getColumn(index));
@@ -483,7 +487,7 @@ function abstractMatrix(superCtor) {
          * Sets a column at the given index
          * @param {number} index - Column index
          * @param {Array|Matrix} array - Array or vector
-         * @returns {Matrix} this
+         * @return {Matrix} this
          */
         setColumn(index, array) {
             util.checkColumnIndex(this, index);
@@ -498,7 +502,7 @@ function abstractMatrix(superCtor) {
          * Swaps two columns
          * @param {number} column1 - First column index
          * @param {number} column2 - Second column index
-         * @returns {Matrix} this
+         * @return {Matrix} this
          */
         swapColumns(column1, column2) {
             util.checkColumnIndex(this, column1);
@@ -514,7 +518,7 @@ function abstractMatrix(superCtor) {
         /**
          * Adds the values of a vector to each row
          * @param {Array|Matrix} vector - Array or vector
-         * @returns {Matrix} this
+         * @return {Matrix} this
          */
         addRowVector(vector) {
             vector = util.checkRowVector(this, vector);
@@ -529,7 +533,7 @@ function abstractMatrix(superCtor) {
         /**
          * Subtracts the values of a vector from each row
          * @param {Array|Matrix} vector - Array or vector
-         * @returns {Matrix} this
+         * @return {Matrix} this
          */
         subRowVector(vector) {
             vector = util.checkRowVector(this, vector);
@@ -544,7 +548,7 @@ function abstractMatrix(superCtor) {
         /**
          * Multiplies the values of a vector with each row
          * @param {Array|Matrix} vector - Array or vector
-         * @returns {Matrix} this
+         * @return {Matrix} this
          */
         mulRowVector(vector) {
             vector = util.checkRowVector(this, vector);
@@ -559,7 +563,7 @@ function abstractMatrix(superCtor) {
         /**
          * Divides the values of each row by those of a vector
          * @param {Array|Matrix} vector - Array or vector
-         * @returns {Matrix} this
+         * @return {Matrix} this
          */
         divRowVector(vector) {
             vector = util.checkRowVector(this, vector);
@@ -574,7 +578,7 @@ function abstractMatrix(superCtor) {
         /**
          * Adds the values of a vector to each column
          * @param {Array|Matrix} vector - Array or vector
-         * @returns {Matrix} this
+         * @return {Matrix} this
          */
         addColumnVector(vector) {
             vector = util.checkColumnVector(this, vector);
@@ -589,7 +593,7 @@ function abstractMatrix(superCtor) {
         /**
          * Subtracts the values of a vector from each column
          * @param {Array|Matrix} vector - Array or vector
-         * @returns {Matrix} this
+         * @return {Matrix} this
          */
         subColumnVector(vector) {
             vector = util.checkColumnVector(this, vector);
@@ -604,7 +608,7 @@ function abstractMatrix(superCtor) {
         /**
          * Multiplies the values of a vector with each column
          * @param {Array|Matrix} vector - Array or vector
-         * @returns {Matrix} this
+         * @return {Matrix} this
          */
         mulColumnVector(vector) {
             vector = util.checkColumnVector(this, vector);
@@ -619,7 +623,7 @@ function abstractMatrix(superCtor) {
         /**
          * Divides the values of each column by those of a vector
          * @param {Array|Matrix} vector - Array or vector
-         * @returns {Matrix} this
+         * @return {Matrix} this
          */
         divColumnVector(vector) {
             vector = util.checkColumnVector(this, vector);
@@ -635,7 +639,7 @@ function abstractMatrix(superCtor) {
          * Multiplies the values of a row with a scalar
          * @param {number} index - Row index
          * @param {number} value
-         * @returns {Matrix} this
+         * @return {Matrix} this
          */
         mulRow(index, value) {
             util.checkRowIndex(this, index);
@@ -649,18 +653,19 @@ function abstractMatrix(superCtor) {
          * Multiplies the values of a column with a scalar
          * @param {number} index - Column index
          * @param {number} value
-         * @returns {Matrix} this
+         * @return {Matrix} this
          */
         mulColumn(index, value) {
             util.checkColumnIndex(this, index);
             for (var i = 0; i < this.rows; i++) {
                 this.set(i, index, this.get(i, index) * value);
             }
+            return this;
         }
 
         /**
          * Returns the maximum value of the matrix
-         * @returns {number}
+         * @return {number}
          */
         max() {
             var v = this.get(0, 0);
@@ -676,7 +681,7 @@ function abstractMatrix(superCtor) {
 
         /**
          * Returns the index of the maximum value
-         * @returns {Array}
+         * @return {Array}
          */
         maxIndex() {
             var v = this.get(0, 0);
@@ -695,7 +700,7 @@ function abstractMatrix(superCtor) {
 
         /**
          * Returns the minimum value of the matrix
-         * @returns {number}
+         * @return {number}
          */
         min() {
             var v = this.get(0, 0);
@@ -711,7 +716,7 @@ function abstractMatrix(superCtor) {
 
         /**
          * Returns the index of the minimum value
-         * @returns {Array}
+         * @return {Array}
          */
         minIndex() {
             var v = this.get(0, 0);
@@ -731,7 +736,7 @@ function abstractMatrix(superCtor) {
         /**
          * Returns the maximum value of one row
          * @param {number} row - Row index
-         * @returns {number}
+         * @return {number}
          */
         maxRow(row) {
             util.checkRowIndex(this, row);
@@ -747,7 +752,7 @@ function abstractMatrix(superCtor) {
         /**
          * Returns the index of the maximum value of one row
          * @param {number} row - Row index
-         * @returns {Array}
+         * @return {Array}
          */
         maxRowIndex(row) {
             util.checkRowIndex(this, row);
@@ -765,7 +770,7 @@ function abstractMatrix(superCtor) {
         /**
          * Returns the minimum value of one row
          * @param {number} row - Row index
-         * @returns {number}
+         * @return {number}
          */
         minRow(row) {
             util.checkRowIndex(this, row);
@@ -781,7 +786,7 @@ function abstractMatrix(superCtor) {
         /**
          * Returns the index of the maximum value of one row
          * @param {number} row - Row index
-         * @returns {Array}
+         * @return {Array}
          */
         minRowIndex(row) {
             util.checkRowIndex(this, row);
@@ -799,7 +804,7 @@ function abstractMatrix(superCtor) {
         /**
          * Returns the maximum value of one column
          * @param {number} column - Column index
-         * @returns {number}
+         * @return {number}
          */
         maxColumn(column) {
             util.checkColumnIndex(this, column);
@@ -815,7 +820,7 @@ function abstractMatrix(superCtor) {
         /**
          * Returns the index of the maximum value of one column
          * @param {number} column - Column index
-         * @returns {Array}
+         * @return {Array}
          */
         maxColumnIndex(column) {
             util.checkColumnIndex(this, column);
@@ -833,7 +838,7 @@ function abstractMatrix(superCtor) {
         /**
          * Returns the minimum value of one column
          * @param {number} column - Column index
-         * @returns {number}
+         * @return {number}
          */
         minColumn(column) {
             util.checkColumnIndex(this, column);
@@ -849,7 +854,7 @@ function abstractMatrix(superCtor) {
         /**
          * Returns the index of the minimum value of one column
          * @param {number} column - Column index
-         * @returns {Array}
+         * @return {Array}
          */
         minColumnIndex(column) {
             util.checkColumnIndex(this, column);
@@ -866,7 +871,7 @@ function abstractMatrix(superCtor) {
 
         /**
          * Returns an array containing the diagonal values of the matrix
-         * @returns {Array}
+         * @return {Array}
          */
         diag() {
             var min = Math.min(this.rows, this.columns);
@@ -879,7 +884,7 @@ function abstractMatrix(superCtor) {
 
         /**
          * Returns the sum of all elements of the matrix
-         * @returns {number}
+         * @return {number}
          */
         sum() {
             var v = 0;
@@ -893,7 +898,7 @@ function abstractMatrix(superCtor) {
 
         /**
          * Returns the mean of all elements of the matrix
-         * @returns {number}
+         * @return {number}
          */
         mean() {
             return this.sum() / this.size;
@@ -901,7 +906,7 @@ function abstractMatrix(superCtor) {
 
         /**
          * Returns the product of all elements of the matrix
-         * @returns {number}
+         * @return {number}
          */
         prod() {
             var prod = 1;
@@ -915,7 +920,7 @@ function abstractMatrix(superCtor) {
 
         /**
          * Computes the cumulative sum of the matrix elements (in place, row by row)
-         * @returns {Matrix} this
+         * @return {Matrix} this
          */
         cumulativeSum() {
             var sum = 0;
@@ -931,7 +936,7 @@ function abstractMatrix(superCtor) {
         /**
          * Computes the dot (scalar) product between the matrix and another
          * @param {Matrix} vector2 vector
-         * @returns {number}
+         * @return {number}
          */
         dot(vector2) {
             if (Matrix.isMatrix(vector2)) vector2 = vector2.to1DArray();
@@ -949,12 +954,14 @@ function abstractMatrix(superCtor) {
         /**
          * Returns the matrix product between this and other
          * @param {Matrix} other
-         * @returns {Matrix}
+         * @return {Matrix}
          */
         mmul(other) {
             other = this.constructor.checkMatrix(other);
-            if (this.columns !== other.rows)
+            if (this.columns !== other.rows) {
+                // eslint-disable-next-line no-console
                 console.warn('Number of columns of left matrix are not equal to number of rows of right matrix.');
+            }
 
             var m = this.rows;
             var n = this.columns;
@@ -980,134 +987,132 @@ function abstractMatrix(superCtor) {
             return result;
         }
 
-        strassen_2x2(other){
+        strassen2x2(other) {
             var result = new this.constructor[Symbol.species](2, 2);
-            const a11 = this.get(0,0);
-            const b11 = other.get(0,0);
-            const a12 = this.get(0,1);
-            const b12 = other.get(0,1);
-            const a21 = this.get(1,0);
-            const b21 = other.get(1,0);
-            const a22 = this.get(1,1);
-            const b22 = other.get(1,1);
+            const a11 = this.get(0, 0);
+            const b11 = other.get(0, 0);
+            const a12 = this.get(0, 1);
+            const b12 = other.get(0, 1);
+            const a21 = this.get(1, 0);
+            const b21 = other.get(1, 0);
+            const a22 = this.get(1, 1);
+            const b22 = other.get(1, 1);
 
             // Compute intermediate values.
-            const m1 = (a11+a22)*(b11+b22);
-            const m2 = (a21+a22)*b11;
-            const m3 = a11*(b12-b22);
-            const m4 = a22*(b21-b11);
-            const m5 = (a11+a12)*b22;
-            const m6 = (a21-a11)*(b11+b12);
-            const m7 = (a12-a22)*(b21+b22);
+            const m1 = (a11 + a22) * (b11 + b22);
+            const m2 = (a21 + a22) * b11;
+            const m3 = a11 * (b12 - b22);
+            const m4 = a22 * (b21 - b11);
+            const m5 = (a11 + a12) * b22;
+            const m6 = (a21 - a11) * (b11 + b12);
+            const m7 = (a12 - a22) * (b21 + b22);
 
             // Combine intermediate values into the output.
-            const c00 =m1+m4-m5+m7;
-            const c01 = m3+m5;
-            const c10 = m2+m4;
-            const c11 = m1-m2+m3+m6;
+            const c00 = m1 + m4 - m5 + m7;
+            const c01 = m3 + m5;
+            const c10 = m2 + m4;
+            const c11 = m1 - m2 + m3 + m6;
 
-            result.set(0,0,c00);
-            result.set(0,1,c01);
-            result.set(1,0,c10);
-            result.set(1,1,c11);
+            result.set(0, 0, c00);
+            result.set(0, 1, c01);
+            result.set(1, 0, c10);
+            result.set(1, 1, c11);
             return result;
         }
 
-        strassen_3x3(other){
+        strassen3x3(other) {
             var result = new this.constructor[Symbol.species](3, 3);
 
-            const a00 = this.get(0,0);
-            const a01 = this.get(0,1);
-            const a02 = this.get(0,2);
-            const a10 = this.get(1,0);
-            const a11 = this.get(1,1);
-            const a12 = this.get(1,2);
-            const a20 = this.get(2,0);
-            const a21 = this.get(2,1);
-            const a22 = this.get(2,2);
+            const a00 = this.get(0, 0);
+            const a01 = this.get(0, 1);
+            const a02 = this.get(0, 2);
+            const a10 = this.get(1, 0);
+            const a11 = this.get(1, 1);
+            const a12 = this.get(1, 2);
+            const a20 = this.get(2, 0);
+            const a21 = this.get(2, 1);
+            const a22 = this.get(2, 2);
 
-            const b00 = other.get(0,0);
-            const b01 = other.get(0,1);
-            const b02 = other.get(0,2);
-            const b10 = other.get(1,0);
-            const b11 = other.get(1,1);
-            const b12 = other.get(1,2);
-            const b20 = other.get(2,0);
-            const b21 = other.get(2,1);
-            const b22 = other.get(2,2);
+            const b00 = other.get(0, 0);
+            const b01 = other.get(0, 1);
+            const b02 = other.get(0, 2);
+            const b10 = other.get(1, 0);
+            const b11 = other.get(1, 1);
+            const b12 = other.get(1, 2);
+            const b20 = other.get(2, 0);
+            const b21 = other.get(2, 1);
+            const b22 = other.get(2, 2);
 
-            const m1 = (a00+a01+a02-a10-a11-a21-a22)*b11;
-            const m2 = (a00-a10)*(-b01+b11);
-            const m3 = a11*(-b00+b01+b10-b11-b12-b20+b22);
-            const m4 = (-a00+a10+a11)*(b00-b01+b11);
-            const m5 = (a10+a11)*(-b00+b01);
-            const m6 = a00*b00;
-            const m7 = (-a00+a20+a21)*(b00-b02+b12);
-            const m8 = (-a00+a20)*(b02-b12);
-            const m9 = (a20+a21)*(-b00+b02);
-            const m10 = (a00+a01+a02-a11-a12-a20-a21)*b12;
-            const m11 = a21*(-b00+b02+b10-b11-b12-b20+b21);
-            const m12 = (-a02+a21+a22)*(b11+b20-b21);
-            const m13 = (a02-a22)*(b11-b21);
-            const m14 = a02*b20;
-            const m15 = (a21+a22)*(-b20+b21);
-            const m16 = (-a02+a11+a12)*(b12+b20-b22);
-            const m17 = (a02-a12)*(b12-b22);
-            const m18 = (a11+a12)*(-b20+b22);
-            const m19= a01*b10;
-            const m20 = a12*b21;
-            const m21 = a10*b02;
-            const m22 = a20*b01;
-            const m23 = a22*b22;
+            const m1 = (a00 + a01 + a02 - a10 - a11 - a21 - a22) * b11;
+            const m2 = (a00 - a10) * (-b01 + b11);
+            const m3 = a11 * (-b00 + b01 + b10 - b11 - b12 - b20 + b22);
+            const m4 = (-a00 + a10 + a11) * (b00 - b01 + b11);
+            const m5 = (a10 + a11) * (-b00 + b01);
+            const m6 = a00 * b00;
+            const m7 = (-a00 + a20 + a21) * (b00 - b02 + b12);
+            const m8 = (-a00 + a20) * (b02 - b12);
+            const m9 = (a20 + a21) * (-b00 + b02);
+            const m10 = (a00 + a01 + a02 - a11 - a12 - a20 - a21) * b12;
+            const m11 = a21 * (-b00 + b02 + b10 - b11 - b12 - b20 + b21);
+            const m12 = (-a02 + a21 + a22) * (b11 + b20 - b21);
+            const m13 = (a02 - a22) * (b11 - b21);
+            const m14 = a02 * b20;
+            const m15 = (a21 + a22) * (-b20 + b21);
+            const m16 = (-a02 + a11 + a12) * (b12 + b20 - b22);
+            const m17 = (a02 - a12) * (b12 - b22);
+            const m18 = (a11 + a12) * (-b20 + b22);
+            const m19 = a01 * b10;
+            const m20 = a12 * b21;
+            const m21 = a10 * b02;
+            const m22 = a20 * b01;
+            const m23 = a22 * b22;
 
-            const c00 = m6+m14+m19;
-            const c01 = m1+m4+m5+m6+m12+m14+m15;
-            const c02 = m6+m7+m9+m10+m14+m16+m18;
-            const c10 = m2+m3+m4+m6+m14+m16+m17;
-            const c11 = m2+m4+m5+m6+m20;
-            const c12 = m14+m16+m17+m18+m21;
-            const c20 = m6+m7+m8+m11+m12+m13+m14;
-            const c21 = m12+m13+m14+m15+m22;
-            const c22 = m6+m7+m8+m9+m23;
+            const c00 = m6 + m14 + m19;
+            const c01 = m1 + m4 + m5 + m6 + m12 + m14 + m15;
+            const c02 = m6 + m7 + m9 + m10 + m14 + m16 + m18;
+            const c10 = m2 + m3 + m4 + m6 + m14 + m16 + m17;
+            const c11 = m2 + m4 + m5 + m6 + m20;
+            const c12 = m14 + m16 + m17 + m18 + m21;
+            const c20 = m6 + m7 + m8 + m11 + m12 + m13 + m14;
+            const c21 = m12 + m13 + m14 + m15 + m22;
+            const c22 = m6 + m7 + m8 + m9 + m23;
 
-            result.set(0,0,c00);
-            result.set(0,1,c01);
-            result.set(0,2,c02);
-            result.set(1,0,c10);
-            result.set(1,1,c11);
-            result.set(1,2,c12);
-            result.set(2,0,c20);
-            result.set(2,1,c21);
-            result.set(2,2,c22);
+            result.set(0, 0, c00);
+            result.set(0, 1, c01);
+            result.set(0, 2, c02);
+            result.set(1, 0, c10);
+            result.set(1, 1, c11);
+            result.set(1, 2, c12);
+            result.set(2, 0, c20);
+            result.set(2, 1, c21);
+            result.set(2, 2, c22);
             return result;
         }
-
 
         /**
          * Returns the matrix product between x and y. More efficient than mmul(other) only when we multiply squared matrix and when the size of the matrix is > 1000.
-         * @param {Matrix} x
          * @param {Matrix} y
-         * @returns {Matrix}
+         * @return {Matrix}
          */
-        mmul_strassen(y){
+        mmulStrassen(y) {
             var x = this.clone();
             var r1 = x.rows;
             var c1 = x.columns;
             var r2 = y.rows;
             var c2 = y.columns;
-            if(c1 != r2){
-                console.log(`Multiplying ${r1} x ${c1} and ${r2} x ${c2} matrix: dimensions do not match.`)
+            if (c1 !== r2) {
+                // eslint-disable-next-line no-console
+                console.warn(`Multiplying ${r1} x ${c1} and ${r2} x ${c2} matrix: dimensions do not match.`);
             }
 
             // Put a matrix into the top left of a matrix of zeros.
             // `rows` and `cols` are the dimensions of the output matrix.
-            function embed(mat, rows, cols){
+            function embed(mat, rows, cols) {
                 var r = mat.rows;
                 var c = mat.columns;
-                if((r==rows) && (c==cols)){
+                if ((r === rows) && (c === cols)) {
                     return mat;
-                }
-                else{
+                } else {
                     var resultat = Matrix.zeros(rows, cols);
                     resultat = resultat.setSubMatrix(mat, 0, 0);
                     return resultat;
@@ -1121,81 +1126,78 @@ function abstractMatrix(superCtor) {
 
             var r = Math.max(r1, r2);
             var c = Math.max(c1, c2);
-            var x = embed(x, r, c);
-            var y = embed(y, r, c);
+            x = embed(x, r, c);
+            y = embed(y, r, c);
 
             // Our recursive multiplication function.
-            function block_mult(a, b, rows, cols){
+            function blockMult(a, b, rows, cols) {
                 // For small matrices, resort to naive multiplication.
-                if (rows <= 512 || cols <= 512){
+                if (rows <= 512 || cols <= 512) {
                     return a.mmul(b); // a is equivalent to this
                 }
 
                 // Apply dynamic padding.
-                if ((rows % 2 == 1) && (cols % 2 == 1)) {
+                if ((rows % 2 === 1) && (cols % 2 === 1)) {
                     a = embed(a, rows + 1, cols + 1);
                     b = embed(b, rows + 1, cols + 1);
-                }
-                else if (rows % 2 == 1){
+                } else if (rows % 2 === 1) {
                     a = embed(a, rows + 1, cols);
                     b = embed(b, rows + 1, cols);
-                }
-                else if (cols % 2 == 1){
+                } else if (cols % 2 === 1) {
                     a = embed(a, rows, cols + 1);
                     b = embed(b, rows, cols + 1);
                 }
 
-                var half_rows = parseInt(a.rows / 2);
-                var half_cols = parseInt(a.columns / 2);
+                var halfRows = parseInt(a.rows / 2);
+                var halfCols = parseInt(a.columns / 2);
                 // Subdivide input matrices.
-                var a11 = a.subMatrix(0, half_rows -1, 0, half_cols - 1);
-                var b11 = b.subMatrix(0, half_rows -1, 0, half_cols - 1);
+                var a11 = a.subMatrix(0, halfRows - 1, 0, halfCols - 1);
+                var b11 = b.subMatrix(0, halfRows - 1, 0, halfCols - 1);
 
-                var a12 = a.subMatrix(0, half_rows -1, half_cols, a.columns - 1);
-                var b12 = b.subMatrix(0, half_rows -1,  half_cols, b.columns - 1);
+                var a12 = a.subMatrix(0, halfRows - 1, halfCols, a.columns - 1);
+                var b12 = b.subMatrix(0, halfRows - 1,  halfCols, b.columns - 1);
 
-                var a21 = a.subMatrix(half_rows, a.rows - 1,  0, half_cols - 1);
-                var b21 = b.subMatrix(half_rows, b.rows - 1,  0, half_cols - 1);
+                var a21 = a.subMatrix(halfRows, a.rows - 1,  0, halfCols - 1);
+                var b21 = b.subMatrix(halfRows, b.rows - 1,  0, halfCols - 1);
 
-                var a22 = a.subMatrix(half_rows, a.rows - 1, half_cols, a.columns - 1);
-                var b22 = b.subMatrix(half_rows, b.rows - 1, half_cols, b.columns - 1);
+                var a22 = a.subMatrix(halfRows, a.rows - 1, halfCols, a.columns - 1);
+                var b22 = b.subMatrix(halfRows, b.rows - 1, halfCols, b.columns - 1);
 
                 // Compute intermediate values.
-                var m1 = block_mult(Matrix.add(a11,a22), Matrix.add(b11,b22), half_rows, half_cols);
-                var m2 = block_mult(Matrix.add(a21,a22), b11, half_rows, half_cols);
-                var m3 = block_mult(a11, Matrix.sub(b12, b22), half_rows, half_cols);
-                var m4 = block_mult(a22, Matrix.sub(b21,b11), half_rows, half_cols);
-                var m5 = block_mult(Matrix.add(a11,a12), b22, half_rows, half_cols);
-                var m6 = block_mult(Matrix.sub(a21, a11), Matrix.add(b11, b12), half_rows, half_cols);
-                var m7 = block_mult(Matrix.sub(a12,a22), Matrix.add(b21,b22), half_rows, half_cols);
+                var m1 = blockMult(Matrix.add(a11, a22), Matrix.add(b11, b22), halfRows, halfCols);
+                var m2 = blockMult(Matrix.add(a21, a22), b11, halfRows, halfCols);
+                var m3 = blockMult(a11, Matrix.sub(b12, b22), halfRows, halfCols);
+                var m4 = blockMult(a22, Matrix.sub(b21, b11), halfRows, halfCols);
+                var m5 = blockMult(Matrix.add(a11, a12), b22, halfRows, halfCols);
+                var m6 = blockMult(Matrix.sub(a21, a11), Matrix.add(b11, b12), halfRows, halfCols);
+                var m7 = blockMult(Matrix.sub(a12, a22), Matrix.add(b21, b22), halfRows, halfCols);
 
                 // Combine intermediate values into the output.
                 var c11 = Matrix.add(m1, m4);
                 c11.sub(m5);
                 c11.add(m7);
-                var c12 = Matrix.add(m3,m5);
-                var c21 = Matrix.add(m2,m4);
-                var c22 = Matrix.sub(m1,m2);
+                var c12 = Matrix.add(m3, m5);
+                var c21 = Matrix.add(m2, m4);
+                var c22 = Matrix.sub(m1, m2);
                 c22.add(m3);
                 c22.add(m6);
 
                 //Crop output to the desired size (undo dynamic padding).
-                var resultat = Matrix.zeros(2*c11.rows, 2*c11.columns);
+                var resultat = Matrix.zeros(2 * c11.rows, 2 * c11.columns);
                 resultat = resultat.setSubMatrix(c11, 0, 0);
-                resultat = resultat.setSubMatrix(c12, c11.rows, 0)
+                resultat = resultat.setSubMatrix(c12, c11.rows, 0);
                 resultat = resultat.setSubMatrix(c21, 0, c11.columns);
                 resultat = resultat.setSubMatrix(c22, c11.rows, c11.columns);
                 return resultat.subMatrix(0, rows - 1, 0, cols - 1);
             }
-            var resultat_final =  block_mult(x, y, r, c);
-            return resultat_final;
-        };
+            return blockMult(x, y, r, c);
+        }
 
         /**
          * Returns a row-by-row scaled matrix
-         * @param {Number} [min=0] - Minimum scaled value
-         * @param {Number} [max=1] - Maximum scaled value
-         * @returns {Matrix} - The scaled matrix
+         * @param {number} [min=0] - Minimum scaled value
+         * @param {number} [max=1] - Maximum scaled value
+         * @return {Matrix} - The scaled matrix
          */
         scaleRows(min, max) {
             min = min === undefined ? 0 : min;
@@ -1213,9 +1215,9 @@ function abstractMatrix(superCtor) {
 
         /**
          * Returns a new column-by-column scaled matrix
-         * @param {Number} [min=0] - Minimum scaled value
-         * @param {Number} [max=1] - Maximum scaled value
-         * @returns {Matrix} - The new scaled matrix
+         * @param {number} [min=0] - Minimum scaled value
+         * @param {number} [max=1] - Maximum scaled value
+         * @return {Matrix} - The new scaled matrix
          * @example
          * var matrix = new Matrix([[1,2],[-1,0]]);
          * var scaledMatrix = matrix.scaleColumns(); // [[1,1],[0,0]]
@@ -1267,7 +1269,7 @@ function abstractMatrix(superCtor) {
 
         /**
          * Transposes the matrix and returns a new one containing the result
-         * @returns {Matrix}
+         * @return {Matrix}
          */
         transpose() {
             var result = new this.constructor[Symbol.species](this.columns, this.rows);
@@ -1282,7 +1284,7 @@ function abstractMatrix(superCtor) {
         /**
          * Sorts the rows (in place)
          * @param {function} compareFunction - usual Array.prototype.sort comparison function
-         * @returns {Matrix} this
+         * @return {Matrix} this
          */
         sortRows(compareFunction) {
             if (compareFunction === undefined) compareFunction = compareNumbers;
@@ -1295,7 +1297,7 @@ function abstractMatrix(superCtor) {
         /**
          * Sorts the columns (in place)
          * @param {function} compareFunction - usual Array.prototype.sort comparison function
-         * @returns {Matrix} this
+         * @return {Matrix} this
          */
         sortColumns(compareFunction) {
             if (compareFunction === undefined) compareFunction = compareNumbers;
@@ -1311,7 +1313,7 @@ function abstractMatrix(superCtor) {
          * @param {number} endRow - Last row index
          * @param {number} startColumn - First column index
          * @param {number} endColumn - Last column index
-         * @returns {Matrix}
+         * @return {Matrix}
          */
         subMatrix(startRow, endRow, startColumn, endColumn) {
             util.checkRange(this, startRow, endRow, startColumn, endColumn);
@@ -1329,7 +1331,7 @@ function abstractMatrix(superCtor) {
          * @param {Array} indices - Array containing the row indices
          * @param {number} [startColumn = 0] - First column index
          * @param {number} [endColumn = this.columns-1] - Last column index
-         * @returns {Matrix}
+         * @return {Matrix}
          */
         subMatrixRow(indices, startColumn, endColumn) {
             if (startColumn === undefined) startColumn = 0;
@@ -1355,7 +1357,7 @@ function abstractMatrix(superCtor) {
          * @param {Array} indices - Array containing the column indices
          * @param {number} [startRow = 0] - First row index
          * @param {number} [endRow = this.rows-1] - Last row index
-         * @returns {Matrix}
+         * @return {Matrix}
          */
         subMatrixColumn(indices, startRow, endRow) {
             if (startRow === undefined) startRow = 0;
@@ -1379,9 +1381,9 @@ function abstractMatrix(superCtor) {
         /**
          * Set a part of the matrix to the given sub-matrix
          * @param {Matrix|Array< Array >} matrix - The source matrix from which to extract values.
-         * @param startRow - The index of the first row to set
-         * @param startColumn - The index of the first column to set
-         * @returns {Matrix}
+         * @param {number} startRow - The index of the first row to set
+         * @param {number} startColumn - The index of the first column to set
+         * @return {Matrix}
          */
         setSubMatrix(matrix, startRow, startColumn) {
             matrix = this.constructor.checkMatrix(matrix);
@@ -1400,7 +1402,7 @@ function abstractMatrix(superCtor) {
          * Return a new matrix based on a selection of rows and columns
          * @param {Array<number>} rowIndices - The row indices to select. Order matters and an index can be more than once.
          * @param {Array<number>} columnIndices - The column indices to select. Order matters and an index can be use more than once.
-         * @returns {Matrix} The new matrix
+         * @return {Matrix} The new matrix
          */
         selection(rowIndices, columnIndices) {
             var indices = util.checkIndices(this, rowIndices, columnIndices);
@@ -1417,7 +1419,7 @@ function abstractMatrix(superCtor) {
 
         /**
          * Returns the trace of the matrix (sum of the diagonal elements)
-         * @returns {number}
+         * @return {number}
          */
         trace() {
             var min = Math.min(this.rows, this.columns);
@@ -1434,7 +1436,7 @@ function abstractMatrix(superCtor) {
 
         /**
          * Returns a view of the transposition of the matrix
-         * @returns {MatrixTransposeView}
+         * @return {MatrixTransposeView}
          */
         transposeView() {
             return new MatrixTransposeView(this);
@@ -1443,7 +1445,7 @@ function abstractMatrix(superCtor) {
         /**
          * Returns a view of the row vector with the given index
          * @param {number} row - row index of the vector
-         * @returns {MatrixRowView}
+         * @return {MatrixRowView}
          */
         rowView(row) {
             util.checkRowIndex(this, row);
@@ -1453,7 +1455,7 @@ function abstractMatrix(superCtor) {
         /**
          * Returns a view of the column vector with the given index
          * @param {number} column - column index of the vector
-         * @returns {MatrixColumnView}
+         * @return {MatrixColumnView}
          */
         columnView(column) {
             util.checkColumnIndex(this, column);
@@ -1462,7 +1464,7 @@ function abstractMatrix(superCtor) {
 
         /**
          * Returns a view of the matrix flipped in the row axis
-         * @returns {MatrixFlipRowView}
+         * @return {MatrixFlipRowView}
          */
         flipRowView() {
             return new MatrixFlipRowView(this);
@@ -1470,7 +1472,7 @@ function abstractMatrix(superCtor) {
 
         /**
          * Returns a view of the matrix flipped in the column axis
-         * @returns {MatrixFlipColumnView}
+         * @return {MatrixFlipColumnView}
          */
         flipColumnView() {
             return new MatrixFlipColumnView(this);
@@ -1482,7 +1484,7 @@ function abstractMatrix(superCtor) {
          * @param {number} endRow - last row index of the submatrix
          * @param {number} startColumn - first column index of the submatrix
          * @param {number} endColumn - last column index of the submatrix
-         * @returns {MatrixSubView}
+         * @return {MatrixSubView}
          */
         subMatrixView(startRow, endRow, startColumn, endColumn) {
             return new MatrixSubView(this, startRow, endRow, startColumn, endColumn);
@@ -1495,7 +1497,7 @@ function abstractMatrix(superCtor) {
          * var matrix = new Matrix([[1,2,3], [4,5,6]]).selectionView([0, 0], [1])
          * @param {Array<number>} rowIndices
          * @param {Array<number>} columnIndices
-         * @returns {MatrixSelectionView}
+         * @return {MatrixSelectionView}
          */
         selectionView(rowIndices, columnIndices) {
             return new MatrixSelectionView(this, rowIndices, columnIndices);
@@ -1510,7 +1512,7 @@ function abstractMatrix(superCtor) {
      * @param {Matrix} matrix
      * @param {Matrix} otherMatrix
      */
-    function checkDimensions(matrix, otherMatrix) {
+    function checkDimensions(matrix, otherMatrix) { // eslint-disable-line no-unused-vars
         if (matrix.rows !== otherMatrix.rows ||
             matrix.columns !== otherMatrix.columns) {
             throw new RangeError('Matrices dimensions must be equal');
@@ -1659,12 +1661,14 @@ function abstractMatrix(superCtor) {
         ['>>>', 'rightShift', 'zeroFillRightShift']
     ];
 
+    var i;
+
     for (var operator of operators) {
         var inplaceOp = eval(fillTemplateFunction(inplaceOperator, {name: operator[1], op: operator[0]}));
         var inplaceOpS = eval(fillTemplateFunction(inplaceOperatorScalar, {name: operator[1] + 'S', op: operator[0]}));
         var inplaceOpM = eval(fillTemplateFunction(inplaceOperatorMatrix, {name: operator[1] + 'M', op: operator[0]}));
         var staticOp = eval(fillTemplateFunction(staticOperator, {name: operator[1]}));
-        for (var i = 1; i < operator.length; i++) {
+        for (i = 1; i < operator.length; i++) {
             Matrix.prototype[operator[i]] = inplaceOp;
             Matrix.prototype[operator[i] + 'S'] = inplaceOpS;
             Matrix.prototype[operator[i] + 'M'] = inplaceOpM;
@@ -1687,7 +1691,7 @@ function abstractMatrix(superCtor) {
     for (var method of methods) {
         var inplaceMeth = eval(fillTemplateFunction(inplaceMethod, {name: method[1], method: method[0]}));
         var staticMeth = eval(fillTemplateFunction(staticMethod, {name: method[1]}));
-        for (var i = 1; i < method.length; i++) {
+        for (i = 1; i < method.length; i++) {
             Matrix.prototype[method[i]] = inplaceMeth;
             Matrix[method[i]] = staticMeth;
         }
@@ -1699,7 +1703,7 @@ function abstractMatrix(superCtor) {
 
     for (var methodWithArg of methodsWithArgs) {
         var args = 'arg0';
-        for (var i = 1; i < methodWithArg[1]; i++) {
+        for (i = 1; i < methodWithArg[1]; i++) {
             args += `, arg${i}`;
         }
         if (methodWithArg[1] !== 1) {
@@ -1709,7 +1713,7 @@ function abstractMatrix(superCtor) {
                 args: args
             }));
             var staticMethWithArgs = eval(fillTemplateFunction(staticMethodWithArgs, {name: methodWithArg[2], args: args}));
-            for (var i = 2; i < methodWithArg.length; i++) {
+            for (i = 2; i < methodWithArg.length; i++) {
                 Matrix.prototype[methodWithArg[i]] = inplaceMethWithArgs;
                 Matrix[methodWithArg[i]] = staticMethWithArgs;
             }
@@ -1719,22 +1723,22 @@ function abstractMatrix(superCtor) {
                 args: args,
                 method: methodWithArg[0]
             };
-            var inplaceMethod = eval(fillTemplateFunction(inplaceMethodWithOneArg, tmplVar));
+            var inplaceMethod2 = eval(fillTemplateFunction(inplaceMethodWithOneArg, tmplVar));
             var inplaceMethodS = eval(fillTemplateFunction(inplaceMethodWithOneArgScalar, tmplVar));
             var inplaceMethodM = eval(fillTemplateFunction(inplaceMethodWithOneArgMatrix, tmplVar));
-            var staticMethod = eval(fillTemplateFunction(staticMethodWithOneArg, tmplVar));
-            for (var i = 2; i < methodWithArg.length; i++) {
-                Matrix.prototype[methodWithArg[i]] = inplaceMethod;
+            var staticMethod2 = eval(fillTemplateFunction(staticMethodWithOneArg, tmplVar));
+            for (i = 2; i < methodWithArg.length; i++) {
+                Matrix.prototype[methodWithArg[i]] = inplaceMethod2;
                 Matrix.prototype[methodWithArg[i] + 'M'] = inplaceMethodM;
                 Matrix.prototype[methodWithArg[i] + 'S'] = inplaceMethodS;
-                Matrix[methodWithArg[i]] = staticMethod;
+                Matrix[methodWithArg[i]] = staticMethod2;
             }
         }
     }
 
     function fillTemplateFunction(template, values) {
-        for (var i in values) {
-            template = template.replace(new RegExp('%' + i + '%', 'g'), values[i]);
+        for (var value in values) {
+            template = template.replace(new RegExp('%' + value + '%', 'g'), values[value]);
         }
         return template;
     }

@@ -6,6 +6,7 @@ var util = require('./util');
 
 class Matrix extends abstractMatrix(Array) {
     constructor(nRows, nColumns) {
+        var i;
         if (arguments.length === 1 && typeof nRows === 'number') {
             return new Array(nRows);
         }
@@ -14,21 +15,21 @@ class Matrix extends abstractMatrix(Array) {
         } else if (Number.isInteger(nRows) && nRows > 0) { // Create an empty matrix
             super(nRows);
             if (Number.isInteger(nColumns) && nColumns > 0) {
-                for (var i = 0; i < nRows; i++) {
+                for (i = 0; i < nRows; i++) {
                     this[i] = new Array(nColumns);
                 }
             } else {
                 throw new TypeError('nColumns must be a positive integer');
             }
         } else if (Array.isArray(nRows)) { // Copy the values from the 2D array
-            var matrix = nRows;
+            const matrix = nRows;
             nRows = matrix.length;
             nColumns = matrix[0].length;
             if (typeof nColumns !== 'number' || nColumns === 0) {
                 throw new TypeError('Data must be a 2D array with at least one element');
             }
             super(nRows);
-            for (var i = 0; i < nRows; i++) {
+            for (i = 0; i < nRows; i++) {
                 if (matrix[i].length !== nColumns) {
                     throw new RangeError('Inconsistent array dimensions');
                 }
@@ -39,6 +40,7 @@ class Matrix extends abstractMatrix(Array) {
         }
         this.rows = nRows;
         this.columns = nColumns;
+        return this;
     }
 
     set(rowIndex, columnIndex, value) {
@@ -52,7 +54,7 @@ class Matrix extends abstractMatrix(Array) {
 
     /**
      * Creates an exact and independent copy of the matrix
-     * @returns {Matrix}
+     * @return {Matrix}
      */
     clone() {
         var newMatrix = new this.constructor[Symbol.species](this.rows, this.columns);
@@ -67,12 +69,13 @@ class Matrix extends abstractMatrix(Array) {
     /**
      * Removes a row from the given index
      * @param {number} index - Row index
-     * @returns {Matrix} this
+     * @return {Matrix} this
      */
     removeRow(index) {
         util.checkRowIndex(this, index);
-        if (this.rows === 1)
+        if (this.rows === 1) {
             throw new RangeError('A matrix cannot have less than one row');
+        }
         this.splice(index, 1);
         this.rows -= 1;
         return this;
@@ -82,7 +85,7 @@ class Matrix extends abstractMatrix(Array) {
      * Adds a row at the given index
      * @param {number} [index = this.rows] - Row index
      * @param {Array|Matrix} array - Array or vector
-     * @returns {Matrix} this
+     * @return {Matrix} this
      */
     addRow(index, array) {
         if (array === undefined) {
@@ -99,12 +102,13 @@ class Matrix extends abstractMatrix(Array) {
     /**
      * Removes a column from the given index
      * @param {number} index - Column index
-     * @returns {Matrix} this
+     * @return {Matrix} this
      */
     removeColumn(index) {
         util.checkColumnIndex(this, index);
-        if (this.columns === 1)
+        if (this.columns === 1) {
             throw new RangeError('A matrix cannot have less than one column');
+        }
         for (var i = 0; i < this.rows; i++) {
             this[i].splice(index, 1);
         }
@@ -116,7 +120,7 @@ class Matrix extends abstractMatrix(Array) {
      * Adds a column at the given index
      * @param {number} [index = this.columns] - Column index
      * @param {Array|Matrix} array - Array or vector
-     * @returns {Matrix} this
+     * @return {Matrix} this
      */
     addColumn(index, array) {
         if (typeof array === 'undefined') {

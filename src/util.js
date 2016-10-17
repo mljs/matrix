@@ -33,7 +33,7 @@ exports.checkColumnIndex = function checkColumnIndex(matrix, index, outer) {
  * Check that the provided vector is an array with the right length
  * @param {Matrix} matrix
  * @param {Array|Matrix} vector
- * @returns {Array}
+ * @return {Array}
  * @throws {RangeError}
  */
 exports.checkRowVector = function checkRowVector(matrix, vector) {
@@ -51,7 +51,7 @@ exports.checkRowVector = function checkRowVector(matrix, vector) {
  * Check that the provided vector is an array with the right length
  * @param {Matrix} matrix
  * @param {Array|Matrix} vector
- * @returns {Array}
+ * @return {Array}
  * @throws {RangeError}
  */
 exports.checkColumnVector = function checkColumnVector(matrix, vector) {
@@ -75,7 +75,7 @@ exports.checkIndices = function checkIndices(matrix, rowIndices, columnIndices) 
     });
 
     if (rowOut || columnOut) {
-        throw new RangeError('Indices are out of range')
+        throw new RangeError('Indices are out of range');
     }
 
     if (typeof rowIndices !== 'object' || typeof columnIndices !== 'object') {

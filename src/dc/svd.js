@@ -19,10 +19,8 @@ function SingularValueDecomposition(value, options) {
         nu = Math.min(m, n);
 
     var wantu = true, wantv = true;
-    if (options.computeLeftSingularVectors === false)
-        wantu = false;
-    if (options.computeRightSingularVectors === false)
-        wantv = false;
+    if (options.computeLeftSingularVectors === false) wantu = false;
+    if (options.computeRightSingularVectors === false) wantv = false;
     var autoTranspose = options.autoTranspose === true;
 
     var swapped = false;
@@ -30,6 +28,7 @@ function SingularValueDecomposition(value, options) {
     if (m < n) {
         if (!autoTranspose) {
             a = value.clone();
+            // eslint-disable-next-line no-console
             console.warn('Computing SVD on a matrix with more columns than rows. Consider enabling autoTranspose');
         } else {
             a = value.transpose();
@@ -100,8 +99,9 @@ function SingularValueDecomposition(value, options) {
                 e[k] = hypotenuse(e[k], e[i]);
             }
             if (e[k] !== 0) {
-                if (e[k + 1] < 0)
-                    e[k] = -e[k];
+                if (e[k + 1] < 0) {
+                    e[k] = 0 - e[k];
+                }
                 for (i = k + 1; i < n; i++) {
                     e[i] /= e[k];
                 }
@@ -374,6 +374,7 @@ function SingularValueDecomposition(value, options) {
                 p--;
                 break;
             }
+            // no default
         }
     }
 

@@ -8,8 +8,9 @@ function CholeskyDecomposition(value) {
         return new CholeskyDecomposition(value);
     }
     value = Matrix.checkMatrix(value);
-    if (!value.isSymmetric())
+    if (!value.isSymmetric()) {
         throw new Error('Matrix is not symmetric');
+    }
 
     var a = value,
         dimension = a.rows,

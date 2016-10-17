@@ -126,7 +126,7 @@ describe('Singular value decomposition', function () {
 
         it('left singular vectors', function () {
             var U = [[0.641423027995072, -0.767187395072177], [0.767187395072177, 0.641423027995072]];
-            target.leftSingularVectors.should.approximatelyDeep(U, 0.001)
+            target.leftSingularVectors.should.approximatelyDeep(U, 0.001);
         });
 
         it('right singular vectors (0)', function () {

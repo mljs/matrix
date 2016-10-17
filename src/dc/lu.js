@@ -85,11 +85,13 @@ LuDecomposition.prototype = {
     },
     get determinant() {
         var data = this.LU;
-        if (!data.isSquare())
+        if (!data.isSquare()) {
             throw new Error('Matrix must be square');
+        }
         var determinant = this.pivotSign, col = data.columns;
-        for (var j = 0; j < col; j++)
+        for (var j = 0; j < col; j++) {
             determinant *= data[j][j];
+        }
         return determinant;
     },
     get lowerTriangularMatrix() {
@@ -135,15 +137,17 @@ LuDecomposition.prototype = {
         var lu = this.LU,
             rows = lu.rows;
 
-        if (rows !== value.rows)
+        if (rows !== value.rows) {
             throw new Error('Invalid matrix dimensions');
-        if (this.isSingular())
+        }
+        if (this.isSingular()) {
             throw new Error('LU matrix is singular');
+        }
 
-        var count = value.columns,
-            X = value.subMatrixRow(this.pivotVector, 0, count - 1),
-            columns = lu.columns,
-            i, j, k;
+        var count = value.columns;
+        var X = value.subMatrixRow(this.pivotVector, 0, count - 1);
+        var columns = lu.columns;
+        var i, j, k;
 
         for (k = 0; k < columns; k++) {
             for (i = k + 1; i < columns; i++) {

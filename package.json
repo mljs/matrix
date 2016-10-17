@@ -11,7 +11,10 @@
     "src"
   ],
   "scripts": {
-    "test": "mocha --require should-approximately-deep --reporter mocha-better-spec-reporter --recursive"
+    "eslint": "eslint src test",
+    "eslint-fix": "npm run eslint -- --fix",
+    "test": "npm run test-mocha && npm run eslint",
+    "test-mocha": "mocha --require should-approximately-deep --reporter mocha-better-spec-reporter --recursive"
   },
   "repository": {
     "type": "git",
@@ -46,6 +49,9 @@
   "devDependencies": {
     "benchmark": "^2.1.0",
     "csv-parse": "^1.0.0",
+    "eslint": "^3.8.0",
+    "eslint-config-cheminfo": "^1.5.2",
+    "eslint-plugin-no-only-tests": "^1.1.0",
     "mathjs": "^3.2.1",
     "mocha": "^3.0.0",
     "mocha-better-spec-reporter": "^3.0.0",

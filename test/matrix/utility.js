@@ -126,8 +126,8 @@ describe('utility methods', function () {
 
     it('selection matrix', function () {
         var matrix = new Matrix([[1, 2], [-5, 3], [2, 4]]);
-        var selMatrix = matrix.selection([2,1], [1]);
-        selMatrix.to2DArray().should.eql([[4],[3]]);
+        var selMatrix = matrix.selection([2, 1], [1]);
+        selMatrix.to2DArray().should.eql([[4], [3]]);
     });
 
     it('repeat matrix', function () {
@@ -137,19 +137,19 @@ describe('utility methods', function () {
         matrix.repeat(1, 2).to2DArray().should.eql([[1, 2, 1, 2], [3, 4, 3, 4]]);
     });
 
-    it('mmul strassen', function (){
-        var matrix = new Matrix([[2,4],[7,1]]);
-        var matrix2 = new Matrix([[2,1],[1,1]]);
-        matrix.mmul_strassen(matrix2).to2DArray().should.eql([[8,6], [15,8]]);
+    it('mmul strassen', function () {
+        var matrix = new Matrix([[2, 4], [7, 1]]);
+        var matrix2 = new Matrix([[2, 1], [1, 1]]);
+        matrix.mmulStrassen(matrix2).to2DArray().should.eql([[8, 6], [15, 8]]);
     });
 
-    it('mmul 2x2 and 3x3', function (){
-        var matrix = new Matrix([[2,4],[7,1]]);
-        var matrix2 = new Matrix([[2,1],[1,1]]);
-        matrix.strassen_2x2(matrix2).to2DArray().should.eql([[8,6], [15,8]]);
+    it('mmul 2x2 and 3x3', function () {
+        var matrix = new Matrix([[2, 4], [7, 1]]);
+        var matrix2 = new Matrix([[2, 1], [1, 1]]);
+        matrix.strassen2x2(matrix2).to2DArray().should.eql([[8, 6], [15, 8]]);
 
-        matrix = new Matrix([[2,4,1],[7,1,2],[5,1,3]]);
-        matrix2 = new Matrix([[2,1,3],[7,1,1],[6,2,7]]);
-        matrix.strassen_3x3(matrix2).to2DArray().should.eql([[38,8,17],[33,12,36],[35,12,37]]);
+        matrix = new Matrix([[2, 4, 1], [7, 1, 2], [5, 1, 3]]);
+        matrix2 = new Matrix([[2, 1, 3], [7, 1, 1], [6, 2, 7]]);
+        matrix.strassen3x3(matrix2).to2DArray().should.eql([[38, 8, 17], [33, 12, 36], [35, 12, 37]]);
     });
 });

@@ -54,15 +54,17 @@ QrDecomposition.prototype = {
         var qr = this.QR,
             m = qr.rows;
 
-        if (value.rows !== m)
+        if (value.rows !== m) {
             throw new Error('Matrix row dimensions must agree');
-        if (!this.isFullRank())
+        }
+        if (!this.isFullRank()) {
             throw new Error('Matrix is rank deficient');
+        }
 
-        var count = value.columns,
-            X = value.clone(),
-            n = qr.columns,
-            i, j, k, s;
+        var count = value.columns;
+        var X = value.clone();
+        var n = qr.columns;
+        var i, j, k, s;
 
         for (k = 0; k < n; k++) {
             for (j = 0; j < count; j++) {

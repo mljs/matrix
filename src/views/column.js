@@ -13,7 +13,7 @@ class MatrixColumnView extends BaseView {
         return this;
     }
 
-    get(rowIndex, columnIndex) {
+    get(rowIndex) {
         return this.matrix.get(rowIndex, this.column);
     }
 }

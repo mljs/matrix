@@ -64,10 +64,10 @@ if(x == 2 && y == 2){
             m.mmul(m2);
         })
         .add('mmul_strassen', function() {
-            m.mmul_strassen(m, m2);
+            m.mmulStrassen(m, m2);
         })
         .add('strassen 2x2', function() {
-            m.strassen_2x2(m2); // a0 is a copy of m
+            m.strassen2x2(m2); // a0 is a copy of m
         })
         .on('cycle', function(event) {
             console.log(String(event.target));
@@ -83,10 +83,10 @@ else if(x == 3 && y == 3){
             m.mmul(m2);
         })
         .add('mmul_strassen', function() {
-            m.mmul_strassen(m, m2);
+            m.mmulStrassen(m, m2);
         })
         .add('strassen 3x3', function() {
-            m.strassen_3x3(m2); // a0 is a copy of m
+            m.strassen3x3(m2); // a0 is a copy of m
         })
         .on('cycle', function(event) {
             console.log(String(event.target));
@@ -102,7 +102,7 @@ else if(Math.max(x,y) < 200){
             m.mmul(m2);
         })
         .add('mmul_strassen', function() {
-            m.mmul_strassen(m, m2);
+            m.mmulStrassen(m, m2);
         })
         .on('cycle', function(event) {
             console.log(String(event.target));
@@ -117,6 +117,6 @@ else{
     var r1 = m.mmul(m2);
     console.timeEnd("mmul")
     console.time("mmul strassen dynamic padding")
-    var r2 = m.mmul_strassen(m, m2);
+    var r2 = m.mmulStrassen(m, m2);
     console.timeEnd("mmul strassen dynamic padding")
 }

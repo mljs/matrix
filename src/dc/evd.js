@@ -42,8 +42,7 @@ function EigenvalueDecomposition(matrix, options) {
         }
         tred2(n, e, d, V);
         tql2(n, e, d, V);
-    }
-    else {
+    } else {
         var H = getFilled2DArray(n, n, 0),
             ort = new Array(n);
         for (j = 0; j < n; j++) {
@@ -87,8 +86,7 @@ EigenvalueDecomposition.prototype = {
             X[i][i] = d[i];
             if (e[i] > 0) {
                 X[i][i + 1] = e[i];
-            }
-            else if (e[i] < 0) {
+            } else if (e[i] < 0) {
                 X[i][i - 1] = e[i];
             }
         }
@@ -772,8 +770,7 @@ function cdiv(xr, xi, yr, yi) {
         r = yi / yr;
         d = yr + r * yi;
         return [(xr + r * xi) / d, (xi - r * xr) / d];
-    }
-    else {
+    } else {
         r = yr / yi;
         d = yi + r * yr;
         return [(r * xr + xi) / d, (r * xi - xr) / d];
