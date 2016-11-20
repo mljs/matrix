@@ -2,6 +2,7 @@
 
 module.exports = abstractMatrix;
 
+var LuDecomposition = require('./dc/lu');
 var arrayUtils = require('ml-array-utils');
 var util = require('./util');
 var MatrixTransposeView = require('./views/transpose');
@@ -1511,7 +1512,6 @@ function abstractMatrix(superCtor) {
         * 
         * @return {number}
         */
-
         det(){
             if(this.isSquare()){
                 if(this.columns === 2){
@@ -1539,9 +1539,8 @@ function abstractMatrix(superCtor) {
                     return a * subMatrix0.det()  - b * subMatrix1.det() + c * subMatrix2.det();
 
                 }else{
-                    // general purpose determinant
-                    
-                    throw Error('Not implemented yet');
+                    // general purpose determinant using the LU decomposition
+                    return new LuDecomposition(this, {skipCheck:true}).determinant;
                 }
 
             }else{
