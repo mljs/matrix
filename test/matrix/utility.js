@@ -85,11 +85,11 @@ describe('utility methods', function () {
         transpose[2][1].should.equal(matrix[1][2]);
     });
 
-    it('determinant', function(){
+    it('determinant', function () {
         var determinant = matrix.det();
         determinant.should.equal(-18);
-        var subMatrix = matrix.selection([1,2], [1,2]);
-        determinant = subMatrix.det()
+        var subMatrix = matrix.selection([1, 2], [1, 2]);
+        determinant = subMatrix.det();
         determinant.should.equal(-9);
     });
     it('transpose rectangular', function () {

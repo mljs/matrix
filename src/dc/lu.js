@@ -10,7 +10,7 @@ function LuDecomposition(matrix, options) {
 
     options = options || {};
 
-    if(!options.skipCheck){
+    if (!options.skipCheck) {
         matrix = Matrix.checkMatrix(matrix);
     }
 
