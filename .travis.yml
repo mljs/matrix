@@ -1,6 +1,6 @@
 language: node_js
 node_js:
-  - 4
-  - 5 
-  - stable
+  - node
+  - lts/boron #v6
+  - lts/argon #v4
 sudo: false
