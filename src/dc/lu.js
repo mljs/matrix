@@ -3,11 +3,16 @@
 var Matrix = require('../matrix');
 
 // https://github.com/lutzroeder/Mapack/blob/master/Source/LuDecomposition.cs
-function LuDecomposition(matrix) {
+function LuDecomposition(matrix, options) {
     if (!(this instanceof LuDecomposition)) {
         return new LuDecomposition(matrix);
     }
-    matrix = Matrix.checkMatrix(matrix);
+
+    options = options || {};
+
+    if (!options.skipCheck) {
+        matrix = Matrix.checkMatrix(matrix);
+    }
 
     var lu = matrix.clone(),
         rows = lu.rows,

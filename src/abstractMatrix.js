@@ -2,6 +2,7 @@
 
 module.exports = abstractMatrix;
 
+var LuDecomposition = require('./dc/lu');
 var arrayUtils = require('ml-array-utils');
 var util = require('./util');
 var MatrixTransposeView = require('./views/transpose');
@@ -1501,6 +1502,45 @@ function abstractMatrix(superCtor) {
          */
         selectionView(rowIndices, columnIndices) {
             return new MatrixSelectionView(this, rowIndices, columnIndices);
+        }
+
+
+        /**
+        * Calculates and returns the determinant of a matrix as a Number
+        * @example
+        *   new Matrix([[1,2,3], [4,5,6]]).det()
+        * @return {number}
+        */
+        det() {
+            if (this.isSquare()) {
+                var a, b, c, d;
+                if (this.columns === 2) {
+                    // 2 x 2 matrix
+                    a = this.get(0, 0);
+                    b = this.get(0, 1);
+                    c = this.get(1, 0);
+                    d = this.get(1, 1);
+
+                    return a * d - (b * c);
+                } else if (this.columns === 3) {
+                    // 3 x 3 matrix
+                    var subMatrix0, subMatrix1, subMatrix2;
+                    subMatrix0 = this.selection([1, 2], [1, 2]);
+                    subMatrix1 = this.selection([1, 2], [0, 2]);
+                    subMatrix2 = this.selection([1, 2], [0, 1]);
+                    a = this.get(0, 0);
+                    b = this.get(0, 1);
+                    c = this.get(0, 2);
+
+                    return a * subMatrix0.det() - b * subMatrix1.det() + c * subMatrix2.det();
+                } else {
+                    // general purpose determinant using the LU decomposition
+                    return new LuDecomposition(this, {skipCheck: true}).determinant;
+                }
+
+            } else {
+                throw Error('Determinant can only be calculated for a square matrix.');
+            }
         }
     }
 
