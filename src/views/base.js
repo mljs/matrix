@@ -1,7 +1,7 @@
 'use strict';
 
 var abstractMatrix = require('../abstractMatrix');
-var Matrix;
+var Matrix = require('../matrix');
 
 class BaseView extends abstractMatrix() {
     constructor(matrix, rows, columns) {
@@ -12,10 +12,7 @@ class BaseView extends abstractMatrix() {
     }
 
     static get [Symbol.species]() {
-        if (!Matrix) {
-            Matrix = require('../matrix');
-        }
-        return Matrix;
+        return Matrix.Matrix;
     }
 }
 

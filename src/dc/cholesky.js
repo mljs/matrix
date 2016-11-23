@@ -1,6 +1,6 @@
 'use strict';
 
-var Matrix = require('../matrix');
+var Matrix = require('../matrix').Matrix;
 
 // https://github.com/lutzroeder/Mapack/blob/master/Source/CholeskyDecomposition.cs
 function CholeskyDecomposition(value) {

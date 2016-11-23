@@ -1535,7 +1535,7 @@ function abstractMatrix(superCtor) {
                     return a * subMatrix0.det() - b * subMatrix1.det() + c * subMatrix2.det();
                 } else {
                     // general purpose determinant using the LU decomposition
-                    return new LuDecomposition(this, {skipCheck: true}).determinant;
+                    return new LuDecomposition(this).determinant;
                 }
 
             } else {

@@ -137,5 +137,5 @@ class Matrix extends abstractMatrix(Array) {
     }
 }
 
-module.exports = Matrix;
+exports.Matrix = Matrix;
 Matrix.abstractMatrix = abstractMatrix;

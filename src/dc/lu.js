@@ -3,16 +3,12 @@
 var Matrix = require('../matrix');
 
 // https://github.com/lutzroeder/Mapack/blob/master/Source/LuDecomposition.cs
-function LuDecomposition(matrix, options) {
+function LuDecomposition(matrix) {
     if (!(this instanceof LuDecomposition)) {
         return new LuDecomposition(matrix);
     }
 
-    options = options || {};
-
-    if (!options.skipCheck) {
-        matrix = Matrix.checkMatrix(matrix);
-    }
+    matrix = Matrix.Matrix.checkMatrix(matrix);
 
     var lu = matrix.clone(),
         rows = lu.rows,
@@ -103,7 +99,7 @@ LuDecomposition.prototype = {
         var data = this.LU,
             rows = data.rows,
             columns = data.columns,
-            X = new Matrix(rows, columns);
+            X = new Matrix.Matrix(rows, columns);
         for (var i = 0; i < rows; i++) {
             for (var j = 0; j < columns; j++) {
                 if (i > j) {
@@ -121,7 +117,7 @@ LuDecomposition.prototype = {
         var data = this.LU,
             rows = data.rows,
             columns = data.columns,
-            X = new Matrix(rows, columns);
+            X = new Matrix.Matrix(rows, columns);
         for (var i = 0; i < rows; i++) {
             for (var j = 0; j < columns; j++) {
                 if (i <= j) {
@@ -137,7 +133,7 @@ LuDecomposition.prototype = {
         return this.pivotVector.slice();
     },
     solve: function (value) {
-        value = Matrix.checkMatrix(value);
+        value = Matrix.Matrix.checkMatrix(value);
 
         var lu = this.LU,
             rows = lu.rows;

@@ -1,6 +1,6 @@
 'use strict';
 
-const Matrix = require('../matrix');
+const Matrix = require('../matrix').Matrix;
 const util = require('./util');
 const hypotenuse = util.hypotenuse;
 const getFilled2DArray = util.getFilled2DArray;

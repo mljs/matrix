@@ -1,6 +1,6 @@
 'use strict';
 
-var Matrix = require('./matrix');
+var Matrix = require('./matrix').Matrix;
 
 var SingularValueDecomposition = require('./dc/svd');
 var EigenvalueDecomposition = require('./dc/evd');

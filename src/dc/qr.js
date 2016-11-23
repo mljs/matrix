@@ -1,6 +1,6 @@
 'use strict';
 
-var Matrix = require('../matrix');
+var Matrix = require('../matrix').Matrix;
 var hypotenuse = require('./util').hypotenuse;
 
 //https://github.com/lutzroeder/Mapack/blob/master/Source/QrDecomposition.cs

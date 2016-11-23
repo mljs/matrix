@@ -1,6 +1,6 @@
 'use strict';
 
-var Matrix = require('../matrix');
+var Matrix = require('../matrix').Matrix;
 var util = require('./util');
 var hypotenuse = util.hypotenuse;
 var getFilled2DArray = util.getFilled2DArray;
