@@ -92,6 +92,11 @@ describe('utility methods', function () {
         determinant = subMatrix.det();
         determinant.should.equal(-9);
     });
+
+    it('determinant synonym', function () {
+        matrix.det().should.equal(matrix.determinant());
+    });
+
     it('transpose rectangular', function () {
         var matrix = new Matrix([[0, 1, 2], [3, 4, 5]]);
         var transpose = matrix.transpose();

@@ -1573,6 +1573,7 @@ function abstractMatrix(superCtor) {
     Matrix.identity = Matrix.eye;
     Matrix.prototype.negate = Matrix.prototype.neg;
     Matrix.prototype.tensorProduct = Matrix.prototype.kroneckerProduct;
+    Matrix.prototype.determinant = Matrix.prototype.det;
 
     /*
      Add dynamically instance and static methods for mathematical operations
