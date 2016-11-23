@@ -102,6 +102,13 @@ describe('utility methods', function () {
         m.det().should.be.a.Number();
     });
 
+    it('determinant wrong size', function () {
+        var m1 = Matrix.ones(3, 5);
+        var m2 = Matrix.ones(5, 3);
+        (() => m1.det()).should.throw(/square/);
+        (() => m2.det()).should.throw(/square/);
+    });
+
     it('transpose rectangular', function () {
         var matrix = new Matrix([[0, 1, 2], [3, 4, 5]]);
         var transpose = matrix.transpose();
