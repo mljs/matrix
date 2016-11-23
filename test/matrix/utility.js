@@ -97,6 +97,11 @@ describe('utility methods', function () {
         matrix.det().should.equal(matrix.determinant());
     });
 
+    it('determinant n>3', function () {
+        var m = Matrix.rand(5, 5);
+        m.det().should.be.a.Number();
+    });
+
     it('transpose rectangular', function () {
         var matrix = new Matrix([[0, 1, 2], [3, 4, 5]]);
         var transpose = matrix.transpose();
