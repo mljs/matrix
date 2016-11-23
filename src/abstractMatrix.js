@@ -1525,9 +1525,9 @@ function abstractMatrix(superCtor) {
                 } else if (this.columns === 3) {
                     // 3 x 3 matrix
                     var subMatrix0, subMatrix1, subMatrix2;
-                    subMatrix0 = this.selection([1, 2], [1, 2]);
-                    subMatrix1 = this.selection([1, 2], [0, 2]);
-                    subMatrix2 = this.selection([1, 2], [0, 1]);
+                    subMatrix0 = this.selectionView([1, 2], [1, 2]);
+                    subMatrix1 = this.selectionView([1, 2], [0, 2]);
+                    subMatrix2 = this.selectionView([1, 2], [0, 1]);
                     a = this.get(0, 0);
                     b = this.get(0, 1);
                     c = this.get(0, 2);
