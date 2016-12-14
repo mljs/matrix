@@ -1,5 +1,7 @@
 'use strict';
 
+var Matrix = require('./abstractMatrix');
+
 /**
  * @private
  * Check that a row index is not out of bounds
@@ -107,4 +109,34 @@ exports.getRange = function getRange(from, to) {
         arr[i] = from + i;
     }
     return arr;
+};
+
+exports.sumByRow = function sumByRow(matrix) {
+    var sum = Matrix.zeros(matrix.rows, 1);
+    for (var i = 0; i < matrix.rows; ++i) {
+        for (var j = 0; j < matrix.columns; ++j) {
+            sum[i][0] += matrix[i][j];
+        }
+    }
+    return sum;
+};
+
+exports.sumByColumn = function sumByColumn(matrix) {
+    var sum = Matrix.zeros(1, matrix.columns);
+    for (var i = 0; i < matrix.rows; ++i) {
+        for (var j = 0; j < matrix.columns; ++j) {
+            sum[0][j] += matrix[i][j];
+        }
+    }
+    return sum;
+};
+
+exports.sumAll = function sumAll() {
+    var v = 0;
+    for (var i = 0; i < this.rows; i++) {
+        for (var j = 0; j < this.columns; j++) {
+            v += this.get(i, j);
+        }
+    }
+    return v;
 };

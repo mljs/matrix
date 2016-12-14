@@ -884,17 +884,20 @@ function abstractMatrix(superCtor) {
         }
 
         /**
-         * Returns the sum of all elements of the matrix
-         * @return {number}
+         * Returns the sum by the argument given, if no argument given,
+         * it returns the sum of all elements of the matrix.
+         * @param {String} by - sum by 'row' or 'column'.
+         * @return {Matrix|number}
          */
-        sum() {
-            var v = 0;
-            for (var i = 0; i < this.rows; i++) {
-                for (var j = 0; j < this.columns; j++) {
-                    v += this.get(i, j);
-                }
+        sum(by) {
+            switch(by) {
+                case 'row':
+                    return util.sumByRow(this);
+                case 'column':
+                    return util.sumByColumn(this);
+                default:
+                    return util.sumAll();
             }
-            return v;
         }
 
         /**
