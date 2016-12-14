@@ -1,6 +1,6 @@
 'use strict';
 
-var Matrix = require('./abstractMatrix');
+var Matrix = require('./matrix');
 
 /**
  * @private
@@ -112,7 +112,7 @@ exports.getRange = function getRange(from, to) {
 };
 
 exports.sumByRow = function sumByRow(matrix) {
-    var sum = Matrix.zeros(matrix.rows, 1);
+    var sum = Matrix.Matrix.zeros(matrix.rows, 1);
     for (var i = 0; i < matrix.rows; ++i) {
         for (var j = 0; j < matrix.columns; ++j) {
             sum[i][0] += matrix[i][j];
@@ -122,7 +122,7 @@ exports.sumByRow = function sumByRow(matrix) {
 };
 
 exports.sumByColumn = function sumByColumn(matrix) {
-    var sum = Matrix.zeros(1, matrix.columns);
+    var sum = Matrix.Matrix.zeros(1, matrix.columns);
     for (var i = 0; i < matrix.rows; ++i) {
         for (var j = 0; j < matrix.columns; ++j) {
             sum[0][j] += matrix[i][j];
@@ -131,11 +131,11 @@ exports.sumByColumn = function sumByColumn(matrix) {
     return sum;
 };
 
-exports.sumAll = function sumAll() {
+exports.sumAll = function sumAll(matrix) {
     var v = 0;
-    for (var i = 0; i < this.rows; i++) {
-        for (var j = 0; j < this.columns; j++) {
-            v += this.get(i, j);
+    for (var i = 0; i < matrix.rows; i++) {
+        for (var j = 0; j < matrix.columns; j++) {
+            v += matrix.get(i, j);
         }
     }
     return v;

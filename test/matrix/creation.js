@@ -1,7 +1,7 @@
 'use strict';
 
 var Matrix = require('../../');
-var  MatrixTransposeView = require('../../src/views/transpose');
+var MatrixTransposeView = require('../../src/views/transpose');
 var util = require('../util');
 var assert = require('assert');
 
