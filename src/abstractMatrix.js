@@ -884,17 +884,20 @@ function abstractMatrix(superCtor) {
         }
 
         /**
-         * Returns the sum of all elements of the matrix
-         * @return {number}
+         * Returns the sum by the argument given, if no argument given,
+         * it returns the sum of all elements of the matrix.
+         * @param {string} by - sum by 'row' or 'column'.
+         * @return {Matrix|number}
          */
-        sum() {
-            var v = 0;
-            for (var i = 0; i < this.rows; i++) {
-                for (var j = 0; j < this.columns; j++) {
-                    v += this.get(i, j);
-                }
+        sum(by) {
+            switch (by) {
+                case 'row':
+                    return util.sumByRow(this);
+                case 'column':
+                    return util.sumByColumn(this);
+                default:
+                    return util.sumAll(this);
             }
-            return v;
         }
 
         /**
@@ -1156,10 +1159,10 @@ function abstractMatrix(superCtor) {
                 var b11 = b.subMatrix(0, halfRows - 1, 0, halfCols - 1);
 
                 var a12 = a.subMatrix(0, halfRows - 1, halfCols, a.columns - 1);
-                var b12 = b.subMatrix(0, halfRows - 1,  halfCols, b.columns - 1);
+                var b12 = b.subMatrix(0, halfRows - 1, halfCols, b.columns - 1);
 
-                var a21 = a.subMatrix(halfRows, a.rows - 1,  0, halfCols - 1);
-                var b21 = b.subMatrix(halfRows, b.rows - 1,  0, halfCols - 1);
+                var a21 = a.subMatrix(halfRows, a.rows - 1, 0, halfCols - 1);
+                var b21 = b.subMatrix(halfRows, b.rows - 1, 0, halfCols - 1);
 
                 var a22 = a.subMatrix(halfRows, a.rows - 1, halfCols, a.columns - 1);
                 var b22 = b.subMatrix(halfRows, b.rows - 1, halfCols, b.columns - 1);
