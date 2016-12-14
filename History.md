@@ -1,3 +1,22 @@
+<a name="2.2.0"></a>
+# [2.2.0](https://github.com/mljs/matrix/compare/v2.1.0...v2.2.0) (2016-12-14)
+
+
+### Bug Fixes
+
+* Matrix and Lu circular dependency ([ab706b9](https://github.com/mljs/matrix/commit/ab706b9))
+* styling issues picked up by Travis CI ([f211a1f](https://github.com/mljs/matrix/commit/f211a1f))
+
+
+### Features
+
+* **det:** add 2x2 and 3x3 determinants ([04ae195](https://github.com/mljs/matrix/commit/04ae195))
+* **det:** add determinant based on LU decomposition ([90532ef](https://github.com/mljs/matrix/commit/90532ef))
+* **det:** add determinant synonym ([5395b56](https://github.com/mljs/matrix/commit/5395b56))
+* **sum:** sum by 'row' or 'column' ([bf5d070](https://github.com/mljs/matrix/commit/bf5d070))
+
+
+
 <a name="2.1.0"></a>
 # [2.1.0](https://github.com/mljs/matrix/compare/v2.0.0...v2.1.0) (2016-10-07)
 
