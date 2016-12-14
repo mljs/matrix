@@ -115,7 +115,7 @@ exports.sumByRow = function sumByRow(matrix) {
     var sum = Matrix.Matrix.zeros(matrix.rows, 1);
     for (var i = 0; i < matrix.rows; ++i) {
         for (var j = 0; j < matrix.columns; ++j) {
-            sum[i][0] += matrix[i][j];
+            sum.set(i, 0, sum.get(i, 0) + matrix.get(i, j));
         }
     }
     return sum;
@@ -125,7 +125,7 @@ exports.sumByColumn = function sumByColumn(matrix) {
     var sum = Matrix.Matrix.zeros(1, matrix.columns);
     for (var i = 0; i < matrix.rows; ++i) {
         for (var j = 0; j < matrix.columns; ++j) {
-            sum[0][j] += matrix[i][j];
+            sum.set(0, j, sum.get(0, j) + matrix.get(i, j));
         }
     }
     return sum;
