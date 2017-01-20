@@ -4,11 +4,8 @@
   "description": "Matrix manipulation and computation library",
   "main": "lib/index.js",
   "module": "src/index.js",
-  "directories": {
-    "lib": "src",
-    "test": "test"
-  },
   "files": [
+    "lib",
     "src"
   ],
   "scripts": {
@@ -17,6 +14,7 @@
     "compile": "babel src --out-dir lib --quiet",
     "eslint": "eslint src test __tests__",
     "eslint-fix": "npm run eslint -- --fix",
+    "prepare": "npm run build",
     "test": "run-s testonly eslint",
     "testonly": "jest"
   },
