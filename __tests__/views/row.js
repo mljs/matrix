@@ -1,12 +1,12 @@
-'use strict';
+import 'should';
 
-var Matrix = require('../..');
+import Matrix from '../../src';
 
 describe('Row view', function () {
     it('should set and get column values', function () {
-        var m = Matrix.ones(5, 8);
-        var mrv1 = m.rowView(0);
-        var mrv2 = m.rowView(3);
+        const m = Matrix.ones(5, 8);
+        const mrv1 = m.rowView(0);
+        const mrv2 = m.rowView(3);
 
         m.set(0, 3, 5);
         m.set(2, 2, 12);

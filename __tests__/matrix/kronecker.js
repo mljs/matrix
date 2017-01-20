@@ -1,6 +1,6 @@
-'use strict';
+import 'should';
 
-const Matrix = require('../..');
+import Matrix from '../../src';
 
 describe('Kronecker product', function () {
     it('should compute the Kronecker product', function () {

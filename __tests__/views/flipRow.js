@@ -1,11 +1,11 @@
-'use strict';
+import 'should';
 
-var Matrix = require('../..');
+import Matrix from '../../src';
 
 describe('Flip row view', function () {
     it('should set and get values', function () {
-        var m = Matrix.ones(5, 8);
-        var view = m.flipRowView();
+        const m = Matrix.ones(5, 8);
+        const view = m.flipRowView();
 
         m.set(0, 3, 5);
         view.get(4, 3).should.equal(5);

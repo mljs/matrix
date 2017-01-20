@@ -1,6 +1,4 @@
-'use strict';
-
-import {Matrix} from './matrix';
+import Matrix from './matrix';
 
 /**
  * @private
@@ -46,7 +44,7 @@ export function checkRowVector(matrix, vector) {
         throw new RangeError('vector size must be the same as the number of columns');
     }
     return vector;
-};
+}
 
 /**
  * @private
