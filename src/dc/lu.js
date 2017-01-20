@@ -1,6 +1,4 @@
-'use strict';
-
-var Matrix = require('../matrix');
+import Matrix from '../matrix';
 
 // https://github.com/lutzroeder/Mapack/blob/master/Source/LuDecomposition.cs
 function LuDecomposition(matrix) {
@@ -8,7 +6,7 @@ function LuDecomposition(matrix) {
         return new LuDecomposition(matrix);
     }
 
-    matrix = Matrix.Matrix.checkMatrix(matrix);
+    matrix = Matrix.checkMatrix(matrix);
 
     var lu = matrix.clone(),
         rows = lu.rows,
@@ -99,7 +97,7 @@ LuDecomposition.prototype = {
         var data = this.LU,
             rows = data.rows,
             columns = data.columns,
-            X = new Matrix.Matrix(rows, columns);
+            X = new Matrix(rows, columns);
         for (var i = 0; i < rows; i++) {
             for (var j = 0; j < columns; j++) {
                 if (i > j) {
@@ -117,7 +115,7 @@ LuDecomposition.prototype = {
         var data = this.LU,
             rows = data.rows,
             columns = data.columns,
-            X = new Matrix.Matrix(rows, columns);
+            X = new Matrix(rows, columns);
         for (var i = 0; i < rows; i++) {
             for (var j = 0; j < columns; j++) {
                 if (i <= j) {
@@ -133,7 +131,7 @@ LuDecomposition.prototype = {
         return this.pivotVector.slice();
     },
     solve: function (value) {
-        value = Matrix.Matrix.checkMatrix(value);
+        value = Matrix.checkMatrix(value);
 
         var lu = this.LU,
             rows = lu.rows;
@@ -171,4 +169,4 @@ LuDecomposition.prototype = {
     }
 };
 
-module.exports = LuDecomposition;
+export default LuDecomposition;

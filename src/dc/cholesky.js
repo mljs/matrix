@@ -1,6 +1,4 @@
-'use strict';
-
-var Matrix = require('../matrix').Matrix;
+import Matrix from '../matrix';
 
 // https://github.com/lutzroeder/Mapack/blob/master/Source/CholeskyDecomposition.cs
 function CholeskyDecomposition(value) {
@@ -87,4 +85,4 @@ CholeskyDecomposition.prototype = {
     }
 };
 
-module.exports = CholeskyDecomposition;
+export default CholeskyDecomposition;

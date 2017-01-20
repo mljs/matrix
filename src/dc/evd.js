@@ -1,9 +1,5 @@
-'use strict';
-
-const Matrix = require('../matrix').Matrix;
-const util = require('./util');
-const hypotenuse = util.hypotenuse;
-const getFilled2DArray = util.getFilled2DArray;
+import Matrix from '../matrix';
+import {hypotenuse, getFilled2DArray} from './util';
 
 const defaultOptions = {
     assumeSymmetric: false
@@ -777,4 +773,4 @@ function cdiv(xr, xi, yr, yi) {
     }
 }
 
-module.exports = EigenvalueDecomposition;
+export default EigenvalueDecomposition;

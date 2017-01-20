@@ -1,12 +1,10 @@
-'use strict';
+import Matrix from './matrix';
 
-var Matrix = require('./matrix').Matrix;
-
-var SingularValueDecomposition = require('./dc/svd');
-var EigenvalueDecomposition = require('./dc/evd');
-var LuDecomposition = require('./dc/lu');
-var QrDecomposition = require('./dc/qr');
-var CholeskyDecomposition = require('./dc/cholesky');
+import SingularValueDecomposition from './dc/svd';
+import EigenvalueDecomposition from './dc/evd';
+import LuDecomposition from './dc/lu';
+import QrDecomposition from './dc/qr';
+import CholeskyDecomposition from './dc/cholesky';
 
 function inverse(matrix) {
     matrix = Matrix.checkMatrix(matrix);
@@ -46,7 +44,7 @@ Matrix.prototype.solve = function (other) {
     return solve(this, other);
 };
 
-module.exports = {
+const Decompositions = {
     SingularValueDecomposition: SingularValueDecomposition,
     SVD: SingularValueDecomposition,
     EigenvalueDecomposition: EigenvalueDecomposition,
@@ -60,3 +58,5 @@ module.exports = {
     inverse: inverse,
     solve: solve
 };
+
+export default Decompositions;

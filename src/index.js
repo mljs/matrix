@@ -1,4 +1,3 @@
-'use strict';
-
-module.exports = require('./matrix').Matrix;
-module.exports.Decompositions = module.exports.DC = require('./decompositions');
+export {default as AbstractMatrix} from './abstractMatrix';
+export {default as default, default as Matrix} from './matrix';
+export {default as Decompositions, default as DC} from './decompositions';

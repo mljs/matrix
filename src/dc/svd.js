@@ -1,9 +1,5 @@
-'use strict';
-
-var Matrix = require('../matrix');
-var util = require('./util');
-var hypotenuse = util.hypotenuse;
-var getFilled2DArray = util.getFilled2DArray;
+import Matrix from '../matrix';
+import {hypotenuse, getFilled2DArray} from './util';
 
 // https://github.com/lutzroeder/Mapack/blob/master/Source/SingularValueDecomposition.cs
 function SingularValueDecomposition(value, options) {
@@ -511,4 +507,4 @@ SingularValueDecomposition.prototype = {
     }
 };
 
-module.exports = SingularValueDecomposition;
+export default SingularValueDecomposition;

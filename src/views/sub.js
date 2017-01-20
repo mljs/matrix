@@ -1,11 +1,9 @@
-'use strict';
+import BaseView from './base';
+import {checkRange} from '../util';
 
-var BaseView = require('./base');
-var util = require('../util');
-
-class MatrixSubView extends BaseView {
+export default class MatrixSubView extends BaseView {
     constructor(matrix, startRow, endRow, startColumn, endColumn) {
-        util.checkRange(matrix, startRow, endRow, startColumn, endColumn);
+        checkRange(matrix, startRow, endRow, startColumn, endColumn);
         super(matrix, endRow - startRow + 1, endColumn - startColumn + 1);
         this.startRow = startRow;
         this.startColumn = startColumn;
@@ -20,5 +18,3 @@ class MatrixSubView extends BaseView {
         return this.matrix.get(this.startRow + rowIndex, this.startColumn + columnIndex);
     }
 }
-
-module.exports = MatrixSubView;
