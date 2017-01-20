@@ -1,10 +1,13 @@
-'use strict';
+import './symbol-species';
+import AbstractMatrix from './abstractMatrix';
+import {
+    checkColumnIndex,
+    checkColumnVector,
+    checkRowIndex,
+    checkRowVector
+} from './util';
 
-require('./symbol-species');
-var abstractMatrix = require('./abstractMatrix');
-var util = require('./util');
-
-class Matrix extends abstractMatrix(Array) {
+export default class Matrix extends AbstractMatrix(Array) {
     constructor(nRows, nColumns) {
         var i;
         if (arguments.length === 1 && typeof nRows === 'number') {
@@ -72,7 +75,7 @@ class Matrix extends abstractMatrix(Array) {
      * @return {Matrix} this
      */
     removeRow(index) {
-        util.checkRowIndex(this, index);
+        checkRowIndex(this, index);
         if (this.rows === 1) {
             throw new RangeError('A matrix cannot have less than one row');
         }
@@ -92,8 +95,8 @@ class Matrix extends abstractMatrix(Array) {
             array = index;
             index = this.rows;
         }
-        util.checkRowIndex(this, index, true);
-        array = util.checkRowVector(this, array, true);
+        checkRowIndex(this, index, true);
+        array = checkRowVector(this, array, true);
         this.splice(index, 0, array);
         this.rows += 1;
         return this;
@@ -105,7 +108,7 @@ class Matrix extends abstractMatrix(Array) {
      * @return {Matrix} this
      */
     removeColumn(index) {
-        util.checkColumnIndex(this, index);
+        checkColumnIndex(this, index);
         if (this.columns === 1) {
             throw new RangeError('A matrix cannot have less than one column');
         }
@@ -127,8 +130,8 @@ class Matrix extends abstractMatrix(Array) {
             array = index;
             index = this.columns;
         }
-        util.checkColumnIndex(this, index, true);
-        array = util.checkColumnVector(this, array);
+        checkColumnIndex(this, index, true);
+        array = checkColumnVector(this, array);
         for (var i = 0; i < this.rows; i++) {
             this[i].splice(index, 0, array[i]);
         }
@@ -136,6 +139,3 @@ class Matrix extends abstractMatrix(Array) {
         return this;
     }
 }
-
-exports.Matrix = Matrix;
-Matrix.abstractMatrix = abstractMatrix;

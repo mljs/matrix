@@ -1,11 +1,9 @@
-'use strict';
+import BaseView from './base';
+import {checkIndices} from '../util';
 
-var BaseView = require('./base');
-var util = require('../util');
-
-class MatrixSelectionView extends BaseView {
+export default class MatrixSelectionView extends BaseView {
     constructor(matrix, rowIndices, columnIndices) {
-        var indices = util.checkIndices(matrix, rowIndices, columnIndices);
+        var indices = checkIndices(matrix, rowIndices, columnIndices);
         super(matrix, indices.row.length, indices.column.length);
         this.rowIndices = indices.row;
         this.columnIndices = indices.column;
@@ -20,5 +18,3 @@ class MatrixSelectionView extends BaseView {
         return this.matrix.get(this.rowIndices[rowIndex], this.columnIndices[columnIndex]);
     }
 }
-
-module.exports = MatrixSelectionView;

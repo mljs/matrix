@@ -1,9 +1,7 @@
-'use strict';
+import AbstractMatrix from '../abstractMatrix';
+import Matrix from '../matrix';
 
-var abstractMatrix = require('../abstractMatrix');
-var Matrix = require('../matrix');
-
-class BaseView extends abstractMatrix() {
+export default class BaseView extends AbstractMatrix() {
     constructor(matrix, rows, columns) {
         super();
         this.matrix = matrix;
@@ -12,8 +10,6 @@ class BaseView extends abstractMatrix() {
     }
 
     static get [Symbol.species]() {
-        return Matrix.Matrix;
+        return Matrix;
     }
 }
-
-module.exports = BaseView;

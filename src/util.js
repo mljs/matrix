@@ -1,6 +1,6 @@
 'use strict';
 
-var Matrix = require('./matrix');
+import {Matrix} from './matrix';
 
 /**
  * @private
@@ -9,12 +9,12 @@ var Matrix = require('./matrix');
  * @param {number} index
  * @param {boolean} [outer]
  */
-exports.checkRowIndex = function checkRowIndex(matrix, index, outer) {
+export function checkRowIndex(matrix, index, outer) {
     var max = outer ? matrix.rows : matrix.rows - 1;
     if (index < 0 || index > max) {
         throw new RangeError('Row index out of range');
     }
-};
+}
 
 /**
  * @private
@@ -23,12 +23,12 @@ exports.checkRowIndex = function checkRowIndex(matrix, index, outer) {
  * @param {number} index
  * @param {boolean} [outer]
  */
-exports.checkColumnIndex = function checkColumnIndex(matrix, index, outer) {
+export function checkColumnIndex(matrix, index, outer) {
     var max = outer ? matrix.columns : matrix.columns - 1;
     if (index < 0 || index > max) {
         throw new RangeError('Column index out of range');
     }
-};
+}
 
 /**
  * @private
@@ -38,7 +38,7 @@ exports.checkColumnIndex = function checkColumnIndex(matrix, index, outer) {
  * @return {Array}
  * @throws {RangeError}
  */
-exports.checkRowVector = function checkRowVector(matrix, vector) {
+export function checkRowVector(matrix, vector) {
     if (vector.to1DArray) {
         vector = vector.to1DArray();
     }
@@ -56,7 +56,7 @@ exports.checkRowVector = function checkRowVector(matrix, vector) {
  * @return {Array}
  * @throws {RangeError}
  */
-exports.checkColumnVector = function checkColumnVector(matrix, vector) {
+export function checkColumnVector(matrix, vector) {
     if (vector.to1DArray) {
         vector = vector.to1DArray();
     }
@@ -64,9 +64,9 @@ exports.checkColumnVector = function checkColumnVector(matrix, vector) {
         throw new RangeError('vector size must be the same as the number of rows');
     }
     return vector;
-};
+}
 
-exports.checkIndices = function checkIndices(matrix, rowIndices, columnIndices) {
+export function checkIndices(matrix, rowIndices, columnIndices) {
     var rowOut = rowIndices.some(r => {
         return r < 0 || r >= matrix.rows;
 
@@ -90,9 +90,9 @@ exports.checkIndices = function checkIndices(matrix, rowIndices, columnIndices) 
         row: rowIndices,
         column: columnIndices
     };
-};
+}
 
-exports.checkRange = function checkRange(matrix, startRow, endRow, startColumn, endColumn) {
+export function checkRange(matrix, startRow, endRow, startColumn, endColumn) {
     if (arguments.length !== 5) throw new TypeError('Invalid argument type');
     var notAllNumbers = Array.from(arguments).slice(1).some(function (arg) {
         return typeof arg !== 'number';
@@ -101,37 +101,37 @@ exports.checkRange = function checkRange(matrix, startRow, endRow, startColumn, 
     if (startRow > endRow || startColumn > endColumn || startRow < 0 || startRow >= matrix.rows || endRow < 0 || endRow >= matrix.rows || startColumn < 0 || startColumn >= matrix.columns || endColumn < 0 || endColumn >= matrix.columns) {
         throw new RangeError('Submatrix indices are out of range');
     }
-};
+}
 
-exports.getRange = function getRange(from, to) {
+export function getRange(from, to) {
     var arr = new Array(to - from + 1);
     for (var i = 0; i < arr.length; i++) {
         arr[i] = from + i;
     }
     return arr;
-};
+}
 
-exports.sumByRow = function sumByRow(matrix) {
-    var sum = Matrix.Matrix.zeros(matrix.rows, 1);
+export function sumByRow(matrix) {
+    var sum = Matrix.zeros(matrix.rows, 1);
     for (var i = 0; i < matrix.rows; ++i) {
         for (var j = 0; j < matrix.columns; ++j) {
             sum.set(i, 0, sum.get(i, 0) + matrix.get(i, j));
         }
     }
     return sum;
-};
+}
 
-exports.sumByColumn = function sumByColumn(matrix) {
-    var sum = Matrix.Matrix.zeros(1, matrix.columns);
+export function sumByColumn(matrix) {
+    var sum = Matrix.zeros(1, matrix.columns);
     for (var i = 0; i < matrix.rows; ++i) {
         for (var j = 0; j < matrix.columns; ++j) {
             sum.set(0, j, sum.get(0, j) + matrix.get(i, j));
         }
     }
     return sum;
-};
+}
 
-exports.sumAll = function sumAll(matrix) {
+export function sumAll(matrix) {
     var v = 0;
     for (var i = 0; i < matrix.rows; i++) {
         for (var j = 0; j < matrix.columns; j++) {
@@ -139,4 +139,4 @@ exports.sumAll = function sumAll(matrix) {
         }
     }
     return v;
-};
+}

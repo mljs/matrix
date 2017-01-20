@@ -1,8 +1,6 @@
-'use strict';
+import BaseView from './base';
 
-var BaseView = require('./base');
-
-class MatrixColumnView extends BaseView {
+export default class MatrixColumnView extends BaseView {
     constructor(matrix, column) {
         super(matrix, matrix.rows, 1);
         this.column = column;
@@ -17,5 +15,3 @@ class MatrixColumnView extends BaseView {
         return this.matrix.get(rowIndex, this.column);
     }
 }
-
-module.exports = MatrixColumnView;

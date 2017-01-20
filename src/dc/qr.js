@@ -1,7 +1,5 @@
-'use strict';
-
-var Matrix = require('../matrix').Matrix;
-var hypotenuse = require('./util').hypotenuse;
+import Matrix from '../matrix';
+import {hypotenuse} from './util';
 
 //https://github.com/lutzroeder/Mapack/blob/master/Source/QrDecomposition.cs
 function QrDecomposition(value) {
@@ -149,4 +147,4 @@ QrDecomposition.prototype = {
     }
 };
 
-module.exports = QrDecomposition;
+export default QrDecomposition;
