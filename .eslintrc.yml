@@ -1,1 +1,3 @@
 extends: 'eslint-config-cheminfo'
+parserOptions:
+  sourceType: module

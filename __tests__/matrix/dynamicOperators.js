@@ -1,6 +1,6 @@
-'use strict';
+import 'should';
 
-var Matrix = require('../..');
+import Matrix from '../../src';
 
 describe('Dynamic operators on matrices', function () {
 

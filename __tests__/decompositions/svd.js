@@ -1,7 +1,9 @@
-'use strict';
+import 'should';
+import 'should-approximately-deep';
 
-var Matrix = require('../..');
-var SVD = Matrix.DC.SVD;
+import {Matrix, Decompositions} from '../../src';
+
+const SVD = Decompositions.SVD;
 
 describe('Singular value decomposition', function () {
     describe('inverse', function () {

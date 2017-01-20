@@ -1,7 +1,8 @@
-'use strict';
+import 'should';
 
-var Matrix = require('../..');
-var EVD = Matrix.DC.EVD;
+import {Matrix, Decompositions} from '../../src';
+
+const EVD = Decompositions.EVD;
 
 describe('Eigenvalue decomposition', function () {
     it('simple example', function () {

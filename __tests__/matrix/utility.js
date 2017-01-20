@@ -1,7 +1,7 @@
-'use strict';
+import 'should';
 
-var Matrix = require('../../');
-var util = require('../util');
+import Matrix from '../../src';
+import * as util from '../../test/util';
 
 describe('utility methods', function () {
     var matrix;

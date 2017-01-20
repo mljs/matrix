@@ -1,9 +1,9 @@
-'use strict';
+import 'should';
 
-var Matrix = require('../..');
+import Matrix from '../../src';
 
 describe('sum by row and columns', function () {
-    var matrix = new Matrix([[1, 2, 3], [4, 5, 6]]);
+    const matrix = new Matrix([[1, 2, 3], [4, 5, 6]]);
     it('sum by row', function () {
         matrix.sum('row').to2DArray().should.eql([[6], [15]]);
     });

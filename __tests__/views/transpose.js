@@ -1,11 +1,11 @@
-'use strict';
+import 'should';
 
-var Matrix = require('../..');
+import Matrix from '../../src';
 
 describe('Transpose view', function () {
     it('should set and get opposite coordinates', function () {
-        var m = Matrix.ones(5, 8);
-        var mtv = m.transposeView();
+        const m = Matrix.ones(5, 8);
+        const mtv = m.transposeView();
 
         m.get(1, 0).should.equal(1);
         mtv.set(0, 1, 5);

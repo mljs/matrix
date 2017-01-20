@@ -1,9 +1,8 @@
-'use strict';
+import 'should';
 
-var Matrix = require('../../');
-var MatrixTransposeView = require('../../src/views/transpose');
-var util = require('../util');
-var assert = require('assert');
+import Matrix from '../../src';
+import MatrixTransposeView from '../../src/views/transpose';
+import * as util from '../../test/util';
 
 describe('Matrix creation', function () {
     it('should create a new object', function () {
@@ -32,7 +31,7 @@ describe('Matrix creation', function () {
         var matrix = new Matrix(3, 9);
         matrix.rows.should.equal(3);
         matrix.columns.should.equal(9);
-        assert.strictEqual(matrix[0][0], undefined);
+        expect(matrix[0][0]).toEqual(undefined);
     });
 
     it('should throw with wrong arguments', function () {
