@@ -1,14 +1,19 @@
 import 'should';
 
-import {DC, Decompositions} from '../../src';
+import {
+    LuDecomposition, LU,
+    QrDecomposition, QR,
+    SingularValueDecomposition, SVD,
+    EigenvalueDecomposition, EVD,
+    CholeskyDecomposition, CHO
+} from '../../src';
 
-describe('Package exports', function () {
+describe('Decompositions exports', function () {
     it('should export full and short names', function () {
-        Decompositions.should.equal(DC);
-        DC.LuDecomposition.should.equal(DC.LU);
-        DC.QrDecomposition.should.equal(DC.QR);
-        DC.SingularValueDecomposition.should.equal(DC.SVD);
-        DC.EigenvalueDecomposition.should.equal(DC.EVD);
-        DC.CholeskyDecomposition.should.equal(DC.CHO);
+        LuDecomposition.should.equal(LU);
+        QrDecomposition.should.equal(QR);
+        SingularValueDecomposition.should.equal(SVD);
+        EigenvalueDecomposition.should.equal(EVD);
+        CholeskyDecomposition.should.equal(CHO);
     });
 });

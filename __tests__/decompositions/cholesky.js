@@ -1,8 +1,6 @@
 import 'should';
 
-import {Matrix, Decompositions} from '../../src';
-
-const CHO = Decompositions.CHO;
+import {Matrix, CHO} from '../../src';
 
 describe('Cholesky decomposition', function () {
     it('should compute lower triangular matrix', function () {

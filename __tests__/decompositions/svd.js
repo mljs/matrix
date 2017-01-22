@@ -1,9 +1,7 @@
 import 'should';
 import 'should-approximately-deep';
 
-import {Matrix, Decompositions} from '../../src';
-
-const SVD = Decompositions.SVD;
+import {Matrix, SVD} from '../../src';
 
 describe('Singular value decomposition', function () {
     describe('inverse', function () {
