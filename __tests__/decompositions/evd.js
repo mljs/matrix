@@ -1,8 +1,6 @@
 import 'should';
 
-import {Matrix, Decompositions} from '../../src';
-
-const EVD = Decompositions.EVD;
+import {Matrix, EVD} from '../../src';
 
 describe('Eigenvalue decomposition', function () {
     it('simple example', function () {
