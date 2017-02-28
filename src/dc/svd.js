@@ -1,6 +1,6 @@
 'use strict';
 
-var Matrix = require('../matrix').Matrix;
+var Matrix = require('../matrix');
 var util = require('./util');
 var hypotenuse = util.hypotenuse;
 var getFilled2DArray = util.getFilled2DArray;
@@ -10,7 +10,7 @@ function SingularValueDecomposition(value, options) {
     if (!(this instanceof SingularValueDecomposition)) {
         return new SingularValueDecomposition(value, options);
     }
-    value = Matrix.checkMatrix(value);
+    value = Matrix.Matrix.checkMatrix(value);
 
     options = options || {};
 
@@ -418,26 +418,26 @@ SingularValueDecomposition.prototype = {
         return (Math.pow(2, -52) / 2) * Math.max(this.m, this.n) * this.s[0];
     },
     get leftSingularVectors() {
-        if (!Matrix.isMatrix(this.U)) {
-            this.U = new Matrix(this.U);
+        if (!Matrix.Matrix.isMatrix(this.U)) {
+            this.U = new Matrix.Matrix(this.U);
         }
         return this.U;
     },
     get rightSingularVectors() {
-        if (!Matrix.isMatrix(this.V)) {
-            this.V = new Matrix(this.V);
+        if (!Matrix.Matrix.isMatrix(this.V)) {
+            this.V = new Matrix.Matrix(this.V);
         }
         return this.V;
     },
     get diagonalMatrix() {
-        return Matrix.diag(this.s);
+        return Matrix.Matrix.diag(this.s);
     },
     solve: function (value) {
 
         var Y = value,
             e = this.threshold,
             scols = this.s.length,
-            Ls = Matrix.zeros(scols, scols),
+            Ls = Matrix.Matrix.zeros(scols, scols),
             i;
 
         for (i = 0; i < scols; i++) {
@@ -454,7 +454,7 @@ SingularValueDecomposition.prototype = {
         var VL = V.mmul(Ls),
             vrows = V.rows,
             urows = U.length,
-            VLU = Matrix.zeros(vrows, urows),
+            VLU = Matrix.Matrix.zeros(vrows, urows),
             j, k, sum;
 
         for (i = 0; i < vrows; i++) {
@@ -470,14 +470,14 @@ SingularValueDecomposition.prototype = {
         return VLU.mmul(Y);
     },
     solveForDiagonal: function (value) {
-        return this.solve(Matrix.diag(value));
+        return this.solve(Matrix.Matrix.diag(value));
     },
     inverse: function () {
         var V = this.V;
         var e = this.threshold,
             vrows = V.length,
             vcols = V[0].length,
-            X = new Matrix(vrows, this.s.length),
+            X = new Matrix.Matrix(vrows, this.s.length),
             i, j;
 
         for (i = 0; i < vrows; i++) {
@@ -494,7 +494,7 @@ SingularValueDecomposition.prototype = {
 
         var urows = U.length,
             ucols = U[0].length,
-            Y = new Matrix(vrows, urows),
+            Y = new Matrix.Matrix(vrows, urows),
             k, sum;
 
         for (i = 0; i < vrows; i++) {

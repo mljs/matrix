@@ -176,4 +176,51 @@ describe('utility methods', function () {
         matrix2 = new Matrix([[2, 1, 3], [7, 1, 1], [6, 2, 7]]);
         matrix.strassen3x3(matrix2).to2DArray().should.eql([[38, 8, 17], [33, 12, 36], [35, 12, 37]]);
     });
+
+    it('pseudoinverse', function () {
+        // Actual values calculated by the Numpy library
+
+        var matrix = new Matrix([[2, 4], [7, 1]]);
+        var result = matrix.pseudoInverse().to2DArray();
+
+        result[0][0].should.approximately(-0.03846153846153843, 1e-5);
+        result[0][1].should.approximately(0.15384615384615374, 1e-5);
+        result[1][0].should.approximately(0.2692307692307691, 1e-5);
+        result[1][1].should.approximately(-0.076923076923077, 1e-5);
+
+        matrix = new Matrix([[4, 7], [2, 6]]);
+        result = matrix.pseudoInverse().to2DArray();
+        result[0][0].should.approximately(0.6, 1e-5);
+        result[0][1].should.approximately(-0.7, 1e-5);
+        result[1][0].should.approximately(-0.2, 1e-5);
+        result[1][1].should.approximately(0.4, 1e-5);
+
+        // Example from http://reference.wolfram.com/language/ref/PseudoInverse.html
+        matrix = new Matrix([[1, 2, 3], [4, 5, 6], [7, 8, 9]]);
+        result = matrix.pseudoInverse().to2DArray();
+
+        result[0][0].should.approximately(-6.38888889e-01, 1e-5);
+        result[0][1].should.approximately(-1.66666667e-01, 1e-5);
+        result[0][2].should.approximately(3.05555556e-01, 1e-5);
+
+        result[1][0].should.approximately(-5.55555556e-02, 1e-5);
+        result[1][1].should.approximately(1.34337961e-16, 1e-5);
+        result[1][2].should.approximately(5.55555556e-02, 1e-5);
+
+        result[2][0].should.approximately(5.27777778e-01, 1e-5);
+        result[2][1].should.approximately(1.66666667e-01, 1e-5);
+        result[2][2].should.approximately(-1.94444444e-01, 1e-5);
+
+        // non-square matrix.
+        matrix = new Matrix([[1, 0, 1], [2, 4, 5]]);
+        result = matrix.pseudoInverse().to2DArray();
+
+        result[0][0].should.approximately(0.75609756, 1e-5);
+        result[0][1].should.approximately(-0.07317073, 1e-5);
+        result[1][0].should.approximately(-0.68292683, 1e-5);
+        result[1][1].should.approximately(0.19512195, 1e-5);
+        result[2][0].should.approximately(0.24390244, 1e-5);
+        result[2][1].should.approximately(0.07317073, 1e-5);
+
+    });
 });
