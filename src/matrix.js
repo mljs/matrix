@@ -143,7 +143,7 @@ class Matrix extends abstractMatrix(Array) {
      * @return {Matrix} the (pseudo)inverted matrix.
      */
     pseudoInverse(threshold) {
-        if (threshold === undefined) threshold = 1e-15;
+        if (threshold === undefined) threshold = Number.EPSILON;
         var svdSolution = new SvDecomposition(this, {autoTranspose: true});
 
         var U = svdSolution.leftSingularVectors;
