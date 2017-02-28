@@ -1,3 +1,13 @@
+<a name="2.3.0"></a>
+# [2.3.0](https://github.com/mljs/matrix/compare/v2.2.0...v2.3.0) (2017-02-28)
+
+
+### Features
+
+* add pseudoinverse function based on SVD ([3279a15](https://github.com/mljs/matrix/commit/3279a15))
+
+
+
 <a name="2.2.0"></a>
 # [2.2.0](https://github.com/mljs/matrix/compare/v2.1.0...v2.2.0) (2016-12-14)
 
