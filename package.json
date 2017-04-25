@@ -2,19 +2,17 @@
   "name": "ml-matrix",
   "version": "2.3.0",
   "description": "Matrix manipulation and computation library",
-  "main": "lib/index.js",
+  "main": "matrix.js",
   "module": "src/index.js",
   "files": [
-    "lib",
+    "matrix.js",
     "src"
   ],
   "scripts": {
-    "build": "run-s clean-lib compile",
-    "clean-lib": "rm -rf lib",
-    "compile": "babel src --out-dir lib --quiet",
+    "compile": "rollup -c",
     "eslint": "eslint src test __tests__",
     "eslint-fix": "npm run eslint -- --fix",
-    "prepare": "npm run build",
+    "prepare": "npm run compile",
     "test": "run-s testonly eslint",
     "testonly": "jest"
   },
@@ -49,8 +47,7 @@
   },
   "homepage": "https://github.com/mljs/matrix",
   "devDependencies": {
-    "babel-cli": "^6.22.2",
-    "babel-plugin-transform-es2015-modules-commonjs": "^6.22.0",
+    "babel-plugin-transform-es2015-modules-commonjs": "^6.24.1",
     "benchmark": "^2.1.0",
     "csv-parse": "^1.0.0",
     "eslint": "^3.8.0",
@@ -61,6 +58,7 @@
     "npm-run-all": "^4.0.1",
     "numeric": "^1.2.6",
     "pretty-hrtime": "^1.0.0",
+    "rollup": "^0.41.6",
     "should": "^11.1.1",
     "should-approximately-deep": "^1.1.0"
   },
