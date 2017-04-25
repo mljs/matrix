@@ -1572,19 +1572,6 @@ export default function AbstractMatrix(superCtor) {
 
     Matrix.prototype.klass = 'Matrix';
 
-    /**
-     * @private
-     * Check that two matrices have the same dimensions
-     * @param {Matrix} matrix
-     * @param {Matrix} otherMatrix
-     */
-    function checkDimensions(matrix, otherMatrix) { // eslint-disable-line no-unused-vars
-        if (matrix.rows !== otherMatrix.rows ||
-            matrix.columns !== otherMatrix.columns) {
-            throw new RangeError('Matrices dimensions must be equal');
-        }
-    }
-
     function compareNumbers(a, b) {
         return a - b;
     }
@@ -1626,7 +1613,10 @@ export default function AbstractMatrix(superCtor) {
     var inplaceOperatorMatrix = `
 (function %name%M(matrix) {
     matrix = this.constructor.checkMatrix(matrix);
-    checkDimensions(this, matrix);
+    if (this.rows !== matrix.rows ||
+        this.columns !== matrix.columns) {
+        throw new RangeError('Matrices dimensions must be equal');
+    }
     for (var i = 0; i < this.rows; i++) {
         for (var j = 0; j < this.columns; j++) {
             this.set(i, j, this.get(i, j) %op% matrix.get(i, j));
@@ -1693,7 +1683,10 @@ export default function AbstractMatrix(superCtor) {
     var inplaceMethodWithOneArgMatrix = `
 (function %name%M(matrix) {
     matrix = this.constructor.checkMatrix(matrix);
-    checkDimensions(this, matrix);
+    if (this.rows !== matrix.rows ||
+        this.columns !== matrix.columns) {
+        throw new RangeError('Matrices dimensions must be equal');
+    }
     for (var i = 0; i < this.rows; i++) {
         for (var j = 0; j < this.columns; j++) {
             this.set(i, j, %method%(this.get(i, j), matrix.get(i, j)));
@@ -1729,12 +1722,12 @@ export default function AbstractMatrix(superCtor) {
     ];
 
     var i;
-
+    var eval2 = eval;
     for (var operator of operators) {
-        var inplaceOp = eval(fillTemplateFunction(inplaceOperator, {name: operator[1], op: operator[0]}));
-        var inplaceOpS = eval(fillTemplateFunction(inplaceOperatorScalar, {name: operator[1] + 'S', op: operator[0]}));
-        var inplaceOpM = eval(fillTemplateFunction(inplaceOperatorMatrix, {name: operator[1] + 'M', op: operator[0]}));
-        var staticOp = eval(fillTemplateFunction(staticOperator, {name: operator[1]}));
+        var inplaceOp = eval2(fillTemplateFunction(inplaceOperator, {name: operator[1], op: operator[0]}));
+        var inplaceOpS = eval2(fillTemplateFunction(inplaceOperatorScalar, {name: operator[1] + 'S', op: operator[0]}));
+        var inplaceOpM = eval2(fillTemplateFunction(inplaceOperatorMatrix, {name: operator[1] + 'M', op: operator[0]}));
+        var staticOp = eval2(fillTemplateFunction(staticOperator, {name: operator[1]}));
         for (i = 1; i < operator.length; i++) {
             Matrix.prototype[operator[i]] = inplaceOp;
             Matrix.prototype[operator[i] + 'S'] = inplaceOpS;
@@ -1756,8 +1749,8 @@ export default function AbstractMatrix(superCtor) {
     });
 
     for (var method of methods) {
-        var inplaceMeth = eval(fillTemplateFunction(inplaceMethod, {name: method[1], method: method[0]}));
-        var staticMeth = eval(fillTemplateFunction(staticMethod, {name: method[1]}));
+        var inplaceMeth = eval2(fillTemplateFunction(inplaceMethod, {name: method[1], method: method[0]}));
+        var staticMeth = eval2(fillTemplateFunction(staticMethod, {name: method[1]}));
         for (i = 1; i < method.length; i++) {
             Matrix.prototype[method[i]] = inplaceMeth;
             Matrix[method[i]] = staticMeth;
@@ -1774,12 +1767,12 @@ export default function AbstractMatrix(superCtor) {
             args += `, arg${i}`;
         }
         if (methodWithArg[1] !== 1) {
-            var inplaceMethWithArgs = eval(fillTemplateFunction(inplaceMethodWithArgs, {
+            var inplaceMethWithArgs = eval2(fillTemplateFunction(inplaceMethodWithArgs, {
                 name: methodWithArg[2],
                 method: methodWithArg[0],
                 args: args
             }));
-            var staticMethWithArgs = eval(fillTemplateFunction(staticMethodWithArgs, {name: methodWithArg[2], args: args}));
+            var staticMethWithArgs = eval2(fillTemplateFunction(staticMethodWithArgs, {name: methodWithArg[2], args: args}));
             for (i = 2; i < methodWithArg.length; i++) {
                 Matrix.prototype[methodWithArg[i]] = inplaceMethWithArgs;
                 Matrix[methodWithArg[i]] = staticMethWithArgs;
@@ -1790,10 +1783,10 @@ export default function AbstractMatrix(superCtor) {
                 args: args,
                 method: methodWithArg[0]
             };
-            var inplaceMethod2 = eval(fillTemplateFunction(inplaceMethodWithOneArg, tmplVar));
-            var inplaceMethodS = eval(fillTemplateFunction(inplaceMethodWithOneArgScalar, tmplVar));
-            var inplaceMethodM = eval(fillTemplateFunction(inplaceMethodWithOneArgMatrix, tmplVar));
-            var staticMethod2 = eval(fillTemplateFunction(staticMethodWithOneArg, tmplVar));
+            var inplaceMethod2 = eval2(fillTemplateFunction(inplaceMethodWithOneArg, tmplVar));
+            var inplaceMethodS = eval2(fillTemplateFunction(inplaceMethodWithOneArgScalar, tmplVar));
+            var inplaceMethodM = eval2(fillTemplateFunction(inplaceMethodWithOneArgMatrix, tmplVar));
+            var staticMethod2 = eval2(fillTemplateFunction(staticMethodWithOneArg, tmplVar));
             for (i = 2; i < methodWithArg.length; i++) {
                 Matrix.prototype[methodWithArg[i]] = inplaceMethod2;
                 Matrix.prototype[methodWithArg[i] + 'M'] = inplaceMethodM;
