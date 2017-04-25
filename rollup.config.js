@@ -1,6 +1,6 @@
 export default {
-    entry: 'src/index-cjs.js',
+    entry: 'src/index.js',
     format: 'cjs',
-    exports: 'default',
+    exports: 'named',
     dest: 'matrix.js'
 }
