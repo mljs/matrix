@@ -4,14 +4,29 @@
   [![build status][travis-image]][travis-url]
   [![npm download][download-image]][download-url]
 
-Matrix manipulation and computation library
+Matrix manipulation and computation library.
 
 ## Installation
 
-`$ npm install ml-matrix`
+`$ npm install --save ml-matrix`
 
-:warning: This library uses ES2015 classes and extends Array. It is not compatible with versions of Node.js/io.js <2.0.0  
-Supported browsers are: Google Chrome, Safari and Microsoft Edge.
+## Usage
+
+### As an ES module
+
+```js
+import Matrix from 'ml-matrix';
+
+const matrix = Matrix.ones(5, 5);
+```
+
+### As a CommonJS module
+
+```js
+const {Matrix} = require('ml-matrix');
+
+const matrix = Matrix.ones(5, 5);
+```
 
 ## [API Documentation](https://mljs.github.io/matrix/)
 

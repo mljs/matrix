@@ -2,6 +2,10 @@
 # [3.0.0](https://github.com/mljs/matrix/compare/v2.3.0...v3.0.0) (2017-04-25)
 
 
+### BREAKING CHANGES
+
+* The library has been migrated to ES module syntax. The different parts are now available as named exports.
+* The `solve` and `inverse` methods have been removed from the `Matrix` prototype and are now only available as individual exports.
 
 <a name="2.3.0"></a>
 # [2.3.0](https://github.com/mljs/matrix/compare/v2.2.0...v2.3.0) (2017-02-28)
