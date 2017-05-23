@@ -1,7 +1,9 @@
 import LuDecomposition from './dc/lu';
 import SvDecomposition from './dc/svd';
 import {scale} from 'ml-array-utils';
-import * as util from './util';
+import {checkRowVector, checkRowIndex, checkColumnIndex, checkColumnVector,
+        checkRange, checkIndices,
+        sumByRow, sumByColumn, sumAll} from './util';
 import MatrixTransposeView from './views/transpose';
 import MatrixRowView from './views/row';
 import MatrixSubView from './views/sub';
@@ -409,7 +411,7 @@ export default function AbstractMatrix(superCtor) {
          * @return {Array}
          */
         getRow(index) {
-            util.checkRowIndex(this, index);
+            checkRowIndex(this, index);
             var row = new Array(this.columns);
             for (var i = 0; i < this.columns; i++) {
                 row[i] = this.get(index, i);
@@ -433,8 +435,8 @@ export default function AbstractMatrix(superCtor) {
          * @return {Matrix} this
          */
         setRow(index, array) {
-            util.checkRowIndex(this, index);
-            array = util.checkRowVector(this, array);
+            checkRowIndex(this, index);
+            array = checkRowVector(this, array);
             for (var i = 0; i < this.columns; i++) {
                 this.set(index, i, array[i]);
             }
@@ -448,8 +450,8 @@ export default function AbstractMatrix(superCtor) {
          * @return {Matrix} this
          */
         swapRows(row1, row2) {
-            util.checkRowIndex(this, row1);
-            util.checkRowIndex(this, row2);
+            checkRowIndex(this, row1);
+            checkRowIndex(this, row2);
             for (var i = 0; i < this.columns; i++) {
                 var temp = this.get(row1, i);
                 this.set(row1, i, this.get(row2, i));
@@ -464,7 +466,7 @@ export default function AbstractMatrix(superCtor) {
          * @return {Array}
          */
         getColumn(index) {
-            util.checkColumnIndex(this, index);
+            checkColumnIndex(this, index);
             var column = new Array(this.rows);
             for (var i = 0; i < this.rows; i++) {
                 column[i] = this.get(i, index);
@@ -488,8 +490,8 @@ export default function AbstractMatrix(superCtor) {
          * @return {Matrix} this
          */
         setColumn(index, array) {
-            util.checkColumnIndex(this, index);
-            array = util.checkColumnVector(this, array);
+            checkColumnIndex(this, index);
+            array = checkColumnVector(this, array);
             for (var i = 0; i < this.rows; i++) {
                 this.set(i, index, array[i]);
             }
@@ -503,8 +505,8 @@ export default function AbstractMatrix(superCtor) {
          * @return {Matrix} this
          */
         swapColumns(column1, column2) {
-            util.checkColumnIndex(this, column1);
-            util.checkColumnIndex(this, column2);
+            checkColumnIndex(this, column1);
+            checkColumnIndex(this, column2);
             for (var i = 0; i < this.rows; i++) {
                 var temp = this.get(i, column1);
                 this.set(i, column1, this.get(i, column2));
@@ -519,7 +521,7 @@ export default function AbstractMatrix(superCtor) {
          * @return {Matrix} this
          */
         addRowVector(vector) {
-            vector = util.checkRowVector(this, vector);
+            vector = checkRowVector(this, vector);
             for (var i = 0; i < this.rows; i++) {
                 for (var j = 0; j < this.columns; j++) {
                     this.set(i, j, this.get(i, j) + vector[j]);
@@ -534,7 +536,7 @@ export default function AbstractMatrix(superCtor) {
          * @return {Matrix} this
          */
         subRowVector(vector) {
-            vector = util.checkRowVector(this, vector);
+            vector = checkRowVector(this, vector);
             for (var i = 0; i < this.rows; i++) {
                 for (var j = 0; j < this.columns; j++) {
                     this.set(i, j, this.get(i, j) - vector[j]);
@@ -549,7 +551,7 @@ export default function AbstractMatrix(superCtor) {
          * @return {Matrix} this
          */
         mulRowVector(vector) {
-            vector = util.checkRowVector(this, vector);
+            vector = checkRowVector(this, vector);
             for (var i = 0; i < this.rows; i++) {
                 for (var j = 0; j < this.columns; j++) {
                     this.set(i, j, this.get(i, j) * vector[j]);
@@ -564,7 +566,7 @@ export default function AbstractMatrix(superCtor) {
          * @return {Matrix} this
          */
         divRowVector(vector) {
-            vector = util.checkRowVector(this, vector);
+            vector = checkRowVector(this, vector);
             for (var i = 0; i < this.rows; i++) {
                 for (var j = 0; j < this.columns; j++) {
                     this.set(i, j, this.get(i, j) / vector[j]);
@@ -579,7 +581,7 @@ export default function AbstractMatrix(superCtor) {
          * @return {Matrix} this
          */
         addColumnVector(vector) {
-            vector = util.checkColumnVector(this, vector);
+            vector = checkColumnVector(this, vector);
             for (var i = 0; i < this.rows; i++) {
                 for (var j = 0; j < this.columns; j++) {
                     this.set(i, j, this.get(i, j) + vector[i]);
@@ -594,7 +596,7 @@ export default function AbstractMatrix(superCtor) {
          * @return {Matrix} this
          */
         subColumnVector(vector) {
-            vector = util.checkColumnVector(this, vector);
+            vector = checkColumnVector(this, vector);
             for (var i = 0; i < this.rows; i++) {
                 for (var j = 0; j < this.columns; j++) {
                     this.set(i, j, this.get(i, j) - vector[i]);
@@ -609,7 +611,7 @@ export default function AbstractMatrix(superCtor) {
          * @return {Matrix} this
          */
         mulColumnVector(vector) {
-            vector = util.checkColumnVector(this, vector);
+            vector = checkColumnVector(this, vector);
             for (var i = 0; i < this.rows; i++) {
                 for (var j = 0; j < this.columns; j++) {
                     this.set(i, j, this.get(i, j) * vector[i]);
@@ -624,7 +626,7 @@ export default function AbstractMatrix(superCtor) {
          * @return {Matrix} this
          */
         divColumnVector(vector) {
-            vector = util.checkColumnVector(this, vector);
+            vector = checkColumnVector(this, vector);
             for (var i = 0; i < this.rows; i++) {
                 for (var j = 0; j < this.columns; j++) {
                     this.set(i, j, this.get(i, j) / vector[i]);
@@ -640,7 +642,7 @@ export default function AbstractMatrix(superCtor) {
          * @return {Matrix} this
          */
         mulRow(index, value) {
-            util.checkRowIndex(this, index);
+            checkRowIndex(this, index);
             for (var i = 0; i < this.columns; i++) {
                 this.set(index, i, this.get(index, i) * value);
             }
@@ -654,7 +656,7 @@ export default function AbstractMatrix(superCtor) {
          * @return {Matrix} this
          */
         mulColumn(index, value) {
-            util.checkColumnIndex(this, index);
+            checkColumnIndex(this, index);
             for (var i = 0; i < this.rows; i++) {
                 this.set(i, index, this.get(i, index) * value);
             }
@@ -737,7 +739,7 @@ export default function AbstractMatrix(superCtor) {
          * @return {number}
          */
         maxRow(row) {
-            util.checkRowIndex(this, row);
+            checkRowIndex(this, row);
             var v = this.get(row, 0);
             for (var i = 1; i < this.columns; i++) {
                 if (this.get(row, i) > v) {
@@ -753,7 +755,7 @@ export default function AbstractMatrix(superCtor) {
          * @return {Array}
          */
         maxRowIndex(row) {
-            util.checkRowIndex(this, row);
+            checkRowIndex(this, row);
             var v = this.get(row, 0);
             var idx = [row, 0];
             for (var i = 1; i < this.columns; i++) {
@@ -771,7 +773,7 @@ export default function AbstractMatrix(superCtor) {
          * @return {number}
          */
         minRow(row) {
-            util.checkRowIndex(this, row);
+            checkRowIndex(this, row);
             var v = this.get(row, 0);
             for (var i = 1; i < this.columns; i++) {
                 if (this.get(row, i) < v) {
@@ -787,7 +789,7 @@ export default function AbstractMatrix(superCtor) {
          * @return {Array}
          */
         minRowIndex(row) {
-            util.checkRowIndex(this, row);
+            checkRowIndex(this, row);
             var v = this.get(row, 0);
             var idx = [row, 0];
             for (var i = 1; i < this.columns; i++) {
@@ -805,7 +807,7 @@ export default function AbstractMatrix(superCtor) {
          * @return {number}
          */
         maxColumn(column) {
-            util.checkColumnIndex(this, column);
+            checkColumnIndex(this, column);
             var v = this.get(0, column);
             for (var i = 1; i < this.rows; i++) {
                 if (this.get(i, column) > v) {
@@ -821,7 +823,7 @@ export default function AbstractMatrix(superCtor) {
          * @return {Array}
          */
         maxColumnIndex(column) {
-            util.checkColumnIndex(this, column);
+            checkColumnIndex(this, column);
             var v = this.get(0, column);
             var idx = [0, column];
             for (var i = 1; i < this.rows; i++) {
@@ -839,7 +841,7 @@ export default function AbstractMatrix(superCtor) {
          * @return {number}
          */
         minColumn(column) {
-            util.checkColumnIndex(this, column);
+            checkColumnIndex(this, column);
             var v = this.get(0, column);
             for (var i = 1; i < this.rows; i++) {
                 if (this.get(i, column) < v) {
@@ -855,7 +857,7 @@ export default function AbstractMatrix(superCtor) {
          * @return {Array}
          */
         minColumnIndex(column) {
-            util.checkColumnIndex(this, column);
+            checkColumnIndex(this, column);
             var v = this.get(0, column);
             var idx = [0, column];
             for (var i = 1; i < this.rows; i++) {
@@ -889,11 +891,11 @@ export default function AbstractMatrix(superCtor) {
         sum(by) {
             switch (by) {
                 case 'row':
-                    return util.sumByRow(this);
+                    return sumByRow(this);
                 case 'column':
-                    return util.sumByColumn(this);
+                    return sumByColumn(this);
                 default:
-                    return util.sumAll(this);
+                    return sumAll(this);
             }
         }
 
@@ -1317,7 +1319,7 @@ export default function AbstractMatrix(superCtor) {
          * @return {Matrix}
          */
         subMatrix(startRow, endRow, startColumn, endColumn) {
-            util.checkRange(this, startRow, endRow, startColumn, endColumn);
+            checkRange(this, startRow, endRow, startColumn, endColumn);
             var newMatrix = new this.constructor[Symbol.species](endRow - startRow + 1, endColumn - startColumn + 1);
             for (var i = startRow; i <= endRow; i++) {
                 for (var j = startColumn; j <= endColumn; j++) {
@@ -1390,7 +1392,7 @@ export default function AbstractMatrix(superCtor) {
             matrix = this.constructor.checkMatrix(matrix);
             var endRow = startRow + matrix.rows - 1;
             var endColumn = startColumn + matrix.columns - 1;
-            util.checkRange(this, startRow, endRow, startColumn, endColumn);
+            checkRange(this, startRow, endRow, startColumn, endColumn);
             for (var i = 0; i < matrix.rows; i++) {
                 for (var j = 0; j < matrix.columns; j++) {
                     this[startRow + i][startColumn + j] = matrix.get(i, j);
@@ -1406,7 +1408,7 @@ export default function AbstractMatrix(superCtor) {
          * @return {Matrix} The new matrix
          */
         selection(rowIndices, columnIndices) {
-            var indices = util.checkIndices(this, rowIndices, columnIndices);
+            var indices = checkIndices(this, rowIndices, columnIndices);
             var newMatrix = new this.constructor[Symbol.species](rowIndices.length, columnIndices.length);
             for (var i = 0; i < indices.row.length; i++) {
                 var rowIndex = indices.row[i];
@@ -1449,7 +1451,7 @@ export default function AbstractMatrix(superCtor) {
          * @return {MatrixRowView}
          */
         rowView(row) {
-            util.checkRowIndex(this, row);
+            checkRowIndex(this, row);
             return new MatrixRowView(this, row);
         }
 
@@ -1459,7 +1461,7 @@ export default function AbstractMatrix(superCtor) {
          * @return {MatrixColumnView}
          */
         columnView(column) {
-            util.checkColumnIndex(this, column);
+            checkColumnIndex(this, column);
             return new MatrixColumnView(this, column);
         }
 
