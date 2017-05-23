@@ -10,11 +10,11 @@ function CholeskyDecomposition(value) {
         throw new Error('Matrix is not symmetric');
     }
 
-    var a = value,
-        dimension = a.rows,
-        l = new Matrix(dimension, dimension),
-        positiveDefinite = true,
-        i, j, k;
+    var a = value;
+    var dimension = a.rows;
+    var l = new Matrix(dimension, dimension);
+    var positiveDefinite = true;
+    var i, j, k;
 
     for (j = 0; j < dimension; j++) {
         var Lrowj = l[j];
@@ -52,16 +52,16 @@ CholeskyDecomposition.prototype = {
     solve: function (value) {
         value = Matrix.checkMatrix(value);
 
-        var l = this.L,
-            dimension = l.rows;
+        var l = this.L;
+        var dimension = l.rows;
 
         if (value.rows !== dimension) {
             throw new Error('Matrix dimensions do not match');
         }
 
-        var count = value.columns,
-            B = value.clone(),
-            i, j, k;
+        var count = value.columns;
+        var B = value.clone();
+        var i, j, k;
 
         for (k = 0; k < dimension; k++) {
             for (j = 0; j < count; j++) {

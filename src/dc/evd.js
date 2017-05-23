@@ -16,12 +16,12 @@ function EigenvalueDecomposition(matrix, options) {
         throw new Error('Matrix is not a square matrix');
     }
 
-    var n = matrix.columns,
-        V = getFilled2DArray(n, n, 0),
-        d = new Array(n),
-        e = new Array(n),
-        value = matrix,
-        i, j;
+    var n = matrix.columns;
+    var V = getFilled2DArray(n, n, 0);
+    var d = new Array(n);
+    var e = new Array(n);
+    var value = matrix;
+    var i, j;
 
     var isSymmetric = false;
     if (options.assumeSymmetric) {
@@ -39,8 +39,8 @@ function EigenvalueDecomposition(matrix, options) {
         tred2(n, e, d, V);
         tql2(n, e, d, V);
     } else {
-        var H = getFilled2DArray(n, n, 0),
-            ort = new Array(n);
+        var H = getFilled2DArray(n, n, 0);
+        var ort = new Array(n);
         for (j = 0; j < n; j++) {
             for (i = 0; i < n; i++) {
                 H[i][j] = value.get(i, j);
@@ -70,11 +70,11 @@ EigenvalueDecomposition.prototype = {
         return this.V;
     },
     get diagonalMatrix() {
-        var n = this.n,
-            e = this.e,
-            d = this.d,
-            X = new Matrix(n, n),
-            i, j;
+        var n = this.n;
+        var e = this.e;
+        var d = this.d;
+        var X = new Matrix(n, n);
+        var i, j;
         for (i = 0; i < n; i++) {
             for (j = 0; j < n; j++) {
                 X[i][j] = 0;
@@ -213,9 +213,9 @@ function tql2(n, e, d, V) {
 
     e[n - 1] = 0;
 
-    var f = 0,
-        tst1 = 0,
-        eps = Math.pow(2, -52);
+    var f = 0;
+    var tst1 = 0;
+    var eps = Math.pow(2, -52);
 
     for (l = 0; l < n; l++) {
         tst1 = Math.max(tst1, Math.abs(d[l]) + Math.abs(e[l]));
@@ -311,10 +311,10 @@ function tql2(n, e, d, V) {
 
 function orthes(n, H, ort, V) {
 
-    var low = 0,
-        high = n - 1,
-        f, g, h, i, j, m,
-        scale;
+    var low = 0;
+    var high = n - 1;
+    var f, g, h, i, j, m;
+    var scale;
 
     for (m = low + 1; m <= high - 1; m++) {
         scale = 0;
@@ -394,21 +394,21 @@ function orthes(n, H, ort, V) {
 }
 
 function hqr2(nn, e, d, V, H) {
-    var n = nn - 1,
-        low = 0,
-        high = nn - 1,
-        eps = Math.pow(2, -52),
-        exshift = 0,
-        norm = 0,
-        p = 0,
-        q = 0,
-        r = 0,
-        s = 0,
-        z = 0,
-        iter = 0,
-        i, j, k, l, m, t, w, x, y,
-        ra, sa, vr, vi,
-        notlast, cdivres;
+    var n = nn - 1;
+    var low = 0;
+    var high = nn - 1;
+    var eps = Math.pow(2, -52);
+    var exshift = 0;
+    var norm = 0;
+    var p = 0;
+    var q = 0;
+    var r = 0;
+    var s = 0;
+    var z = 0;
+    var iter = 0;
+    var i, j, k, l, m, t, w, x, y;
+    var ra, sa, vr, vi;
+    var notlast, cdivres;
 
     for (i = 0; i < nn; i++) {
         if (i < low || i > high) {

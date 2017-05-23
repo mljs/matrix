@@ -8,13 +8,13 @@ function LuDecomposition(matrix) {
 
     matrix = Matrix.checkMatrix(matrix);
 
-    var lu = matrix.clone(),
-        rows = lu.rows,
-        columns = lu.columns,
-        pivotVector = new Array(rows),
-        pivotSign = 1,
-        i, j, k, p, s, t, v,
-        LUrowi, LUcolj, kmax;
+    var lu = matrix.clone();
+    var rows = lu.rows;
+    var columns = lu.columns;
+    var pivotVector = new Array(rows);
+    var pivotSign = 1;
+    var i, j, k, p, s, t, v;
+    var LUrowi, LUcolj, kmax;
 
     for (i = 0; i < rows; i++) {
         pivotVector[i] = i;
@@ -73,8 +73,8 @@ function LuDecomposition(matrix) {
 
 LuDecomposition.prototype = {
     isSingular: function () {
-        var data = this.LU,
-            col = data.columns;
+        var data = this.LU;
+        var col = data.columns;
         for (var j = 0; j < col; j++) {
             if (data[j][j] === 0) {
                 return true;
@@ -87,17 +87,18 @@ LuDecomposition.prototype = {
         if (!data.isSquare()) {
             throw new Error('Matrix must be square');
         }
-        var determinant = this.pivotSign, col = data.columns;
+        var determinant = this.pivotSign;
+        var col = data.columns;
         for (var j = 0; j < col; j++) {
             determinant *= data[j][j];
         }
         return determinant;
     },
     get lowerTriangularMatrix() {
-        var data = this.LU,
-            rows = data.rows,
-            columns = data.columns,
-            X = new Matrix(rows, columns);
+        var data = this.LU;
+        var rows = data.rows;
+        var columns = data.columns;
+        var X = new Matrix(rows, columns);
         for (var i = 0; i < rows; i++) {
             for (var j = 0; j < columns; j++) {
                 if (i > j) {
@@ -112,10 +113,10 @@ LuDecomposition.prototype = {
         return X;
     },
     get upperTriangularMatrix() {
-        var data = this.LU,
-            rows = data.rows,
-            columns = data.columns,
-            X = new Matrix(rows, columns);
+        var data = this.LU;
+        var rows = data.rows;
+        var columns = data.columns;
+        var X = new Matrix(rows, columns);
         for (var i = 0; i < rows; i++) {
             for (var j = 0; j < columns; j++) {
                 if (i <= j) {
@@ -133,8 +134,8 @@ LuDecomposition.prototype = {
     solve: function (value) {
         value = Matrix.checkMatrix(value);
 
-        var lu = this.LU,
-            rows = lu.rows;
+        var lu = this.LU;
+        var rows = lu.rows;
 
         if (rows !== value.rows) {
             throw new Error('Invalid matrix dimensions');

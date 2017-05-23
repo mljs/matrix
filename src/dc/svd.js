@@ -10,11 +10,12 @@ function SingularValueDecomposition(value, options) {
 
     options = options || {};
 
-    var m = value.rows,
-        n = value.columns,
-        nu = Math.min(m, n);
+    var m = value.rows;
+    var n = value.columns;
+    var nu = Math.min(m, n);
 
-    var wantu = true, wantv = true;
+    var wantu = true;
+    var wantv = true;
     if (options.computeLeftSingularVectors === false) wantu = false;
     if (options.computeRightSingularVectors === false) wantv = false;
     var autoTranspose = options.autoTranspose === true;
@@ -39,11 +40,11 @@ function SingularValueDecomposition(value, options) {
         a = value.clone();
     }
 
-    var s = new Array(Math.min(m + 1, n)),
-        U = getFilled2DArray(m, nu, 0),
-        V = getFilled2DArray(n, n, 0),
-        e = new Array(n),
-        work = new Array(m);
+    var s = new Array(Math.min(m + 1, n));
+    var U = getFilled2DArray(m, nu, 0);
+    var V = getFilled2DArray(n, n, 0);
+    var e = new Array(n);
+    var work = new Array(m);
 
     var nct = Math.min(m - 1, n);
     var nrt = Math.max(0, Math.min(n - 2, m));
@@ -196,9 +197,9 @@ function SingularValueDecomposition(value, options) {
         }
     }
 
-    var pp = p - 1,
-        iter = 0,
-        eps = Math.pow(2, -52);
+    var pp = p - 1;
+    var iter = 0;
+    var eps = Math.pow(2, -52);
     while (p > 0) {
         for (k = p - 2; k >= -1; k--) {
             if (k === -1) {
@@ -395,10 +396,10 @@ SingularValueDecomposition.prototype = {
         return this.s[0];
     },
     get rank() {
-        var eps = Math.pow(2, -52),
-            tol = Math.max(this.m, this.n) * this.s[0] * eps,
-            r = 0,
-            s = this.s;
+        var eps = Math.pow(2, -52);
+        var tol = Math.max(this.m, this.n) * this.s[0] * eps;
+        var r = 0;
+        var s = this.s;
         for (var i = 0, ii = s.length; i < ii; i++) {
             if (s[i] > tol) {
                 r++;
@@ -430,11 +431,11 @@ SingularValueDecomposition.prototype = {
     },
     solve: function (value) {
 
-        var Y = value,
-            e = this.threshold,
-            scols = this.s.length,
-            Ls = Matrix.zeros(scols, scols),
-            i;
+        var Y = value;
+        var e = this.threshold;
+        var scols = this.s.length;
+        var Ls = Matrix.zeros(scols, scols);
+        var i;
 
         for (i = 0; i < scols; i++) {
             if (Math.abs(this.s[i]) <= e) {
@@ -447,11 +448,11 @@ SingularValueDecomposition.prototype = {
         var U = this.U;
         var V = this.rightSingularVectors;
 
-        var VL = V.mmul(Ls),
-            vrows = V.rows,
-            urows = U.length,
-            VLU = Matrix.zeros(vrows, urows),
-            j, k, sum;
+        var VL = V.mmul(Ls);
+        var vrows = V.rows;
+        var urows = U.length;
+        var VLU = Matrix.zeros(vrows, urows);
+        var j, k, sum;
 
         for (i = 0; i < vrows; i++) {
             for (j = 0; j < urows; j++) {
@@ -470,11 +471,11 @@ SingularValueDecomposition.prototype = {
     },
     inverse: function () {
         var V = this.V;
-        var e = this.threshold,
-            vrows = V.length,
-            vcols = V[0].length,
-            X = new Matrix(vrows, this.s.length),
-            i, j;
+        var e = this.threshold;
+        var vrows = V.length;
+        var vcols = V[0].length;
+        var X = new Matrix(vrows, this.s.length);
+        var i, j;
 
         for (i = 0; i < vrows; i++) {
             for (j = 0; j < vcols; j++) {
@@ -488,10 +489,10 @@ SingularValueDecomposition.prototype = {
 
         var U = this.U;
 
-        var urows = U.length,
-            ucols = U[0].length,
-            Y = new Matrix(vrows, urows),
-            k, sum;
+        var urows = U.length;
+        var ucols = U[0].length;
+        var Y = new Matrix(vrows, urows);
+        var k, sum;
 
         for (i = 0; i < vrows; i++) {
             for (j = 0; j < urows; j++) {

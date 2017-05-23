@@ -8,11 +8,11 @@ function QrDecomposition(value) {
     }
     value = Matrix.checkMatrix(value);
 
-    var qr = value.clone(),
-        m = value.rows,
-        n = value.columns,
-        rdiag = new Array(n),
-        i, j, k, s;
+    var qr = value.clone();
+    var m = value.rows;
+    var n = value.columns;
+    var rdiag = new Array(n);
+    var i, j, k, s;
 
     for (k = 0; k < n; k++) {
         var nrm = 0;
@@ -49,8 +49,8 @@ QrDecomposition.prototype = {
     solve: function (value) {
         value = Matrix.checkMatrix(value);
 
-        var qr = this.QR,
-            m = qr.rows;
+        var qr = this.QR;
+        var m = qr.rows;
 
         if (value.rows !== m) {
             throw new Error('Matrix row dimensions must agree');
@@ -99,10 +99,10 @@ QrDecomposition.prototype = {
         return true;
     },
     get upperTriangularMatrix() {
-        var qr = this.QR,
-            n = qr.columns,
-            X = new Matrix(n, n),
-            i, j;
+        var qr = this.QR;
+        var n = qr.columns;
+        var X = new Matrix(n, n);
+        var i, j;
         for (i = 0; i < n; i++) {
             for (j = 0; j < n; j++) {
                 if (i < j) {
@@ -117,11 +117,11 @@ QrDecomposition.prototype = {
         return X;
     },
     get orthogonalMatrix() {
-        var qr = this.QR,
-            rows = qr.rows,
-            columns = qr.columns,
-            X = new Matrix(rows, columns),
-            i, j, k, s;
+        var qr = this.QR;
+        var rows = qr.rows;
+        var columns = qr.columns;
+        var X = new Matrix(rows, columns);
+        var i, j, k, s;
 
         for (k = columns - 1; k >= 0; k--) {
             for (i = 0; i < rows; i++) {
