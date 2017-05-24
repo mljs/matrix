@@ -63,6 +63,6 @@
     "should-approximately-deep": "^1.1.0"
   },
   "dependencies": {
-    "ml-array-utils": "^0.3.0"
+    "ml-array-rescale": "^1.0.0"
   }
 }

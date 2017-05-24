@@ -1,6 +1,6 @@
 import LuDecomposition from './dc/lu';
 import SvDecomposition from './dc/svd';
-import {scale} from 'ml-array-utils';
+import rescale from 'ml-array-rescale';
 import {checkRowVector, checkRowIndex, checkColumnIndex, checkColumnVector,
         checkRange, checkIndices,
         sumByRow, sumByColumn, sumAll} from './util';
@@ -1210,7 +1210,7 @@ export default function AbstractMatrix(superCtor) {
             }
             var newMatrix = this.constructor.empty(this.rows, this.columns);
             for (var i = 0; i < this.rows; i++) {
-                var scaled = scale(this.getRow(i), {min, max});
+                var scaled = rescale(this.getRow(i), {min, max});
                 newMatrix.setRow(i, scaled);
             }
             return newMatrix;
@@ -1233,7 +1233,7 @@ export default function AbstractMatrix(superCtor) {
             }
             var newMatrix = this.constructor.empty(this.rows, this.columns);
             for (var i = 0; i < this.columns; i++) {
-                var scaled = scale(this.getColumn(i), {
+                var scaled = rescale(this.getColumn(i), {
                     min: min,
                     max: max
                 });
