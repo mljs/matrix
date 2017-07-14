@@ -2,7 +2,7 @@ import 'should';
 
 import Matrix from '../../src';
 import MatrixTransposeView from '../../src/views/transpose';
-import * as util from '../../test/util';
+import * as util from '../util/util';
 
 describe('Matrix creation', function () {
     it('should create a new object', function () {
