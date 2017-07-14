@@ -1,4 +1,4 @@
-import Matrix from '../../src/index';
+import Matrix from './src/index';
 
 export function getSquareArray() {
     return [
@@ -11,7 +11,3 @@ export function getSquareArray() {
 export function getSquareMatrix() {
     return new Matrix(getSquareArray());
 }
-
-test('This is not a test', () => {
-    expect(true).toBe(true);
-});
