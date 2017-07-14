@@ -73,7 +73,7 @@ export function checkIndices(matrix, rowIndices, columnIndices) {
 
 export function checkRowIndices(matrix, rowIndices) {
     if (typeof rowIndices !== 'object') {
-        throw new TypeError('Unexpected type for row/column indices');
+        throw new TypeError('unexpected type for row indices');
     }
 
     var rowOut = rowIndices.some(r => {
@@ -82,7 +82,7 @@ export function checkRowIndices(matrix, rowIndices) {
     });
 
     if (rowOut) {
-        throw new RangeError('Indices are out of range');
+        throw new RangeError('row indices are out of range');
     }
 
     if (!Array.isArray(rowIndices)) rowIndices = Array.from(rowIndices);
@@ -92,7 +92,7 @@ export function checkRowIndices(matrix, rowIndices) {
 
 export function checkColumnIndices(matrix, columnIndices) {
     if (typeof columnIndices !== 'object') {
-        throw new TypeError('Unexpected type for row/column indices');
+        throw new TypeError('unexpected type for column indices');
     }
 
     var columnOut = columnIndices.some(c => {
@@ -100,7 +100,7 @@ export function checkColumnIndices(matrix, columnIndices) {
     });
 
     if (columnOut) {
-        throw new RangeError('Indices are out of range');
+        throw new RangeError('column indices are out of range');
     }
     if (!Array.isArray(columnIndices)) columnIndices = Array.from(columnIndices);
 

@@ -12,7 +12,7 @@ describe('Selection view', () => {
 
     it('should throw when wrong arguments or range', () => {
         const m = Matrix.ones(2, 2);
-        expect(() => m.selectionRowView([1, 1, 2])).toThrow(RangeError);
-        expect(() => m.selectionRowView(1)).toThrow(TypeError);
+        expect(() => m.selectionRowView([1, 1, 2])).toThrow('row indices are out of range');
+        expect(() => m.selectionRowView(1)).toThrow('unexpected type for row indices');
     });
 });
