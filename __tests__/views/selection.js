@@ -16,6 +16,19 @@ describe('Selection view', function () {
         msv.get(1, 1).should.equal(10);
     });
 
+    it('should handle typed arrays', function () {
+        const m = Matrix.ones(5, 8);
+        const msv = m.selectionView(Int8Array.from([1, 2]), Int8Array.from([2, 1]));
+
+        m.get(1, 2).should.equal(1);
+        msv.set(0, 0, 5);
+        m.get(1, 2).should.equal(5);
+
+        m.get(2, 1).should.equal(1);
+        m.set(2, 1, 10);
+        msv.get(1, 1).should.equal(10);
+    });
+
     it('should throw when wrong arguments or range', function () {
         const m = Matrix.ones(2, 2);
         (function () {
