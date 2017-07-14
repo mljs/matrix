@@ -1,4 +1,4 @@
 language: node_js
 node_js:
-  - node
-  - lts/boron #v6
+  - 8
+  - 6
