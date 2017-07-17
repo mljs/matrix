@@ -1,12 +1,10 @@
-import 'should';
-
 import Matrix from '../../src';
 
-describe('Dynamic operators on matrices', function () {
+describe('Dynamic operators on matrices', () => {
 
     var matrix;
 
-    beforeEach(function () {
+    beforeEach(() => {
         matrix = new Matrix([
             [0, 1, 2],
             [3, -4, -5],
@@ -14,22 +12,22 @@ describe('Dynamic operators on matrices', function () {
         ]);
     });
 
-    describe('inplace', function () {
-        it('should return instance', function () {
-            matrix.mul(5).should.equal(matrix);
-            matrix.subtract(36).should.equal(matrix);
+    describe('inplace', () => {
+        it('should return instance', () => {
+            expect(matrix.mul(5)).toBe(matrix);
+            expect(matrix.subtract(36)).toBe(matrix);
         });
-        it('multiply', function () {
+        it('multiply', () => {
             matrix.multiply(2);
-            matrix.to2DArray().should.eql([
+            expect(matrix.to2DArray()).toEqual([
                 [0, 2, 4],
                 [6, -8, -10],
                 [-12, -14, -16]
             ]);
         });
-        it('or', function () {
+        it('or', () => {
             matrix.or(10);
-            matrix.to2DArray().should.eql([
+            expect(matrix.to2DArray()).toEqual([
                 [10, 11, 10],
                 [11, -2, -5],
                 [-6, -5, -6]
@@ -37,23 +35,23 @@ describe('Dynamic operators on matrices', function () {
         });
     });
 
-    describe('static', function () {
-        it('should return a new Matrix', function () {
-            Matrix.multiply(matrix, 5).should.not.equal(matrix);
+    describe('static', () => {
+        it('should return a new Matrix', () => {
+            expect(Matrix.multiply(matrix, 5)).not.toBe(matrix);
             var mul1 = Matrix.mul(matrix, 5);
             var mul2 = Matrix.mul(matrix, 5);
-            mul1.should.not.equal(mul2);
+            expect(mul1).not.toBe(mul2);
         });
-        it('should accept 2D array input', function () {
+        it('should accept 2D array input', () => {
             var result = Matrix.mul([[-6]], 5);
-            result[0][0].should.equal(-30);
+            expect(result[0][0]).toBe(-30);
         });
-        it('should return a Matrix instance', function () {
+        it('should return a Matrix instance', () => {
             var result = Matrix.mul([[-6]], 5);
-            result.should.be.instanceOf(Matrix);
+            expect(result).toBeInstanceOf(Matrix);
         });
-        it('or', function () {
-            Matrix.or(matrix, 10).to2DArray().should.eql([
+        it('or', () => {
+            expect(Matrix.or(matrix, 10).to2DArray()).toEqual([
                 [10, 11, 10],
                 [11, -2, -5],
                 [-6, -5, -6]
