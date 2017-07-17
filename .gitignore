@@ -1,3 +1,4 @@
 .idea
 node_modules
 /matrix.js
+coverage/

@@ -1,7 +1,7 @@
 import 'should';
 
 import Matrix from '../../src';
-import * as util from '../../test/util';
+import * as util from '../../testUtils';
 
 describe('utility methods', function () {
     var matrix;

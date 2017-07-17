@@ -65,29 +65,46 @@ export function checkColumnVector(matrix, vector) {
 }
 
 export function checkIndices(matrix, rowIndices, columnIndices) {
+    return {
+        row: checkRowIndices(matrix, rowIndices),
+        column: checkColumnIndices(matrix, columnIndices)
+    };
+}
+
+export function checkRowIndices(matrix, rowIndices) {
+    if (typeof rowIndices !== 'object') {
+        throw new TypeError('unexpected type for row indices');
+    }
+
     var rowOut = rowIndices.some(r => {
         return r < 0 || r >= matrix.rows;
 
     });
 
+    if (rowOut) {
+        throw new RangeError('row indices are out of range');
+    }
+
+    if (!Array.isArray(rowIndices)) rowIndices = Array.from(rowIndices);
+
+    return rowIndices;
+}
+
+export function checkColumnIndices(matrix, columnIndices) {
+    if (typeof columnIndices !== 'object') {
+        throw new TypeError('unexpected type for column indices');
+    }
+
     var columnOut = columnIndices.some(c => {
         return c < 0 || c >= matrix.columns;
     });
 
-    if (rowOut || columnOut) {
-        throw new RangeError('Indices are out of range');
+    if (columnOut) {
+        throw new RangeError('column indices are out of range');
     }
+    if (!Array.isArray(columnIndices)) columnIndices = Array.from(columnIndices);
 
-    if (typeof rowIndices !== 'object' || typeof columnIndices !== 'object') {
-        throw new TypeError('Unexpected type for row/column indices');
-    }
-    if (!Array.isArray(rowIndices)) rowIndices = Array.from(rowIndices);
-    if (!Array.isArray(columnIndices)) rowIndices = Array.from(columnIndices);
-
-    return {
-        row: rowIndices,
-        column: columnIndices
-    };
+    return columnIndices;
 }
 
 export function checkRange(matrix, startRow, endRow, startColumn, endColumn) {

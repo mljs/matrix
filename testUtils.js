@@ -1,4 +1,4 @@
-import Matrix from '../src';
+import Matrix from './src/index';
 
 export function getSquareArray() {
     return [
