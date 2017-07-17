@@ -1,7 +1,7 @@
 import BaseView from './base';
 import {checkRowIndices} from '../util';
 
-export default class MatrixSelectionRowView extends BaseView {
+export default class MatrixRowSelectionView extends BaseView {
     constructor(matrix, rowIndices) {
         rowIndices = checkRowIndices(matrix, rowIndices);
         super(matrix, rowIndices.length, matrix.columns);

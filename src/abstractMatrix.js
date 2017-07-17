@@ -8,8 +8,8 @@ import MatrixTransposeView from './views/transpose';
 import MatrixRowView from './views/row';
 import MatrixSubView from './views/sub';
 import MatrixSelectionView from './views/selection';
-import MatrixSelectionRowView from './views/selectionRow';
-import MatrixSelectionColumnView from './views/selectionColumn';
+import MatrixRowSelectionView from './views/rowSelection';
+import MatrixColumnSelectionView from './views/columnSelection';
 import MatrixColumnView from './views/column';
 import MatrixFlipRowView from './views/flipRow';
 import MatrixFlipColumnView from './views/flipColumn';
@@ -1514,10 +1514,10 @@ export default function AbstractMatrix(superCtor) {
          * // resulting vector is [[1,2,3], [1,2,3]]
          * var matrix = new Matrix([[1,2,3], [4,5,6]]).rowSelectionView([0, 0])
          * @param {Array<number>} rowIndices
-         * @return {MatrixSelectionRowView}
+         * @return {MatrixRowSelectionView}
          */
         rowSelectionView(rowIndices) {
-            return new MatrixSelectionRowView(this, rowIndices);
+            return new MatrixRowSelectionView(this, rowIndices);
         }
 
         /**
@@ -1526,10 +1526,10 @@ export default function AbstractMatrix(superCtor) {
          * // resulting vector is [[2, 2], [5, 5]]
          * var matrix = new Matrix([[1,2,3], [4,5,6]]).columnSelectionView([1, 1])
          * @param {Array<number>} columnIndices
-         * @return {MatrixSelectionColumnView}
+         * @return {MatrixColumnSelectionView}
          */
         columnSelectionView(columnIndices) {
-            return new MatrixSelectionColumnView(this, columnIndices);
+            return new MatrixColumnSelectionView(this, columnIndices);
         }
 
 
