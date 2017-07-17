@@ -1,5 +1,3 @@
-import 'should';
-
 import {
     LuDecomposition, LU,
     QrDecomposition, QR,
@@ -8,12 +6,12 @@ import {
     CholeskyDecomposition, CHO
 } from '../../src';
 
-describe('Decompositions exports', function () {
-    it('should export full and short names', function () {
-        LuDecomposition.should.equal(LU);
-        QrDecomposition.should.equal(QR);
-        SingularValueDecomposition.should.equal(SVD);
-        EigenvalueDecomposition.should.equal(EVD);
-        CholeskyDecomposition.should.equal(CHO);
+describe('Decompositions exports', () => {
+    it('should export full and short names', () => {
+        expect(LuDecomposition).toEqual(LU);
+        expect(QrDecomposition).toEqual(QR);
+        expect(SingularValueDecomposition).toEqual(SVD);
+        expect(EigenvalueDecomposition).toEqual(EVD);
+        expect(CholeskyDecomposition).toEqual(CHO);
     });
 });
