@@ -8,7 +8,7 @@ describe('manual creation', () => {
         expect(wrapperMatrix2D.get(0, 1)).toBe(2);
     });
 
-    it('2d WrapperMatrix2D creation', () => {
+    it('more rows WrapperMatrix1D creation', () => {
         var wrapperMatrix2D = new WrapperMatrix1D([0, 1, 2, 3, 4, 5], {rows: 2});
         expect(wrapperMatrix2D.get(1, 1)).toBe(4);
         wrapperMatrix2D.set(1, 1, 2);

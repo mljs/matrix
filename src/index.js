@@ -1,6 +1,7 @@
 export {default as default, default as Matrix} from './matrix';
 export {default as abstractMatrix} from './abstractMatrix';
 
+export {wrap} from './wrap/wrap';
 export {default as WrapperMatrix2D} from './wrap/WrapperMatrix2D';
 export {default as WrapperMatrix1D} from './wrap/WrapperMatrix1D';
 
