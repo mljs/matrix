@@ -54,13 +54,12 @@
     "eslint-config-cheminfo": "^1.5.2",
     "eslint-plugin-no-only-tests": "^1.1.0",
     "jest-cli": "^20.0.3",
+    "jest-matcher-deep-close-to": "^1.0.0",
     "mathjs": "^3.2.1",
     "npm-run-all": "^4.0.1",
     "numeric": "^1.2.6",
     "pretty-hrtime": "^1.0.0",
-    "rollup": "^0.41.6",
-    "should": "^11.1.1",
-    "should-approximately-deep": "^1.1.0"
+    "rollup": "^0.41.6"
   },
   "dependencies": {
     "ml-array-rescale": "^1.0.0"
