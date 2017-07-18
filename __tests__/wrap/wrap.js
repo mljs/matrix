@@ -1,4 +1,4 @@
-import {wrap} from '../../src/index';
+import {Matrix, wrap} from '../../src/index';
 
 describe('matrix creation', () => {
     it('WrapperMatrix1D creation', () => {
@@ -31,7 +31,7 @@ it('matrix methods', () => {
         [0, 1]
     ]);
 
-    expect((matrix1.mmul(matrix2)).data).toEqual([0, 1, 2, 3]);
-    expect((matrix2.mmul(matrix1)).data).toEqual([0, 1, 2, 3]);
+    expect(matrix1.mmul(matrix2)).toBeInstanceOf(Matrix);
+    expect(matrix2.mmul(matrix1)).toBeInstanceOf(Matrix);
 });
 

@@ -1,4 +1,5 @@
 import AbstractMatrix from '../abstractMatrix';
+import Matrix from '../matrix';
 
 export default class WrapperMatrix1D extends AbstractMatrix() {
     /**
@@ -34,5 +35,9 @@ export default class WrapperMatrix1D extends AbstractMatrix() {
 
     _calculateIndex(row, column) {
         return (row * this.columns) + column;
+    }
+
+    static get [Symbol.species]() {
+        return Matrix;
     }
 }
