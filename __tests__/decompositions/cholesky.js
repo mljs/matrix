@@ -1,9 +1,7 @@
-import 'should';
-
 import {Matrix, CHO} from '../../src';
 
-describe('Cholesky decomposition', function () {
-    it('should compute lower triangular matrix', function () {
+describe('Cholesky decomposition', () => {
+    it('should compute lower triangular matrix', () => {
         // http://ch.mathworks.com/help/matlab/ref/chol.html
         let matrix = new Matrix([
             [1, -1, -1, -1, -1],
@@ -18,22 +16,18 @@ describe('Cholesky decomposition', function () {
         const ltm = cho.lowerTriangularMatrix;
         checkTriangular(ltm);
 
-        ltm.mmul(ltm.transpose()).should.eql(matrix);
+        expect(ltm.mmul(ltm.transpose())).toEqual(matrix);
     });
-    it('should throw on bad input', function () {
-        (function () {
-            CHO([[0, 1], [2, 0]]);
-        }).should.throw('Matrix is not symmetric');
-        (function () {
-            CHO([[1, 2], [2, 1]]);
-        }).should.throw('Matrix is not positive definite');
+    it('should throw on bad input', () => {
+        expect(() => CHO([[0, 1], [2, 0]])).toThrow('Matrix is not symmetric');
+        expect(() => CHO([[1, 2], [2, 1]])).toThrow('Matrix is not positive definite');
     });
 });
 
 function checkTriangular(matrix) {
     for (let i = 0; i < matrix.rows; i++) {
         for (let j = i + 1; j < matrix.columns; j++) {
-            matrix[i][j].should.equal(0);
+            expect(matrix[i][j]).toBe(0);
         }
     }
 }
