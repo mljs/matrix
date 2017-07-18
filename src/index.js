@@ -1,6 +1,6 @@
 export {default as default, default as Matrix} from './matrix';
 export {default as abstractMatrix} from './abstractMatrix';
-export {default as BaseMatrix} from './baseMatrix';
+export {default as WrapperMatrix2D} from './wrap/WrapperMatrix2D';
 
 export {solve, inverse} from './decompositions';
 export {default as SingularValueDecomposition, default as SVD} from './dc/svd.js';

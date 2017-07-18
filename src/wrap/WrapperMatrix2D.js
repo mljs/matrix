@@ -1,6 +1,6 @@
-import AbstractMatrix from './abstractMatrix';
+import AbstractMatrix from '../abstractMatrix';
 
-export default class BaseMatrix extends AbstractMatrix() {
+export default class WrapperMatrix2D extends AbstractMatrix() {
     constructor(data) {
         super();
         this.data = data;
