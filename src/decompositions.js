@@ -6,10 +6,10 @@ import SingularValueDecomposition from './dc/svd';
 
 export function inverse(matrix, useSVD = false) {
     matrix = Matrix.checkMatrix(matrix);
-    if(useSVD){
+    if (useSVD) {
         return SingularValueDecomposition(matrix).inverse();
     }
-    else{
+    else {
         return solve(matrix, Matrix.eye(matrix.rows));
     }
 }
@@ -17,10 +17,10 @@ export function inverse(matrix, useSVD = false) {
 export function solve(leftHandSide, rightHandSide, useSVD = false) {
     leftHandSide = Matrix.checkMatrix(leftHandSide);
     rightHandSide = Matrix.checkMatrix(rightHandSide);
-    if(useSVD){
+    if (useSVD) {
         return SingularValueDecomposition(leftHandSide).solve(rightHandSide);
     }
-    else{
+    else {
         return leftHandSide.isSquare() ? new LuDecomposition(leftHandSide).solve(rightHandSide) : new QrDecomposition(leftHandSide).solve(rightHandSide);
     }
 }
