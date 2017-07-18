@@ -1,6 +1,6 @@
 import {wrap} from '../../src/index';
 
-describe('manual creation', () => {
+describe('matrix creation', () => {
     it('WrapperMatrix1D creation', () => {
         var matrix = wrap([0, 1, 2, 3, 4, 5]);
         expect(matrix.get(0, 1)).toBe(1);
@@ -20,5 +20,5 @@ describe('manual creation', () => {
 });
 
 test('error testing', () => {
-    expect(() => wrap(2)).toThrow('the parameter is not an array');
+    expect(() => wrap(2)).toThrow('the argument is not an array');
 });

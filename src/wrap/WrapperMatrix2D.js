@@ -8,6 +8,8 @@ export default class WrapperMatrix2D extends AbstractMatrix() {
     constructor(data) {
         super();
         this.data = data;
+        this.rows = data.length;
+        this.columns = data[0].length;
     }
 
     set(rowIndex, columnIndex, value) {

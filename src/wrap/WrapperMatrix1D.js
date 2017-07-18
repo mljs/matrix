@@ -16,7 +16,8 @@ export default class WrapperMatrix1D extends AbstractMatrix() {
             throw new Error('the data length is not divisible by the number of rows');
         }
         super();
-        this.rows = data.length / rows;
+        this.rows = rows;
+        this.columns = data.length / rows;
         this.data = data;
     }
 
@@ -32,6 +33,6 @@ export default class WrapperMatrix1D extends AbstractMatrix() {
     }
 
     _calculateIndex(row, column) {
-        return (row * this.rows) + column;
+        return (row * this.columns) + column;
     }
 }

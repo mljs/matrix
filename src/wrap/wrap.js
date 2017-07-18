@@ -15,6 +15,6 @@ export function wrap(array, options) {
             return new WrapperMatrix1D(array, options);
         }
     } else {
-        throw new Error('the parameter is not an array');
+        throw new Error('the argument is not an array');
     }
 }
