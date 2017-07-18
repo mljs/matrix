@@ -1,7 +1,6 @@
-import 'should';
-import 'should-approximately-deep';
-
 import {Matrix, SVD} from '../../src';
+import {toBeDeepCloseTo} from 'jest-matcher-deep-close-to';
+expect.extend({toBeDeepCloseTo});
 
 describe('Singular value decomposition', () => {
     describe('inverse', () => {
@@ -11,12 +10,12 @@ describe('Singular value decomposition', () => {
 
         it('should solve with identity matrix', () => {
             var actual = target.solve(Matrix.eye(2));
-            actual.should.approximatelyDeep(expected, 0.001);
+            expect(actual).toBeDeepCloseTo(expected, 3);
         });
 
         it('should compute the inverse', () => {
             var actual = target.inverse();
-            actual.should.approximatelyDeep(expected, 0.001);
+            expect(actual).toBeDeepCloseTo(expected, 3);
         });
     });
 
@@ -30,12 +29,12 @@ describe('Singular value decomposition', () => {
 
         it('should be possible to get back original matrix', () => {
             var actual = target.leftSingularVectors.mmul(Matrix.diag(target.diagonal)).mmul(target.rightSingularVectors.transpose());
-            actual.should.approximatelyDeep(value, 0.01);
+            expect(actual).toBeDeepCloseTo(value, 2);
         });
 
         it('left singular vectors', () => {
             var U = [[-0.641423027995072, -0.767187395072177], [-0.767187395072177, 0.641423027995072]];
-            target.leftSingularVectors.should.approximatelyDeep(U, 0.01);
+            expect(target.leftSingularVectors).toBeDeepCloseTo(U, 2);
         });
 
         it('right singular vectors', () => {
@@ -43,12 +42,12 @@ describe('Singular value decomposition', () => {
                 [-0.349918371807964, 0.421375287684580],
                 [-0.547353510305727, 0.0201031031435023],
                 [-0.744788648803490, -0.381169081397574]];
-            target.rightSingularVectors.subMatrix(0, 3, 0, 1).should.approximatelyDeep(V, 0.0001);
+            expect(target.rightSingularVectors.subMatrix(0, 3, 0, 1)).toBeDeepCloseTo(V, 4);
         });
 
         it('diagonal', () => {
             var S = [14.2690954992615, 0.626828232417543];
-            target.diagonal.slice(0, 2).should.approximatelyDeep(S, 0.001);
+            expect(target.diagonal.slice(0, 2)).toBeDeepCloseTo(S, 3);
         });
     });
 
@@ -62,7 +61,7 @@ describe('Singular value decomposition', () => {
 
         it('should be possible to get back original matrix', () => {
             var actual = target.leftSingularVectors.mmul(Matrix.diag(target.diagonal)).mmul(target.rightSingularVectors.transpose());
-            actual.should.approximatelyDeep(value, 0.01);
+            expect(actual).toBeDeepCloseTo(value, 2);
         });
 
         it('left singular vectors', () => {
@@ -70,17 +69,17 @@ describe('Singular value decomposition', () => {
                 [0.349918371807964, 0.421375287684580],
                 [0.547353510305727, 0.0201031031435023],
                 [0.744788648803490, -0.381169081397574]];
-            target.leftSingularVectors.subMatrix(0, 3, 0, 1).should.approximatelyDeep(U, 0.01);
+            expect(target.leftSingularVectors.subMatrix(0, 3, 0, 1)).toBeDeepCloseTo(U, 2);
         });
 
         it('right singular vectors', () => {
             var V = [[0.641423027995072, -0.767187395072177], [0.767187395072177, 0.641423027995072]];
-            target.rightSingularVectors.should.approximatelyDeep(V, 0.0001);
+            expect(target.rightSingularVectors).toBeDeepCloseTo(V, 4);
         });
 
         it('diagonal', () => {
             var S = [14.2690954992615, 0.626828232417543];
-            target.diagonal.slice(0, 2).should.approximatelyDeep(S, 0.001);
+            expect(target.diagonal.slice(0, 2)).toBeDeepCloseTo(S, 3);
         });
     });
 
@@ -94,12 +93,12 @@ describe('Singular value decomposition', () => {
 
         it('should be possible to get back original matrix', () => {
             var actual = target.leftSingularVectors.mmul(Matrix.diag(target.diagonal)).mmul(target.rightSingularVectors.transpose());
-            actual.should.approximatelyDeep(value, 0.01);
+            expect(actual).toBeDeepCloseTo(value, 2);
         });
 
         it('left singular vectors', () => {
             var U = [[0.641423027995072, -0.767187395072177], [0.767187395072177, 0.641423027995072]];
-            target.leftSingularVectors.should.approximatelyDeep(U, 0.01);
+            expect(target.leftSingularVectors).toBeDeepCloseTo(U, 2);
         });
 
         it('right singular vectors', () => {
@@ -107,12 +106,12 @@ describe('Singular value decomposition', () => {
                 [0.349918371807964, 0.421375287684580],
                 [0.547353510305727, 0.0201031031435023],
                 [0.744788648803490, -0.381169081397574]];
-            target.rightSingularVectors.subMatrix(0, 3, 0, 1).should.approximatelyDeep(V, 0.0001);
+            expect(target.rightSingularVectors.subMatrix(0, 3, 0, 1)).toBeDeepCloseTo(V, 4);
         });
 
         it('diagonal', () => {
             var S = [14.2690954992615, 0.626828232417543];
-            target.diagonal.slice(0, 2).should.approximatelyDeep(S, 0.001);
+            expect(target.diagonal.slice(0, 2)).toBeDeepCloseTo(S, 3);
         });
     });
 
@@ -126,17 +125,17 @@ describe('Singular value decomposition', () => {
 
         it('left singular vectors', () => {
             var U = [[0.641423027995072, -0.767187395072177], [0.767187395072177, 0.641423027995072]];
-            target.leftSingularVectors.should.approximatelyDeep(U, 0.001);
+            expect(target.leftSingularVectors).toBeDeepCloseTo(U, 3);
         });
 
         it('right singular vectors (0)', () => {
             var V = [[0, 0], [0, 0], [0, 0], [0, 0]];
-            target.rightSingularVectors.should.approximatelyDeep(V, 1e-6);
+            expect(target.rightSingularVectors).toBeDeepCloseTo(V, 6);
         });
 
         it('diagonal', () => {
             var S = [14.2690954992615, 0.626828232417543];
-            target.diagonal.slice(0, 2).should.approximatelyDeep(S, 0.001);
+            expect(target.diagonal.slice(0, 2)).toBeDeepCloseTo(S, 3);
         });
     });
 
@@ -150,7 +149,7 @@ describe('Singular value decomposition', () => {
 
         it('left singular vectors', () => {
             var U = [[0, 0], [0, 0]];
-            target.leftSingularVectors.should.approximatelyDeep(U, 1e-6);
+            expect(target.leftSingularVectors).toBeDeepCloseTo(U, 6);
         });
 
         it('right singular vectors', () => {
@@ -158,12 +157,12 @@ describe('Singular value decomposition', () => {
                 [0.349918371807964, 0.421375287684580],
                 [0.547353510305727, 0.0201031031435023],
                 [0.744788648803490, -0.381169081397574]];
-            target.rightSingularVectors.subMatrix(0, 3, 0, 1).should.approximatelyDeep(V, 0.0001);
+            expect(target.rightSingularVectors.subMatrix(0, 3, 0, 1)).toBeDeepCloseTo(V, 4);
         });
 
         it('diagonal', () => {
             var S = [14.2690954992615, 0.626828232417543];
-            target.diagonal.slice(0, 2).should.approximatelyDeep(S, 0.001);
+            expect(target.diagonal.slice(0, 2)).toBeDeepCloseTo(S, 4);
         });
     });
 
@@ -197,13 +196,13 @@ describe('Singular value decomposition', () => {
 
         it('should decompose correctly', () => {
             var actual = target.leftSingularVectors.mmul(target.diagonalMatrix).mmul(target.rightSingularVectors.transpose());
-            actual.should.approximatelyDeep(value, 1e-8);
+            expect(actual).toBeDeepCloseTo(value, 8);
         });
 
         it('should find the solution', () => {
             var solution = target.solve(Matrix.columnVector(output));
             var actual = value.mmul(solution).to1DArray();
-            actual.should.approximatelyDeep(output, 1e-8);
+            expect(actual).toBeDeepCloseTo(output, 8);
         });
     });
 });
