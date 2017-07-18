@@ -22,3 +22,16 @@ describe('matrix creation', () => {
 test('error testing', () => {
     expect(() => wrap(2)).toThrow('the argument is not an array');
 });
+
+
+it('matrix methods', () => {
+    var matrix1 = wrap([0, 1, 2, 3], {rows: 2});
+    var matrix2 = wrap([
+        [1, 0],
+        [0, 1]
+    ]);
+
+    expect((matrix1.mmul(matrix2)).data).toEqual([0, 1, 2, 3]);
+    expect((matrix2.mmul(matrix1)).data).toEqual([0, 1, 2, 3]);
+});
+
