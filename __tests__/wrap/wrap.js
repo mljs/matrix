@@ -31,7 +31,12 @@ it('matrix methods', () => {
         [0, 1]
     ]);
 
-    expect(matrix1.mmul(matrix2)).toBeInstanceOf(Matrix);
-    expect(matrix2.mmul(matrix1)).toBeInstanceOf(Matrix);
+    var result = matrix1.mmul(matrix2);
+    expect(result).toBeInstanceOf(Matrix);
+    expect(result.to2DArray()).toEqual([[0, 1], [2, 3]]);
+
+    result = matrix2.mmul(matrix1);
+    expect(result).toBeInstanceOf(Matrix);
+    expect(result.to2DArray()).toEqual([[0, 1], [2, 3]]);
 });
 
