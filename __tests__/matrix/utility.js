@@ -115,6 +115,11 @@ describe('utility methods', () => {
         expect(m1.norm()).toBeCloseTo(5.7445626465380286, 2);
     });
 
+    it('norm Frobenius 2', () => {
+        var m1 = new Matrix([[1, 1, 1], [3, 3, 3], [1, 1, 1]]);
+        expect(m1.norm('frobenius')).toBeCloseTo(5.7445626465380286, 2);
+    });
+
     it('norm max', () => {
         var m1 = new Matrix([[1, 1, 1], [3, 3, 3], [1, 1, 1]]);
         expect(m1.norm('max')).toBe(3);
