@@ -110,13 +110,13 @@ describe('utility methods', function () {
     });
 
     it('norm Frobenius', function () {
-        var m1 = new Matrix([[1,1,1],[3,3,3],[1,1,1]]);
+        var m1 = new Matrix([[1, 1, 1], [3, 3, 3], [1, 1, 1]]);
         m1.norm().should.approximately(5.7445626465380286, 1e-2);
     });
 
     it('norm max', function () {
-        var m1 = new Matrix([[1,1,1],[3,3,3],[1,1,1]]);
-        m1.norm(type = "max").should.equal(3);
+        var m1 = new Matrix([[1, 1, 1], [3, 3, 3], [1, 1, 1]]);
+        m1.norm('max').should.equal(3);
     });
 
     it('transpose rectangular', function () {

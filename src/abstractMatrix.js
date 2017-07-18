@@ -928,18 +928,18 @@ export default function AbstractMatrix(superCtor) {
          * @param {string} type - "frob" (default) ou "max" return resp. the Frobenius norm and the max norm.
          * @return {number}
          */
-        norm(type = "frob") {
+        norm(type = 'frob') {
             var result = 0;
-            if (type == "max") {
+            if (type === 'max') {
                 return this.max();
             } else { // by default, norm = "frobenius"
-                for(var i = 0; i < this.rows; i++){
-                    for(var j = 0; j < this.columns; j++){
-                         result = result + Math.abs(this.get(i,j)) * Math.abs(this.get(i,j));
-                     }
-                 }
-                 return Math.sqrt(result); 
-            } 
+                for (var i = 0; i < this.rows; i++) {
+                    for (var j = 0; j < this.columns; j++) {
+                        result = result + Math.abs(this.get(i, j)) * Math.abs(this.get(i, j));
+                    }
+                }
+                return Math.sqrt(result);
+            }
         }
 
         /**
