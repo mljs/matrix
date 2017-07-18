@@ -54,7 +54,7 @@
     "eslint-config-cheminfo": "^1.5.2",
     "eslint-plugin-no-only-tests": "^1.1.0",
     "jest-cli": "^20.0.3",
-    "jest-matcher-deep-close-to": "^0.1.0",
+    "jest-matcher-deep-close-to": "^1.0.0",
     "mathjs": "^3.2.1",
     "npm-run-all": "^4.0.1",
     "numeric": "^1.2.6",

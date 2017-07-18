@@ -1522,9 +1522,9 @@ jest-jasmine2@^20.0.3:
     once "^1.4.0"
     p-map "^1.1.1"
 
-jest-matcher-deep-close-to@^0.1.0:
-  version "0.1.0"
-  resolved "https://registry.yarnpkg.com/jest-matcher-deep-close-to/-/jest-matcher-deep-close-to-0.1.0.tgz#be4b9ed2352deab5695ff85238eabb29e795403e"
+jest-matcher-deep-close-to@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/jest-matcher-deep-close-to/-/jest-matcher-deep-close-to-1.0.0.tgz#d2e3a2426cbecd502395ec65e0cb4763d2ece250"
 
 jest-matcher-utils@^20.0.3:
   version "20.0.3"
