@@ -478,8 +478,7 @@ SingularValueDecomposition.prototype = {
         return this.solve(Matrix.diag(value));
     },
     /**
-     * Get the inverse of the matrix. We compute the inverse of a matrix using SVD when this matrix is singular or ill-conditioned.
-     * Example : 
+     * Get the inverse of the matrix. We compute the inverse of a matrix using SVD when this matrix is singular or ill-conditioned. Example :
      * var svd = SingularValueDecomposition(A);
      * var inverseA = svd.inverse();
      * @return {Matrix} - The approximation of the inverse of the matrix
