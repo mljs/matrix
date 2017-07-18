@@ -116,7 +116,7 @@ describe('utility methods', function () {
 
     it('norm max', function () {
         var m1 = new Matrix([[1,1,1],[3,3,3],[1,1,1]]);
-        m1.norm().should.equal(3);
+        m1.norm(type = "max").should.equal(3);
     });
 
     it('transpose rectangular', function () {
