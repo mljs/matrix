@@ -933,9 +933,9 @@ export default function AbstractMatrix(superCtor) {
             if (type == "max") {
                 return this.max();
             } else { // by default, norm = "frobenius"
-                for(var i = 0; i < A.rows; i++){
-                    for(var j = 0; j < A.columns; j++){
-                         result = result + Math.abs(A.get(i,j)) * Math.abs(A.get(i,j));
+                for(var i = 0; i < this.rows; i++){
+                    for(var j = 0; j < this.columns; j++){
+                         result = result + Math.abs(this.get(i,j)) * Math.abs(this.get(i,j));
                      }
                  }
                  return Math.sqrt(result); 
