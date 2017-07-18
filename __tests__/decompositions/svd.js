@@ -176,7 +176,7 @@ describe('Singular value decomposition', () => {
 
         expect(target1.rightSingularVectors).toEqual(target2.leftSingularVectors);
         expect(target1.leftSingularVectors).toEqual(target2.rightSingularVectors);
-        expect(target1.diagonalMatrix).toEqual(target2.diagonalMatrix).toBeCloseTo();
+        expect(target1.diagonalMatrix).toEqual(target2.diagonalMatrix);
     });
 
     describe('solve', () => {
