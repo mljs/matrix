@@ -46,6 +46,14 @@ function QrDecomposition(value) {
 }
 
 QrDecomposition.prototype = {
+    /**
+     * Solve a problem of least square (Ax=b) by using the QR decomposition. Useful when A is rectangular, but not working when A is singular.
+     * Example : We search to approximate x, with A matrix shape m*n, x vector size n, b vector size m (m > n). We will use :
+     * var qr = QrDecomposition(A);
+     * var x = qr.solve(b);
+     * @param {Matrix} value - Matrix 1D which is the vector b (in the equation Ax = b)
+     * @return {Matrix} - The vector x
+     */
     solve: function (value) {
         value = Matrix.checkMatrix(value);
 

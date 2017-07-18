@@ -429,6 +429,14 @@ SingularValueDecomposition.prototype = {
     get diagonalMatrix() {
         return Matrix.diag(this.s);
     },
+    /**
+     * Solve a problem of least square (Ax=b) by using the SVD. Useful when A is singular. When A is not singular, it would be better to use qr.solve(value).
+     * Example : We search to approximate x, with A matrix shape m*n, x vector size n, b vector size m (m > n). We will use :
+     * var svd = SingularValueDecomposition(A);
+     * var x = svd.solve(b);
+     * @param {Matrix} value - Matrix 1D which is the vector b (in the equation Ax = b)
+     * @return {Matrix} - The vector x
+     */
     solve: function (value) {
 
         var Y = value;
@@ -469,6 +477,12 @@ SingularValueDecomposition.prototype = {
     solveForDiagonal: function (value) {
         return this.solve(Matrix.diag(value));
     },
+    /**
+     * Get the inverse of the matrix. We compute the inverse of a matrix using SVD when this matrix is singular or ill-conditioned. Example :
+     * var svd = SingularValueDecomposition(A);
+     * var inverseA = svd.inverse();
+     * @return {Matrix} - The approximation of the inverse of the matrix
+     */
     inverse: function () {
         var V = this.V;
         var e = this.threshold;
