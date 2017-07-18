@@ -110,6 +110,21 @@ describe('utility methods', () => {
         expect(() => m2.det()).toThrow(/square/);
     });
 
+    it('norm Frobenius', () => {
+        var m1 = new Matrix([[1, 1, 1], [3, 3, 3], [1, 1, 1]]);
+        expect(m1.norm()).toBeCloseTo(5.7445626465380286, 2);
+    });
+
+    it('norm Frobenius 2', () => {
+        var m1 = new Matrix([[1, 1, 1], [3, 3, 3], [1, 1, 1]]);
+        expect(m1.norm('frobenius')).toBeCloseTo(5.7445626465380286, 2);
+    });
+
+    it('norm max', () => {
+        var m1 = new Matrix([[1, 1, 1], [3, 3, 3], [1, 1, 1]]);
+        expect(m1.norm('max')).toBe(3);
+    });
+
     it('transpose rectangular', () => {
         var matrix = new Matrix([[0, 1, 2], [3, 4, 5]]);
         var transpose = matrix.transpose();
