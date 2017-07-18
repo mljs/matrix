@@ -109,6 +109,11 @@ describe('utility methods', function () {
         (() => m2.det()).should.throw(/square/);
     });
 
+    it('norm Frobenius', function () {
+        var m1 = Matrix([[1,1,1],[3,3,3],[1,1,1]]);
+        m1.norm().should.approximately(5.7445626465380286, 1e-2);
+    });
+
     it('transpose rectangular', function () {
         var matrix = new Matrix([[0, 1, 2], [3, 4, 5]]);
         var transpose = matrix.transpose();

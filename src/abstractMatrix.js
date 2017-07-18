@@ -924,6 +924,25 @@ export default function AbstractMatrix(superCtor) {
         }
 
         /**
+         * Returns the norm of a matrix.
+         * @param {string} type - "frob" (default) ou "max" return resp. the Frobenius norm and the max norm.
+         * @return {number}
+         */
+        norm(type = "frob") {
+            var result = 0;
+            if (type == "max") {
+                return this.max();
+            } else { // by default, norm = "frobenius"
+                for(var i = 0; i < A.rows; i++){
+                    for(var j = 0; j < A.columns; j++){
+                         result = result + Math.abs(A.get(i,j))**2;
+                     }
+                 }
+                 return Math.sqrt(result); 
+            } 
+        }
+
+        /**
          * Computes the cumulative sum of the matrix elements (in place, row by row)
          * @return {Matrix} this
          */
