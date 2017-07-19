@@ -50,18 +50,18 @@
     "babel-plugin-transform-es2015-modules-commonjs": "^6.24.1",
     "benchmark": "^2.1.0",
     "csv-parse": "^1.0.0",
-    "eslint": "^3.8.0",
+    "eslint": "^4.2.0",
     "eslint-config-cheminfo": "^1.5.2",
-    "eslint-plugin-no-only-tests": "^1.1.0",
-    "jest-cli": "^20.0.3",
+    "eslint-plugin-no-only-tests": "^2.0.0",
+    "jest-cli": "^20.0.4",
     "jest-matcher-deep-close-to": "^1.0.0",
-    "mathjs": "^3.2.1",
+    "mathjs": "^3.14.2",
     "npm-run-all": "^4.0.1",
     "numeric": "^1.2.6",
     "pretty-hrtime": "^1.0.0",
-    "rollup": "^0.41.6"
+    "rollup": "^0.45.2"
   },
   "dependencies": {
-    "ml-array-rescale": "^1.0.0"
+    "ml-array-rescale": "^1.1.0"
   }
 }

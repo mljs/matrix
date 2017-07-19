@@ -1,9 +1,11 @@
 import LuDecomposition from './dc/lu';
 import SvDecomposition from './dc/svd';
 import rescale from 'ml-array-rescale';
-import {checkRowVector, checkRowIndex, checkColumnIndex, checkColumnVector,
-        checkRange, checkIndices,
-        sumByRow, sumByColumn, sumAll} from './util';
+import {
+    checkRowVector, checkRowIndex, checkColumnIndex, checkColumnVector,
+    checkRange, checkIndices,
+    sumByRow, sumByColumn, sumAll
+} from './util';
 import MatrixTransposeView from './views/transpose';
 import MatrixRowView from './views/row';
 import MatrixSubView from './views/sub';
