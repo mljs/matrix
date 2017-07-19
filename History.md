@@ -1,3 +1,25 @@
+<a name="4.0.0"></a>
+# [4.0.0](https://github.com/mljs/matrix/compare/v3.0.0...v4.0.0) (2017-07-19)
+
+
+### Code Refactoring
+
+* remove dependency on ml-array-utils ([1e7119d](https://github.com/mljs/matrix/commit/1e7119d))
+
+
+### Features
+
+* add norm method ([#57](https://github.com/mljs/matrix/issues/57)) ([221391a](https://github.com/mljs/matrix/commit/221391a))
+* allows to select only rows or columns as view ([#51](https://github.com/mljs/matrix/issues/51)) ([46eb916](https://github.com/mljs/matrix/commit/46eb916))
+* **wrap:** create a 2D or 1D WrapperMatrix ([#52](https://github.com/mljs/matrix/issues/52)) ([7900d67](https://github.com/mljs/matrix/commit/7900d67))
+
+
+### BREAKING CHANGES
+
+* The new ml-array-rescale dependency removes support for Node 4
+
+
+
 <a name="3.0.0"></a>
 # [3.0.0](https://github.com/mljs/matrix/compare/v2.3.0...v3.0.0) (2017-04-25)
 
