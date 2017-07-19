@@ -1,4 +1,4 @@
-import Matrix from '../matrix';
+import {Matrix, WrapperMatrix2D} from '..';
 
 /**
  * @class LuDecomposition
@@ -7,7 +7,7 @@ import Matrix from '../matrix';
  */
 export default class LuDecomposition {
     constructor(matrix) {
-        matrix = Matrix.checkMatrix(matrix);
+        matrix = WrapperMatrix2D.checkMatrix(matrix);
 
         var lu = matrix.clone();
         var rows = lu.rows;

@@ -1,4 +1,4 @@
-import Matrix from '../matrix';
+import {Matrix, WrapperMatrix2D} from '..';
 import {hypotenuse, getFilled2DArray} from './util';
 
 /**
@@ -14,7 +14,7 @@ export default class EigenvalueDecomposition {
             assumeSymmetric = false
         } = options;
 
-        matrix = Matrix.checkMatrix(matrix);
+        matrix = WrapperMatrix2D.checkMatrix(matrix);
         if (!matrix.isSquare()) {
             throw new Error('Matrix is not a square matrix');
         }

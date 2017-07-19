@@ -1,4 +1,4 @@
-import Matrix from './matrix';
+import {Matrix, WrapperMatrix2D} from '..';
 
 import LuDecomposition from './dc/lu';
 import QrDecomposition from './dc/qr';
@@ -11,7 +11,7 @@ import SingularValueDecomposition from './dc/svd';
  * @return {Matrix}
  */
 export function inverse(matrix, useSVD = false) {
-    matrix = Matrix.checkMatrix(matrix);
+    matrix = WrapperMatrix2D.checkMatrix(matrix);
     if (useSVD) {
         return SingularValueDecomposition(matrix).inverse();
     } else {
@@ -27,8 +27,8 @@ export function inverse(matrix, useSVD = false) {
  * @return {Matrix}
  */
 export function solve(leftHandSide, rightHandSide, useSVD = false) {
-    leftHandSide = Matrix.checkMatrix(leftHandSide);
-    rightHandSide = Matrix.checkMatrix(rightHandSide);
+    leftHandSide = WrapperMatrix2D.checkMatrix(leftHandSide);
+    rightHandSide = WrapperMatrix2D.checkMatrix(rightHandSide);
     if (useSVD) {
         return SingularValueDecomposition(leftHandSide).solve(rightHandSide);
     } else {

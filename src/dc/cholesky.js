@@ -1,4 +1,4 @@
-import Matrix from '../matrix';
+import {Matrix, WrapperMatrix2D} from '..';
 
 /**
  * @class CholeskyDecomposition
@@ -7,7 +7,7 @@ import Matrix from '../matrix';
  */
 export default class CholeskyDecomposition {
     constructor(value) {
-        value = Matrix.checkMatrix(value);
+        value = WrapperMatrix2D.checkMatrix(value);
         if (!value.isSymmetric()) {
             throw new Error('Matrix is not symmetric');
         }
@@ -27,11 +27,11 @@ export default class CholeskyDecomposition {
                 for (i = 0; i < k; i++) {
                     s += Lrowk[i] * Lrowj[i];
                 }
-                Lrowj[k] = s = (a[j][k] - s) / l[k][k];
+                Lrowj[k] = s = (a.get(j, k) - s) / l[k][k];
                 d = d + s * s;
             }
 
-            d = a[j][j] - d;
+            d = a.get(j, j) - d;
 
             positiveDefinite &= (d > 0);
             l[j][j] = Math.sqrt(Math.max(d, 0));
@@ -53,7 +53,7 @@ export default class CholeskyDecomposition {
      * @return {Matrix}
      */
     solve(value) {
-        value = Matrix.checkMatrix(value);
+        value = WrapperMatrix2D.checkMatrix(value);
 
         var l = this.L;
         var dimension = l.rows;

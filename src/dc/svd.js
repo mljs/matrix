@@ -1,4 +1,4 @@
-import Matrix from '../matrix';
+import {Matrix, WrapperMatrix2D} from '..';
 import {hypotenuse, getFilled2DArray} from './util';
 
 /**
@@ -12,7 +12,7 @@ import {hypotenuse, getFilled2DArray} from './util';
  */
 export default class SingularValueDecomposition {
     constructor(value, options = {}) {
-        value = Matrix.checkMatrix(value);
+        value = WrapperMatrix2D.checkMatrix(value);
 
         var m = value.rows;
         var n = value.columns;
