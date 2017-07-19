@@ -1,4 +1,4 @@
-import {Matrix, WrapperMatrix2D} from '..';
+import {Matrix, WrapperMatrix2D} from '../index';
 
 /**
  * @class LuDecomposition
