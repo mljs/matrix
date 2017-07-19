@@ -508,7 +508,7 @@ export default class SingularValueDecomposition {
         return this.s;
     }
 
-// https://github.com/accord-net/framework/blob/development/Sources/Accord.Math/Decompositions/SingularValueDecomposition.cs
+    // https://github.com/accord-net/framework/blob/development/Sources/Accord.Math/Decompositions/SingularValueDecomposition.cs
     get threshold() {
         return (Math.pow(2, -52) / 2) * Math.max(this.m, this.n) * this.s[0];
     }

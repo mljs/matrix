@@ -121,7 +121,7 @@ export default class LuDecomposition {
         return X;
     }
 
-    get determinant(){
+    get determinant() {
         var data = this.LU;
         if (!data.isSquare()) {
             throw new Error('Matrix must be square');
@@ -134,7 +134,7 @@ export default class LuDecomposition {
         return determinant;
     }
 
-    get lowerTriangularMatrix(){
+    get lowerTriangularMatrix() {
         var data = this.LU;
         var rows = data.rows;
         var columns = data.columns;
@@ -153,7 +153,7 @@ export default class LuDecomposition {
         return X;
     }
 
-    get upperTriangularMatrix(){
+    get upperTriangularMatrix() {
         var data = this.LU;
         var rows = data.rows;
         var columns = data.columns;
@@ -170,7 +170,7 @@ export default class LuDecomposition {
         return X;
     }
 
-    get pivotPermutationVector(){
+    get pivotPermutationVector() {
         return this.pivotVector.slice();
     }
 }
