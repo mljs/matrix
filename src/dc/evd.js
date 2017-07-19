@@ -1,7 +1,12 @@
 import Matrix from '../matrix';
 import {hypotenuse, getFilled2DArray} from './util';
 
-// https://github.com/lutzroeder/Mapack/blob/master/Source/EigenvalueDecomposition.cs
+/**
+ * @class EigenvalueDecomposition
+ * @link https://github.com/lutzroeder/Mapack/blob/master/Source/EigenvalueDecomposition.cs
+ * @param {*} matrix
+ * @param {object} [options]
+ */
 export default class EigenvalueDecomposition {
     constructor(matrix, options = {}) {
         const {

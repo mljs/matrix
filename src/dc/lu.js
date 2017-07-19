@@ -1,6 +1,10 @@
 import Matrix from '../matrix';
 
-// https://github.com/lutzroeder/Mapack/blob/master/Source/LuDecomposition.cs
+/**
+ * @class LuDecomposition
+ * @link https://github.com/lutzroeder/Mapack/blob/master/Source/LuDecomposition.cs
+ * @param {*} matrix
+ */
 export default class LuDecomposition {
     constructor(matrix) {
         matrix = Matrix.checkMatrix(matrix);

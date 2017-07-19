@@ -1,6 +1,10 @@
 import Matrix from '../matrix';
 
-// https://github.com/lutzroeder/Mapack/blob/master/Source/CholeskyDecomposition.cs
+/**
+ * @class CholeskyDecomposition
+ * @link https://github.com/lutzroeder/Mapack/blob/master/Source/CholeskyDecomposition.cs
+ * @param {*} value
+ */
 export default class CholeskyDecomposition {
     constructor(value) {
         value = Matrix.checkMatrix(value);

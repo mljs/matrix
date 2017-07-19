@@ -1,7 +1,11 @@
 import Matrix from '../matrix';
 import {hypotenuse} from './util';
 
-//https://github.com/lutzroeder/Mapack/blob/master/Source/QrDecomposition.cs
+/**
+ * @class QrDecomposition
+ * @link https://github.com/lutzroeder/Mapack/blob/master/Source/QrDecomposition.cs
+ * @param {*} value
+ */
 export default class QrDecomposition {
     constructor(value) {
         value = Matrix.checkMatrix(value);

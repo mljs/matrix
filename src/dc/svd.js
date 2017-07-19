@@ -1,7 +1,12 @@
 import Matrix from '../matrix';
 import {hypotenuse, getFilled2DArray} from './util';
 
-// https://github.com/lutzroeder/Mapack/blob/master/Source/SingularValueDecomposition.cs
+/**
+ * @class SingularValueDecomposition
+ * @link https://github.com/lutzroeder/Mapack/blob/master/Source/SingularValueDecomposition.cs
+ * @param {*} value
+ * @param {object} [options]
+ */
 export default class SingularValueDecomposition {
     constructor(value, options = {}) {
         value = Matrix.checkMatrix(value);
