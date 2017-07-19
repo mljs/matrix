@@ -1,4 +1,4 @@
-import Matrix from '../matrix';
+import {Matrix, WrapperMatrix2D} from '..';
 import {hypotenuse} from './util';
 
 /**
@@ -8,7 +8,7 @@ import {hypotenuse} from './util';
  */
 export default class QrDecomposition {
     constructor(value) {
-        value = Matrix.checkMatrix(value);
+        value = WrapperMatrix2D.checkMatrix(value);
 
         var qr = value.clone();
         var m = value.rows;
