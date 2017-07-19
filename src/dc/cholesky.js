@@ -1,55 +1,53 @@
 import Matrix from '../matrix';
 
-// https://github.com/lutzroeder/Mapack/blob/master/Source/CholeskyDecomposition.cs
-function CholeskyDecomposition(value) {
-    if (!(this instanceof CholeskyDecomposition)) {
-        return new CholeskyDecomposition(value);
-    }
-    value = Matrix.checkMatrix(value);
-    if (!value.isSymmetric()) {
-        throw new Error('Matrix is not symmetric');
-    }
+/**
+ * @class CholeskyDecomposition
+ * @link https://github.com/lutzroeder/Mapack/blob/master/Source/CholeskyDecomposition.cs
+ * @param {*} value
+ */
+export default class CholeskyDecomposition {
+    constructor(value) {
+        value = Matrix.checkMatrix(value);
+        if (!value.isSymmetric()) {
+            throw new Error('Matrix is not symmetric');
+        }
 
-    var a = value;
-    var dimension = a.rows;
-    var l = new Matrix(dimension, dimension);
-    var positiveDefinite = true;
-    var i, j, k;
+        var a = value;
+        var dimension = a.rows;
+        var l = new Matrix(dimension, dimension);
+        var positiveDefinite = true;
+        var i, j, k;
 
-    for (j = 0; j < dimension; j++) {
-        var Lrowj = l[j];
-        var d = 0;
-        for (k = 0; k < j; k++) {
-            var Lrowk = l[k];
-            var s = 0;
-            for (i = 0; i < k; i++) {
-                s += Lrowk[i] * Lrowj[i];
+        for (j = 0; j < dimension; j++) {
+            var Lrowj = l[j];
+            var d = 0;
+            for (k = 0; k < j; k++) {
+                var Lrowk = l[k];
+                var s = 0;
+                for (i = 0; i < k; i++) {
+                    s += Lrowk[i] * Lrowj[i];
+                }
+                Lrowj[k] = s = (a[j][k] - s) / l[k][k];
+                d = d + s * s;
             }
-            Lrowj[k] = s = (a[j][k] - s) / l[k][k];
-            d = d + s * s;
+
+            d = a[j][j] - d;
+
+            positiveDefinite &= (d > 0);
+            l[j][j] = Math.sqrt(Math.max(d, 0));
+            for (k = j + 1; k < dimension; k++) {
+                l[j][k] = 0;
+            }
         }
 
-        d = a[j][j] - d;
-
-        positiveDefinite &= (d > 0);
-        l[j][j] = Math.sqrt(Math.max(d, 0));
-        for (k = j + 1; k < dimension; k++) {
-            l[j][k] = 0;
+        if (!positiveDefinite) {
+            throw new Error('Matrix is not positive definite');
         }
+
+        this.L = l;
     }
 
-    if (!positiveDefinite) {
-        throw new Error('Matrix is not positive definite');
-    }
-
-    this.L = l;
-}
-
-CholeskyDecomposition.prototype = {
-    get lowerTriangularMatrix() {
-        return this.L;
-    },
-    solve: function (value) {
+    solve(value) {
         value = Matrix.checkMatrix(value);
 
         var l = this.L;
@@ -83,6 +81,9 @@ CholeskyDecomposition.prototype = {
 
         return B;
     }
-};
 
-export default CholeskyDecomposition;
+    get lowerTriangularMatrix() {
+        return this.L;
+    }
+}
+

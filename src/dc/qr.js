@@ -1,51 +1,52 @@
 import Matrix from '../matrix';
 import {hypotenuse} from './util';
 
-//https://github.com/lutzroeder/Mapack/blob/master/Source/QrDecomposition.cs
-function QrDecomposition(value) {
-    if (!(this instanceof QrDecomposition)) {
-        return new QrDecomposition(value);
-    }
-    value = Matrix.checkMatrix(value);
+/**
+ * @class QrDecomposition
+ * @link https://github.com/lutzroeder/Mapack/blob/master/Source/QrDecomposition.cs
+ * @param {*} value
+ */
+export default class QrDecomposition {
+    constructor(value) {
+        value = Matrix.checkMatrix(value);
 
-    var qr = value.clone();
-    var m = value.rows;
-    var n = value.columns;
-    var rdiag = new Array(n);
-    var i, j, k, s;
+        var qr = value.clone();
+        var m = value.rows;
+        var n = value.columns;
+        var rdiag = new Array(n);
+        var i, j, k, s;
 
-    for (k = 0; k < n; k++) {
-        var nrm = 0;
-        for (i = k; i < m; i++) {
-            nrm = hypotenuse(nrm, qr[i][k]);
-        }
-        if (nrm !== 0) {
-            if (qr[k][k] < 0) {
-                nrm = -nrm;
-            }
+        for (k = 0; k < n; k++) {
+            var nrm = 0;
             for (i = k; i < m; i++) {
-                qr[i][k] /= nrm;
+                nrm = hypotenuse(nrm, qr[i][k]);
             }
-            qr[k][k] += 1;
-            for (j = k + 1; j < n; j++) {
-                s = 0;
-                for (i = k; i < m; i++) {
-                    s += qr[i][k] * qr[i][j];
+            if (nrm !== 0) {
+                if (qr[k][k] < 0) {
+                    nrm = -nrm;
                 }
-                s = -s / qr[k][k];
                 for (i = k; i < m; i++) {
-                    qr[i][j] += s * qr[i][k];
+                    qr[i][k] /= nrm;
+                }
+                qr[k][k] += 1;
+                for (j = k + 1; j < n; j++) {
+                    s = 0;
+                    for (i = k; i < m; i++) {
+                        s += qr[i][k] * qr[i][j];
+                    }
+                    s = -s / qr[k][k];
+                    for (i = k; i < m; i++) {
+                        qr[i][j] += s * qr[i][k];
+                    }
                 }
             }
+            rdiag[k] = -nrm;
         }
-        rdiag[k] = -nrm;
+
+        this.QR = qr;
+        this.Rdiag = rdiag;
     }
 
-    this.QR = qr;
-    this.Rdiag = rdiag;
-}
-
-QrDecomposition.prototype = {
     /**
      * Solve a problem of least square (Ax=b) by using the QR decomposition. Useful when A is rectangular, but not working when A is singular.
      * Example : We search to approximate x, with A matrix shape m*n, x vector size n, b vector size m (m > n). We will use :
@@ -54,7 +55,7 @@ QrDecomposition.prototype = {
      * @param {Matrix} value - Matrix 1D which is the vector b (in the equation Ax = b)
      * @return {Matrix} - The vector x
      */
-    solve: function (value) {
+    solve(value) {
         value = Matrix.checkMatrix(value);
 
         var qr = this.QR;
@@ -96,8 +97,9 @@ QrDecomposition.prototype = {
         }
 
         return X.subMatrix(0, n - 1, 0, count - 1);
-    },
-    isFullRank: function () {
+    }
+
+    isFullRank() {
         var columns = this.QR.columns;
         for (var i = 0; i < columns; i++) {
             if (this.Rdiag[i] === 0) {
@@ -105,7 +107,8 @@ QrDecomposition.prototype = {
             }
         }
         return true;
-    },
+    }
+
     get upperTriangularMatrix() {
         var qr = this.QR;
         var n = qr.columns;
@@ -123,7 +126,8 @@ QrDecomposition.prototype = {
             }
         }
         return X;
-    },
+    }
+
     get orthogonalMatrix() {
         var qr = this.QR;
         var rows = qr.rows;
@@ -153,6 +157,4 @@ QrDecomposition.prototype = {
         }
         return X;
     }
-};
-
-export default QrDecomposition;
+}

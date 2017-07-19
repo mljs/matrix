@@ -1,74 +1,78 @@
 import Matrix from '../matrix';
 import {hypotenuse, getFilled2DArray} from './util';
 
-const defaultOptions = {
-    assumeSymmetric: false
-};
+/**
+ * @class EigenvalueDecomposition
+ * @link https://github.com/lutzroeder/Mapack/blob/master/Source/EigenvalueDecomposition.cs
+ * @param {*} matrix
+ * @param {object} [options]
+ */
+export default class EigenvalueDecomposition {
+    constructor(matrix, options = {}) {
+        const {
+            assumeSymmetric = false
+        } = options;
 
-// https://github.com/lutzroeder/Mapack/blob/master/Source/EigenvalueDecomposition.cs
-function EigenvalueDecomposition(matrix, options) {
-    options = Object.assign({}, defaultOptions, options);
-    if (!(this instanceof EigenvalueDecomposition)) {
-        return new EigenvalueDecomposition(matrix, options);
-    }
-    matrix = Matrix.checkMatrix(matrix);
-    if (!matrix.isSquare()) {
-        throw new Error('Matrix is not a square matrix');
-    }
-
-    var n = matrix.columns;
-    var V = getFilled2DArray(n, n, 0);
-    var d = new Array(n);
-    var e = new Array(n);
-    var value = matrix;
-    var i, j;
-
-    var isSymmetric = false;
-    if (options.assumeSymmetric) {
-        isSymmetric = true;
-    } else {
-        isSymmetric = matrix.isSymmetric();
-    }
-
-    if (isSymmetric) {
-        for (i = 0; i < n; i++) {
-            for (j = 0; j < n; j++) {
-                V[i][j] = value.get(i, j);
-            }
+        matrix = Matrix.checkMatrix(matrix);
+        if (!matrix.isSquare()) {
+            throw new Error('Matrix is not a square matrix');
         }
-        tred2(n, e, d, V);
-        tql2(n, e, d, V);
-    } else {
-        var H = getFilled2DArray(n, n, 0);
-        var ort = new Array(n);
-        for (j = 0; j < n; j++) {
+
+        var n = matrix.columns;
+        var V = getFilled2DArray(n, n, 0);
+        var d = new Array(n);
+        var e = new Array(n);
+        var value = matrix;
+        var i, j;
+
+        var isSymmetric = false;
+        if (assumeSymmetric) {
+            isSymmetric = true;
+        } else {
+            isSymmetric = matrix.isSymmetric();
+        }
+
+        if (isSymmetric) {
             for (i = 0; i < n; i++) {
-                H[i][j] = value.get(i, j);
+                for (j = 0; j < n; j++) {
+                    V[i][j] = value.get(i, j);
+                }
             }
+            tred2(n, e, d, V);
+            tql2(n, e, d, V);
+        } else {
+            var H = getFilled2DArray(n, n, 0);
+            var ort = new Array(n);
+            for (j = 0; j < n; j++) {
+                for (i = 0; i < n; i++) {
+                    H[i][j] = value.get(i, j);
+                }
+            }
+            orthes(n, H, ort, V);
+            hqr2(n, e, d, V, H);
         }
-        orthes(n, H, ort, V);
-        hqr2(n, e, d, V, H);
+
+        this.n = n;
+        this.e = e;
+        this.d = d;
+        this.V = V;
     }
 
-    this.n = n;
-    this.e = e;
-    this.d = d;
-    this.V = V;
-}
-
-EigenvalueDecomposition.prototype = {
     get realEigenvalues() {
         return this.d;
-    },
+    }
+
     get imaginaryEigenvalues() {
         return this.e;
-    },
+    }
+
     get eigenvectorMatrix() {
         if (!Matrix.isMatrix(this.V)) {
             this.V = new Matrix(this.V);
         }
         return this.V;
-    },
+    }
+
     get diagonalMatrix() {
         var n = this.n;
         var e = this.e;
@@ -88,10 +92,10 @@ EigenvalueDecomposition.prototype = {
         }
         return X;
     }
-};
+}
+
 
 function tred2(n, e, d, V) {
-
     var f, g, h, i, j, k,
         hh, scale;
 
@@ -772,5 +776,3 @@ function cdiv(xr, xi, yr, yi) {
         return [(r * xr + xi) / d, (r * xi - xr) / d];
     }
 }
-
-export default EigenvalueDecomposition;

@@ -19,8 +19,8 @@ describe('Cholesky decomposition', () => {
         expect(ltm.mmul(ltm.transpose())).toEqual(matrix);
     });
     it('should throw on bad input', () => {
-        expect(() => CHO([[0, 1], [2, 0]])).toThrow('Matrix is not symmetric');
-        expect(() => CHO([[1, 2], [2, 1]])).toThrow('Matrix is not positive definite');
+        expect(() => new CHO([[0, 1], [2, 0]])).toThrow('Matrix is not symmetric');
+        expect(() => new CHO([[1, 2], [2, 1]])).toThrow('Matrix is not positive definite');
     });
 });
 
