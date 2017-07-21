@@ -3,7 +3,7 @@ import Matrix from '../matrix';
 /**
  * @class LuDecomposition
  * @link https://github.com/lutzroeder/Mapack/blob/master/Source/LuDecomposition.cs
- * @param {*} matrix
+ * @param {Matrix} matrix
  */
 export default class LuDecomposition {
     constructor(matrix) {
@@ -72,6 +72,10 @@ export default class LuDecomposition {
         this.pivotSign = pivotSign;
     }
 
+    /**
+     *
+     * @return {boolean}
+     */
     isSingular() {
         var data = this.LU;
         var col = data.columns;
@@ -83,6 +87,11 @@ export default class LuDecomposition {
         return false;
     }
 
+    /**
+     *
+     * @param {Matrix} value
+     * @return {Matrix}
+     */
     solve(value) {
         value = Matrix.checkMatrix(value);
 
@@ -121,6 +130,10 @@ export default class LuDecomposition {
         return X;
     }
 
+    /**
+     *
+     * @return {number}
+     */
     get determinant() {
         var data = this.LU;
         if (!data.isSquare()) {
@@ -134,6 +147,10 @@ export default class LuDecomposition {
         return determinant;
     }
 
+    /**
+     *
+     * @return {Matrix}
+     */
     get lowerTriangularMatrix() {
         var data = this.LU;
         var rows = data.rows;
@@ -153,6 +170,10 @@ export default class LuDecomposition {
         return X;
     }
 
+    /**
+     *
+     * @return {Matrix}
+     */
     get upperTriangularMatrix() {
         var data = this.LU;
         var rows = data.rows;
@@ -170,6 +191,10 @@ export default class LuDecomposition {
         return X;
     }
 
+    /**
+     *
+     * @return {Array<number>}
+     */
     get pivotPermutationVector() {
         return this.pivotVector.slice();
     }

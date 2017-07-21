@@ -4,8 +4,11 @@ import {hypotenuse, getFilled2DArray} from './util';
 /**
  * @class SingularValueDecomposition
  * @link https://github.com/lutzroeder/Mapack/blob/master/Source/SingularValueDecomposition.cs
- * @param {*} value
+ * @param {Matrix} value
  * @param {object} [options]
+ * @param {boolean} [options.computeLeftSingularVectors=true]
+ * @param {boolean} [options.computeRightSingularVectors=true]
+ * @param {boolean} [options.autoTranspose=false]
  */
 export default class SingularValueDecomposition {
     constructor(value, options = {}) {
@@ -15,11 +18,14 @@ export default class SingularValueDecomposition {
         var n = value.columns;
         var nu = Math.min(m, n);
 
-        var wantu = true;
-        var wantv = true;
-        if (options.computeLeftSingularVectors === false) wantu = false;
-        if (options.computeRightSingularVectors === false) wantv = false;
-        var autoTranspose = options.autoTranspose === true;
+        const {
+            computeLeftSingularVectors = true,
+            computeRightSingularVectors = true,
+            autoTranspose = false
+        } = options;
+
+        var wantu = Boolean(computeLeftSingularVectors);
+        var wantv = Boolean(computeRightSingularVectors);
 
         var swapped = false;
         var a;
@@ -200,7 +206,7 @@ export default class SingularValueDecomposition {
 
         var pp = p - 1;
         var iter = 0;
-        var eps = Math.pow(2, -52);
+        var eps = Number.EPSILON;
         while (p > 0) {
             for (k = p - 2; k >= -1; k--) {
                 if (k === -1) {
@@ -280,7 +286,7 @@ export default class SingularValueDecomposition {
                     break;
                 }
                 case 3 : {
-                    scale = Math.max(Math.max(Math.max(Math.max(Math.abs(s[p - 1]), Math.abs(s[p - 2])), Math.abs(e[p - 2])), Math.abs(s[k])), Math.abs(e[k]));
+                    scale = Math.max(Math.abs(s[p - 1]), Math.abs(s[p - 2]), Math.abs(e[p - 2]), Math.abs(s[k]), Math.abs(e[k]));
                     sp = s[p - 1] / scale;
                     spm1 = s[p - 2] / scale;
                     epm1 = e[p - 2] / scale;
@@ -435,6 +441,11 @@ export default class SingularValueDecomposition {
         return VLU.mmul(Y);
     }
 
+    /**
+     *
+     * @param {Array<number>} value
+     * @return {Matrix}
+     */
     solveForDiagonal(value) {
         return this.solve(Matrix.diag(value));
     }
@@ -483,17 +494,28 @@ export default class SingularValueDecomposition {
         return Y;
     }
 
+    /**
+     *
+     * @return {number}
+     */
     get condition() {
         return this.s[0] / this.s[Math.min(this.m, this.n) - 1];
     }
 
+    /**
+     *
+     * @return {number}
+     */
     get norm2() {
         return this.s[0];
     }
 
+    /**
+     *
+     * @return {number}
+     */
     get rank() {
-        var eps = Math.pow(2, -52);
-        var tol = Math.max(this.m, this.n) * this.s[0] * eps;
+        var tol = Math.max(this.m, this.n) * this.s[0] * Number.EPSILON;
         var r = 0;
         var s = this.s;
         for (var i = 0, ii = s.length; i < ii; i++) {
@@ -504,15 +526,26 @@ export default class SingularValueDecomposition {
         return r;
     }
 
+    /**
+     *
+     * @return {Array<number>}
+     */
     get diagonal() {
         return this.s;
     }
 
-    // https://github.com/accord-net/framework/blob/development/Sources/Accord.Math/Decompositions/SingularValueDecomposition.cs
+    /**
+     *
+     * @return {number}
+     */
     get threshold() {
-        return (Math.pow(2, -52) / 2) * Math.max(this.m, this.n) * this.s[0];
+        return (Number.EPSILON / 2) * Math.max(this.m, this.n) * this.s[0];
     }
 
+    /**
+     *
+     * @return {Matrix}
+     */
     get leftSingularVectors() {
         if (!Matrix.isMatrix(this.U)) {
             this.U = new Matrix(this.U);
@@ -520,6 +553,10 @@ export default class SingularValueDecomposition {
         return this.U;
     }
 
+    /**
+     *
+     * @return {Matrix}
+     */
     get rightSingularVectors() {
         if (!Matrix.isMatrix(this.V)) {
             this.V = new Matrix(this.V);
@@ -527,6 +564,10 @@ export default class SingularValueDecomposition {
         return this.V;
     }
 
+    /**
+     *
+     * @return {Matrix}
+     */
     get diagonalMatrix() {
         return Matrix.diag(this.s);
     }

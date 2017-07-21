@@ -4,8 +4,9 @@ import {hypotenuse, getFilled2DArray} from './util';
 /**
  * @class EigenvalueDecomposition
  * @link https://github.com/lutzroeder/Mapack/blob/master/Source/EigenvalueDecomposition.cs
- * @param {*} matrix
+ * @param {Matrix} matrix
  * @param {object} [options]
+ * @param {boolean} [options.assumeSymmetric=false]
  */
 export default class EigenvalueDecomposition {
     constructor(matrix, options = {}) {
@@ -58,14 +59,26 @@ export default class EigenvalueDecomposition {
         this.V = V;
     }
 
+    /**
+     *
+     * @return {Array<number>}
+     */
     get realEigenvalues() {
         return this.d;
     }
 
+    /**
+     *
+     * @return {Array<number>}
+     */
     get imaginaryEigenvalues() {
         return this.e;
     }
 
+    /**
+     *
+     * @return {Matrix}
+     */
     get eigenvectorMatrix() {
         if (!Matrix.isMatrix(this.V)) {
             this.V = new Matrix(this.V);
@@ -73,6 +86,10 @@ export default class EigenvalueDecomposition {
         return this.V;
     }
 
+    /**
+     *
+     * @return {Matrix}
+     */
     get diagonalMatrix() {
         var n = this.n;
         var e = this.e;
@@ -93,7 +110,6 @@ export default class EigenvalueDecomposition {
         return X;
     }
 }
-
 
 function tred2(n, e, d, V) {
     var f, g, h, i, j, k,
@@ -219,7 +235,7 @@ function tql2(n, e, d, V) {
 
     var f = 0;
     var tst1 = 0;
-    var eps = Math.pow(2, -52);
+    var eps = Number.EPSILON;
 
     for (l = 0; l < n; l++) {
         tst1 = Math.max(tst1, Math.abs(d[l]) + Math.abs(e[l]));
@@ -401,7 +417,7 @@ function hqr2(nn, e, d, V, H) {
     var n = nn - 1;
     var low = 0;
     var high = nn - 1;
-    var eps = Math.pow(2, -52);
+    var eps = Number.EPSILON;
     var exshift = 0;
     var norm = 0;
     var p = 0;

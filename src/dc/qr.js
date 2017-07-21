@@ -4,7 +4,7 @@ import {hypotenuse} from './util';
 /**
  * @class QrDecomposition
  * @link https://github.com/lutzroeder/Mapack/blob/master/Source/QrDecomposition.cs
- * @param {*} value
+ * @param {Matrix} value
  */
 export default class QrDecomposition {
     constructor(value) {
@@ -99,6 +99,10 @@ export default class QrDecomposition {
         return X.subMatrix(0, n - 1, 0, count - 1);
     }
 
+    /**
+     *
+     * @return {boolean}
+     */
     isFullRank() {
         var columns = this.QR.columns;
         for (var i = 0; i < columns; i++) {
@@ -109,6 +113,10 @@ export default class QrDecomposition {
         return true;
     }
 
+    /**
+     *
+     * @return {Matrix}
+     */
     get upperTriangularMatrix() {
         var qr = this.QR;
         var n = qr.columns;
@@ -128,6 +136,10 @@ export default class QrDecomposition {
         return X;
     }
 
+    /**
+     *
+     * @return {Matrix}
+     */
     get orthogonalMatrix() {
         var qr = this.QR;
         var rows = qr.rows;
