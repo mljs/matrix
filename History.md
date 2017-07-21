@@ -1,3 +1,18 @@
+<a name="5.0.0"></a>
+# [5.0.0](https://github.com/mljs/matrix/compare/v4.0.0...v5.0.0) (2017-07-21)
+
+
+### Code Refactoring
+
+* change decompositions to classes ([00c18e8](https://github.com/mljs/matrix/commit/00c18e8))
+
+
+### BREAKING CHANGES
+
+* Now decompositions have to be created with "new".
+
+
+
 <a name="4.0.0"></a>
 # [4.0.0](https://github.com/mljs/matrix/compare/v3.0.0...v4.0.0) (2017-07-19)
 
