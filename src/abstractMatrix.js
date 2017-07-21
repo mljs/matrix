@@ -1619,6 +1619,20 @@ export default function AbstractMatrix(superCtor) {
             s = this.constructor[Symbol.species].diag(s);
             return V.mmul(s.mmul(U.transposeView()));
         }
+
+        /**
+         * Creates an exact and independent copy of the matrix
+         * @return {Matrix}
+         */
+        clone() {
+            var newMatrix = new this.constructor[Symbol.species](this.rows, this.columns);
+            for (var row = 0; row < this.rows; row++) {
+                for (var column = 0; column < this.columns; column++) {
+                    newMatrix.set(row, column, this.get(row, column));
+                }
+            }
+            return newMatrix;
+        }
     }
 
     Matrix.prototype.klass = 'Matrix';
