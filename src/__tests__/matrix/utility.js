@@ -1,5 +1,5 @@
-import Matrix from '../../src';
-import * as util from '../../testUtils';
+import Matrix from '../..';
+import * as util from '../../../testUtils';
 
 describe('utility methods', () => {
     var matrix;

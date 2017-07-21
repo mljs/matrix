@@ -1,4 +1,4 @@
-import Matrix from '../../src';
+import Matrix from '../..';
 
 describe('sum by row and columns', () => {
     const matrix = new Matrix([[1, 2, 3], [4, 5, 6]]);

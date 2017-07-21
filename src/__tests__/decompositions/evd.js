@@ -1,4 +1,4 @@
-import {Matrix, EVD} from '../../src';
+import {Matrix, EVD} from '../..';
 
 describe('Eigenvalue decomposition', () => {
     it('simple example', () => {

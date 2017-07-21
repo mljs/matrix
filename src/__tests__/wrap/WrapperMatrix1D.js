@@ -1,4 +1,4 @@
-import {WrapperMatrix1D} from '../../src/index';
+import {WrapperMatrix1D} from '../..';
 
 describe('manual creation', () => {
     it('default WrapperMatrix1D creation', () => {

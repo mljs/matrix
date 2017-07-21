@@ -1,4 +1,4 @@
-import {Matrix, CHO} from '../../src';
+import {Matrix, CHO} from '../..';
 
 describe('Cholesky decomposition', () => {
     it('should compute lower triangular matrix', () => {

@@ -4,7 +4,7 @@ import {
     SingularValueDecomposition, SVD,
     EigenvalueDecomposition, EVD,
     CholeskyDecomposition, CHO
-} from '../../src';
+} from '../..';
 
 describe('Decompositions exports', () => {
     it('should export full and short names', () => {

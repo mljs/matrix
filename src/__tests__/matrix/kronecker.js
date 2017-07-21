@@ -1,4 +1,4 @@
-import Matrix from '../../src';
+import Matrix from '../..';
 
 describe('Kronecker product', () => {
     it('should compute the Kronecker product', () => {

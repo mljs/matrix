@@ -1,4 +1,4 @@
-import {WrapperMatrix2D} from '../../src/index';
+import {WrapperMatrix2D} from '../..';
 
 test('simple WrapperMatrix2D creation', () => {
     var wrapperMatrix2D = new WrapperMatrix2D([

@@ -1,4 +1,4 @@
-import {Matrix, SVD} from '../../src';
+import {Matrix, SVD} from '../..';
 import {toBeDeepCloseTo} from 'jest-matcher-deep-close-to';
 expect.extend({toBeDeepCloseTo});
 
