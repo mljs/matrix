@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta charset='utf-8' />
-  <title>ml-matrix 4.0.0 | Documentation</title>
+  <title>ml-matrix 5.0.0 | Documentation</title>
   <meta name='viewport' content='width=device-width,initial-scale=1'>
   <link href='assets/bass.css' type='text/css' rel='stylesheet' />
   <link href='assets/style.css' type='text/css' rel='stylesheet' />
@@ -14,7 +14,7 @@
       <div class='fixed xs-hide fix-3 overflow-auto max-height-100'>
         <div class='py1 px2'>
           <h3 class='mb0 no-anchor'>ml-matrix</h3>
-          <div class='mb1'><code>4.0.0</code></div>
+          <div class='mb1'><code>5.0.0</code></div>
           <input
             placeholder='Filter'
             id='filter-input'
@@ -22,6 +22,154 @@
             type='text' />
           <div id='toc'>
             <ul class='list-reset h5 py1-ul'>
+              
+                
+                <li><a
+                  href='#choleskydecomposition'
+                  class=" toggle-sibling">
+                  CholeskyDecomposition
+                  <span class='icon'>▸</span>
+                </a>
+                
+                <div class='toggle-target display-none'>
+                  
+                  
+                    <ul class='list-reset py1-ul pl1'>
+                      <li class='h5'><span>Instance members</span></li>
+                      
+                      <li><a
+                        href='#CholeskyDecomposition#lowerTriangularMatrix'
+                        class='regular pre-open'>
+                        #lowerTriangularMatrix
+                      </a></li>
+                      
+                      <li><a
+                        href='#CholeskyDecomposition#solve'
+                        class='regular pre-open'>
+                        #solve
+                      </a></li>
+                      
+                    </ul>
+                  
+                  
+                  
+                </div>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#eigenvaluedecomposition'
+                  class=" toggle-sibling">
+                  EigenvalueDecomposition
+                  <span class='icon'>▸</span>
+                </a>
+                
+                <div class='toggle-target display-none'>
+                  
+                  
+                    <ul class='list-reset py1-ul pl1'>
+                      <li class='h5'><span>Instance members</span></li>
+                      
+                      <li><a
+                        href='#EigenvalueDecomposition#eigenvectorMatrix'
+                        class='regular pre-open'>
+                        #eigenvectorMatrix
+                      </a></li>
+                      
+                      <li><a
+                        href='#EigenvalueDecomposition#diagonalMatrix'
+                        class='regular pre-open'>
+                        #diagonalMatrix
+                      </a></li>
+                      
+                      <li><a
+                        href='#EigenvalueDecomposition#realEigenvalues'
+                        class='regular pre-open'>
+                        #realEigenvalues
+                      </a></li>
+                      
+                      <li><a
+                        href='#EigenvalueDecomposition#imaginaryEigenvalues'
+                        class='regular pre-open'>
+                        #imaginaryEigenvalues
+                      </a></li>
+                      
+                    </ul>
+                  
+                  
+                  
+                </div>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#inverse'
+                  class="">
+                  inverse
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#ludecomposition'
+                  class=" toggle-sibling">
+                  LuDecomposition
+                  <span class='icon'>▸</span>
+                </a>
+                
+                <div class='toggle-target display-none'>
+                  
+                  
+                    <ul class='list-reset py1-ul pl1'>
+                      <li class='h5'><span>Instance members</span></li>
+                      
+                      <li><a
+                        href='#LuDecomposition#lowerTriangularMatrix'
+                        class='regular pre-open'>
+                        #lowerTriangularMatrix
+                      </a></li>
+                      
+                      <li><a
+                        href='#LuDecomposition#upperTriangularMatrix'
+                        class='regular pre-open'>
+                        #upperTriangularMatrix
+                      </a></li>
+                      
+                      <li><a
+                        href='#LuDecomposition#pivotPermutationVector'
+                        class='regular pre-open'>
+                        #pivotPermutationVector
+                      </a></li>
+                      
+                      <li><a
+                        href='#LuDecomposition#determinant'
+                        class='regular pre-open'>
+                        #determinant
+                      </a></li>
+                      
+                      <li><a
+                        href='#LuDecomposition#solve'
+                        class='regular pre-open'>
+                        #solve
+                      </a></li>
+                      
+                      <li><a
+                        href='#LuDecomposition#isSingular'
+                        class='regular pre-open'>
+                        #isSingular
+                      </a></li>
+                      
+                    </ul>
+                  
+                  
+                  
+                </div>
+                
+                </li>
               
                 
                 <li><a
@@ -127,21 +275,105 @@
                       <li class='h5'><span>Instance members</span></li>
                       
                       <li><a
-                        href='#Matrix#subRowVector'
+                        href='#Matrix#subMatrixView'
                         class='regular pre-open'>
-                        #subRowVector
-                      </a></li>
-                      
-                      <li><a
-                        href='#Matrix#selectionView'
-                        class='regular pre-open'>
-                        #selectionView
+                        #subMatrixView
                       </a></li>
                       
                       <li><a
                         href='#Matrix#pseudoInverse'
                         class='regular pre-open'>
                         #pseudoInverse
+                      </a></li>
+                      
+                      <li><a
+                        href='#Matrix#flipColumnView'
+                        class='regular pre-open'>
+                        #flipColumnView
+                      </a></li>
+                      
+                      <li><a
+                        href='#Matrix#flipRowView'
+                        class='regular pre-open'>
+                        #flipRowView
+                      </a></li>
+                      
+                      <li><a
+                        href='#Matrix#columnView'
+                        class='regular pre-open'>
+                        #columnView
+                      </a></li>
+                      
+                      <li><a
+                        href='#Matrix#rowView'
+                        class='regular pre-open'>
+                        #rowView
+                      </a></li>
+                      
+                      <li><a
+                        href='#Matrix#transposeView'
+                        class='regular pre-open'>
+                        #transposeView
+                      </a></li>
+                      
+                      <li><a
+                        href='#Matrix#trace'
+                        class='regular pre-open'>
+                        #trace
+                      </a></li>
+                      
+                      <li><a
+                        href='#Matrix#selection'
+                        class='regular pre-open'>
+                        #selection
+                      </a></li>
+                      
+                      <li><a
+                        href='#Matrix#setSubMatrix'
+                        class='regular pre-open'>
+                        #setSubMatrix
+                      </a></li>
+                      
+                      <li><a
+                        href='#Matrix#subMatrixColumn'
+                        class='regular pre-open'>
+                        #subMatrixColumn
+                      </a></li>
+                      
+                      <li><a
+                        href='#Matrix#subMatrixRow'
+                        class='regular pre-open'>
+                        #subMatrixRow
+                      </a></li>
+                      
+                      <li><a
+                        href='#Matrix#subMatrix'
+                        class='regular pre-open'>
+                        #subMatrix
+                      </a></li>
+                      
+                      <li><a
+                        href='#Matrix#sortColumns'
+                        class='regular pre-open'>
+                        #sortColumns
+                      </a></li>
+                      
+                      <li><a
+                        href='#Matrix#sortRows'
+                        class='regular pre-open'>
+                        #sortRows
+                      </a></li>
+                      
+                      <li><a
+                        href='#Matrix#transpose'
+                        class='regular pre-open'>
+                        #transpose
+                      </a></li>
+                      
+                      <li><a
+                        href='#Matrix#kroneckerProduct'
+                        class='regular pre-open'>
+                        #kroneckerProduct
                       </a></li>
                       
                       <li><a
@@ -160,6 +392,12 @@
                         href='#Matrix#rowSelectionView'
                         class='regular pre-open'>
                         #rowSelectionView
+                      </a></li>
+                      
+                      <li><a
+                        href='#Matrix#selectionView'
+                        class='regular pre-open'>
+                        #selectionView
                       </a></li>
                       
                       <li><a
@@ -235,9 +473,9 @@
                       </a></li>
                       
                       <li><a
-                        href='#Matrix#isSquare'
+                        href='#Matrix#scaleColumns'
                         class='regular pre-open'>
-                        #isSquare
+                        #scaleColumns
                       </a></li>
                       
                       <li><a
@@ -331,9 +569,9 @@
                       </a></li>
                       
                       <li><a
-                        href='#Matrix#subMatrixView'
+                        href='#Matrix#subRowVector'
                         class='regular pre-open'>
-                        #subMatrixView
+                        #subRowVector
                       </a></li>
                       
                       <li><a
@@ -517,99 +755,9 @@
                       </a></li>
                       
                       <li><a
-                        href='#Matrix#scaleColumns'
+                        href='#Matrix#isSquare'
                         class='regular pre-open'>
-                        #scaleColumns
-                      </a></li>
-                      
-                      <li><a
-                        href='#Matrix#kroneckerProduct'
-                        class='regular pre-open'>
-                        #kroneckerProduct
-                      </a></li>
-                      
-                      <li><a
-                        href='#Matrix#transpose'
-                        class='regular pre-open'>
-                        #transpose
-                      </a></li>
-                      
-                      <li><a
-                        href='#Matrix#sortRows'
-                        class='regular pre-open'>
-                        #sortRows
-                      </a></li>
-                      
-                      <li><a
-                        href='#Matrix#sortColumns'
-                        class='regular pre-open'>
-                        #sortColumns
-                      </a></li>
-                      
-                      <li><a
-                        href='#Matrix#subMatrix'
-                        class='regular pre-open'>
-                        #subMatrix
-                      </a></li>
-                      
-                      <li><a
-                        href='#Matrix#subMatrixRow'
-                        class='regular pre-open'>
-                        #subMatrixRow
-                      </a></li>
-                      
-                      <li><a
-                        href='#Matrix#subMatrixColumn'
-                        class='regular pre-open'>
-                        #subMatrixColumn
-                      </a></li>
-                      
-                      <li><a
-                        href='#Matrix#setSubMatrix'
-                        class='regular pre-open'>
-                        #setSubMatrix
-                      </a></li>
-                      
-                      <li><a
-                        href='#Matrix#selection'
-                        class='regular pre-open'>
-                        #selection
-                      </a></li>
-                      
-                      <li><a
-                        href='#Matrix#trace'
-                        class='regular pre-open'>
-                        #trace
-                      </a></li>
-                      
-                      <li><a
-                        href='#Matrix#transposeView'
-                        class='regular pre-open'>
-                        #transposeView
-                      </a></li>
-                      
-                      <li><a
-                        href='#Matrix#rowView'
-                        class='regular pre-open'>
-                        #rowView
-                      </a></li>
-                      
-                      <li><a
-                        href='#Matrix#columnView'
-                        class='regular pre-open'>
-                        #columnView
-                      </a></li>
-                      
-                      <li><a
-                        href='#Matrix#flipRowView'
-                        class='regular pre-open'>
-                        #flipRowView
-                      </a></li>
-                      
-                      <li><a
-                        href='#Matrix#flipColumnView'
-                        class='regular pre-open'>
-                        #flipColumnView
+                        #isSquare
                       </a></li>
                       
                     </ul>
@@ -622,21 +770,135 @@
               
                 
                 <li><a
-                  href='#solve'
-                  class="">
-                  solve
-                  
+                  href='#qrdecomposition'
+                  class=" toggle-sibling">
+                  QrDecomposition
+                  <span class='icon'>▸</span>
                 </a>
+                
+                <div class='toggle-target display-none'>
+                  
+                  
+                    <ul class='list-reset py1-ul pl1'>
+                      <li class='h5'><span>Instance members</span></li>
+                      
+                      <li><a
+                        href='#QrDecomposition#solve'
+                        class='regular pre-open'>
+                        #solve
+                      </a></li>
+                      
+                      <li><a
+                        href='#QrDecomposition#isFullRank'
+                        class='regular pre-open'>
+                        #isFullRank
+                      </a></li>
+                      
+                      <li><a
+                        href='#QrDecomposition#orthogonalMatrix'
+                        class='regular pre-open'>
+                        #orthogonalMatrix
+                      </a></li>
+                      
+                      <li><a
+                        href='#QrDecomposition#upperTriangularMatrix'
+                        class='regular pre-open'>
+                        #upperTriangularMatrix
+                      </a></li>
+                      
+                    </ul>
+                  
+                  
+                  
+                </div>
                 
                 </li>
               
                 
                 <li><a
-                  href='#inverse'
-                  class="">
-                  inverse
-                  
+                  href='#singularvaluedecomposition'
+                  class=" toggle-sibling">
+                  SingularValueDecomposition
+                  <span class='icon'>▸</span>
                 </a>
+                
+                <div class='toggle-target display-none'>
+                  
+                  
+                    <ul class='list-reset py1-ul pl1'>
+                      <li class='h5'><span>Instance members</span></li>
+                      
+                      <li><a
+                        href='#SingularValueDecomposition#rank'
+                        class='regular pre-open'>
+                        #rank
+                      </a></li>
+                      
+                      <li><a
+                        href='#SingularValueDecomposition#norm2'
+                        class='regular pre-open'>
+                        #norm2
+                      </a></li>
+                      
+                      <li><a
+                        href='#SingularValueDecomposition#condition'
+                        class='regular pre-open'>
+                        #condition
+                      </a></li>
+                      
+                      <li><a
+                        href='#SingularValueDecomposition#inverse'
+                        class='regular pre-open'>
+                        #inverse
+                      </a></li>
+                      
+                      <li><a
+                        href='#SingularValueDecomposition#solveForDiagonal'
+                        class='regular pre-open'>
+                        #solveForDiagonal
+                      </a></li>
+                      
+                      <li><a
+                        href='#SingularValueDecomposition#diagonalMatrix'
+                        class='regular pre-open'>
+                        #diagonalMatrix
+                      </a></li>
+                      
+                      <li><a
+                        href='#SingularValueDecomposition#solve'
+                        class='regular pre-open'>
+                        #solve
+                      </a></li>
+                      
+                      <li><a
+                        href='#SingularValueDecomposition#rightSingularVectors'
+                        class='regular pre-open'>
+                        #rightSingularVectors
+                      </a></li>
+                      
+                      <li><a
+                        href='#SingularValueDecomposition#leftSingularVectors'
+                        class='regular pre-open'>
+                        #leftSingularVectors
+                      </a></li>
+                      
+                      <li><a
+                        href='#SingularValueDecomposition#threshold'
+                        class='regular pre-open'>
+                        #threshold
+                      </a></li>
+                      
+                      <li><a
+                        href='#SingularValueDecomposition#diagonal'
+                        class='regular pre-open'>
+                        #diagonal
+                      </a></li>
+                      
+                    </ul>
+                  
+                  
+                  
+                </div>
                 
                 </li>
               
@@ -695,12 +957,1103 @@
   
   <div class='clearfix'>
     
+    <h3 class='fl m0' id='choleskydecomposition'>
+      CholeskyDecomposition
+    </h3>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/300316d47b2aaa70fbcce038604aad4a84f5a71f/src/dc/cholesky.js#L8-L97'>
+      <span>src/dc/cholesky.js</span>
+      </a>
+    
+  </div>
+  
+
+  
+
+  <div class='pre p1 fill-light mt0'>new CholeskyDecomposition(value: <a href="#matrix">Matrix</a>)</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>value</span> <code class='quiet'>(<a href="#matrix">Matrix</a>)</code>
+	    
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Instance Members</div>
+    <div class="clearfix">
+  
+    <div class='border-bottom' id='CholeskyDecomposition#lowerTriangularMatrix'>
+      <div class="clearfix small pointer toggle-sibling">
+        <div class="py1 contain">
+            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
+            <span class='code strong strong truncate'>lowerTriangularMatrix</span>
+        </div>
+      </div>
+      <div class="clearfix display-none toggle-target">
+        <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/300316d47b2aaa70fbcce038604aad4a84f5a71f/src/dc/cholesky.js#L94-L96'>
+      <span>src/dc/cholesky.js</span>
+      </a>
+    
+  </div>
+  
+
+  
+
+  <div class='pre p1 fill-light mt0'>lowerTriangularMatrix</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="#matrix">Matrix</a></code>:
+        
+
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+      </div>
+    </div>
+  
+    <div class='border-bottom' id='CholeskyDecomposition#solve'>
+      <div class="clearfix small pointer toggle-sibling">
+        <div class="py1 contain">
+            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
+            <span class='code strong strong truncate'>solve(value)</span>
+        </div>
+      </div>
+      <div class="clearfix display-none toggle-target">
+        <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/300316d47b2aaa70fbcce038604aad4a84f5a71f/src/dc/cholesky.js#L55-L88'>
+      <span>src/dc/cholesky.js</span>
+      </a>
+    
+  </div>
+  
+
+  
+
+  <div class='pre p1 fill-light mt0'>solve(value: <a href="#matrix">Matrix</a>): <a href="#matrix">Matrix</a></div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>value</span> <code class='quiet'>(<a href="#matrix">Matrix</a>)</code>
+	    
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="#matrix">Matrix</a></code>:
+        
+
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+      </div>
+    </div>
+  
+</div>
+
+  
+
+  
+</section>
+
+          
+        
+          
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='eigenvaluedecomposition'>
+      EigenvalueDecomposition
+    </h3>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/300316d47b2aaa70fbcce038604aad4a84f5a71f/src/dc/evd.js#L11-L112'>
+      <span>src/dc/evd.js</span>
+      </a>
+    
+  </div>
+  
+
+  
+
+  <div class='pre p1 fill-light mt0'>new EigenvalueDecomposition(matrix: <a href="#matrix">Matrix</a>, options: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a>?)</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>matrix</span> <code class='quiet'>(<a href="#matrix">Matrix</a>)</code>
+	    
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>options</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a>?
+            = <code>{}</code>)</code>
+	    
+          </div>
+          
+          <table class='mt1 mb2 fixed-table h5 col-12'>
+            <colgroup>
+              <col width='30%' />
+              <col width='70%' />
+            </colgroup>
+            <thead>
+              <tr class='bold fill-light'>
+                <th>Name</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody class='mt1'>
+              
+                <tr>
+                  <td class='break-word'><span class='code bold'>options.assumeSymmetric</span> <code class='quiet'><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a></code>
+                  
+                    (default <code>false</code>)
+                  </td>
+                  <td class='break-word'><span></span></td>
+                </tr>
+              
+            </tbody>
+          </table>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Instance Members</div>
+    <div class="clearfix">
+  
+    <div class='border-bottom' id='EigenvalueDecomposition#eigenvectorMatrix'>
+      <div class="clearfix small pointer toggle-sibling">
+        <div class="py1 contain">
+            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
+            <span class='code strong strong truncate'>eigenvectorMatrix</span>
+        </div>
+      </div>
+      <div class="clearfix display-none toggle-target">
+        <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/300316d47b2aaa70fbcce038604aad4a84f5a71f/src/dc/evd.js#L82-L87'>
+      <span>src/dc/evd.js</span>
+      </a>
+    
+  </div>
+  
+
+  
+
+  <div class='pre p1 fill-light mt0'>eigenvectorMatrix</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="#matrix">Matrix</a></code>:
+        
+
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+      </div>
+    </div>
+  
+    <div class='border-bottom' id='EigenvalueDecomposition#diagonalMatrix'>
+      <div class="clearfix small pointer toggle-sibling">
+        <div class="py1 contain">
+            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
+            <span class='code strong strong truncate'>diagonalMatrix</span>
+        </div>
+      </div>
+      <div class="clearfix display-none toggle-target">
+        <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/300316d47b2aaa70fbcce038604aad4a84f5a71f/src/dc/evd.js#L93-L111'>
+      <span>src/dc/evd.js</span>
+      </a>
+    
+  </div>
+  
+
+  
+
+  <div class='pre p1 fill-light mt0'>diagonalMatrix</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="#matrix">Matrix</a></code>:
+        
+
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+      </div>
+    </div>
+  
+    <div class='border-bottom' id='EigenvalueDecomposition#realEigenvalues'>
+      <div class="clearfix small pointer toggle-sibling">
+        <div class="py1 contain">
+            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
+            <span class='code strong strong truncate'>realEigenvalues</span>
+        </div>
+      </div>
+      <div class="clearfix display-none toggle-target">
+        <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/300316d47b2aaa70fbcce038604aad4a84f5a71f/src/dc/evd.js#L66-L68'>
+      <span>src/dc/evd.js</span>
+      </a>
+    
+  </div>
+  
+
+  
+
+  <div class='pre p1 fill-light mt0'>realEigenvalues</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>></code>:
+        
+
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+      </div>
+    </div>
+  
+    <div class='border-bottom' id='EigenvalueDecomposition#imaginaryEigenvalues'>
+      <div class="clearfix small pointer toggle-sibling">
+        <div class="py1 contain">
+            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
+            <span class='code strong strong truncate'>imaginaryEigenvalues</span>
+        </div>
+      </div>
+      <div class="clearfix display-none toggle-target">
+        <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/300316d47b2aaa70fbcce038604aad4a84f5a71f/src/dc/evd.js#L74-L76'>
+      <span>src/dc/evd.js</span>
+      </a>
+    
+  </div>
+  
+
+  
+
+  <div class='pre p1 fill-light mt0'>imaginaryEigenvalues</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>></code>:
+        
+
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+      </div>
+    </div>
+  
+</div>
+
+  
+
+  
+</section>
+
+          
+        
+          
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='inverse'>
+      inverse
+    </h3>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/300316d47b2aaa70fbcce038604aad4a84f5a71f/src/decompositions.js#L13-L20'>
+      <span>src/decompositions.js</span>
+      </a>
+    
+  </div>
+  
+
+  <p>Computes the inverse of a Matrix</p>
+
+
+  <div class='pre p1 fill-light mt0'>inverse(matrix: <a href="#matrix">Matrix</a>, useSVD: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a>): <a href="#matrix">Matrix</a></div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>matrix</span> <code class='quiet'>(<a href="#matrix">Matrix</a>)</code>
+	    
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>useSVD</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a>
+            = <code>false</code>)</code>
+	    
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="#matrix">Matrix</a></code>:
+        
+
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='ludecomposition'>
+      LuDecomposition
+    </h3>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/300316d47b2aaa70fbcce038604aad4a84f5a71f/src/dc/lu.js#L8-L201'>
+      <span>src/dc/lu.js</span>
+      </a>
+    
+  </div>
+  
+
+  
+
+  <div class='pre p1 fill-light mt0'>new LuDecomposition(matrix: <a href="#matrix">Matrix</a>)</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>matrix</span> <code class='quiet'>(<a href="#matrix">Matrix</a>)</code>
+	    
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Instance Members</div>
+    <div class="clearfix">
+  
+    <div class='border-bottom' id='LuDecomposition#lowerTriangularMatrix'>
+      <div class="clearfix small pointer toggle-sibling">
+        <div class="py1 contain">
+            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
+            <span class='code strong strong truncate'>lowerTriangularMatrix</span>
+        </div>
+      </div>
+      <div class="clearfix display-none toggle-target">
+        <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/300316d47b2aaa70fbcce038604aad4a84f5a71f/src/dc/lu.js#L154-L171'>
+      <span>src/dc/lu.js</span>
+      </a>
+    
+  </div>
+  
+
+  
+
+  <div class='pre p1 fill-light mt0'>lowerTriangularMatrix</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="#matrix">Matrix</a></code>:
+        
+
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+      </div>
+    </div>
+  
+    <div class='border-bottom' id='LuDecomposition#upperTriangularMatrix'>
+      <div class="clearfix small pointer toggle-sibling">
+        <div class="py1 contain">
+            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
+            <span class='code strong strong truncate'>upperTriangularMatrix</span>
+        </div>
+      </div>
+      <div class="clearfix display-none toggle-target">
+        <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/300316d47b2aaa70fbcce038604aad4a84f5a71f/src/dc/lu.js#L177-L192'>
+      <span>src/dc/lu.js</span>
+      </a>
+    
+  </div>
+  
+
+  
+
+  <div class='pre p1 fill-light mt0'>upperTriangularMatrix</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="#matrix">Matrix</a></code>:
+        
+
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+      </div>
+    </div>
+  
+    <div class='border-bottom' id='LuDecomposition#pivotPermutationVector'>
+      <div class="clearfix small pointer toggle-sibling">
+        <div class="py1 contain">
+            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
+            <span class='code strong strong truncate'>pivotPermutationVector</span>
+        </div>
+      </div>
+      <div class="clearfix display-none toggle-target">
+        <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/300316d47b2aaa70fbcce038604aad4a84f5a71f/src/dc/lu.js#L198-L200'>
+      <span>src/dc/lu.js</span>
+      </a>
+    
+  </div>
+  
+
+  
+
+  <div class='pre p1 fill-light mt0'>pivotPermutationVector</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>></code>:
+        
+
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+      </div>
+    </div>
+  
+    <div class='border-bottom' id='LuDecomposition#determinant'>
+      <div class="clearfix small pointer toggle-sibling">
+        <div class="py1 contain">
+            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
+            <span class='code strong strong truncate'>determinant</span>
+        </div>
+      </div>
+      <div class="clearfix display-none toggle-target">
+        <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/300316d47b2aaa70fbcce038604aad4a84f5a71f/src/dc/lu.js#L137-L148'>
+      <span>src/dc/lu.js</span>
+      </a>
+    
+  </div>
+  
+
+  
+
+  <div class='pre p1 fill-light mt0'>determinant</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a></code>:
+        
+
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+      </div>
+    </div>
+  
+    <div class='border-bottom' id='LuDecomposition#solve'>
+      <div class="clearfix small pointer toggle-sibling">
+        <div class="py1 contain">
+            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
+            <span class='code strong strong truncate'>solve(value)</span>
+        </div>
+      </div>
+      <div class="clearfix display-none toggle-target">
+        <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/300316d47b2aaa70fbcce038604aad4a84f5a71f/src/dc/lu.js#L95-L131'>
+      <span>src/dc/lu.js</span>
+      </a>
+    
+  </div>
+  
+
+  
+
+  <div class='pre p1 fill-light mt0'>solve(value: <a href="#matrix">Matrix</a>): <a href="#matrix">Matrix</a></div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>value</span> <code class='quiet'>(<a href="#matrix">Matrix</a>)</code>
+	    
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="#matrix">Matrix</a></code>:
+        
+
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+      </div>
+    </div>
+  
+    <div class='border-bottom' id='LuDecomposition#isSingular'>
+      <div class="clearfix small pointer toggle-sibling">
+        <div class="py1 contain">
+            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
+            <span class='code strong strong truncate'>isSingular()</span>
+        </div>
+      </div>
+      <div class="clearfix display-none toggle-target">
+        <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/300316d47b2aaa70fbcce038604aad4a84f5a71f/src/dc/lu.js#L79-L88'>
+      <span>src/dc/lu.js</span>
+      </a>
+    
+  </div>
+  
+
+  
+
+  <div class='pre p1 fill-light mt0'>isSingular(): <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a></div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a></code>:
+        
+
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+      </div>
+    </div>
+  
+</div>
+
+  
+
+  
+</section>
+
+          
+        
+          
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
     <h3 class='fl m0' id='matrix'>
       Matrix
     </h3>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/283c9e72b09ec311bb2e34cb09fa2d9fad9178fd/src/abstractMatrix.js#L29-L1622'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/300316d47b2aaa70fbcce038604aad4a84f5a71f/src/abstractMatrix.js#L29-L1622'>
       <span>src/abstractMatrix.js</span>
       </a>
     
@@ -780,7 +2133,7 @@
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/283c9e72b09ec311bb2e34cb09fa2d9fad9178fd/src/abstractMatrix.js#L41-L53'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/300316d47b2aaa70fbcce038604aad4a84f5a71f/src/abstractMatrix.js#L41-L53'>
       <span>src/abstractMatrix.js</span>
       </a>
     
@@ -875,7 +2228,7 @@
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/283c9e72b09ec311bb2e34cb09fa2d9fad9178fd/src/abstractMatrix.js#L60-L66'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/300316d47b2aaa70fbcce038604aad4a84f5a71f/src/abstractMatrix.js#L60-L66'>
       <span>src/abstractMatrix.js</span>
       </a>
     
@@ -952,7 +2305,7 @@
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/283c9e72b09ec311bb2e34cb09fa2d9fad9178fd/src/abstractMatrix.js#L73-L79'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/300316d47b2aaa70fbcce038604aad4a84f5a71f/src/abstractMatrix.js#L73-L79'>
       <span>src/abstractMatrix.js</span>
       </a>
     
@@ -1029,7 +2382,7 @@
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/283c9e72b09ec311bb2e34cb09fa2d9fad9178fd/src/abstractMatrix.js#L87-L89'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/300316d47b2aaa70fbcce038604aad4a84f5a71f/src/abstractMatrix.js#L87-L89'>
       <span>src/abstractMatrix.js</span>
       </a>
     
@@ -1115,7 +2468,7 @@
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/283c9e72b09ec311bb2e34cb09fa2d9fad9178fd/src/abstractMatrix.js#L97-L99'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/300316d47b2aaa70fbcce038604aad4a84f5a71f/src/abstractMatrix.js#L97-L99'>
       <span>src/abstractMatrix.js</span>
       </a>
     
@@ -1201,7 +2554,7 @@
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/283c9e72b09ec311bb2e34cb09fa2d9fad9178fd/src/abstractMatrix.js#L107-L109'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/300316d47b2aaa70fbcce038604aad4a84f5a71f/src/abstractMatrix.js#L107-L109'>
       <span>src/abstractMatrix.js</span>
       </a>
     
@@ -1287,7 +2640,7 @@
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/283c9e72b09ec311bb2e34cb09fa2d9fad9178fd/src/abstractMatrix.js#L118-L127'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/300316d47b2aaa70fbcce038604aad4a84f5a71f/src/abstractMatrix.js#L118-L127'>
       <span>src/abstractMatrix.js</span>
       </a>
     
@@ -1383,7 +2736,7 @@
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/283c9e72b09ec311bb2e34cb09fa2d9fad9178fd/src/abstractMatrix.js#L137-L148'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/300316d47b2aaa70fbcce038604aad4a84f5a71f/src/abstractMatrix.js#L137-L148'>
       <span>src/abstractMatrix.js</span>
       </a>
     
@@ -1489,7 +2842,7 @@
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/283c9e72b09ec311bb2e34cb09fa2d9fad9178fd/src/abstractMatrix.js#L157-L166'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/300316d47b2aaa70fbcce038604aad4a84f5a71f/src/abstractMatrix.js#L157-L166'>
       <span>src/abstractMatrix.js</span>
       </a>
     
@@ -1586,7 +2939,7 @@
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/283c9e72b09ec311bb2e34cb09fa2d9fad9178fd/src/abstractMatrix.js#L175-L185'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/300316d47b2aaa70fbcce038604aad4a84f5a71f/src/abstractMatrix.js#L175-L185'>
       <span>src/abstractMatrix.js</span>
       </a>
     
@@ -1681,7 +3034,7 @@
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/283c9e72b09ec311bb2e34cb09fa2d9fad9178fd/src/abstractMatrix.js#L193-L205'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/300316d47b2aaa70fbcce038604aad4a84f5a71f/src/abstractMatrix.js#L193-L205'>
       <span>src/abstractMatrix.js</span>
       </a>
     
@@ -1765,7 +3118,7 @@
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/283c9e72b09ec311bb2e34cb09fa2d9fad9178fd/src/abstractMatrix.js#L213-L225'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/300316d47b2aaa70fbcce038604aad4a84f5a71f/src/abstractMatrix.js#L213-L225'>
       <span>src/abstractMatrix.js</span>
       </a>
     
@@ -1849,7 +3202,7 @@
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/283c9e72b09ec311bb2e34cb09fa2d9fad9178fd/src/abstractMatrix.js#L232-L234'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/300316d47b2aaa70fbcce038604aad4a84f5a71f/src/abstractMatrix.js#L232-L234'>
       <span>src/abstractMatrix.js</span>
       </a>
     
@@ -1926,7 +3279,7 @@
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/283c9e72b09ec311bb2e34cb09fa2d9fad9178fd/src/abstractMatrix.js#L241-L243'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/300316d47b2aaa70fbcce038604aad4a84f5a71f/src/abstractMatrix.js#L241-L243'>
       <span>src/abstractMatrix.js</span>
       </a>
     
@@ -1997,11 +3350,11 @@
     <div class='py1 quiet mt1 prose-big'>Instance Members</div>
     <div class="clearfix">
   
-    <div class='border-bottom' id='Matrix#subRowVector'>
+    <div class='border-bottom' id='Matrix#subMatrixView'>
       <div class="clearfix small pointer toggle-sibling">
         <div class="py1 contain">
             <a class='icon pin-right py1 dark-link caret-right'>▸</a>
-            <span class='code strong strong truncate'>subRowVector(vector)</span>
+            <span class='code strong strong truncate'>subMatrixView(startRow, endRow, startColumn, endColumn)</span>
         </div>
       </div>
       <div class="clearfix display-none toggle-target">
@@ -2011,17 +3364,17 @@
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/283c9e72b09ec311bb2e34cb09fa2d9fad9178fd/src/abstractMatrix.js#L542-L550'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/300316d47b2aaa70fbcce038604aad4a84f5a71f/src/abstractMatrix.js#L1517-L1519'>
       <span>src/abstractMatrix.js</span>
       </a>
     
   </div>
   
 
-  <p>Subtracts the values of a vector from each row</p>
+  <p>Returns a view of a submatrix giving the index boundaries</p>
 
 
-  <div class='pre p1 fill-light mt0'>subRowVector(vector: (<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a> | <a href="#matrix">Matrix</a>)): <a href="#matrix">Matrix</a></div>
+  <div class='pre p1 fill-light mt0'>subMatrixView(startRow: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>, endRow: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>, startColumn: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>, endColumn: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>): MatrixSubView</div>
   
   
 
@@ -2038,8 +3391,35 @@
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>vector</span> <code class='quiet'>((<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a> | <a href="#matrix">Matrix</a>))</code>
-	    Array or vector
+            <span class='code bold'>startRow</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>)</code>
+	    first row index of the submatrix
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>endRow</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>)</code>
+	    last row index of the submatrix
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>startColumn</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>)</code>
+	    first column index of the submatrix
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>endColumn</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>)</code>
+	    last column index of the submatrix
 
           </div>
           
@@ -2053,91 +3433,7 @@
   
     
       <div class='py1 quiet mt1 prose-big'>Returns</div>
-      <code><a href="#matrix">Matrix</a></code>:
-        this
-
-      
-    
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-</section>
-
-      </div>
-    </div>
-  
-    <div class='border-bottom' id='Matrix#selectionView'>
-      <div class="clearfix small pointer toggle-sibling">
-        <div class="py1 contain">
-            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
-            <span class='code strong strong truncate'>selectionView(rowIndices, columnIndices)</span>
-        </div>
-      </div>
-      <div class="clearfix display-none toggle-target">
-        <section class='p2 mb2 clearfix bg-white minishadow'>
-
-  
-  <div class='clearfix'>
-    
-    
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/283c9e72b09ec311bb2e34cb09fa2d9fad9178fd/src/abstractMatrix.js#L1530-L1532'>
-      <span>src/abstractMatrix.js</span>
-      </a>
-    
-  </div>
-  
-
-  <p>Returns a view of the cross of the row indices and the column indices</p>
-
-
-  <div class='pre p1 fill-light mt0'>selectionView(rowIndices: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>>, columnIndices: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>>): MatrixSelectionView</div>
-  
-  
-
-  
-  
-  
-  
-  
-  
-
-  
-    <div class='py1 quiet mt1 prose-big'>Parameters</div>
-    <div class='prose'>
-      
-        <div class='space-bottom0'>
-          <div>
-            <span class='code bold'>rowIndices</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>>)</code>
-	    
-          </div>
-          
-        </div>
-      
-        <div class='space-bottom0'>
-          <div>
-            <span class='code bold'>columnIndices</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>>)</code>
-	    
-          </div>
-          
-        </div>
-      
-    </div>
-  
-
-  
-
-  
-    
-      <div class='py1 quiet mt1 prose-big'>Returns</div>
-      <code>MatrixSelectionView</code>:
+      <code>MatrixSubView</code>:
         
 
       
@@ -2146,13 +3442,6 @@
 
   
 
-  
-    <div class='py1 quiet mt1 prose-big'>Example</div>
-    
-      
-      <pre class='p1 overflow-auto round fill-light'><span class="hljs-comment">// resulting vector is [[2], [2]]</span>
-<span class="hljs-keyword">var</span> matrix = <span class="hljs-keyword">new</span> Matrix([[<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>], [<span class="hljs-number">4</span>,<span class="hljs-number">5</span>,<span class="hljs-number">6</span>]]).selectionView([<span class="hljs-number">0</span>, <span class="hljs-number">0</span>], [<span class="hljs-number">1</span>])</pre>
-    
   
 
   
@@ -2179,7 +3468,7 @@
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/283c9e72b09ec311bb2e34cb09fa2d9fad9178fd/src/abstractMatrix.js#L1602-L1621'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/300316d47b2aaa70fbcce038604aad4a84f5a71f/src/abstractMatrix.js#L1602-L1621'>
       <span>src/abstractMatrix.js</span>
       </a>
     
@@ -2242,6 +3531,1185 @@
       </div>
     </div>
   
+    <div class='border-bottom' id='Matrix#flipColumnView'>
+      <div class="clearfix small pointer toggle-sibling">
+        <div class="py1 contain">
+            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
+            <span class='code strong strong truncate'>flipColumnView()</span>
+        </div>
+      </div>
+      <div class="clearfix display-none toggle-target">
+        <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/300316d47b2aaa70fbcce038604aad4a84f5a71f/src/abstractMatrix.js#L1505-L1507'>
+      <span>src/abstractMatrix.js</span>
+      </a>
+    
+  </div>
+  
+
+  <p>Returns a view of the matrix flipped in the column axis</p>
+
+
+  <div class='pre p1 fill-light mt0'>flipColumnView(): MatrixFlipColumnView</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code>MatrixFlipColumnView</code>:
+        
+
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+      </div>
+    </div>
+  
+    <div class='border-bottom' id='Matrix#flipRowView'>
+      <div class="clearfix small pointer toggle-sibling">
+        <div class="py1 contain">
+            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
+            <span class='code strong strong truncate'>flipRowView()</span>
+        </div>
+      </div>
+      <div class="clearfix display-none toggle-target">
+        <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/300316d47b2aaa70fbcce038604aad4a84f5a71f/src/abstractMatrix.js#L1497-L1499'>
+      <span>src/abstractMatrix.js</span>
+      </a>
+    
+  </div>
+  
+
+  <p>Returns a view of the matrix flipped in the row axis</p>
+
+
+  <div class='pre p1 fill-light mt0'>flipRowView(): MatrixFlipRowView</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code>MatrixFlipRowView</code>:
+        
+
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+      </div>
+    </div>
+  
+    <div class='border-bottom' id='Matrix#columnView'>
+      <div class="clearfix small pointer toggle-sibling">
+        <div class="py1 contain">
+            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
+            <span class='code strong strong truncate'>columnView(column)</span>
+        </div>
+      </div>
+      <div class="clearfix display-none toggle-target">
+        <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/300316d47b2aaa70fbcce038604aad4a84f5a71f/src/abstractMatrix.js#L1488-L1491'>
+      <span>src/abstractMatrix.js</span>
+      </a>
+    
+  </div>
+  
+
+  <p>Returns a view of the column vector with the given index</p>
+
+
+  <div class='pre p1 fill-light mt0'>columnView(column: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>): MatrixColumnView</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>column</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>)</code>
+	    column index of the vector
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code>MatrixColumnView</code>:
+        
+
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+      </div>
+    </div>
+  
+    <div class='border-bottom' id='Matrix#rowView'>
+      <div class="clearfix small pointer toggle-sibling">
+        <div class="py1 contain">
+            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
+            <span class='code strong strong truncate'>rowView(row)</span>
+        </div>
+      </div>
+      <div class="clearfix display-none toggle-target">
+        <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/300316d47b2aaa70fbcce038604aad4a84f5a71f/src/abstractMatrix.js#L1478-L1481'>
+      <span>src/abstractMatrix.js</span>
+      </a>
+    
+  </div>
+  
+
+  <p>Returns a view of the row vector with the given index</p>
+
+
+  <div class='pre p1 fill-light mt0'>rowView(row: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>): MatrixRowView</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>row</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>)</code>
+	    row index of the vector
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code>MatrixRowView</code>:
+        
+
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+      </div>
+    </div>
+  
+    <div class='border-bottom' id='Matrix#transposeView'>
+      <div class="clearfix small pointer toggle-sibling">
+        <div class="py1 contain">
+            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
+            <span class='code strong strong truncate'>transposeView()</span>
+        </div>
+      </div>
+      <div class="clearfix display-none toggle-target">
+        <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/300316d47b2aaa70fbcce038604aad4a84f5a71f/src/abstractMatrix.js#L1469-L1471'>
+      <span>src/abstractMatrix.js</span>
+      </a>
+    
+  </div>
+  
+
+  <p>Returns a view of the transposition of the matrix</p>
+
+
+  <div class='pre p1 fill-light mt0'>transposeView(): MatrixTransposeView</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code>MatrixTransposeView</code>:
+        
+
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+      </div>
+    </div>
+  
+    <div class='border-bottom' id='Matrix#trace'>
+      <div class="clearfix small pointer toggle-sibling">
+        <div class="py1 contain">
+            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
+            <span class='code strong strong truncate'>trace()</span>
+        </div>
+      </div>
+      <div class="clearfix display-none toggle-target">
+        <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/300316d47b2aaa70fbcce038604aad4a84f5a71f/src/abstractMatrix.js#L1452-L1459'>
+      <span>src/abstractMatrix.js</span>
+      </a>
+    
+  </div>
+  
+
+  <p>Returns the trace of the matrix (sum of the diagonal elements)</p>
+
+
+  <div class='pre p1 fill-light mt0'>trace(): <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a></div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a></code>:
+        
+
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+      </div>
+    </div>
+  
+    <div class='border-bottom' id='Matrix#selection'>
+      <div class="clearfix small pointer toggle-sibling">
+        <div class="py1 contain">
+            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
+            <span class='code strong strong truncate'>selection(rowIndices, columnIndices)</span>
+        </div>
+      </div>
+      <div class="clearfix display-none toggle-target">
+        <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/300316d47b2aaa70fbcce038604aad4a84f5a71f/src/abstractMatrix.js#L1435-L1446'>
+      <span>src/abstractMatrix.js</span>
+      </a>
+    
+  </div>
+  
+
+  <p>Return a new matrix based on a selection of rows and columns</p>
+
+
+  <div class='pre p1 fill-light mt0'>selection(rowIndices: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>>, columnIndices: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>>): <a href="#matrix">Matrix</a></div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>rowIndices</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>>)</code>
+	    The row indices to select. Order matters and an index can be more than once.
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>columnIndices</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>>)</code>
+	    The column indices to select. Order matters and an index can be use more than once.
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="#matrix">Matrix</a></code>:
+        The new matrix
+
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+      </div>
+    </div>
+  
+    <div class='border-bottom' id='Matrix#setSubMatrix'>
+      <div class="clearfix small pointer toggle-sibling">
+        <div class="py1 contain">
+            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
+            <span class='code strong strong truncate'>setSubMatrix(matrix, startRow, startColumn)</span>
+        </div>
+      </div>
+      <div class="clearfix display-none toggle-target">
+        <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/300316d47b2aaa70fbcce038604aad4a84f5a71f/src/abstractMatrix.js#L1416-L1427'>
+      <span>src/abstractMatrix.js</span>
+      </a>
+    
+  </div>
+  
+
+  <p>Set a part of the matrix to the given sub-matrix</p>
+
+
+  <div class='pre p1 fill-light mt0'>setSubMatrix(matrix: (<a href="#matrix">Matrix</a> | <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>>), startRow: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>, startColumn: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>): <a href="#matrix">Matrix</a></div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>matrix</span> <code class='quiet'>((<a href="#matrix">Matrix</a> | <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>>))</code>
+	    The source matrix from which to extract values.
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>startRow</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>)</code>
+	    The index of the first row to set
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>startColumn</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>)</code>
+	    The index of the first column to set
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="#matrix">Matrix</a></code>:
+        
+
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+      </div>
+    </div>
+  
+    <div class='border-bottom' id='Matrix#subMatrixColumn'>
+      <div class="clearfix small pointer toggle-sibling">
+        <div class="py1 contain">
+            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
+            <span class='code strong strong truncate'>subMatrixColumn(indices, startRow, endRow)</span>
+        </div>
+      </div>
+      <div class="clearfix display-none toggle-target">
+        <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/300316d47b2aaa70fbcce038604aad4a84f5a71f/src/abstractMatrix.js#L1390-L1407'>
+      <span>src/abstractMatrix.js</span>
+      </a>
+    
+  </div>
+  
+
+  <p>Returns a subset of the matrix based on an array of column indices</p>
+
+
+  <div class='pre p1 fill-light mt0'>subMatrixColumn(indices: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>, startRow: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>, endRow: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>): <a href="#matrix">Matrix</a></div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>indices</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>)</code>
+	    Array containing the column indices
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>startRow</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>
+            = <code>0</code>)</code>
+	    First row index
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>endRow</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>
+            = <code>this.rows-1</code>)</code>
+	    Last row index
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="#matrix">Matrix</a></code>:
+        
+
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+      </div>
+    </div>
+  
+    <div class='border-bottom' id='Matrix#subMatrixRow'>
+      <div class="clearfix small pointer toggle-sibling">
+        <div class="py1 contain">
+            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
+            <span class='code strong strong truncate'>subMatrixRow(indices, startColumn, endColumn)</span>
+        </div>
+      </div>
+      <div class="clearfix display-none toggle-target">
+        <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/300316d47b2aaa70fbcce038604aad4a84f5a71f/src/abstractMatrix.js#L1364-L1381'>
+      <span>src/abstractMatrix.js</span>
+      </a>
+    
+  </div>
+  
+
+  <p>Returns a subset of the matrix based on an array of row indices</p>
+
+
+  <div class='pre p1 fill-light mt0'>subMatrixRow(indices: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>, startColumn: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>, endColumn: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>): <a href="#matrix">Matrix</a></div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>indices</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>)</code>
+	    Array containing the row indices
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>startColumn</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>
+            = <code>0</code>)</code>
+	    First column index
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>endColumn</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>
+            = <code>this.columns-1</code>)</code>
+	    Last column index
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="#matrix">Matrix</a></code>:
+        
+
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+      </div>
+    </div>
+  
+    <div class='border-bottom' id='Matrix#subMatrix'>
+      <div class="clearfix small pointer toggle-sibling">
+        <div class="py1 contain">
+            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
+            <span class='code strong strong truncate'>subMatrix(startRow, endRow, startColumn, endColumn)</span>
+        </div>
+      </div>
+      <div class="clearfix display-none toggle-target">
+        <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/300316d47b2aaa70fbcce038604aad4a84f5a71f/src/abstractMatrix.js#L1346-L1355'>
+      <span>src/abstractMatrix.js</span>
+      </a>
+    
+  </div>
+  
+
+  <p>Returns a subset of the matrix</p>
+
+
+  <div class='pre p1 fill-light mt0'>subMatrix(startRow: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>, endRow: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>, startColumn: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>, endColumn: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>): <a href="#matrix">Matrix</a></div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>startRow</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>)</code>
+	    First row index
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>endRow</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>)</code>
+	    Last row index
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>startColumn</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>)</code>
+	    First column index
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>endColumn</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>)</code>
+	    Last column index
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="#matrix">Matrix</a></code>:
+        
+
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+      </div>
+    </div>
+  
+    <div class='border-bottom' id='Matrix#sortColumns'>
+      <div class="clearfix small pointer toggle-sibling">
+        <div class="py1 contain">
+            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
+            <span class='code strong strong truncate'>sortColumns(compareFunction)</span>
+        </div>
+      </div>
+      <div class="clearfix display-none toggle-target">
+        <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/300316d47b2aaa70fbcce038604aad4a84f5a71f/src/abstractMatrix.js#L1330-L1336'>
+      <span>src/abstractMatrix.js</span>
+      </a>
+    
+  </div>
+  
+
+  <p>Sorts the columns (in place)</p>
+
+
+  <div class='pre p1 fill-light mt0'>sortColumns(compareFunction: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function">function</a>): <a href="#matrix">Matrix</a></div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>compareFunction</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function">function</a>)</code>
+	    usual Array.prototype.sort comparison function
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="#matrix">Matrix</a></code>:
+        this
+
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+      </div>
+    </div>
+  
+    <div class='border-bottom' id='Matrix#sortRows'>
+      <div class="clearfix small pointer toggle-sibling">
+        <div class="py1 contain">
+            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
+            <span class='code strong strong truncate'>sortRows(compareFunction)</span>
+        </div>
+      </div>
+      <div class="clearfix display-none toggle-target">
+        <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/300316d47b2aaa70fbcce038604aad4a84f5a71f/src/abstractMatrix.js#L1317-L1323'>
+      <span>src/abstractMatrix.js</span>
+      </a>
+    
+  </div>
+  
+
+  <p>Sorts the rows (in place)</p>
+
+
+  <div class='pre p1 fill-light mt0'>sortRows(compareFunction: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function">function</a>): <a href="#matrix">Matrix</a></div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>compareFunction</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function">function</a>)</code>
+	    usual Array.prototype.sort comparison function
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="#matrix">Matrix</a></code>:
+        this
+
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+      </div>
+    </div>
+  
+    <div class='border-bottom' id='Matrix#transpose'>
+      <div class="clearfix small pointer toggle-sibling">
+        <div class="py1 contain">
+            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
+            <span class='code strong strong truncate'>transpose()</span>
+        </div>
+      </div>
+      <div class="clearfix display-none toggle-target">
+        <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/300316d47b2aaa70fbcce038604aad4a84f5a71f/src/abstractMatrix.js#L1302-L1310'>
+      <span>src/abstractMatrix.js</span>
+      </a>
+    
+  </div>
+  
+
+  <p>Transposes the matrix and returns a new one containing the result</p>
+
+
+  <div class='pre p1 fill-light mt0'>transpose(): <a href="#matrix">Matrix</a></div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="#matrix">Matrix</a></code>:
+        
+
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+      </div>
+    </div>
+  
+    <div class='border-bottom' id='Matrix#kroneckerProduct'>
+      <div class="clearfix small pointer toggle-sibling">
+        <div class="py1 contain">
+            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
+            <span class='code strong strong truncate'>kroneckerProduct(other)</span>
+        </div>
+      </div>
+      <div class="clearfix display-none toggle-target">
+        <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/300316d47b2aaa70fbcce038604aad4a84f5a71f/src/abstractMatrix.js#L1277-L1296'>
+      <span>src/abstractMatrix.js</span>
+      </a>
+    
+  </div>
+  
+
+  <p>Returns the Kronecker product (also known as tensor product) between this and other
+See <a href="https://en.wikipedia.org/wiki/Kronecker_product">https://en.wikipedia.org/wiki/Kronecker_product</a></p>
+
+
+  <div class='pre p1 fill-light mt0'>kroneckerProduct(other: <a href="#matrix">Matrix</a>): <a href="#matrix">Matrix</a></div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>other</span> <code class='quiet'>(<a href="#matrix">Matrix</a>)</code>
+	    
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="#matrix">Matrix</a></code>:
+        
+
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+      </div>
+    </div>
+  
     <div class='border-bottom' id='Matrix#det'>
       <div class="clearfix small pointer toggle-sibling">
         <div class="py1 contain">
@@ -2256,7 +4724,7 @@
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/283c9e72b09ec311bb2e34cb09fa2d9fad9178fd/src/abstractMatrix.js#L1565-L1595'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/300316d47b2aaa70fbcce038604aad4a84f5a71f/src/abstractMatrix.js#L1565-L1595'>
       <span>src/abstractMatrix.js</span>
       </a>
     
@@ -2325,7 +4793,7 @@
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/283c9e72b09ec311bb2e34cb09fa2d9fad9178fd/src/abstractMatrix.js#L1554-L1556'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/300316d47b2aaa70fbcce038604aad4a84f5a71f/src/abstractMatrix.js#L1554-L1556'>
       <span>src/abstractMatrix.js</span>
       </a>
     
@@ -2408,7 +4876,7 @@
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/283c9e72b09ec311bb2e34cb09fa2d9fad9178fd/src/abstractMatrix.js#L1542-L1544'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/300316d47b2aaa70fbcce038604aad4a84f5a71f/src/abstractMatrix.js#L1542-L1544'>
       <span>src/abstractMatrix.js</span>
       </a>
     
@@ -2477,6 +4945,97 @@
       </div>
     </div>
   
+    <div class='border-bottom' id='Matrix#selectionView'>
+      <div class="clearfix small pointer toggle-sibling">
+        <div class="py1 contain">
+            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
+            <span class='code strong strong truncate'>selectionView(rowIndices, columnIndices)</span>
+        </div>
+      </div>
+      <div class="clearfix display-none toggle-target">
+        <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/300316d47b2aaa70fbcce038604aad4a84f5a71f/src/abstractMatrix.js#L1530-L1532'>
+      <span>src/abstractMatrix.js</span>
+      </a>
+    
+  </div>
+  
+
+  <p>Returns a view of the cross of the row indices and the column indices</p>
+
+
+  <div class='pre p1 fill-light mt0'>selectionView(rowIndices: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>>, columnIndices: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>>): MatrixSelectionView</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>rowIndices</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>>)</code>
+	    
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>columnIndices</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>>)</code>
+	    
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code>MatrixSelectionView</code>:
+        
+
+      
+    
+  
+
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Example</div>
+    
+      
+      <pre class='p1 overflow-auto round fill-light'><span class="hljs-comment">// resulting vector is [[2], [2]]</span>
+<span class="hljs-keyword">var</span> matrix = <span class="hljs-keyword">new</span> Matrix([[<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>], [<span class="hljs-number">4</span>,<span class="hljs-number">5</span>,<span class="hljs-number">6</span>]]).selectionView([<span class="hljs-number">0</span>, <span class="hljs-number">0</span>], [<span class="hljs-number">1</span>])</pre>
+    
+  
+
+  
+
+  
+
+  
+</section>
+
+      </div>
+    </div>
+  
     <div class='border-bottom' id='Matrix#clone'>
       <div class="clearfix small pointer toggle-sibling">
         <div class="py1 contain">
@@ -2491,7 +5050,7 @@
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/283c9e72b09ec311bb2e34cb09fa2d9fad9178fd/src/matrix.js#L62-L70'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/300316d47b2aaa70fbcce038604aad4a84f5a71f/src/matrix.js#L62-L70'>
       <span>src/matrix.js</span>
       </a>
     
@@ -2554,7 +5113,7 @@
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/283c9e72b09ec311bb2e34cb09fa2d9fad9178fd/src/matrix.js#L77-L85'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/300316d47b2aaa70fbcce038604aad4a84f5a71f/src/matrix.js#L77-L85'>
       <span>src/matrix.js</span>
       </a>
     
@@ -2631,7 +5190,7 @@
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/283c9e72b09ec311bb2e34cb09fa2d9fad9178fd/src/matrix.js#L93-L103'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/300316d47b2aaa70fbcce038604aad4a84f5a71f/src/matrix.js#L93-L103'>
       <span>src/matrix.js</span>
       </a>
     
@@ -2718,7 +5277,7 @@
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/283c9e72b09ec311bb2e34cb09fa2d9fad9178fd/src/matrix.js#L110-L120'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/300316d47b2aaa70fbcce038604aad4a84f5a71f/src/matrix.js#L110-L120'>
       <span>src/matrix.js</span>
       </a>
     
@@ -2795,7 +5354,7 @@
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/283c9e72b09ec311bb2e34cb09fa2d9fad9178fd/src/matrix.js#L128-L140'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/300316d47b2aaa70fbcce038604aad4a84f5a71f/src/matrix.js#L128-L140'>
       <span>src/matrix.js</span>
       </a>
     
@@ -2882,7 +5441,7 @@
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/283c9e72b09ec311bb2e34cb09fa2d9fad9178fd/src/abstractMatrix.js#L248-L250'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/300316d47b2aaa70fbcce038604aad4a84f5a71f/src/abstractMatrix.js#L248-L250'>
       <span>src/abstractMatrix.js</span>
       </a>
     
@@ -2948,7 +5507,7 @@
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/283c9e72b09ec311bb2e34cb09fa2d9fad9178fd/src/abstractMatrix.js#L257-L269'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/300316d47b2aaa70fbcce038604aad4a84f5a71f/src/abstractMatrix.js#L257-L269'>
       <span>src/abstractMatrix.js</span>
       </a>
     
@@ -3025,7 +5584,7 @@
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/283c9e72b09ec311bb2e34cb09fa2d9fad9178fd/src/abstractMatrix.js#L275-L283'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/300316d47b2aaa70fbcce038604aad4a84f5a71f/src/abstractMatrix.js#L275-L283'>
       <span>src/abstractMatrix.js</span>
       </a>
     
@@ -3088,7 +5647,7 @@
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/283c9e72b09ec311bb2e34cb09fa2d9fad9178fd/src/abstractMatrix.js#L289-L298'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/300316d47b2aaa70fbcce038604aad4a84f5a71f/src/abstractMatrix.js#L289-L298'>
       <span>src/abstractMatrix.js</span>
       </a>
     
@@ -3151,7 +5710,7 @@
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/283c9e72b09ec311bb2e34cb09fa2d9fad9178fd/src/abstractMatrix.js#L303-L305'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/300316d47b2aaa70fbcce038604aad4a84f5a71f/src/abstractMatrix.js#L303-L305'>
       <span>src/abstractMatrix.js</span>
       </a>
     
@@ -3213,7 +5772,7 @@
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/283c9e72b09ec311bb2e34cb09fa2d9fad9178fd/src/abstractMatrix.js#L310-L312'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/300316d47b2aaa70fbcce038604aad4a84f5a71f/src/abstractMatrix.js#L310-L312'>
       <span>src/abstractMatrix.js</span>
       </a>
     
@@ -3275,7 +5834,7 @@
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/283c9e72b09ec311bb2e34cb09fa2d9fad9178fd/src/abstractMatrix.js#L317-L319'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/300316d47b2aaa70fbcce038604aad4a84f5a71f/src/abstractMatrix.js#L317-L319'>
       <span>src/abstractMatrix.js</span>
       </a>
     
@@ -3323,11 +5882,11 @@
       </div>
     </div>
   
-    <div class='border-bottom' id='Matrix#isSquare'>
+    <div class='border-bottom' id='Matrix#scaleColumns'>
       <div class="clearfix small pointer toggle-sibling">
         <div class="py1 contain">
             <a class='icon pin-right py1 dark-link caret-right'>▸</a>
-            <span class='code strong strong truncate'>isSquare()</span>
+            <span class='code strong strong truncate'>scaleColumns(min, max)</span>
         </div>
       </div>
       <div class="clearfix display-none toggle-target">
@@ -3337,26 +5896,52 @@
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/283c9e72b09ec311bb2e34cb09fa2d9fad9178fd/src/abstractMatrix.js#L324-L326'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/300316d47b2aaa70fbcce038604aad4a84f5a71f/src/abstractMatrix.js#L1253-L1268'>
       <span>src/abstractMatrix.js</span>
       </a>
     
   </div>
   
 
-  
+  <p>Returns a new column-by-column scaled matrix</p>
 
-  <div class='pre p1 fill-light mt0'>isSquare(): <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a></div>
-  
-  
 
-  
-  
-  
-  
+  <div class='pre p1 fill-light mt0'>scaleColumns(min: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>, max: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>): <a href="#matrix">Matrix</a></div>
   
   
 
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>min</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>
+            = <code>0</code>)</code>
+	    Minimum scaled value
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>max</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>
+            = <code>1</code>)</code>
+	    Maximum scaled value
+
+          </div>
+          
+        </div>
+      
+    </div>
   
 
   
@@ -3364,8 +5949,8 @@
   
     
       <div class='py1 quiet mt1 prose-big'>Returns</div>
-      <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a></code>:
-        true if the matrix has the same number of rows and columns
+      <code><a href="#matrix">Matrix</a></code>:
+        The new scaled matrix
 
       
     
@@ -3373,6 +5958,13 @@
 
   
 
+  
+    <div class='py1 quiet mt1 prose-big'>Example</div>
+    
+      
+      <pre class='p1 overflow-auto round fill-light'><span class="hljs-keyword">var</span> matrix = <span class="hljs-keyword">new</span> Matrix([[<span class="hljs-number">1</span>,<span class="hljs-number">2</span>],[<span class="hljs-number">-1</span>,<span class="hljs-number">0</span>]]);
+<span class="hljs-keyword">var</span> scaledMatrix = matrix.scaleColumns(); <span class="hljs-comment">// [[1,1],[0,0]]</span></pre>
+    
   
 
   
@@ -3399,7 +5991,7 @@
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/283c9e72b09ec311bb2e34cb09fa2d9fad9178fd/src/abstractMatrix.js#L331-L343'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/300316d47b2aaa70fbcce038604aad4a84f5a71f/src/abstractMatrix.js#L331-L343'>
       <span>src/abstractMatrix.js</span>
       </a>
     
@@ -3461,7 +6053,7 @@
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/283c9e72b09ec311bb2e34cb09fa2d9fad9178fd/src/abstractMatrix.js#L353-L355'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/300316d47b2aaa70fbcce038604aad4a84f5a71f/src/abstractMatrix.js#L353-L355'>
       <span>src/abstractMatrix.js</span>
       </a>
     
@@ -3556,7 +6148,7 @@
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/283c9e72b09ec311bb2e34cb09fa2d9fad9178fd/src/abstractMatrix.js#L364-L366'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/300316d47b2aaa70fbcce038604aad4a84f5a71f/src/abstractMatrix.js#L364-L366'>
       <span>src/abstractMatrix.js</span>
       </a>
     
@@ -3642,7 +6234,7 @@
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/283c9e72b09ec311bb2e34cb09fa2d9fad9178fd/src/abstractMatrix.js#L378-L388'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/300316d47b2aaa70fbcce038604aad4a84f5a71f/src/abstractMatrix.js#L378-L388'>
       <span>src/abstractMatrix.js</span>
       </a>
     
@@ -3736,7 +6328,7 @@ matrix.repeat(<span class="hljs-number">2</span>); <span class="hljs-comment">//
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/283c9e72b09ec311bb2e34cb09fa2d9fad9178fd/src/abstractMatrix.js#L395-L402'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/300316d47b2aaa70fbcce038604aad4a84f5a71f/src/abstractMatrix.js#L395-L402'>
       <span>src/abstractMatrix.js</span>
       </a>
     
@@ -3813,7 +6405,7 @@ matrix.repeat(<span class="hljs-number">2</span>); <span class="hljs-comment">//
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/283c9e72b09ec311bb2e34cb09fa2d9fad9178fd/src/abstractMatrix.js#L408-L410'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/300316d47b2aaa70fbcce038604aad4a84f5a71f/src/abstractMatrix.js#L408-L410'>
       <span>src/abstractMatrix.js</span>
       </a>
     
@@ -3876,7 +6468,7 @@ matrix.repeat(<span class="hljs-number">2</span>); <span class="hljs-comment">//
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/283c9e72b09ec311bb2e34cb09fa2d9fad9178fd/src/abstractMatrix.js#L417-L424'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/300316d47b2aaa70fbcce038604aad4a84f5a71f/src/abstractMatrix.js#L417-L424'>
       <span>src/abstractMatrix.js</span>
       </a>
     
@@ -3953,7 +6545,7 @@ matrix.repeat(<span class="hljs-number">2</span>); <span class="hljs-comment">//
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/283c9e72b09ec311bb2e34cb09fa2d9fad9178fd/src/abstractMatrix.js#L431-L433'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/300316d47b2aaa70fbcce038604aad4a84f5a71f/src/abstractMatrix.js#L431-L433'>
       <span>src/abstractMatrix.js</span>
       </a>
     
@@ -4030,7 +6622,7 @@ matrix.repeat(<span class="hljs-number">2</span>); <span class="hljs-comment">//
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/283c9e72b09ec311bb2e34cb09fa2d9fad9178fd/src/abstractMatrix.js#L441-L448'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/300316d47b2aaa70fbcce038604aad4a84f5a71f/src/abstractMatrix.js#L441-L448'>
       <span>src/abstractMatrix.js</span>
       </a>
     
@@ -4116,7 +6708,7 @@ matrix.repeat(<span class="hljs-number">2</span>); <span class="hljs-comment">//
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/283c9e72b09ec311bb2e34cb09fa2d9fad9178fd/src/abstractMatrix.js#L456-L465'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/300316d47b2aaa70fbcce038604aad4a84f5a71f/src/abstractMatrix.js#L456-L465'>
       <span>src/abstractMatrix.js</span>
       </a>
     
@@ -4202,7 +6794,7 @@ matrix.repeat(<span class="hljs-number">2</span>); <span class="hljs-comment">//
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/283c9e72b09ec311bb2e34cb09fa2d9fad9178fd/src/abstractMatrix.js#L472-L479'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/300316d47b2aaa70fbcce038604aad4a84f5a71f/src/abstractMatrix.js#L472-L479'>
       <span>src/abstractMatrix.js</span>
       </a>
     
@@ -4279,7 +6871,7 @@ matrix.repeat(<span class="hljs-number">2</span>); <span class="hljs-comment">//
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/283c9e72b09ec311bb2e34cb09fa2d9fad9178fd/src/abstractMatrix.js#L486-L488'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/300316d47b2aaa70fbcce038604aad4a84f5a71f/src/abstractMatrix.js#L486-L488'>
       <span>src/abstractMatrix.js</span>
       </a>
     
@@ -4356,7 +6948,7 @@ matrix.repeat(<span class="hljs-number">2</span>); <span class="hljs-comment">//
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/283c9e72b09ec311bb2e34cb09fa2d9fad9178fd/src/abstractMatrix.js#L496-L503'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/300316d47b2aaa70fbcce038604aad4a84f5a71f/src/abstractMatrix.js#L496-L503'>
       <span>src/abstractMatrix.js</span>
       </a>
     
@@ -4442,7 +7034,7 @@ matrix.repeat(<span class="hljs-number">2</span>); <span class="hljs-comment">//
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/283c9e72b09ec311bb2e34cb09fa2d9fad9178fd/src/abstractMatrix.js#L511-L520'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/300316d47b2aaa70fbcce038604aad4a84f5a71f/src/abstractMatrix.js#L511-L520'>
       <span>src/abstractMatrix.js</span>
       </a>
     
@@ -4528,7 +7120,7 @@ matrix.repeat(<span class="hljs-number">2</span>); <span class="hljs-comment">//
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/283c9e72b09ec311bb2e34cb09fa2d9fad9178fd/src/abstractMatrix.js#L527-L535'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/300316d47b2aaa70fbcce038604aad4a84f5a71f/src/abstractMatrix.js#L527-L535'>
       <span>src/abstractMatrix.js</span>
       </a>
     
@@ -4591,11 +7183,11 @@ matrix.repeat(<span class="hljs-number">2</span>); <span class="hljs-comment">//
       </div>
     </div>
   
-    <div class='border-bottom' id='Matrix#subMatrixView'>
+    <div class='border-bottom' id='Matrix#subRowVector'>
       <div class="clearfix small pointer toggle-sibling">
         <div class="py1 contain">
             <a class='icon pin-right py1 dark-link caret-right'>▸</a>
-            <span class='code strong strong truncate'>subMatrixView(startRow, endRow, startColumn, endColumn)</span>
+            <span class='code strong strong truncate'>subRowVector(vector)</span>
         </div>
       </div>
       <div class="clearfix display-none toggle-target">
@@ -4605,17 +7197,17 @@ matrix.repeat(<span class="hljs-number">2</span>); <span class="hljs-comment">//
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/283c9e72b09ec311bb2e34cb09fa2d9fad9178fd/src/abstractMatrix.js#L1517-L1519'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/300316d47b2aaa70fbcce038604aad4a84f5a71f/src/abstractMatrix.js#L542-L550'>
       <span>src/abstractMatrix.js</span>
       </a>
     
   </div>
   
 
-  <p>Returns a view of a submatrix giving the index boundaries</p>
+  <p>Subtracts the values of a vector from each row</p>
 
 
-  <div class='pre p1 fill-light mt0'>subMatrixView(startRow: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>, endRow: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>, startColumn: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>, endColumn: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>): MatrixSubView</div>
+  <div class='pre p1 fill-light mt0'>subRowVector(vector: (<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a> | <a href="#matrix">Matrix</a>)): <a href="#matrix">Matrix</a></div>
   
   
 
@@ -4632,35 +7224,8 @@ matrix.repeat(<span class="hljs-number">2</span>); <span class="hljs-comment">//
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>startRow</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>)</code>
-	    first row index of the submatrix
-
-          </div>
-          
-        </div>
-      
-        <div class='space-bottom0'>
-          <div>
-            <span class='code bold'>endRow</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>)</code>
-	    last row index of the submatrix
-
-          </div>
-          
-        </div>
-      
-        <div class='space-bottom0'>
-          <div>
-            <span class='code bold'>startColumn</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>)</code>
-	    first column index of the submatrix
-
-          </div>
-          
-        </div>
-      
-        <div class='space-bottom0'>
-          <div>
-            <span class='code bold'>endColumn</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>)</code>
-	    last column index of the submatrix
+            <span class='code bold'>vector</span> <code class='quiet'>((<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a> | <a href="#matrix">Matrix</a>))</code>
+	    Array or vector
 
           </div>
           
@@ -4674,8 +7239,8 @@ matrix.repeat(<span class="hljs-number">2</span>); <span class="hljs-comment">//
   
     
       <div class='py1 quiet mt1 prose-big'>Returns</div>
-      <code>MatrixSubView</code>:
-        
+      <code><a href="#matrix">Matrix</a></code>:
+        this
 
       
     
@@ -4709,7 +7274,7 @@ matrix.repeat(<span class="hljs-number">2</span>); <span class="hljs-comment">//
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/283c9e72b09ec311bb2e34cb09fa2d9fad9178fd/src/abstractMatrix.js#L557-L565'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/300316d47b2aaa70fbcce038604aad4a84f5a71f/src/abstractMatrix.js#L557-L565'>
       <span>src/abstractMatrix.js</span>
       </a>
     
@@ -4786,7 +7351,7 @@ matrix.repeat(<span class="hljs-number">2</span>); <span class="hljs-comment">//
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/283c9e72b09ec311bb2e34cb09fa2d9fad9178fd/src/abstractMatrix.js#L572-L580'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/300316d47b2aaa70fbcce038604aad4a84f5a71f/src/abstractMatrix.js#L572-L580'>
       <span>src/abstractMatrix.js</span>
       </a>
     
@@ -4863,7 +7428,7 @@ matrix.repeat(<span class="hljs-number">2</span>); <span class="hljs-comment">//
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/283c9e72b09ec311bb2e34cb09fa2d9fad9178fd/src/abstractMatrix.js#L587-L595'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/300316d47b2aaa70fbcce038604aad4a84f5a71f/src/abstractMatrix.js#L587-L595'>
       <span>src/abstractMatrix.js</span>
       </a>
     
@@ -4940,7 +7505,7 @@ matrix.repeat(<span class="hljs-number">2</span>); <span class="hljs-comment">//
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/283c9e72b09ec311bb2e34cb09fa2d9fad9178fd/src/abstractMatrix.js#L602-L610'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/300316d47b2aaa70fbcce038604aad4a84f5a71f/src/abstractMatrix.js#L602-L610'>
       <span>src/abstractMatrix.js</span>
       </a>
     
@@ -5017,7 +7582,7 @@ matrix.repeat(<span class="hljs-number">2</span>); <span class="hljs-comment">//
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/283c9e72b09ec311bb2e34cb09fa2d9fad9178fd/src/abstractMatrix.js#L617-L625'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/300316d47b2aaa70fbcce038604aad4a84f5a71f/src/abstractMatrix.js#L617-L625'>
       <span>src/abstractMatrix.js</span>
       </a>
     
@@ -5094,7 +7659,7 @@ matrix.repeat(<span class="hljs-number">2</span>); <span class="hljs-comment">//
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/283c9e72b09ec311bb2e34cb09fa2d9fad9178fd/src/abstractMatrix.js#L632-L640'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/300316d47b2aaa70fbcce038604aad4a84f5a71f/src/abstractMatrix.js#L632-L640'>
       <span>src/abstractMatrix.js</span>
       </a>
     
@@ -5171,7 +7736,7 @@ matrix.repeat(<span class="hljs-number">2</span>); <span class="hljs-comment">//
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/283c9e72b09ec311bb2e34cb09fa2d9fad9178fd/src/abstractMatrix.js#L648-L654'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/300316d47b2aaa70fbcce038604aad4a84f5a71f/src/abstractMatrix.js#L648-L654'>
       <span>src/abstractMatrix.js</span>
       </a>
     
@@ -5256,7 +7821,7 @@ matrix.repeat(<span class="hljs-number">2</span>); <span class="hljs-comment">//
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/283c9e72b09ec311bb2e34cb09fa2d9fad9178fd/src/abstractMatrix.js#L662-L668'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/300316d47b2aaa70fbcce038604aad4a84f5a71f/src/abstractMatrix.js#L662-L668'>
       <span>src/abstractMatrix.js</span>
       </a>
     
@@ -5341,7 +7906,7 @@ matrix.repeat(<span class="hljs-number">2</span>); <span class="hljs-comment">//
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/283c9e72b09ec311bb2e34cb09fa2d9fad9178fd/src/abstractMatrix.js#L674-L684'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/300316d47b2aaa70fbcce038604aad4a84f5a71f/src/abstractMatrix.js#L674-L684'>
       <span>src/abstractMatrix.js</span>
       </a>
     
@@ -5404,7 +7969,7 @@ matrix.repeat(<span class="hljs-number">2</span>); <span class="hljs-comment">//
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/283c9e72b09ec311bb2e34cb09fa2d9fad9178fd/src/abstractMatrix.js#L690-L703'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/300316d47b2aaa70fbcce038604aad4a84f5a71f/src/abstractMatrix.js#L690-L703'>
       <span>src/abstractMatrix.js</span>
       </a>
     
@@ -5467,7 +8032,7 @@ matrix.repeat(<span class="hljs-number">2</span>); <span class="hljs-comment">//
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/283c9e72b09ec311bb2e34cb09fa2d9fad9178fd/src/abstractMatrix.js#L709-L719'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/300316d47b2aaa70fbcce038604aad4a84f5a71f/src/abstractMatrix.js#L709-L719'>
       <span>src/abstractMatrix.js</span>
       </a>
     
@@ -5530,7 +8095,7 @@ matrix.repeat(<span class="hljs-number">2</span>); <span class="hljs-comment">//
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/283c9e72b09ec311bb2e34cb09fa2d9fad9178fd/src/abstractMatrix.js#L725-L738'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/300316d47b2aaa70fbcce038604aad4a84f5a71f/src/abstractMatrix.js#L725-L738'>
       <span>src/abstractMatrix.js</span>
       </a>
     
@@ -5593,7 +8158,7 @@ matrix.repeat(<span class="hljs-number">2</span>); <span class="hljs-comment">//
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/283c9e72b09ec311bb2e34cb09fa2d9fad9178fd/src/abstractMatrix.js#L745-L754'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/300316d47b2aaa70fbcce038604aad4a84f5a71f/src/abstractMatrix.js#L745-L754'>
       <span>src/abstractMatrix.js</span>
       </a>
     
@@ -5670,7 +8235,7 @@ matrix.repeat(<span class="hljs-number">2</span>); <span class="hljs-comment">//
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/283c9e72b09ec311bb2e34cb09fa2d9fad9178fd/src/abstractMatrix.js#L761-L772'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/300316d47b2aaa70fbcce038604aad4a84f5a71f/src/abstractMatrix.js#L761-L772'>
       <span>src/abstractMatrix.js</span>
       </a>
     
@@ -5747,7 +8312,7 @@ matrix.repeat(<span class="hljs-number">2</span>); <span class="hljs-comment">//
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/283c9e72b09ec311bb2e34cb09fa2d9fad9178fd/src/abstractMatrix.js#L779-L788'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/300316d47b2aaa70fbcce038604aad4a84f5a71f/src/abstractMatrix.js#L779-L788'>
       <span>src/abstractMatrix.js</span>
       </a>
     
@@ -5824,7 +8389,7 @@ matrix.repeat(<span class="hljs-number">2</span>); <span class="hljs-comment">//
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/283c9e72b09ec311bb2e34cb09fa2d9fad9178fd/src/abstractMatrix.js#L795-L806'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/300316d47b2aaa70fbcce038604aad4a84f5a71f/src/abstractMatrix.js#L795-L806'>
       <span>src/abstractMatrix.js</span>
       </a>
     
@@ -5901,7 +8466,7 @@ matrix.repeat(<span class="hljs-number">2</span>); <span class="hljs-comment">//
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/283c9e72b09ec311bb2e34cb09fa2d9fad9178fd/src/abstractMatrix.js#L813-L822'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/300316d47b2aaa70fbcce038604aad4a84f5a71f/src/abstractMatrix.js#L813-L822'>
       <span>src/abstractMatrix.js</span>
       </a>
     
@@ -5978,7 +8543,7 @@ matrix.repeat(<span class="hljs-number">2</span>); <span class="hljs-comment">//
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/283c9e72b09ec311bb2e34cb09fa2d9fad9178fd/src/abstractMatrix.js#L829-L840'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/300316d47b2aaa70fbcce038604aad4a84f5a71f/src/abstractMatrix.js#L829-L840'>
       <span>src/abstractMatrix.js</span>
       </a>
     
@@ -6055,7 +8620,7 @@ matrix.repeat(<span class="hljs-number">2</span>); <span class="hljs-comment">//
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/283c9e72b09ec311bb2e34cb09fa2d9fad9178fd/src/abstractMatrix.js#L847-L856'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/300316d47b2aaa70fbcce038604aad4a84f5a71f/src/abstractMatrix.js#L847-L856'>
       <span>src/abstractMatrix.js</span>
       </a>
     
@@ -6132,7 +8697,7 @@ matrix.repeat(<span class="hljs-number">2</span>); <span class="hljs-comment">//
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/283c9e72b09ec311bb2e34cb09fa2d9fad9178fd/src/abstractMatrix.js#L863-L874'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/300316d47b2aaa70fbcce038604aad4a84f5a71f/src/abstractMatrix.js#L863-L874'>
       <span>src/abstractMatrix.js</span>
       </a>
     
@@ -6209,7 +8774,7 @@ matrix.repeat(<span class="hljs-number">2</span>); <span class="hljs-comment">//
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/283c9e72b09ec311bb2e34cb09fa2d9fad9178fd/src/abstractMatrix.js#L880-L887'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/300316d47b2aaa70fbcce038604aad4a84f5a71f/src/abstractMatrix.js#L880-L887'>
       <span>src/abstractMatrix.js</span>
       </a>
     
@@ -6272,7 +8837,7 @@ matrix.repeat(<span class="hljs-number">2</span>); <span class="hljs-comment">//
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/283c9e72b09ec311bb2e34cb09fa2d9fad9178fd/src/abstractMatrix.js#L895-L904'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/300316d47b2aaa70fbcce038604aad4a84f5a71f/src/abstractMatrix.js#L895-L904'>
       <span>src/abstractMatrix.js</span>
       </a>
     
@@ -6350,7 +8915,7 @@ it returns the sum of all elements of the matrix.</p>
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/283c9e72b09ec311bb2e34cb09fa2d9fad9178fd/src/abstractMatrix.js#L910-L912'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/300316d47b2aaa70fbcce038604aad4a84f5a71f/src/abstractMatrix.js#L910-L912'>
       <span>src/abstractMatrix.js</span>
       </a>
     
@@ -6413,7 +8978,7 @@ it returns the sum of all elements of the matrix.</p>
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/283c9e72b09ec311bb2e34cb09fa2d9fad9178fd/src/abstractMatrix.js#L918-L926'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/300316d47b2aaa70fbcce038604aad4a84f5a71f/src/abstractMatrix.js#L918-L926'>
       <span>src/abstractMatrix.js</span>
       </a>
     
@@ -6476,7 +9041,7 @@ it returns the sum of all elements of the matrix.</p>
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/283c9e72b09ec311bb2e34cb09fa2d9fad9178fd/src/abstractMatrix.js#L933-L947'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/300316d47b2aaa70fbcce038604aad4a84f5a71f/src/abstractMatrix.js#L933-L947'>
       <span>src/abstractMatrix.js</span>
       </a>
     
@@ -6554,7 +9119,7 @@ it returns the sum of all elements of the matrix.</p>
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/283c9e72b09ec311bb2e34cb09fa2d9fad9178fd/src/abstractMatrix.js#L953-L962'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/300316d47b2aaa70fbcce038604aad4a84f5a71f/src/abstractMatrix.js#L953-L962'>
       <span>src/abstractMatrix.js</span>
       </a>
     
@@ -6617,7 +9182,7 @@ it returns the sum of all elements of the matrix.</p>
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/283c9e72b09ec311bb2e34cb09fa2d9fad9178fd/src/abstractMatrix.js#L969-L980'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/300316d47b2aaa70fbcce038604aad4a84f5a71f/src/abstractMatrix.js#L969-L980'>
       <span>src/abstractMatrix.js</span>
       </a>
     
@@ -6694,7 +9259,7 @@ it returns the sum of all elements of the matrix.</p>
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/283c9e72b09ec311bb2e34cb09fa2d9fad9178fd/src/abstractMatrix.js#L987-L1016'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/300316d47b2aaa70fbcce038604aad4a84f5a71f/src/abstractMatrix.js#L987-L1016'>
       <span>src/abstractMatrix.js</span>
       </a>
     
@@ -6770,7 +9335,7 @@ it returns the sum of all elements of the matrix.</p>
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/283c9e72b09ec311bb2e34cb09fa2d9fad9178fd/src/abstractMatrix.js#L1125-L1222'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/300316d47b2aaa70fbcce038604aad4a84f5a71f/src/abstractMatrix.js#L1125-L1222'>
       <span>src/abstractMatrix.js</span>
       </a>
     
@@ -6846,7 +9411,7 @@ it returns the sum of all elements of the matrix.</p>
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/283c9e72b09ec311bb2e34cb09fa2d9fad9178fd/src/abstractMatrix.js#L1230-L1242'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/300316d47b2aaa70fbcce038604aad4a84f5a71f/src/abstractMatrix.js#L1230-L1242'>
       <span>src/abstractMatrix.js</span>
       </a>
     
@@ -6920,11 +9485,11 @@ it returns the sum of all elements of the matrix.</p>
       </div>
     </div>
   
-    <div class='border-bottom' id='Matrix#scaleColumns'>
+    <div class='border-bottom' id='Matrix#isSquare'>
       <div class="clearfix small pointer toggle-sibling">
         <div class="py1 contain">
             <a class='icon pin-right py1 dark-link caret-right'>▸</a>
-            <span class='code strong strong truncate'>scaleColumns(min, max)</span>
+            <span class='code strong strong truncate'>isSquare()</span>
         </div>
       </div>
       <div class="clearfix display-none toggle-target">
@@ -6934,189 +9499,16 @@ it returns the sum of all elements of the matrix.</p>
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/283c9e72b09ec311bb2e34cb09fa2d9fad9178fd/src/abstractMatrix.js#L1253-L1268'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/300316d47b2aaa70fbcce038604aad4a84f5a71f/src/abstractMatrix.js#L324-L326'>
       <span>src/abstractMatrix.js</span>
       </a>
     
   </div>
   
 
-  <p>Returns a new column-by-column scaled matrix</p>
-
-
-  <div class='pre p1 fill-light mt0'>scaleColumns(min: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>, max: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>): <a href="#matrix">Matrix</a></div>
-  
   
 
-  
-  
-  
-  
-  
-  
-
-  
-    <div class='py1 quiet mt1 prose-big'>Parameters</div>
-    <div class='prose'>
-      
-        <div class='space-bottom0'>
-          <div>
-            <span class='code bold'>min</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>
-            = <code>0</code>)</code>
-	    Minimum scaled value
-
-          </div>
-          
-        </div>
-      
-        <div class='space-bottom0'>
-          <div>
-            <span class='code bold'>max</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>
-            = <code>1</code>)</code>
-	    Maximum scaled value
-
-          </div>
-          
-        </div>
-      
-    </div>
-  
-
-  
-
-  
-    
-      <div class='py1 quiet mt1 prose-big'>Returns</div>
-      <code><a href="#matrix">Matrix</a></code>:
-        The new scaled matrix
-
-      
-    
-  
-
-  
-
-  
-    <div class='py1 quiet mt1 prose-big'>Example</div>
-    
-      
-      <pre class='p1 overflow-auto round fill-light'><span class="hljs-keyword">var</span> matrix = <span class="hljs-keyword">new</span> Matrix([[<span class="hljs-number">1</span>,<span class="hljs-number">2</span>],[<span class="hljs-number">-1</span>,<span class="hljs-number">0</span>]]);
-<span class="hljs-keyword">var</span> scaledMatrix = matrix.scaleColumns(); <span class="hljs-comment">// [[1,1],[0,0]]</span></pre>
-    
-  
-
-  
-
-  
-
-  
-</section>
-
-      </div>
-    </div>
-  
-    <div class='border-bottom' id='Matrix#kroneckerProduct'>
-      <div class="clearfix small pointer toggle-sibling">
-        <div class="py1 contain">
-            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
-            <span class='code strong strong truncate'>kroneckerProduct(other)</span>
-        </div>
-      </div>
-      <div class="clearfix display-none toggle-target">
-        <section class='p2 mb2 clearfix bg-white minishadow'>
-
-  
-  <div class='clearfix'>
-    
-    
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/283c9e72b09ec311bb2e34cb09fa2d9fad9178fd/src/abstractMatrix.js#L1277-L1296'>
-      <span>src/abstractMatrix.js</span>
-      </a>
-    
-  </div>
-  
-
-  <p>Returns the Kronecker product (also known as tensor product) between this and other
-See <a href="https://en.wikipedia.org/wiki/Kronecker_product">https://en.wikipedia.org/wiki/Kronecker_product</a></p>
-
-
-  <div class='pre p1 fill-light mt0'>kroneckerProduct(other: <a href="#matrix">Matrix</a>): <a href="#matrix">Matrix</a></div>
-  
-  
-
-  
-  
-  
-  
-  
-  
-
-  
-    <div class='py1 quiet mt1 prose-big'>Parameters</div>
-    <div class='prose'>
-      
-        <div class='space-bottom0'>
-          <div>
-            <span class='code bold'>other</span> <code class='quiet'>(<a href="#matrix">Matrix</a>)</code>
-	    
-          </div>
-          
-        </div>
-      
-    </div>
-  
-
-  
-
-  
-    
-      <div class='py1 quiet mt1 prose-big'>Returns</div>
-      <code><a href="#matrix">Matrix</a></code>:
-        
-
-      
-    
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-</section>
-
-      </div>
-    </div>
-  
-    <div class='border-bottom' id='Matrix#transpose'>
-      <div class="clearfix small pointer toggle-sibling">
-        <div class="py1 contain">
-            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
-            <span class='code strong strong truncate'>transpose()</span>
-        </div>
-      </div>
-      <div class="clearfix display-none toggle-target">
-        <section class='p2 mb2 clearfix bg-white minishadow'>
-
-  
-  <div class='clearfix'>
-    
-    
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/283c9e72b09ec311bb2e34cb09fa2d9fad9178fd/src/abstractMatrix.js#L1302-L1310'>
-      <span>src/abstractMatrix.js</span>
-      </a>
-    
-  </div>
-  
-
-  <p>Transposes the matrix and returns a new one containing the result</p>
-
-
-  <div class='pre p1 fill-light mt0'>transpose(): <a href="#matrix">Matrix</a></div>
+  <div class='pre p1 fill-light mt0'>isSquare(): <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a></div>
   
   
 
@@ -7134,1047 +9526,8 @@ See <a href="https://en.wikipedia.org/wiki/Kronecker_product">https://en.wikiped
   
     
       <div class='py1 quiet mt1 prose-big'>Returns</div>
-      <code><a href="#matrix">Matrix</a></code>:
-        
-
-      
-    
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-</section>
-
-      </div>
-    </div>
-  
-    <div class='border-bottom' id='Matrix#sortRows'>
-      <div class="clearfix small pointer toggle-sibling">
-        <div class="py1 contain">
-            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
-            <span class='code strong strong truncate'>sortRows(compareFunction)</span>
-        </div>
-      </div>
-      <div class="clearfix display-none toggle-target">
-        <section class='p2 mb2 clearfix bg-white minishadow'>
-
-  
-  <div class='clearfix'>
-    
-    
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/283c9e72b09ec311bb2e34cb09fa2d9fad9178fd/src/abstractMatrix.js#L1317-L1323'>
-      <span>src/abstractMatrix.js</span>
-      </a>
-    
-  </div>
-  
-
-  <p>Sorts the rows (in place)</p>
-
-
-  <div class='pre p1 fill-light mt0'>sortRows(compareFunction: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function">function</a>): <a href="#matrix">Matrix</a></div>
-  
-  
-
-  
-  
-  
-  
-  
-  
-
-  
-    <div class='py1 quiet mt1 prose-big'>Parameters</div>
-    <div class='prose'>
-      
-        <div class='space-bottom0'>
-          <div>
-            <span class='code bold'>compareFunction</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function">function</a>)</code>
-	    usual Array.prototype.sort comparison function
-
-          </div>
-          
-        </div>
-      
-    </div>
-  
-
-  
-
-  
-    
-      <div class='py1 quiet mt1 prose-big'>Returns</div>
-      <code><a href="#matrix">Matrix</a></code>:
-        this
-
-      
-    
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-</section>
-
-      </div>
-    </div>
-  
-    <div class='border-bottom' id='Matrix#sortColumns'>
-      <div class="clearfix small pointer toggle-sibling">
-        <div class="py1 contain">
-            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
-            <span class='code strong strong truncate'>sortColumns(compareFunction)</span>
-        </div>
-      </div>
-      <div class="clearfix display-none toggle-target">
-        <section class='p2 mb2 clearfix bg-white minishadow'>
-
-  
-  <div class='clearfix'>
-    
-    
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/283c9e72b09ec311bb2e34cb09fa2d9fad9178fd/src/abstractMatrix.js#L1330-L1336'>
-      <span>src/abstractMatrix.js</span>
-      </a>
-    
-  </div>
-  
-
-  <p>Sorts the columns (in place)</p>
-
-
-  <div class='pre p1 fill-light mt0'>sortColumns(compareFunction: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function">function</a>): <a href="#matrix">Matrix</a></div>
-  
-  
-
-  
-  
-  
-  
-  
-  
-
-  
-    <div class='py1 quiet mt1 prose-big'>Parameters</div>
-    <div class='prose'>
-      
-        <div class='space-bottom0'>
-          <div>
-            <span class='code bold'>compareFunction</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function">function</a>)</code>
-	    usual Array.prototype.sort comparison function
-
-          </div>
-          
-        </div>
-      
-    </div>
-  
-
-  
-
-  
-    
-      <div class='py1 quiet mt1 prose-big'>Returns</div>
-      <code><a href="#matrix">Matrix</a></code>:
-        this
-
-      
-    
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-</section>
-
-      </div>
-    </div>
-  
-    <div class='border-bottom' id='Matrix#subMatrix'>
-      <div class="clearfix small pointer toggle-sibling">
-        <div class="py1 contain">
-            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
-            <span class='code strong strong truncate'>subMatrix(startRow, endRow, startColumn, endColumn)</span>
-        </div>
-      </div>
-      <div class="clearfix display-none toggle-target">
-        <section class='p2 mb2 clearfix bg-white minishadow'>
-
-  
-  <div class='clearfix'>
-    
-    
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/283c9e72b09ec311bb2e34cb09fa2d9fad9178fd/src/abstractMatrix.js#L1346-L1355'>
-      <span>src/abstractMatrix.js</span>
-      </a>
-    
-  </div>
-  
-
-  <p>Returns a subset of the matrix</p>
-
-
-  <div class='pre p1 fill-light mt0'>subMatrix(startRow: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>, endRow: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>, startColumn: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>, endColumn: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>): <a href="#matrix">Matrix</a></div>
-  
-  
-
-  
-  
-  
-  
-  
-  
-
-  
-    <div class='py1 quiet mt1 prose-big'>Parameters</div>
-    <div class='prose'>
-      
-        <div class='space-bottom0'>
-          <div>
-            <span class='code bold'>startRow</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>)</code>
-	    First row index
-
-          </div>
-          
-        </div>
-      
-        <div class='space-bottom0'>
-          <div>
-            <span class='code bold'>endRow</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>)</code>
-	    Last row index
-
-          </div>
-          
-        </div>
-      
-        <div class='space-bottom0'>
-          <div>
-            <span class='code bold'>startColumn</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>)</code>
-	    First column index
-
-          </div>
-          
-        </div>
-      
-        <div class='space-bottom0'>
-          <div>
-            <span class='code bold'>endColumn</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>)</code>
-	    Last column index
-
-          </div>
-          
-        </div>
-      
-    </div>
-  
-
-  
-
-  
-    
-      <div class='py1 quiet mt1 prose-big'>Returns</div>
-      <code><a href="#matrix">Matrix</a></code>:
-        
-
-      
-    
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-</section>
-
-      </div>
-    </div>
-  
-    <div class='border-bottom' id='Matrix#subMatrixRow'>
-      <div class="clearfix small pointer toggle-sibling">
-        <div class="py1 contain">
-            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
-            <span class='code strong strong truncate'>subMatrixRow(indices, startColumn, endColumn)</span>
-        </div>
-      </div>
-      <div class="clearfix display-none toggle-target">
-        <section class='p2 mb2 clearfix bg-white minishadow'>
-
-  
-  <div class='clearfix'>
-    
-    
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/283c9e72b09ec311bb2e34cb09fa2d9fad9178fd/src/abstractMatrix.js#L1364-L1381'>
-      <span>src/abstractMatrix.js</span>
-      </a>
-    
-  </div>
-  
-
-  <p>Returns a subset of the matrix based on an array of row indices</p>
-
-
-  <div class='pre p1 fill-light mt0'>subMatrixRow(indices: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>, startColumn: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>, endColumn: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>): <a href="#matrix">Matrix</a></div>
-  
-  
-
-  
-  
-  
-  
-  
-  
-
-  
-    <div class='py1 quiet mt1 prose-big'>Parameters</div>
-    <div class='prose'>
-      
-        <div class='space-bottom0'>
-          <div>
-            <span class='code bold'>indices</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>)</code>
-	    Array containing the row indices
-
-          </div>
-          
-        </div>
-      
-        <div class='space-bottom0'>
-          <div>
-            <span class='code bold'>startColumn</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>
-            = <code>0</code>)</code>
-	    First column index
-
-          </div>
-          
-        </div>
-      
-        <div class='space-bottom0'>
-          <div>
-            <span class='code bold'>endColumn</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>
-            = <code>this.columns-1</code>)</code>
-	    Last column index
-
-          </div>
-          
-        </div>
-      
-    </div>
-  
-
-  
-
-  
-    
-      <div class='py1 quiet mt1 prose-big'>Returns</div>
-      <code><a href="#matrix">Matrix</a></code>:
-        
-
-      
-    
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-</section>
-
-      </div>
-    </div>
-  
-    <div class='border-bottom' id='Matrix#subMatrixColumn'>
-      <div class="clearfix small pointer toggle-sibling">
-        <div class="py1 contain">
-            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
-            <span class='code strong strong truncate'>subMatrixColumn(indices, startRow, endRow)</span>
-        </div>
-      </div>
-      <div class="clearfix display-none toggle-target">
-        <section class='p2 mb2 clearfix bg-white minishadow'>
-
-  
-  <div class='clearfix'>
-    
-    
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/283c9e72b09ec311bb2e34cb09fa2d9fad9178fd/src/abstractMatrix.js#L1390-L1407'>
-      <span>src/abstractMatrix.js</span>
-      </a>
-    
-  </div>
-  
-
-  <p>Returns a subset of the matrix based on an array of column indices</p>
-
-
-  <div class='pre p1 fill-light mt0'>subMatrixColumn(indices: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>, startRow: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>, endRow: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>): <a href="#matrix">Matrix</a></div>
-  
-  
-
-  
-  
-  
-  
-  
-  
-
-  
-    <div class='py1 quiet mt1 prose-big'>Parameters</div>
-    <div class='prose'>
-      
-        <div class='space-bottom0'>
-          <div>
-            <span class='code bold'>indices</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>)</code>
-	    Array containing the column indices
-
-          </div>
-          
-        </div>
-      
-        <div class='space-bottom0'>
-          <div>
-            <span class='code bold'>startRow</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>
-            = <code>0</code>)</code>
-	    First row index
-
-          </div>
-          
-        </div>
-      
-        <div class='space-bottom0'>
-          <div>
-            <span class='code bold'>endRow</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>
-            = <code>this.rows-1</code>)</code>
-	    Last row index
-
-          </div>
-          
-        </div>
-      
-    </div>
-  
-
-  
-
-  
-    
-      <div class='py1 quiet mt1 prose-big'>Returns</div>
-      <code><a href="#matrix">Matrix</a></code>:
-        
-
-      
-    
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-</section>
-
-      </div>
-    </div>
-  
-    <div class='border-bottom' id='Matrix#setSubMatrix'>
-      <div class="clearfix small pointer toggle-sibling">
-        <div class="py1 contain">
-            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
-            <span class='code strong strong truncate'>setSubMatrix(matrix, startRow, startColumn)</span>
-        </div>
-      </div>
-      <div class="clearfix display-none toggle-target">
-        <section class='p2 mb2 clearfix bg-white minishadow'>
-
-  
-  <div class='clearfix'>
-    
-    
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/283c9e72b09ec311bb2e34cb09fa2d9fad9178fd/src/abstractMatrix.js#L1416-L1427'>
-      <span>src/abstractMatrix.js</span>
-      </a>
-    
-  </div>
-  
-
-  <p>Set a part of the matrix to the given sub-matrix</p>
-
-
-  <div class='pre p1 fill-light mt0'>setSubMatrix(matrix: (<a href="#matrix">Matrix</a> | <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>>), startRow: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>, startColumn: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>): <a href="#matrix">Matrix</a></div>
-  
-  
-
-  
-  
-  
-  
-  
-  
-
-  
-    <div class='py1 quiet mt1 prose-big'>Parameters</div>
-    <div class='prose'>
-      
-        <div class='space-bottom0'>
-          <div>
-            <span class='code bold'>matrix</span> <code class='quiet'>((<a href="#matrix">Matrix</a> | <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>>))</code>
-	    The source matrix from which to extract values.
-
-          </div>
-          
-        </div>
-      
-        <div class='space-bottom0'>
-          <div>
-            <span class='code bold'>startRow</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>)</code>
-	    The index of the first row to set
-
-          </div>
-          
-        </div>
-      
-        <div class='space-bottom0'>
-          <div>
-            <span class='code bold'>startColumn</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>)</code>
-	    The index of the first column to set
-
-          </div>
-          
-        </div>
-      
-    </div>
-  
-
-  
-
-  
-    
-      <div class='py1 quiet mt1 prose-big'>Returns</div>
-      <code><a href="#matrix">Matrix</a></code>:
-        
-
-      
-    
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-</section>
-
-      </div>
-    </div>
-  
-    <div class='border-bottom' id='Matrix#selection'>
-      <div class="clearfix small pointer toggle-sibling">
-        <div class="py1 contain">
-            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
-            <span class='code strong strong truncate'>selection(rowIndices, columnIndices)</span>
-        </div>
-      </div>
-      <div class="clearfix display-none toggle-target">
-        <section class='p2 mb2 clearfix bg-white minishadow'>
-
-  
-  <div class='clearfix'>
-    
-    
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/283c9e72b09ec311bb2e34cb09fa2d9fad9178fd/src/abstractMatrix.js#L1435-L1446'>
-      <span>src/abstractMatrix.js</span>
-      </a>
-    
-  </div>
-  
-
-  <p>Return a new matrix based on a selection of rows and columns</p>
-
-
-  <div class='pre p1 fill-light mt0'>selection(rowIndices: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>>, columnIndices: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>>): <a href="#matrix">Matrix</a></div>
-  
-  
-
-  
-  
-  
-  
-  
-  
-
-  
-    <div class='py1 quiet mt1 prose-big'>Parameters</div>
-    <div class='prose'>
-      
-        <div class='space-bottom0'>
-          <div>
-            <span class='code bold'>rowIndices</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>>)</code>
-	    The row indices to select. Order matters and an index can be more than once.
-
-          </div>
-          
-        </div>
-      
-        <div class='space-bottom0'>
-          <div>
-            <span class='code bold'>columnIndices</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>>)</code>
-	    The column indices to select. Order matters and an index can be use more than once.
-
-          </div>
-          
-        </div>
-      
-    </div>
-  
-
-  
-
-  
-    
-      <div class='py1 quiet mt1 prose-big'>Returns</div>
-      <code><a href="#matrix">Matrix</a></code>:
-        The new matrix
-
-      
-    
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-</section>
-
-      </div>
-    </div>
-  
-    <div class='border-bottom' id='Matrix#trace'>
-      <div class="clearfix small pointer toggle-sibling">
-        <div class="py1 contain">
-            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
-            <span class='code strong strong truncate'>trace()</span>
-        </div>
-      </div>
-      <div class="clearfix display-none toggle-target">
-        <section class='p2 mb2 clearfix bg-white minishadow'>
-
-  
-  <div class='clearfix'>
-    
-    
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/283c9e72b09ec311bb2e34cb09fa2d9fad9178fd/src/abstractMatrix.js#L1452-L1459'>
-      <span>src/abstractMatrix.js</span>
-      </a>
-    
-  </div>
-  
-
-  <p>Returns the trace of the matrix (sum of the diagonal elements)</p>
-
-
-  <div class='pre p1 fill-light mt0'>trace(): <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a></div>
-  
-  
-
-  
-  
-  
-  
-  
-  
-
-  
-
-  
-
-  
-    
-      <div class='py1 quiet mt1 prose-big'>Returns</div>
-      <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a></code>:
-        
-
-      
-    
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-</section>
-
-      </div>
-    </div>
-  
-    <div class='border-bottom' id='Matrix#transposeView'>
-      <div class="clearfix small pointer toggle-sibling">
-        <div class="py1 contain">
-            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
-            <span class='code strong strong truncate'>transposeView()</span>
-        </div>
-      </div>
-      <div class="clearfix display-none toggle-target">
-        <section class='p2 mb2 clearfix bg-white minishadow'>
-
-  
-  <div class='clearfix'>
-    
-    
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/283c9e72b09ec311bb2e34cb09fa2d9fad9178fd/src/abstractMatrix.js#L1469-L1471'>
-      <span>src/abstractMatrix.js</span>
-      </a>
-    
-  </div>
-  
-
-  <p>Returns a view of the transposition of the matrix</p>
-
-
-  <div class='pre p1 fill-light mt0'>transposeView(): MatrixTransposeView</div>
-  
-  
-
-  
-  
-  
-  
-  
-  
-
-  
-
-  
-
-  
-    
-      <div class='py1 quiet mt1 prose-big'>Returns</div>
-      <code>MatrixTransposeView</code>:
-        
-
-      
-    
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-</section>
-
-      </div>
-    </div>
-  
-    <div class='border-bottom' id='Matrix#rowView'>
-      <div class="clearfix small pointer toggle-sibling">
-        <div class="py1 contain">
-            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
-            <span class='code strong strong truncate'>rowView(row)</span>
-        </div>
-      </div>
-      <div class="clearfix display-none toggle-target">
-        <section class='p2 mb2 clearfix bg-white minishadow'>
-
-  
-  <div class='clearfix'>
-    
-    
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/283c9e72b09ec311bb2e34cb09fa2d9fad9178fd/src/abstractMatrix.js#L1478-L1481'>
-      <span>src/abstractMatrix.js</span>
-      </a>
-    
-  </div>
-  
-
-  <p>Returns a view of the row vector with the given index</p>
-
-
-  <div class='pre p1 fill-light mt0'>rowView(row: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>): MatrixRowView</div>
-  
-  
-
-  
-  
-  
-  
-  
-  
-
-  
-    <div class='py1 quiet mt1 prose-big'>Parameters</div>
-    <div class='prose'>
-      
-        <div class='space-bottom0'>
-          <div>
-            <span class='code bold'>row</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>)</code>
-	    row index of the vector
-
-          </div>
-          
-        </div>
-      
-    </div>
-  
-
-  
-
-  
-    
-      <div class='py1 quiet mt1 prose-big'>Returns</div>
-      <code>MatrixRowView</code>:
-        
-
-      
-    
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-</section>
-
-      </div>
-    </div>
-  
-    <div class='border-bottom' id='Matrix#columnView'>
-      <div class="clearfix small pointer toggle-sibling">
-        <div class="py1 contain">
-            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
-            <span class='code strong strong truncate'>columnView(column)</span>
-        </div>
-      </div>
-      <div class="clearfix display-none toggle-target">
-        <section class='p2 mb2 clearfix bg-white minishadow'>
-
-  
-  <div class='clearfix'>
-    
-    
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/283c9e72b09ec311bb2e34cb09fa2d9fad9178fd/src/abstractMatrix.js#L1488-L1491'>
-      <span>src/abstractMatrix.js</span>
-      </a>
-    
-  </div>
-  
-
-  <p>Returns a view of the column vector with the given index</p>
-
-
-  <div class='pre p1 fill-light mt0'>columnView(column: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>): MatrixColumnView</div>
-  
-  
-
-  
-  
-  
-  
-  
-  
-
-  
-    <div class='py1 quiet mt1 prose-big'>Parameters</div>
-    <div class='prose'>
-      
-        <div class='space-bottom0'>
-          <div>
-            <span class='code bold'>column</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>)</code>
-	    column index of the vector
-
-          </div>
-          
-        </div>
-      
-    </div>
-  
-
-  
-
-  
-    
-      <div class='py1 quiet mt1 prose-big'>Returns</div>
-      <code>MatrixColumnView</code>:
-        
-
-      
-    
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-</section>
-
-      </div>
-    </div>
-  
-    <div class='border-bottom' id='Matrix#flipRowView'>
-      <div class="clearfix small pointer toggle-sibling">
-        <div class="py1 contain">
-            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
-            <span class='code strong strong truncate'>flipRowView()</span>
-        </div>
-      </div>
-      <div class="clearfix display-none toggle-target">
-        <section class='p2 mb2 clearfix bg-white minishadow'>
-
-  
-  <div class='clearfix'>
-    
-    
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/283c9e72b09ec311bb2e34cb09fa2d9fad9178fd/src/abstractMatrix.js#L1497-L1499'>
-      <span>src/abstractMatrix.js</span>
-      </a>
-    
-  </div>
-  
-
-  <p>Returns a view of the matrix flipped in the row axis</p>
-
-
-  <div class='pre p1 fill-light mt0'>flipRowView(): MatrixFlipRowView</div>
-  
-  
-
-  
-  
-  
-  
-  
-  
-
-  
-
-  
-
-  
-    
-      <div class='py1 quiet mt1 prose-big'>Returns</div>
-      <code>MatrixFlipRowView</code>:
-        
-
-      
-    
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-</section>
-
-      </div>
-    </div>
-  
-    <div class='border-bottom' id='Matrix#flipColumnView'>
-      <div class="clearfix small pointer toggle-sibling">
-        <div class="py1 contain">
-            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
-            <span class='code strong strong truncate'>flipColumnView()</span>
-        </div>
-      </div>
-      <div class="clearfix display-none toggle-target">
-        <section class='p2 mb2 clearfix bg-white minishadow'>
-
-  
-  <div class='clearfix'>
-    
-    
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/283c9e72b09ec311bb2e34cb09fa2d9fad9178fd/src/abstractMatrix.js#L1505-L1507'>
-      <span>src/abstractMatrix.js</span>
-      </a>
-    
-  </div>
-  
-
-  <p>Returns a view of the matrix flipped in the column axis</p>
-
-
-  <div class='pre p1 fill-light mt0'>flipColumnView(): MatrixFlipColumnView</div>
-  
-  
-
-  
-  
-  
-  
-  
-  
-
-  
-
-  
-
-  
-    
-      <div class='py1 quiet mt1 prose-big'>Returns</div>
-      <code>MatrixFlipColumnView</code>:
-        
+      <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a></code>:
+        true if the matrix has the same number of rows and columns
 
       
     
@@ -8209,12 +9562,75 @@ See <a href="https://en.wikipedia.org/wiki/Kronecker_product">https://en.wikiped
   
   <div class='clearfix'>
     
-    <h3 class='fl m0' id='solve'>
-      solve
+    <h3 class='fl m0' id='qrdecomposition'>
+      QrDecomposition
     </h3>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/283c9e72b09ec311bb2e34cb09fa2d9fad9178fd/src/dc/qr.js#L57-L99'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/300316d47b2aaa70fbcce038604aad4a84f5a71f/src/dc/qr.js#L9-L172'>
+      <span>src/dc/qr.js</span>
+      </a>
+    
+  </div>
+  
+
+  
+
+  <div class='pre p1 fill-light mt0'>new QrDecomposition(value: <a href="#matrix">Matrix</a>)</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>value</span> <code class='quiet'>(<a href="#matrix">Matrix</a>)</code>
+	    
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Instance Members</div>
+    <div class="clearfix">
+  
+    <div class='border-bottom' id='QrDecomposition#solve'>
+      <div class="clearfix small pointer toggle-sibling">
+        <div class="py1 contain">
+            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
+            <span class='code strong strong truncate'>solve(value)</span>
+        </div>
+      </div>
+      <div class="clearfix display-none toggle-target">
+        <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/300316d47b2aaa70fbcce038604aad4a84f5a71f/src/dc/qr.js#L58-L100'>
       <span>src/dc/qr.js</span>
       </a>
     
@@ -8277,6 +9693,202 @@ var x = qr.solve(b);</p>
   
 </section>
 
+      </div>
+    </div>
+  
+    <div class='border-bottom' id='QrDecomposition#isFullRank'>
+      <div class="clearfix small pointer toggle-sibling">
+        <div class="py1 contain">
+            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
+            <span class='code strong strong truncate'>isFullRank()</span>
+        </div>
+      </div>
+      <div class="clearfix display-none toggle-target">
+        <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/300316d47b2aaa70fbcce038604aad4a84f5a71f/src/dc/qr.js#L106-L114'>
+      <span>src/dc/qr.js</span>
+      </a>
+    
+  </div>
+  
+
+  
+
+  <div class='pre p1 fill-light mt0'>isFullRank(): <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a></div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a></code>:
+        
+
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+      </div>
+    </div>
+  
+    <div class='border-bottom' id='QrDecomposition#orthogonalMatrix'>
+      <div class="clearfix small pointer toggle-sibling">
+        <div class="py1 contain">
+            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
+            <span class='code strong strong truncate'>orthogonalMatrix</span>
+        </div>
+      </div>
+      <div class="clearfix display-none toggle-target">
+        <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/300316d47b2aaa70fbcce038604aad4a84f5a71f/src/dc/qr.js#L143-L171'>
+      <span>src/dc/qr.js</span>
+      </a>
+    
+  </div>
+  
+
+  
+
+  <div class='pre p1 fill-light mt0'>orthogonalMatrix</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="#matrix">Matrix</a></code>:
+        
+
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+      </div>
+    </div>
+  
+    <div class='border-bottom' id='QrDecomposition#upperTriangularMatrix'>
+      <div class="clearfix small pointer toggle-sibling">
+        <div class="py1 contain">
+            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
+            <span class='code strong strong truncate'>upperTriangularMatrix</span>
+        </div>
+      </div>
+      <div class="clearfix display-none toggle-target">
+        <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/300316d47b2aaa70fbcce038604aad4a84f5a71f/src/dc/qr.js#L120-L137'>
+      <span>src/dc/qr.js</span>
+      </a>
+    
+  </div>
+  
+
+  
+
+  <div class='pre p1 fill-light mt0'>upperTriangularMatrix</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="#matrix">Matrix</a></code>:
+        
+
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+      </div>
+    </div>
+  
+</div>
+
+  
+
+  
+</section>
+
           
         
           
@@ -8285,12 +9897,310 @@ var x = qr.solve(b);</p>
   
   <div class='clearfix'>
     
-    <h3 class='fl m0' id='inverse'>
-      inverse
+    <h3 class='fl m0' id='singularvaluedecomposition'>
+      SingularValueDecomposition
     </h3>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/283c9e72b09ec311bb2e34cb09fa2d9fad9178fd/src/dc/svd.js#L486-L522'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/300316d47b2aaa70fbcce038604aad4a84f5a71f/src/dc/svd.js#L13-L574'>
+      <span>src/dc/svd.js</span>
+      </a>
+    
+  </div>
+  
+
+  
+
+  <div class='pre p1 fill-light mt0'>new SingularValueDecomposition(value: <a href="#matrix">Matrix</a>, options: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a>?)</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>value</span> <code class='quiet'>(<a href="#matrix">Matrix</a>)</code>
+	    
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>options</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a>?
+            = <code>{}</code>)</code>
+	    
+          </div>
+          
+          <table class='mt1 mb2 fixed-table h5 col-12'>
+            <colgroup>
+              <col width='30%' />
+              <col width='70%' />
+            </colgroup>
+            <thead>
+              <tr class='bold fill-light'>
+                <th>Name</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody class='mt1'>
+              
+                <tr>
+                  <td class='break-word'><span class='code bold'>options.computeLeftSingularVectors</span> <code class='quiet'><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a></code>
+                  
+                    (default <code>true</code>)
+                  </td>
+                  <td class='break-word'><span></span></td>
+                </tr>
+              
+                <tr>
+                  <td class='break-word'><span class='code bold'>options.computeRightSingularVectors</span> <code class='quiet'><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a></code>
+                  
+                    (default <code>true</code>)
+                  </td>
+                  <td class='break-word'><span></span></td>
+                </tr>
+              
+                <tr>
+                  <td class='break-word'><span class='code bold'>options.autoTranspose</span> <code class='quiet'><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a></code>
+                  
+                    (default <code>false</code>)
+                  </td>
+                  <td class='break-word'><span></span></td>
+                </tr>
+              
+            </tbody>
+          </table>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Instance Members</div>
+    <div class="clearfix">
+  
+    <div class='border-bottom' id='SingularValueDecomposition#rank'>
+      <div class="clearfix small pointer toggle-sibling">
+        <div class="py1 contain">
+            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
+            <span class='code strong strong truncate'>rank</span>
+        </div>
+      </div>
+      <div class="clearfix display-none toggle-target">
+        <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/300316d47b2aaa70fbcce038604aad4a84f5a71f/src/dc/svd.js#L517-L527'>
+      <span>src/dc/svd.js</span>
+      </a>
+    
+  </div>
+  
+
+  
+
+  <div class='pre p1 fill-light mt0'>rank</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a></code>:
+        
+
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+      </div>
+    </div>
+  
+    <div class='border-bottom' id='SingularValueDecomposition#norm2'>
+      <div class="clearfix small pointer toggle-sibling">
+        <div class="py1 contain">
+            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
+            <span class='code strong strong truncate'>norm2</span>
+        </div>
+      </div>
+      <div class="clearfix display-none toggle-target">
+        <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/300316d47b2aaa70fbcce038604aad4a84f5a71f/src/dc/svd.js#L509-L511'>
+      <span>src/dc/svd.js</span>
+      </a>
+    
+  </div>
+  
+
+  
+
+  <div class='pre p1 fill-light mt0'>norm2</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a></code>:
+        
+
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+      </div>
+    </div>
+  
+    <div class='border-bottom' id='SingularValueDecomposition#condition'>
+      <div class="clearfix small pointer toggle-sibling">
+        <div class="py1 contain">
+            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
+            <span class='code strong strong truncate'>condition</span>
+        </div>
+      </div>
+      <div class="clearfix display-none toggle-target">
+        <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/300316d47b2aaa70fbcce038604aad4a84f5a71f/src/dc/svd.js#L501-L503'>
+      <span>src/dc/svd.js</span>
+      </a>
+    
+  </div>
+  
+
+  
+
+  <div class='pre p1 fill-light mt0'>condition</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a></code>:
+        
+
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+      </div>
+    </div>
+  
+    <div class='border-bottom' id='SingularValueDecomposition#inverse'>
+      <div class="clearfix small pointer toggle-sibling">
+        <div class="py1 contain">
+            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
+            <span class='code strong strong truncate'>inverse()</span>
+        </div>
+      </div>
+      <div class="clearfix display-none toggle-target">
+        <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/300316d47b2aaa70fbcce038604aad4a84f5a71f/src/dc/svd.js#L459-L495'>
       <span>src/dc/svd.js</span>
       </a>
     
@@ -8338,20 +10248,161 @@ var inverseA = svd.inverse();</p>
   
 </section>
 
-          
-        
-          
-            <section class='p2 mb2 clearfix bg-white minishadow'>
+      </div>
+    </div>
+  
+    <div class='border-bottom' id='SingularValueDecomposition#solveForDiagonal'>
+      <div class="clearfix small pointer toggle-sibling">
+        <div class="py1 contain">
+            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
+            <span class='code strong strong truncate'>solveForDiagonal(value)</span>
+        </div>
+      </div>
+      <div class="clearfix display-none toggle-target">
+        <section class='p2 mb2 clearfix bg-white minishadow'>
 
   
   <div class='clearfix'>
     
-    <h3 class='fl m0' id='solve'>
-      solve
-    </h3>
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/300316d47b2aaa70fbcce038604aad4a84f5a71f/src/dc/svd.js#L449-L451'>
+      <span>src/dc/svd.js</span>
+      </a>
+    
+  </div>
+  
+
+  
+
+  <div class='pre p1 fill-light mt0'>solveForDiagonal(value: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>>): <a href="#matrix">Matrix</a></div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>value</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>>)</code>
+	    
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="#matrix">Matrix</a></code>:
+        
+
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+      </div>
+    </div>
+  
+    <div class='border-bottom' id='SingularValueDecomposition#diagonalMatrix'>
+      <div class="clearfix small pointer toggle-sibling">
+        <div class="py1 contain">
+            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
+            <span class='code strong strong truncate'>diagonalMatrix</span>
+        </div>
+      </div>
+      <div class="clearfix display-none toggle-target">
+        <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/283c9e72b09ec311bb2e34cb09fa2d9fad9178fd/src/dc/svd.js#L440-L476'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/300316d47b2aaa70fbcce038604aad4a84f5a71f/src/dc/svd.js#L571-L573'>
+      <span>src/dc/svd.js</span>
+      </a>
+    
+  </div>
+  
+
+  
+
+  <div class='pre p1 fill-light mt0'>diagonalMatrix</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="#matrix">Matrix</a></code>:
+        
+
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+      </div>
+    </div>
+  
+    <div class='border-bottom' id='SingularValueDecomposition#solve'>
+      <div class="clearfix small pointer toggle-sibling">
+        <div class="py1 contain">
+            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
+            <span class='code strong strong truncate'>solve(value)</span>
+        </div>
+      </div>
+      <div class="clearfix display-none toggle-target">
+        <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/300316d47b2aaa70fbcce038604aad4a84f5a71f/src/dc/svd.js#L406-L442'>
       <span>src/dc/svd.js</span>
       </a>
     
@@ -8414,6 +10465,352 @@ var x = svd.solve(b);</p>
   
 </section>
 
+      </div>
+    </div>
+  
+    <div class='border-bottom' id='SingularValueDecomposition#rightSingularVectors'>
+      <div class="clearfix small pointer toggle-sibling">
+        <div class="py1 contain">
+            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
+            <span class='code strong strong truncate'>rightSingularVectors</span>
+        </div>
+      </div>
+      <div class="clearfix display-none toggle-target">
+        <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/300316d47b2aaa70fbcce038604aad4a84f5a71f/src/dc/svd.js#L560-L565'>
+      <span>src/dc/svd.js</span>
+      </a>
+    
+  </div>
+  
+
+  
+
+  <div class='pre p1 fill-light mt0'>rightSingularVectors</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="#matrix">Matrix</a></code>:
+        
+
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+      </div>
+    </div>
+  
+    <div class='border-bottom' id='SingularValueDecomposition#leftSingularVectors'>
+      <div class="clearfix small pointer toggle-sibling">
+        <div class="py1 contain">
+            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
+            <span class='code strong strong truncate'>leftSingularVectors</span>
+        </div>
+      </div>
+      <div class="clearfix display-none toggle-target">
+        <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/300316d47b2aaa70fbcce038604aad4a84f5a71f/src/dc/svd.js#L549-L554'>
+      <span>src/dc/svd.js</span>
+      </a>
+    
+  </div>
+  
+
+  
+
+  <div class='pre p1 fill-light mt0'>leftSingularVectors</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="#matrix">Matrix</a></code>:
+        
+
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+      </div>
+    </div>
+  
+    <div class='border-bottom' id='SingularValueDecomposition#threshold'>
+      <div class="clearfix small pointer toggle-sibling">
+        <div class="py1 contain">
+            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
+            <span class='code strong strong truncate'>threshold</span>
+        </div>
+      </div>
+      <div class="clearfix display-none toggle-target">
+        <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/300316d47b2aaa70fbcce038604aad4a84f5a71f/src/dc/svd.js#L541-L543'>
+      <span>src/dc/svd.js</span>
+      </a>
+    
+  </div>
+  
+
+  
+
+  <div class='pre p1 fill-light mt0'>threshold</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a></code>:
+        
+
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+      </div>
+    </div>
+  
+    <div class='border-bottom' id='SingularValueDecomposition#diagonal'>
+      <div class="clearfix small pointer toggle-sibling">
+        <div class="py1 contain">
+            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
+            <span class='code strong strong truncate'>diagonal</span>
+        </div>
+      </div>
+      <div class="clearfix display-none toggle-target">
+        <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/300316d47b2aaa70fbcce038604aad4a84f5a71f/src/dc/svd.js#L533-L535'>
+      <span>src/dc/svd.js</span>
+      </a>
+    
+  </div>
+  
+
+  
+
+  <div class='pre p1 fill-light mt0'>diagonal</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>></code>:
+        
+
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+      </div>
+    </div>
+  
+</div>
+
+  
+
+  
+</section>
+
+          
+        
+          
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='solve'>
+      solve
+    </h3>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/300316d47b2aaa70fbcce038604aad4a84f5a71f/src/decompositions.js#L29-L37'>
+      <span>src/decompositions.js</span>
+      </a>
+    
+  </div>
+  
+
+  
+
+  <div class='pre p1 fill-light mt0'>solve(leftHandSide: <a href="#matrix">Matrix</a>, rightHandSide: <a href="#matrix">Matrix</a>, useSVD: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a>): <a href="#matrix">Matrix</a></div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>leftHandSide</span> <code class='quiet'>(<a href="#matrix">Matrix</a>)</code>
+	    
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>rightHandSide</span> <code class='quiet'>(<a href="#matrix">Matrix</a>)</code>
+	    
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>useSVD</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a>
+            = <code>false</code>)</code>
+	    
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="#matrix">Matrix</a></code>:
+        
+
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
           
         
           
@@ -8427,7 +10824,7 @@ var x = svd.solve(b);</p>
     </h3>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/283c9e72b09ec311bb2e34cb09fa2d9fad9178fd/src/wrap/wrap.js#L10-L20'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/300316d47b2aaa70fbcce038604aad4a84f5a71f/src/wrap/wrap.js#L10-L20'>
       <span>src/wrap/wrap.js</span>
       </a>
     
@@ -8530,7 +10927,7 @@ var x = svd.solve(b);</p>
     </h3>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/283c9e72b09ec311bb2e34cb09fa2d9fad9178fd/src/wrap/WrapperMatrix1D.js#L11-L23'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/300316d47b2aaa70fbcce038604aad4a84f5a71f/src/wrap/WrapperMatrix1D.js#L11-L23'>
       <span>src/wrap/WrapperMatrix1D.js</span>
       </a>
     
@@ -8626,7 +11023,7 @@ var x = svd.solve(b);</p>
     </h3>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/283c9e72b09ec311bb2e34cb09fa2d9fad9178fd/src/wrap/WrapperMatrix2D.js#L9-L14'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/300316d47b2aaa70fbcce038604aad4a84f5a71f/src/wrap/WrapperMatrix2D.js#L9-L14'>
       <span>src/wrap/WrapperMatrix2D.js</span>
       </a>
     
