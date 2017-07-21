@@ -35,7 +35,7 @@ const matrix = Matrix.ones(5, 5);
 
 ### Standard operations
 
-``` javascript
+``` js
 const {Matrix} = require('ml-matrix');
 
 var A = new Matrix([[1, 1], [2, 2]]);
@@ -101,8 +101,16 @@ var z = Matrix.eye(3, 4); // Matrix [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], r
 ```
 
 ### Maths :
-```javascript
-const {Matrix, inverse, solve, QrDecomposition, LuDecomposition, CholeskyDecomposition} = require('ml-matrix');
+```js
+const {
+    Matrix,
+    inverse,
+    solve,
+    linearDependencies,
+    QrDecomposition,
+    LuDecomposition,
+    CholeskyDecomposition
+} = require('ml-matrix');
 
 //===========================
 // inverse and pseudo-inverse
@@ -168,6 +176,13 @@ var A = new Matrix([[2, 3, 5], [4, 1, 6], [1, 3, 0]]);
 var cholesky = CholeskyDecomposition(A);
 var L = cholesky.lowerTriangularMatrix; 
 
+//=======
+// Others
+//=======
+
+// Linear dependencies
+var A = new Matrix([[2, 0, 0, 1], [0, 1, 6, 0], [0, 3, 0, 1], [0, 0, 1, 0], [0, 1, 2, 0]]);  
+var dependencies = linearDependencies(A); // dependencies is a matrix with the dependencies of the rows. When we look row by row, we see that the first row is [0, 0, 0, 0, 0], so it means that the first row is independent, and the second row is [ 0, 0, 0, 4, 1 ], i.e the second row = 4 times the 4th row + the 5th row.
 
 ```
 
