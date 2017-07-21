@@ -56,20 +56,6 @@ export default class Matrix extends AbstractMatrix(Array) {
     }
 
     /**
-     * Creates an exact and independent copy of the matrix
-     * @return {Matrix}
-     */
-    clone() {
-        var newMatrix = new this.constructor[Symbol.species](this.rows, this.columns);
-        for (var row = 0; row < this.rows; row++) {
-            for (var column = 0; column < this.columns; column++) {
-                newMatrix.set(row, column, this.get(row, column));
-            }
-        }
-        return newMatrix;
-    }
-
-    /**
      * Removes a row from the given index
      * @param {number} index - Row index
      * @return {Matrix} this
