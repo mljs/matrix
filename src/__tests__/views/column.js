@@ -1,4 +1,4 @@
-import Matrix from '../../src';
+import Matrix from '../..';
 
 describe('Column view', () => {
     it('should set and get row values', () => {

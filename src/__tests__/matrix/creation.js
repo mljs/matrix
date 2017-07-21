@@ -1,6 +1,6 @@
-import Matrix from '../../src';
-import MatrixTransposeView from '../../src/views/transpose';
-import * as util from '../../testUtils';
+import Matrix from '../..';
+import MatrixTransposeView from '../../views/transpose';
+import * as util from '../../../testUtils';
 
 describe('Matrix creation', () => {
     it('should create a new object', () => {

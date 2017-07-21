@@ -1,4 +1,4 @@
-import Matrix from '../../src';
+import Matrix from '../..';
 
 describe('Selection view', () => {
     it('should correctly remap coordinates', () => {

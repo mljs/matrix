@@ -1,4 +1,4 @@
-import Matrix from '../../src';
+import Matrix from '../..';
 
 describe('Transpose view', () => {
     it('should set and get opposite coordinates', () => {

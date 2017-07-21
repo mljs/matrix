@@ -1,4 +1,4 @@
-import Matrix from '../../src';
+import Matrix from '../..';
 
 describe('min - max', () => {
     const matrix1 = new Matrix([[0, 1, 2], [3, 4, 5]]);

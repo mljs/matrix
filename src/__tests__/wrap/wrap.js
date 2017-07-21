@@ -1,4 +1,4 @@
-import {Matrix, wrap} from '../../src/index';
+import {Matrix, wrap} from '../..';
 
 describe('matrix creation', () => {
     it('WrapperMatrix1D creation', () => {
