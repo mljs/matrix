@@ -2,7 +2,7 @@ import {Matrix, LU} from '../..';
 
 describe('LU decomposition', () => {
     it('should compute lower triangular matrix', () => {
-        // http://ch.mathworks.com/help/matlab/ref/chol.html
+        // http://ch.mathworks.com/help/matlab/ref/lu.html
         let matrix = new Matrix([
             [1, -1, -1, -1, -1],
             [-1, 2, 0, 0, 0],
