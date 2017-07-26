@@ -15,7 +15,7 @@ export default class LuDecomposition {
         var pivotVector = new Array(rows);
         var pivotSign = 1;
         var i, j, k, p, s, t, v;
-        var LUrowi, LUcolj, kmax;
+        var LUcolj, kmax;
 
         for (i = 0; i < rows; i++) {
             pivotVector[i] = i;
@@ -26,17 +26,17 @@ export default class LuDecomposition {
         for (j = 0; j < columns; j++) {
 
             for (i = 0; i < rows; i++) {
-                LUcolj[i] = lu[i][j];
+                LUcolj[i] = lu.get(i, j);
             }
 
             for (i = 0; i < rows; i++) {
-                LUrowi = lu[i];
                 kmax = Math.min(i, j);
                 s = 0;
                 for (k = 0; k < kmax; k++) {
-                    s += LUrowi[k] * LUcolj[k];
+                    s += lu.get(i, k) * LUcolj[k];
                 }
-                LUrowi[j] = LUcolj[i] -= s;
+                LUcolj[i] -= s;
+                lu.set(i, j, LUcolj[i]);
             }
 
             p = j;
@@ -48,9 +48,9 @@ export default class LuDecomposition {
 
             if (p !== j) {
                 for (k = 0; k < columns; k++) {
-                    t = lu[p][k];
-                    lu[p][k] = lu[j][k];
-                    lu[j][k] = t;
+                    t = lu.get(p, k);
+                    lu.set(p, k, lu.get(j, k));
+                    lu.set(j, k, t);
                 }
 
                 v = pivotVector[p];
@@ -60,9 +60,9 @@ export default class LuDecomposition {
                 pivotSign = -pivotSign;
             }
 
-            if (j < rows && lu[j][j] !== 0) {
+            if (j < rows && lu.get(j, j) !== 0) {
                 for (i = j + 1; i < rows; i++) {
-                    lu[i][j] /= lu[j][j];
+                    lu.set(i, j, lu.get(i, j) / lu.get(j, j));
                 }
             }
         }
