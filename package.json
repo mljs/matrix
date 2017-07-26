@@ -14,7 +14,8 @@
     "eslint-fix": "npm run eslint -- --fix",
     "prepare": "npm run compile",
     "test": "run-s testonly eslint",
-    "testonly": "jest"
+    "testonly": "jest",
+    "test-travis": "jest --coverage && codecov"
   },
   "repository": {
     "type": "git",
@@ -49,6 +50,7 @@
   "devDependencies": {
     "babel-plugin-transform-es2015-modules-commonjs": "^6.24.1",
     "benchmark": "^2.1.0",
+    "codecov": "^2.2.0",
     "csv-parse": "^1.0.0",
     "eslint": "^4.2.0",
     "eslint-config-cheminfo": "^1.5.2",
