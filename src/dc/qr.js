@@ -19,24 +19,24 @@ export default class QrDecomposition {
         for (k = 0; k < n; k++) {
             var nrm = 0;
             for (i = k; i < m; i++) {
-                nrm = hypotenuse(nrm, qr[i][k]);
+                nrm = hypotenuse(nrm, qr.get(i, k));
             }
             if (nrm !== 0) {
-                if (qr[k][k] < 0) {
+                if (qr.get(k, k) < 0) {
                     nrm = -nrm;
                 }
                 for (i = k; i < m; i++) {
-                    qr[i][k] /= nrm;
+                    qr.set(i, k, qr.get(i, k) / nrm);
                 }
-                qr[k][k] += 1;
+                qr.set(k, k, qr.get(k, k) + 1);
                 for (j = k + 1; j < n; j++) {
                     s = 0;
                     for (i = k; i < m; i++) {
-                        s += qr[i][k] * qr[i][j];
+                        s += qr.get(i, k) * qr.get(i, j);
                     }
-                    s = -s / qr[k][k];
+                    s = -s / qr.get(k, k);
                     for (i = k; i < m; i++) {
-                        qr[i][j] += s * qr[i][k];
+                        qr.set(i, j, qr.get(i, j) + s * qr.get(i, k));
                     }
                 }
             }
