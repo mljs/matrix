@@ -10,7 +10,7 @@
   ],
   "scripts": {
     "compile": "rollup -c",
-    "eslint": "eslint src test",
+    "eslint": "eslint src testUtils.js",
     "eslint-fix": "npm run eslint -- --fix",
     "prepare": "npm run compile",
     "test": "run-s testonly eslint",
