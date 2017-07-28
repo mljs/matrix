@@ -1,4 +1,4 @@
-import {Matrix, SVD, inverse} from '../..';
+import {Matrix, SVD, inverse, solve} from '../..';
 import {toBeDeepCloseTo} from 'jest-matcher-deep-close-to';
 expect.extend({toBeDeepCloseTo});
 
@@ -18,8 +18,13 @@ describe('Singular value decomposition', () => {
             expect(actual).toBeDeepCloseTo(expected, 3);
         });
 
-        it('should compute the inverse with the inverse function (svd = true)', () => {
+        it('should compute the inverse with the inverse function', () => {
             var actual = inverse(value, true);
+            expect(actual).toBeDeepCloseTo(expected, 3);
+        });
+
+        it('should solve with identity matrix with the solve function', () => {
+            var actual = solve(value, Matrix.eye(2), true);
             expect(actual).toBeDeepCloseTo(expected, 3);
         });
     });
