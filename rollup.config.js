@@ -1,6 +1,9 @@
 export default {
-    entry: 'src/index.js',
-    format: 'cjs',
+    input: 'src/index.js',
     exports: 'named',
-    dest: 'matrix.js'
+    output: {
+        file: 'matrix.js',
+        format: 'cjs'
+    },
+    external: ['ml-array-rescale', 'ml-array-max']
 }
