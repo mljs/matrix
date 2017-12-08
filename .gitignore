@@ -2,3 +2,4 @@
 node_modules
 /matrix.js
 coverage/
+/packages/*/lib/
