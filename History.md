@@ -1,3 +1,18 @@
+<a name="5.1.0"></a>
+# [5.1.0](https://github.com/mljs/matrix/compare/v5.0.1...v5.1.0) (2018-05-04)
+
+
+### Features
+
+* add linearDependencies method ([88ee3df](https://github.com/mljs/matrix/commit/88ee3df))
+
+
+### Performance Improvements
+
+* add transposeViewMul benchmark ([0d24ea9](https://github.com/mljs/matrix/commit/0d24ea9))
+
+
+
 <a name="5.0.1"></a>
 ## [5.0.1](https://github.com/mljs/matrix/compare/v5.0.0...v5.0.1) (2017-07-28)
 
