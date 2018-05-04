@@ -10,12 +10,12 @@
   ],
   "scripts": {
     "compile": "rollup -c",
-    "eslint": "eslint src testUtils.js",
+    "eslint": "eslint benchmark src testUtils.js",
     "eslint-fix": "npm run eslint -- --fix",
-    "prepare": "npm run compile",
-    "test": "run-s testonly eslint",
-    "testonly": "jest",
-    "test-travis": "jest --coverage && codecov"
+    "prepublishOnly": "npm run compile",
+    "test": "run-s test-coverage eslint",
+    "test-only": "jest",
+    "test-coverage": "jest --coverage"
   },
   "repository": {
     "type": "git",
@@ -43,27 +43,25 @@
   "bugs": {
     "url": "https://github.com/mljs/matrix/issues"
   },
-  "engines": {
-    "node": ">=2.0.0"
-  },
   "homepage": "https://github.com/mljs/matrix",
   "devDependencies": {
     "babel-plugin-transform-es2015-modules-commonjs": "^6.26.0",
     "benchmark": "^2.1.0",
-    "codecov": "^2.3.0",
-    "csv-parse": "^1.0.0",
+    "csv-parse": "^2.2.0",
     "eslint": "^4.5.0",
     "eslint-config-cheminfo": "^1.5.2",
-    "eslint-plugin-no-only-tests": "^2.0.0",
-    "jest-cli": "^20.0.4",
+    "eslint-plugin-import": "^2.11.0",
+    "eslint-plugin-jest": "^21.15.1",
+    "jest": "^22.4.3",
     "jest-matcher-deep-close-to": "^1.0.2",
-    "mathjs": "^3.16.2",
+    "mathjs": "^4.2.1",
     "npm-run-all": "^4.0.1",
     "numeric": "^1.2.6",
     "pretty-hrtime": "^1.0.0",
-    "rollup": "^0.48.2"
+    "rollup": "^0.58.2"
   },
   "dependencies": {
+    "ml-array-max": "^1.0.1",
     "ml-array-rescale": "^1.1.0"
   }
 }

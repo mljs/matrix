@@ -1,0 +1,7 @@
+parserOptions:
+  sourceType: script
+rules:
+  no-console: off
+  no-new: off
+  no-useless-constructor: off
+  import/no-unresolved: off
