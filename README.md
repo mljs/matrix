@@ -1,9 +1,9 @@
 # ml-matrix
 
-  [![NPM version][npm-image]][npm-url]
-  [![build status][travis-image]][travis-url]
-  [![Test coverage][codecov-image]][codecov-url]
-  [![npm download][download-image]][download-url]
+[![NPM version][npm-image]][npm-url]
+[![build status][travis-image]][travis-url]
+[![Test coverage][codecov-image]][codecov-url]
+[![npm download][download-image]][download-url]
 
 Matrix manipulation and computation library.
 
@@ -24,19 +24,19 @@ const matrix = Matrix.ones(5, 5);
 ### As a CommonJS module
 
 ```js
-const {Matrix} = require('ml-matrix');
+const { Matrix } = require('ml-matrix');
 
 const matrix = Matrix.ones(5, 5);
 ```
 
 ## [API Documentation](https://mljs.github.io/matrix/)
 
-## Examples 
+## Examples
 
 ### Standard operations
 
-``` js
-const {Matrix} = require('ml-matrix');
+```js
+const { Matrix } = require('ml-matrix');
 
 var A = new Matrix([[1, 1], [2, 2]]);
 var B = new Matrix([[3, 3], [1, 1]]);
@@ -65,9 +65,9 @@ C.mod(2); // => C = Cinit % 2
 
 // Standard Math operations : (abs, cos, round, etc.)
 var A = new Matrix([[1, 1], [-1, -1]]);
-var expon = Matrix.exp(A); // expon = Matrix [[Math.exp(1), Math.exp(1)], [Math.exp(-1), Math.exp(-1)], rows: 2, columns: 2]. 
-var cosinus = Matrix.cos(A); // cosinus = Matrix [[Math.cos(1), Math.cos(1)], [Math.cos(-1), Math.cos(-1)], rows: 2, columns: 2]. 
-var absolute = Matrix.abs(A); // expon = absolute [[1, 1], [1, 1], rows: 2, columns: 2]. 
+var expon = Matrix.exp(A); // expon = Matrix [[Math.exp(1), Math.exp(1)], [Math.exp(-1), Math.exp(-1)], rows: 2, columns: 2].
+var cosinus = Matrix.cos(A); // cosinus = Matrix [[Math.cos(1), Math.cos(1)], [Math.cos(-1), Math.cos(-1)], rows: 2, columns: 2].
+var absolute = Matrix.abs(A); // expon = absolute [[1, 1], [1, 1], rows: 2, columns: 2].
 // you can use 'abs', 'acos', 'acosh', 'asin', 'asinh', 'atan', 'atanh', 'cbrt', 'ceil', 'clz32', 'cos', 'cosh', 'exp', 'expm1', 'floor', 'fround', 'log', 'log1p', 'log10', 'log2', 'round', 'sign', 'sin', 'sinh', 'sqrt', 'tan', 'tanh', 'trunc'
 // Note : you can do it inplace too as A.abs()
 
@@ -101,29 +101,30 @@ var z = Matrix.eye(3, 4); // Matrix [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], r
 ```
 
 ### Maths :
+
 ```js
 const {
-    Matrix,
-    inverse,
-    solve,
-    linearDependencies,
-    QrDecomposition,
-    LuDecomposition,
-    CholeskyDecomposition
+  Matrix,
+  inverse,
+  solve,
+  linearDependencies,
+  QrDecomposition,
+  LuDecomposition,
+  CholeskyDecomposition
 } = require('ml-matrix');
 
 //===========================
 // inverse and pseudo-inverse
 //===========================
 
-var A = new Matrix([[2, 3, 5], [4, 1, 6], [1, 3, 0]]); 
+var A = new Matrix([[2, 3, 5], [4, 1, 6], [1, 3, 0]]);
 var inverseA = inverse(A);
-var B = A.mmul(inverseA); // B = A * inverse(A), so B ~= Identity 
+var B = A.mmul(inverseA); // B = A * inverse(A), so B ~= Identity
 
 // if A is singular, you can use SVD :
 var A = new Matrix([[1, 2, 3], [4, 5, 6], [7, 8, 9]]); // A is singular, so the standard computation of inverse won't work (you can test if you don't trust me^^)
-var inverseA = inverse(A, useSVD = true); // inverseA is only an approximation of the inverse, by using the Singular Values Decomposition
-var B = A.mmul(inverseA); // B = A * inverse(A), but inverse(A) is only an approximation, so B doesn't really be identity. 
+var inverseA = inverse(A, (useSVD = true)); // inverseA is only an approximation of the inverse, by using the Singular Values Decomposition
+var B = A.mmul(inverseA); // B = A * inverse(A), but inverse(A) is only an approximation, so B doesn't really be identity.
 
 // if you want the pseudo-inverse of a matrix :
 var A = new Matrix([[1, 2], [3, 4], [5, 6]]);
@@ -131,7 +132,7 @@ var pseudoInverseA = A.pseudoInverse();
 var B = A.mmul(pseudoInverseA).mmul(A); // with pseudo inverse, A*pseudo-inverse(A)*A ~= A. It's the case here
 
 //=============
-// Least square 
+// Least square
 //=============
 
 // Least square is the following problem : We search x, such as A.x = b (A, x and b are matrix or vectors).
@@ -140,55 +141,60 @@ var B = A.mmul(pseudoInverseA).mmul(A); // with pseudo inverse, A*pseudo-inverse
 // If A is non singular :
 var A = new Matrix([[3, 1], [4.25, 1], [5.5, 1], [8, 1]]);
 var b = Matrix.columnVector([4.5, 4.25, 5.5, 5.5]);
-var x = solve(A, b); 
-var error = Matrix.sub(b, A.mmul(x)); // The error enables to evaluate the solution x found. 
+var x = solve(A, b);
+var error = Matrix.sub(b, A.mmul(x)); // The error enables to evaluate the solution x found.
 
 // If A is non singular :
 var A = new Matrix([[1, 2, 3], [4, 5, 6], [7, 8, 9]]);
 var b = Matrix.columnVector([8, 20, 32]);
-var x = solve(A, b, useSVD = true); // there are many solutions. x can be [1, 2, 1].transpose(), or [1.33, 1.33, 1.33].transpose(), etc. 
-var error = Matrix.sub(b, A.mmul(x)); // The error enables to evaluate the solution x found. 
+var x = solve(A, b, (useSVD = true)); // there are many solutions. x can be [1, 2, 1].transpose(), or [1.33, 1.33, 1.33].transpose(), etc.
+var error = Matrix.sub(b, A.mmul(x)); // The error enables to evaluate the solution x found.
 
 //===============
-// Decompositions 
+// Decompositions
 //===============
 
 // QR Decomposition
 
-var A = new Matrix([[2, 3, 5], [4, 1, 6], [1, 3, 0]]);  
+var A = new Matrix([[2, 3, 5], [4, 1, 6], [1, 3, 0]]);
 var QR = QrDecomposition(A);
-var Q = QR.orthogonalMatrix; 
+var Q = QR.orthogonalMatrix;
 var R = QR.upperTriangularMatrix;
 // So you have the QR decomposition. If you multiply Q by R, you'll see that A = Q.R, with Q orthogonal and R upper triangular
 
 // LU Decomposition
 
-var A = new Matrix([[2, 3, 5], [4, 1, 6], [1, 3, 0]]);  
+var A = new Matrix([[2, 3, 5], [4, 1, 6], [1, 3, 0]]);
 var LU = LuDecomposition(A);
-var L = LU.lowerTriangularMatrix; 
+var L = LU.lowerTriangularMatrix;
 var U = LU.upperTriangularMatrix;
 var P = LU.pivotPermutationVector;
 // So you have the LU decomposition. P includes the permutation of the matrix. Here P = [1, 2, 0], i.e the first row of LU is the second row of A, the second row of LU is the third row of A and the third row of LU is the first row of A.
 
 // Cholesky Decomposition
 
-var A = new Matrix([[2, 3, 5], [4, 1, 6], [1, 3, 0]]);  
+var A = new Matrix([[2, 3, 5], [4, 1, 6], [1, 3, 0]]);
 var cholesky = CholeskyDecomposition(A);
-var L = cholesky.lowerTriangularMatrix; 
+var L = cholesky.lowerTriangularMatrix;
 
 //=======
 // Others
 //=======
 
 // Linear dependencies
-var A = new Matrix([[2, 0, 0, 1], [0, 1, 6, 0], [0, 3, 0, 1], [0, 0, 1, 0], [0, 1, 2, 0]]);  
+var A = new Matrix([
+  [2, 0, 0, 1],
+  [0, 1, 6, 0],
+  [0, 3, 0, 1],
+  [0, 0, 1, 0],
+  [0, 1, 2, 0]
+]);
 var dependencies = linearDependencies(A); // dependencies is a matrix with the dependencies of the rows. When we look row by row, we see that the first row is [0, 0, 0, 0, 0], so it means that the first row is independent, and the second row is [ 0, 0, 0, 4, 1 ], i.e the second row = 4 times the 4th row + the 5th row.
-
 ```
 
 ## License
 
-  [MIT](./LICENSE)
+[MIT](./LICENSE)
 
 [npm-image]: https://img.shields.io/npm/v/ml-matrix.svg?style=flat-square
 [npm-url]: https://npmjs.org/package/ml-matrix
