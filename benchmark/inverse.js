@@ -3,7 +3,7 @@
 var Benchmark = require('benchmark');
 var numeric = require('numeric');
 
-var { Matrix, inverse } = require('../matrix');
+var { Matrix, inverse } = require('..');
 
 var x = parseInt(process.argv[2], 10) || 5;
 var y = parseInt(process.argv[3], 10) || x;

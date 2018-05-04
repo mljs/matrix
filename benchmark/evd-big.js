@@ -3,7 +3,7 @@
 var prettyHrtime = require('pretty-hrtime');
 var numeric = require('numeric');
 
-var { Matrix, EVD } = require('../matrix');
+var { Matrix, EVD } = require('..');
 
 var n = parseInt(process.argv[2], 10) || 3;
 var runs = parseInt(process.argv[3], 10) || 1;

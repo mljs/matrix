@@ -3,7 +3,7 @@
 var Benchmark = require('benchmark');
 var numeric = require('numeric');
 
-var { Matrix, EVD } = require('../matrix');
+var { Matrix, EVD } = require('..');
 
 var n = parseInt(process.argv[2], 10) || 3;
 console.log(`EVD benchmark for ${n}x${n} matrix`);

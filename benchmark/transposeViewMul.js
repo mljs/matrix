@@ -2,7 +2,7 @@
 
 var benchmark = require('benchmark');
 
-var { Matrix } = require('../matrix');
+var { Matrix } = require('..');
 
 var n = 100;
 

@@ -7,7 +7,7 @@ const parse = require('csv-parse');
 const prettyHrtime = require('pretty-hrtime');
 const numeric = require('numeric');
 
-var { Matrix, EVD } = require('../matrix');
+var { Matrix, EVD } = require('..');
 
 test('../data/9S.csv');
 test('../data/10S.csv');
