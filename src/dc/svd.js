@@ -325,6 +325,7 @@ export default class SingularValueDecomposition {
           let g = sk * ek;
           for (let j = k; j < p - 1; j++) {
             let t = hypotenuse(f, g);
+            if (t === 0) t = Number.MIN_VALUE;
             let cs = f / t;
             let sn = g / t;
             if (j !== k) {
@@ -342,6 +343,7 @@ export default class SingularValueDecomposition {
               }
             }
             t = hypotenuse(f, g);
+            if (t === 0) t = Number.MIN_VALUE;
             cs = f / t;
             sn = g / t;
             s[j] = t;

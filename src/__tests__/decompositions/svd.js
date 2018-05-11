@@ -5,6 +5,28 @@ import { Matrix, SVD, inverse, solve } from '../..';
 expect.extend({ toBeDeepCloseTo });
 
 describe('Singular value decomposition', () => {
+  it('Regress 1', () => {
+    const svdbug = require('./svdbug.json');
+    // Should not hang
+    var res = new SVD(svdbug);
+    expect(res.diagonal).toHaveLength(73);
+  });
+
+  // https://en.wikipedia.org/wiki/Singular_value_decomposition#Example
+  it('Wikipedia example - U and V should be unitary', () => {
+    var matrix = new Matrix([
+      [1, 0, 0, 0, 2],
+      [0, 0, 3, 0, 0],
+      [0, 0, 0, 0, 0],
+      [0, 4, 0, 0, 0]
+    ]);
+    var svd = new SVD(matrix);
+    var U = new Matrix(svd.U);
+    var V = new Matrix(svd.V);
+    expect(U.mmul(U.transpose())).toEqual(Matrix.eye(4));
+    expect(V.mmul(V.transpose())).toBeDeepCloseTo(Matrix.eye(5), 5);
+  });
+
   describe('inverse', () => {
     var value = new Matrix([[1, 1], [2, 2]]);
     var target = new SVD(value);
