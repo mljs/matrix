@@ -1,3 +1,13 @@
+<a name="5.1.1"></a>
+## [5.1.1](https://github.com/mljs/matrix/compare/v5.1.0...v5.1.1) (2018-05-11)
+
+
+### Bug Fixes
+
+* prevent infinite loop ([f684d90](https://github.com/mljs/matrix/commit/f684d90))
+
+
+
 <a name="5.1.0"></a>
 # [5.1.0](https://github.com/mljs/matrix/compare/v5.0.1...v5.1.0) (2018-05-04)
 
