@@ -58,7 +58,7 @@
     "npm-run-all": "^4.0.1",
     "numeric": "^1.2.6",
     "pretty-hrtime": "^1.0.0",
-    "rollup": "^0.58.2"
+    "rollup": "^0.59.2"
   },
   "dependencies": {
     "ml-array-max": "^1.0.1",
