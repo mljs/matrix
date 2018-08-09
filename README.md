@@ -177,6 +177,14 @@ var A = new Matrix([[2, 3, 5], [4, 1, 6], [1, 3, 0]]);
 var cholesky = CholeskyDecomposition(A);
 var L = cholesky.lowerTriangularMatrix;
 
+// Eigenvalues & eigenvectors
+
+var A = new Matrix([[2, 3, 5], [4, 1, 6], [1, 3, 0]]);
+var e = EigenvalueDecomposition(A);
+var real = e.realEigenvalues;
+var imaginary = e.imaginaryEigenvalues;
+var vectors = e.eigenvectorMatrix;
+
 //=======
 // Others
 //=======
