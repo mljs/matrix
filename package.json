@@ -4,7 +4,9 @@
   "description": "Matrix manipulation and computation library",
   "main": "matrix.js",
   "module": "src/index.js",
+  "types": "matrix.d.ts",
   "files": [
+    "matrix.d.ts",
     "matrix.js",
     "src"
   ],
