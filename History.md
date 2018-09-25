@@ -1,3 +1,18 @@
+<a name="5.2.0"></a>
+# [5.2.0](https://github.com/mljs/matrix/compare/v5.1.1...v5.2.0) (2018-09-25)
+
+
+### Bug Fixes
+
+* complete type definitions ([ca63059](https://github.com/mljs/matrix/commit/ca63059))
+
+
+### Features
+
+* create index.d.ts ([#74](https://github.com/mljs/matrix/issues/74)) ([905c987](https://github.com/mljs/matrix/commit/905c987))
+
+
+
 <a name="5.1.1"></a>
 ## [5.1.1](https://github.com/mljs/matrix/compare/v5.1.0...v5.1.1) (2018-05-11)
 
