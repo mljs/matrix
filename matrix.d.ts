@@ -1,15 +1,18 @@
-declare module "ml-matrix" {
-  type NRows = number | Array<any> | Matrix;
+declare module 'ml-matrix' {
+  type MaybeMatrix = Matrix | number[][];
+  type Rng = () => number;
+  type ScalarOrMatrix = number | Matrix;
+
   class BaseView extends Matrix {}
   class MatrixColumnView extends BaseView {
-    set(rowIndex: number, columnIndex: number, value: any): MatrixColumnView;
+    set(rowIndex: number, columnIndex: number, value: number): MatrixColumnView;
     get(rowIndex: number): number;
   }
   class MatrixColumnSelectionView extends BaseView {
     set(
       rowIndex: number,
       columnIndex: number,
-      value: any
+      value: number
     ): MatrixColumnSelectionView;
     get(rowIndex: number, columnIndex: number): number;
   }
@@ -17,49 +20,84 @@ declare module "ml-matrix" {
     set(
       rowIndex: number,
       columnIndex: number,
-      value: any
+      value: number
     ): MatrixFlipColumnView;
     get(rowIndex: number, columnIndex: number): number;
   }
   class MatrixFlipRowView extends BaseView {
-    set(rowIndex: number, columnIndex: number, value: any): MatrixFlipRowView;
+    set(
+      rowIndex: number,
+      columnIndex: number,
+      value: number
+    ): MatrixFlipRowView;
     get(rowIndex: number, columnIndex: number): number;
   }
   class MatrixRowView extends BaseView {
-    set(rowIndex: number, columnIndex: number, value: any): MatrixRowView;
+    set(rowIndex: number, columnIndex: number, value: number): MatrixRowView;
     get(rowIndex: number, columnIndex: number): number;
   }
   class MatrixRowSelectionView extends BaseView {
     set(
       rowIndex: number,
       columnIndex: number,
-      value: any
+      value: number
     ): MatrixRowSelectionView;
     get(rowIndex: number, columnIndex: number): number;
   }
   class MatrixSelectionView extends BaseView {
-    set(rowIndex: number, columnIndex: number, value: any): MatrixSelectionView;
+    set(
+      rowIndex: number,
+      columnIndex: number,
+      value: number
+    ): MatrixSelectionView;
     get(rowIndex: number, columnIndex: number): number;
   }
   class MatrixSubView extends BaseView {
-    set(rowIndex: number, columnIndex: number, value: any): MatrixSubView;
+    set(rowIndex: number, columnIndex: number, value: number): MatrixSubView;
     get(rowIndex: number, columnIndex: number): number;
   }
   class MatrixTransposeView extends BaseView {
-    set(rowIndex: number, columnIndex: number, value: any): MatrixTransposeView;
+    set(
+      rowIndex: number,
+      columnIndex: number,
+      value: number
+    ): MatrixTransposeView;
     get(rowIndex: number, columnIndex: number): number;
   }
   class Matrix {
     readonly size: number;
-    constructor(nRows: NRows, nColumns: number);
+    constructor(nRows: number, nColumns: number);
+    constructor(data: number[][]);
+    constructor(otherMatrix: Matrix);
     static from1DArray(
       newRows: number,
       newColumns: number,
-      newData: Array<any>
+      newData: number[]
     ): Matrix;
+    static rowVector(newData: number[]): Matrix;
+    static columnVector(newData: number[]): Matrix;
+    static empty(rows: number, columns: number): Matrix;
+    static zeros(rows: number, columns: number): Matrix;
+    static ones(rows: number, columns: number): Matrix;
+    static rand(rows: number, columns: number, rng?: Rng): Matrix;
+    static random(rows: number, columns: number, rng?: Rng): Matrix;
+    static randInt(
+      rows: number,
+      columns: number,
+      maxValue?: number,
+      rng?: Rng
+    ): Matrix;
+    static eye(rows: number, columns?: number, value?: number): Matrix;
+    static identity(rows: number, columns?: number, value?: number): Matrix;
+    static diag(data: number[], rows?: number, columns?: number): Matrix;
+    static diagonal(data: number[], rows?: number, columns?: number): Matrix;
+    static min(matrix1: Matrix, matrix2: Matrix): Matrix;
+    static max(matrix1: Matrix, matrix2: Matrix): Matrix;
+    static checkMatrix(value: any): Matrix;
+    static isMatrix(value: any): value is Matrix;
     apply(callback: Function): Matrix;
-    to1DArray<T = any>(): Array<T>;
-    to2DArray<T = any>(): Array<Array<T>>;
+    to1DArray(): number[];
+    to2DArray(): number[][];
     isRowVector(): boolean;
     isColumnVector(): boolean;
     isVector(): boolean;
@@ -70,50 +108,53 @@ declare module "ml-matrix" {
     repeat(rowRep: number, colRep: number): Matrix;
     fill(value: number): Matrix;
     neg(): Matrix;
-    getRow<T = any>(index: number): Array<T>;
+    negate(): Matrix;
+    getRow(index: number): number[];
     getRowVector(index: number): Matrix;
-    setRow(index: number, array: Array<any> | Matrix[]): Matrix;
+    setRow(index: number, array: number[] | Matrix): Matrix;
     swapRows(row1: number, row2: number): Matrix;
-    getColumn(index: number): Array<any>;
+    getColumn(index: number): number[];
     getColumnVector(index: number): Matrix;
-    setColumn(index: number, array: Array<any> | Matrix[]): Matrix;
+    setColumn(index: number, array: number[] | Matrix): Matrix;
     swapColumns(column1: number, column2: number): Matrix;
-    addRowVector(vector: Array<any> | Matrix[]): Matrix;
-    subRowVector(vector: Array<any> | Matrix[]): Matrix;
-    mulRowVector(vector: Array<any> | Matrix[]): Matrix;
-    divRowVector(vector: Array<any> | Matrix[]): Matrix;
-    addColumnVector(vector: Array<any> | Matrix[]): Matrix;
-    subColumnVector(vector: Array<any> | Matrix[]): Matrix;
-    mulColumnVector(vector: Array<any> | Matrix[]): Matrix;
-    divColumnVector(vector: Array<any> | Matrix[]): Matrix;
+    addRowVector(vector: number[] | Matrix): Matrix;
+    subRowVector(vector: number[] | Matrix): Matrix;
+    mulRowVector(vector: number[] | Matrix): Matrix;
+    divRowVector(vector: number[] | Matrix): Matrix;
+    addColumnVector(vector: number[] | Matrix): Matrix;
+    subColumnVector(vector: number[] | Matrix): Matrix;
+    mulColumnVector(vector: number[] | Matrix): Matrix;
+    divColumnVector(vector: number[] | Matrix): Matrix;
     mulRow(index: number, value: number): Matrix;
     mulColumn(index: number, value: number): Matrix;
     max(): number;
-    maxIndex(): Array<any>;
+    maxIndex(): number[];
     min(): number;
-    minIndex(): Array<any>;
+    minIndex(): number[];
     maxRow(row: number): number;
-    maxRowIndex(row: number): Array<any>;
+    maxRowIndex(row: number): number[];
     minRow(row: number): number;
-    minRowIndex(row: number): Array<any>;
+    minRowIndex(row: number): number[];
     maxColumn(column: number): number;
-    maxColumnIndex(column: number): Array<any>;
+    maxColumnIndex(column: number): number[];
     minColumn(column: number): number;
-    minColumnIndex(column: number): Array<number>;
-    diag(): Array<any>;
-    sum(by: "row" | "column"): Matrix | number;
+    minColumnIndex(column: number): number[];
+    diag(): number[];
+    diagonal(): number[];
+    sum(by: 'row' | 'column'): Matrix | number;
     mean(): number;
     prod(): number;
-    norm(type: "frobenius" | "max"): number;
+    norm(type: 'frobenius' | 'max'): number;
     cumulativeSum(): Matrix;
     dot(vector2: Matrix): number;
     mmul(other: Matrix): Matrix;
     strassen2x2(other: Matrix): Matrix;
     strassen3x3(other: Matrix): Matrix;
     mmulStrassen(y: Matrix): Matrix;
-    scaleRows(min: number, max: number): Matrix;
-    scaleColumns(min: number, max: number): Matrix;
+    scaleRows(min?: number, max?: number): Matrix;
+    scaleColumns(min?: number, max?: number): Matrix;
     kroneckerProduct(other: Matrix): Matrix;
+    tensorProduct(other: Matrix): Matrix;
     transpose(): Matrix;
     sortRows(compareFunction: Function): Matrix;
     sortColumns(compareFunction: Function): Matrix;
@@ -124,21 +165,21 @@ declare module "ml-matrix" {
       endColumn: number
     ): Matrix;
     subMatrixRow(
-      indices: Array<any>,
-      startColumn: number,
-      endColumn: number
+      indices: number[],
+      startColumn?: number,
+      endColumn?: number
     ): Matrix;
     subMatrixColumn(
-      indices: Array<any>,
-      startRow: number,
-      endRow: number
+      indices: number[],
+      startRow?: number,
+      endRow?: number
     ): Matrix;
     setSubMatrix(
-      matrix: Matrix | Array<any>,
+      matrix: Matrix | number[],
       startRow: number,
       startColumn: number
     ): Matrix;
-    selection(rowIndices: Array<number>, columnIndices: Array<number>): Matrix;
+    selection(rowIndices: number[], columnIndices: number[]): Matrix;
     trace(): number;
     transposeView(): MatrixTransposeView;
     rowView(row: number): MatrixRowView;
@@ -152,34 +193,193 @@ declare module "ml-matrix" {
       endColumn: number
     ): MatrixSubView;
     selectionView(
-      rowIndices: Array<number>,
-      columnIndices: Array<number>
+      rowIndices: number[],
+      columnIndices: number[]
     ): MatrixSelectionView;
-    rowSelectionView(rowIndices: Array<number>): MatrixRowSelectionView;
-    columnSelectionView(
-      columnIndices: Array<number>
-    ): MatrixColumnSelectionView;
+    rowSelectionView(rowIndices: number[]): MatrixRowSelectionView;
+    columnSelectionView(columnIndices: number[]): MatrixColumnSelectionView;
     det(): number;
+    determinant(): number;
     pseudoInverse(threshold: number): Matrix;
     clone(): Matrix;
-    static rowVector<T = any>(newData: Array<T>): Matrix;
-    static columnVector<T = any>(newData: Array<T>): Matrix;
-    static empty(rows: number, columns: number): Matrix;
-    static zeros(rows: number, columns: number): Matrix;
-    static ones(rows: number, columns: number): Matrix;
-    static rand(rows: number, columns: number, rng: Function): Matrix;
-    static randInt(
-      rows: number,
-      columns: number,
-      maxValue: number,
-      rng: Function
+
+    // From here we document methods dynamically generated from operators
+
+    // Mathematical operators
+    // inplace
+    add(value: ScalarOrMatrix): Matrix;
+    sub(value: ScalarOrMatrix): Matrix;
+    subtract(value: ScalarOrMatrix): Matrix;
+    mul(value: ScalarOrMatrix): Matrix;
+    multiply(value: ScalarOrMatrix): Matrix;
+    div(value: ScalarOrMatrix): Matrix;
+    divide(value: ScalarOrMatrix): Matrix;
+    mod(value: ScalarOrMatrix): Matrix;
+    modulus(value: ScalarOrMatrix): Matrix;
+    and(value: ScalarOrMatrix): Matrix;
+    or(value: ScalarOrMatrix): Matrix;
+    xor(value: ScalarOrMatrix): Matrix;
+    leftShift(value: ScalarOrMatrix): Matrix;
+    signPropagatingRightShift(value: ScalarOrMatrix): Matrix;
+    rightShift(value: ScalarOrMatrix): Matrix;
+    zeroFillRightShift(value: ScalarOrMatrix): Matrix;
+    // new matrix
+    static add(matrix: Matrix, value: ScalarOrMatrix): Matrix;
+    static sub(matrix: Matrix, value: ScalarOrMatrix): Matrix;
+    static subtract(matrix: Matrix, value: ScalarOrMatrix): Matrix;
+    static mul(matrix: Matrix, value: ScalarOrMatrix): Matrix;
+    static multiply(matrix: Matrix, value: ScalarOrMatrix): Matrix;
+    static div(matrix: Matrix, value: ScalarOrMatrix): Matrix;
+    static divide(matrix: Matrix, value: ScalarOrMatrix): Matrix;
+    static mod(matrix: Matrix, value: ScalarOrMatrix): Matrix;
+    static modulus(matrix: Matrix, value: ScalarOrMatrix): Matrix;
+    static and(matrix: Matrix, value: ScalarOrMatrix): Matrix;
+    static or(matrix: Matrix, value: ScalarOrMatrix): Matrix;
+    static xor(matrix: Matrix, value: ScalarOrMatrix): Matrix;
+    static leftShift(matrix: Matrix, value: ScalarOrMatrix): Matrix;
+    static signPropagatingRightShift(
+      matrix: Matrix,
+      value: ScalarOrMatrix
     ): Matrix;
-    static eye(rows: number, columns: number, value: number): Matrix;
-    static diag(data: Array<number>, rows: number, columns: number): Matrix;
-    static min(matrix1: Matrix, matrix2: Matrix): Matrix;
-    static max(matrix1: Matrix, matrix2: Matrix): Matrix;
-    static checkMatrix(value: any): Matrix;
-    static isMatrix(value: any): value is Matrix;
+    static rightShift(matrix: Matrix, value: ScalarOrMatrix): Matrix;
+    static zeroFillRightShift(matrix: Matrix, value: ScalarOrMatrix): Matrix;
+
+    // Functional operators (one arg)
+    // inplace
+    not(): Matrix;
+    abs(): Matrix;
+    acos(): Matrix;
+    acosh(): Matrix;
+    asin(): Matrix;
+    asinh(): Matrix;
+    atan(): Matrix;
+    atanh(): Matrix;
+    cbrt(): Matrix;
+    ceil(): Matrix;
+    clz32(): Matrix;
+    cos(): Matrix;
+    cosh(): Matrix;
+    exp(): Matrix;
+    expm1(): Matrix;
+    floor(): Matrix;
+    fround(): Matrix;
+    log(): Matrix;
+    log1p(): Matrix;
+    log10(): Matrix;
+    log2(): Matrix;
+    round(): Matrix;
+    sign(): Matrix;
+    sin(): Matrix;
+    sinh(): Matrix;
+    sqrt(): Matrix;
+    tan(): Matrix;
+    tanh(): Matrix;
+    trunc(): Matrix;
+    // new matrix
+    static not(value: Matrix): Matrix;
+    static abs(value: Matrix): Matrix;
+    static acos(value: Matrix): Matrix;
+    static acosh(value: Matrix): Matrix;
+    static asin(value: Matrix): Matrix;
+    static asinh(value: Matrix): Matrix;
+    static atan(value: Matrix): Matrix;
+    static atanh(value: Matrix): Matrix;
+    static cbrt(value: Matrix): Matrix;
+    static ceil(value: Matrix): Matrix;
+    static clz32(value: Matrix): Matrix;
+    static cos(value: Matrix): Matrix;
+    static cosh(value: Matrix): Matrix;
+    static exp(value: Matrix): Matrix;
+    static expm1(value: Matrix): Matrix;
+    static floor(value: Matrix): Matrix;
+    static fround(value: Matrix): Matrix;
+    static log(value: Matrix): Matrix;
+    static log1p(value: Matrix): Matrix;
+    static log10(value: Matrix): Matrix;
+    static log2(value: Matrix): Matrix;
+    static round(value: Matrix): Matrix;
+    static sign(value: Matrix): Matrix;
+    static sin(value: Matrix): Matrix;
+    static sinh(value: Matrix): Matrix;
+    static sqrt(value: Matrix): Matrix;
+    static tan(value: Matrix): Matrix;
+    static tanh(value: Matrix): Matrix;
+    static trunc(value: Matrix): Matrix;
+
+    // Functional operators with one arg
+    // inplace
+    pow(value: ScalarOrMatrix): Matrix;
+    // new matrix
+    static pow(value: Matrix, value: ScalarOrMatrix): Matrix;
   }
   export default Matrix;
+  export { Matrix };
+
+  class SingularValueDecomposition {
+    constructor(value: MaybeMatrix, options?: ISVDOptions);
+    inverse(): Matrix;
+    solve(value: Matrix): Matrix;
+    solveForDiagonal(value: number[]): Matrix;
+    get norm2(): number;
+    get threshold(): number;
+    get leftSingularVectors(): Matrix;
+    get condition(): number;
+    get rank(): number;
+    get rightSingularVectors(): Matrix;
+    get diagonal(): number[];
+    get diagonalMatrix(): Matrix;
+  }
+  export interface ISVDOptions {
+    computeLeftSingularVectors?: boolean;
+    computeRightSingularVectors?: boolean;
+    autoTranspose?: boolean;
+  }
+  export { SingularValueDecomposition, SingularValueDecomposition as SVD };
+
+  class EigenvalueDecomposition {
+    constructor(value: MaybeMatrix, options?: IEVDOptions);
+    get diagonalMatrix(): Matrix;
+    get eigenvectorMatrix(): Matrix;
+    get imaginaryEigenvalues(): number[];
+    get realEigenvalues(): number[];
+  }
+  export interface IEVDOptions {
+    assumeSymmetric?: boolean;
+  }
+  export { EigenvalueDecomposition, EigenvalueDecomposition as EVD };
+
+  class CholeskyDecomposition {
+    constructor(value: MaybeMatrix);
+    solve(value: Matrix): Matrix;
+    get lowerTriangularMatrix(): Matrix;
+  }
+  export { CholeskyDecomposition, CholeskyDecomposition as CHO };
+
+  class LuDecomposition {
+    constructor(value: MaybeMatrix);
+    isSingular(): boolean;
+    solve(value: Matrix): Matrix;
+    get determinant(): number;
+    get lowerTriangularMatrix(): Matrix;
+    get pivotPermutationVector(): number[];
+    get upperTriangularMatrix(): Matrix;
+  }
+  export { LuDecomposition, LuDecomposition as LU };
+
+  class QrDecomposition {
+    constructor(value: MaybeMatrix);
+    isFullRank(): boolean;
+    solve(value: Matrix): Matrix;
+    get orthogonalMatrix(): Matrix;
+    get upperTriangularMatrix(): Matrix;
+  }
+  export { QrDecomposition, QrDecomposition as QR };
+
+  export function solve(
+    leftHandSide: Matrix,
+    rightHandSide: Matrix,
+    useSVD?: boolean
+  ): Matrix;
+
+  export function inverse(matrix: Matrix, useSVD?: boolean): Matrix;
 }
