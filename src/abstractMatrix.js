@@ -132,16 +132,18 @@ export default function AbstractMatrix(superCtor) {
          * @param {number} rows - Number of rows
          * @param {number} columns - Number of columns
          * @param {number} [maxValue=1000] - Maximum value
+         * @param {number} [minValue=0] - Minimum value
          * @param {function} [rng=Math.random] - Random number generator
          * @return {Matrix} The new matrix
          */
-    static randInt(rows, columns, maxValue, rng) {
+    static randInt(rows, columns, maxValue, minValue, rng) {
       if (maxValue === undefined) maxValue = 1000;
+      if (minValue === undefined) minValue = 0;
       if (rng === undefined) rng = Math.random;
       var matrix = this.empty(rows, columns);
       for (var i = 0; i < rows; i++) {
         for (var j = 0; j < columns; j++) {
-          var value = Math.floor(rng() * maxValue);
+          var value = Math.floor(rng() * maxValue + minValue);
           matrix.set(i, j, value);
         }
       }
