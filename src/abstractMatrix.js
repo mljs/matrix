@@ -143,7 +143,7 @@ export default function AbstractMatrix(superCtor) {
       var matrix = this.empty(rows, columns);
       for (var i = 0; i < rows; i++) {
         for (var j = 0; j < columns; j++) {
-          var value = Math.floor(rng() * maxValue + minValue);
+          var value = Math.floor(rng() * (maxValue - minValue) + minValue);
           matrix.set(i, j, value);
         }
       }
