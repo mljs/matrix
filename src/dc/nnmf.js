@@ -1,4 +1,4 @@
-import { Matrix, WrapperMatrix2D } from '../index';
+import { Matrix } from '../index';
 
 /**
  * @class Non-negativeMatrixFactorization
@@ -6,11 +6,7 @@ import { Matrix, WrapperMatrix2D } from '../index';
  * @param {number} r
  * @param {number} it
  */
-
 export default class NNMF {
-  constructor(A, r, it) {
-    A = WrapperMatrix2D.checkMatrix(A);
-  }
   /**
  * Do the NNMF of a matrix A into two matrix X and Y
  * @param {Matrix} A
