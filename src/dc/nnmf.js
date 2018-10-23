@@ -83,11 +83,15 @@ export default class NNMF {
     }
     return [this.X, this.Y];
   }
+  /** Compute the error
+   *@returns {matrix} error
+   */
+
   error() {
     let A2 = this.X.mmul(this.Y);
     for (let i = 0; i < this.m; i++) {
       for (let j = 0; j < this.n; j++) {
-        this.error.set(i, j, Math.abs(A2.get(i, j) - this.A.get(i, j)));
+        this.error.set(i, j, (Math.abs(A2.get(i, j) - this.A.get(i, j))) / this.A.get(i, j));
       }
     }
     return (this.error);
