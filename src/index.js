@@ -21,3 +21,4 @@ export {
 } from './dc/cholesky.js';
 export { default as LuDecomposition, default as LU } from './dc/lu.js';
 export { default as QrDecomposition, default as QR } from './dc/qr.js';
+export { default as NNMFDecomposition, default as NNMF } from './dc/nnmf.js';
