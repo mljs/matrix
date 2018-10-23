@@ -4,27 +4,32 @@ import { Matrix, WrapperMatrix2D } from '../index';
  * @class Non-negativeMatrixFactorization
  * @param {Matrix} A
  * @param {number} r
- * @param {number} it
  */
 export default class NNMF {
   constructor(A, r) {
     A = WrapperMatrix2D.checkMatrix(A);
-    var m = this.A.rows;
-    var n = this.A.columns;
+    var m = A.rows;
+    var n = A.columns;
 
-    let X = Matrix.rand(m, r);
-    let Y = Matrix.rand(r, n);
+    var X = Matrix.rand(m, r);
+    var Y = Matrix.rand(r, n);
 
-    let error = new Matrix(this.m, this.n);
+    let error = new Matrix(m, n);
+
+    this.r = r;
+    this.A = A;
+    this.m = m;
+    this.n = n;
+    this.X = X;
+    this.Y = Y;
+    this.error = error;
   }
   /**
  * Do the NNMF of a matrix A into two matrix X and Y
  * @param {number} it
- * @return {Array} [X,Y]
  */
-  nnmf(it) {
+  doNnmf(it) {
     let A2 = this.X.mmul(this.Y);
-
     let numX = Matrix.empty(this.m, this.r);
     let denumX = Matrix.empty(this.m, this.r);
 
@@ -81,7 +86,6 @@ export default class NNMF {
         }
       }
     }
-    return [this.X, this.Y];
   }
   /** Compute the error
    *@returns {matrix} error
