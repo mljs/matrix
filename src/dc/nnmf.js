@@ -14,15 +14,15 @@ export default class NNMF {
 
     let X = Matrix.rand(m, r);
     let Y = Matrix.rand(r, n);
+
+    let error = new Matrix(this.m, this.n);
   }
   /**
  * Do the NNMF of a matrix A into two matrix X and Y
- * @param {Matrix} this.A
- * @param {number} r
  * @param {number} it
  * @return {Array} [X,Y]
  */
-  nnmf(A, it) {
+  nnmf(it) {
     let A2 = this.X.mmul(this.Y);
 
     let numX = Matrix.empty(this.m, this.r);
@@ -63,7 +63,7 @@ export default class NNMF {
 
       for (let i = 0; i < this.m; i++) {
         for (let j = 0; j < this.n; j++) {
-          temp1.set(i, j, Math.pow(A2.get(i, j), -2) * A.get(i, j));
+          temp1.set(i, j, Math.pow(A2.get(i, j), -2) * this.A.get(i, j));
           temp2.set(i, j, Math.pow(A2.get(i, j), -1));
         }
       }
@@ -84,6 +84,12 @@ export default class NNMF {
     return [this.X, this.Y];
   }
   error() {
-
+    let A2 = this.X.mmul(this.Y);
+    for (let i = 0; i < this.m; i++) {
+      for (let j = 0; j < this.n; j++) {
+        this.error.set(i, j, Math.abs(A2.get(i, j) - this.A.get(i, j)));
+      }
+    }
+    return (this.error);
   }
 }
