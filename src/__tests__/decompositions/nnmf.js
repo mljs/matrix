@@ -14,7 +14,7 @@ describe('Non-negative Matrix Factorization', () => {
       [1, 0, 0, 0, 1]
     ]);
 
-    var nA = new NNMF(A, 4, 100);
+    var nA = new NNMF(A, 4);
     var zM = Matrix.zeros(5, 5);
 
     nA.doNnmf(1000);

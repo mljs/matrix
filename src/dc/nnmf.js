@@ -7,7 +7,7 @@ import { Matrix, WrapperMatrix2D } from '../index';
  * @param {number} it
  */
 export default class NNMF {
-  constructor(A, r, it) {
+  constructor(A, r) {
     A = WrapperMatrix2D.checkMatrix(A);
     var m = A.rows;
     var n = A.columns;
