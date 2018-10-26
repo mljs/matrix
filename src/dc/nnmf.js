@@ -89,9 +89,7 @@ export default class NNMF {
     }
   }
   /** Compute the error
-   *@returns {matrix} error
    */
-
   doError() {
     let A2 = this.X.mmul(this.Y);
     for (let i = 0; i < this.m; i++) {
