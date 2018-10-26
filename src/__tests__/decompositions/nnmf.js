@@ -6,7 +6,7 @@ expect.extend({ toBeDeepCloseTo });
 
 describe('Non-negative Matrix Factorization', () => {
   it('factorization', () => {
-    var A = new Matrix([
+    let A = new Matrix([
       [1, 0, 0, 0, 1],
       [0, 0, 0, 0, 0],
       [0, 0, 0, 0, 0],
@@ -14,8 +14,8 @@ describe('Non-negative Matrix Factorization', () => {
       [1, 0, 0, 0, 1]
     ]);
 
-    var nA = new NNMF(A, 4);
-    var zM = Matrix.zeros(5, 5);
+    let nA = new NNMF(A, 4);
+    let zM = Matrix.zeros(5, 5);
 
     nA.doNnmf(1000);
     nA.doError();
