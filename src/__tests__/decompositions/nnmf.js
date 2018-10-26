@@ -14,8 +14,12 @@ describe('Non-negative Matrix Factorization', () => {
       [1, 0, 0, 0, 1]
     ]);
 
-    var nA = new NNMF(A, 4);
+    var nA = new NNMF(A, 4, 100);
+    var zM = Matrix.zeros(5, 5);
+
     nA.doNnmf(1000);
+    nA.doError();
     expect(nA.X.mmul(nA.Y)).toBeDeepCloseTo(A);
+    expect(nA.error).toBeDeepCloseTo(zM);
   });
 });

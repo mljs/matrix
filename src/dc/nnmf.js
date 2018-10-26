@@ -4,9 +4,10 @@ import { Matrix, WrapperMatrix2D } from '../index';
  * @class Non-negativeMatrixFactorization
  * @param {Matrix} A
  * @param {number} r
+ * @param {number} it
  */
 export default class NNMF {
-  constructor(A, r) {
+  constructor(A, r, it) {
     A = WrapperMatrix2D.checkMatrix(A);
     var m = A.rows;
     var n = A.columns;
@@ -91,13 +92,12 @@ export default class NNMF {
    *@returns {matrix} error
    */
 
-  error() {
+  doError() {
     let A2 = this.X.mmul(this.Y);
     for (let i = 0; i < this.m; i++) {
       for (let j = 0; j < this.n; j++) {
-        this.error.set(i, j, (Math.abs(A2.get(i, j) - this.A.get(i, j))) / this.A.get(i, j));
+        this.error.set(i, j, (Math.abs(A2.get(i, j) - this.A.get(i, j))) / (this.A.get(i, j) + Number.EPSILON));
       }
     }
-    return (this.error);
   }
 }
