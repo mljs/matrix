@@ -1,6 +1,6 @@
 import { toBeDeepCloseTo } from 'jest-matcher-deep-close-to';
 
-import { Matrix, NNMF, WrapperMatrix2D } from '../..';
+import { Matrix, NNMF } from '../..';
 
 expect.extend({ toBeDeepCloseTo });
 
