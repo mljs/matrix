@@ -29,12 +29,12 @@ export default class NNMF {
   /**
    * Compute the error
    */
-  doError() {
-    this.error = new Matrix(this.m, this.n);
+  get error() {
+    let error = new Matrix(this.m, this.n);
     let A2 = this.X.mmul(this.Y);
     for (let i = 0; i < this.m; i++) {
       for (let j = 0; j < this.n; j++) {
-        this.error.set(
+        error.set(
           i,
           j,
           Math.abs(A2.get(i, j) - this.A.get(i, j)) /
@@ -42,6 +42,7 @@ export default class NNMF {
         );
       }
     }
+    return (error);
   }
 }
 

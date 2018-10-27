@@ -15,8 +15,6 @@ describe('Non-negative Matrix Factorization', () => {
     ]);
 
     let nA = new NNMF(A, 4);
-    // nA.doNnmf(1000);
-    nA.doError();
     expect(nA.X.mmul(nA.Y)).toBeDeepCloseTo(A);
     expect(nA.error).toBeDeepCloseTo(Matrix.zeros(5, 5));
   });
