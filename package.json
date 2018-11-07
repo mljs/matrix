@@ -57,6 +57,7 @@
     "eslint-config-cheminfo": "^1.18.0",
     "eslint-plugin-import": "^2.14.0",
     "eslint-plugin-jest": "^21.24.1",
+    "esm": "^3.0.84",
     "jest": "^23.6.0",
     "jest-matcher-deep-close-to": "^1.3.0",
     "mathjs": "^5.1.2",
