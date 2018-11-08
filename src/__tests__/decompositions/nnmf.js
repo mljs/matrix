@@ -36,22 +36,14 @@ describe('Non-negative Matrix Factorization', () => {
     let nA = new NNMF(A, 4, 0.0000001);
 
     expect(positivity(nA)).toEqual(true);
-    for (let i = 0; i < A.rows; i++) {
-      for (let j = 0; j < A.columns; j++) {
-        expect(nA.error.get(i, j)).toBeLessThan(0.0000001);
-      }
-    }
+    expect(nA.error.max()).toBeLessThan(0.0000001);
   });
   it('Random factoriation tests', () => {
     for (let i = 0; i < 1; i++) {
       let A = Matrix.rand(20, 20);
-      let nA = new NNMF(A, 15, 0.1);
+      let nA = new NNMF(A, 19, 1, { maxIterations: 100000 });
       expect(positivity(nA)).toEqual(true);
-      for (let i = 0; i < A.rows; i++) {
-        for (let j = 0; j < A.columns; j++) {
-          expect(nA.error.get(i, j)).toBeLessThan(1);
-        }
-      }
+      expect(nA.error.max()).toBeLessThan(1);
     }
   });
 });

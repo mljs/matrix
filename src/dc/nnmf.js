@@ -22,8 +22,13 @@ export default class NNMF {
     this.A = A;
     this.m = m;
     this.n = n;
-    this.X = Matrix.rand(this.m, this.r);
-    this.Y = Matrix.rand(this.r, this.n);
+    this.X = Matrix.ones(this.m, this.r);
+    this.Y = Matrix.ones(this.r, this.n);
+
+    for (let i = 0; i < r; i++) {
+      this.Y.mulColumn(i, 0.5);
+      this.X.mulRow(i, 0.25);
+    }
 
     let condition = false;
     let time = 0;
@@ -84,8 +89,12 @@ function doNnmf(numberIterations = 1000) {
     denumX = temp2.mmul(this.Y.transpose());
     for (let i = 0; i < this.m; i++) {
       for (let j = 0; j < this.r; j++) {
-        numX.set(i, j, numX.get(i, j) + Number.EPSILON);
-        denumX.set(i, j, denumX.get(i, j) + Number.EPSILON);
+        if (numX.get(i, j) === 0) {
+          numX.set(i, j, Number.EPSILON);
+        }
+        if (denumX.get(i, j) === 0) {
+          denumX.set(i, j, Number.EPSILON);
+        }
       }
     }
     for (let i = 0; i < this.m; i++) {
@@ -110,8 +119,12 @@ function doNnmf(numberIterations = 1000) {
     denumY = this.X.transpose().mmul(temp2);
     for (let i = 0; i < this.r; i++) {
       for (let j = 0; j < this.n; j++) {
-        numY.set(i, j, numY.get(i, j) + Number.EPSILON);
-        denumY.set(i, j, denumY.get(i, j) + Number.EPSILON);
+        if (numY.get(i, j) === 0) {
+          numY.set(i, j, Number.EPSILON);
+        }
+        if (denumY.get(i, j) === 0) {
+          denumY.set(i, j, Number.EPSILON);
+        }
       }
     }
     for (let i = 0; i < this.r; i++) {
