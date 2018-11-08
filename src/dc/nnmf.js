@@ -20,12 +20,13 @@ export default class NNMF {
     this.A = A;
     this.m = m;
     this.n = n;
-    this.X = Matrix.ones(m, r);
-    this.Y = Matrix.ones(r, n);
+    this.X = Matrix.rand(m, r);
+    this.Y = Matrix.rand(r, n);
 
-    for (let i = 0; i < r; i++) {
-      this.Y.mulColumn(r, 0.5);
-      this.X.mulRow(r, 0.5);
+
+    for (let i = 0; i <= r; i++) {
+      this.Y.mulColumn(i, 0.5);
+      this.X.mulRow(i, 0.5);
     }
 
     doNnmf.call(this, numberIterations);
