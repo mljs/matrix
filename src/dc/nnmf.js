@@ -6,42 +6,41 @@ import { Matrix, WrapperMatrix2D } from '../index';
  * @link http://papers.nips.cc/paper/1861-algorithms-for-non-negative-matrix-factorization.pdf
  * @param {Matrix} A
  * @param {number} r
+ * @param {number} targetRelativeError
  * @param {object} [options={}]
- * @param {number} [options.numberIterations=1000]
+ * @param {number} [options.maxIterations=10000]
  */
 export default class NNMF {
-  constructor(A, r, options = {}) {
-    const { numberIterations = 1000 } = options;
+  constructor(A, r, targetRelativeError, options = {}) {
+    const { maxIterations = 100000 } = options;
     A = WrapperMatrix2D.checkMatrix(A);
     var m = A.rows;
     var n = A.columns;
 
+    this.targetRelativeError = targetRelativeError;
     this.r = r;
     this.A = A;
     this.m = m;
     this.n = n;
-    this.X = Matrix.rand(m, r);
-    this.Y = Matrix.rand(r, n);
+    this.X = Matrix.rand(this.m, this.r);
+    this.Y = Matrix.rand(this.r, this.n);
 
     let condition = false;
-    let time = 1;
+    let time = 0;
+
 
     do {
-      doNnmf.call(this, numberIterations);
+      doNnmf.call(this, 100);
       condition = false;
       for (let i = 0; i < n; i++) {
         for (let j = 0; j < m; j++) {
-          if (this.error.get(i, j) > 0.1) {
+          if (this.error.get(i, j) > targetRelativeError) {
             condition = true;
             time++;
           }
         }
       }
-      if (time % 10 === 0) {
-        this.X = Matrix.rand(m, r);
-        this.Y = Matrix.rand(r, n);
-      }
-    } while (condition && time < 99);
+    } while (condition && (time < maxIterations / 100));
   }
 
   /**
@@ -52,12 +51,7 @@ export default class NNMF {
     let A2 = this.X.mmul(this.Y);
     for (let i = 0; i < this.m; i++) {
       for (let j = 0; j < this.n; j++) {
-        error.set(
-          i,
-          j,
-          Math.abs(A2.get(i, j) - this.A.get(i, j)) /
-            (this.A.get(i, j) !== 0 ? this.A.get(i, j) : Number.EPSILON)
-        );
+        error.set(i, j, Math.abs(A2.get(i, j) - this.A.get(i, j)) / (this.A.get(i, j) !== 0 ? this.A.get(i, j) : Number.EPSILON));
       }
     }
     return (error);
@@ -96,11 +90,7 @@ function doNnmf(numberIterations = 1000) {
     }
     for (let i = 0; i < this.m; i++) {
       for (let j = 0; j < this.r; j++) {
-        this.X.set(
-          i,
-          j,
-          (this.X.get(i, j) * numX.get(i, j)) / denumX.get(i, j)
-        );
+        this.X.set(i, j, (this.X.get(i, j) * numX.get(i, j)) / denumX.get(i, j));
       }
     }
     A2 = this.X.mmul(this.Y);
@@ -126,11 +116,7 @@ function doNnmf(numberIterations = 1000) {
     }
     for (let i = 0; i < this.r; i++) {
       for (let j = 0; j < this.n; j++) {
-        this.Y.set(
-          i,
-          j,
-          (this.Y.get(i, j) * numY.get(i, j)) / denumY.get(i, j)
-        );
+        this.Y.set(i, j, (this.Y.get(i, j) * numY.get(i, j)) / denumY.get(i, j));
       }
     }
   }
