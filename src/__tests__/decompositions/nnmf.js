@@ -48,4 +48,24 @@ describe('Non-negative Matrix Factorization', () => {
     expect(positivity(nA)).toEqual(true);
     expect(nA.error.max()).toBeLessThan(0.000000001);
   });
+
+  it('Factorization test II', () => {
+    let A = new Matrix([
+      [1, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+      [1, 1, 1, 0, 0, 0, 0, 0, 0, 0],
+      [1, 1, 1, 1, 0, 0, 0, 0, 0, 0],
+      [1, 1, 1, 1, 1, 0, 0, 0, 0, 0],
+      [1, 1, 1, 1, 1, 1, 0, 0, 0, 0],
+      [1, 1, 1, 1, 1, 1, 1, 0, 0, 0],
+      [1, 1, 1, 1, 1, 1, 1, 1, 0, 0],
+      [1, 1, 1, 1, 1, 1, 1, 1, 1, 0],
+      [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+    ]);
+
+    let nA = new NNMF(A, 3, 0.000000001);
+
+    expect(positivity(nA)).toEqual(true);
+    expect(nA.error.max()).toBeLessThan(0.001);
+  });
 });
