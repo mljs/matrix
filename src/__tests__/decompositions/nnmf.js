@@ -40,8 +40,8 @@ describe('Non-negative Matrix Factorization', () => {
   });
   it('Random factoriation tests', () => {
     for (let i = 0; i < 1; i++) {
-      let A = Matrix.rand(20, 20);
-      let nA = new NNMF(A, 19, 1, { maxIterations: 100000 });
+      let A = Matrix.rand(10, 10);
+      let nA = new NNMF(A, 8, 1, { maxIterations: 1000000 });
       expect(positivity(nA)).toEqual(true);
       expect(nA.error.max()).toBeLessThan(1);
     }

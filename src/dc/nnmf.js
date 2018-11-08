@@ -35,7 +35,7 @@ export default class NNMF {
 
 
     do {
-      doNnmf.call(this, 100);
+      doNnmf.call(this, 1000);
       condition = false;
       for (let i = 0; i < n; i++) {
         for (let j = 0; j < m; j++) {
@@ -45,7 +45,7 @@ export default class NNMF {
           }
         }
       }
-    } while (condition && (time < maxIterations / 100));
+    } while (condition && (time < maxIterations / 1000));
   }
 
   /**
