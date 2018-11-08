@@ -17,5 +17,6 @@ describe('Non-negative Matrix Factorization', () => {
     let nA = new NNMF(A, 4);
     expect(nA.X.mmul(nA.Y)).toBeDeepCloseTo(A);
     expect(nA.error).toBeDeepCloseTo(Matrix.zeros(5, 5));
+    expect(nA.positivity).toEqual(true);
   });
 });
