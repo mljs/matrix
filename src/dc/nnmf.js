@@ -23,12 +23,6 @@ export default class NNMF {
     this.X = Matrix.rand(m, r);
     this.Y = Matrix.rand(r, n);
 
-
-    for (let i = 0; i <= r; i++) {
-      this.Y.mulColumn(i, 0.5);
-      this.X.mulRow(i, 0.5);
-    }
-
     doNnmf.call(this, numberIterations);
   }
 
@@ -49,24 +43,6 @@ export default class NNMF {
       }
     }
     return (error);
-  }
-  get positivity() {
-    let positive = true;
-    for (let i = 0; i < this.m; i++) {
-      for (let j = 0; j < this.r; j++) {
-        if (this.X.get(i, j) < 0) {
-          positive = false;
-        }
-      }
-    }
-    for (let i = 0; i < this.r; i++) {
-      for (let j = 0; j < this.n; j++) {
-        if (this.X.get(i, j) < 0) {
-          positive = false;
-        }
-      }
-    }
-    return (positive);
   }
 }
 
