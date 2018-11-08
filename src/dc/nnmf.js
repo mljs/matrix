@@ -1,7 +1,6 @@
 import { Matrix, WrapperMatrix2D } from '../index';
 
 /**
- *
  * @class NNMF
  * @link http://papers.nips.cc/paper/1861-algorithms-for-non-negative-matrix-factorization.pdf
  * @param {Matrix} A

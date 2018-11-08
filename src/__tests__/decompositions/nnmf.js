@@ -1,7 +1,6 @@
 import { toBeDeepCloseTo } from 'jest-matcher-deep-close-to';
 
 import { Matrix, NNMF } from '../..';
-import WrapperMatrix2D from '../../wrap/WrapperMatrix2D';
 
 expect.extend({ toBeDeepCloseTo });
 
@@ -25,25 +24,28 @@ function positivity(An) {
 }
 
 describe('Non-negative Matrix Factorization', () => {
-  it('factorization', () => {
+  it('Factorization test I', () => {
+  /**
+   * Global minimum :
+   * X = [
+   *   [2,	  4],
+   *   [8,	 16],
+   *  [32,	 64],
+   * [128,	256]]
+   *
+   * Y = [
+   * [1,	2,	3,	4],
+   * [6,	7,	8,	9]]
+   */
     let A = new Matrix([
-      [1, 0, 0, 0, 1],
-      [0, 0, 0, 0, 0],
-      [0, 0, 0, 0, 0],
-      [0, 0, 0, 0, 0],
-      [1, 0, 0, 0, 1]
+      [26, 32, 38, 44],
+      [104, 128, 152, 176],
+      [416, 512, 608, 704],
+      [1664, 2048, 2432, 2816]
     ]);
-    let nA = new NNMF(A, 4, 0.0000001);
+    let nA = new NNMF(A, 3, 0.000000001);
 
     expect(positivity(nA)).toEqual(true);
-    expect(nA.error.max()).toBeLessThan(0.0000001);
-  });
-  it('Random factoriation tests', () => {
-    for (let i = 0; i < 1; i++) {
-      let A = Matrix.rand(10, 10);
-      let nA = new NNMF(A, 8, 1, { maxIterations: 1000000 });
-      expect(positivity(nA)).toEqual(true);
-      expect(nA.error.max()).toBeLessThan(1);
-    }
+    expect(nA.error.max()).toBeLessThan(0.000000001);
   });
 });
