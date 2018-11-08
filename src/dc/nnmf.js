@@ -23,7 +23,25 @@ export default class NNMF {
     this.X = Matrix.rand(m, r);
     this.Y = Matrix.rand(r, n);
 
-    doNnmf.call(this, numberIterations);
+    let condition = false;
+    let time = 1;
+
+    do {
+      doNnmf.call(this, numberIterations);
+      condition = false;
+      for (let i = 0; i < n; i++) {
+        for (let j = 0; j < m; j++) {
+          if (this.error.get(i, j) > 0.1) {
+            condition = true;
+            time++;
+          }
+        }
+      }
+      if (time % 10 === 0) {
+        this.X = Matrix.rand(m, r);
+        this.Y = Matrix.rand(r, n);
+      }
+    } while (condition && time < 99);
   }
 
   /**
