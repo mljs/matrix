@@ -55,7 +55,11 @@ export default class NNMF {
     let A2 = this.X.mmul(this.Y);
     for (let i = 0; i < this.m; i++) {
       for (let j = 0; j < this.n; j++) {
-        error.set(i, j, Math.abs(A2.get(i, j) - this.A.get(i, j)) / (this.A.get(i, j) !== 0 ? this.A.get(i, j) : Number.EPSILON));
+        if (this.A === 0) {
+          error.set(i, j, Math.abs(A2.get(i, j) - this.A.get(i, j)));
+        } else {
+          error.set(i, j, Math.abs(A2.get(i, j) - this.A.get(i, j)) / (this.A.get(i, j) !== 0 ? this.A.get(i, j) : Number.EPSILON));
+        }
       }
     }
     return (error);
@@ -129,6 +133,12 @@ function doNnmf(numberIterations = 1000) {
     for (let i = 0; i < this.r; i++) {
       for (let j = 0; j < this.n; j++) {
         this.Y.set(i, j, (this.Y.get(i, j) * numY.get(i, j)) / denumY.get(i, j));
+      }
+    }
+    A2 = this.X.mmul(this.Y);
+    for (let i = 0; i < this.m; i++) {
+      for (let j = 0; j < this.n; j++) {
+        A2.set(i, j, A2.get(i, j) + Number.EPSILON);
       }
     }
   }

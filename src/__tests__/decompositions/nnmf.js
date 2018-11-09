@@ -65,6 +65,8 @@ describe('Non-negative Matrix Factorization', () => {
 
     let nA = new NNMF(A, 3, 0.000000001);
 
+    console.log(nA.X);
+
     expect(positivity(nA)).toEqual(true);
     expect(nA.error.max()).toBeLessThan(0.001);
   });
