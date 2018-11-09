@@ -43,10 +43,10 @@ describe('Non-negative Matrix Factorization', () => {
       [416, 512, 608, 704],
       [1664, 2048, 2432, 2816]
     ]);
-    let nA = new NNMF(A, 3, 0.000000001);
+    let nA = new NNMF(A, 3, 0.000000001, 1000000);
 
     expect(positivity(nA)).toEqual(true);
-    expect(nA.error.max()).toBeLessThan(0.000000001);
+    expect(nA.error.max()).toBeLessThan(0.000001);
   });
 
   it('Factorization test II', () => {
@@ -63,11 +63,56 @@ describe('Non-negative Matrix Factorization', () => {
       [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
     ]);
 
-    let nA = new NNMF(A, 3, 0.000000001);
+    let nA = new NNMF(A, 8, 0.1, 100000000);
 
-    console.log(nA.X);
+    console.log(nA.X.mmul(nA.Y));
+    console.log(nA.error);
 
     expect(positivity(nA)).toEqual(true);
-    expect(nA.error.max()).toBeLessThan(0.001);
+    expect(nA.error.max()).toBeLessThan(1);
   });
+
+  it('Factorization test III', () => {
+    let A = new Matrix([
+      [1, 60, 60, 60, 60, 60, 60, 60, 60, 60],
+      [1, 1, 60, 60, 60, 60, 60, 60, 60, 60],
+      [1, 1, 1, 60, 60, 60, 60, 60, 60, 60],
+      [1, 1, 1, 1, 60, 60, 60, 60, 60, 60],
+      [1, 1, 1, 1, 1, 60, 60, 60, 60, 60],
+      [1, 1, 1, 1, 1, 1, 60, 60, 60, 60],
+      [1, 1, 1, 1, 1, 1, 1, 60, 60, 60],
+      [1, 1, 1, 1, 1, 1, 1, 1, 60, 60],
+      [1, 1, 1, 1, 1, 1, 1, 1, 1, 60],
+      [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+    ]);
+
+    let nA = new NNMF(A, 8, 0.1, 100000000);
+
+    // console.log(nA.X.mmul(nA.Y));
+    // console.log(nA.error);
+
+    expect(positivity(nA)).toEqual(true);
+    expect(nA.error.max()).toBeLessThan(1);
+  });
+
+
+  /*
+  it('Factorization test IV', () => {
+    let A = new Matrix([
+      [1, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+      [1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+      [1, 1, 1, 0, 0, 0, 0, 0, 0, 0],
+      [1, 1, 1, 1, 0, 0, 0, 0, 0, 0],
+      [1, 1, 1, 1, 1, 0, 0, 0, 0, 0],
+      [5, 4, 3, 2, 1, 0, 0, 0, 0, 0]
+    ]);
+
+    let nA = new NNMF(A, 3, 0.000000001, 100000);
+
+    console.log(nA.error);
+
+    expect(positivity(nA)).toEqual(true);
+    expect(nA.error.max()).toBeLessThan(1);
+  }); */
 });
