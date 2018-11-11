@@ -8,10 +8,11 @@ import { Matrix, WrapperMatrix2D } from '../index';
  * @param {number} targetRelativeError
  * @param {object} [options={}]
  * @param {number} [options.maxIterations=10000]
+ * @param {number} [options.version=2]
  */
 export default class NNMF {
   constructor(A, r, targetRelativeError, options = {}) {
-    const { maxIterations = 10000 } = options;
+    const { maxIterations = 10000, version = 2 } = options;
     A = WrapperMatrix2D.checkMatrix(A);
     var m = A.rows;
     var n = A.columns;
@@ -36,7 +37,11 @@ export default class NNMF {
 
 
     do {
-      doNnmf.call(this, maxIterations / 10);
+      if (version === 1) {
+        doNnmf1.call(this, maxIterations / 10);
+      } else {
+        doNnmf2.call(this, maxIterations / 10);
+      }
       condition = false;
       for (let i = 0; i < n; i++) {
         for (let j = 0; j < m; j++) {
@@ -74,7 +79,7 @@ export default class NNMF {
  * Do the NNMF of a matrix A into two matrix X and Y
  * @param {number} [numberIterations=1000]
  */
-function doNnmf(numberIterations = 1000) {
+function doNnmf1(numberIterations = 1000) {
   let A2 = this.X.mmul(this.Y);
   let numX = Matrix.empty(this.m, this.r);
   let denumX = Matrix.empty(this.m, this.r);
@@ -140,6 +145,42 @@ function doNnmf(numberIterations = 1000) {
     for (let i = 0; i < this.m; i++) {
       for (let j = 0; j < this.n; j++) {
         A2.set(i, j, A2.get(i, j) + Number.EPSILON);
+      }
+    }
+  }
+}
+
+function doNnmf2(numberIterations = 1000) {
+  let numX = Matrix.empty(this.m, this.r);
+  let denumX = Matrix.empty(this.m, this.r);
+  let numY = Matrix.empty(this.r, this.n);
+  let denumY = Matrix.empty(this.r, this.n);
+
+  for (let a = 0; a < numberIterations; a++) {
+    numX = this.A.mmul(this.Y.transpose());
+    denumX = (this.X.mmul(this.Y)).mmul(this.Y.transpose());
+    for (let i = 0; i < this.m; i++) {
+      for (let j = 0; j < this.r; j++) {
+        numX.set(i, j, numX.get(i, j) + Number.EPSILON);
+        denumX.set(i, j, denumX.get(i, j) + Number.EPSILON);
+      }
+    }
+    for (let i = 0; i < this.m; i++) {
+      for (let j = 0; j < this.r; j++) {
+        this.X.set(i, j, (this.X.get(i, j) * numX.get(i, j)) / denumX.get(i, j));
+      }
+    }
+    numY = this.X.transpose().mmul(this.A);
+    denumY = (this.X.transpose().mmul(this.X)).mmul(this.Y);
+    for (let i = 0; i < this.r; i++) {
+      for (let j = 0; j < this.n; j++) {
+        numY.set(i, j, numY.get(i, j) + Number.EPSILON);
+        denumY.set(i, j, denumY.get(i, j) + Number.EPSILON);
+      }
+    }
+    for (let i = 0; i < this.r; i++) {
+      for (let j = 0; j < this.n; j++) {
+        this.Y.set(i, j, (this.Y.get(i, j) * numY.get(i, j)) / denumY.get(i, j));
       }
     }
   }
