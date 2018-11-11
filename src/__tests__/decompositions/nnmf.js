@@ -111,7 +111,7 @@ describe('Non-negative Matrix Factorization', () => {
     expect(nA.error.max()).toBeLessThan(1);
   });
   */
-  /*
+
   it('Factorization test IV', () => {
     let A = new Matrix([
       [1, 0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -127,5 +127,5 @@ describe('Non-negative Matrix Factorization', () => {
 
     expect(positivity(nA)).toEqual(true);
     expect(nA.error.max()).toBeLessThan(1);
-  }); */
+  });
 });

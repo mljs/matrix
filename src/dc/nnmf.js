@@ -43,8 +43,8 @@ export default class NNMF {
         doNnmf2.call(this, maxIterations / 10);
       }
       condition = false;
-      for (let i = 0; i < n; i++) {
-        for (let j = 0; j < m; j++) {
+      for (let i = 0; i < m; i++) {
+        for (let j = 0; j < n; j++) {
           if (this.error.get(i, j) > targetRelativeError) {
             condition = true;
           }
