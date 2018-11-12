@@ -1,4 +1,26 @@
-import { Matrix, WrapperMatrix2D, NNMF } from '../index';
+import { Matrix, WrapperMatrix2D, NNMF } from './index';
+
+function linearCombination(X, epsilon) {
+  if (X.rows > 1) {
+    X = X.transpose();
+  }
+  let solutions = Matrix.zeros(1, X.columns);
+  let notTheEnd = true;
+  let vecVal = X.get(0, X.columns - 1);
+  let tmp = 0;
+  while (vecVal > epsilon && notTheEnd) {
+    notTheEnd = false;
+    for (let i = 0; i < X.columns; i++) {
+      tmp = vecVal - X.get(0, i);
+      if (tmp > epsilon) {
+        solutions.set(0, i, solutions.get(0, i) + 1);
+        vecVal = tmp;
+        notTheEnd = true;
+      }
+    }
+  }
+  return (solutions);
+}
 
 /**
  *  Compute the linear dependencies of a vector and a set of base vectors
@@ -38,6 +60,7 @@ export function positiveLinearDependencies(base, vector, options = {}) {
       A.set(m - 1, j, vector.get(0, j));
     }
     let nA = NNMF(A, 1, { maxIterations: NNMFmaxIterations, version: NNMFversion });
+    solutions = linearCombination(nA.X, Matrix.min(nA.X) - Number.EPSILON);
     return (solutions);
   }
 }
