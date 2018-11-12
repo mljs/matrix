@@ -1,6 +1,6 @@
 import { Matrix, WrapperMatrix2D, NNMF } from './index';
 
-function linearCombination(X, epsilon) {
+function linearCombination(X) {
   if (X.rows > 1) {
     X = X.transpose();
   }
@@ -8,11 +8,11 @@ function linearCombination(X, epsilon) {
   let notTheEnd = true;
   let vecVal = X.get(0, X.columns - 1);
   let tmp = 0;
-  while (vecVal > epsilon && notTheEnd) {
+  while ((vecVal > 0) && notTheEnd) {
     notTheEnd = false;
-    for (let i = 0; i < X.columns; i++) {
+    for (let i = 0; i < X.columns - 1; i++) {
       tmp = vecVal - X.get(0, i);
-      if (tmp > epsilon) {
+      if (tmp >= 0 && X.get(0, i) > 0) {
         solutions.set(0, i, solutions.get(0, i) + 1);
         vecVal = tmp;
         notTheEnd = true;
@@ -63,7 +63,6 @@ export function positiveLinearCombination(base, vector, options = {}) {
 
     let nA = new NNMF(A, 1, { maxIterations: NNMFmaxIterations, version: NNMFversion });
 
-    console.table(nA.X);
 
     for (let i = 0; i < m; i++) {
       if ((nA.X.get(m - 1, 0) / delta) > nA.X.get(i, 0)) {
@@ -71,9 +70,7 @@ export function positiveLinearCombination(base, vector, options = {}) {
       }
     }
 
-    console.table(nA.X);
-
-    solutions = linearCombination(nA.X, nA.X.min() - Number.EPSILON);
+    solutions = linearCombination(nA.X, nA.X.min() + Number.EPSILON);
     return (solutions);
   }
 }
