@@ -1,7 +1,16 @@
 import { Matrix, WrapperMatrix2D, NNMF } from '../index';
 
+/**
+ *  Compute the linear dependencies of a vector and a set of base vectors
+ * @param {Matrix} base
+ * @param {Matrix} vector
+ * @param {object} [options={}]
+ * @param {number} [options.NNMF_maxIterations=100000]
+ * @param {number} [options.NNMF_version=2]
+ * @return {Matrix}
+ */
 export function positiveLinearDependencies(base, vector, options = {}) {
-  const { NNMF_version = 2, NNMF_maxIterations = 100000 } = options;
+  const { NNMFmaxIterations = 100000, NNMFversion = 2 } = options;
 
   base = WrapperMatrix2D.checkMatrix(base);
   vector = WrapperMatrix2D.checkMatrix(vector);
@@ -28,6 +37,7 @@ export function positiveLinearDependencies(base, vector, options = {}) {
     for (let j = 0; j < n; j++) {
       A.set(m - 1, j, vector.get(0, j));
     }
+    let nA = NNMF(A, 1, { maxIterations: NNMFmaxIterations, version: NNMFversion });
     return (solutions);
   }
 }
