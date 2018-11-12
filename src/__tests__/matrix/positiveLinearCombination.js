@@ -1,6 +1,6 @@
 import { toBeDeepCloseTo } from 'jest-matcher-deep-close-to';
 
-import { Matrix, positiveLinearDependencies } from '../..';
+import { Matrix, positiveLinearCombination } from '../..';
 
 expect.extend({ toBeDeepCloseTo });
 
@@ -18,7 +18,7 @@ describe('Non-negative Matrix Factorization', () => {
     let solutions = Matrix.empty(1, base.columns);
     let expected = new Matrix([1, 0, 1, 0, 0, 2]);
 
-    solutions = positiveLinearDependencies.positiveLinearDependencies(base, vector);
+    solutions = positiveLinearCombination(base, vector);
 
     expect(solutions).toEqual(expected);
   });

@@ -31,7 +31,7 @@ function linearCombination(X, epsilon) {
  * @param {number} [options.NNMF_version=2]
  * @return {Matrix}
  */
-export function positiveLinearDependencies(base, vector, options = {}) {
+export function positiveLinearCombination(base, vector, options = {}) {
   const { NNMFmaxIterations = 100000, NNMFversion = 2 } = options;
 
   base = WrapperMatrix2D.checkMatrix(base);
