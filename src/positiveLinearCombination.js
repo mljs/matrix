@@ -1,5 +1,3 @@
-import AbstractMatrix from './abstractMatrix';
-
 import { Matrix, WrapperMatrix2D, NNMF } from './index';
 
 function linearCombination(X, epsilon) {
@@ -31,10 +29,11 @@ function linearCombination(X, epsilon) {
  * @param {object} [options={}]
  * @param {number} [options.NNMF_maxIterations=100000]
  * @param {number} [options.NNMF_version=2]
+ * @param {number} [options.delta=1000]
  * @return {Matrix}
  */
 export function positiveLinearCombination(base, vector, options = {}) {
-  const { NNMFmaxIterations = 100000, NNMFversion = 2 } = options;
+  const { NNMFmaxIterations = 100000, NNMFversion = 2, delta = 1000 } = options;
 
   base = WrapperMatrix2D.checkMatrix(base);
   vector = WrapperMatrix2D.checkMatrix(vector);
@@ -61,7 +60,19 @@ export function positiveLinearCombination(base, vector, options = {}) {
     for (let j = 0; j < n; j++) {
       A.set(m - 1, j, vector.get(0, j));
     }
+
     let nA = new NNMF(A, 1, { maxIterations: NNMFmaxIterations, version: NNMFversion });
+
+    console.table(nA.X);
+
+    for (let i = 0; i < m; i++) {
+      if ((nA.X.get(m - 1, 0) / delta) > nA.X.get(i, 0)) {
+        nA.X.set(i, 0, 0);
+      }
+    }
+
+    console.table(nA.X);
+
     solutions = linearCombination(nA.X, nA.X.min() - Number.EPSILON);
     return (solutions);
   }
