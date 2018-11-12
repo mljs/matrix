@@ -4,7 +4,7 @@ import { Matrix, positiveLinearCombination } from '../..';
 
 expect.extend({ toBeDeepCloseTo });
 
-describe('Non-negative Matrix Factorization', () => {
+describe('Positive linear combination', () => {
   it('Base I', () => {
     let base = new Matrix([
       [0, 20, 100, 20, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],

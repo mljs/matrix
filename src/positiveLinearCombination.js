@@ -4,21 +4,53 @@ function linearCombination(X) {
   if (X.rows > 1) {
     X = X.transpose();
   }
+  const objValue = X.get(0, X.columns - 1);
+  X.removeColumn(X.columns - 1);
   let solutions = Matrix.zeros(1, X.columns);
+  let maxOcc = Matrix.zeros(1, X.columns);
+  let diffSolutions = objValue + Number.EPSILON;
+
+  let testSolutions = Matrix.zeros(1, X.columns);
+
   let notTheEnd = true;
-  let vecVal = X.get(0, X.columns - 1);
   let tmp = 0;
-  while ((vecVal > 0) && notTheEnd) {
-    notTheEnd = false;
-    for (let i = 0; i < X.columns - 1; i++) {
-      tmp = vecVal - X.get(0, i);
-      if (tmp >= 0 && X.get(0, i) > 0) {
-        solutions.set(0, i, solutions.get(0, i) + 1);
-        vecVal = tmp;
-        notTheEnd = true;
-      }
+  for (let j = 0; j < maxOcc.columns; j++) {
+    if (X.get(0, j) !== 0) {
+      maxOcc.set(0, j, Math.trunc(objValue / X.get(0, j)));
     }
   }
+  let testV = 0;
+  while (notTheEnd && testV < 1000) {
+    testSolutions.set(0, 0, testSolutions.get(0, 0) + 1);
+
+    tmp = 0;
+
+    for (let j = 0; j < testSolutions.columns; j++) {
+      tmp += testSolutions.get(0, j) * X.get(0, j);
+    }
+    if (Math.abs(tmp - objValue) < diffSolutions && notTheEnd) {
+      for (let j = 0; j < maxOcc.columns; j++) {
+        solutions.set(0, j, testSolutions.get(0, j));
+      }
+      diffSolutions = Math.abs(tmp - objValue);
+    }
+
+    if (testSolutions.get(0, testSolutions.columns - 1) > maxOcc.get(0, maxOcc.columns - 1)) {
+      notTheEnd = false;
+    } else {
+      for (let j = 0; j < maxOcc.columns; j++) {
+        if (testSolutions.get(0, j) >= maxOcc.get(0, j) && testSolutions.get(0, j) !== 0) {
+          testSolutions.set(0, j, 0);
+          testSolutions.set(0, j + 1, testSolutions.get(0, j + 1) + 1);
+        } else if (testSolutions.get(0, j) > maxOcc.get(0, j)) {
+          testSolutions.set(0, j, 0);
+          testSolutions.set(0, j + 1, testSolutions.get(0, j + 1) + 1);
+        }
+      }
+    }
+    testV += 1;
+  }
+
   return (solutions);
 }
 
