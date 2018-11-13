@@ -25,18 +25,18 @@ function positivity(An) {
 
 describe('Non-negative Matrix Factorization', () => {
   it('Factorization test I', () => {
-  /**
-   * Global minimum :
-   * X = [
-   *   [2,	  4],
-   *   [8,	 16],
-   *  [32,	 64],
-   * [128,	256]]
-   *
-   * Y = [
-   * [1,	2,	3,	4],
-   * [6,	7,	8,	9]]
-   */
+    /**
+     * Global minimum :
+     * X = [
+     *   [2,	  4],
+     *   [8,	 16],
+     *  [32,	 64],
+     * [128,	256]]
+     *
+     * Y = [
+     * [1,	2,	3,	4],
+     * [6,	7,	8,	9]]
+     */
     let A = new Matrix([
       [26, 32, 38, 44],
       [104, 128, 152, 176],
@@ -44,7 +44,8 @@ describe('Non-negative Matrix Factorization', () => {
       [1664, 2048, 2432, 2816]
     ]);
 
-    let nA = new NNMF(A, 1, 0.000001, { version: 2 });
+    let nA =
+        new NNMF(A, 1, { targetRelativeError: 0.000001, maxIterations: 10000 });
 
     expect(positivity(nA)).toEqual(true);
     expect(nA.error.max()).toBeLessThan(0.000001);
@@ -63,7 +64,7 @@ describe('Non-negative Matrix Factorization', () => {
       [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
     ]);
 
-    let nA = new NNMF(A, 8, 0.1);
+    let nA = new NNMF(A, 8, { targetRelativeError: 0.5, maxIterations: 10000 });
 
     expect(positivity(nA)).toEqual(true);
     expect(nA.error.max()).toBeLessThan(0.5);
@@ -80,7 +81,7 @@ describe('Non-negative Matrix Factorization', () => {
       [5, 4, 3, 2, 1, 0, 0, 0, 0, 0]
     ]);
 
-    let nA = new NNMF(A, 3, 0.000000001, 100000);
+    let nA = new NNMF(A, 3, { targetRelativeError: 1, maxIterations: 10000 });
 
     expect(positivity(nA)).toEqual(true);
     expect(nA.error.max()).toBeLessThan(1);

@@ -2,17 +2,19 @@ import { Matrix, WrapperMatrix2D } from '../index';
 
 /**
  * @class NNMF
- * @link http://papers.nips.cc/paper/1861-algorithms-for-non-negative-matrix-factorization.pdf
+ * @link
+ * http://papers.nips.cc/paper/1861-algorithms-for-non-negative-matrix-factorization.pdf
  * @param {Matrix} A
  * @param {number} r
- * @param {number} targetRelativeError
  * @param {object} [options={}]
+ * @param {number} [options.targetRelativeError=0.001]
  * @param {number} [options.maxIterations=10000]
  * @param {number} [options.version=2]
  */
 export default class NNMF {
-  constructor(A, r, targetRelativeError, options = {}) {
-    const { maxIterations = 10000, version = 2 } = options;
+  constructor(A, r, options = {}) {
+    const { targetRelativeError = 0.001, maxIterations = 10000, version = 2 } =
+        options;
     A = WrapperMatrix2D.checkMatrix(A);
     var m = A.rows;
     var n = A.columns;
@@ -67,7 +69,8 @@ export default class NNMF {
         if (this.A.get(i, j) === 0) {
           error.set(i, j, Math.abs(A2.get(i, j) - this.A.get(i, j)));
         } else {
-          error.set(i, j, Math.abs(A2.get(i, j) - this.A.get(i, j)) / this.A.get(i, j));
+          error.set(i, j, Math.abs(A2.get(i, j) - this.A.get(i, j)) /
+                              this.A.get(i, j));
         }
       }
     }
@@ -112,7 +115,8 @@ function doNnmf1(numberIterations = 1000) {
     }
     for (let i = 0; i < this.m; i++) {
       for (let j = 0; j < this.r; j++) {
-        this.X.set(i, j, (this.X.get(i, j) * numX.get(i, j)) / denumX.get(i, j));
+        this.X.set(i, j,
+          (this.X.get(i, j) * numX.get(i, j)) / denumX.get(i, j));
       }
     }
     A2 = this.X.mmul(this.Y);
@@ -138,7 +142,8 @@ function doNnmf1(numberIterations = 1000) {
     }
     for (let i = 0; i < this.r; i++) {
       for (let j = 0; j < this.n; j++) {
-        this.Y.set(i, j, (this.Y.get(i, j) * numY.get(i, j)) / denumY.get(i, j));
+        this.Y.set(i, j,
+          (this.Y.get(i, j) * numY.get(i, j)) / denumY.get(i, j));
       }
     }
     A2 = this.X.mmul(this.Y);
@@ -167,7 +172,8 @@ function doNnmf2(numberIterations = 1000) {
     }
     for (let i = 0; i < this.m; i++) {
       for (let j = 0; j < this.r; j++) {
-        this.X.set(i, j, (this.X.get(i, j) * numX.get(i, j)) / denumX.get(i, j));
+        this.X.set(i, j,
+          (this.X.get(i, j) * numX.get(i, j)) / denumX.get(i, j));
       }
     }
     numY = this.X.transpose().mmul(this.A);
@@ -180,7 +186,8 @@ function doNnmf2(numberIterations = 1000) {
     }
     for (let i = 0; i < this.r; i++) {
       for (let j = 0; j < this.n; j++) {
-        this.Y.set(i, j, (this.Y.get(i, j) * numY.get(i, j)) / denumY.get(i, j));
+        this.Y.set(i, j,
+          (this.Y.get(i, j) * numY.get(i, j)) / denumY.get(i, j));
       }
     }
   }
