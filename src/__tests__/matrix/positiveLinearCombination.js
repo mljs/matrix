@@ -21,12 +21,9 @@ describe('Positive linear combination', () => {
 
     solutions = positiveLinearCombination(base, vector);
 
-
     expect(solutions).toEqual(expected);
   });
-
-
-  it('Base I Decimal I', () => {
+  it('Decimal Base I', () => {
     let base = new Matrix([
       [0, 20, 100, 20, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
       [0, 0, 0, 0, 0, 30, 100, 30, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -40,128 +37,9 @@ describe('Positive linear combination', () => {
     let solutions = Matrix.zeros(1, base.columns);
     let expected = new Matrix([[1, 0, 1, 0, 0, 0.5]]);
 
-    solutions = positiveLinearCombination(base, vector, { lowestDecimal:
-        0.5 });
+    solutions = positiveLinearCombination(base, vector, { lowestDecimal: 0.5 });
 
+    console.table(solutions);
     expect(solutions).toEqual(expected);
   });
-
-
-  it('Luc I', () => {
-    let base = new Matrix([
-      [1, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-      [1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-      [1, 1, 1, 0, 0, 0, 0, 0, 0, 0],
-      [1, 1, 1, 1, 0, 0, 0, 0, 0, 0],
-      [1, 1, 1, 1, 1, 0, 0, 0, 0, 0],
-      [1, 1, 1, 1, 1, 1, 0, 0, 0, 0],
-      [1, 1, 1, 1, 1, 1, 1, 0, 0, 0],
-      [1, 1, 1, 1, 1, 1, 1, 1, 0, 0],
-      [1, 1, 1, 1, 1, 1, 1, 1, 1, 0],
-      [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
-    ]);
-    let vector = new Matrix([[1, 0, 0, 0, 0, 0, 0, 0, 0, 0]]);
-    let solutions = Matrix.zeros(1, base.columns);
-    let expected = new Matrix([[1, 0, 0, 0, 0, 0, 0, 0, 0, 0]]);
-
-    solutions = positiveLinearCombination(base, vector);
-
-    expect(solutions).toEqual(expected);
-  });
-
-
-  it('Luc II', () => {
-    let base = new Matrix([
-      [1, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-      [1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-      [1, 1, 1, 0, 0, 0, 0, 0, 0, 0],
-      [1, 1, 1, 1, 0, 0, 0, 0, 0, 0],
-      [1, 1, 1, 1, 1, 0, 0, 0, 0, 0],
-      [1, 1, 1, 1, 1, 1, 0, 0, 0, 0],
-      [1, 1, 1, 1, 1, 1, 1, 0, 0, 0],
-      [1, 1, 1, 1, 1, 1, 1, 1, 0, 0],
-      [1, 1, 1, 1, 1, 1, 1, 1, 1, 0],
-      [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
-    ]);
-    let vector = new Matrix([[3, 0, 0, 0, 0, 0, 0, 0, 0, 0]]);
-    let solutions = Matrix.zeros(1, base.columns);
-
-
-    let expected = new Matrix([[3, 0, 0, 0, 0, 0, 0, 0, 0, 0]]);
-
-    solutions = positiveLinearCombination(base, vector);
-    expect(solutions).toEqual(expected);
-  });
-
-
-  it('Luc III', () => {
-    let base = new Matrix([
-      [1, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-      [1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-      [1, 1, 1, 0, 0, 0, 0, 0, 0, 0],
-      [1, 1, 1, 1, 0, 0, 0, 0, 0, 0],
-      [1, 1, 1, 1, 1, 0, 0, 0, 0, 0],
-      [1, 1, 1, 1, 1, 1, 0, 0, 0, 0],
-      [1, 1, 1, 1, 1, 1, 1, 0, 0, 0],
-      [1, 1, 1, 1, 1, 1, 1, 1, 0, 0],
-      [1, 1, 1, 1, 1, 1, 1, 1, 1, 0],
-      [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
-    ]);
-    let vector = new Matrix([[0, 1, 0, 0, 0, 0, 0, 0, 0, 0]]);
-    let solutions = Matrix.zeros(1, base.columns);
-
-
-    let expected = new Matrix([[1, 0, 0, 0, 0, 0, 0, 0, 0, 0]]);
-
-    solutions = positiveLinearCombination(base, vector);
-    expect(solutions).toEqual(expected);
-  });
-  it('Luc IV', () => {
-    let base = new Matrix([
-      [1, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-      [1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-      [1, 1, 1, 0, 0, 0, 0, 0, 0, 0],
-      [1, 1, 1, 1, 0, 0, 0, 0, 0, 0],
-      [1, 1, 1, 1, 1, 0, 0, 0, 0, 0],
-      [1, 1, 1, 1, 1, 1, 0, 0, 0, 0],
-      [1, 1, 1, 1, 1, 1, 1, 0, 0, 0],
-      [1, 1, 1, 1, 1, 1, 1, 1, 0, 0],
-      [1, 1, 1, 1, 1, 1, 1, 1, 1, 0],
-      [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
-    ]);
-    let vector = new Matrix([[0, 1, 1, 0, 0, 0, 0, 0, 0, 0]]);
-    let solutions = Matrix.zeros(1, base.columns);
-
-
-    let expected = new Matrix([[0, 1, 0, 0, 0, 0, 0, 0, 0, 0]]);
-
-    solutions = positiveLinearCombination(base, vector);
-    expect(solutions).toEqual(expected);
-  });
-
-  /*
-
-    it('Luc V', () => {
-      let base = new Matrix([
-        [1, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        [1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-        [1, 1, 1, 0, 0, 0, 0, 0, 0, 0],
-        [1, 1, 1, 1, 0, 0, 0, 0, 0, 0],
-        [1, 1, 1, 1, 1, 0, 0, 0, 0, 0],
-        [1, 1, 1, 1, 1, 1, 0, 0, 0, 0],
-        [1, 1, 1, 1, 1, 1, 1, 0, 0, 0],
-        [1, 1, 1, 1, 1, 1, 1, 1, 0, 0],
-        [1, 1, 1, 1, 1, 1, 1, 1, 1, 0],
-        [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
-      ]);
-      let vector = new Matrix([[10, 9, 8, 7, 6, 5, 4, 3, 2, 1]]);
-      let solutions = Matrix.zeros(1, base.columns);
-
-
-      let expected = new Matrix([[0, 0, 0, 0, 0, 0, 0, 0, 0, 0]]);
-
-      solutions = positiveLinearCombination(base, vector);
-      expect(solutions).toEqual(expected);
-    });
-    */
 });
