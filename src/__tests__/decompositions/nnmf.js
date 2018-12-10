@@ -45,7 +45,7 @@ describe('Non-negative Matrix Factorization', () => {
     ]);
 
     let nA =
-        new NNMF(A, 1, { targetRelativeError: 0.000001, maxIterations: 10000 });
+        new NNMF(A, 1, { targetRelativeError: 0.000001, maxIterations: 100 });
 
     expect(positivity(nA)).toEqual(true);
     expect(nA.error.max()).toBeLessThan(0.000001);
@@ -64,7 +64,7 @@ describe('Non-negative Matrix Factorization', () => {
       [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
     ]);
 
-    let nA = new NNMF(A, 8, { targetRelativeError: 0.5, maxIterations: 10000 });
+    let nA = new NNMF(A, 8, { targetRelativeError: 0.5, maxIterations: 100 });
 
     expect(positivity(nA)).toEqual(true);
     expect(nA.error.max()).toBeLessThan(0.5);
@@ -81,9 +81,26 @@ describe('Non-negative Matrix Factorization', () => {
       [5, 4, 3, 2, 1, 0, 0, 0, 0, 0]
     ]);
 
-    let nA = new NNMF(A, 3, { targetRelativeError: 1, maxIterations: 10000 });
+    let nA = new NNMF(A, 3, { targetRelativeError: 1, maxIterations: 100 });
 
     expect(positivity(nA)).toEqual(true);
     expect(nA.error.max()).toBeLessThan(1);
+  });
+  it('Comparation of the error with matlab', () => {
+    // Working with 10*10 matrix and 100*100 matrix
+    // Matlab as a max error of 0.8 for 10*10 matrix and 0.98 for 100*100 matrix
+    // However, we don't have the same factorization
+    // But we have the same position of zeros in X and Y matrix
+    let A = Matrix.zeros(100, 100);
+    for (let i = 0; i < 100; i++) {
+      for (let j = 0; j <= i; j++) {
+        A.set(i, j, 1);
+      }
+    }
+    let nA = new NNMF(A, 1, { targetRelativeError: 1, maxIterations: 10 });
+
+    expect(positivity(nA)).toEqual(true);
+    expect(nA.error.max()).toBeLessThan(1);
+    console.table(nA.X);
   });
 });
