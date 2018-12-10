@@ -27,13 +27,6 @@ export default class NNMF {
     this.X = Matrix.rand(this.m, this.r);
     this.Y = Matrix.rand(this.r, this.n);
 
-    /*
-    for (let i = 0; i < r; i++) {
-      this.Y.mulColumn(i, 0.5);
-      this.X.mulRow(i, 0.25);
-    }
-    */
-
     let condition = false;
     let time = 0;
 
@@ -53,8 +46,6 @@ export default class NNMF {
         }
       }
       time++;
-      // this.X = Matrix.rand(this.m, this.r);
-      // this.Y = Matrix.rand(this.r, this.n);
     } while (condition && (time < 2));
   }
 
