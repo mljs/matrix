@@ -13,7 +13,7 @@ import { Matrix, WrapperMatrix2D } from '../index';
  */
 export default class NNMF {
   constructor(A, r, options = {}) {
-    const { targetRelativeError = 0.001, maxIterations = 10000, version = 2 } =
+    const { targetRelativeError = 0.001, maxIterations = 1000, version = 2 } =
         options;
     A = WrapperMatrix2D.checkMatrix(A);
     var m = A.rows;
@@ -40,9 +40,9 @@ export default class NNMF {
 
     do {
       if (version === 1) {
-        doNnmf1.call(this, maxIterations / 10);
+        doNnmf1.call(this, maxIterations / 2);
       } else {
-        doNnmf2.call(this, maxIterations / 10);
+        doNnmf2.call(this, maxIterations / 2);
       }
       condition = false;
       for (let i = 0; i < m; i++) {
@@ -55,7 +55,7 @@ export default class NNMF {
       time++;
       // this.X = Matrix.rand(this.m, this.r);
       // this.Y = Matrix.rand(this.r, this.n);
-    } while (condition && (time < 10));
+    } while (condition && (time < 2));
   }
 
   /**
