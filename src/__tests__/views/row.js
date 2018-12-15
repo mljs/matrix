@@ -19,8 +19,8 @@ describe('Row view', () => {
     expect(mrv1.get(0, 4)).toBe(1);
     expect(mrv2.get(0, 4)).toBe(10);
 
-    expect(mrv1.to1DArray()).toEqual([1, 1, 1, 5, 1, 1, 1, 1]);
-    expect(mrv2.to1DArray()).toEqual([1, 1, 1, 1, 10, 1, 1, 1]);
+    expect(mrv1.to1DArray()).toStrictEqual([1, 1, 1, 5, 1, 1, 1, 1]);
+    expect(mrv2.to1DArray()).toStrictEqual([1, 1, 1, 1, 10, 1, 1, 1]);
 
     expect(mrv1.isRowVector()).toBe(true);
     expect(mrv2.isRowVector()).toBe(true);

@@ -13,10 +13,10 @@ import {
 
 describe('Decompositions exports', () => {
   it('should export full and short names', () => {
-    expect(LuDecomposition).toEqual(LU);
-    expect(QrDecomposition).toEqual(QR);
-    expect(SingularValueDecomposition).toEqual(SVD);
-    expect(EigenvalueDecomposition).toEqual(EVD);
-    expect(CholeskyDecomposition).toEqual(CHO);
+    expect(LuDecomposition).toStrictEqual(LU);
+    expect(QrDecomposition).toStrictEqual(QR);
+    expect(SingularValueDecomposition).toStrictEqual(SVD);
+    expect(EigenvalueDecomposition).toStrictEqual(EVD);
+    expect(CholeskyDecomposition).toStrictEqual(CHO);
   });
 });

@@ -22,7 +22,7 @@ describe('Matrix creation', () => {
     var original = util.getSquareMatrix();
     var matrix = new Matrix(original);
     expect(matrix).not.toBe(original);
-    expect(matrix).toEqual(original);
+    expect(matrix).toStrictEqual(original);
   });
 
   it('should create an empty matrix', () => {
@@ -82,26 +82,26 @@ describe('Matrix creation', () => {
     var vector = Matrix.rowVector([0, 1, 2, 3]);
     expect(vector.rows).toBe(1);
     expect(vector.columns).toBe(4);
-    expect(vector.to2DArray()).toEqual([[0, 1, 2, 3]]);
+    expect(vector.to2DArray()).toStrictEqual([[0, 1, 2, 3]]);
   });
 
   it('column vector', () => {
     var vector = Matrix.columnVector([0, 1, 2, 3]);
     expect(vector.rows).toBe(4);
     expect(vector.columns).toBe(1);
-    expect(vector.to2DArray()).toEqual([[0], [1], [2], [3]]);
+    expect(vector.to2DArray()).toStrictEqual([[0], [1], [2], [3]]);
   });
 
   it('empty', () => {
-    expect(Matrix.empty(3, 3)).toEqual(new Matrix(3, 3));
+    expect(Matrix.empty(3, 3)).toStrictEqual(new Matrix(3, 3));
   });
 
   it('zeros', () => {
-    expect(Matrix.zeros(2, 3).to2DArray()).toEqual([[0, 0, 0], [0, 0, 0]]);
+    expect(Matrix.zeros(2, 3).to2DArray()).toStrictEqual([[0, 0, 0], [0, 0, 0]]);
   });
 
   it('ones', () => {
-    expect(Matrix.ones(2, 3).to2DArray()).toEqual([[1, 1, 1], [1, 1, 1]]);
+    expect(Matrix.ones(2, 3).to2DArray()).toStrictEqual([[1, 1, 1], [1, 1, 1]]);
   });
 
   it('random', () => {
@@ -117,35 +117,35 @@ describe('Matrix creation', () => {
 
   it('random with custom RNG', () => {
     var fakeRNG = () => 2;
-    expect(Matrix.rand(2, 2, fakeRNG).to2DArray()).toEqual([[2, 2], [2, 2]]);
+    expect(Matrix.rand(2, 2, fakeRNG).to2DArray()).toStrictEqual([[2, 2], [2, 2]]);
   });
 
   it('eye/identity', () => {
     var eye1 = Matrix.eye(3);
-    expect(eye1).toEqual(Matrix.identity(3));
-    expect(eye1.to2DArray()).toEqual([[1, 0, 0], [0, 1, 0], [0, 0, 1]]);
+    expect(eye1).toStrictEqual(Matrix.identity(3));
+    expect(eye1.to2DArray()).toStrictEqual([[1, 0, 0], [0, 1, 0], [0, 0, 1]]);
 
     var eye2 = Matrix.eye(3, 2);
-    expect(eye2.to2DArray()).toEqual([[1, 0], [0, 1], [0, 0]]);
+    expect(eye2.to2DArray()).toStrictEqual([[1, 0], [0, 1], [0, 0]]);
   });
 
   it('eye with other value than 1', () => {
     var eye1 = Matrix.eye(3, 3, 3);
-    expect(eye1.to2DArray()).toEqual([[3, 0, 0], [0, 3, 0], [0, 0, 3]]);
+    expect(eye1.to2DArray()).toStrictEqual([[3, 0, 0], [0, 3, 0], [0, 0, 3]]);
   });
 
   it('diag/diagonal', () => {
     var arr = [1, 2, 3];
     var diag = Matrix.diag(arr);
-    expect(diag).toEqual(Matrix.diagonal(arr));
-    expect(diag.to2DArray()).toEqual([[1, 0, 0], [0, 2, 0], [0, 0, 3]]);
+    expect(diag).toStrictEqual(Matrix.diagonal(arr));
+    expect(diag.to2DArray()).toStrictEqual([[1, 0, 0], [0, 2, 0], [0, 0, 3]]);
 
-    expect(Matrix.diag(arr, 2).to2DArray()).toEqual([[1, 0], [0, 2]]);
-    expect(Matrix.diag(arr, 2, 4).to2DArray()).toEqual([
+    expect(Matrix.diag(arr, 2).to2DArray()).toStrictEqual([[1, 0], [0, 2]]);
+    expect(Matrix.diag(arr, 2, 4).to2DArray()).toStrictEqual([
       [1, 0, 0, 0],
       [0, 2, 0, 0]
     ]);
-    expect(Matrix.diag(arr, 4, 4).to2DArray()).toEqual([
+    expect(Matrix.diag(arr, 4, 4).to2DArray()).toStrictEqual([
       [1, 0, 0, 0],
       [0, 2, 0, 0],
       [0, 0, 3, 0],
@@ -155,19 +155,19 @@ describe('Matrix creation', () => {
 
   it('regression test for Symbol.species (V8 5.1)', () => {
     var matrix = Matrix.ones(1, 2);
-    expect(matrix.map(() => 1)).toEqual([1]);
+    expect(matrix.map(() => 1)).toStrictEqual([1]);
   });
 
   it('Symbol.species should work for views', () => {
     var matrix = new Matrix([[1, 1, 1], [1, 1, 1]]);
     var view = matrix.transposeView();
-    expect(matrix.transpose().mmul(matrix)).toEqual(view.mmul(matrix));
+    expect(matrix.transpose().mmul(matrix)).toStrictEqual(view.mmul(matrix));
   });
 
   it('Symbol.species should work on static evaluated methods', () => {
     var a = [[1, 2]];
     var b = [[3, 1]];
-    expect(Matrix.subtract(a, b).to2DArray()).toEqual([[-2, 1]]);
-    expect(MatrixTransposeView.subtract(a, b).to2DArray()).toEqual([[-2, 1]]);
+    expect(Matrix.subtract(a, b).to2DArray()).toStrictEqual([[-2, 1]]);
+    expect(MatrixTransposeView.subtract(a, b).to2DArray()).toStrictEqual([[-2, 1]]);
   });
 });

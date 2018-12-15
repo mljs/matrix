@@ -16,7 +16,7 @@ describe('LU decomposition', () => {
     const ltm = lu.lowerTriangularMatrix;
     checkTriangular(ltm);
 
-    expect(ltm.mmul(ltm.transpose())).toEqual(matrix);
+    expect(ltm.mmul(ltm.transpose())).toStrictEqual(matrix);
   });
 
   it('should work with arrays', () => {
@@ -34,7 +34,7 @@ describe('LU decomposition', () => {
     const ltm = lu.lowerTriangularMatrix;
     checkTriangular(ltm);
 
-    expect(ltm.mmul(ltm.transpose())).toEqual(new Matrix(matrix));
+    expect(ltm.mmul(ltm.transpose())).toStrictEqual(new Matrix(matrix));
   });
 
   it('should throw on bad input', () => {

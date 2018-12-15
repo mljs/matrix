@@ -14,7 +14,7 @@ describe('Dynamic operators on matrices', () => {
     });
     it('multiply', () => {
       matrix.multiply(2);
-      expect(matrix.to2DArray()).toEqual([
+      expect(matrix.to2DArray()).toStrictEqual([
         [0, 2, 4],
         [6, -8, -10],
         [-12, -14, -16]
@@ -22,7 +22,7 @@ describe('Dynamic operators on matrices', () => {
     });
     it('or', () => {
       matrix.or(10);
-      expect(matrix.to2DArray()).toEqual([
+      expect(matrix.to2DArray()).toStrictEqual([
         [10, 11, 10],
         [11, -2, -5],
         [-6, -5, -6]
@@ -46,7 +46,7 @@ describe('Dynamic operators on matrices', () => {
       expect(result).toBeInstanceOf(Matrix);
     });
     it('or', () => {
-      expect(Matrix.or(matrix, 10).to2DArray()).toEqual([
+      expect(Matrix.or(matrix, 10).to2DArray()).toStrictEqual([
         [10, 11, 10],
         [11, -2, -5],
         [-6, -5, -6]

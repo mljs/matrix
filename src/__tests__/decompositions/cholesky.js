@@ -16,7 +16,7 @@ describe('Cholesky decomposition', () => {
     const ltm = cho.lowerTriangularMatrix;
     checkTriangular(ltm);
 
-    expect(ltm.mmul(ltm.transpose())).toEqual(matrix);
+    expect(ltm.mmul(ltm.transpose())).toStrictEqual(matrix);
   });
   it('should throw on bad input', () => {
     expect(() => new CHO([[0, 1], [2, 0]])).toThrow('Matrix is not symmetric');

@@ -52,7 +52,7 @@ describe('utility methods', () => {
   it('clone', () => {
     var clone = matrix.clone();
     expect(clone).not.toBe(matrix);
-    expect(clone).toEqual(matrix);
+    expect(clone).toStrictEqual(matrix);
     expect(clone).toBeInstanceOf(Matrix);
     expect(Matrix.isMatrix(clone)).toBe(true);
   });
@@ -62,7 +62,7 @@ describe('utility methods', () => {
     var array = matrix.to1DArray();
     expect(array).toBeInstanceOf(Array);
     expect(array).toHaveLength(9);
-    expect(array).toEqual([9, 13, 5, 1, 11, 7, 2, 6, 3]);
+    expect(array).toStrictEqual([9, 13, 5, 1, 11, 7, 2, 6, 3]);
     expect(array).not.toBeInstanceOf(Matrix);
     expect(Matrix.isMatrix(array)).toBe(false);
   });
@@ -70,7 +70,7 @@ describe('utility methods', () => {
   it('to2DArray', () => {
     var matrix = util.getSquareMatrix();
     var array = matrix.to2DArray();
-    expect(array).toEqual(util.getSquareArray());
+    expect(array).toStrictEqual(util.getSquareArray());
     expect(array).toBeInstanceOf(Array);
     expect(array).toHaveLength(3);
     expect(array[0]).toBeInstanceOf(Array);
@@ -137,15 +137,15 @@ describe('utility methods', () => {
 
   it('scale rows', () => {
     var matrix = new Matrix([[-1, 0, 1], [6, 9, 7]]);
-    expect(matrix.scaleRows().to2DArray()).toEqual([
+    expect(matrix.scaleRows().to2DArray()).toStrictEqual([
       [0, 1 / 2, 1],
       [0, 1, 1 / 3]
     ]);
-    expect(matrix.scaleRows(1, 2).to2DArray()).toEqual([
+    expect(matrix.scaleRows(1, 2).to2DArray()).toStrictEqual([
       [1, 3 / 2, 2],
       [1, 2, 4 / 3]
     ]);
-    expect(matrix.scaleRows(-2, -1).to2DArray()).toEqual([
+    expect(matrix.scaleRows(-2, -1).to2DArray()).toStrictEqual([
       [-2, -3 / 2, -1],
       [-2, -1, -5 / 3]
     ]);
@@ -156,17 +156,17 @@ describe('utility methods', () => {
 
   it('scale columns', () => {
     var matrix = new Matrix([[1, 2], [-5, 3], [2, 4]]);
-    expect(matrix.scaleColumns().to2DArray()).toEqual([
+    expect(matrix.scaleColumns().to2DArray()).toStrictEqual([
       [6 / 7, 0],
       [0, 1 / 2],
       [1, 1]
     ]);
-    expect(matrix.scaleColumns(1, 2).to2DArray()).toEqual([
+    expect(matrix.scaleColumns(1, 2).to2DArray()).toStrictEqual([
       [13 / 7, 1],
       [1, 3 / 2],
       [2, 2]
     ]);
-    expect(matrix.scaleColumns(-2, -1).to2DArray()).toEqual([
+    expect(matrix.scaleColumns(-2, -1).to2DArray()).toStrictEqual([
       [-8 / 7, -2],
       [-2, -3 / 2],
       [-1, -1]
@@ -178,12 +178,12 @@ describe('utility methods', () => {
 
   it('set sub matrix', () => {
     var matrix = new Matrix([[1, 2], [-5, 3], [2, 4]]);
-    expect(matrix.setSubMatrix([[1, 2]], 1, 0).to2DArray()).toEqual([
+    expect(matrix.setSubMatrix([[1, 2]], 1, 0).to2DArray()).toStrictEqual([
       [1, 2],
       [1, 2],
       [2, 4]
     ]);
-    expect(matrix.setSubMatrix([[10], [10]], 1, 1).to2DArray()).toEqual([
+    expect(matrix.setSubMatrix([[10], [10]], 1, 1).to2DArray()).toStrictEqual([
       [1, 2],
       [1, 10],
       [2, 10]
@@ -194,19 +194,19 @@ describe('utility methods', () => {
   it('selection matrix', () => {
     var matrix = new Matrix([[1, 2], [-5, 3], [2, 4]]);
     var selMatrix = matrix.selection([2, 1], [1]);
-    expect(selMatrix.to2DArray()).toEqual([[4], [3]]);
+    expect(selMatrix.to2DArray()).toStrictEqual([[4], [3]]);
   });
 
   it('repeat matrix', () => {
     var matrix = new Matrix([[1, 2], [3, 4]]);
-    expect(matrix.repeat().to2DArray()).toEqual([[1, 2], [3, 4]]);
-    expect(matrix.repeat(2, 2).to2DArray()).toEqual([
+    expect(matrix.repeat().to2DArray()).toStrictEqual([[1, 2], [3, 4]]);
+    expect(matrix.repeat(2, 2).to2DArray()).toStrictEqual([
       [1, 2, 1, 2],
       [3, 4, 3, 4],
       [1, 2, 1, 2],
       [3, 4, 3, 4]
     ]);
-    expect(matrix.repeat(1, 2).to2DArray()).toEqual([
+    expect(matrix.repeat(1, 2).to2DArray()).toStrictEqual([
       [1, 2, 1, 2],
       [3, 4, 3, 4]
     ]);
@@ -215,17 +215,17 @@ describe('utility methods', () => {
   it('mmul strassen', () => {
     var matrix = new Matrix([[2, 4], [7, 1]]);
     var matrix2 = new Matrix([[2, 1], [1, 1]]);
-    expect(matrix.mmulStrassen(matrix2).to2DArray()).toEqual([[8, 6], [15, 8]]);
+    expect(matrix.mmulStrassen(matrix2).to2DArray()).toStrictEqual([[8, 6], [15, 8]]);
   });
 
   it('mmul 2x2 and 3x3', () => {
     var matrix = new Matrix([[2, 4], [7, 1]]);
     var matrix2 = new Matrix([[2, 1], [1, 1]]);
-    expect(matrix.strassen2x2(matrix2).to2DArray()).toEqual([[8, 6], [15, 8]]);
+    expect(matrix.strassen2x2(matrix2).to2DArray()).toStrictEqual([[8, 6], [15, 8]]);
 
     matrix = new Matrix([[2, 4, 1], [7, 1, 2], [5, 1, 3]]);
     matrix2 = new Matrix([[2, 1, 3], [7, 1, 1], [6, 2, 7]]);
-    expect(matrix.strassen3x3(matrix2).to2DArray()).toEqual([
+    expect(matrix.strassen3x3(matrix2).to2DArray()).toStrictEqual([
       [38, 8, 17],
       [33, 12, 36],
       [35, 12, 37]

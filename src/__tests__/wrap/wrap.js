@@ -20,15 +20,15 @@ test('error testing', () => {
   expect(() => wrap(2)).toThrow('the argument is not an array');
 });
 
-it('matrix methods', () => {
+test('matrix methods', () => {
   var matrix1 = wrap([0, 1, 2, 3], { rows: 2 });
   var matrix2 = wrap([[1, 0], [0, 1]]);
 
   var result = matrix1.mmul(matrix2);
   expect(result).toBeInstanceOf(Matrix);
-  expect(result.to2DArray()).toEqual([[0, 1], [2, 3]]);
+  expect(result.to2DArray()).toStrictEqual([[0, 1], [2, 3]]);
 
   result = matrix2.mmul(matrix1);
   expect(result).toBeInstanceOf(Matrix);
-  expect(result.to2DArray()).toEqual([[0, 1], [2, 3]]);
+  expect(result.to2DArray()).toStrictEqual([[0, 1], [2, 3]]);
 });

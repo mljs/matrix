@@ -19,8 +19,8 @@ describe('Column view', () => {
     expect(mcv1.get(3, 0)).toBe(1);
     expect(mcv2.get(3, 0)).toBe(1);
 
-    expect(mcv1.to1DArray()).toEqual([1, 1, 12, 1, 1]);
-    expect(mcv2.to1DArray()).toEqual([5, 1, 1, 1, 1]);
+    expect(mcv1.to1DArray()).toStrictEqual([1, 1, 12, 1, 1]);
+    expect(mcv2.to1DArray()).toStrictEqual([5, 1, 1, 1, 1]);
 
     expect(mcv1.isColumnVector()).toBe(true);
     expect(mcv2.isColumnVector()).toBe(true);
