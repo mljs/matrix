@@ -310,7 +310,7 @@ declare module 'ml-matrix' {
     // inplace
     pow(value: ScalarOrMatrix): Matrix;
     // new matrix
-    static pow(value: Matrix, value: ScalarOrMatrix): Matrix;
+    static pow(matrix: Matrix, value: ScalarOrMatrix): Matrix;
   }
   export default Matrix;
   export { Matrix };
@@ -320,14 +320,14 @@ declare module 'ml-matrix' {
     inverse(): Matrix;
     solve(value: Matrix): Matrix;
     solveForDiagonal(value: number[]): Matrix;
-    get norm2(): number;
-    get threshold(): number;
-    get leftSingularVectors(): Matrix;
-    get condition(): number;
-    get rank(): number;
-    get rightSingularVectors(): Matrix;
-    get diagonal(): number[];
-    get diagonalMatrix(): Matrix;
+    readonly norm2: number;
+    readonly threshold: number;
+    readonly leftSingularVectors: Matrix;
+    readonly condition: number;
+    readonly rank: number;
+    readonly rightSingularVectors: Matrix;
+    readonly diagonal: number[];
+    readonly diagonalMatrix: Matrix;
   }
   export interface ISVDOptions {
     computeLeftSingularVectors?: boolean;
@@ -338,10 +338,10 @@ declare module 'ml-matrix' {
 
   class EigenvalueDecomposition {
     constructor(value: MaybeMatrix, options?: IEVDOptions);
-    get diagonalMatrix(): Matrix;
-    get eigenvectorMatrix(): Matrix;
-    get imaginaryEigenvalues(): number[];
-    get realEigenvalues(): number[];
+    readonly diagonalMatrix: Matrix;
+    readonly eigenvectorMatrix: Matrix;
+    readonly imaginaryEigenvalues: number[];
+    readonly realEigenvalues: number[];
   }
   export interface IEVDOptions {
     assumeSymmetric?: boolean;
@@ -351,7 +351,7 @@ declare module 'ml-matrix' {
   class CholeskyDecomposition {
     constructor(value: MaybeMatrix);
     solve(value: Matrix): Matrix;
-    get lowerTriangularMatrix(): Matrix;
+    readonly lowerTriangularMatrix: Matrix;
   }
   export { CholeskyDecomposition, CholeskyDecomposition as CHO };
 
@@ -359,10 +359,10 @@ declare module 'ml-matrix' {
     constructor(value: MaybeMatrix);
     isSingular(): boolean;
     solve(value: Matrix): Matrix;
-    get determinant(): number;
-    get lowerTriangularMatrix(): Matrix;
-    get pivotPermutationVector(): number[];
-    get upperTriangularMatrix(): Matrix;
+    readonly determinant: number;
+    readonly lowerTriangularMatrix: Matrix;
+    readonly pivotPermutationVector: number[];
+    readonly upperTriangularMatrix: Matrix;
   }
   export { LuDecomposition, LuDecomposition as LU };
 
@@ -370,8 +370,8 @@ declare module 'ml-matrix' {
     constructor(value: MaybeMatrix);
     isFullRank(): boolean;
     solve(value: Matrix): Matrix;
-    get orthogonalMatrix(): Matrix;
-    get upperTriangularMatrix(): Matrix;
+    readonly orthogonalMatrix: Matrix;
+    readonly upperTriangularMatrix: Matrix;
   }
   export { QrDecomposition, QrDecomposition as QR };
 
