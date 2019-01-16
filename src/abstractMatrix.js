@@ -989,7 +989,7 @@ export default function AbstractMatrix(superCtor) {
       other = this.constructor.checkMatrix(other);
       if (this.rows !== other.rows || this.columns !== other.columns) {
         // eslint-disable-next-line no-console
-        console.warn('Shape of left matrix are not equal to the shape of right matrix.');
+        throw new Error('The shape of left matrix is not equal to the shape of right matrix.');
       }
       var m = this.rows;
       var n = this.columns;

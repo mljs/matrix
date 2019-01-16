@@ -215,7 +215,11 @@ describe('utility methods', () => {
   it('emul', () => {
     var matrix = new Matrix([[2, 4], [7, 1]]);
     var matrix2 = new Matrix([[2, 1], [1, 1]]);
+    var matrix3 = new Matrix([[2, 1], [1, 1], [3, 2]]);
     expect(matrix.emul(matrix2).to2DArray()).toStrictEqual([[4, 4], [7, 1]]);
+    expect(() => matrix.emul(matrix3)).toThrow(
+      'The shape of left matrix is not equal to the shape of right matrix.'
+    );
   });
 
   it('mmul strassen', () => {
