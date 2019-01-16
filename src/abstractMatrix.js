@@ -981,6 +981,33 @@ export default function AbstractMatrix(superCtor) {
     }
 
     /**
+         * Returns the element-wise product between this and other
+         * @param {Matrix} other
+         * @return {Matrix}
+         */
+    emul(other) {
+      other = this.constructor.checkMatrix(other);
+      if (this.rows !== other.rows || this.columns !== other.columns) {
+        // eslint-disable-next-line no-console
+        console.warn('Shape of left matrix are not equal to the shape of right matrix.');
+      }
+      var m = this.rows;
+      var n = this.columns;
+
+      var result = new this.constructor[Symbol.species](m, n);
+
+      for (var i = 0; i < m; i++) {
+        for (var j = 0; j < n; j++) {
+          var a = this.get(i, j);
+          var b = other.get(i, j);
+          result.set(i, j, a * b);
+        }
+      }
+
+      return result;
+    }
+
+    /**
          * Returns the matrix product between this and other
          * @param {Matrix} other
          * @return {Matrix}

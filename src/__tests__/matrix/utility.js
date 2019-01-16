@@ -212,6 +212,12 @@ describe('utility methods', () => {
     ]);
   });
 
+  it('emul', () => {
+    var matrix = new Matrix([[2, 4], [7, 1]]);
+    var matrix2 = new Matrix([[2, 1], [1, 1]]);
+    expect(matrix.emul(matrix2).to2DArray()).toStrictEqual([[4, 4], [7, 1]]);
+  });
+
   it('mmul strassen', () => {
     var matrix = new Matrix([[2, 4], [7, 1]]);
     var matrix2 = new Matrix([[2, 1], [1, 1]]);

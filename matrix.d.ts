@@ -147,6 +147,7 @@ declare module 'ml-matrix' {
     norm(type: 'frobenius' | 'max'): number;
     cumulativeSum(): Matrix;
     dot(vector2: Matrix): number;
+    emul(other: Matrix): Matrix;
     mmul(other: Matrix): Matrix;
     strassen2x2(other: Matrix): Matrix;
     strassen3x3(other: Matrix): Matrix;
