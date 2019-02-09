@@ -344,6 +344,67 @@ export default function AbstractMatrix(superCtor) {
     }
 
     /**
+          * @return true if the matrix is in echelon form
+          */
+    isEchelonForm() {
+      let i = 0;
+      let j = 0;
+      let previousColumn = -1;
+      let isEchelonForm = true;
+      let checked = false;
+      while ((i < this.rows) && (isEchelonForm)) {
+        j = 0;
+        checked = false;
+        while ((j < this.columns) && (checked === false)) {
+          if (this.get(i, j) === 0) {
+            j++;
+          } else if ((this.get(i, j) === 1) && (j > previousColumn)) {
+            checked = true;
+            previousColumn = j;
+          } else {
+            isEchelonForm = false;
+            checked = true;
+          }
+        }
+        i++;
+      }
+      return isEchelonForm;
+    }
+
+    /**
+             * @return true if the matrix is in reduced echelon form
+             */
+    isReducedEchelonForm() {
+      let i = 0;
+      let j = 0;
+      let previousColumn = -1;
+      let isReducedEchelonForm = true;
+      let checked = false;
+      while ((i < this.rows) && (isReducedEchelonForm)) {
+        j = 0;
+        checked = false;
+        while ((j < this.columns) && (checked === false)) {
+          if (this.get(i, j) === 0) {
+            j++;
+          } else if ((this.get(i, j) === 1) && (j > previousColumn)) {
+            checked = true;
+            previousColumn = j;
+          } else {
+            isReducedEchelonForm = false;
+            checked = true;
+          }
+        }
+        for (let k = j + 1; k < this.rows; k++) {
+          if (this.get(i, k) !== 0) {
+            isReducedEchelonForm = false;
+          }
+        }
+        i++;
+      }
+      return isReducedEchelonForm;
+    }
+
+    /**
          * Sets a given element of the matrix. mat.set(3,4,1) is equivalent to mat[3][4]=1
          * @abstract
          * @param {number} rowIndex - Index of the row
