@@ -1,3 +1,12 @@
+## [5.2.1](https://github.com/mljs/matrix/compare/v5.2.0...v5.2.1) (2019-01-07)
+
+
+### Bug Fixes
+
+* correct matrix.d.ts to follow TypeScript 3 ([#81](https://github.com/mljs/matrix/issues/81)) ([99329fd](https://github.com/mljs/matrix/commit/99329fd))
+
+
+
 <a name="5.2.0"></a>
 # [5.2.0](https://github.com/mljs/matrix/compare/v5.1.1...v5.2.0) (2018-09-25)
 

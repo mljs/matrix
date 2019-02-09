@@ -23,7 +23,7 @@ describe('Singular value decomposition', () => {
     var svd = new SVD(matrix);
     var U = new Matrix(svd.U);
     var V = new Matrix(svd.V);
-    expect(U.mmul(U.transpose())).toEqual(Matrix.eye(4));
+    expect(U.mmul(U.transpose())).toStrictEqual(Matrix.eye(4));
     expect(V.mmul(V.transpose())).toBeDeepCloseTo(Matrix.eye(5), 5);
   });
 
@@ -256,9 +256,9 @@ describe('Singular value decomposition', () => {
     var target1 = new SVD(value1, { autoTranspose: true });
     var target2 = new SVD(value2, { autoTranspose: true });
 
-    expect(target1.rightSingularVectors).toEqual(target2.leftSingularVectors);
-    expect(target1.leftSingularVectors).toEqual(target2.rightSingularVectors);
-    expect(target1.diagonalMatrix).toEqual(target2.diagonalMatrix);
+    expect(target1.rightSingularVectors).toStrictEqual(target2.leftSingularVectors);
+    expect(target1.leftSingularVectors).toStrictEqual(target2.rightSingularVectors);
+    expect(target1.diagonalMatrix).toStrictEqual(target2.diagonalMatrix);
   });
 
   describe('solve', () => {
