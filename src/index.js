@@ -7,7 +7,6 @@ export { default as WrapperMatrix1D } from './wrap/WrapperMatrix1D';
 
 export { solve, inverse } from './decompositions';
 export { linearDependencies } from './linearDependencies';
-export { positiveLinearCombination } from './positiveLinearCombination';
 export {
   default as SingularValueDecomposition,
   default as SVD

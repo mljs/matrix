@@ -28,14 +28,14 @@ describe('Non-negative Matrix Factorization', () => {
     /**
      * Global minimum :
      * X = [
-     *   [2,	  4],
-     *   [8,	 16],
-     *  [32,	 64],
-     * [128,	256]]
+     * [2, 4],
+     * [8, 16],
+     * [32, 64],
+     * [128, 256]]
      *
      * Y = [
-     * [1,	2,	3,	4],
-     * [6,	7,	8,	9]]
+     * [1, 2, 3, 4],
+     * [6, 7, 8, 9]]
      */
     let A = new Matrix([
       [26, 32, 38, 44],
@@ -47,7 +47,7 @@ describe('Non-negative Matrix Factorization', () => {
     let nA =
         new NNMF(A, 1, { targetRelativeError: 0.000001, maxIterations: 100 });
 
-    expect(positivity(nA)).toEqual(true);
+    expect(positivity(nA)).toStrictEqual(true);
     expect(nA.error.max()).toBeLessThan(0.000001);
   });
   it('Factorization test II', () => {
@@ -66,7 +66,7 @@ describe('Non-negative Matrix Factorization', () => {
 
     let nA = new NNMF(A, 8, { targetRelativeError: 0.5, maxIterations: 100 });
 
-    expect(positivity(nA)).toEqual(true);
+    expect(positivity(nA)).toStrictEqual(true);
     expect(nA.error.max()).toBeLessThan(0.5);
   });
 
@@ -83,7 +83,7 @@ describe('Non-negative Matrix Factorization', () => {
 
     let nA = new NNMF(A, 3, { targetRelativeError: 1, maxIterations: 100 });
 
-    expect(positivity(nA)).toEqual(true);
+    expect(positivity(nA)).toStrictEqual(true);
     expect(nA.error.max()).toBeLessThan(1);
   });
   it('Comparation of the error with matlab', () => {
@@ -99,8 +99,7 @@ describe('Non-negative Matrix Factorization', () => {
     }
     let nA = new NNMF(A, 1, { targetRelativeError: 1, maxIterations: 10 });
 
-    expect(positivity(nA)).toEqual(true);
+    expect(positivity(nA)).toStrictEqual(true);
     expect(nA.error.max()).toBeLessThan(1);
-    console.table(nA.X);
   });
 });
