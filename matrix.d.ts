@@ -103,6 +103,8 @@ declare module 'ml-matrix' {
     isVector(): boolean;
     isSquare(): boolean;
     isSymmetric(): boolean;
+    isEchelonForm(): boolean;
+    isReducedEchelonForm(): boolean;
     set(rowIndex: number, columnIndex: number, value: number): Matrix;
     get(rowIndex: number, columnIndex: number): number;
     repeat(rowRep: number, colRep: number): Matrix;
