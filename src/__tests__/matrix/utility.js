@@ -286,17 +286,23 @@ describe('utility methods', () => {
   });
 
   it('isEchelonForm', () => {
-    var matrix = new Matrix([[1, 0], [0, 1]]);
-    var matrix2 = new Matrix([[2, 1], [1, 1]]);
+    const matrix = new Matrix([[1, 0], [0, 1]]);
+    const matrix2 = new Matrix([[2, 1], [1, 1]]);
     expect(matrix.isEchelonForm()).toStrictEqual(true);
     expect(matrix2.isEchelonForm()).toStrictEqual(false);
   });
 
   it('isReducedEchelonForm', () => {
-    var matrix = new Matrix([[1, 0], [0, 1]]);
-    var matrix2 = new Matrix([[1, 1], [0, 1]]);
+    const matrix = new Matrix([[1, 0], [0, 1]]);
+    const matrix2 = new Matrix([[1, 1], [0, 1]]);
     expect(matrix.isReducedEchelonForm()).toStrictEqual(true);
     expect(matrix2.isReducedEchelonForm()).toStrictEqual(false);
+  });
+
+  it('echelonForm', () => {
+    const matrix = new Matrix([[1, 3], [4, 8]]);
+    const result = [[1, 2], [0, 1]];
+    expect(matrix.echelonForm().to2DArray()).toStrictEqual(result);
   });
 
   it('isRowVector', () => {

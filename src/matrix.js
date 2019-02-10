@@ -400,6 +400,42 @@ export class AbstractMatrix {
   }
 
   /**
+   * @return the row echelon form of a matrix, using Gaussian elimination
+   */
+  echelonForm() {
+    let result = this.clone();
+    let h = 0;
+    let k = 0;
+    while ((h < result.rows) && (k < result.columns)) {
+      let iMax = h;
+      for (let i = h; i < result.rows; i++) {
+        if (result.get(i, k) > result.get(iMax, k)) {
+          iMax = i;
+        }
+      }
+      if (result.get(iMax, k) === 0) {
+        k++;
+      } else {
+        result.swapRows(h, iMax);
+        let tmp = result.get(h, k);
+        for (let j = k; j < result.columns; j++) {
+          result.set(h, j, result.get(h, j) / tmp);
+        }
+        for (let i = h + 1; i < result.rows; i++) {
+          let factor = result.get(i, k) / result.get(h, k);
+          result.set(i, k, 0);
+          for (let j = k + 1; j < result.columns; j++) {
+            result.set(i, j, result.get(i, j) - result.get(h, j) * factor);
+          }
+        }
+        h++;
+        k++;
+      }
+    }
+    return result;
+  }
+
+  /**
    * Sets a given element of the matrix.
    * @abstract
    * @param {number} rowIndex - Index of the row
