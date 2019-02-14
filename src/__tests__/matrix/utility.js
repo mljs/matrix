@@ -305,6 +305,18 @@ describe('utility methods', () => {
     expect(matrix.echelonForm().to2DArray()).toStrictEqual(result);
   });
 
+  it('reducedEchelonForm', () => {
+    const matrix = new Matrix([[1, 3], [4, 8]]);
+    const result = [[1, 0], [0, 1]];
+    const matrix2 = new Matrix([[1, 3], [2, 6]]);
+    const result2 = [[1, 3], [0, 0]];
+    const matrix3 = new Matrix([[1, 3, -1], [0, 2, 14]]);
+    const result3 = [[1, 0, -22], [0, 1, 7]];
+    expect(matrix.reducedEchelonForm().to2DArray()).toStrictEqual(result);
+    expect(matrix2.reducedEchelonForm().to2DArray()).toStrictEqual(result2);
+    expect(matrix3.reducedEchelonForm().to2DArray()).toStrictEqual(result3);
+  });
+
   it('isRowVector', () => {
     var m = new Matrix(1, 3);
     expect(m.isRowVector()).toBe(true);
