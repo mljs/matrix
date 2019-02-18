@@ -64,7 +64,7 @@ declare module 'ml-matrix' {
     ): MatrixTransposeView;
     get(rowIndex: number, columnIndex: number): number;
   }
-  export class Matrix extends Array<number> {
+  export class Matrix extends Array<Array<number>> {
     readonly size: number;
     readonly rows: number;
     readonly columns: number;
