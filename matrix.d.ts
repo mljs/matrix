@@ -64,7 +64,7 @@ declare module 'ml-matrix' {
     ): MatrixTransposeView;
     get(rowIndex: number, columnIndex: number): number;
   }
-  export default class Matrix extends Array<number> {
+  export class Matrix extends Array<number> {
     readonly size: number;
     readonly rows: number;
     readonly columns: number;
@@ -321,6 +321,7 @@ declare module 'ml-matrix' {
     // new matrix
     static pow(matrix: Matrix, value: ScalarOrMatrix): Matrix;
   }
+  export default Matrix;
 
   class SingularValueDecomposition {
     constructor(value: MaybeMatrix, options?: ISVDOptions);
