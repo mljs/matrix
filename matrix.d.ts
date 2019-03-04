@@ -331,6 +331,10 @@ declare module 'ml-matrix' {
     readonly diagonal: number[];
     readonly diagonalMatrix: Matrix;
   }
+  class NNMF{
+    constructor(value: MaybeMatrix, options?: number);
+    error(): number
+  }
   export interface ISVDOptions {
     computeLeftSingularVectors?: boolean;
     computeRightSingularVectors?: boolean;
