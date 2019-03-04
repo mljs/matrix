@@ -7,7 +7,7 @@ import { Matrix, WrapperMatrix2D } from '../index';
  * @param {Matrix} A
  * @param {number} r
  * @param {object} [options={}]
- * @param {number} [options.targetRelativeError=0.001]
+ * @param {number} [options.targetRelativeError=0.001] //Maybe better with derivated
  * @param {number} [options.maxIterations=10000]
  * @param {number} [options.version=2]
  */
