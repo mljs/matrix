@@ -64,11 +64,15 @@ declare module 'ml-matrix' {
     ): MatrixTransposeView;
     get(rowIndex: number, columnIndex: number): number;
   }
-  class Matrix {
+  export class Matrix {
     readonly size: number;
+    readonly rows: number;
+    readonly columns: number;
+
     constructor(nRows: number, nColumns: number);
     constructor(data: number[][]);
     constructor(otherMatrix: Matrix);
+
     static from1DArray(
       newRows: number,
       newColumns: number,
@@ -95,6 +99,7 @@ declare module 'ml-matrix' {
     static max(matrix1: Matrix, matrix2: Matrix): Matrix;
     static checkMatrix(value: any): Matrix;
     static isMatrix(value: any): value is Matrix;
+
     apply(callback: Function): Matrix;
     to1DArray(): number[];
     to2DArray(): number[][];
@@ -108,13 +113,15 @@ declare module 'ml-matrix' {
     set(rowIndex: number, columnIndex: number, value: number): Matrix;
     get(rowIndex: number, columnIndex: number): number;
     repeat(rowRep: number, colRep: number): Matrix;
-    fill(value: number): Matrix;
+    fill(value: number): this;
     neg(): Matrix;
     negate(): Matrix;
+    addRow(index: number, array: number[] | Matrix): this;
     getRow(index: number): number[];
     getRowVector(index: number): Matrix;
     setRow(index: number, array: number[] | Matrix): Matrix;
     swapRows(row1: number, row2: number): Matrix;
+    addColumn(index: number, array: number[] | Matrix): this;
     getColumn(index: number): number[];
     getColumnVector(index: number): Matrix;
     setColumn(index: number, array: number[] | Matrix): Matrix;
@@ -202,7 +209,7 @@ declare module 'ml-matrix' {
     columnSelectionView(columnIndices: number[]): MatrixColumnSelectionView;
     det(): number;
     determinant(): number;
-    pseudoInverse(threshold: number): Matrix;
+    pseudoInverse(threshold?: number): Matrix;
     clone(): Matrix;
 
     // From here we document methods dynamically generated from operators
@@ -315,7 +322,6 @@ declare module 'ml-matrix' {
     static pow(matrix: Matrix, value: ScalarOrMatrix): Matrix;
   }
   export default Matrix;
-  export { Matrix };
 
   class SingularValueDecomposition {
     constructor(value: MaybeMatrix, options?: ISVDOptions);
