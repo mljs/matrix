@@ -1,3 +1,18 @@
+# [5.3.0](https://github.com/mljs/matrix/compare/v5.2.1...v5.3.0) (2019-03-23)
+
+
+### Bug Fixes
+
+* add isEchelonForm and isReducedEchelonForm to typings ([690edd1](https://github.com/mljs/matrix/commit/690edd1))
+* correct matrix.d.ts file. ([#86](https://github.com/mljs/matrix/issues/86)) ([ebb273c](https://github.com/mljs/matrix/commit/ebb273c))
+
+
+### Features
+
+* add isEchelonForm and isReducedEchelonForm ([#84](https://github.com/mljs/matrix/issues/84)) ([dee2a94](https://github.com/mljs/matrix/commit/dee2a94))
+
+
+
 ## [5.2.1](https://github.com/mljs/matrix/compare/v5.2.0...v5.2.1) (2019-01-07)
 
 
