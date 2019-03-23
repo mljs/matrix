@@ -2,20 +2,20 @@
 <html>
 <head>
   <meta charset='utf-8' />
-  <title>ml-matrix 5.2.1 | Documentation</title>
-  <meta name='viewport' content='width=device-width,initial-scale=1'>
-  <link href='assets/bass.css' type='text/css' rel='stylesheet' />
-  <link href='assets/style.css' type='text/css' rel='stylesheet' />
-  <link href='assets/github.css' type='text/css' rel='stylesheet' />
-  <link href='assets/split.css' type='text/css' rel='stylesheet' />
+  <title>ml-matrix 5.3.0 | Documentation</title>
   <meta name='description' content='Matrix manipulation and computation library'>
+  <meta name='viewport' content='width=device-width,initial-scale=1'>
+  <link href='assets/bass.css' rel='stylesheet' />
+  <link href='assets/style.css' rel='stylesheet' />
+  <link href='assets/github.css' rel='stylesheet' />
+  <link href='assets/split.css' rel='stylesheet' />
 </head>
 <body class='documentation m0'>
     <div class='flex'>
       <div id='split-left' class='overflow-auto fs0 height-viewport-100'>
         <div class='py1 px2'>
           <h3 class='mb0 no-anchor'>ml-matrix</h3>
-          <div class='mb1'><code>5.2.1</code></div>
+          <div class='mb1'><code>5.3.0</code></div>
           <input
             placeholder='Filter'
             id='filter-input'
@@ -263,6 +263,18 @@
                         href='#matrixiscolumnvector'
                         class='regular pre-open'>
                         #isColumnVector
+                      </a></li>
+                      
+                      <li><a
+                        href='#matrixisechelonform'
+                        class='regular pre-open'>
+                        #isEchelonForm
+                      </a></li>
+                      
+                      <li><a
+                        href='#matrixisreducedechelonform'
+                        class='regular pre-open'>
+                        #isReducedEchelonForm
                       </a></li>
                       
                       <li><a
@@ -973,7 +985,7 @@
     </h3>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:mljs/matrix/blob/43e75c550c999606c770b7299b3da2a4a168b93b/src/abstractMatrix.js#L30-L1636'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/04322d92464d12c2b3eba56ec1ae623433655cea/src/abstractMatrix.js#L30-L1697'>
       <span>src/abstractMatrix.js</span>
       </a>
     
@@ -982,10 +994,7 @@
 
   <p>Real matrix</p>
 
- 
-  
     <div class='pre p1 fill-light mt0'>new Matrix(nRows: (<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a> | <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a> | <a href="#matrix">Matrix</a>), nColumns: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>?)</div>
-   
   
   
 
@@ -1048,7 +1057,7 @@
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:mljs/matrix/blob/43e75c550c999606c770b7299b3da2a4a168b93b/src/abstractMatrix.js#L233-L235'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/04322d92464d12c2b3eba56ec1ae623433655cea/src/abstractMatrix.js#L233-L235'>
       <span>src/abstractMatrix.js</span>
       </a>
     
@@ -1057,10 +1066,7 @@
 
   <p>Check that the provided value is a Matrix and tries to instantiate one if not</p>
 
- 
-  
     <div class='pre p1 fill-light mt0'>checkMatrix(value: any): <a href="#matrix">Matrix</a></div>
-   
   
   
 
@@ -1108,6 +1114,8 @@
   
 
   
+
+  
 </section>
 
       </div>
@@ -1127,7 +1135,7 @@
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:mljs/matrix/blob/43e75c550c999606c770b7299b3da2a4a168b93b/src/abstractMatrix.js#L74-L80'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/04322d92464d12c2b3eba56ec1ae623433655cea/src/abstractMatrix.js#L74-L80'>
       <span>src/abstractMatrix.js</span>
       </a>
     
@@ -1136,10 +1144,7 @@
 
   <p>Creates a column vector, a matrix with only one column.</p>
 
- 
-  
     <div class='pre p1 fill-light mt0'>columnVector(newData: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>): <a href="#matrix">Matrix</a></div>
-   
   
   
 
@@ -1187,6 +1192,8 @@
   
 
   
+
+  
 </section>
 
       </div>
@@ -1206,7 +1213,7 @@
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:mljs/matrix/blob/43e75c550c999606c770b7299b3da2a4a168b93b/src/abstractMatrix.js#L176-L186'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/04322d92464d12c2b3eba56ec1ae623433655cea/src/abstractMatrix.js#L176-L186'>
       <span>src/abstractMatrix.js</span>
       </a>
     
@@ -1215,10 +1222,7 @@
 
   <p>Creates a diagonal matrix based on the given array.</p>
 
- 
-  
     <div class='pre p1 fill-light mt0'>diag(data: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>, rows: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>?, columns: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>?): <a href="#matrix">Matrix</a></div>
-   
   
   
 
@@ -1284,6 +1288,8 @@
   
 
   
+
+  
 </section>
 
       </div>
@@ -1303,7 +1309,7 @@
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:mljs/matrix/blob/43e75c550c999606c770b7299b3da2a4a168b93b/src/abstractMatrix.js#L88-L90'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/04322d92464d12c2b3eba56ec1ae623433655cea/src/abstractMatrix.js#L88-L90'>
       <span>src/abstractMatrix.js</span>
       </a>
     
@@ -1312,10 +1318,7 @@
 
   <p>Creates an empty matrix with the given dimensions. Values will be undefined. Same as using new Matrix(rows, columns).</p>
 
- 
-  
     <div class='pre p1 fill-light mt0'>empty(rows: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>, columns: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>): <a href="#matrix">Matrix</a></div>
-   
   
   
 
@@ -1372,6 +1375,8 @@
   
 
   
+
+  
 </section>
 
       </div>
@@ -1391,7 +1396,7 @@
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:mljs/matrix/blob/43e75c550c999606c770b7299b3da2a4a168b93b/src/abstractMatrix.js#L158-L167'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/04322d92464d12c2b3eba56ec1ae623433655cea/src/abstractMatrix.js#L158-L167'>
       <span>src/abstractMatrix.js</span>
       </a>
     
@@ -1400,10 +1405,7 @@
 
   <p>Creates an identity matrix with the given dimension. Values of the diagonal will be 1 and others will be 0.</p>
 
- 
-  
     <div class='pre p1 fill-light mt0'>eye(rows: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>, columns: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>, value: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>): <a href="#matrix">Matrix</a></div>
-   
   
   
 
@@ -1471,6 +1473,8 @@
   
 
   
+
+  
 </section>
 
       </div>
@@ -1490,7 +1494,7 @@
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:mljs/matrix/blob/43e75c550c999606c770b7299b3da2a4a168b93b/src/abstractMatrix.js#L42-L54'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/04322d92464d12c2b3eba56ec1ae623433655cea/src/abstractMatrix.js#L42-L54'>
       <span>src/abstractMatrix.js</span>
       </a>
     
@@ -1499,10 +1503,7 @@
 
   <p>Constructs a Matrix with the chosen dimensions from a 1D array</p>
 
- 
-  
     <div class='pre p1 fill-light mt0'>from1DArray(newRows: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>, newColumns: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>, newData: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>): <a href="#matrix">Matrix</a></div>
-   
   
   
 
@@ -1568,6 +1569,8 @@
   
 
   
+
+  
 </section>
 
       </div>
@@ -1587,7 +1590,7 @@
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:mljs/matrix/blob/43e75c550c999606c770b7299b3da2a4a168b93b/src/abstractMatrix.js#L242-L244'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/04322d92464d12c2b3eba56ec1ae623433655cea/src/abstractMatrix.js#L242-L244'>
       <span>src/abstractMatrix.js</span>
       </a>
     
@@ -1596,10 +1599,7 @@
 
   <p>Returns true if the argument is a Matrix, false otherwise</p>
 
- 
-  
     <div class='pre p1 fill-light mt0'>isMatrix(value: any): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a></div>
-   
   
   
 
@@ -1647,6 +1647,8 @@
   
 
   
+
+  
 </section>
 
       </div>
@@ -1666,7 +1668,7 @@
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:mljs/matrix/blob/43e75c550c999606c770b7299b3da2a4a168b93b/src/abstractMatrix.js#L214-L226'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/04322d92464d12c2b3eba56ec1ae623433655cea/src/abstractMatrix.js#L214-L226'>
       <span>src/abstractMatrix.js</span>
       </a>
     
@@ -1675,10 +1677,7 @@
 
   <p>Returns a matrix whose elements are the maximum between matrix1 and matrix2</p>
 
- 
-  
     <div class='pre p1 fill-light mt0'>max(matrix1: <a href="#matrix">Matrix</a>, matrix2: <a href="#matrix">Matrix</a>): <a href="#matrix">Matrix</a></div>
-   
   
   
 
@@ -1722,6 +1721,8 @@
 
       
     
+  
+
   
 
   
@@ -1752,7 +1753,7 @@
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:mljs/matrix/blob/43e75c550c999606c770b7299b3da2a4a168b93b/src/abstractMatrix.js#L194-L206'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/04322d92464d12c2b3eba56ec1ae623433655cea/src/abstractMatrix.js#L194-L206'>
       <span>src/abstractMatrix.js</span>
       </a>
     
@@ -1761,10 +1762,7 @@
 
   <p>Returns a matrix whose elements are the minimum between matrix1 and matrix2</p>
 
- 
-  
     <div class='pre p1 fill-light mt0'>min(matrix1: <a href="#matrix">Matrix</a>, matrix2: <a href="#matrix">Matrix</a>): <a href="#matrix">Matrix</a></div>
-   
   
   
 
@@ -1819,6 +1817,8 @@
   
 
   
+
+  
 </section>
 
       </div>
@@ -1838,7 +1838,7 @@
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:mljs/matrix/blob/43e75c550c999606c770b7299b3da2a4a168b93b/src/abstractMatrix.js#L108-L110'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/04322d92464d12c2b3eba56ec1ae623433655cea/src/abstractMatrix.js#L108-L110'>
       <span>src/abstractMatrix.js</span>
       </a>
     
@@ -1847,10 +1847,7 @@
 
   <p>Creates a matrix with the given dimensions. Values will be set to one.</p>
 
- 
-  
     <div class='pre p1 fill-light mt0'>ones(rows: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>, columns: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>): <a href="#matrix">Matrix</a></div>
-   
   
   
 
@@ -1907,6 +1904,8 @@
   
 
   
+
+  
 </section>
 
       </div>
@@ -1926,7 +1925,7 @@
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:mljs/matrix/blob/43e75c550c999606c770b7299b3da2a4a168b93b/src/abstractMatrix.js#L119-L128'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/04322d92464d12c2b3eba56ec1ae623433655cea/src/abstractMatrix.js#L119-L128'>
       <span>src/abstractMatrix.js</span>
       </a>
     
@@ -1935,10 +1934,7 @@
 
   <p>Creates a matrix with the given dimensions. Values will be randomly set.</p>
 
- 
-  
     <div class='pre p1 fill-light mt0'>rand(rows: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>, columns: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>, rng: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function">function</a>): <a href="#matrix">Matrix</a></div>
-   
   
   
 
@@ -2005,6 +2001,8 @@
   
 
   
+
+  
 </section>
 
       </div>
@@ -2024,7 +2022,7 @@
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:mljs/matrix/blob/43e75c550c999606c770b7299b3da2a4a168b93b/src/abstractMatrix.js#L138-L149'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/04322d92464d12c2b3eba56ec1ae623433655cea/src/abstractMatrix.js#L138-L149'>
       <span>src/abstractMatrix.js</span>
       </a>
     
@@ -2033,10 +2031,7 @@
 
   <p>Creates a matrix with the given dimensions. Values will be random integers.</p>
 
- 
-  
     <div class='pre p1 fill-light mt0'>randInt(rows: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>, columns: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>, maxValue: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>, rng: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function">function</a>): <a href="#matrix">Matrix</a></div>
-   
   
   
 
@@ -2113,6 +2108,8 @@
   
 
   
+
+  
 </section>
 
       </div>
@@ -2132,7 +2129,7 @@
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:mljs/matrix/blob/43e75c550c999606c770b7299b3da2a4a168b93b/src/abstractMatrix.js#L61-L67'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/04322d92464d12c2b3eba56ec1ae623433655cea/src/abstractMatrix.js#L61-L67'>
       <span>src/abstractMatrix.js</span>
       </a>
     
@@ -2141,10 +2138,7 @@
 
   <p>Creates a row vector, a matrix with only one row.</p>
 
- 
-  
     <div class='pre p1 fill-light mt0'>rowVector(newData: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>): <a href="#matrix">Matrix</a></div>
-   
   
   
 
@@ -2192,6 +2186,8 @@
   
 
   
+
+  
 </section>
 
       </div>
@@ -2211,7 +2207,7 @@
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:mljs/matrix/blob/43e75c550c999606c770b7299b3da2a4a168b93b/src/abstractMatrix.js#L98-L100'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/04322d92464d12c2b3eba56ec1ae623433655cea/src/abstractMatrix.js#L98-L100'>
       <span>src/abstractMatrix.js</span>
       </a>
     
@@ -2220,10 +2216,7 @@
 
   <p>Creates a matrix with the given dimensions. Values will be set to zero.</p>
 
- 
-  
     <div class='pre p1 fill-light mt0'>zeros(rows: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>, columns: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>): <a href="#matrix">Matrix</a></div>
-   
   
   
 
@@ -2280,6 +2273,8 @@
   
 
   
+
+  
 </section>
 
       </div>
@@ -2307,7 +2302,7 @@
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:mljs/matrix/blob/43e75c550c999606c770b7299b3da2a4a168b93b/src/matrix.js#L119-L131'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/04322d92464d12c2b3eba56ec1ae623433655cea/src/matrix.js#L119-L131'>
       <span>src/matrix.js</span>
       </a>
     
@@ -2316,10 +2311,7 @@
 
   <p>Adds a column at the given index</p>
 
- 
-  
     <div class='pre p1 fill-light mt0'>addColumn(index: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>, array: (<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a> | <a href="#matrix">Matrix</a>)): <a href="#matrix">Matrix</a></div>
-   
   
   
 
@@ -2377,6 +2369,8 @@
   
 
   
+
+  
 </section>
 
       </div>
@@ -2396,7 +2390,7 @@
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:mljs/matrix/blob/43e75c550c999606c770b7299b3da2a4a168b93b/src/abstractMatrix.js#L588-L596'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/04322d92464d12c2b3eba56ec1ae623433655cea/src/abstractMatrix.js#L649-L657'>
       <span>src/abstractMatrix.js</span>
       </a>
     
@@ -2405,10 +2399,7 @@
 
   <p>Adds the values of a vector to each column</p>
 
- 
-  
     <div class='pre p1 fill-light mt0'>addColumnVector(vector: (<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a> | <a href="#matrix">Matrix</a>)): <a href="#matrix">Matrix</a></div>
-   
   
   
 
@@ -2456,6 +2447,8 @@
   
 
   
+
+  
 </section>
 
       </div>
@@ -2475,7 +2468,7 @@
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:mljs/matrix/blob/43e75c550c999606c770b7299b3da2a4a168b93b/src/matrix.js#L84-L94'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/04322d92464d12c2b3eba56ec1ae623433655cea/src/matrix.js#L84-L94'>
       <span>src/matrix.js</span>
       </a>
     
@@ -2484,10 +2477,7 @@
 
   <p>Adds a row at the given index</p>
 
- 
-  
     <div class='pre p1 fill-light mt0'>addRow(index: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>, array: (<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a> | <a href="#matrix">Matrix</a>)): <a href="#matrix">Matrix</a></div>
-   
   
   
 
@@ -2545,6 +2535,8 @@
   
 
   
+
+  
 </section>
 
       </div>
@@ -2564,7 +2556,7 @@
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:mljs/matrix/blob/43e75c550c999606c770b7299b3da2a4a168b93b/src/abstractMatrix.js#L528-L536'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/04322d92464d12c2b3eba56ec1ae623433655cea/src/abstractMatrix.js#L589-L597'>
       <span>src/abstractMatrix.js</span>
       </a>
     
@@ -2573,10 +2565,7 @@
 
   <p>Adds the values of a vector to each row</p>
 
- 
-  
     <div class='pre p1 fill-light mt0'>addRowVector(vector: (<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a> | <a href="#matrix">Matrix</a>)): <a href="#matrix">Matrix</a></div>
-   
   
   
 
@@ -2624,6 +2613,8 @@
   
 
   
+
+  
 </section>
 
       </div>
@@ -2643,7 +2634,7 @@
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:mljs/matrix/blob/43e75c550c999606c770b7299b3da2a4a168b93b/src/abstractMatrix.js#L258-L270'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/04322d92464d12c2b3eba56ec1ae623433655cea/src/abstractMatrix.js#L258-L270'>
       <span>src/abstractMatrix.js</span>
       </a>
     
@@ -2652,10 +2643,7 @@
 
   <p>Applies a callback for each element of the matrix. The function is called in the matrix (this) context.</p>
 
- 
-  
     <div class='pre p1 fill-light mt0'>apply(callback: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function">function</a>): <a href="#matrix">Matrix</a></div>
-   
   
   
 
@@ -2703,6 +2691,8 @@
   
 
   
+
+  
 </section>
 
       </div>
@@ -2722,7 +2712,7 @@
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:mljs/matrix/blob/43e75c550c999606c770b7299b3da2a4a168b93b/src/abstractMatrix.js#L1627-L1635'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/04322d92464d12c2b3eba56ec1ae623433655cea/src/abstractMatrix.js#L1688-L1696'>
       <span>src/abstractMatrix.js</span>
       </a>
     
@@ -2731,10 +2721,7 @@
 
   <p>Creates an exact and independent copy of the matrix</p>
 
- 
-  
     <div class='pre p1 fill-light mt0'>clone(): <a href="#matrix">Matrix</a></div>
-   
   
   
 
@@ -2768,6 +2755,8 @@
   
 
   
+
+  
 </section>
 
       </div>
@@ -2787,7 +2776,7 @@
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:mljs/matrix/blob/43e75c550c999606c770b7299b3da2a4a168b93b/src/abstractMatrix.js#L1555-L1557'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/04322d92464d12c2b3eba56ec1ae623433655cea/src/abstractMatrix.js#L1616-L1618'>
       <span>src/abstractMatrix.js</span>
       </a>
     
@@ -2796,10 +2785,7 @@
 
   <p>Returns a view of the column indices</p>
 
- 
-  
     <div class='pre p1 fill-light mt0'>columnSelectionView(columnIndices: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>>): MatrixColumnSelectionView</div>
-   
   
   
 
@@ -2853,6 +2839,8 @@
   
 
   
+
+  
 </section>
 
       </div>
@@ -2872,7 +2860,7 @@
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:mljs/matrix/blob/43e75c550c999606c770b7299b3da2a4a168b93b/src/abstractMatrix.js#L1489-L1492'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/04322d92464d12c2b3eba56ec1ae623433655cea/src/abstractMatrix.js#L1550-L1553'>
       <span>src/abstractMatrix.js</span>
       </a>
     
@@ -2881,10 +2869,7 @@
 
   <p>Returns a view of the column vector with the given index</p>
 
- 
-  
     <div class='pre p1 fill-light mt0'>columnView(column: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>): MatrixColumnView</div>
-   
   
   
 
@@ -2932,6 +2917,8 @@
   
 
   
+
+  
 </section>
 
       </div>
@@ -2951,7 +2938,7 @@
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:mljs/matrix/blob/43e75c550c999606c770b7299b3da2a4a168b93b/src/abstractMatrix.js#L954-L963'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/04322d92464d12c2b3eba56ec1ae623433655cea/src/abstractMatrix.js#L1015-L1024'>
       <span>src/abstractMatrix.js</span>
       </a>
     
@@ -2960,10 +2947,7 @@
 
   <p>Computes the cumulative sum of the matrix elements (in place, row by row)</p>
 
- 
-  
     <div class='pre p1 fill-light mt0'>cumulativeSum(): <a href="#matrix">Matrix</a></div>
-   
   
   
 
@@ -2997,6 +2981,8 @@
   
 
   
+
+  
 </section>
 
       </div>
@@ -3016,7 +3002,7 @@
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:mljs/matrix/blob/43e75c550c999606c770b7299b3da2a4a168b93b/src/abstractMatrix.js#L1566-L1595'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/04322d92464d12c2b3eba56ec1ae623433655cea/src/abstractMatrix.js#L1627-L1656'>
       <span>src/abstractMatrix.js</span>
       </a>
     
@@ -3025,10 +3011,7 @@
 
   <p>Calculates and returns the determinant of a matrix as a Number</p>
 
- 
-  
     <div class='pre p1 fill-light mt0'>det(): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a></div>
-   
   
   
 
@@ -3068,6 +3051,8 @@
   
 
   
+
+  
 </section>
 
       </div>
@@ -3087,7 +3072,7 @@
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:mljs/matrix/blob/43e75c550c999606c770b7299b3da2a4a168b93b/src/abstractMatrix.js#L881-L888'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/04322d92464d12c2b3eba56ec1ae623433655cea/src/abstractMatrix.js#L942-L949'>
       <span>src/abstractMatrix.js</span>
       </a>
     
@@ -3096,10 +3081,7 @@
 
   <p>Returns an array containing the diagonal values of the matrix</p>
 
- 
-  
     <div class='pre p1 fill-light mt0'>diag(): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a></div>
-   
   
   
 
@@ -3133,6 +3115,8 @@
   
 
   
+
+  
 </section>
 
       </div>
@@ -3152,7 +3136,7 @@
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:mljs/matrix/blob/43e75c550c999606c770b7299b3da2a4a168b93b/src/abstractMatrix.js#L633-L641'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/04322d92464d12c2b3eba56ec1ae623433655cea/src/abstractMatrix.js#L694-L702'>
       <span>src/abstractMatrix.js</span>
       </a>
     
@@ -3161,10 +3145,7 @@
 
   <p>Divides the values of each column by those of a vector</p>
 
- 
-  
     <div class='pre p1 fill-light mt0'>divColumnVector(vector: (<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a> | <a href="#matrix">Matrix</a>)): <a href="#matrix">Matrix</a></div>
-   
   
   
 
@@ -3201,6 +3182,8 @@
 
       
     
+  
+
   
 
   
@@ -3231,7 +3214,7 @@
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:mljs/matrix/blob/43e75c550c999606c770b7299b3da2a4a168b93b/src/abstractMatrix.js#L573-L581'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/04322d92464d12c2b3eba56ec1ae623433655cea/src/abstractMatrix.js#L634-L642'>
       <span>src/abstractMatrix.js</span>
       </a>
     
@@ -3240,10 +3223,7 @@
 
   <p>Divides the values of each row by those of a vector</p>
 
- 
-  
     <div class='pre p1 fill-light mt0'>divRowVector(vector: (<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a> | <a href="#matrix">Matrix</a>)): <a href="#matrix">Matrix</a></div>
-   
   
   
 
@@ -3291,6 +3271,8 @@
   
 
   
+
+  
 </section>
 
       </div>
@@ -3310,7 +3292,7 @@
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:mljs/matrix/blob/43e75c550c999606c770b7299b3da2a4a168b93b/src/abstractMatrix.js#L970-L981'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/04322d92464d12c2b3eba56ec1ae623433655cea/src/abstractMatrix.js#L1031-L1042'>
       <span>src/abstractMatrix.js</span>
       </a>
     
@@ -3319,10 +3301,7 @@
 
   <p>Computes the dot (scalar) product between the matrix and another</p>
 
- 
-  
     <div class='pre p1 fill-light mt0'>dot(vector2: <a href="#matrix">Matrix</a>): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a></div>
-   
   
   
 
@@ -3370,6 +3349,8 @@
   
 
   
+
+  
 </section>
 
       </div>
@@ -3389,7 +3370,7 @@
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:mljs/matrix/blob/43e75c550c999606c770b7299b3da2a4a168b93b/src/abstractMatrix.js#L396-L403'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/04322d92464d12c2b3eba56ec1ae623433655cea/src/abstractMatrix.js#L457-L464'>
       <span>src/abstractMatrix.js</span>
       </a>
     
@@ -3398,10 +3379,7 @@
 
   <p>Fills the matrix with a given value. All elements will be set to this value.</p>
 
- 
-  
     <div class='pre p1 fill-light mt0'>fill(value: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>): <a href="#matrix">Matrix</a></div>
-   
   
   
 
@@ -3449,6 +3427,8 @@
   
 
   
+
+  
 </section>
 
       </div>
@@ -3468,7 +3448,7 @@
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:mljs/matrix/blob/43e75c550c999606c770b7299b3da2a4a168b93b/src/abstractMatrix.js#L1506-L1508'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/04322d92464d12c2b3eba56ec1ae623433655cea/src/abstractMatrix.js#L1567-L1569'>
       <span>src/abstractMatrix.js</span>
       </a>
     
@@ -3477,10 +3457,7 @@
 
   <p>Returns a view of the matrix flipped in the column axis</p>
 
- 
-  
     <div class='pre p1 fill-light mt0'>flipColumnView(): MatrixFlipColumnView</div>
-   
   
   
 
@@ -3514,6 +3491,8 @@
   
 
   
+
+  
 </section>
 
       </div>
@@ -3533,7 +3512,7 @@
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:mljs/matrix/blob/43e75c550c999606c770b7299b3da2a4a168b93b/src/abstractMatrix.js#L1498-L1500'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/04322d92464d12c2b3eba56ec1ae623433655cea/src/abstractMatrix.js#L1559-L1561'>
       <span>src/abstractMatrix.js</span>
       </a>
     
@@ -3542,10 +3521,7 @@
 
   <p>Returns a view of the matrix flipped in the row axis</p>
 
- 
-  
     <div class='pre p1 fill-light mt0'>flipRowView(): MatrixFlipRowView</div>
-   
   
   
 
@@ -3579,6 +3555,8 @@
   
 
   
+
+  
 </section>
 
       </div>
@@ -3598,7 +3576,7 @@
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:mljs/matrix/blob/43e75c550c999606c770b7299b3da2a4a168b93b/src/abstractMatrix.js#L365-L367'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/04322d92464d12c2b3eba56ec1ae623433655cea/src/abstractMatrix.js#L426-L428'>
       <span>src/abstractMatrix.js</span>
       </a>
     
@@ -3607,10 +3585,7 @@
 
   <p>Returns the given element of the matrix. mat.get(3,4) is equivalent to matrix[3][4]</p>
 
- 
-  
     <div class='pre p1 fill-light mt0'>get(rowIndex: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>, columnIndex: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a></div>
-   
   
   
 
@@ -3667,6 +3642,8 @@
   
 
   
+
+  
 </section>
 
       </div>
@@ -3686,7 +3663,7 @@
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:mljs/matrix/blob/43e75c550c999606c770b7299b3da2a4a168b93b/src/abstractMatrix.js#L473-L480'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/04322d92464d12c2b3eba56ec1ae623433655cea/src/abstractMatrix.js#L534-L541'>
       <span>src/abstractMatrix.js</span>
       </a>
     
@@ -3695,10 +3672,7 @@
 
   <p>Returns a new array from the given column index</p>
 
- 
-  
     <div class='pre p1 fill-light mt0'>getColumn(index: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a></div>
-   
   
   
 
@@ -3735,6 +3709,8 @@
 
       
     
+  
+
   
 
   
@@ -3765,7 +3741,7 @@
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:mljs/matrix/blob/43e75c550c999606c770b7299b3da2a4a168b93b/src/abstractMatrix.js#L487-L489'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/04322d92464d12c2b3eba56ec1ae623433655cea/src/abstractMatrix.js#L548-L550'>
       <span>src/abstractMatrix.js</span>
       </a>
     
@@ -3774,10 +3750,7 @@
 
   <p>Returns a new column vector from the given column index</p>
 
- 
-  
     <div class='pre p1 fill-light mt0'>getColumnVector(index: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>): <a href="#matrix">Matrix</a></div>
-   
   
   
 
@@ -3825,6 +3798,8 @@
   
 
   
+
+  
 </section>
 
       </div>
@@ -3844,7 +3819,7 @@
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:mljs/matrix/blob/43e75c550c999606c770b7299b3da2a4a168b93b/src/abstractMatrix.js#L418-L425'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/04322d92464d12c2b3eba56ec1ae623433655cea/src/abstractMatrix.js#L479-L486'>
       <span>src/abstractMatrix.js</span>
       </a>
     
@@ -3853,10 +3828,7 @@
 
   <p>Returns a new array from the given row index</p>
 
- 
-  
     <div class='pre p1 fill-light mt0'>getRow(index: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a></div>
-   
   
   
 
@@ -3904,6 +3876,8 @@
   
 
   
+
+  
 </section>
 
       </div>
@@ -3923,7 +3897,7 @@
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:mljs/matrix/blob/43e75c550c999606c770b7299b3da2a4a168b93b/src/abstractMatrix.js#L432-L434'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/04322d92464d12c2b3eba56ec1ae623433655cea/src/abstractMatrix.js#L493-L495'>
       <span>src/abstractMatrix.js</span>
       </a>
     
@@ -3932,10 +3906,7 @@
 
   <p>Returns a new row vector from the given row index</p>
 
- 
-  
     <div class='pre p1 fill-light mt0'>getRowVector(index: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>): <a href="#matrix">Matrix</a></div>
-   
   
   
 
@@ -3983,6 +3954,8 @@
   
 
   
+
+  
 </section>
 
       </div>
@@ -4002,7 +3975,7 @@
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:mljs/matrix/blob/43e75c550c999606c770b7299b3da2a4a168b93b/src/abstractMatrix.js#L311-L313'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/04322d92464d12c2b3eba56ec1ae623433655cea/src/abstractMatrix.js#L311-L313'>
       <span>src/abstractMatrix.js</span>
       </a>
     
@@ -4010,10 +3983,7 @@
   
 
   
- 
-  
     <div class='pre p1 fill-light mt0'>isColumnVector(): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a></div>
-   
   
   
 
@@ -4047,6 +4017,134 @@
   
 
   
+
+  
+</section>
+
+      </div>
+    </div>
+  
+    <div class='border-bottom' id='matrixisechelonform'>
+      <div class="clearfix small pointer toggle-sibling">
+        <div class="py1 contain">
+            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
+            <span class='code strong strong truncate'>isEchelonForm()</span>
+        </div>
+      </div>
+      <div class="clearfix display-none toggle-target">
+        <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/04322d92464d12c2b3eba56ec1ae623433655cea/src/abstractMatrix.js#L349-L372'>
+      <span>src/abstractMatrix.js</span>
+      </a>
+    
+  </div>
+  
+
+  
+    <div class='pre p1 fill-light mt0'>isEchelonForm(): any</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code>any</code>:
+        true if the matrix is in echelon form
+
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+      </div>
+    </div>
+  
+    <div class='border-bottom' id='matrixisreducedechelonform'>
+      <div class="clearfix small pointer toggle-sibling">
+        <div class="py1 contain">
+            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
+            <span class='code strong strong truncate'>isReducedEchelonForm()</span>
+        </div>
+      </div>
+      <div class="clearfix display-none toggle-target">
+        <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/04322d92464d12c2b3eba56ec1ae623433655cea/src/abstractMatrix.js#L377-L405'>
+      <span>src/abstractMatrix.js</span>
+      </a>
+    
+  </div>
+  
+
+  
+    <div class='pre p1 fill-light mt0'>isReducedEchelonForm(): any</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code>any</code>:
+        true if the matrix is in reduced echelon form
+
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
 </section>
 
       </div>
@@ -4066,7 +4164,7 @@
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:mljs/matrix/blob/43e75c550c999606c770b7299b3da2a4a168b93b/src/abstractMatrix.js#L304-L306'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/04322d92464d12c2b3eba56ec1ae623433655cea/src/abstractMatrix.js#L304-L306'>
       <span>src/abstractMatrix.js</span>
       </a>
     
@@ -4074,10 +4172,7 @@
   
 
   
- 
-  
     <div class='pre p1 fill-light mt0'>isRowVector(): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a></div>
-   
   
   
 
@@ -4111,6 +4206,8 @@
   
 
   
+
+  
 </section>
 
       </div>
@@ -4130,7 +4227,7 @@
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:mljs/matrix/blob/43e75c550c999606c770b7299b3da2a4a168b93b/src/abstractMatrix.js#L325-L327'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/04322d92464d12c2b3eba56ec1ae623433655cea/src/abstractMatrix.js#L325-L327'>
       <span>src/abstractMatrix.js</span>
       </a>
     
@@ -4138,10 +4235,7 @@
   
 
   
- 
-  
     <div class='pre p1 fill-light mt0'>isSquare(): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a></div>
-   
   
   
 
@@ -4175,6 +4269,8 @@
   
 
   
+
+  
 </section>
 
       </div>
@@ -4194,7 +4290,7 @@
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:mljs/matrix/blob/43e75c550c999606c770b7299b3da2a4a168b93b/src/abstractMatrix.js#L332-L344'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/04322d92464d12c2b3eba56ec1ae623433655cea/src/abstractMatrix.js#L332-L344'>
       <span>src/abstractMatrix.js</span>
       </a>
     
@@ -4202,10 +4298,7 @@
   
 
   
- 
-  
     <div class='pre p1 fill-light mt0'>isSymmetric(): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a></div>
-   
   
   
 
@@ -4239,6 +4332,8 @@
   
 
   
+
+  
 </section>
 
       </div>
@@ -4258,7 +4353,7 @@
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:mljs/matrix/blob/43e75c550c999606c770b7299b3da2a4a168b93b/src/abstractMatrix.js#L318-L320'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/04322d92464d12c2b3eba56ec1ae623433655cea/src/abstractMatrix.js#L318-L320'>
       <span>src/abstractMatrix.js</span>
       </a>
     
@@ -4266,10 +4361,7 @@
   
 
   
- 
-  
     <div class='pre p1 fill-light mt0'>isVector(): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a></div>
-   
   
   
 
@@ -4303,6 +4395,8 @@
   
 
   
+
+  
 </section>
 
       </div>
@@ -4322,7 +4416,7 @@
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:mljs/matrix/blob/43e75c550c999606c770b7299b3da2a4a168b93b/src/abstractMatrix.js#L1278-L1297'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/04322d92464d12c2b3eba56ec1ae623433655cea/src/abstractMatrix.js#L1339-L1358'>
       <span>src/abstractMatrix.js</span>
       </a>
     
@@ -4332,10 +4426,7 @@
   <p>Returns the Kronecker product (also known as tensor product) between this and other
 See <a href="https://en.wikipedia.org/wiki/Kronecker_product">https://en.wikipedia.org/wiki/Kronecker_product</a></p>
 
- 
-  
     <div class='pre p1 fill-light mt0'>kroneckerProduct(other: <a href="#matrix">Matrix</a>): <a href="#matrix">Matrix</a></div>
-   
   
   
 
@@ -4371,6 +4462,8 @@ See <a href="https://en.wikipedia.org/wiki/Kronecker_product">https://en.wikiped
 
       
     
+  
+
   
 
   
@@ -4401,7 +4494,7 @@ See <a href="https://en.wikipedia.org/wiki/Kronecker_product">https://en.wikiped
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:mljs/matrix/blob/43e75c550c999606c770b7299b3da2a4a168b93b/src/abstractMatrix.js#L675-L685'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/04322d92464d12c2b3eba56ec1ae623433655cea/src/abstractMatrix.js#L736-L746'>
       <span>src/abstractMatrix.js</span>
       </a>
     
@@ -4410,10 +4503,7 @@ See <a href="https://en.wikipedia.org/wiki/Kronecker_product">https://en.wikiped
 
   <p>Returns the maximum value of the matrix</p>
 
- 
-  
     <div class='pre p1 fill-light mt0'>max(): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a></div>
-   
   
   
 
@@ -4436,6 +4526,8 @@ See <a href="https://en.wikipedia.org/wiki/Kronecker_product">https://en.wikiped
 
       
     
+  
+
   
 
   
@@ -4466,7 +4558,7 @@ See <a href="https://en.wikipedia.org/wiki/Kronecker_product">https://en.wikiped
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:mljs/matrix/blob/43e75c550c999606c770b7299b3da2a4a168b93b/src/abstractMatrix.js#L814-L823'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/04322d92464d12c2b3eba56ec1ae623433655cea/src/abstractMatrix.js#L875-L884'>
       <span>src/abstractMatrix.js</span>
       </a>
     
@@ -4475,10 +4567,7 @@ See <a href="https://en.wikipedia.org/wiki/Kronecker_product">https://en.wikiped
 
   <p>Returns the maximum value of one column</p>
 
- 
-  
     <div class='pre p1 fill-light mt0'>maxColumn(column: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a></div>
-   
   
   
 
@@ -4515,6 +4604,8 @@ See <a href="https://en.wikipedia.org/wiki/Kronecker_product">https://en.wikiped
 
       
     
+  
+
   
 
   
@@ -4545,7 +4636,7 @@ See <a href="https://en.wikipedia.org/wiki/Kronecker_product">https://en.wikiped
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:mljs/matrix/blob/43e75c550c999606c770b7299b3da2a4a168b93b/src/abstractMatrix.js#L830-L841'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/04322d92464d12c2b3eba56ec1ae623433655cea/src/abstractMatrix.js#L891-L902'>
       <span>src/abstractMatrix.js</span>
       </a>
     
@@ -4554,10 +4645,7 @@ See <a href="https://en.wikipedia.org/wiki/Kronecker_product">https://en.wikiped
 
   <p>Returns the index of the maximum value of one column</p>
 
- 
-  
     <div class='pre p1 fill-light mt0'>maxColumnIndex(column: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a></div>
-   
   
   
 
@@ -4594,6 +4682,8 @@ See <a href="https://en.wikipedia.org/wiki/Kronecker_product">https://en.wikiped
 
       
     
+  
+
   
 
   
@@ -4624,7 +4714,7 @@ See <a href="https://en.wikipedia.org/wiki/Kronecker_product">https://en.wikiped
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:mljs/matrix/blob/43e75c550c999606c770b7299b3da2a4a168b93b/src/abstractMatrix.js#L691-L704'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/04322d92464d12c2b3eba56ec1ae623433655cea/src/abstractMatrix.js#L752-L765'>
       <span>src/abstractMatrix.js</span>
       </a>
     
@@ -4633,10 +4723,7 @@ See <a href="https://en.wikipedia.org/wiki/Kronecker_product">https://en.wikiped
 
   <p>Returns the index of the maximum value</p>
 
- 
-  
     <div class='pre p1 fill-light mt0'>maxIndex(): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a></div>
-   
   
   
 
@@ -4659,6 +4746,8 @@ See <a href="https://en.wikipedia.org/wiki/Kronecker_product">https://en.wikiped
 
       
     
+  
+
   
 
   
@@ -4689,7 +4778,7 @@ See <a href="https://en.wikipedia.org/wiki/Kronecker_product">https://en.wikiped
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:mljs/matrix/blob/43e75c550c999606c770b7299b3da2a4a168b93b/src/abstractMatrix.js#L746-L755'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/04322d92464d12c2b3eba56ec1ae623433655cea/src/abstractMatrix.js#L807-L816'>
       <span>src/abstractMatrix.js</span>
       </a>
     
@@ -4698,10 +4787,7 @@ See <a href="https://en.wikipedia.org/wiki/Kronecker_product">https://en.wikiped
 
   <p>Returns the maximum value of one row</p>
 
- 
-  
     <div class='pre p1 fill-light mt0'>maxRow(row: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a></div>
-   
   
   
 
@@ -4738,6 +4824,8 @@ See <a href="https://en.wikipedia.org/wiki/Kronecker_product">https://en.wikiped
 
       
     
+  
+
   
 
   
@@ -4768,7 +4856,7 @@ See <a href="https://en.wikipedia.org/wiki/Kronecker_product">https://en.wikiped
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:mljs/matrix/blob/43e75c550c999606c770b7299b3da2a4a168b93b/src/abstractMatrix.js#L762-L773'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/04322d92464d12c2b3eba56ec1ae623433655cea/src/abstractMatrix.js#L823-L834'>
       <span>src/abstractMatrix.js</span>
       </a>
     
@@ -4777,10 +4865,7 @@ See <a href="https://en.wikipedia.org/wiki/Kronecker_product">https://en.wikiped
 
   <p>Returns the index of the maximum value of one row</p>
 
- 
-  
     <div class='pre p1 fill-light mt0'>maxRowIndex(row: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a></div>
-   
   
   
 
@@ -4817,6 +4902,8 @@ See <a href="https://en.wikipedia.org/wiki/Kronecker_product">https://en.wikiped
 
       
     
+  
+
   
 
   
@@ -4847,7 +4934,7 @@ See <a href="https://en.wikipedia.org/wiki/Kronecker_product">https://en.wikiped
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:mljs/matrix/blob/43e75c550c999606c770b7299b3da2a4a168b93b/src/abstractMatrix.js#L911-L913'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/04322d92464d12c2b3eba56ec1ae623433655cea/src/abstractMatrix.js#L972-L974'>
       <span>src/abstractMatrix.js</span>
       </a>
     
@@ -4856,10 +4943,7 @@ See <a href="https://en.wikipedia.org/wiki/Kronecker_product">https://en.wikiped
 
   <p>Returns the mean of all elements of the matrix</p>
 
- 
-  
     <div class='pre p1 fill-light mt0'>mean(): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a></div>
-   
   
   
 
@@ -4882,6 +4966,8 @@ See <a href="https://en.wikipedia.org/wiki/Kronecker_product">https://en.wikiped
 
       
     
+  
+
   
 
   
@@ -4912,7 +4998,7 @@ See <a href="https://en.wikipedia.org/wiki/Kronecker_product">https://en.wikiped
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:mljs/matrix/blob/43e75c550c999606c770b7299b3da2a4a168b93b/src/abstractMatrix.js#L710-L720'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/04322d92464d12c2b3eba56ec1ae623433655cea/src/abstractMatrix.js#L771-L781'>
       <span>src/abstractMatrix.js</span>
       </a>
     
@@ -4921,10 +5007,7 @@ See <a href="https://en.wikipedia.org/wiki/Kronecker_product">https://en.wikiped
 
   <p>Returns the minimum value of the matrix</p>
 
- 
-  
     <div class='pre p1 fill-light mt0'>min(): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a></div>
-   
   
   
 
@@ -4947,6 +5030,8 @@ See <a href="https://en.wikipedia.org/wiki/Kronecker_product">https://en.wikiped
 
       
     
+  
+
   
 
   
@@ -4977,7 +5062,7 @@ See <a href="https://en.wikipedia.org/wiki/Kronecker_product">https://en.wikiped
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:mljs/matrix/blob/43e75c550c999606c770b7299b3da2a4a168b93b/src/abstractMatrix.js#L848-L857'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/04322d92464d12c2b3eba56ec1ae623433655cea/src/abstractMatrix.js#L909-L918'>
       <span>src/abstractMatrix.js</span>
       </a>
     
@@ -4986,10 +5071,7 @@ See <a href="https://en.wikipedia.org/wiki/Kronecker_product">https://en.wikiped
 
   <p>Returns the minimum value of one column</p>
 
- 
-  
     <div class='pre p1 fill-light mt0'>minColumn(column: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a></div>
-   
   
   
 
@@ -5026,6 +5108,8 @@ See <a href="https://en.wikipedia.org/wiki/Kronecker_product">https://en.wikiped
 
       
     
+  
+
   
 
   
@@ -5056,7 +5140,7 @@ See <a href="https://en.wikipedia.org/wiki/Kronecker_product">https://en.wikiped
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:mljs/matrix/blob/43e75c550c999606c770b7299b3da2a4a168b93b/src/abstractMatrix.js#L864-L875'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/04322d92464d12c2b3eba56ec1ae623433655cea/src/abstractMatrix.js#L925-L936'>
       <span>src/abstractMatrix.js</span>
       </a>
     
@@ -5065,10 +5149,7 @@ See <a href="https://en.wikipedia.org/wiki/Kronecker_product">https://en.wikiped
 
   <p>Returns the index of the minimum value of one column</p>
 
- 
-  
     <div class='pre p1 fill-light mt0'>minColumnIndex(column: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a></div>
-   
   
   
 
@@ -5116,6 +5197,8 @@ See <a href="https://en.wikipedia.org/wiki/Kronecker_product">https://en.wikiped
   
 
   
+
+  
 </section>
 
       </div>
@@ -5135,7 +5218,7 @@ See <a href="https://en.wikipedia.org/wiki/Kronecker_product">https://en.wikiped
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:mljs/matrix/blob/43e75c550c999606c770b7299b3da2a4a168b93b/src/abstractMatrix.js#L726-L739'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/04322d92464d12c2b3eba56ec1ae623433655cea/src/abstractMatrix.js#L787-L800'>
       <span>src/abstractMatrix.js</span>
       </a>
     
@@ -5144,10 +5227,7 @@ See <a href="https://en.wikipedia.org/wiki/Kronecker_product">https://en.wikiped
 
   <p>Returns the index of the minimum value</p>
 
- 
-  
     <div class='pre p1 fill-light mt0'>minIndex(): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a></div>
-   
   
   
 
@@ -5181,6 +5261,8 @@ See <a href="https://en.wikipedia.org/wiki/Kronecker_product">https://en.wikiped
   
 
   
+
+  
 </section>
 
       </div>
@@ -5200,7 +5282,7 @@ See <a href="https://en.wikipedia.org/wiki/Kronecker_product">https://en.wikiped
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:mljs/matrix/blob/43e75c550c999606c770b7299b3da2a4a168b93b/src/abstractMatrix.js#L780-L789'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/04322d92464d12c2b3eba56ec1ae623433655cea/src/abstractMatrix.js#L841-L850'>
       <span>src/abstractMatrix.js</span>
       </a>
     
@@ -5209,10 +5291,7 @@ See <a href="https://en.wikipedia.org/wiki/Kronecker_product">https://en.wikiped
 
   <p>Returns the minimum value of one row</p>
 
- 
-  
     <div class='pre p1 fill-light mt0'>minRow(row: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a></div>
-   
   
   
 
@@ -5260,6 +5339,8 @@ See <a href="https://en.wikipedia.org/wiki/Kronecker_product">https://en.wikiped
   
 
   
+
+  
 </section>
 
       </div>
@@ -5279,7 +5360,7 @@ See <a href="https://en.wikipedia.org/wiki/Kronecker_product">https://en.wikiped
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:mljs/matrix/blob/43e75c550c999606c770b7299b3da2a4a168b93b/src/abstractMatrix.js#L796-L807'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/04322d92464d12c2b3eba56ec1ae623433655cea/src/abstractMatrix.js#L857-L868'>
       <span>src/abstractMatrix.js</span>
       </a>
     
@@ -5288,10 +5369,7 @@ See <a href="https://en.wikipedia.org/wiki/Kronecker_product">https://en.wikiped
 
   <p>Returns the index of the maximum value of one row</p>
 
- 
-  
     <div class='pre p1 fill-light mt0'>minRowIndex(row: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a></div>
-   
   
   
 
@@ -5339,6 +5417,8 @@ See <a href="https://en.wikipedia.org/wiki/Kronecker_product">https://en.wikiped
   
 
   
+
+  
 </section>
 
       </div>
@@ -5358,7 +5438,7 @@ See <a href="https://en.wikipedia.org/wiki/Kronecker_product">https://en.wikiped
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:mljs/matrix/blob/43e75c550c999606c770b7299b3da2a4a168b93b/src/abstractMatrix.js#L988-L1017'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/04322d92464d12c2b3eba56ec1ae623433655cea/src/abstractMatrix.js#L1049-L1078'>
       <span>src/abstractMatrix.js</span>
       </a>
     
@@ -5367,10 +5447,7 @@ See <a href="https://en.wikipedia.org/wiki/Kronecker_product">https://en.wikiped
 
   <p>Returns the matrix product between this and other</p>
 
- 
-  
     <div class='pre p1 fill-light mt0'>mmul(other: <a href="#matrix">Matrix</a>): <a href="#matrix">Matrix</a></div>
-   
   
   
 
@@ -5417,6 +5494,8 @@ See <a href="https://en.wikipedia.org/wiki/Kronecker_product">https://en.wikiped
   
 
   
+
+  
 </section>
 
       </div>
@@ -5436,7 +5515,7 @@ See <a href="https://en.wikipedia.org/wiki/Kronecker_product">https://en.wikiped
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:mljs/matrix/blob/43e75c550c999606c770b7299b3da2a4a168b93b/src/abstractMatrix.js#L1126-L1223'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/04322d92464d12c2b3eba56ec1ae623433655cea/src/abstractMatrix.js#L1187-L1284'>
       <span>src/abstractMatrix.js</span>
       </a>
     
@@ -5445,10 +5524,7 @@ See <a href="https://en.wikipedia.org/wiki/Kronecker_product">https://en.wikiped
 
   <p>Returns the matrix product between x and y. More efficient than mmul(other) only when we multiply squared matrix and when the size of the matrix is > 1000.</p>
 
- 
-  
     <div class='pre p1 fill-light mt0'>mmulStrassen(y: <a href="#matrix">Matrix</a>): <a href="#matrix">Matrix</a></div>
-   
   
   
 
@@ -5495,6 +5571,8 @@ See <a href="https://en.wikipedia.org/wiki/Kronecker_product">https://en.wikiped
   
 
   
+
+  
 </section>
 
       </div>
@@ -5514,7 +5592,7 @@ See <a href="https://en.wikipedia.org/wiki/Kronecker_product">https://en.wikiped
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:mljs/matrix/blob/43e75c550c999606c770b7299b3da2a4a168b93b/src/abstractMatrix.js#L663-L669'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/04322d92464d12c2b3eba56ec1ae623433655cea/src/abstractMatrix.js#L724-L730'>
       <span>src/abstractMatrix.js</span>
       </a>
     
@@ -5523,10 +5601,7 @@ See <a href="https://en.wikipedia.org/wiki/Kronecker_product">https://en.wikiped
 
   <p>Multiplies the values of a column with a scalar</p>
 
- 
-  
     <div class='pre p1 fill-light mt0'>mulColumn(index: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>, value: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>): <a href="#matrix">Matrix</a></div>
-   
   
   
 
@@ -5582,6 +5657,8 @@ See <a href="https://en.wikipedia.org/wiki/Kronecker_product">https://en.wikiped
   
 
   
+
+  
 </section>
 
       </div>
@@ -5601,7 +5678,7 @@ See <a href="https://en.wikipedia.org/wiki/Kronecker_product">https://en.wikiped
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:mljs/matrix/blob/43e75c550c999606c770b7299b3da2a4a168b93b/src/abstractMatrix.js#L618-L626'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/04322d92464d12c2b3eba56ec1ae623433655cea/src/abstractMatrix.js#L679-L687'>
       <span>src/abstractMatrix.js</span>
       </a>
     
@@ -5610,10 +5687,7 @@ See <a href="https://en.wikipedia.org/wiki/Kronecker_product">https://en.wikiped
 
   <p>Multiplies the values of a vector with each column</p>
 
- 
-  
     <div class='pre p1 fill-light mt0'>mulColumnVector(vector: (<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a> | <a href="#matrix">Matrix</a>)): <a href="#matrix">Matrix</a></div>
-   
   
   
 
@@ -5661,6 +5735,8 @@ See <a href="https://en.wikipedia.org/wiki/Kronecker_product">https://en.wikiped
   
 
   
+
+  
 </section>
 
       </div>
@@ -5680,7 +5756,7 @@ See <a href="https://en.wikipedia.org/wiki/Kronecker_product">https://en.wikiped
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:mljs/matrix/blob/43e75c550c999606c770b7299b3da2a4a168b93b/src/abstractMatrix.js#L649-L655'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/04322d92464d12c2b3eba56ec1ae623433655cea/src/abstractMatrix.js#L710-L716'>
       <span>src/abstractMatrix.js</span>
       </a>
     
@@ -5689,10 +5765,7 @@ See <a href="https://en.wikipedia.org/wiki/Kronecker_product">https://en.wikiped
 
   <p>Multiplies the values of a row with a scalar</p>
 
- 
-  
     <div class='pre p1 fill-light mt0'>mulRow(index: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>, value: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>): <a href="#matrix">Matrix</a></div>
-   
   
   
 
@@ -5748,6 +5821,8 @@ See <a href="https://en.wikipedia.org/wiki/Kronecker_product">https://en.wikiped
   
 
   
+
+  
 </section>
 
       </div>
@@ -5767,7 +5842,7 @@ See <a href="https://en.wikipedia.org/wiki/Kronecker_product">https://en.wikiped
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:mljs/matrix/blob/43e75c550c999606c770b7299b3da2a4a168b93b/src/abstractMatrix.js#L558-L566'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/04322d92464d12c2b3eba56ec1ae623433655cea/src/abstractMatrix.js#L619-L627'>
       <span>src/abstractMatrix.js</span>
       </a>
     
@@ -5776,10 +5851,7 @@ See <a href="https://en.wikipedia.org/wiki/Kronecker_product">https://en.wikiped
 
   <p>Multiplies the values of a vector with each row</p>
 
- 
-  
     <div class='pre p1 fill-light mt0'>mulRowVector(vector: (<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a> | <a href="#matrix">Matrix</a>)): <a href="#matrix">Matrix</a></div>
-   
   
   
 
@@ -5827,6 +5899,8 @@ See <a href="https://en.wikipedia.org/wiki/Kronecker_product">https://en.wikiped
   
 
   
+
+  
 </section>
 
       </div>
@@ -5846,7 +5920,7 @@ See <a href="https://en.wikipedia.org/wiki/Kronecker_product">https://en.wikiped
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:mljs/matrix/blob/43e75c550c999606c770b7299b3da2a4a168b93b/src/abstractMatrix.js#L409-L411'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/04322d92464d12c2b3eba56ec1ae623433655cea/src/abstractMatrix.js#L470-L472'>
       <span>src/abstractMatrix.js</span>
       </a>
     
@@ -5855,10 +5929,7 @@ See <a href="https://en.wikipedia.org/wiki/Kronecker_product">https://en.wikiped
 
   <p>Negates the matrix. All elements will be multiplied by (-1)</p>
 
- 
-  
     <div class='pre p1 fill-light mt0'>neg(): <a href="#matrix">Matrix</a></div>
-   
   
   
 
@@ -5892,6 +5963,8 @@ See <a href="https://en.wikipedia.org/wiki/Kronecker_product">https://en.wikiped
   
 
   
+
+  
 </section>
 
       </div>
@@ -5911,7 +5984,7 @@ See <a href="https://en.wikipedia.org/wiki/Kronecker_product">https://en.wikiped
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:mljs/matrix/blob/43e75c550c999606c770b7299b3da2a4a168b93b/src/abstractMatrix.js#L934-L948'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/04322d92464d12c2b3eba56ec1ae623433655cea/src/abstractMatrix.js#L995-L1009'>
       <span>src/abstractMatrix.js</span>
       </a>
     
@@ -5920,10 +5993,7 @@ See <a href="https://en.wikipedia.org/wiki/Kronecker_product">https://en.wikiped
 
   <p>Returns the norm of a matrix.</p>
 
- 
-  
     <div class='pre p1 fill-light mt0'>norm(type: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a></div>
-   
   
   
 
@@ -5972,6 +6042,8 @@ See <a href="https://en.wikipedia.org/wiki/Kronecker_product">https://en.wikiped
   
 
   
+
+  
 </section>
 
       </div>
@@ -5991,7 +6063,7 @@ See <a href="https://en.wikipedia.org/wiki/Kronecker_product">https://en.wikiped
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:mljs/matrix/blob/43e75c550c999606c770b7299b3da2a4a168b93b/src/abstractMatrix.js#L919-L927'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/04322d92464d12c2b3eba56ec1ae623433655cea/src/abstractMatrix.js#L980-L988'>
       <span>src/abstractMatrix.js</span>
       </a>
     
@@ -6000,10 +6072,7 @@ See <a href="https://en.wikipedia.org/wiki/Kronecker_product">https://en.wikiped
 
   <p>Returns the product of all elements of the matrix</p>
 
- 
-  
     <div class='pre p1 fill-light mt0'>prod(): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a></div>
-   
   
   
 
@@ -6037,6 +6106,8 @@ See <a href="https://en.wikipedia.org/wiki/Kronecker_product">https://en.wikiped
   
 
   
+
+  
 </section>
 
       </div>
@@ -6056,7 +6127,7 @@ See <a href="https://en.wikipedia.org/wiki/Kronecker_product">https://en.wikiped
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:mljs/matrix/blob/43e75c550c999606c770b7299b3da2a4a168b93b/src/abstractMatrix.js#L1602-L1621'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/04322d92464d12c2b3eba56ec1ae623433655cea/src/abstractMatrix.js#L1663-L1682'>
       <span>src/abstractMatrix.js</span>
       </a>
     
@@ -6065,10 +6136,7 @@ See <a href="https://en.wikipedia.org/wiki/Kronecker_product">https://en.wikiped
 
   <p>Returns inverse of a matrix if it exists or the pseudoinverse</p>
 
- 
-  
     <div class='pre p1 fill-light mt0'>pseudoInverse(threshold: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>): <a href="#matrix">Matrix</a></div>
-   
   
   
 
@@ -6116,6 +6184,8 @@ See <a href="https://en.wikipedia.org/wiki/Kronecker_product">https://en.wikiped
   
 
   
+
+  
 </section>
 
       </div>
@@ -6135,7 +6205,7 @@ See <a href="https://en.wikipedia.org/wiki/Kronecker_product">https://en.wikiped
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:mljs/matrix/blob/43e75c550c999606c770b7299b3da2a4a168b93b/src/matrix.js#L101-L111'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/04322d92464d12c2b3eba56ec1ae623433655cea/src/matrix.js#L101-L111'>
       <span>src/matrix.js</span>
       </a>
     
@@ -6144,10 +6214,7 @@ See <a href="https://en.wikipedia.org/wiki/Kronecker_product">https://en.wikiped
 
   <p>Removes a column from the given index</p>
 
- 
-  
     <div class='pre p1 fill-light mt0'>removeColumn(index: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>): <a href="#matrix">Matrix</a></div>
-   
   
   
 
@@ -6195,6 +6262,8 @@ See <a href="https://en.wikipedia.org/wiki/Kronecker_product">https://en.wikiped
   
 
   
+
+  
 </section>
 
       </div>
@@ -6214,7 +6283,7 @@ See <a href="https://en.wikipedia.org/wiki/Kronecker_product">https://en.wikiped
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:mljs/matrix/blob/43e75c550c999606c770b7299b3da2a4a168b93b/src/matrix.js#L68-L76'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/04322d92464d12c2b3eba56ec1ae623433655cea/src/matrix.js#L68-L76'>
       <span>src/matrix.js</span>
       </a>
     
@@ -6223,10 +6292,7 @@ See <a href="https://en.wikipedia.org/wiki/Kronecker_product">https://en.wikiped
 
   <p>Removes a row from the given index</p>
 
- 
-  
     <div class='pre p1 fill-light mt0'>removeRow(index: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>): <a href="#matrix">Matrix</a></div>
-   
   
   
 
@@ -6274,6 +6340,8 @@ See <a href="https://en.wikipedia.org/wiki/Kronecker_product">https://en.wikiped
   
 
   
+
+  
 </section>
 
       </div>
@@ -6293,7 +6361,7 @@ See <a href="https://en.wikipedia.org/wiki/Kronecker_product">https://en.wikiped
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:mljs/matrix/blob/43e75c550c999606c770b7299b3da2a4a168b93b/src/abstractMatrix.js#L379-L389'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/04322d92464d12c2b3eba56ec1ae623433655cea/src/abstractMatrix.js#L440-L450'>
       <span>src/abstractMatrix.js</span>
       </a>
     
@@ -6303,10 +6371,7 @@ See <a href="https://en.wikipedia.org/wiki/Kronecker_product">https://en.wikiped
   <p>Creates a new matrix that is a repetition of the current matrix. New matrix has rowRep times the number of
 rows of the matrix, and colRep times the number of columns of the matrix</p>
 
- 
-  
     <div class='pre p1 fill-light mt0'>repeat(rowRep: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>, colRep: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>): <a href="#matrix">Matrix</a></div>
-   
   
   
 
@@ -6370,6 +6435,8 @@ matrix.repeat(<span class="hljs-number">2</span>); <span class="hljs-comment">//
   
 
   
+
+  
 </section>
 
       </div>
@@ -6389,7 +6456,7 @@ matrix.repeat(<span class="hljs-number">2</span>); <span class="hljs-comment">//
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:mljs/matrix/blob/43e75c550c999606c770b7299b3da2a4a168b93b/src/abstractMatrix.js#L1543-L1545'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/04322d92464d12c2b3eba56ec1ae623433655cea/src/abstractMatrix.js#L1604-L1606'>
       <span>src/abstractMatrix.js</span>
       </a>
     
@@ -6398,10 +6465,7 @@ matrix.repeat(<span class="hljs-number">2</span>); <span class="hljs-comment">//
 
   <p>Returns a view of the row indices</p>
 
- 
-  
     <div class='pre p1 fill-light mt0'>rowSelectionView(rowIndices: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>>): MatrixRowSelectionView</div>
-   
   
   
 
@@ -6455,6 +6519,8 @@ matrix.repeat(<span class="hljs-number">2</span>); <span class="hljs-comment">//
   
 
   
+
+  
 </section>
 
       </div>
@@ -6474,7 +6540,7 @@ matrix.repeat(<span class="hljs-number">2</span>); <span class="hljs-comment">//
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:mljs/matrix/blob/43e75c550c999606c770b7299b3da2a4a168b93b/src/abstractMatrix.js#L1479-L1482'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/04322d92464d12c2b3eba56ec1ae623433655cea/src/abstractMatrix.js#L1540-L1543'>
       <span>src/abstractMatrix.js</span>
       </a>
     
@@ -6483,10 +6549,7 @@ matrix.repeat(<span class="hljs-number">2</span>); <span class="hljs-comment">//
 
   <p>Returns a view of the row vector with the given index</p>
 
- 
-  
     <div class='pre p1 fill-light mt0'>rowView(row: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>): MatrixRowView</div>
-   
   
   
 
@@ -6534,6 +6597,8 @@ matrix.repeat(<span class="hljs-number">2</span>); <span class="hljs-comment">//
   
 
   
+
+  
 </section>
 
       </div>
@@ -6553,7 +6618,7 @@ matrix.repeat(<span class="hljs-number">2</span>); <span class="hljs-comment">//
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:mljs/matrix/blob/43e75c550c999606c770b7299b3da2a4a168b93b/src/abstractMatrix.js#L1254-L1269'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/04322d92464d12c2b3eba56ec1ae623433655cea/src/abstractMatrix.js#L1315-L1330'>
       <span>src/abstractMatrix.js</span>
       </a>
     
@@ -6562,10 +6627,7 @@ matrix.repeat(<span class="hljs-number">2</span>); <span class="hljs-comment">//
 
   <p>Returns a new column-by-column scaled matrix</p>
 
- 
-  
     <div class='pre p1 fill-light mt0'>scaleColumns(min: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>, max: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>): <a href="#matrix">Matrix</a></div>
-   
   
   
 
@@ -6631,6 +6693,8 @@ matrix.repeat(<span class="hljs-number">2</span>); <span class="hljs-comment">//
   
 
   
+
+  
 </section>
 
       </div>
@@ -6650,7 +6714,7 @@ matrix.repeat(<span class="hljs-number">2</span>); <span class="hljs-comment">//
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:mljs/matrix/blob/43e75c550c999606c770b7299b3da2a4a168b93b/src/abstractMatrix.js#L1231-L1243'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/04322d92464d12c2b3eba56ec1ae623433655cea/src/abstractMatrix.js#L1292-L1304'>
       <span>src/abstractMatrix.js</span>
       </a>
     
@@ -6659,10 +6723,7 @@ matrix.repeat(<span class="hljs-number">2</span>); <span class="hljs-comment">//
 
   <p>Returns a row-by-row scaled matrix</p>
 
- 
-  
     <div class='pre p1 fill-light mt0'>scaleRows(min: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>, max: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>): <a href="#matrix">Matrix</a></div>
-   
   
   
 
@@ -6721,6 +6782,8 @@ matrix.repeat(<span class="hljs-number">2</span>); <span class="hljs-comment">//
   
 
   
+
+  
 </section>
 
       </div>
@@ -6740,7 +6803,7 @@ matrix.repeat(<span class="hljs-number">2</span>); <span class="hljs-comment">//
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:mljs/matrix/blob/43e75c550c999606c770b7299b3da2a4a168b93b/src/abstractMatrix.js#L1436-L1447'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/04322d92464d12c2b3eba56ec1ae623433655cea/src/abstractMatrix.js#L1497-L1508'>
       <span>src/abstractMatrix.js</span>
       </a>
     
@@ -6749,10 +6812,7 @@ matrix.repeat(<span class="hljs-number">2</span>); <span class="hljs-comment">//
 
   <p>Return a new matrix based on a selection of rows and columns</p>
 
- 
-  
     <div class='pre p1 fill-light mt0'>selection(rowIndices: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>>, columnIndices: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>>): <a href="#matrix">Matrix</a></div>
-   
   
   
 
@@ -6809,6 +6869,8 @@ matrix.repeat(<span class="hljs-number">2</span>); <span class="hljs-comment">//
   
 
   
+
+  
 </section>
 
       </div>
@@ -6828,7 +6890,7 @@ matrix.repeat(<span class="hljs-number">2</span>); <span class="hljs-comment">//
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:mljs/matrix/blob/43e75c550c999606c770b7299b3da2a4a168b93b/src/abstractMatrix.js#L1531-L1533'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/04322d92464d12c2b3eba56ec1ae623433655cea/src/abstractMatrix.js#L1592-L1594'>
       <span>src/abstractMatrix.js</span>
       </a>
     
@@ -6837,10 +6899,7 @@ matrix.repeat(<span class="hljs-number">2</span>); <span class="hljs-comment">//
 
   <p>Returns a view of the cross of the row indices and the column indices</p>
 
- 
-  
     <div class='pre p1 fill-light mt0'>selectionView(rowIndices: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>>, columnIndices: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>>): MatrixSelectionView</div>
-   
   
   
 
@@ -6902,6 +6961,8 @@ matrix.repeat(<span class="hljs-number">2</span>); <span class="hljs-comment">//
   
 
   
+
+  
 </section>
 
       </div>
@@ -6921,7 +6982,7 @@ matrix.repeat(<span class="hljs-number">2</span>); <span class="hljs-comment">//
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:mljs/matrix/blob/43e75c550c999606c770b7299b3da2a4a168b93b/src/abstractMatrix.js#L354-L356'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/04322d92464d12c2b3eba56ec1ae623433655cea/src/abstractMatrix.js#L415-L417'>
       <span>src/abstractMatrix.js</span>
       </a>
     
@@ -6930,10 +6991,7 @@ matrix.repeat(<span class="hljs-number">2</span>); <span class="hljs-comment">//
 
   <p>Sets a given element of the matrix. mat.set(3,4,1) is equivalent to mat[3][4]=1</p>
 
- 
-  
     <div class='pre p1 fill-light mt0'>set(rowIndex: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>, columnIndex: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>, value: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>): <a href="#matrix">Matrix</a></div>
-   
   
   
 
@@ -6999,6 +7057,8 @@ matrix.repeat(<span class="hljs-number">2</span>); <span class="hljs-comment">//
   
 
   
+
+  
 </section>
 
       </div>
@@ -7018,7 +7078,7 @@ matrix.repeat(<span class="hljs-number">2</span>); <span class="hljs-comment">//
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:mljs/matrix/blob/43e75c550c999606c770b7299b3da2a4a168b93b/src/abstractMatrix.js#L497-L504'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/04322d92464d12c2b3eba56ec1ae623433655cea/src/abstractMatrix.js#L558-L565'>
       <span>src/abstractMatrix.js</span>
       </a>
     
@@ -7027,10 +7087,7 @@ matrix.repeat(<span class="hljs-number">2</span>); <span class="hljs-comment">//
 
   <p>Sets a column at the given index</p>
 
- 
-  
     <div class='pre p1 fill-light mt0'>setColumn(index: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>, array: (<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a> | <a href="#matrix">Matrix</a>)): <a href="#matrix">Matrix</a></div>
-   
   
   
 
@@ -7087,6 +7144,8 @@ matrix.repeat(<span class="hljs-number">2</span>); <span class="hljs-comment">//
   
 
   
+
+  
 </section>
 
       </div>
@@ -7106,7 +7165,7 @@ matrix.repeat(<span class="hljs-number">2</span>); <span class="hljs-comment">//
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:mljs/matrix/blob/43e75c550c999606c770b7299b3da2a4a168b93b/src/abstractMatrix.js#L442-L449'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/04322d92464d12c2b3eba56ec1ae623433655cea/src/abstractMatrix.js#L503-L510'>
       <span>src/abstractMatrix.js</span>
       </a>
     
@@ -7115,10 +7174,7 @@ matrix.repeat(<span class="hljs-number">2</span>); <span class="hljs-comment">//
 
   <p>Sets a row at the given index</p>
 
- 
-  
     <div class='pre p1 fill-light mt0'>setRow(index: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>, array: (<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a> | <a href="#matrix">Matrix</a>)): <a href="#matrix">Matrix</a></div>
-   
   
   
 
@@ -7175,6 +7231,8 @@ matrix.repeat(<span class="hljs-number">2</span>); <span class="hljs-comment">//
   
 
   
+
+  
 </section>
 
       </div>
@@ -7194,7 +7252,7 @@ matrix.repeat(<span class="hljs-number">2</span>); <span class="hljs-comment">//
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:mljs/matrix/blob/43e75c550c999606c770b7299b3da2a4a168b93b/src/abstractMatrix.js#L1417-L1428'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/04322d92464d12c2b3eba56ec1ae623433655cea/src/abstractMatrix.js#L1478-L1489'>
       <span>src/abstractMatrix.js</span>
       </a>
     
@@ -7203,10 +7261,7 @@ matrix.repeat(<span class="hljs-number">2</span>); <span class="hljs-comment">//
 
   <p>Set a part of the matrix to the given sub-matrix</p>
 
- 
-  
     <div class='pre p1 fill-light mt0'>setSubMatrix(matrix: (<a href="#matrix">Matrix</a> | <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>>), startRow: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>, startColumn: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>): <a href="#matrix">Matrix</a></div>
-   
   
   
 
@@ -7272,6 +7327,8 @@ matrix.repeat(<span class="hljs-number">2</span>); <span class="hljs-comment">//
   
 
   
+
+  
 </section>
 
       </div>
@@ -7291,7 +7348,7 @@ matrix.repeat(<span class="hljs-number">2</span>); <span class="hljs-comment">//
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:mljs/matrix/blob/43e75c550c999606c770b7299b3da2a4a168b93b/src/abstractMatrix.js#L249-L251'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/04322d92464d12c2b3eba56ec1ae623433655cea/src/abstractMatrix.js#L249-L251'>
       <span>src/abstractMatrix.js</span>
       </a>
     
@@ -7299,10 +7356,7 @@ matrix.repeat(<span class="hljs-number">2</span>); <span class="hljs-comment">//
   
 
   
- 
-  
     <div class='pre p1 fill-light mt0'>size</div>
-   
   
   
 
@@ -7340,6 +7394,8 @@ matrix.repeat(<span class="hljs-number">2</span>); <span class="hljs-comment">//
   
 
   
+
+  
 </section>
 
       </div>
@@ -7359,7 +7415,7 @@ matrix.repeat(<span class="hljs-number">2</span>); <span class="hljs-comment">//
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:mljs/matrix/blob/43e75c550c999606c770b7299b3da2a4a168b93b/src/abstractMatrix.js#L1331-L1337'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/04322d92464d12c2b3eba56ec1ae623433655cea/src/abstractMatrix.js#L1392-L1398'>
       <span>src/abstractMatrix.js</span>
       </a>
     
@@ -7368,10 +7424,7 @@ matrix.repeat(<span class="hljs-number">2</span>); <span class="hljs-comment">//
 
   <p>Sorts the columns (in place)</p>
 
- 
-  
     <div class='pre p1 fill-light mt0'>sortColumns(compareFunction: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function">function</a>): <a href="#matrix">Matrix</a></div>
-   
   
   
 
@@ -7408,6 +7461,8 @@ matrix.repeat(<span class="hljs-number">2</span>); <span class="hljs-comment">//
 
       
     
+  
+
   
 
   
@@ -7438,7 +7493,7 @@ matrix.repeat(<span class="hljs-number">2</span>); <span class="hljs-comment">//
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:mljs/matrix/blob/43e75c550c999606c770b7299b3da2a4a168b93b/src/abstractMatrix.js#L1318-L1324'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/04322d92464d12c2b3eba56ec1ae623433655cea/src/abstractMatrix.js#L1379-L1385'>
       <span>src/abstractMatrix.js</span>
       </a>
     
@@ -7447,10 +7502,7 @@ matrix.repeat(<span class="hljs-number">2</span>); <span class="hljs-comment">//
 
   <p>Sorts the rows (in place)</p>
 
- 
-  
     <div class='pre p1 fill-light mt0'>sortRows(compareFunction: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function">function</a>): <a href="#matrix">Matrix</a></div>
-   
   
   
 
@@ -7498,6 +7550,8 @@ matrix.repeat(<span class="hljs-number">2</span>); <span class="hljs-comment">//
   
 
   
+
+  
 </section>
 
       </div>
@@ -7517,7 +7571,7 @@ matrix.repeat(<span class="hljs-number">2</span>); <span class="hljs-comment">//
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:mljs/matrix/blob/43e75c550c999606c770b7299b3da2a4a168b93b/src/abstractMatrix.js#L603-L611'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/04322d92464d12c2b3eba56ec1ae623433655cea/src/abstractMatrix.js#L664-L672'>
       <span>src/abstractMatrix.js</span>
       </a>
     
@@ -7526,10 +7580,7 @@ matrix.repeat(<span class="hljs-number">2</span>); <span class="hljs-comment">//
 
   <p>Subtracts the values of a vector from each column</p>
 
- 
-  
     <div class='pre p1 fill-light mt0'>subColumnVector(vector: (<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a> | <a href="#matrix">Matrix</a>)): <a href="#matrix">Matrix</a></div>
-   
   
   
 
@@ -7577,6 +7628,8 @@ matrix.repeat(<span class="hljs-number">2</span>); <span class="hljs-comment">//
   
 
   
+
+  
 </section>
 
       </div>
@@ -7596,7 +7649,7 @@ matrix.repeat(<span class="hljs-number">2</span>); <span class="hljs-comment">//
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:mljs/matrix/blob/43e75c550c999606c770b7299b3da2a4a168b93b/src/abstractMatrix.js#L1347-L1356'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/04322d92464d12c2b3eba56ec1ae623433655cea/src/abstractMatrix.js#L1408-L1417'>
       <span>src/abstractMatrix.js</span>
       </a>
     
@@ -7605,10 +7658,7 @@ matrix.repeat(<span class="hljs-number">2</span>); <span class="hljs-comment">//
 
   <p>Returns a subset of the matrix</p>
 
- 
-  
     <div class='pre p1 fill-light mt0'>subMatrix(startRow: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>, endRow: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>, startColumn: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>, endColumn: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>): <a href="#matrix">Matrix</a></div>
-   
   
   
 
@@ -7683,6 +7733,8 @@ matrix.repeat(<span class="hljs-number">2</span>); <span class="hljs-comment">//
   
 
   
+
+  
 </section>
 
       </div>
@@ -7702,7 +7754,7 @@ matrix.repeat(<span class="hljs-number">2</span>); <span class="hljs-comment">//
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:mljs/matrix/blob/43e75c550c999606c770b7299b3da2a4a168b93b/src/abstractMatrix.js#L1391-L1408'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/04322d92464d12c2b3eba56ec1ae623433655cea/src/abstractMatrix.js#L1452-L1469'>
       <span>src/abstractMatrix.js</span>
       </a>
     
@@ -7711,10 +7763,7 @@ matrix.repeat(<span class="hljs-number">2</span>); <span class="hljs-comment">//
 
   <p>Returns a subset of the matrix based on an array of column indices</p>
 
- 
-  
     <div class='pre p1 fill-light mt0'>subMatrixColumn(indices: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>, startRow: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>, endRow: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>): <a href="#matrix">Matrix</a></div>
-   
   
   
 
@@ -7782,6 +7831,8 @@ matrix.repeat(<span class="hljs-number">2</span>); <span class="hljs-comment">//
   
 
   
+
+  
 </section>
 
       </div>
@@ -7801,7 +7852,7 @@ matrix.repeat(<span class="hljs-number">2</span>); <span class="hljs-comment">//
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:mljs/matrix/blob/43e75c550c999606c770b7299b3da2a4a168b93b/src/abstractMatrix.js#L1365-L1382'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/04322d92464d12c2b3eba56ec1ae623433655cea/src/abstractMatrix.js#L1426-L1443'>
       <span>src/abstractMatrix.js</span>
       </a>
     
@@ -7810,10 +7861,7 @@ matrix.repeat(<span class="hljs-number">2</span>); <span class="hljs-comment">//
 
   <p>Returns a subset of the matrix based on an array of row indices</p>
 
- 
-  
     <div class='pre p1 fill-light mt0'>subMatrixRow(indices: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>, startColumn: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>, endColumn: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>): <a href="#matrix">Matrix</a></div>
-   
   
   
 
@@ -7881,6 +7929,8 @@ matrix.repeat(<span class="hljs-number">2</span>); <span class="hljs-comment">//
   
 
   
+
+  
 </section>
 
       </div>
@@ -7900,7 +7950,7 @@ matrix.repeat(<span class="hljs-number">2</span>); <span class="hljs-comment">//
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:mljs/matrix/blob/43e75c550c999606c770b7299b3da2a4a168b93b/src/abstractMatrix.js#L1518-L1520'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/04322d92464d12c2b3eba56ec1ae623433655cea/src/abstractMatrix.js#L1579-L1581'>
       <span>src/abstractMatrix.js</span>
       </a>
     
@@ -7909,10 +7959,7 @@ matrix.repeat(<span class="hljs-number">2</span>); <span class="hljs-comment">//
 
   <p>Returns a view of a submatrix giving the index boundaries</p>
 
- 
-  
     <div class='pre p1 fill-light mt0'>subMatrixView(startRow: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>, endRow: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>, startColumn: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>, endColumn: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>): MatrixSubView</div>
-   
   
   
 
@@ -7987,6 +8034,8 @@ matrix.repeat(<span class="hljs-number">2</span>); <span class="hljs-comment">//
   
 
   
+
+  
 </section>
 
       </div>
@@ -8006,7 +8055,7 @@ matrix.repeat(<span class="hljs-number">2</span>); <span class="hljs-comment">//
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:mljs/matrix/blob/43e75c550c999606c770b7299b3da2a4a168b93b/src/abstractMatrix.js#L543-L551'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/04322d92464d12c2b3eba56ec1ae623433655cea/src/abstractMatrix.js#L604-L612'>
       <span>src/abstractMatrix.js</span>
       </a>
     
@@ -8015,10 +8064,7 @@ matrix.repeat(<span class="hljs-number">2</span>); <span class="hljs-comment">//
 
   <p>Subtracts the values of a vector from each row</p>
 
- 
-  
     <div class='pre p1 fill-light mt0'>subRowVector(vector: (<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a> | <a href="#matrix">Matrix</a>)): <a href="#matrix">Matrix</a></div>
-   
   
   
 
@@ -8066,6 +8112,8 @@ matrix.repeat(<span class="hljs-number">2</span>); <span class="hljs-comment">//
   
 
   
+
+  
 </section>
 
       </div>
@@ -8085,7 +8133,7 @@ matrix.repeat(<span class="hljs-number">2</span>); <span class="hljs-comment">//
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:mljs/matrix/blob/43e75c550c999606c770b7299b3da2a4a168b93b/src/abstractMatrix.js#L896-L905'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/04322d92464d12c2b3eba56ec1ae623433655cea/src/abstractMatrix.js#L957-L966'>
       <span>src/abstractMatrix.js</span>
       </a>
     
@@ -8095,10 +8143,7 @@ matrix.repeat(<span class="hljs-number">2</span>); <span class="hljs-comment">//
   <p>Returns the sum by the argument given, if no argument given,
 it returns the sum of all elements of the matrix.</p>
 
- 
-  
     <div class='pre p1 fill-light mt0'>sum(by: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>): (<a href="#matrix">Matrix</a> | <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>)</div>
-   
   
   
 
@@ -8146,6 +8191,8 @@ it returns the sum of all elements of the matrix.</p>
   
 
   
+
+  
 </section>
 
       </div>
@@ -8165,7 +8212,7 @@ it returns the sum of all elements of the matrix.</p>
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:mljs/matrix/blob/43e75c550c999606c770b7299b3da2a4a168b93b/src/abstractMatrix.js#L512-L521'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/04322d92464d12c2b3eba56ec1ae623433655cea/src/abstractMatrix.js#L573-L582'>
       <span>src/abstractMatrix.js</span>
       </a>
     
@@ -8174,10 +8221,7 @@ it returns the sum of all elements of the matrix.</p>
 
   <p>Swaps two columns</p>
 
- 
-  
     <div class='pre p1 fill-light mt0'>swapColumns(column1: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>, column2: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>): <a href="#matrix">Matrix</a></div>
-   
   
   
 
@@ -8234,6 +8278,8 @@ it returns the sum of all elements of the matrix.</p>
   
 
   
+
+  
 </section>
 
       </div>
@@ -8253,7 +8299,7 @@ it returns the sum of all elements of the matrix.</p>
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:mljs/matrix/blob/43e75c550c999606c770b7299b3da2a4a168b93b/src/abstractMatrix.js#L457-L466'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/04322d92464d12c2b3eba56ec1ae623433655cea/src/abstractMatrix.js#L518-L527'>
       <span>src/abstractMatrix.js</span>
       </a>
     
@@ -8262,10 +8308,7 @@ it returns the sum of all elements of the matrix.</p>
 
   <p>Swaps two rows</p>
 
- 
-  
     <div class='pre p1 fill-light mt0'>swapRows(row1: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>, row2: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>): <a href="#matrix">Matrix</a></div>
-   
   
   
 
@@ -8322,6 +8365,8 @@ it returns the sum of all elements of the matrix.</p>
   
 
   
+
+  
 </section>
 
       </div>
@@ -8341,7 +8386,7 @@ it returns the sum of all elements of the matrix.</p>
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:mljs/matrix/blob/43e75c550c999606c770b7299b3da2a4a168b93b/src/abstractMatrix.js#L276-L284'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/04322d92464d12c2b3eba56ec1ae623433655cea/src/abstractMatrix.js#L276-L284'>
       <span>src/abstractMatrix.js</span>
       </a>
     
@@ -8350,10 +8395,7 @@ it returns the sum of all elements of the matrix.</p>
 
   <p>Returns a new 1D array filled row by row with the matrix values</p>
 
- 
-  
     <div class='pre p1 fill-light mt0'>to1DArray(): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a></div>
-   
   
   
 
@@ -8376,6 +8418,8 @@ it returns the sum of all elements of the matrix.</p>
 
       
     
+  
+
   
 
   
@@ -8406,7 +8450,7 @@ it returns the sum of all elements of the matrix.</p>
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:mljs/matrix/blob/43e75c550c999606c770b7299b3da2a4a168b93b/src/abstractMatrix.js#L290-L299'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/04322d92464d12c2b3eba56ec1ae623433655cea/src/abstractMatrix.js#L290-L299'>
       <span>src/abstractMatrix.js</span>
       </a>
     
@@ -8415,10 +8459,7 @@ it returns the sum of all elements of the matrix.</p>
 
   <p>Returns a 2D array containing a copy of the data</p>
 
- 
-  
     <div class='pre p1 fill-light mt0'>to2DArray(): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a></div>
-   
   
   
 
@@ -8452,6 +8493,8 @@ it returns the sum of all elements of the matrix.</p>
   
 
   
+
+  
 </section>
 
       </div>
@@ -8471,7 +8514,7 @@ it returns the sum of all elements of the matrix.</p>
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:mljs/matrix/blob/43e75c550c999606c770b7299b3da2a4a168b93b/src/abstractMatrix.js#L1453-L1460'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/04322d92464d12c2b3eba56ec1ae623433655cea/src/abstractMatrix.js#L1514-L1521'>
       <span>src/abstractMatrix.js</span>
       </a>
     
@@ -8480,10 +8523,7 @@ it returns the sum of all elements of the matrix.</p>
 
   <p>Returns the trace of the matrix (sum of the diagonal elements)</p>
 
- 
-  
     <div class='pre p1 fill-light mt0'>trace(): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a></div>
-   
   
   
 
@@ -8517,6 +8557,8 @@ it returns the sum of all elements of the matrix.</p>
   
 
   
+
+  
 </section>
 
       </div>
@@ -8536,7 +8578,7 @@ it returns the sum of all elements of the matrix.</p>
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:mljs/matrix/blob/43e75c550c999606c770b7299b3da2a4a168b93b/src/abstractMatrix.js#L1303-L1311'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/04322d92464d12c2b3eba56ec1ae623433655cea/src/abstractMatrix.js#L1364-L1372'>
       <span>src/abstractMatrix.js</span>
       </a>
     
@@ -8545,10 +8587,7 @@ it returns the sum of all elements of the matrix.</p>
 
   <p>Transposes the matrix and returns a new one containing the result</p>
 
- 
-  
     <div class='pre p1 fill-light mt0'>transpose(): <a href="#matrix">Matrix</a></div>
-   
   
   
 
@@ -8582,6 +8621,8 @@ it returns the sum of all elements of the matrix.</p>
   
 
   
+
+  
 </section>
 
       </div>
@@ -8601,7 +8642,7 @@ it returns the sum of all elements of the matrix.</p>
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:mljs/matrix/blob/43e75c550c999606c770b7299b3da2a4a168b93b/src/abstractMatrix.js#L1470-L1472'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/04322d92464d12c2b3eba56ec1ae623433655cea/src/abstractMatrix.js#L1531-L1533'>
       <span>src/abstractMatrix.js</span>
       </a>
     
@@ -8610,10 +8651,7 @@ it returns the sum of all elements of the matrix.</p>
 
   <p>Returns a view of the transposition of the matrix</p>
 
- 
-  
     <div class='pre p1 fill-light mt0'>transposeView(): MatrixTransposeView</div>
-   
   
   
 
@@ -8647,6 +8685,8 @@ it returns the sum of all elements of the matrix.</p>
   
 
   
+
+  
 </section>
 
       </div>
@@ -8657,8 +8697,11 @@ it returns the sum of all elements of the matrix.</p>
   
 
   
+
+  
 </section>
 
+          
         
           
           <section class='p2 mb2 clearfix bg-white minishadow'>
@@ -8671,7 +8714,7 @@ it returns the sum of all elements of the matrix.</p>
     </h3>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:mljs/matrix/blob/43e75c550c999606c770b7299b3da2a4a168b93b/src/dc/cholesky.js#L8-L97'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/04322d92464d12c2b3eba56ec1ae623433655cea/src/dc/cholesky.js#L8-L97'>
       <span>src/dc/cholesky.js</span>
       </a>
     
@@ -8679,10 +8722,7 @@ it returns the sum of all elements of the matrix.</p>
   
 
   
- 
-  
     <div class='pre p1 fill-light mt0'>new CholeskyDecomposition(value: <a href="#matrix">Matrix</a>)</div>
-   
   
   
 
@@ -8736,7 +8776,7 @@ it returns the sum of all elements of the matrix.</p>
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:mljs/matrix/blob/43e75c550c999606c770b7299b3da2a4a168b93b/src/dc/cholesky.js#L94-L96'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/04322d92464d12c2b3eba56ec1ae623433655cea/src/dc/cholesky.js#L94-L96'>
       <span>src/dc/cholesky.js</span>
       </a>
     
@@ -8744,10 +8784,7 @@ it returns the sum of all elements of the matrix.</p>
   
 
   
- 
-  
     <div class='pre p1 fill-light mt0'>lowerTriangularMatrix</div>
-   
   
   
 
@@ -8781,6 +8818,8 @@ it returns the sum of all elements of the matrix.</p>
   
 
   
+
+  
 </section>
 
       </div>
@@ -8800,7 +8839,7 @@ it returns the sum of all elements of the matrix.</p>
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:mljs/matrix/blob/43e75c550c999606c770b7299b3da2a4a168b93b/src/dc/cholesky.js#L55-L88'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/04322d92464d12c2b3eba56ec1ae623433655cea/src/dc/cholesky.js#L55-L88'>
       <span>src/dc/cholesky.js</span>
       </a>
     
@@ -8808,10 +8847,7 @@ it returns the sum of all elements of the matrix.</p>
   
 
   
- 
-  
     <div class='pre p1 fill-light mt0'>solve(value: <a href="#matrix">Matrix</a>): <a href="#matrix">Matrix</a></div>
-   
   
   
 
@@ -8858,6 +8894,8 @@ it returns the sum of all elements of the matrix.</p>
   
 
   
+
+  
 </section>
 
       </div>
@@ -8868,8 +8906,11 @@ it returns the sum of all elements of the matrix.</p>
   
 
   
+
+  
 </section>
 
+          
         
           
           <section class='p2 mb2 clearfix bg-white minishadow'>
@@ -8882,7 +8923,7 @@ it returns the sum of all elements of the matrix.</p>
     </h3>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:mljs/matrix/blob/43e75c550c999606c770b7299b3da2a4a168b93b/src/dc/svd.js#L14-L590'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/04322d92464d12c2b3eba56ec1ae623433655cea/src/dc/svd.js#L14-L590'>
       <span>src/dc/svd.js</span>
       </a>
     
@@ -8890,10 +8931,7 @@ it returns the sum of all elements of the matrix.</p>
   
 
   
- 
-  
     <div class='pre p1 fill-light mt0'>new SingularValueDecomposition(value: <a href="#matrix">Matrix</a>, options: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a>?)</div>
-   
   
   
 
@@ -9001,7 +9039,7 @@ it returns the sum of all elements of the matrix.</p>
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:mljs/matrix/blob/43e75c550c999606c770b7299b3da2a4a168b93b/src/dc/svd.js#L517-L519'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/04322d92464d12c2b3eba56ec1ae623433655cea/src/dc/svd.js#L517-L519'>
       <span>src/dc/svd.js</span>
       </a>
     
@@ -9009,10 +9047,7 @@ it returns the sum of all elements of the matrix.</p>
   
 
   
- 
-  
     <div class='pre p1 fill-light mt0'>condition</div>
-   
   
   
 
@@ -9046,6 +9081,8 @@ it returns the sum of all elements of the matrix.</p>
   
 
   
+
+  
 </section>
 
       </div>
@@ -9065,7 +9102,7 @@ it returns the sum of all elements of the matrix.</p>
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:mljs/matrix/blob/43e75c550c999606c770b7299b3da2a4a168b93b/src/dc/svd.js#L549-L551'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/04322d92464d12c2b3eba56ec1ae623433655cea/src/dc/svd.js#L549-L551'>
       <span>src/dc/svd.js</span>
       </a>
     
@@ -9073,10 +9110,7 @@ it returns the sum of all elements of the matrix.</p>
   
 
   
- 
-  
     <div class='pre p1 fill-light mt0'>diagonal</div>
-   
   
   
 
@@ -9110,6 +9144,8 @@ it returns the sum of all elements of the matrix.</p>
   
 
   
+
+  
 </section>
 
       </div>
@@ -9129,7 +9165,7 @@ it returns the sum of all elements of the matrix.</p>
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:mljs/matrix/blob/43e75c550c999606c770b7299b3da2a4a168b93b/src/dc/svd.js#L587-L589'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/04322d92464d12c2b3eba56ec1ae623433655cea/src/dc/svd.js#L587-L589'>
       <span>src/dc/svd.js</span>
       </a>
     
@@ -9137,10 +9173,7 @@ it returns the sum of all elements of the matrix.</p>
   
 
   
- 
-  
     <div class='pre p1 fill-light mt0'>diagonalMatrix</div>
-   
   
   
 
@@ -9174,6 +9207,8 @@ it returns the sum of all elements of the matrix.</p>
   
 
   
+
+  
 </section>
 
       </div>
@@ -9193,7 +9228,7 @@ it returns the sum of all elements of the matrix.</p>
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:mljs/matrix/blob/43e75c550c999606c770b7299b3da2a4a168b93b/src/dc/svd.js#L477-L511'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/04322d92464d12c2b3eba56ec1ae623433655cea/src/dc/svd.js#L477-L511'>
       <span>src/dc/svd.js</span>
       </a>
     
@@ -9204,10 +9239,7 @@ it returns the sum of all elements of the matrix.</p>
 var svd = SingularValueDecomposition(A);
 var inverseA = svd.inverse();</p>
 
- 
-  
     <div class='pre p1 fill-light mt0'>inverse(): <a href="#matrix">Matrix</a></div>
-   
   
   
 
@@ -9241,6 +9273,8 @@ var inverseA = svd.inverse();</p>
   
 
   
+
+  
 </section>
 
       </div>
@@ -9260,7 +9294,7 @@ var inverseA = svd.inverse();</p>
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:mljs/matrix/blob/43e75c550c999606c770b7299b3da2a4a168b93b/src/dc/svd.js#L565-L570'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/04322d92464d12c2b3eba56ec1ae623433655cea/src/dc/svd.js#L565-L570'>
       <span>src/dc/svd.js</span>
       </a>
     
@@ -9268,10 +9302,7 @@ var inverseA = svd.inverse();</p>
   
 
   
- 
-  
     <div class='pre p1 fill-light mt0'>leftSingularVectors</div>
-   
   
   
 
@@ -9294,6 +9325,8 @@ var inverseA = svd.inverse();</p>
 
       
     
+  
+
   
 
   
@@ -9324,7 +9357,7 @@ var inverseA = svd.inverse();</p>
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:mljs/matrix/blob/43e75c550c999606c770b7299b3da2a4a168b93b/src/dc/svd.js#L525-L527'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/04322d92464d12c2b3eba56ec1ae623433655cea/src/dc/svd.js#L525-L527'>
       <span>src/dc/svd.js</span>
       </a>
     
@@ -9332,10 +9365,7 @@ var inverseA = svd.inverse();</p>
   
 
   
- 
-  
     <div class='pre p1 fill-light mt0'>norm2</div>
-   
   
   
 
@@ -9358,6 +9388,8 @@ var inverseA = svd.inverse();</p>
 
       
     
+  
+
   
 
   
@@ -9388,7 +9420,7 @@ var inverseA = svd.inverse();</p>
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:mljs/matrix/blob/43e75c550c999606c770b7299b3da2a4a168b93b/src/dc/svd.js#L533-L543'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/04322d92464d12c2b3eba56ec1ae623433655cea/src/dc/svd.js#L533-L543'>
       <span>src/dc/svd.js</span>
       </a>
     
@@ -9396,10 +9428,7 @@ var inverseA = svd.inverse();</p>
   
 
   
- 
-  
     <div class='pre p1 fill-light mt0'>rank</div>
-   
   
   
 
@@ -9433,6 +9462,8 @@ var inverseA = svd.inverse();</p>
   
 
   
+
+  
 </section>
 
       </div>
@@ -9452,7 +9483,7 @@ var inverseA = svd.inverse();</p>
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:mljs/matrix/blob/43e75c550c999606c770b7299b3da2a4a168b93b/src/dc/svd.js#L576-L581'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/04322d92464d12c2b3eba56ec1ae623433655cea/src/dc/svd.js#L576-L581'>
       <span>src/dc/svd.js</span>
       </a>
     
@@ -9460,10 +9491,7 @@ var inverseA = svd.inverse();</p>
   
 
   
- 
-  
     <div class='pre p1 fill-light mt0'>rightSingularVectors</div>
-   
   
   
 
@@ -9497,6 +9525,8 @@ var inverseA = svd.inverse();</p>
   
 
   
+
+  
 </section>
 
       </div>
@@ -9516,7 +9546,7 @@ var inverseA = svd.inverse();</p>
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:mljs/matrix/blob/43e75c550c999606c770b7299b3da2a4a168b93b/src/dc/svd.js#L427-L460'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/04322d92464d12c2b3eba56ec1ae623433655cea/src/dc/svd.js#L427-L460'>
       <span>src/dc/svd.js</span>
       </a>
     
@@ -9528,10 +9558,7 @@ Example : We search to approximate x, with A matrix shape m*n, x vector size n, 
 var svd = SingularValueDecomposition(A);
 var x = svd.solve(b);</p>
 
- 
-  
     <div class='pre p1 fill-light mt0'>solve(value: <a href="#matrix">Matrix</a>): <a href="#matrix">Matrix</a></div>
-   
   
   
 
@@ -9579,6 +9606,8 @@ var x = svd.solve(b);</p>
   
 
   
+
+  
 </section>
 
       </div>
@@ -9598,7 +9627,7 @@ var x = svd.solve(b);</p>
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:mljs/matrix/blob/43e75c550c999606c770b7299b3da2a4a168b93b/src/dc/svd.js#L467-L469'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/04322d92464d12c2b3eba56ec1ae623433655cea/src/dc/svd.js#L467-L469'>
       <span>src/dc/svd.js</span>
       </a>
     
@@ -9606,10 +9635,7 @@ var x = svd.solve(b);</p>
   
 
   
- 
-  
     <div class='pre p1 fill-light mt0'>solveForDiagonal(value: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>>): <a href="#matrix">Matrix</a></div>
-   
   
   
 
@@ -9656,6 +9682,8 @@ var x = svd.solve(b);</p>
   
 
   
+
+  
 </section>
 
       </div>
@@ -9675,7 +9703,7 @@ var x = svd.solve(b);</p>
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:mljs/matrix/blob/43e75c550c999606c770b7299b3da2a4a168b93b/src/dc/svd.js#L557-L559'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/04322d92464d12c2b3eba56ec1ae623433655cea/src/dc/svd.js#L557-L559'>
       <span>src/dc/svd.js</span>
       </a>
     
@@ -9683,10 +9711,7 @@ var x = svd.solve(b);</p>
   
 
   
- 
-  
     <div class='pre p1 fill-light mt0'>threshold</div>
-   
   
   
 
@@ -9720,6 +9745,8 @@ var x = svd.solve(b);</p>
   
 
   
+
+  
 </section>
 
       </div>
@@ -9730,8 +9757,11 @@ var x = svd.solve(b);</p>
   
 
   
+
+  
 </section>
 
+          
         
           
           <section class='p2 mb2 clearfix bg-white minishadow'>
@@ -9744,7 +9774,7 @@ var x = svd.solve(b);</p>
     </h3>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:mljs/matrix/blob/43e75c550c999606c770b7299b3da2a4a168b93b/src/dc/lu.js#L8-L200'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/04322d92464d12c2b3eba56ec1ae623433655cea/src/dc/lu.js#L8-L200'>
       <span>src/dc/lu.js</span>
       </a>
     
@@ -9752,10 +9782,7 @@ var x = svd.solve(b);</p>
   
 
   
- 
-  
     <div class='pre p1 fill-light mt0'>new LuDecomposition(matrix: <a href="#matrix">Matrix</a>)</div>
-   
   
   
 
@@ -9809,7 +9836,7 @@ var x = svd.solve(b);</p>
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:mljs/matrix/blob/43e75c550c999606c770b7299b3da2a4a168b93b/src/dc/lu.js#L136-L147'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/04322d92464d12c2b3eba56ec1ae623433655cea/src/dc/lu.js#L136-L147'>
       <span>src/dc/lu.js</span>
       </a>
     
@@ -9817,10 +9844,7 @@ var x = svd.solve(b);</p>
   
 
   
- 
-  
     <div class='pre p1 fill-light mt0'>determinant</div>
-   
   
   
 
@@ -9854,6 +9878,8 @@ var x = svd.solve(b);</p>
   
 
   
+
+  
 </section>
 
       </div>
@@ -9873,7 +9899,7 @@ var x = svd.solve(b);</p>
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:mljs/matrix/blob/43e75c550c999606c770b7299b3da2a4a168b93b/src/dc/lu.js#L78-L87'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/04322d92464d12c2b3eba56ec1ae623433655cea/src/dc/lu.js#L78-L87'>
       <span>src/dc/lu.js</span>
       </a>
     
@@ -9881,10 +9907,7 @@ var x = svd.solve(b);</p>
   
 
   
- 
-  
     <div class='pre p1 fill-light mt0'>isSingular(): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a></div>
-   
   
   
 
@@ -9918,6 +9941,8 @@ var x = svd.solve(b);</p>
   
 
   
+
+  
 </section>
 
       </div>
@@ -9937,7 +9962,7 @@ var x = svd.solve(b);</p>
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:mljs/matrix/blob/43e75c550c999606c770b7299b3da2a4a168b93b/src/dc/lu.js#L153-L170'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/04322d92464d12c2b3eba56ec1ae623433655cea/src/dc/lu.js#L153-L170'>
       <span>src/dc/lu.js</span>
       </a>
     
@@ -9945,10 +9970,7 @@ var x = svd.solve(b);</p>
   
 
   
- 
-  
     <div class='pre p1 fill-light mt0'>lowerTriangularMatrix</div>
-   
   
   
 
@@ -9982,6 +10004,8 @@ var x = svd.solve(b);</p>
   
 
   
+
+  
 </section>
 
       </div>
@@ -10001,7 +10025,7 @@ var x = svd.solve(b);</p>
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:mljs/matrix/blob/43e75c550c999606c770b7299b3da2a4a168b93b/src/dc/lu.js#L197-L199'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/04322d92464d12c2b3eba56ec1ae623433655cea/src/dc/lu.js#L197-L199'>
       <span>src/dc/lu.js</span>
       </a>
     
@@ -10009,10 +10033,7 @@ var x = svd.solve(b);</p>
   
 
   
- 
-  
     <div class='pre p1 fill-light mt0'>pivotPermutationVector</div>
-   
   
   
 
@@ -10046,6 +10067,8 @@ var x = svd.solve(b);</p>
   
 
   
+
+  
 </section>
 
       </div>
@@ -10065,7 +10088,7 @@ var x = svd.solve(b);</p>
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:mljs/matrix/blob/43e75c550c999606c770b7299b3da2a4a168b93b/src/dc/lu.js#L94-L130'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/04322d92464d12c2b3eba56ec1ae623433655cea/src/dc/lu.js#L94-L130'>
       <span>src/dc/lu.js</span>
       </a>
     
@@ -10073,10 +10096,7 @@ var x = svd.solve(b);</p>
   
 
   
- 
-  
     <div class='pre p1 fill-light mt0'>solve(value: <a href="#matrix">Matrix</a>): <a href="#matrix">Matrix</a></div>
-   
   
   
 
@@ -10123,6 +10143,8 @@ var x = svd.solve(b);</p>
   
 
   
+
+  
 </section>
 
       </div>
@@ -10142,7 +10164,7 @@ var x = svd.solve(b);</p>
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:mljs/matrix/blob/43e75c550c999606c770b7299b3da2a4a168b93b/src/dc/lu.js#L176-L191'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/04322d92464d12c2b3eba56ec1ae623433655cea/src/dc/lu.js#L176-L191'>
       <span>src/dc/lu.js</span>
       </a>
     
@@ -10150,10 +10172,7 @@ var x = svd.solve(b);</p>
   
 
   
- 
-  
     <div class='pre p1 fill-light mt0'>upperTriangularMatrix</div>
-   
   
   
 
@@ -10187,6 +10206,8 @@ var x = svd.solve(b);</p>
   
 
   
+
+  
 </section>
 
       </div>
@@ -10197,8 +10218,11 @@ var x = svd.solve(b);</p>
   
 
   
+
+  
 </section>
 
+          
         
           
           <section class='p2 mb2 clearfix bg-white minishadow'>
@@ -10211,7 +10235,7 @@ var x = svd.solve(b);</p>
     </h3>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:mljs/matrix/blob/43e75c550c999606c770b7299b3da2a4a168b93b/src/dc/evd.js#L12-L111'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/04322d92464d12c2b3eba56ec1ae623433655cea/src/dc/evd.js#L12-L111'>
       <span>src/dc/evd.js</span>
       </a>
     
@@ -10219,10 +10243,7 @@ var x = svd.solve(b);</p>
   
 
   
- 
-  
     <div class='pre p1 fill-light mt0'>new EigenvalueDecomposition(matrix: <a href="#matrix">Matrix</a>, options: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a>?)</div>
-   
   
   
 
@@ -10310,7 +10331,7 @@ var x = svd.solve(b);</p>
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:mljs/matrix/blob/43e75c550c999606c770b7299b3da2a4a168b93b/src/dc/evd.js#L92-L110'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/04322d92464d12c2b3eba56ec1ae623433655cea/src/dc/evd.js#L92-L110'>
       <span>src/dc/evd.js</span>
       </a>
     
@@ -10318,10 +10339,7 @@ var x = svd.solve(b);</p>
   
 
   
- 
-  
     <div class='pre p1 fill-light mt0'>diagonalMatrix</div>
-   
   
   
 
@@ -10344,6 +10362,8 @@ var x = svd.solve(b);</p>
 
       
     
+  
+
   
 
   
@@ -10374,7 +10394,7 @@ var x = svd.solve(b);</p>
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:mljs/matrix/blob/43e75c550c999606c770b7299b3da2a4a168b93b/src/dc/evd.js#L81-L86'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/04322d92464d12c2b3eba56ec1ae623433655cea/src/dc/evd.js#L81-L86'>
       <span>src/dc/evd.js</span>
       </a>
     
@@ -10382,10 +10402,7 @@ var x = svd.solve(b);</p>
   
 
   
- 
-  
     <div class='pre p1 fill-light mt0'>eigenvectorMatrix</div>
-   
   
   
 
@@ -10419,6 +10436,8 @@ var x = svd.solve(b);</p>
   
 
   
+
+  
 </section>
 
       </div>
@@ -10438,7 +10457,7 @@ var x = svd.solve(b);</p>
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:mljs/matrix/blob/43e75c550c999606c770b7299b3da2a4a168b93b/src/dc/evd.js#L73-L75'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/04322d92464d12c2b3eba56ec1ae623433655cea/src/dc/evd.js#L73-L75'>
       <span>src/dc/evd.js</span>
       </a>
     
@@ -10446,10 +10465,7 @@ var x = svd.solve(b);</p>
   
 
   
- 
-  
     <div class='pre p1 fill-light mt0'>imaginaryEigenvalues</div>
-   
   
   
 
@@ -10472,6 +10488,8 @@ var x = svd.solve(b);</p>
 
       
     
+  
+
   
 
   
@@ -10502,7 +10520,7 @@ var x = svd.solve(b);</p>
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:mljs/matrix/blob/43e75c550c999606c770b7299b3da2a4a168b93b/src/dc/evd.js#L65-L67'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/04322d92464d12c2b3eba56ec1ae623433655cea/src/dc/evd.js#L65-L67'>
       <span>src/dc/evd.js</span>
       </a>
     
@@ -10510,10 +10528,7 @@ var x = svd.solve(b);</p>
   
 
   
- 
-  
     <div class='pre p1 fill-light mt0'>realEigenvalues</div>
-   
   
   
 
@@ -10547,6 +10562,8 @@ var x = svd.solve(b);</p>
   
 
   
+
+  
 </section>
 
       </div>
@@ -10557,8 +10574,11 @@ var x = svd.solve(b);</p>
   
 
   
+
+  
 </section>
 
+          
         
           
           <section class='p2 mb2 clearfix bg-white minishadow'>
@@ -10571,7 +10591,7 @@ var x = svd.solve(b);</p>
     </h3>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:mljs/matrix/blob/43e75c550c999606c770b7299b3da2a4a168b93b/src/decompositions.js#L13-L20'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/04322d92464d12c2b3eba56ec1ae623433655cea/src/decompositions.js#L13-L20'>
       <span>src/decompositions.js</span>
       </a>
     
@@ -10580,10 +10600,7 @@ var x = svd.solve(b);</p>
 
   <p>Computes the inverse of a Matrix</p>
 
- 
-  
     <div class='pre p1 fill-light mt0'>inverse(matrix: <a href="#matrix">Matrix</a>, useSVD: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a>): <a href="#matrix">Matrix</a></div>
-   
   
   
 
@@ -10639,8 +10656,11 @@ var x = svd.solve(b);</p>
   
 
   
+
+  
 </section>
 
+          
         
           
           <section class='p2 mb2 clearfix bg-white minishadow'>
@@ -10653,7 +10673,7 @@ var x = svd.solve(b);</p>
     </h3>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:mljs/matrix/blob/43e75c550c999606c770b7299b3da2a4a168b93b/src/dc/qr.js#L10-L173'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/04322d92464d12c2b3eba56ec1ae623433655cea/src/dc/qr.js#L10-L173'>
       <span>src/dc/qr.js</span>
       </a>
     
@@ -10661,10 +10681,7 @@ var x = svd.solve(b);</p>
   
 
   
- 
-  
     <div class='pre p1 fill-light mt0'>new QrDecomposition(value: <a href="#matrix">Matrix</a>)</div>
-   
   
   
 
@@ -10718,7 +10735,7 @@ var x = svd.solve(b);</p>
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:mljs/matrix/blob/43e75c550c999606c770b7299b3da2a4a168b93b/src/dc/qr.js#L107-L115'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/04322d92464d12c2b3eba56ec1ae623433655cea/src/dc/qr.js#L107-L115'>
       <span>src/dc/qr.js</span>
       </a>
     
@@ -10726,10 +10743,7 @@ var x = svd.solve(b);</p>
   
 
   
- 
-  
     <div class='pre p1 fill-light mt0'>isFullRank(): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a></div>
-   
   
   
 
@@ -10763,6 +10777,8 @@ var x = svd.solve(b);</p>
   
 
   
+
+  
 </section>
 
       </div>
@@ -10782,7 +10798,7 @@ var x = svd.solve(b);</p>
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:mljs/matrix/blob/43e75c550c999606c770b7299b3da2a4a168b93b/src/dc/qr.js#L144-L172'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/04322d92464d12c2b3eba56ec1ae623433655cea/src/dc/qr.js#L144-L172'>
       <span>src/dc/qr.js</span>
       </a>
     
@@ -10790,10 +10806,7 @@ var x = svd.solve(b);</p>
   
 
   
- 
-  
     <div class='pre p1 fill-light mt0'>orthogonalMatrix</div>
-   
   
   
 
@@ -10827,6 +10840,8 @@ var x = svd.solve(b);</p>
   
 
   
+
+  
 </section>
 
       </div>
@@ -10846,7 +10861,7 @@ var x = svd.solve(b);</p>
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:mljs/matrix/blob/43e75c550c999606c770b7299b3da2a4a168b93b/src/dc/qr.js#L59-L101'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/04322d92464d12c2b3eba56ec1ae623433655cea/src/dc/qr.js#L59-L101'>
       <span>src/dc/qr.js</span>
       </a>
     
@@ -10858,10 +10873,7 @@ Example : We search to approximate x, with A matrix shape m*n, x vector size n, 
 var qr = QrDecomposition(A);
 var x = qr.solve(b);</p>
 
- 
-  
     <div class='pre p1 fill-light mt0'>solve(value: <a href="#matrix">Matrix</a>): <a href="#matrix">Matrix</a></div>
-   
   
   
 
@@ -10909,6 +10921,8 @@ var x = qr.solve(b);</p>
   
 
   
+
+  
 </section>
 
       </div>
@@ -10928,7 +10942,7 @@ var x = qr.solve(b);</p>
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:mljs/matrix/blob/43e75c550c999606c770b7299b3da2a4a168b93b/src/dc/qr.js#L121-L138'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/04322d92464d12c2b3eba56ec1ae623433655cea/src/dc/qr.js#L121-L138'>
       <span>src/dc/qr.js</span>
       </a>
     
@@ -10936,10 +10950,7 @@ var x = qr.solve(b);</p>
   
 
   
- 
-  
     <div class='pre p1 fill-light mt0'>upperTriangularMatrix</div>
-   
   
   
 
@@ -10973,6 +10984,8 @@ var x = qr.solve(b);</p>
   
 
   
+
+  
 </section>
 
       </div>
@@ -10983,8 +10996,11 @@ var x = qr.solve(b);</p>
   
 
   
+
+  
 </section>
 
+          
         
           
           <section class='p2 mb2 clearfix bg-white minishadow'>
@@ -10997,7 +11013,7 @@ var x = qr.solve(b);</p>
     </h3>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:mljs/matrix/blob/43e75c550c999606c770b7299b3da2a4a168b93b/src/linearDependencies.js#L49-L71'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/04322d92464d12c2b3eba56ec1ae623433655cea/src/linearDependencies.js#L49-L71'>
       <span>src/linearDependencies.js</span>
       </a>
     
@@ -11008,10 +11024,7 @@ var x = qr.solve(b);</p>
 If a row is a linear combination of others rows, the result will be a row with the coefficients of this combination.
 For example : for A = [[2, 0, 0, 1], [0, 1, 6, 0], [0, 3, 0, 1], [0, 0, 1, 0], [0, 1, 2, 0]], the result will be [[0, 0, 0, 0, 0], [0, 0, 0, 4, 1], [0, 0, 0, 0, 0], [0, 0.25, 0, 0, -0.25], [0, 1, 0, -4, 0]]</p>
 
- 
-  
     <div class='pre p1 fill-light mt0'>linearDependencies(matrix: <a href="#matrix">Matrix</a>, options: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>?): <a href="#matrix">Matrix</a></div>
-   
   
   
 
@@ -11106,8 +11119,11 @@ For example : for A = [[2, 0, 0, 1], [0, 1, 6, 0], [0, 3, 0, 1], [0, 0, 1, 0], [
   
 
   
+
+  
 </section>
 
+          
         
           
           <section class='p2 mb2 clearfix bg-white minishadow'>
@@ -11120,7 +11136,7 @@ For example : for A = [[2, 0, 0, 1], [0, 1, 6, 0], [0, 3, 0, 1], [0, 0, 1, 0], [
     </h3>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:mljs/matrix/blob/43e75c550c999606c770b7299b3da2a4a168b93b/src/decompositions.js#L29-L39'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/04322d92464d12c2b3eba56ec1ae623433655cea/src/decompositions.js#L29-L39'>
       <span>src/decompositions.js</span>
       </a>
     
@@ -11128,10 +11144,7 @@ For example : for A = [[2, 0, 0, 1], [0, 1, 6, 0], [0, 3, 0, 1], [0, 0, 1, 0], [
   
 
   
- 
-  
     <div class='pre p1 fill-light mt0'>solve(leftHandSide: <a href="#matrix">Matrix</a>, rightHandSide: <a href="#matrix">Matrix</a>, useSVD: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a>): <a href="#matrix">Matrix</a></div>
-   
   
   
 
@@ -11195,8 +11208,11 @@ For example : for A = [[2, 0, 0, 1], [0, 1, 6, 0], [0, 3, 0, 1], [0, 0, 1, 0], [
   
 
   
+
+  
 </section>
 
+          
         
           
           <section class='p2 mb2 clearfix bg-white minishadow'>
@@ -11209,7 +11225,7 @@ For example : for A = [[2, 0, 0, 1], [0, 1, 6, 0], [0, 3, 0, 1], [0, 0, 1, 0], [
     </h3>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:mljs/matrix/blob/43e75c550c999606c770b7299b3da2a4a168b93b/src/wrap/wrap.js#L10-L20'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/04322d92464d12c2b3eba56ec1ae623433655cea/src/wrap/wrap.js#L10-L20'>
       <span>src/wrap/wrap.js</span>
       </a>
     
@@ -11217,10 +11233,7 @@ For example : for A = [[2, 0, 0, 1], [0, 1, 6, 0], [0, 3, 0, 1], [0, 0, 1, 0], [
   
 
   
- 
-  
     <div class='pre p1 fill-light mt0'>wrap(array: (<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>>> | <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>>), options: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a>?): (<a href="#wrappermatrix1d">WrapperMatrix1D</a> | <a href="#wrappermatrix2d">WrapperMatrix2D</a>)</div>
-   
   
   
 
@@ -11301,8 +11314,11 @@ For example : for A = [[2, 0, 0, 1], [0, 1, 6, 0], [0, 3, 0, 1], [0, 0, 1, 0], [
   
 
   
+
+  
 </section>
 
+          
         
           
           <section class='p2 mb2 clearfix bg-white minishadow'>
@@ -11315,7 +11331,7 @@ For example : for A = [[2, 0, 0, 1], [0, 1, 6, 0], [0, 3, 0, 1], [0, 0, 1, 0], [
     </h3>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:mljs/matrix/blob/43e75c550c999606c770b7299b3da2a4a168b93b/src/wrap/WrapperMatrix1D.js#L11-L21'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/04322d92464d12c2b3eba56ec1ae623433655cea/src/wrap/WrapperMatrix1D.js#L11-L21'>
       <span>src/wrap/WrapperMatrix1D.js</span>
       </a>
     
@@ -11323,10 +11339,7 @@ For example : for A = [[2, 0, 0, 1], [0, 1, 6, 0], [0, 3, 0, 1], [0, 0, 1, 0], [
   
 
   
- 
-  
     <div class='pre p1 fill-light mt0'>new WrapperMatrix1D(data: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>>, options: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a>?)</div>
-   
   
   
 
@@ -11399,8 +11412,11 @@ For example : for A = [[2, 0, 0, 1], [0, 1, 6, 0], [0, 3, 0, 1], [0, 0, 1, 0], [
   
 
   
+
+  
 </section>
 
+          
         
           
           <section class='p2 mb2 clearfix bg-white minishadow'>
@@ -11413,7 +11429,7 @@ For example : for A = [[2, 0, 0, 1], [0, 1, 6, 0], [0, 3, 0, 1], [0, 0, 1, 0], [
     </h3>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:mljs/matrix/blob/43e75c550c999606c770b7299b3da2a4a168b93b/src/wrap/WrapperMatrix2D.js#L9-L14'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/mljs/matrix/blob/04322d92464d12c2b3eba56ec1ae623433655cea/src/wrap/WrapperMatrix2D.js#L9-L14'>
       <span>src/wrap/WrapperMatrix2D.js</span>
       </a>
     
@@ -11421,10 +11437,7 @@ For example : for A = [[2, 0, 0, 1], [0, 1, 6, 0], [0, 3, 0, 1], [0, 0, 1, 0], [
   
 
   
- 
-  
     <div class='pre p1 fill-light mt0'>new WrapperMatrix2D(data: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>>>)</div>
-   
   
   
 
@@ -11463,8 +11476,11 @@ For example : for A = [[2, 0, 0, 1], [0, 1, 6, 0], [0, 3, 0, 1], [0, 0, 1, 0], [
   
 
   
+
+  
 </section>
 
+          
         
       </div>
     </div>
