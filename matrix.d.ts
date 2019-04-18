@@ -186,7 +186,7 @@ declare module 'ml-matrix' {
 
     prod(): number;
     norm(type: 'frobenius' | 'max'): number;
-    cumulativeSum(): Matrix;
+    cumulativeSum(): this;
     dot(vector2: Matrix): number;
     mmul(other: Matrix): Matrix;
     strassen2x2(other: Matrix): Matrix;
@@ -194,11 +194,13 @@ declare module 'ml-matrix' {
     mmulStrassen(y: Matrix): Matrix;
     scaleRows(min?: number, max?: number): Matrix;
     scaleColumns(min?: number, max?: number): Matrix;
+    reverseRows(): this;
+    reverseColumns(): this;
     kroneckerProduct(other: Matrix): Matrix;
     tensorProduct(other: Matrix): Matrix;
     transpose(): Matrix;
-    sortRows(compareFunction: Function): Matrix;
-    sortColumns(compareFunction: Function): Matrix;
+    sortRows(compareFunction: Function): this;
+    sortColumns(compareFunction: Function): this;
     subMatrix(
       startRow: number,
       endRow: number,

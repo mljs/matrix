@@ -1383,6 +1383,32 @@ export default function AbstractMatrix(superCtor) {
       return newMatrix;
     }
 
+    reverseRows() {
+      const middle = Math.ceil(this.columns / 2);
+      for (var i = 0; i < this.rows; i++) {
+        for (var j = 0; j < middle; j++) {
+          var first = this.get(i, j);
+          var last = this.get(i, this.columns - 1 - j);
+          this.set(i, j, last);
+          this.set(i, this.columns - 1 - j, first);
+        }
+      }
+      return this;
+    }
+
+    reverseColumns() {
+      const middle = Math.ceil(this.rows / 2);
+      for (var j = 0; j < this.columns; j++) {
+        for (var i = 0; i < middle; i++) {
+          var first = this.get(i, j);
+          var last = this.get(this.rows - 1 - i, j);
+          this.set(i, j, last);
+          this.set(this.rows - 1 - i, j, first);
+        }
+      }
+      return this;
+    }
+
     /**
      * Returns the Kronecker product (also known as tensor product) between this and other
      * See https://en.wikipedia.org/wiki/Kronecker_product
