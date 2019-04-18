@@ -1,5 +1,3 @@
-import Matrix from './matrix';
-
 /**
  * @private
  * Check that a row index is not out of bounds
@@ -140,34 +138,12 @@ export function getRange(from, to) {
   return arr;
 }
 
-export function sumByRow(matrix) {
-  var sum = Matrix.zeros(matrix.rows, 1);
-  for (var i = 0; i < matrix.rows; ++i) {
-    for (var j = 0; j < matrix.columns; ++j) {
-      sum.set(i, 0, sum.get(i, 0) + matrix.get(i, j));
-    }
+export function newArray(length) {
+  var array = [];
+  for (var i = 0; i < length; i++) {
+    array.push(i);
   }
-  return sum;
-}
-
-export function sumByColumn(matrix) {
-  var sum = Matrix.zeros(1, matrix.columns);
-  for (var i = 0; i < matrix.rows; ++i) {
-    for (var j = 0; j < matrix.columns; ++j) {
-      sum.set(0, j, sum.get(0, j) + matrix.get(i, j));
-    }
-  }
-  return sum;
-}
-
-export function sumAll(matrix) {
-  var v = 0;
-  for (var i = 0; i < matrix.rows; i++) {
-    for (var j = 0; j < matrix.columns; j++) {
-      v += matrix.get(i, j);
-    }
-  }
-  return v;
+  return array;
 }
 
 function checkNumber(name, value) {

@@ -149,7 +149,17 @@ declare module 'ml-matrix' {
     minColumnIndex(column: number): number[];
     diag(): number[];
     diagonal(): number[];
-    sum(by?: 'row' | 'column'): Matrix | number;
+
+    /**
+     * Returns the sum of all elements of the matrix.
+     */
+    sum(): number;
+    /**
+     * Returns the sum by the dimension given.
+     * @param by - sum by 'row' or 'column'.
+     */
+    sum(by: 'row' | 'column'): number[];
+
     mean(): number;
     prod(): number;
     norm(type: 'frobenius' | 'max'): number;

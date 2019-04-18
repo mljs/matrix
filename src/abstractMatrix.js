@@ -8,11 +8,9 @@ import {
   checkColumnIndex,
   checkColumnVector,
   checkRange,
-  checkIndices,
-  sumByRow,
-  sumByColumn,
-  sumAll
+  checkIndices
 } from './util';
+import { sumByRow, sumByColumn, sumAll } from './stat';
 import MatrixTransposeView from './views/transpose';
 import MatrixRowView from './views/row';
 import MatrixSubView from './views/sub';
@@ -949,20 +947,16 @@ export default function AbstractMatrix(superCtor) {
       return diag;
     }
 
-    /**
-     * Returns the sum by the argument given, if no argument given,
-     * it returns the sum of all elements of the matrix.
-     * @param {string} by - sum by 'row' or 'column'.
-     * @return {Matrix|number}
-     */
     sum(by) {
       switch (by) {
         case 'row':
           return sumByRow(this);
         case 'column':
           return sumByColumn(this);
-        default:
+        case undefined:
           return sumAll(this);
+        default:
+          throw new Error(`invalid option: ${by}`);
       }
     }
 
