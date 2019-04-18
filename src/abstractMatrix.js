@@ -10,7 +10,14 @@ import {
   checkRange,
   checkIndices
 } from './util';
-import { sumByRow, sumByColumn, sumAll, productByRow, productByColumn, productAll } from './stat';
+import {
+  sumByRow,
+  sumByColumn,
+  sumAll,
+  productByRow,
+  productByColumn,
+  productAll
+} from './stat';
 import MatrixTransposeView from './views/transpose';
 import MatrixRowView from './views/row';
 import MatrixSubView from './views/sub';
@@ -1777,6 +1784,51 @@ export default function AbstractMatrix(superCtor) {
         }
       }
       return 0 - sum;
+    }
+
+    variance(unbiased = true, means = this.mean('column')) {
+      if (typeof unbiased !== 'boolean') {
+        throw new TypeError('unbiased must be a boolean');
+      }
+      if (!Array.isArray(means)) {
+        throw new TypeError('means must be an array');
+      }
+
+      const rows = this.rows;
+      const cols = this.columns;
+      const variance = [];
+
+      for (var j = 0; j < cols; j++) {
+        var sum1 = 0;
+        var sum2 = 0;
+        var x = 0;
+        for (var i = 0; i < rows; i++) {
+          x = this.get(i, j) - means[j];
+          sum1 += x;
+          sum2 += x * x;
+        }
+        if (unbiased) {
+          variance.push((sum2 - (sum1 * sum1) / rows) / (rows - 1));
+        } else {
+          variance.push((sum2 - (sum1 * sum1) / rows) / rows);
+        }
+      }
+      return variance;
+    }
+
+    standardDeviation(unbiased = true, means = this.mean('column')) {
+      if (typeof unbiased !== 'boolean') {
+        throw new TypeError('unbiased must be a boolean');
+      }
+      if (!Array.isArray(means)) {
+        throw new TypeError('means must be an array');
+      }
+
+      const variance = this.variance(means, unbiased);
+      for (var i = 0; i < variance.length; i++) {
+        variance[i] = Math.sqrt(variance[i]);
+      }
+      return variance;
     }
   }
 

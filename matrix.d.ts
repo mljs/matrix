@@ -244,6 +244,8 @@ declare module 'ml-matrix' {
     pseudoInverse(threshold?: number): Matrix;
     clone(): Matrix;
     entropy(eps?: number): number;
+    variance(unbiased?: boolean, means?: number[]): number[];
+    standardDeviation(unbiased?: boolean, means?: number[]): number[];
 
     // From here we document methods dynamically generated from operators
 
