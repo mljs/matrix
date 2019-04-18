@@ -149,7 +149,7 @@ declare module 'ml-matrix' {
     minColumnIndex(column: number): number[];
     diag(): number[];
     diagonal(): number[];
-    sum(by: 'row' | 'column'): Matrix | number;
+    sum(by?: 'row' | 'column'): Matrix | number;
     mean(): number;
     prod(): number;
     norm(type: 'frobenius' | 'max'): number;
@@ -210,6 +210,7 @@ declare module 'ml-matrix' {
     determinant(): number;
     pseudoInverse(threshold?: number): Matrix;
     clone(): Matrix;
+    entropy(eps?: number): number;
 
     // From here we document methods dynamically generated from operators
 

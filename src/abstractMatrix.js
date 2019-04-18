@@ -1747,6 +1747,16 @@ export default function AbstractMatrix(superCtor) {
       }
       return newMatrix;
     }
+
+    entropy(eps = 0) {
+      var sum = 0;
+      for (var i = 0; i < this.rows; i++) {
+        for (var j = 0; j < this.columns; j++) {
+          sum += this.get(i, j) * Math.log(this.get(i, j) + eps);
+        }
+      }
+      return 0 - sum;
+    }
   }
 
   Matrix.prototype.klass = 'Matrix';
