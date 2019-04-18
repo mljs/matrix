@@ -141,7 +141,7 @@ export function getRange(from, to) {
 export function newArray(length) {
   var array = [];
   for (var i = 0; i < length; i++) {
-    array.push(i);
+    array.push(0);
   }
   return array;
 }
