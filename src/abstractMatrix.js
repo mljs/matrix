@@ -1348,8 +1348,9 @@ export default function AbstractMatrix(superCtor) {
       }
       var newMatrix = new this.constructor(this.rows, this.columns);
       for (var i = 0; i < this.rows; i++) {
-        var scaled = rescale(this.getRow(i), { min, max });
-        newMatrix.setRow(i, scaled);
+        const row = this.getRow(i);
+        rescale(row, { min, max, output: row });
+        newMatrix.setRow(i, row);
       }
       return newMatrix;
     }
@@ -1371,11 +1372,13 @@ export default function AbstractMatrix(superCtor) {
       }
       var newMatrix = new this.constructor(this.rows, this.columns);
       for (var i = 0; i < this.columns; i++) {
-        var scaled = rescale(this.getColumn(i), {
+        const column = this.getColumn(i);
+        rescale(column, {
           min: min,
-          max: max
+          max: max,
+          output: column
         });
-        newMatrix.setColumn(i, scaled);
+        newMatrix.setColumn(i, column);
       }
       return newMatrix;
     }
@@ -1828,7 +1831,7 @@ export default function AbstractMatrix(superCtor) {
         throw new TypeError('means must be an array');
       }
 
-      const variance = this.variance(means, unbiased);
+      const variance = this.variance(unbiased, means);
       for (var i = 0; i < variance.length; i++) {
         variance[i] = Math.sqrt(variance[i]);
       }

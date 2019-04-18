@@ -1,5 +1,3 @@
-import max from 'ml-array-max';
-
 import Matrix from './matrix';
 import SingularValueDecomposition from './dc/svd';
 
@@ -57,11 +55,9 @@ export function linearDependencies(matrix, options = {}) {
     var Abis = matrix.subMatrixRow(xrange(n, i)).transposeView();
     var svd = new SingularValueDecomposition(Abis);
     var x = svd.solve(b);
-    var error = max(
-      Matrix.sub(b, Abis.mmul(x))
-        .abs()
-        .to1DArray()
-    );
+    var error = Matrix.sub(b, Abis.mmul(x))
+      .abs()
+      .max();
     results.setRow(
       i,
       dependenciesOneRow(error, x, i, thresholdValue, thresholdError)

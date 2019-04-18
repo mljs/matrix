@@ -212,7 +212,7 @@ function tred2(n, e, d, V) {
     V.set(n - 1, j, 0);
   }
 
-  V[n - 1][n - 1] = 1;
+  V.set(n - 1, n - 1, 1);
   e[0] = 0;
 }
 

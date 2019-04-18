@@ -5,5 +5,5 @@ export default {
     format: 'cjs',
     exports: 'named'
   },
-  external: ['ml-array-rescale', 'ml-array-max']
+  external: ['ml-array-rescale']
 };
