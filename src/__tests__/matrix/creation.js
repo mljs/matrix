@@ -7,15 +7,8 @@ describe('Matrix creation', () => {
     var array = util.getSquareArray();
     var matrix = new Matrix(array);
     expect(matrix).not.toBe(array);
-  });
-
-  it('should extend Array', () => {
-    var array = util.getSquareArray();
-    var matrix = new Matrix(array);
     expect(matrix).toBeInstanceOf(Matrix);
-    expect(matrix).toBeInstanceOf(Array);
     expect(Matrix.isMatrix(matrix)).toBe(true);
-    expect(Array.isArray(matrix)).toBe(true);
   });
 
   it('should clone existing matrix', () => {
@@ -29,7 +22,7 @@ describe('Matrix creation', () => {
     var matrix = new Matrix(3, 9);
     expect(matrix.rows).toBe(3);
     expect(matrix.columns).toBe(9);
-    expect(matrix[0][0]).toBeUndefined();
+    expect(matrix.get(0, 0)).toBe(0);
   });
 
   it('should throw with wrong arguments', () => {
@@ -55,7 +48,7 @@ describe('Matrix creation', () => {
     var matrix = util.getSquareMatrix();
     expect(matrix.rows).toBe(3);
     expect(matrix.columns).toBe(3);
-    expect(matrix[1][2]).toBe(7);
+    expect(matrix.get(1, 2)).toBe(7);
   });
 
   it('should correctly check if argument is a matrix', () => {
@@ -92,12 +85,11 @@ describe('Matrix creation', () => {
     expect(vector.to2DArray()).toStrictEqual([[0], [1], [2], [3]]);
   });
 
-  it('empty', () => {
-    expect(Matrix.empty(3, 3)).toStrictEqual(new Matrix(3, 3));
-  });
-
   it('zeros', () => {
-    expect(Matrix.zeros(2, 3).to2DArray()).toStrictEqual([[0, 0, 0], [0, 0, 0]]);
+    expect(Matrix.zeros(2, 3).to2DArray()).toStrictEqual([
+      [0, 0, 0],
+      [0, 0, 0]
+    ]);
   });
 
   it('ones', () => {
@@ -110,14 +102,17 @@ describe('Matrix creation', () => {
     expect(random.to2DArray()).not.toEqual(random2.to2DArray());
     for (var i = 0; i < 2; i++) {
       for (var j = 0; j < 3; j++) {
-        expect(random[i][j]).toBeCloseTo(0, -1);
+        expect(random.get(i, j)).toBeCloseTo(0, -1);
       }
     }
   });
 
   it('random with custom RNG', () => {
     var fakeRNG = () => 2;
-    expect(Matrix.rand(2, 2, fakeRNG).to2DArray()).toStrictEqual([[2, 2], [2, 2]]);
+    expect(Matrix.rand(2, 2, fakeRNG).to2DArray()).toStrictEqual([
+      [2, 2],
+      [2, 2]
+    ]);
   });
 
   it('eye/identity', () => {
@@ -151,11 +146,6 @@ describe('Matrix creation', () => {
       [0, 0, 3, 0],
       [0, 0, 0, 0]
     ]);
-  });
-
-  it('regression test for Symbol.species (V8 5.1)', () => {
-    var matrix = Matrix.ones(1, 2);
-    expect(matrix.map(() => 1)).toStrictEqual([1]);
   });
 
   it('Symbol.species should work for views', () => {

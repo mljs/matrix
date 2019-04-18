@@ -29,7 +29,7 @@ describe('Cholesky decomposition', () => {
 function checkTriangular(matrix) {
   for (let i = 0; i < matrix.rows; i++) {
     for (let j = i + 1; j < matrix.columns; j++) {
-      expect(matrix[i][j]).toBe(0);
+      expect(matrix.get(i, j)).toBe(0);
     }
   }
 }

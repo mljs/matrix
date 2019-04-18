@@ -23,33 +23,38 @@ describe('Singular value decomposition', () => {
     var svd = new SVD(matrix);
     var U = new Matrix(svd.U);
     var V = new Matrix(svd.V);
-    expect(U.mmul(U.transpose())).toStrictEqual(Matrix.eye(4));
-    expect(V.mmul(V.transpose())).toBeDeepCloseTo(Matrix.eye(5), 5);
+    expect(U.mmul(U.transpose()).to2DArray()).toStrictEqual(
+      Matrix.eye(4).to2DArray()
+    );
+    expect(V.mmul(V.transpose()).to2DArray()).toBeDeepCloseTo(
+      Matrix.eye(5).to2DArray(),
+      5
+    );
   });
 
   describe('inverse', () => {
     var value = new Matrix([[1, 1], [2, 2]]);
     var target = new SVD(value);
-    var expected = new Matrix([[0.1, 0.2], [0.1, 0.2]]);
+    var expected = [[0.1, 0.2], [0.1, 0.2]];
 
     it('should solve with identity matrix', () => {
       var actual = target.solve(Matrix.eye(2));
-      expect(actual).toBeDeepCloseTo(expected, 3);
+      expect(actual.to2DArray()).toBeDeepCloseTo(expected, 3);
     });
 
     it('should compute the inverse', () => {
       var actual = target.inverse();
-      expect(actual).toBeDeepCloseTo(expected, 3);
+      expect(actual.to2DArray()).toBeDeepCloseTo(expected, 3);
     });
 
     it('should compute the inverse with the inverse function', () => {
       var actual = inverse(value, true);
-      expect(actual).toBeDeepCloseTo(expected, 3);
+      expect(actual.to2DArray()).toBeDeepCloseTo(expected, 3);
     });
 
     it('should solve with identity matrix with the solve function', () => {
       var actual = solve(value, Matrix.eye(2), true);
-      expect(actual).toBeDeepCloseTo(expected, 3);
+      expect(actual.to2DArray()).toBeDeepCloseTo(expected, 3);
     });
   });
 
@@ -65,7 +70,7 @@ describe('Singular value decomposition', () => {
       var actual = target.leftSingularVectors
         .mmul(Matrix.diag(target.diagonal))
         .mmul(target.rightSingularVectors.transpose());
-      expect(actual).toBeDeepCloseTo(value, 2);
+      expect(actual.to2DArray()).toBeDeepCloseTo(value.to2DArray(), 2);
     });
 
     it('left singular vectors', () => {
@@ -73,7 +78,7 @@ describe('Singular value decomposition', () => {
         [-0.641423027995072, -0.767187395072177],
         [-0.767187395072177, 0.641423027995072]
       ];
-      expect(target.leftSingularVectors).toBeDeepCloseTo(U, 2);
+      expect(target.leftSingularVectors.to2DArray()).toBeDeepCloseTo(U, 2);
     });
 
     it('right singular vectors', () => {
@@ -83,10 +88,9 @@ describe('Singular value decomposition', () => {
         [-0.547353510305727, 0.0201031031435023],
         [-0.74478864880349, -0.381169081397574]
       ];
-      expect(target.rightSingularVectors.subMatrix(0, 3, 0, 1)).toBeDeepCloseTo(
-        V,
-        4
-      );
+      expect(
+        target.rightSingularVectors.subMatrix(0, 3, 0, 1).to2DArray()
+      ).toBeDeepCloseTo(V, 4);
     });
 
     it('diagonal', () => {
@@ -107,7 +111,7 @@ describe('Singular value decomposition', () => {
       var actual = target.leftSingularVectors
         .mmul(Matrix.diag(target.diagonal))
         .mmul(target.rightSingularVectors.transpose());
-      expect(actual).toBeDeepCloseTo(value, 2);
+      expect(actual.to2DArray()).toBeDeepCloseTo(value.to2DArray(), 2);
     });
 
     it('left singular vectors', () => {
@@ -117,10 +121,9 @@ describe('Singular value decomposition', () => {
         [0.547353510305727, 0.0201031031435023],
         [0.74478864880349, -0.381169081397574]
       ];
-      expect(target.leftSingularVectors.subMatrix(0, 3, 0, 1)).toBeDeepCloseTo(
-        U,
-        2
-      );
+      expect(
+        target.leftSingularVectors.subMatrix(0, 3, 0, 1).to2DArray()
+      ).toBeDeepCloseTo(U, 2);
     });
 
     it('right singular vectors', () => {
@@ -128,7 +131,7 @@ describe('Singular value decomposition', () => {
         [0.641423027995072, -0.767187395072177],
         [0.767187395072177, 0.641423027995072]
       ];
-      expect(target.rightSingularVectors).toBeDeepCloseTo(V, 4);
+      expect(target.rightSingularVectors.to2DArray()).toBeDeepCloseTo(V, 4);
     });
 
     it('diagonal', () => {
@@ -149,7 +152,7 @@ describe('Singular value decomposition', () => {
       var actual = target.leftSingularVectors
         .mmul(Matrix.diag(target.diagonal))
         .mmul(target.rightSingularVectors.transpose());
-      expect(actual).toBeDeepCloseTo(value, 2);
+      expect(actual.to2DArray()).toBeDeepCloseTo(value.to2DArray(), 2);
     });
 
     it('left singular vectors', () => {
@@ -157,7 +160,7 @@ describe('Singular value decomposition', () => {
         [0.641423027995072, -0.767187395072177],
         [0.767187395072177, 0.641423027995072]
       ];
-      expect(target.leftSingularVectors).toBeDeepCloseTo(U, 2);
+      expect(target.leftSingularVectors.to2DArray()).toBeDeepCloseTo(U, 2);
     });
 
     it('right singular vectors', () => {
@@ -167,10 +170,9 @@ describe('Singular value decomposition', () => {
         [0.547353510305727, 0.0201031031435023],
         [0.74478864880349, -0.381169081397574]
       ];
-      expect(target.rightSingularVectors.subMatrix(0, 3, 0, 1)).toBeDeepCloseTo(
-        V,
-        4
-      );
+      expect(
+        target.rightSingularVectors.subMatrix(0, 3, 0, 1).to2DArray()
+      ).toBeDeepCloseTo(V, 4);
     });
 
     it('diagonal', () => {
@@ -192,12 +194,12 @@ describe('Singular value decomposition', () => {
         [0.641423027995072, -0.767187395072177],
         [0.767187395072177, 0.641423027995072]
       ];
-      expect(target.leftSingularVectors).toBeDeepCloseTo(U, 3);
+      expect(target.leftSingularVectors.to2DArray()).toBeDeepCloseTo(U, 3);
     });
 
     it('right singular vectors (0)', () => {
       var V = [[0, 0], [0, 0], [0, 0], [0, 0]];
-      expect(target.rightSingularVectors).toBeDeepCloseTo(V, 6);
+      expect(target.rightSingularVectors.to2DArray()).toBeDeepCloseTo(V, 6);
     });
 
     it('diagonal', () => {
@@ -216,7 +218,7 @@ describe('Singular value decomposition', () => {
 
     it('left singular vectors', () => {
       var U = [[0, 0], [0, 0]];
-      expect(target.leftSingularVectors).toBeDeepCloseTo(U, 6);
+      expect(target.leftSingularVectors.to2DArray()).toBeDeepCloseTo(U, 6);
     });
 
     it('right singular vectors', () => {
@@ -226,10 +228,9 @@ describe('Singular value decomposition', () => {
         [0.547353510305727, 0.0201031031435023],
         [0.74478864880349, -0.381169081397574]
       ];
-      expect(target.rightSingularVectors.subMatrix(0, 3, 0, 1)).toBeDeepCloseTo(
-        V,
-        4
-      );
+      expect(
+        target.rightSingularVectors.subMatrix(0, 3, 0, 1).to2DArray()
+      ).toBeDeepCloseTo(V, 4);
     });
 
     it('diagonal', () => {
@@ -256,22 +257,26 @@ describe('Singular value decomposition', () => {
     var target1 = new SVD(value1, { autoTranspose: true });
     var target2 = new SVD(value2, { autoTranspose: true });
 
-    expect(target1.rightSingularVectors).toStrictEqual(target2.leftSingularVectors);
-    expect(target1.leftSingularVectors).toStrictEqual(target2.rightSingularVectors);
+    expect(target1.rightSingularVectors).toStrictEqual(
+      target2.leftSingularVectors
+    );
+    expect(target1.leftSingularVectors).toStrictEqual(
+      target2.rightSingularVectors
+    );
     expect(target1.diagonalMatrix).toStrictEqual(target2.diagonalMatrix);
   });
 
   describe('solve', () => {
     var count = 100;
-    var value = Matrix.empty(count, 3);
+    var value = new Matrix(count, 3);
     var output = new Array(count);
 
     for (var i = 0; i < count; i++) {
       var x = i + 1;
       var y = 2 * (i + 1) - 1;
-      value[i][0] = x;
-      value[i][1] = y;
-      value[i][2] = 1;
+      value.set(i, 0, x);
+      value.set(i, 1, y);
+      value.set(i, 2, 1);
       output[i] = 4 * x - y + 3;
     }
 
@@ -281,7 +286,7 @@ describe('Singular value decomposition', () => {
       var actual = target.leftSingularVectors
         .mmul(target.diagonalMatrix)
         .mmul(target.rightSingularVectors.transpose());
-      expect(actual).toBeDeepCloseTo(value, 8);
+      expect(actual.to2DArray()).toBeDeepCloseTo(value.to2DArray(), 8);
     });
 
     it('should find the solution', () => {

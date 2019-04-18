@@ -79,7 +79,7 @@ export default class LuDecomposition {
     var data = this.LU;
     var col = data.columns;
     for (var j = 0; j < col; j++) {
-      if (data[j][j] === 0) {
+      if (data.get(j, j) === 0) {
         return true;
       }
     }
@@ -112,17 +112,17 @@ export default class LuDecomposition {
     for (k = 0; k < columns; k++) {
       for (i = k + 1; i < columns; i++) {
         for (j = 0; j < count; j++) {
-          X[i][j] -= X[k][j] * lu[i][k];
+          X.set(i, j, X.get(i, j) - X.get(k, j) * lu.get(i, k));
         }
       }
     }
     for (k = columns - 1; k >= 0; k--) {
       for (j = 0; j < count; j++) {
-        X[k][j] /= lu[k][k];
+        X.set(k, j, X.get(k, j) / lu.get(k, k));
       }
       for (i = 0; i < k; i++) {
         for (j = 0; j < count; j++) {
-          X[i][j] -= X[k][j] * lu[i][k];
+          X.set(i, j, X.get(i, j) - X.get(k, j) * lu.get(i, k));
         }
       }
     }
@@ -141,7 +141,7 @@ export default class LuDecomposition {
     var determinant = this.pivotSign;
     var col = data.columns;
     for (var j = 0; j < col; j++) {
-      determinant *= data[j][j];
+      determinant *= data.get(j, j);
     }
     return determinant;
   }
@@ -158,11 +158,11 @@ export default class LuDecomposition {
     for (var i = 0; i < rows; i++) {
       for (var j = 0; j < columns; j++) {
         if (i > j) {
-          X[i][j] = data[i][j];
+          X.set(i, j, data.get(i, j));
         } else if (i === j) {
-          X[i][j] = 1;
+          X.set(i, j, 1);
         } else {
-          X[i][j] = 0;
+          X.set(i, j, 0);
         }
       }
     }
@@ -181,9 +181,9 @@ export default class LuDecomposition {
     for (var i = 0; i < rows; i++) {
       for (var j = 0; j < columns; j++) {
         if (i <= j) {
-          X[i][j] = data[i][j];
+          X.set(i, j, data.get(i, j));
         } else {
-          X[i][j] = 0;
+          X.set(i, j, 0);
         }
       }
     }

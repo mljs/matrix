@@ -9,14 +9,14 @@ Matrix manipulation and computation library.
 
 ## Installation
 
-`$ npm install --save ml-matrix`
+`$ npm install ml-matrix`
 
 ## Usage
 
 ### As an ES module
 
 ```js
-import Matrix from 'ml-matrix';
+import { Matrix } from 'ml-matrix';
 
 const matrix = Matrix.ones(5, 5);
 ```
@@ -100,7 +100,7 @@ var z = Matrix.ones(2, 3); // z = Matrix [[1, 1, 1], [1, 1, 1], rows: 2, columns
 var z = Matrix.eye(3, 4); // Matrix [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], rows: 3, columns: 4]. there are 1 only in the diagonal
 ```
 
-### Maths :
+### Maths
 
 ```js
 const {

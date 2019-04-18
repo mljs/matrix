@@ -80,7 +80,6 @@ declare module 'ml-matrix' {
     ): Matrix;
     static rowVector(newData: number[]): Matrix;
     static columnVector(newData: number[]): Matrix;
-    static empty(rows: number, columns: number): Matrix;
     static zeros(rows: number, columns: number): Matrix;
     static ones(rows: number, columns: number): Matrix;
     static rand(rows: number, columns: number, rng?: Rng): Matrix;

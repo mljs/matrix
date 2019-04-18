@@ -6,40 +6,40 @@ import {
   checkRowVector
 } from './util';
 
-export default class Matrix extends AbstractMatrix(Array) {
+export default class Matrix extends AbstractMatrix() {
   constructor(nRows, nColumns) {
-    var i;
-    if (arguments.length === 1 && typeof nRows === 'number') {
-      return new Array(nRows);
-    }
+    super();
     if (Matrix.isMatrix(nRows)) {
       return nRows.clone();
     } else if (Number.isInteger(nRows) && nRows > 0) {
       // Create an empty matrix
-      super(nRows);
+      this.data = [];
       if (Number.isInteger(nColumns) && nColumns > 0) {
-        for (i = 0; i < nRows; i++) {
-          this[i] = new Array(nColumns);
+        for (let i = 0; i < nRows; i++) {
+          this.data.push([]);
+          for (let j = 0; j < nColumns; j++) {
+            this.data[i].push(0);
+          }
         }
       } else {
         throw new TypeError('nColumns must be a positive integer');
       }
     } else if (Array.isArray(nRows)) {
       // Copy the values from the 2D array
-      const matrix = nRows;
-      nRows = matrix.length;
-      nColumns = matrix[0].length;
+      const arrayData = nRows;
+      nRows = arrayData.length;
+      nColumns = arrayData[0].length;
       if (typeof nColumns !== 'number' || nColumns === 0) {
         throw new TypeError(
           'Data must be a 2D array with at least one element'
         );
       }
-      super(nRows);
-      for (i = 0; i < nRows; i++) {
-        if (matrix[i].length !== nColumns) {
+      this.data = [];
+      for (let i = 0; i < nRows; i++) {
+        if (arrayData[i].length !== nColumns) {
           throw new RangeError('Inconsistent array dimensions');
         }
-        this[i] = [].concat(matrix[i]);
+        this.data.push(arrayData[i].slice());
       }
     } else {
       throw new TypeError(
@@ -52,12 +52,12 @@ export default class Matrix extends AbstractMatrix(Array) {
   }
 
   set(rowIndex, columnIndex, value) {
-    this[rowIndex][columnIndex] = value;
+    this.data[rowIndex][columnIndex] = value;
     return this;
   }
 
   get(rowIndex, columnIndex) {
-    return this[rowIndex][columnIndex];
+    return this.data[rowIndex][columnIndex];
   }
 
   /**
@@ -70,7 +70,7 @@ export default class Matrix extends AbstractMatrix(Array) {
     if (this.rows === 1) {
       throw new RangeError('A matrix cannot have less than one row');
     }
-    this.splice(index, 1);
+    this.data.splice(index, 1);
     this.rows -= 1;
     return this;
   }
@@ -88,7 +88,7 @@ export default class Matrix extends AbstractMatrix(Array) {
     }
     checkRowIndex(this, index, true);
     array = checkRowVector(this, array, true);
-    this.splice(index, 0, array);
+    this.data.splice(index, 0, array);
     this.rows += 1;
     return this;
   }
@@ -104,7 +104,7 @@ export default class Matrix extends AbstractMatrix(Array) {
       throw new RangeError('A matrix cannot have less than one column');
     }
     for (var i = 0; i < this.rows; i++) {
-      this[i].splice(index, 1);
+      this.data[i].splice(index, 1);
     }
     this.columns -= 1;
     return this;
@@ -124,7 +124,7 @@ export default class Matrix extends AbstractMatrix(Array) {
     checkColumnIndex(this, index, true);
     array = checkColumnVector(this, array);
     for (var i = 0; i < this.rows; i++) {
-      this[i].splice(index, 0, array[i]);
+      this.data[i].splice(index, 0, array[i]);
     }
     this.columns += 1;
     return this;

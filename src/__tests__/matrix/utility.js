@@ -31,21 +31,21 @@ describe('utility methods', () => {
 
   it('apply', () => {
     var matrix = Matrix.ones(6, 5);
-    matrix[0][0] = 10;
+    matrix.set(0, 0, 10);
     var called = 0;
 
     function cb(i, j) {
       called++;
       expect(this).toBeInstanceOf(Matrix);
       if (called === 1) {
-        expect(this[i][j]).toBe(10);
+        expect(this.get(i, j)).toBe(10);
       } else if (called === 30) {
-        this[i][j] = 20;
+        this.set(i, j, 20);
       }
     }
 
     matrix.apply(cb);
-    expect(matrix[5][4]).toBe(20);
+    expect(matrix.get(5, 4)).toBe(20);
     expect(called).toBe(30);
   });
 
@@ -81,9 +81,9 @@ describe('utility methods', () => {
 
   it('transpose square', () => {
     var transpose = matrix.transpose();
-    expect(transpose[0][0]).toBe(matrix[0][0]);
-    expect(transpose[1][0]).toBe(matrix[0][1]);
-    expect(transpose[2][1]).toBe(matrix[1][2]);
+    expect(transpose.get(0, 0)).toBe(matrix.get(0, 0));
+    expect(transpose.get(1, 0)).toBe(matrix.get(0, 1));
+    expect(transpose.get(2, 1)).toBe(matrix.get(1, 2));
   });
 
   it('determinant', () => {
@@ -128,9 +128,9 @@ describe('utility methods', () => {
   it('transpose rectangular', () => {
     var matrix = new Matrix([[0, 1, 2], [3, 4, 5]]);
     var transpose = matrix.transpose();
-    expect(transpose[0][0]).toBe(matrix[0][0]);
-    expect(transpose[1][0]).toBe(matrix[0][1]);
-    expect(transpose[2][1]).toBe(matrix[1][2]);
+    expect(transpose.get(0, 0)).toBe(matrix.get(0, 0));
+    expect(transpose.get(1, 0)).toBe(matrix.get(0, 1));
+    expect(transpose.get(2, 1)).toBe(matrix.get(1, 2));
     expect(transpose.rows).toBe(3);
     expect(transpose.columns).toBe(2);
   });
@@ -215,13 +215,19 @@ describe('utility methods', () => {
   it('mmul strassen', () => {
     var matrix = new Matrix([[2, 4], [7, 1]]);
     var matrix2 = new Matrix([[2, 1], [1, 1]]);
-    expect(matrix.mmulStrassen(matrix2).to2DArray()).toStrictEqual([[8, 6], [15, 8]]);
+    expect(matrix.mmulStrassen(matrix2).to2DArray()).toStrictEqual([
+      [8, 6],
+      [15, 8]
+    ]);
   });
 
   it('mmul 2x2 and 3x3', () => {
     var matrix = new Matrix([[2, 4], [7, 1]]);
     var matrix2 = new Matrix([[2, 1], [1, 1]]);
-    expect(matrix.strassen2x2(matrix2).to2DArray()).toStrictEqual([[8, 6], [15, 8]]);
+    expect(matrix.strassen2x2(matrix2).to2DArray()).toStrictEqual([
+      [8, 6],
+      [15, 8]
+    ]);
 
     matrix = new Matrix([[2, 4, 1], [7, 1, 2], [5, 1, 3]]);
     matrix2 = new Matrix([[2, 1, 3], [7, 1, 1], [6, 2, 7]]);

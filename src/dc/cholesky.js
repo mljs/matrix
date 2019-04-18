@@ -19,24 +19,23 @@ export default class CholeskyDecomposition {
     var i, j, k;
 
     for (j = 0; j < dimension; j++) {
-      var Lrowj = l[j];
       var d = 0;
       for (k = 0; k < j; k++) {
-        var Lrowk = l[k];
         var s = 0;
         for (i = 0; i < k; i++) {
-          s += Lrowk[i] * Lrowj[i];
+          s += l.get(k, i) * l.get(j, i);
         }
-        Lrowj[k] = s = (a.get(j, k) - s) / l[k][k];
+        s = (a.get(j, k) - s) / l.get(k, k);
+        l.set(j, k, s);
         d = d + s * s;
       }
 
       d = a.get(j, j) - d;
 
       positiveDefinite &= d > 0;
-      l[j][j] = Math.sqrt(Math.max(d, 0));
+      l.set(j, j, Math.sqrt(Math.max(d, 0)));
       for (k = j + 1; k < dimension; k++) {
-        l[j][k] = 0;
+        l.set(j, k, 0);
       }
     }
 
@@ -69,18 +68,18 @@ export default class CholeskyDecomposition {
     for (k = 0; k < dimension; k++) {
       for (j = 0; j < count; j++) {
         for (i = 0; i < k; i++) {
-          B[k][j] -= B[i][j] * l[k][i];
+          B.set(k, j, B.get(k, j) - B.get(i, j) * l.get(k, i));
         }
-        B[k][j] /= l[k][k];
+        B.set(k, j, B.get(k, j) / l.get(k, k));
       }
     }
 
     for (k = dimension - 1; k >= 0; k--) {
       for (j = 0; j < count; j++) {
         for (i = k + 1; i < dimension; i++) {
-          B[k][j] -= B[i][j] * l[i][k];
+          B.set(k, j, B.get(k, j) - B.get(i, j) * l.get(i, k));
         }
-        B[k][j] /= l[k][k];
+        B.set(k, j, B.get(k, j) / l.get(k, k));
       }
     }
 

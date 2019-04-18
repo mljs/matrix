@@ -47,7 +47,7 @@ describe('Dynamic methods on matrices', () => {
     });
     it('should accept 2D array input', () => {
       var result = Matrix.abs([[-6]]);
-      expect(result[0][0]).toBe(6);
+      expect(result.get(0, 0)).toBe(6);
     });
     it('should return a Matrix instance', () => {
       var result = Matrix.abs([[-6]]);

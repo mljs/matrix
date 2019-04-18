@@ -78,21 +78,21 @@ export default class QrDecomposition {
       for (j = 0; j < count; j++) {
         s = 0;
         for (i = k; i < m; i++) {
-          s += qr[i][k] * X[i][j];
+          s += qr.get(i, k) * X.get(i, j);
         }
-        s = -s / qr[k][k];
+        s = -s / qr.get(k, k);
         for (i = k; i < m; i++) {
-          X[i][j] += s * qr[i][k];
+          X.set(i, j, X.get(i, j) + s * qr.get(i, k));
         }
       }
     }
     for (k = n - 1; k >= 0; k--) {
       for (j = 0; j < count; j++) {
-        X[k][j] /= this.Rdiag[k];
+        X.set(k, j, X.get(k, j) / this.Rdiag[k]);
       }
       for (i = 0; i < k; i++) {
         for (j = 0; j < count; j++) {
-          X[i][j] -= X[k][j] * qr[i][k];
+          X.set(i, j, X.get(i, j) - X.get(k, j) * qr.get(i, k));
         }
       }
     }
@@ -126,11 +126,11 @@ export default class QrDecomposition {
     for (i = 0; i < n; i++) {
       for (j = 0; j < n; j++) {
         if (i < j) {
-          X[i][j] = qr[i][j];
+          X.set(i, j, qr.get(i, j));
         } else if (i === j) {
-          X[i][j] = this.Rdiag[i];
+          X.set(i, j, this.Rdiag[i]);
         } else {
-          X[i][j] = 0;
+          X.set(i, j, 0);
         }
       }
     }
@@ -150,20 +150,20 @@ export default class QrDecomposition {
 
     for (k = columns - 1; k >= 0; k--) {
       for (i = 0; i < rows; i++) {
-        X[i][k] = 0;
+        X.set(i, k, 0);
       }
-      X[k][k] = 1;
+      X.set(k, k, 1);
       for (j = k; j < columns; j++) {
-        if (qr[k][k] !== 0) {
+        if (qr.get(k, k) !== 0) {
           s = 0;
           for (i = k; i < rows; i++) {
-            s += qr[i][k] * X[i][j];
+            s += qr.get(i, k) * X.get(i, j);
           }
 
           s = -s / qr[k][k];
 
           for (i = k; i < rows; i++) {
-            X[i][j] += s * qr[i][k];
+            X.set(i, j, X.get(i, j) + s * qr.get(i, k));
           }
         }
       }

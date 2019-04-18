@@ -39,7 +39,7 @@ describe('Dynamic operators on matrices', () => {
     });
     it('should accept 2D array input', () => {
       var result = Matrix.mul([[-6]], 5);
-      expect(result[0][0]).toBe(-30);
+      expect(result.get(0, 0)).toBe(-30);
     });
     it('should return a Matrix instance', () => {
       var result = Matrix.mul([[-6]], 5);
