@@ -2,6 +2,7 @@ declare module 'ml-matrix' {
   type MaybeMatrix = Matrix | number[][];
   type Rng = () => number;
   type ScalarOrMatrix = number | Matrix;
+  type MatrixDimension = 'row' | 'column';
 
   class BaseView extends Matrix {}
   class MatrixColumnView extends BaseView {
@@ -154,13 +155,35 @@ declare module 'ml-matrix' {
      * Returns the sum of all elements of the matrix.
      */
     sum(): number;
+
     /**
-     * Returns the sum by the dimension given.
+     * Returns the sum by the given dimension.
      * @param by - sum by 'row' or 'column'.
      */
-    sum(by: 'row' | 'column'): number[];
+    sum(by: MatrixDimension): number[];
 
+    /**
+     * Returns the product of all elements of the matrix.
+     */
+    product(): number;
+
+    /**
+     * Returns the product by the given dimension.
+     * @param by - product by 'row' or 'column'.
+     */
+    product(by: MatrixDimension): number[];
+
+    /**
+     * Returns the mean of all elements of the matrix.
+     */
     mean(): number;
+
+    /**
+     * Returns the mean by the given dimension.
+     * @param by - mean by 'row' or 'column'.
+     */
+    mean(by: MatrixDimension): number[];
+
     prod(): number;
     norm(type: 'frobenius' | 'max'): number;
     cumulativeSum(): Matrix;

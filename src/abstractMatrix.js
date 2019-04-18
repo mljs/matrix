@@ -10,7 +10,7 @@ import {
   checkRange,
   checkIndices
 } from './util';
-import { sumByRow, sumByColumn, sumAll } from './stat';
+import { sumByRow, sumByColumn, sumAll, productByRow, productByColumn, productAll } from './stat';
 import MatrixTransposeView from './views/transpose';
 import MatrixRowView from './views/row';
 import MatrixSubView from './views/sub';
@@ -960,12 +960,39 @@ export default function AbstractMatrix(superCtor) {
       }
     }
 
-    /**
-     * Returns the mean of all elements of the matrix
-     * @return {number}
-     */
-    mean() {
-      return this.sum() / this.size;
+    product(by) {
+      switch (by) {
+        case 'row':
+          return productByRow(this);
+        case 'column':
+          return productByColumn(this);
+        case undefined:
+          return productAll(this);
+        default:
+          throw new Error(`invalid option: ${by}`);
+      }
+    }
+
+    mean(by) {
+      const sum = this.sum(by);
+      switch (by) {
+        case 'row': {
+          for (let i = 0; i < this.rows; i++) {
+            sum[i] /= this.columns;
+          }
+          return sum;
+        }
+        case 'column': {
+          for (let i = 0; i < this.columns; i++) {
+            sum[i] /= this.rows;
+          }
+          return sum;
+        }
+        case undefined:
+          return sum / this.size;
+        default:
+          throw new Error(`invalid option: ${by}`);
+      }
     }
 
     /**

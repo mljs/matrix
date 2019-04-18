@@ -138,10 +138,10 @@ export function getRange(from, to) {
   return arr;
 }
 
-export function newArray(length) {
+export function newArray(length, value = 0) {
   var array = [];
   for (var i = 0; i < length; i++) {
-    array.push(0);
+    array.push(value);
   }
   return array;
 }
