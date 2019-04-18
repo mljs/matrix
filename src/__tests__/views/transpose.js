@@ -1,9 +1,9 @@
-import { Matrix } from '../..';
+import { Matrix, MatrixTransposeView } from '../..';
 
 describe('Transpose view', () => {
   it('should set and get opposite coordinates', () => {
     const m = Matrix.ones(5, 8);
-    const mtv = m.transposeView();
+    const mtv = new MatrixTransposeView(m);
 
     expect(m.get(1, 0)).toBe(1);
     mtv.set(0, 1, 5);

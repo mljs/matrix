@@ -1,4 +1,4 @@
-import { Matrix } from '../..';
+import { Matrix, pseudoInverse, determinant } from '../..';
 import * as util from '../../../testUtils';
 
 describe('utility methods', () => {
@@ -87,27 +87,23 @@ describe('utility methods', () => {
   });
 
   it('determinant', () => {
-    var determinant = matrix.det();
-    expect(determinant).toBe(-18);
+    var det = determinant(matrix);
+    expect(det).toBe(-18);
     var subMatrix = matrix.selection([1, 2], [1, 2]);
-    determinant = subMatrix.det();
-    expect(determinant).toBe(-9);
-  });
-
-  it('determinant synonym', () => {
-    expect(matrix.det()).toBe(matrix.determinant());
+    det = determinant(subMatrix);
+    expect(det).toBe(-9);
   });
 
   it('determinant n>3', () => {
     var m = Matrix.rand(5, 5);
-    expect(m.det()).toBeCloseTo(0, -1);
+    expect(determinant(m)).toBeCloseTo(0, -1);
   });
 
   it('determinant wrong size', () => {
     var m1 = Matrix.ones(3, 5);
     var m2 = Matrix.ones(5, 3);
-    expect(() => m1.det()).toThrow(/square/);
-    expect(() => m2.det()).toThrow(/square/);
+    expect(() => determinant(m1)).toThrow(/square/);
+    expect(() => determinant(m2)).toThrow(/square/);
   });
 
   it('norm Frobenius', () => {
@@ -242,7 +238,7 @@ describe('utility methods', () => {
     // Actual values calculated by the Numpy library
 
     var matrix = new Matrix([[2, 4], [7, 1]]);
-    var result = matrix.pseudoInverse().to2DArray();
+    var result = pseudoInverse(matrix).to2DArray();
 
     expect(result[0][0]).toBeCloseTo(-0.03846153846153843, 5);
     expect(result[0][1]).toBeCloseTo(0.15384615384615374, 5);
@@ -250,7 +246,7 @@ describe('utility methods', () => {
     expect(result[1][1]).toBeCloseTo(-0.076923076923077, 5);
 
     matrix = new Matrix([[4, 7], [2, 6]]);
-    result = matrix.pseudoInverse().to2DArray();
+    result = pseudoInverse(matrix).to2DArray();
     expect(result[0][0]).toBeCloseTo(0.6, 5);
     expect(result[0][1]).toBeCloseTo(-0.7, 5);
     expect(result[1][0]).toBeCloseTo(-0.2, 5);
@@ -258,7 +254,7 @@ describe('utility methods', () => {
 
     // Example from http://reference.wolfram.com/language/ref/PseudoInverse.html
     matrix = new Matrix([[1, 2, 3], [4, 5, 6], [7, 8, 9]]);
-    result = matrix.pseudoInverse().to2DArray();
+    result = pseudoInverse(matrix).to2DArray();
 
     expect(result[0][0]).toBeCloseTo(-6.38888889e-1, 5);
     expect(result[0][1]).toBeCloseTo(-1.66666667e-1, 5);
@@ -274,7 +270,7 @@ describe('utility methods', () => {
 
     // non-square matrix.
     matrix = new Matrix([[1, 0, 1], [2, 4, 5]]);
-    result = matrix.pseudoInverse().to2DArray();
+    result = pseudoInverse(matrix).to2DArray();
 
     expect(result[0][0]).toBeCloseTo(0.75609756, 5);
     expect(result[0][1]).toBeCloseTo(-0.07317073, 5);

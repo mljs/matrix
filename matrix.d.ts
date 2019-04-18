@@ -4,66 +4,38 @@ declare module 'ml-matrix' {
   type ScalarOrMatrix = number | Matrix;
   type MatrixDimension = 'row' | 'column';
 
-  class BaseView extends Matrix {}
-  class MatrixColumnView extends BaseView {
-    set(rowIndex: number, columnIndex: number, value: number): MatrixColumnView;
-    get(rowIndex: number): number;
+  export class MatrixColumnView extends Matrix {
+    constructor(matrix: Matrix, column: number);
   }
-  class MatrixColumnSelectionView extends BaseView {
-    set(
-      rowIndex: number,
-      columnIndex: number,
-      value: number
-    ): MatrixColumnSelectionView;
-    get(rowIndex: number, columnIndex: number): number;
+  export class MatrixColumnSelectionView extends Matrix {
+    constructor(matrix: Matrix, columnIndices: number[]);
   }
-  class MatrixFlipColumnView extends BaseView {
-    set(
-      rowIndex: number,
-      columnIndex: number,
-      value: number
-    ): MatrixFlipColumnView;
-    get(rowIndex: number, columnIndex: number): number;
+  export class MatrixFlipColumnView extends Matrix {
+    constructor(matrix: Matrix);
   }
-  class MatrixFlipRowView extends BaseView {
-    set(
-      rowIndex: number,
-      columnIndex: number,
-      value: number
-    ): MatrixFlipRowView;
-    get(rowIndex: number, columnIndex: number): number;
+  export class MatrixFlipRowView extends Matrix {
+    constructor(matrix: Matrix);
   }
-  class MatrixRowView extends BaseView {
-    set(rowIndex: number, columnIndex: number, value: number): MatrixRowView;
-    get(rowIndex: number, columnIndex: number): number;
+  export class MatrixRowView extends Matrix {
+    constructor(matrix: Matrix, row: number);
   }
-  class MatrixRowSelectionView extends BaseView {
-    set(
-      rowIndex: number,
-      columnIndex: number,
-      value: number
-    ): MatrixRowSelectionView;
-    get(rowIndex: number, columnIndex: number): number;
+  export class MatrixRowSelectionView extends Matrix {
+    constructor(matrix: Matrix, rowIndices: number[]);
   }
-  class MatrixSelectionView extends BaseView {
-    set(
-      rowIndex: number,
-      columnIndex: number,
-      value: number
-    ): MatrixSelectionView;
-    get(rowIndex: number, columnIndex: number): number;
+  export class MatrixSelectionView extends Matrix {
+    constructor(matrix: Matrix, rowIndices: number[], columnIndices: number[]);
   }
-  class MatrixSubView extends BaseView {
-    set(rowIndex: number, columnIndex: number, value: number): MatrixSubView;
-    get(rowIndex: number, columnIndex: number): number;
+  export class MatrixSubView extends Matrix {
+    constructor(
+      matrix: Matrix,
+      startRow: number,
+      endRow: number,
+      startColumn: number,
+      endColumn: number
+    );
   }
-  class MatrixTransposeView extends BaseView {
-    set(
-      rowIndex: number,
-      columnIndex: number,
-      value: number
-    ): MatrixTransposeView;
-    get(rowIndex: number, columnIndex: number): number;
+  export class MatrixTransposeView extends BaseView {
+    constructor(matrix: Matrix);
   }
   export class Matrix {
     readonly size: number;
@@ -100,7 +72,7 @@ declare module 'ml-matrix' {
     static checkMatrix(value: any): Matrix;
     static isMatrix(value: any): value is Matrix;
 
-    apply(callback: Function): Matrix;
+    apply(callback: Function): this;
     to1DArray(): number[];
     to2DArray(): number[][];
     isRowVector(): boolean;
@@ -110,7 +82,7 @@ declare module 'ml-matrix' {
     isSymmetric(): boolean;
     isEchelonForm(): boolean;
     isReducedEchelonForm(): boolean;
-    set(rowIndex: number, columnIndex: number, value: number): Matrix;
+    set(rowIndex: number, columnIndex: number, value: number): this;
     get(rowIndex: number, columnIndex: number): number;
     repeat(rowRep: number, colRep: number): Matrix;
     fill(value: number): this;
@@ -224,26 +196,6 @@ declare module 'ml-matrix' {
     ): Matrix;
     selection(rowIndices: number[], columnIndices: number[]): Matrix;
     trace(): number;
-    transposeView(): MatrixTransposeView;
-    rowView(row: number): MatrixRowView;
-    columnView(column: number): MatrixColumnView;
-    flipRowView(): MatrixFlipRowView;
-    flipColumnView(): MatrixFlipColumnView;
-    subMatrixView(
-      startRow: number,
-      endRow: number,
-      startColumn: number,
-      endColumn: number
-    ): MatrixSubView;
-    selectionView(
-      rowIndices: number[],
-      columnIndices: number[]
-    ): MatrixSelectionView;
-    rowSelectionView(rowIndices: number[]): MatrixRowSelectionView;
-    columnSelectionView(columnIndices: number[]): MatrixColumnSelectionView;
-    det(): number;
-    determinant(): number;
-    pseudoInverse(threshold?: number): Matrix;
     clone(): Matrix;
     entropy(eps?: number): number;
     variance(unbiased?: boolean, means?: number[]): number[];
@@ -421,10 +373,17 @@ declare module 'ml-matrix' {
   export { QrDecomposition, QrDecomposition as QR };
 
   export function solve(
-    leftHandSide: Matrix,
-    rightHandSide: Matrix,
+    leftHandSide: MaybeMatrix,
+    rightHandSide: MaybeMatrix,
     useSVD?: boolean
   ): Matrix;
 
-  export function inverse(matrix: Matrix, useSVD?: boolean): Matrix;
+  export function inverse(matrix: MaybeMatrix, useSVD?: boolean): Matrix;
+
+  export function determinant(matrix: MaybeMatrix): number;
+
+  export function pseudoInverse(
+    matrix: MaybeMatrix,
+    threshold?: number
+  ): Matrix;
 }

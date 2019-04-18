@@ -1,10 +1,10 @@
-import { Matrix } from '../..';
+import { Matrix, MatrixColumnView } from '../..';
 
 describe('Column view', () => {
   it('should set and get row values', () => {
     const m = Matrix.ones(5, 8);
-    const mcv1 = m.columnView(2);
-    const mcv2 = m.columnView(3);
+    const mcv1 = new MatrixColumnView(m, 2);
+    const mcv2 = new MatrixColumnView(m, 3);
 
     m.set(2, 2, 12);
     m.set(0, 3, 5);

@@ -150,7 +150,7 @@ describe('Matrix creation', () => {
 
   it('Symbol.species should work for views', () => {
     var matrix = new Matrix([[1, 1, 1], [1, 1, 1]]);
-    var view = matrix.transposeView();
+    var view = new MatrixTransposeView(matrix);
     expect(matrix.transpose().mmul(matrix)).toStrictEqual(view.mmul(matrix));
   });
 
@@ -168,7 +168,9 @@ describe('Matrix creation', () => {
     expect(JSON.stringify(matrix)).toBe(json);
     const mat1D = wrap(matrix.to1DArray(), { rows: 2 });
     expect(JSON.stringify(mat1D)).toBe(json);
-    const transposeTwice = matrix.transposeView().transposeView();
+    const transposeTwice = new MatrixTransposeView(
+      new MatrixTransposeView(matrix)
+    );
     expect(JSON.stringify(transposeTwice)).toBe(json);
   });
 });

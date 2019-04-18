@@ -6,7 +6,7 @@ import {
   checkRowVector
 } from './util';
 
-export default class Matrix extends AbstractMatrix() {
+export default class Matrix extends AbstractMatrix {
   constructor(nRows, nColumns) {
     super();
     if (Matrix.isMatrix(nRows)) {

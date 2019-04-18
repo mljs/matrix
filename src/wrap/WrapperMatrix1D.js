@@ -1,7 +1,7 @@
 import AbstractMatrix from '../abstractMatrix';
 import Matrix from '../matrix';
 
-export default class WrapperMatrix1D extends AbstractMatrix() {
+export default class WrapperMatrix1D extends AbstractMatrix {
   /**
    * @class WrapperMatrix1D
    * @param {Array<number>} data

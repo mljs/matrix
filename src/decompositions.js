@@ -1,8 +1,8 @@
 import LuDecomposition from './dc/lu';
 import QrDecomposition from './dc/qr';
 import SingularValueDecomposition from './dc/svd';
-
-import { Matrix, WrapperMatrix2D } from './index';
+import Matrix from './matrix';
+import WrapperMatrix2D from './wrap/WrapperMatrix2D';
 
 /**
  * Computes the inverse of a Matrix

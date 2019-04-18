@@ -52,7 +52,7 @@ export function linearDependencies(matrix, options = {}) {
 
   for (var i = 0; i < n; i++) {
     var b = Matrix.columnVector(matrix.getRow(i));
-    var Abis = matrix.subMatrixRow(xrange(n, i)).transposeView();
+    var Abis = matrix.subMatrixRow(xrange(n, i)).transpose();
     var svd = new SingularValueDecomposition(Abis);
     var x = svd.solve(b);
     var error = Matrix.sub(b, Abis.mmul(x))

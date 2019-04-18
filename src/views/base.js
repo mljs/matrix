@@ -1,7 +1,7 @@
 import AbstractMatrix from '../abstractMatrix';
 import Matrix from '../matrix';
 
-export default class BaseView extends AbstractMatrix() {
+export default class BaseView extends AbstractMatrix {
   constructor(matrix, rows, columns) {
     super();
     this.matrix = matrix;
