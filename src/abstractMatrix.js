@@ -299,6 +299,10 @@ export default function AbstractMatrix(superCtor) {
       return copy;
     }
 
+    toJSON() {
+      return this.to2DArray();
+    }
+
     /**
      * @return {boolean} true if the matrix has one row
      */

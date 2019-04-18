@@ -1,4 +1,4 @@
-import { Matrix } from '../..';
+import { Matrix, wrap } from '../..';
 import MatrixTransposeView from '../../views/transpose';
 import * as util from '../../../testUtils';
 
@@ -159,5 +159,16 @@ describe('Matrix creation', () => {
     var b = [[3, 1]];
     expect(Matrix.subtract(a, b).to2DArray()).toStrictEqual([[-2, 1]]);
     expect(MatrixTransposeView.subtract(a, b).to2DArray()).toStrictEqual([[-2, 1]]);
+  });
+
+  it('JSON.stringify should always return a 2D array', () => {
+    const data = [[0, 1], [2, 3]];
+    const json = JSON.stringify(data);
+    const matrix = new Matrix(data);
+    expect(JSON.stringify(matrix)).toBe(json);
+    const mat1D = wrap(matrix.to1DArray(), { rows: 2 });
+    expect(JSON.stringify(mat1D)).toBe(json);
+    const transposeTwice = matrix.transposeView().transposeView();
+    expect(JSON.stringify(transposeTwice)).toBe(json);
   });
 });
