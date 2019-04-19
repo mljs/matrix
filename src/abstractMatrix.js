@@ -1720,9 +1720,9 @@ var inplaceOperator = `
 var inplaceOperatorScalar = `
 (function %name%S(value) {
   for (var i = 0; i < this.rows; i++) {
-      for (var j = 0; j < this.columns; j++) {
-          this.set(i, j, this.get(i, j) %op% value);
-      }
+    for (var j = 0; j < this.columns; j++) {
+      this.set(i, j, this.get(i, j) %op% value);
+    }
   }
   return this;
 })
@@ -1732,13 +1732,13 @@ var inplaceOperatorMatrix = `
 (function %name%M(matrix) {
   matrix = this.constructor.checkMatrix(matrix);
   if (this.rows !== matrix.rows ||
-      this.columns !== matrix.columns) {
-      throw new RangeError('Matrices dimensions must be equal');
+    this.columns !== matrix.columns) {
+    throw new RangeError('Matrices dimensions must be equal');
   }
   for (var i = 0; i < this.rows; i++) {
-      for (var j = 0; j < this.columns; j++) {
-          this.set(i, j, this.get(i, j) %op% matrix.get(i, j));
-      }
+    for (var j = 0; j < this.columns; j++) {
+      this.set(i, j, this.get(i, j) %op% matrix.get(i, j));
+    }
   }
   return this;
 })
@@ -1754,9 +1754,9 @@ var staticOperator = `
 var inplaceMethod = `
 (function %name%() {
   for (var i = 0; i < this.rows; i++) {
-      for (var j = 0; j < this.columns; j++) {
-          this.set(i, j, %method%(this.get(i, j)));
-      }
+    for (var j = 0; j < this.columns; j++) {
+      this.set(i, j, %method%(this.get(i, j)));
+    }
   }
   return this;
 })
@@ -1772,9 +1772,9 @@ var staticMethod = `
 var inplaceMethodWithArgs = `
 (function %name%(%args%) {
   for (var i = 0; i < this.rows; i++) {
-      for (var j = 0; j < this.columns; j++) {
-          this.set(i, j, %method%(this.get(i, j), %args%));
-      }
+    for (var j = 0; j < this.columns; j++) {
+      this.set(i, j, %method%(this.get(i, j), %args%));
+    }
   }
   return this;
 })
@@ -1790,9 +1790,9 @@ var staticMethodWithArgs = `
 var inplaceMethodWithOneArgScalar = `
 (function %name%S(value) {
   for (var i = 0; i < this.rows; i++) {
-      for (var j = 0; j < this.columns; j++) {
-          this.set(i, j, %method%(this.get(i, j), value));
-      }
+    for (var j = 0; j < this.columns; j++) {
+      this.set(i, j, %method%(this.get(i, j), value));
+    }
   }
   return this;
 })
@@ -1801,13 +1801,13 @@ var inplaceMethodWithOneArgMatrix = `
 (function %name%M(matrix) {
   matrix = this.constructor.checkMatrix(matrix);
   if (this.rows !== matrix.rows ||
-      this.columns !== matrix.columns) {
-      throw new RangeError('Matrices dimensions must be equal');
+    this.columns !== matrix.columns) {
+    throw new RangeError('Matrices dimensions must be equal');
   }
   for (var i = 0; i < this.rows; i++) {
-      for (var j = 0; j < this.columns; j++) {
-          this.set(i, j, %method%(this.get(i, j), matrix.get(i, j)));
-      }
+    for (var j = 0; j < this.columns; j++) {
+      this.set(i, j, %method%(this.get(i, j), matrix.get(i, j)));
+    }
   }
   return this;
 })
