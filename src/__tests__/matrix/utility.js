@@ -279,12 +279,14 @@ describe('utility methods', () => {
     expect(result[2][0]).toBeCloseTo(0.24390244, 5);
     expect(result[2][1]).toBeCloseTo(0.07317073, 5);
   });
+
   it('isEchelonForm', () => {
     var matrix = new Matrix([[1, 0], [0, 1]]);
     var matrix2 = new Matrix([[2, 1], [1, 1]]);
     expect(matrix.isEchelonForm()).toStrictEqual(true);
     expect(matrix2.isEchelonForm()).toStrictEqual(false);
   });
+
   it('isReducedEchelonForm', () => {
     var matrix = new Matrix([[1, 0], [0, 1]]);
     var matrix2 = new Matrix([[1, 1], [0, 1]]);
