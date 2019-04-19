@@ -46,6 +46,7 @@ function dependenciesOneRow(
 
 export function linearDependencies(matrix, options = {}) {
   const { thresholdValue = 10e-10, thresholdError = 10e-10 } = options;
+  matrix = Matrix.checkMatrix(matrix);
 
   var n = matrix.rows;
   var results = new Matrix(n, n);

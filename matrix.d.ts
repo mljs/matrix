@@ -382,6 +382,15 @@ declare module 'ml-matrix' {
 
   export function determinant(matrix: MaybeMatrix): number;
 
+  export interface ILinearDependenciesOptions {
+    thresholdValue?: number;
+    thresholdError?: number;
+  }
+  export function linearDependencies(
+    matrix: MaybeMatrix,
+    options?: ILinearDependenciesOptions
+  ): Matrix;
+
   export function pseudoInverse(
     matrix: MaybeMatrix,
     threshold?: number
