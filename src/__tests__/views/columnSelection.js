@@ -7,6 +7,7 @@ describe('Selection column view', () => {
 
     expect(m.get(0, 2)).toBe(1);
     msv.set(0, 1, 5);
+    expect(msv.get(0, 1)).toBe(5);
     expect(m.get(0, 2)).toBe(5);
   });
 

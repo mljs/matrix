@@ -6,6 +6,7 @@ describe('Sub view', () => {
     const msv = new MatrixSubView(m, 3, 4, 6, 7);
     expect(m.get(4, 7)).toBe(1);
     msv.set(1, 1, 20);
+    expect(msv.get(1, 1)).toBe(20);
     expect(m.get(4, 7)).toBe(20);
   });
 

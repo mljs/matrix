@@ -7,6 +7,7 @@ describe('Selection view', () => {
 
     expect(m.get(1, 0)).toBe(1);
     msv.set(0, 0, 5);
+    expect(msv.get(0, 0)).toBe(5);
     expect(m.get(1, 0)).toBe(5);
   });
 
