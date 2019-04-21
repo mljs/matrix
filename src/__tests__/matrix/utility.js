@@ -49,6 +49,13 @@ describe('utility methods', () => {
     expect(called).toBe(30);
   });
 
+  it('should throw if apply is called without a callback', () => {
+    expect(() => matrix.apply()).toThrow(/^callback must be a function$/);
+    expect(() => matrix.apply(null)).toThrow(/^callback must be a function$/);
+    expect(() => matrix.apply(1)).toThrow(/^callback must be a function$/);
+    expect(() => matrix.apply([])).toThrow(/^callback must be a function$/);
+  });
+
   it('clone', () => {
     var clone = matrix.clone();
     expect(clone).not.toBe(matrix);
@@ -292,5 +299,47 @@ describe('utility methods', () => {
     var matrix2 = new Matrix([[1, 1], [0, 1]]);
     expect(matrix.isReducedEchelonForm()).toStrictEqual(true);
     expect(matrix2.isReducedEchelonForm()).toStrictEqual(false);
+  });
+
+  it('isRowVector', () => {
+    var m = new Matrix(1, 3);
+    expect(m.isRowVector()).toBe(true);
+    m = new Matrix(3, 1);
+    expect(m.isRowVector()).toBe(false);
+    m = new Matrix(4, 5);
+    expect(m.isRowVector()).toBe(false);
+  });
+
+  it('isColumnVector', () => {
+    var m = new Matrix(1, 3);
+    expect(m.isColumnVector()).toBe(false);
+    m = new Matrix(3, 1);
+    expect(m.isColumnVector()).toBe(true);
+    m = new Matrix(4, 5);
+    expect(m.isColumnVector()).toBe(false);
+  });
+
+  it('isVector', () => {
+    var m = new Matrix(1, 3);
+    expect(m.isVector()).toBe(true);
+    m = new Matrix(3, 1);
+    expect(m.isVector()).toBe(true);
+    m = new Matrix(4, 5);
+    expect(m.isVector()).toBe(false);
+  });
+
+  it('isSymmetric', () => {
+    var m = new Matrix([[1, 0, 2], [0, 4, 9], [2, 9, 3]]);
+    expect(m.isSymmetric()).toBe(true);
+    m = new Matrix([[1, 0, 4], [0, 4, 1], [2, 9, 3]]);
+    expect(m.isSymmetric()).toBe(false);
+    m = new Matrix([[1, 0, 2], [0, 4, 9]]);
+    expect(m.isSymmetric()).toBe(false);
+  });
+
+  it('neg', () => {
+    var m = new Matrix([[-1, 0, 2], [3, -42, 4]]);
+    m.neg();
+    expect(m.to2DArray()).toStrictEqual([[1, -0, -2], [-3, 42, -4]]);
   });
 });
