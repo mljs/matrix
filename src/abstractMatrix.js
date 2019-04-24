@@ -16,8 +16,7 @@ import {
   productByColumn,
   productAll
 } from './stat';
-
-const inspect = Symbol.for('nodejs.util.inspect.custom');
+import { inspectMatrix } from './inspect';
 
 export default class AbstractMatrix {
   static get [Symbol.species]() {
@@ -1675,20 +1674,10 @@ export default class AbstractMatrix {
     }
     return variance;
   }
-
-  [inspect](_, options) {
-    const { indentationLvl } = options;
-    const indent = ' '.repeat(indentationLvl + 2);
-    const indentData = ' '.repeat(indentationLvl + 4);
-    return `${this.constructor.name} {
-${indent}[ ${inspectData(this, indentData)} ]
-${indent}rows: ${this.rows},
-${indent}columns: ${this.columns}
-${' '.repeat(indentationLvl)}}`;
-  }
 }
 
 AbstractMatrix.prototype.klass = 'Matrix';
+AbstractMatrix.prototype[Symbol.for('nodejs.util.inspect.custom')] = inspectMatrix;
 
 function compareNumbers(a, b) {
   return a - b;
@@ -1978,16 +1967,4 @@ function fillTemplateFunction(template, values) {
     template = template.replace(new RegExp(`%${value}%`, 'g'), values[value]);
   }
   return template;
-}
-
-function inspectData(matrix, indent) {
-  const result = [];
-  for (var i = 0; i < matrix.rows; i++) {
-    let line = [];
-    for (var j = 0; j < matrix.columns; j++) {
-      line.push(Math.round(matrix.get(i, j) * 1000) / 1000);
-    }
-    result.push(`[ ${line.join(', ')} ]`);
-  }
-  return result.join(`\n${indent}`);
 }
