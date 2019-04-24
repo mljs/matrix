@@ -1,14 +1,13 @@
-export function inspectMatrix(depth, options) {
-  const { indentationLvl } = options;
-  const indent = ' '.repeat(indentationLvl + 2);
-  const indentData = ' '.repeat(indentationLvl + 4);
+export function inspectMatrix() {
+  const indent = ' '.repeat(2);
+  const indentData = ' '.repeat(4);
   return `${this.constructor.name} {
 ${indent}[
 ${indentData}${inspectData(this, indentData)}
 ${indent}]
 ${indent}rows: ${this.rows}
 ${indent}columns: ${this.columns}
-${' '.repeat(indentationLvl)}}`;
+}`;
 }
 
 const maxRows = 15;

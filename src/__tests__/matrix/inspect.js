@@ -2,7 +2,7 @@ import { inspect } from 'util';
 
 import { Matrix } from '../..';
 
-if (process.version.startsWith('8.')) {
+if (process.version.startsWith('v8.')) {
   test('custom Node.js inspect (8.x)', () => {
     expect(true).toBe(true);
   });
