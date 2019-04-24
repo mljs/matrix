@@ -166,8 +166,8 @@ declare module 'ml-matrix' {
     mmulStrassen(y: Matrix): Matrix;
     scaleRows(min?: number, max?: number): Matrix;
     scaleColumns(min?: number, max?: number): Matrix;
-    reverseRows(): this;
-    reverseColumns(): this;
+    flipRows(): this;
+    flipColumns(): this;
     kroneckerProduct(other: Matrix): Matrix;
     tensorProduct(other: Matrix): Matrix;
     transpose(): Matrix;

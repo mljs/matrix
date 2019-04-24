@@ -1363,7 +1363,7 @@ export default class AbstractMatrix {
     return newMatrix;
   }
 
-  reverseRows() {
+  flipRows() {
     const middle = Math.ceil(this.columns / 2);
     for (var i = 0; i < this.rows; i++) {
       for (var j = 0; j < middle; j++) {
@@ -1376,7 +1376,7 @@ export default class AbstractMatrix {
     return this;
   }
 
-  reverseColumns() {
+  flipColumns() {
     const middle = Math.ceil(this.rows / 2);
     for (var j = 0; j < this.columns; j++) {
       for (var i = 0; i < middle; i++) {
