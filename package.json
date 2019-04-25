@@ -5,6 +5,7 @@
   "main": "matrix.js",
   "module": "src/index.js",
   "types": "matrix.d.ts",
+  "sideEffects": false,
   "files": [
     "matrix.d.ts",
     "matrix.js",

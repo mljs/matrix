@@ -1,4 +1,4 @@
-import SvDecomposition from './dc/svd';
+import SVD from './dc/svd';
 import Matrix from './matrix';
 
 /**
@@ -8,7 +8,7 @@ import Matrix from './matrix';
  */
 export function pseudoInverse(matrix, threshold = Number.EPSILON) {
   matrix = Matrix.checkMatrix(matrix);
-  var svdSolution = new SvDecomposition(matrix, { autoTranspose: true });
+  var svdSolution = new SVD(matrix, { autoTranspose: true });
 
   var U = svdSolution.leftSingularVectors;
   var V = svdSolution.rightSingularVectors;
@@ -22,7 +22,5 @@ export function pseudoInverse(matrix, threshold = Number.EPSILON) {
     }
   }
 
-  // convert list to diagonal
-  s = matrix.constructor[Symbol.species].diag(s);
-  return V.mmul(s.mmul(U.transpose()));
+  return V.mmul(Matrix.diag(s).mmul(U.transpose()));
 }

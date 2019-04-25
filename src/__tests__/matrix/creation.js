@@ -67,7 +67,7 @@ describe('Matrix creation', () => {
     expect(matrix.rows).toBe(3);
     expect(matrix.columns).toBe(2);
     expect(() => Matrix.from1DArray(3, 2, [0, 1, 2, 3])).toThrow(
-      /^Data length does not match given dimensions$/
+      /^data length does not match given dimensions$/
     );
   });
 
@@ -109,7 +109,7 @@ describe('Matrix creation', () => {
 
   it('random with custom RNG', () => {
     var fakeRNG = () => 2;
-    expect(Matrix.rand(2, 2, fakeRNG).to2DArray()).toStrictEqual([
+    expect(Matrix.rand(2, 2, { random: fakeRNG }).to2DArray()).toStrictEqual([
       [2, 2],
       [2, 2]
     ]);
@@ -148,13 +148,13 @@ describe('Matrix creation', () => {
     ]);
   });
 
-  it('Symbol.species should work for views', () => {
+  it('views should return new instances of Matrix', () => {
     var matrix = new Matrix([[1, 1, 1], [1, 1, 1]]);
     var view = new MatrixTransposeView(matrix);
     expect(matrix.transpose().mmul(matrix)).toStrictEqual(view.mmul(matrix));
   });
 
-  it('Symbol.species should work on static evaluated methods', () => {
+  it('static evaluated methods should return new instances of Matrix', () => {
     var a = [[1, 2]];
     var b = [[3, 1]];
     expect(Matrix.subtract(a, b).to2DArray()).toStrictEqual([[-2, 1]]);

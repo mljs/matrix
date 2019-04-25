@@ -144,16 +144,16 @@ describe('utility methods', () => {
       [0, 1 / 2, 1],
       [0, 1, 1 / 3]
     ]);
-    expect(matrix.scaleRows(1, 2).to2DArray()).toStrictEqual([
+    expect(matrix.scaleRows({ min: 1, max: 2 }).to2DArray()).toStrictEqual([
       [1, 3 / 2, 2],
       [1, 2, 4 / 3]
     ]);
-    expect(matrix.scaleRows(-2, -1).to2DArray()).toStrictEqual([
+    expect(matrix.scaleRows({ min: -2, max: -1 }).to2DArray()).toStrictEqual([
       [-2, -3 / 2, -1],
       [-2, -1, -5 / 3]
     ]);
-    expect(() => matrix.scaleRows(2, 1)).toThrow(
-      /min should be strictly smaller than max/
+    expect(() => matrix.scaleRows({ min: 2, max: 1 })).toThrow(
+      /^min must be smaller than max$/
     );
   });
 
@@ -164,18 +164,16 @@ describe('utility methods', () => {
       [0, 1 / 2],
       [1, 1]
     ]);
-    expect(matrix.scaleColumns(1, 2).to2DArray()).toStrictEqual([
+    expect(matrix.scaleColumns({ min: 1, max: 2 }).to2DArray()).toStrictEqual([
       [13 / 7, 1],
       [1, 3 / 2],
       [2, 2]
     ]);
-    expect(matrix.scaleColumns(-2, -1).to2DArray()).toStrictEqual([
-      [-8 / 7, -2],
-      [-2, -3 / 2],
-      [-1, -1]
-    ]);
-    expect(() => matrix.scaleColumns(2, 1)).toThrow(
-      /min should be strictly smaller than max/
+    expect(matrix.scaleColumns({ min: -2, max: -1 }).to2DArray()).toStrictEqual(
+      [[-8 / 7, -2], [-2, -3 / 2], [-1, -1]]
+    );
+    expect(() => matrix.scaleColumns({ min: 2, max: 1 })).toThrow(
+      /^min must be smaller than max$/
     );
   });
 
@@ -203,13 +201,13 @@ describe('utility methods', () => {
   it('repeat matrix', () => {
     var matrix = new Matrix([[1, 2], [3, 4]]);
     expect(matrix.repeat().to2DArray()).toStrictEqual([[1, 2], [3, 4]]);
-    expect(matrix.repeat(2, 2).to2DArray()).toStrictEqual([
+    expect(matrix.repeat({ rows: 2, columns: 2 }).to2DArray()).toStrictEqual([
       [1, 2, 1, 2],
       [3, 4, 3, 4],
       [1, 2, 1, 2],
       [3, 4, 3, 4]
     ]);
-    expect(matrix.repeat(1, 2).to2DArray()).toStrictEqual([
+    expect(matrix.repeat({ columns: 2 }).to2DArray()).toStrictEqual([
       [1, 2, 1, 2],
       [3, 4, 3, 4]
     ]);

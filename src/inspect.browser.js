@@ -1,3 +1,3 @@
-export function addInspect() {
+export function inspectMatrix() {
   // noop
 }

@@ -1,15 +1,15 @@
-export { default, default as Matrix } from './matrix';
-export { default as AbstractMatrix } from './abstractMatrix';
+export { AbstractMatrix, default, default as Matrix } from './matrix';
 export * from './views/index';
 
 export { wrap } from './wrap/wrap';
-export { default as WrapperMatrix2D } from './wrap/WrapperMatrix2D';
 export { default as WrapperMatrix1D } from './wrap/WrapperMatrix1D';
+export { default as WrapperMatrix2D } from './wrap/WrapperMatrix2D';
 
 export { solve, inverse } from './decompositions';
 export { determinant } from './determinant';
 export { linearDependencies } from './linearDependencies';
 export { pseudoInverse } from './pseudoInverse';
+
 export {
   default as SingularValueDecomposition,
   default as SVD
