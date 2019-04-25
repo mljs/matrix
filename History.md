@@ -2,6 +2,122 @@
 
 
 
+# [6.0.0-6](https://github.com/mljs/matrix/compare/v6.0.0-5...v6.0.0-6) (2019-04-25)
+
+
+### Bug Fixes
+
+* add linearDependencies to TS definitions ([22c4f60](https://github.com/mljs/matrix/commit/22c4f60))
+
+
+### Code Refactoring
+
+* rework a lot of things ([1b3cb03](https://github.com/mljs/matrix/commit/1b3cb03))
+
+
+### Features
+
+* add a custom Node.js inspect function ([cb51169](https://github.com/mljs/matrix/commit/cb51169))
+* rename reverse methods to split ([def2977](https://github.com/mljs/matrix/commit/def2977))
+
+
+### BREAKING CHANGES
+
+* The signature of a few methods changed to take an options object:
+- Matrix.rand / Matrix.random
+- Matrix.randInt
+- Matrix.prototype.repeat
+- Matrix.prototype.scaleRows
+- Matrix.prototype.scaleColumns
+
+
+
+# [6.0.0-5](https://github.com/mljs/matrix/compare/v6.0.0-4...v6.0.0-5) (2019-04-18)
+
+
+### Code Refactoring
+
+* remove configurable super class and circular dependencies ([dd35ec8](https://github.com/mljs/matrix/commit/dd35ec8))
+
+
+### BREAKING CHANGES
+
+* * It is no longer possible to make a Matrix class that extends a custom constructor
+* `matrix.det()` was moved to a standalone function: `determinant(matrix)`
+* `matrix.pseudoInverse()` was moved to a standalone function: `pseudoInverse(matrix)`
+* `matrix.linearDependencies()` was moved to a standalone function: `linearDependencies(matrix)`
+* Matrix views must be created using their constructors instead of Matrix methods.
+  For example, `matrix.transposeView()` becomes `new MatrixTransposeView(matrix)`
+
+
+
+# [6.0.0-4](https://github.com/mljs/matrix/compare/v6.0.0-3...v6.0.0-4) (2019-04-18)
+
+
+### Features
+
+* implement reverseRows and reverseColumns methods ([77e5ed7](https://github.com/mljs/matrix/commit/77e5ed7))
+
+
+
+# [6.0.0-3](https://github.com/mljs/matrix/compare/v6.0.0-2...v6.0.0-3) (2019-04-18)
+
+
+
+# [6.0.0-2](https://github.com/mljs/matrix/compare/v6.0.0-1...v6.0.0-2) (2019-04-18)
+
+
+### Features
+
+* make JSON.stringify always return a 2D array from any matrix ([021115b](https://github.com/mljs/matrix/commit/021115b))
+
+
+
+# [6.0.0-1](https://github.com/mljs/matrix/compare/v6.0.0-0...v6.0.0-1) (2019-04-18)
+
+
+### Code Refactoring
+
+* make sum by row or column return an array ([dbe7c99](https://github.com/mljs/matrix/commit/dbe7c99))
+
+
+### Features
+
+* add entropy method ([63b95d1](https://github.com/mljs/matrix/commit/63b95d1))
+* add mean by dimension and product methods ([6b57aae](https://github.com/mljs/matrix/commit/6b57aae))
+* add variance and standardDeviation methods ([f42f1b6](https://github.com/mljs/matrix/commit/f42f1b6))
+
+
+### BREAKING CHANGES
+
+* `matrix.sum('row')` and `matrix.sum('column')` now return an array instead of a Matrix.
+
+
+
+# [6.0.0-0](https://github.com/mljs/matrix/compare/v5.3.0...v6.0.0-0) (2019-04-18)
+
+
+### chore
+
+* remove support for Node 6 ([42e4fde](https://github.com/mljs/matrix/commit/42e4fde))
+
+
+### Code Refactoring
+
+* stop extending Array ([1837678](https://github.com/mljs/matrix/commit/1837678))
+
+
+### BREAKING CHANGES
+
+* Node.js 6 is no longer supported.
+* * Matrix no longer extends the Array class. It means that it is not
+  possible to access and set values using array indices (e.g. matrix[i][j]).
+  The only supported way is to use matrix.get() and matrix.set().
+* New matrices are now always filled with zeros instead of `undefined`.
+* The static Matrix.empty() function was removed.
+
+
+
 # [5.3.0](https://github.com/mljs/matrix/compare/v5.2.1...v5.3.0) (2019-03-23)
 
 
@@ -26,7 +142,6 @@
 
 
 
-<a name="5.2.0"></a>
 # [5.2.0](https://github.com/mljs/matrix/compare/v5.1.1...v5.2.0) (2018-09-25)
 
 
@@ -41,7 +156,6 @@
 
 
 
-<a name="5.1.1"></a>
 ## [5.1.1](https://github.com/mljs/matrix/compare/v5.1.0...v5.1.1) (2018-05-11)
 
 
@@ -51,7 +165,6 @@
 
 
 
-<a name="5.1.0"></a>
 # [5.1.0](https://github.com/mljs/matrix/compare/v5.0.1...v5.1.0) (2018-05-04)
 
 
@@ -66,7 +179,6 @@
 
 
 
-<a name="5.0.1"></a>
 ## [5.0.1](https://github.com/mljs/matrix/compare/v5.0.0...v5.0.1) (2017-07-28)
 
 
@@ -78,7 +190,6 @@
 
 
 
-<a name="5.0.0"></a>
 # [5.0.0](https://github.com/mljs/matrix/compare/v4.0.0...v5.0.0) (2017-07-21)
 
 
@@ -93,7 +204,6 @@
 
 
 
-<a name="4.0.0"></a>
 # [4.0.0](https://github.com/mljs/matrix/compare/v3.0.0...v4.0.0) (2017-07-19)
 
 
@@ -104,10 +214,9 @@
 
 ### Features
 
-* add norm method ([#57](https://github.com/mljs/matrix/issues/57)) ([221391a](https://github.com/mljs/matrix/commit/221391a))
-* add useSVD parameter to the solve function ([#56](https://github.com/mljs/matrix/pull/56))
-* allows to select only rows or columns as view ([#51](https://github.com/mljs/matrix/issues/51)) ([46eb916](https://github.com/mljs/matrix/commit/46eb916))
 * **wrap:** create a 2D or 1D WrapperMatrix ([#52](https://github.com/mljs/matrix/issues/52)) ([7900d67](https://github.com/mljs/matrix/commit/7900d67))
+* add norm method ([#57](https://github.com/mljs/matrix/issues/57)) ([221391a](https://github.com/mljs/matrix/commit/221391a))
+* allows to select only rows or columns as view ([#51](https://github.com/mljs/matrix/issues/51)) ([46eb916](https://github.com/mljs/matrix/commit/46eb916))
 
 
 ### BREAKING CHANGES
@@ -116,16 +225,10 @@
 
 
 
-<a name="3.0.0"></a>
 # [3.0.0](https://github.com/mljs/matrix/compare/v2.3.0...v3.0.0) (2017-04-25)
 
 
-### BREAKING CHANGES
 
-* The library has been migrated to ES module syntax. The different parts are now available as named exports.
-* The `solve` and `inverse` methods have been removed from the `Matrix` prototype and are now only available as individual exports.
-
-<a name="2.3.0"></a>
 # [2.3.0](https://github.com/mljs/matrix/compare/v2.2.0...v2.3.0) (2017-02-28)
 
 
@@ -135,7 +238,6 @@
 
 
 
-<a name="2.2.0"></a>
 # [2.2.0](https://github.com/mljs/matrix/compare/v2.1.0...v2.2.0) (2016-12-14)
 
 
@@ -154,7 +256,6 @@
 
 
 
-<a name="2.1.0"></a>
 # [2.1.0](https://github.com/mljs/matrix/compare/v2.0.0...v2.1.0) (2016-10-07)
 
 
@@ -168,25 +269,35 @@
 
 * add fast multiplication algorithm (strassen) ([fdc1c07](https://github.com/mljs/matrix/commit/fdc1c07))
 * add maxValue option to Matrix.randInt ([e5a8541](https://github.com/mljs/matrix/commit/e5a8541))
-* add value parameter to Matrix.eye ([f52e4fd](https://github.com/mljs/matrix/commit/f52e4fd))
+* add value parameter to Matrix.eye ([f52e4fd](https://github.com/mljs/matrix/commit/f52e4fd)), closes [#43](https://github.com/mljs/matrix/issues/43)
 * implement optimized algorithm for 2x2 and 3x3 multiplication ([4055ef9](https://github.com/mljs/matrix/commit/4055ef9))
 
 
 
-<a name="2.0.0"></a>
 # [2.0.0](https://github.com/mljs/matrix/compare/v1.4.0...v2.0.0) (2016-08-04)
 
 
 ### Features
 
 * add column view ([5ff6680](https://github.com/mljs/matrix/commit/5ff6680))
-* add concept of abstract matrix ([cbefc9b](https://github.com/mljs/matrix/commit/cbefc9b))
 * add flipColumn and flipRow views ([55ee4a6](https://github.com/mljs/matrix/commit/55ee4a6))
 * add method subMatrixView ([aa1df18](https://github.com/mljs/matrix/commit/aa1df18))
 * add row view ([a9e99f2](https://github.com/mljs/matrix/commit/a9e99f2))
 * add selection method and selection view ([59aa861](https://github.com/mljs/matrix/commit/59aa861))
-* add transposeView ([fb0a0c9](https://github.com/mljs/matrix/commit/fb0a0c9))
 * make use of Symbol.species to allow creating new matrices in any class ([eaee5de](https://github.com/mljs/matrix/commit/eaee5de))
+
+
+
+# [1.4.0](https://github.com/mljs/matrix/compare/v1.3.0...v1.4.0) (2016-08-03)
+
+
+### Features
+
+* add concept of abstract matrix ([cbefc9b](https://github.com/mljs/matrix/commit/cbefc9b))
+* add method setSubMatrix ([89b4242](https://github.com/mljs/matrix/commit/89b4242))
+* add method with one argument template ([b66ee9f](https://github.com/mljs/matrix/commit/b66ee9f))
+* add repeat method ([8b9eecb](https://github.com/mljs/matrix/commit/8b9eecb))
+* add transposeView ([fb0a0c9](https://github.com/mljs/matrix/commit/fb0a0c9))
 
 
 ### BREAKING CHANGES
@@ -196,19 +307,6 @@ There is no known backward incompatibility though.
 
 
 
-<a name="1.4.0"></a>
-# [1.4.0](https://github.com/mljs/matrix/compare/v1.3.0...v1.4.0) (2016-08-03)
-
-
-### Features
-
-* add method setSubMatrix ([89b4242](https://github.com/mljs/matrix/commit/89b4242))
-* add method with one argument template ([b66ee9f](https://github.com/mljs/matrix/commit/b66ee9f))
-* add repeat method ([8b9eecb](https://github.com/mljs/matrix/commit/8b9eecb))
-
-
-
-<a name="1.3.0"></a>
 # [1.3.0](https://github.com/mljs/matrix/compare/v1.2.1...v1.3.0) (2016-07-25)
 
 
@@ -218,7 +316,6 @@ There is no known backward incompatibility though.
 
 
 
-<a name="1.2.1"></a>
 ## [1.2.1](https://github.com/mljs/matrix/compare/v1.2.0...v1.2.1) (2016-07-07)
 
 
@@ -228,90 +325,89 @@ There is no known backward incompatibility though.
 
 
 
-<a name="1.2.0"></a>
 # [1.2.0](https://github.com/mljs/matrix/compare/v1.1.5...v1.2.0) (2016-07-07)
 
 
 ### Features
 
-* add support for Math.pow ([2524b73](https://github.com/mljs/matrix/commit/2524b73))
+* add support for Math.pow ([2524b73](https://github.com/mljs/matrix/commit/2524b73)), closes [#21](https://github.com/mljs/matrix/issues/21)
 
 
 
-1.1.5 / 2016-05-31
-==================
+## [1.1.5](https://github.com/mljs/matrix/compare/v1.1.4...v1.1.5) (2016-05-31)
 
-* EVD: add assumeSymmetric option
 
-1.1.4 / 2016-05-27
-==================
 
-* add support of Symbol.species for Chrome 51
+## [1.1.4](https://github.com/mljs/matrix/compare/v1.1.3...v1.1.4) (2016-05-27)
 
-1.1.2 / 2016-05-18
-==================
 
-* fix EVD bug introduced in last version
 
-1.1.1 / 2016-05-18
-==================
+## [1.1.3](https://github.com/mljs/matrix/compare/v1.1.2...v1.1.3) (2016-05-27)
 
-* make EVD compatible with SparseMatrix
 
-1.1.0 / 2016-05-13
-==================
 
-* add kroneckerProduct method
+## [1.1.2](https://github.com/mljs/matrix/compare/v1.1.1...v1.1.2) (2016-05-18)
 
-1.0.4 / 2015-11-21
-==================
 
-* only include src directory on publish
 
-1.0.3 / 2015-11-19
-==================
+## [1.1.1](https://github.com/mljs/matrix/compare/v1.1.0...v1.1.1) (2016-05-18)
 
-* random not correctly filling rectangular matrices
 
-1.0.2 / 2015-10-05
-==================
 
-* remove const and let for Safari support
+# [1.1.0](https://github.com/mljs/matrix/compare/v1.0.4...v1.1.0) (2016-05-13)
 
-1.0.0 / 2015-09-10
-==================
 
-* rename xxxFactor to xxxMatrix in decompositions
-* add static min and max methods
-* add fullname synonyms for some methods
-* support all arithmetic operators and Math functions including static versions
-* convert project to use ES2015 classes
-* fix abs method not returning `this`
 
-0.1.0 / 2015-06-11
-==================
+## [1.0.4](https://github.com/mljs/matrix/compare/v1.0.3...v1.0.4) (2015-11-21)
 
-* use standard errors, remove MatrixError
-* implement getColumnVector and getRowVector
 
-0.0.4 / 2015-06-11
-==================
 
-* authorize call of decompositions without new
-* fix bug in svd.inverse
-* check for matrix argument in mmul
+## [1.0.3](https://github.com/mljs/matrix/compare/v1.0.2...v1.0.3) (2015-11-19)
 
-0.0.3 / 2015-04-24
-==================
 
-* use Array.isArray
+### Bug Fixes
 
-0.0.2 / 2015-03-16
-==================
+* random not correctly filling rectangular matrices ([a79c3eb](https://github.com/mljs/matrix/commit/a79c3eb))
 
-* add matrix.inverse() and matrix.solve(other)
 
-0.0.1 / 2014-10-24
-==================
 
-* first release
+## [1.0.2](https://github.com/mljs/matrix/compare/v1.0.1...v1.0.2) (2015-10-05)
+
+
+
+## [1.0.1](https://github.com/mljs/matrix/compare/v1.0.0...v1.0.1) (2015-09-11)
+
+
+
+# [1.0.0](https://github.com/mljs/matrix/compare/v1.0.0-0...v1.0.0) (2015-09-10)
+
+
+
+# [1.0.0-0](https://github.com/mljs/matrix/compare/v0.1.0...v1.0.0-0) (2015-09-09)
+
+
+### Bug Fixes
+
+* **matrix:** abs method should return the instance ([cd96b4b](https://github.com/mljs/matrix/commit/cd96b4b))
+
+
+### Features
+
+* add fullname synonyms for some methods ([4845a43](https://github.com/mljs/matrix/commit/4845a43))
+* add static min and max methods ([41707af](https://github.com/mljs/matrix/commit/41707af))
+* support all arithmetic operators and Math functions including static versions ([521e4fe](https://github.com/mljs/matrix/commit/521e4fe)), closes [#7](https://github.com/mljs/matrix/issues/7)
+
+
+
+# [0.1.0](https://github.com/mljs/matrix/compare/v0.0.4...v0.1.0) (2015-06-11)
+
+
+
+## [0.0.4](https://github.com/mljs/matrix/compare/v0.0.1...v0.0.4) (2015-06-11)
+
+
+
+## 0.0.1 (2014-10-24)
+
+
+
