@@ -9,6 +9,8 @@ export { solve, inverse } from './decompositions';
 export { determinant } from './determinant';
 export { linearDependencies } from './linearDependencies';
 export { pseudoInverse } from './pseudoInverse';
+export { covariance } from './covariance';
+export { correlation } from './correlation';
 
 export {
   default as SingularValueDecomposition,

@@ -32,6 +32,38 @@ declare module 'ml-matrix' {
     mean?: number[];
   }
 
+  export interface ICenterOptions {
+    center?: number;
+  }
+  export interface ICenterByOptions {
+    center?: number[];
+  }
+
+  export interface IScaleOptions {
+    scale?: number;
+  }
+  export interface IScaleByOptions {
+    scale?: number[];
+  }
+
+  export interface ICovarianceOptions {
+    /**
+     * Default: true.
+     */
+    center?: boolean;
+  }
+
+  export interface ICorrelationOptions {
+    /**
+     * Default: true.
+     */
+    center?: boolean;
+    /**
+     * Default: true.
+     */
+    scale?: boolean;
+  }
+
   export abstract class AbstractMatrix {
     /**
      * Total number of elements in the matrix.
@@ -273,14 +305,64 @@ declare module 'ml-matrix' {
      */
     mean(by: MatrixDimension): number[];
 
+    /**
+     * Returns the variance of all elements of the matrix.
+     * @param options
+     */
     variance(options?: IVarianceOptions): number;
+
+    /**
+     * Returns the variance by the given dimension.
+     * @param by - variance by 'row' or 'column'.
+     * @param options
+     */
     variance(by: MatrixDimension, options?: IVarianceByOptions): number[];
 
+    /**
+     * Returns the standard deviation of all elements of the matrix.
+     * @param options
+     */
     standardDeviation(options?: IVarianceOptions): number;
+
+    /**
+     * Returns the standard deviation by the given dimension.
+     * @param by - standard deviation by 'row' or 'column'.
+     * @param options
+     */
     standardDeviation(
       by: MatrixDimension,
       options?: IVarianceByOptions
     ): number[];
+
+    /**
+     * Center the matrix in-place. By default, the mean value of the matrix is
+     * subtracted from every value.
+     * @param options
+     */
+    center(options?: ICenterOptions): this;
+
+    /**
+     * Center the matrix in-place. By default, the mean values in the give
+     * dimension are subtracted from the values.
+     * @param by - center by 'row' or 'column'.
+     * @param options
+     */
+    center(by: MatrixDimension, options?: ICenterByOptions): this;
+
+    /**
+     * Scale the matrix in-place. By default, values are divided by their
+     * standard deviation.
+     * @param options
+     */
+    scale(options?: IScaleOptions): this;
+
+    /**
+     * Scale the matrix in-place. By default, values are divided by the
+     * standard deviation in the given dimension.
+     * @param by - scale by 'row' or 'column'.
+     * @param options
+     */
+    scale(by: MatrixDimension, options?: IScaleByOptions): this;
 
     // From here we document methods dynamically generated from operators
 
@@ -471,6 +553,7 @@ declare module 'ml-matrix' {
     thresholdValue?: number;
     thresholdError?: number;
   }
+
   export function linearDependencies(
     matrix: MaybeMatrix,
     options?: ILinearDependenciesOptions
@@ -479,6 +562,28 @@ declare module 'ml-matrix' {
   export function pseudoInverse(
     matrix: MaybeMatrix,
     threshold?: number
+  ): Matrix;
+
+  export function covariance(
+    matrix: MaybeMatrix,
+    options?: ICovarianceOptions
+  ): Matrix;
+
+  export function covariance(
+    xMatrix: MaybeMatrix,
+    yMatrix: MaybeMatrix,
+    options?: ICovarianceOptions
+  ): Matrix;
+
+  export function correlation(
+    matrix: MaybeMatrix,
+    options?: ICorrelationOptions
+  ): Matrix;
+
+  export function correlation(
+    xMatrix: MaybeMatrix,
+    yMatrix: MaybeMatrix,
+    options?: ICorrelationOptions
   ): Matrix;
 
   export interface ISVDOptions {

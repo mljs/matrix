@@ -70,7 +70,7 @@ export function varianceByRow(matrix, unbiased, mean) {
     var sum2 = 0;
     var x = 0;
     for (var j = 0; j < cols; j++) {
-      x = matrix.get(j, i) - mean[i];
+      x = matrix.get(i, j) - mean[i];
       sum1 += x;
       sum2 += x * x;
     }
@@ -125,5 +125,88 @@ export function varianceAll(matrix, unbiased, mean) {
     return (sum2 - (sum1 * sum1) / size) / (size - 1);
   } else {
     return (sum2 - (sum1 * sum1) / size) / size;
+  }
+}
+
+export function centerByRow(matrix, mean) {
+  for (let i = 0; i < matrix.rows; i++) {
+    for (let j = 0; j < matrix.columns; j++) {
+      matrix.set(i, j, matrix.get(i, j) - mean[i]);
+    }
+  }
+}
+
+export function centerByColumn(matrix, mean) {
+  for (let i = 0; i < matrix.rows; i++) {
+    for (let j = 0; j < matrix.columns; j++) {
+      matrix.set(i, j, matrix.get(i, j) - mean[j]);
+    }
+  }
+}
+
+export function centerAll(matrix, mean) {
+  for (let i = 0; i < matrix.rows; i++) {
+    for (let j = 0; j < matrix.columns; j++) {
+      matrix.set(i, j, matrix.get(i, j) - mean);
+    }
+  }
+}
+
+export function getScaleByRow(matrix) {
+  const scale = [];
+  for (let i = 0; i < matrix.rows; i++) {
+    let sum = 0;
+    for (let j = 0; j < matrix.columns; j++) {
+      sum += Math.pow(matrix.get(i, j), 2) / (matrix.columns - 1);
+    }
+    scale.push(Math.sqrt(sum));
+  }
+  return scale;
+}
+
+export function scaleByRow(matrix, scale) {
+  for (let i = 0; i < matrix.rows; i++) {
+    for (let j = 0; j < matrix.columns; j++) {
+      matrix.set(i, j, matrix.get(i, j) / scale[i]);
+    }
+  }
+}
+
+export function getScaleByColumn(matrix) {
+  const scale = [];
+  for (let j = 0; j < matrix.columns; j++) {
+    let sum = 0;
+    for (let i = 0; i < matrix.rows; i++) {
+      sum += Math.pow(matrix.get(i, j), 2) / (matrix.rows - 1);
+    }
+    scale.push(Math.sqrt(sum));
+  }
+  return scale;
+}
+
+export function scaleByColumn(matrix, scale) {
+  for (let i = 0; i < matrix.rows; i++) {
+    for (let j = 0; j < matrix.columns; j++) {
+      matrix.set(i, j, matrix.get(i, j) / scale[j]);
+    }
+  }
+}
+
+export function getScaleAll(matrix) {
+  const divider = matrix.size - 1;
+  let sum = 0;
+  for (let j = 0; j < matrix.columns; j++) {
+    for (let i = 0; i < matrix.rows; i++) {
+      sum += Math.pow(matrix.get(i, j), 2) / divider;
+    }
+  }
+  return Math.sqrt(sum);
+}
+
+export function scaleAll(matrix, scale) {
+  for (let i = 0; i < matrix.rows; i++) {
+    for (let j = 0; j < matrix.columns; j++) {
+      matrix.set(i, j, matrix.get(i, j) / scale);
+    }
   }
 }
