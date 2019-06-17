@@ -17,7 +17,16 @@ import {
   productAll,
   varianceByRow,
   varianceByColumn,
-  varianceAll
+  varianceAll,
+  centerByRow,
+  centerByColumn,
+  centerAll,
+  scaleByRow,
+  scaleByColumn,
+  scaleAll,
+  getScaleByRow,
+  getScaleByColumn,
+  getScaleAll
 } from './stat';
 import { inspectMatrix } from './inspect';
 import { installMathOperations } from './mathOperations';
@@ -1684,6 +1693,83 @@ export class AbstractMatrix {
         variance[i] = Math.sqrt(variance[i]);
       }
       return variance;
+    }
+  }
+
+  center(by, options = {}) {
+    if (typeof by === 'object') {
+      options = by;
+      by = undefined;
+    }
+    if (typeof options !== 'object') {
+      throw new TypeError('options must be an object');
+    }
+    const { center = this.mean(by) } = options;
+    switch (by) {
+      case 'row': {
+        if (!Array.isArray(center)) {
+          throw new TypeError('center must be an array');
+        }
+        centerByRow(this, center);
+        return this;
+      }
+      case 'column': {
+        if (!Array.isArray(center)) {
+          throw new TypeError('center must be an array');
+        }
+        centerByColumn(this, center);
+        return this;
+      } case undefined: {
+        if (typeof center !== 'number') {
+          throw new TypeError('center must be a number');
+        }
+        centerAll(this, center);
+        return this;
+      }
+      default:
+        throw new Error(`invalid option: ${by}`);
+    }
+  }
+
+  scale(by, options = {}) {
+    if (typeof by === 'object') {
+      options = by;
+      by = undefined;
+    }
+    if (typeof options !== 'object') {
+      throw new TypeError('options must be an object');
+    }
+    let scale = options.scale;
+    switch (by) {
+      case 'row': {
+        if (scale === undefined) {
+          scale = getScaleByRow(this);
+        } else if (!Array.isArray(scale)) {
+          throw new TypeError('scale must be an array');
+        }
+        scaleByRow(this, scale);
+        return this;
+      }
+      case 'column': {
+        if (scale === undefined) {
+          scale = getScaleByColumn(this);
+        } else if (!Array.isArray(scale)) {
+          throw new TypeError('scale must be an array');
+        }
+        scaleByColumn(this, scale);
+        return this;
+      }
+      case undefined: {
+        if (scale === undefined) {
+          scale = getScaleAll(this);
+        } else if (typeof scale !== 'number') {
+          throw new TypeError('scale must be a number');
+        }
+        scaleAll(this, scale);
+        return this;
+      }
+      default:
+        throw new Error(`invalid option: ${by}`);
     }
   }
 }
