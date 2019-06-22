@@ -23,13 +23,6 @@ import { inspectMatrix } from './inspect';
 import { installMathOperations } from './mathOperations';
 
 export class AbstractMatrix {
-  /**
-   * Constructs a Matrix with the chosen dimensions from a 1D array
-   * @param {number} newRows - Number of rows
-   * @param {number} newColumns - Number of columns
-   * @param {Array} newData - A 1D array containing data for the matrix
-   * @return {Matrix} - The new matrix
-   */
   static from1DArray(newRows, newColumns, newData) {
     var length = newRows * newColumns;
     if (length !== newData.length) {
@@ -44,11 +37,6 @@ export class AbstractMatrix {
     return newMatrix;
   }
 
-  /**
-   * Creates a row vector, a matrix with only one row.
-   * @param {Array} newData - A 1D array containing data for the vector
-   * @return {Matrix} - The new matrix
-   */
   static rowVector(newData) {
     var vector = new Matrix(1, newData.length);
     for (var i = 0; i < newData.length; i++) {
@@ -57,11 +45,6 @@ export class AbstractMatrix {
     return vector;
   }
 
-  /**
-   * Creates a column vector, a matrix with only one column.
-   * @param {Array} newData - A 1D array containing data for the vector
-   * @return {Matrix} - The new matrix
-   */
   static columnVector(newData) {
     var vector = new Matrix(newData.length, 1);
     for (var i = 0; i < newData.length; i++) {
@@ -70,34 +53,14 @@ export class AbstractMatrix {
     return vector;
   }
 
-  /**
-   * Creates a matrix with the given dimensions. Values will be set to zero.
-   * @param {number} rows - Number of rows
-   * @param {number} columns - Number of columns
-   * @return {Matrix} - The new matrix
-   */
   static zeros(rows, columns) {
     return new Matrix(rows, columns);
   }
 
-  /**
-   * Creates a matrix with the given dimensions. Values will be set to one.
-   * @param {number} rows - Number of rows
-   * @param {number} columns - Number of columns
-   * @return {Matrix} - The new matrix
-   */
   static ones(rows, columns) {
     return new Matrix(rows, columns).fill(1);
   }
 
-  /**
-   * Creates a matrix with the given dimensions. Values will be randomly set.
-   * @param {number} rows - Number of rows
-   * @param {number} columns - Number of columns
-   * @param {object} [options]
-   * @param {function} [options.random=Math.random] - Random number generator
-   * @return {Matrix} The new matrix
-   */
   static rand(rows, columns, options = {}) {
     if (typeof options !== 'object') {
       throw new TypeError('options must be an object');
@@ -314,9 +277,6 @@ export class AbstractMatrix {
     return this.rows === 1 || this.columns === 1;
   }
 
-  /**
-   * @return {boolean} true if the matrix has the same number of rows and columns
-   */
   isSquare() {
     return this.rows === this.columns;
   }
@@ -338,9 +298,6 @@ export class AbstractMatrix {
     return false;
   }
 
-  /**
-   * @return true if the matrix is in echelon form
-   */
   isEchelonForm() {
     let i = 0;
     let j = 0;
@@ -366,9 +323,6 @@ export class AbstractMatrix {
     return isEchelonForm;
   }
 
-  /**
-   * @return true if the matrix is in reduced echelon form
-   */
   isReducedEchelonForm() {
     let i = 0;
     let j = 0;
@@ -399,9 +353,6 @@ export class AbstractMatrix {
     return isReducedEchelonForm;
   }
 
-  /**
-   * @return the row echelon form of a matrix, using Gaussian elimination
-   */
   echelonForm() {
     let result = this.clone();
     let h = 0;
@@ -435,9 +386,6 @@ export class AbstractMatrix {
     return result;
   }
 
-  /**
-   * @return the row reduced echelon form of a matrix, using Gaussian elimination
-   */
   reducedEchelonForm() {
     let result = this.echelonForm();
     let m = result.columns;
