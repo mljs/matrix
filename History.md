@@ -1,3 +1,14 @@
+# [6.1.0](https://github.com/mljs/matrix/compare/v6.0.0...v6.1.0) (2019-06-22)
+
+
+### Features
+
+* add echelonForm method ([eac0588](https://github.com/mljs/matrix/commit/eac0588))
+* add reducedEchelonForm method ([f32a8aa](https://github.com/mljs/matrix/commit/f32a8aa))
+* add statistical operations ([43fc4ef](https://github.com/mljs/matrix/commit/43fc4ef))
+
+
+
 # [6.0.0](https://github.com/mljs/matrix/compare/v6.0.0-6...v6.0.0) (2019-04-25)
 
 
