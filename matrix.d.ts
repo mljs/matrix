@@ -4,6 +4,10 @@ declare module 'ml-matrix' {
   type MatrixDimension = 'row' | 'column';
 
   export interface IRandomOptions {
+    /**
+     * Random number generator.
+     * Default: `Math.random`
+     */
     random: () => number;
   }
   export interface IRandomIntOptions {
@@ -29,19 +33,72 @@ declare module 'ml-matrix' {
   }
 
   export abstract class AbstractMatrix {
+    /**
+     * Total number of elements in the matrix.
+     */
     readonly size: number;
+
+    /**
+     * Number of rows of the matrix.
+     */
     readonly rows: number;
+
+    /**
+     * Number of columns of the matrix.
+     */
     readonly columns: number;
 
+  /**
+   * Constructs a matrix with the chosen dimensions from a 1D array.
+   * @param newRows - Number of rows.
+   * @param newColumns - Number of columns.
+   * @param newData - A 1D array containing data for the matrix.
+   * @returns The new matrix.
+   */
     static from1DArray(
       newRows: number,
       newColumns: number,
       newData: number[]
     ): Matrix;
+
+    /**
+     * Creates a row vector, a matrix with only one row.
+     * @param newData - A 1D array containing data for the vector.
+     * @returns The new matrix.
+     */
     static rowVector(newData: number[]): Matrix;
+
+    /**
+     * Creates a column vector, a matrix with only one column.
+     * @param newData - A 1D array containing data for the vector.
+     * @returns The new matrix.
+     */
     static columnVector(newData: number[]): Matrix;
+
+    /**
+     * Creates a matrix with the given dimensions. Values will be set to zero.
+     * This is equivalent to calling the Matrix constructor.
+     * @param rows - Number of rows.
+     * @param columns - Number of columns.
+     * @returns The new matrix.
+     */
     static zeros(rows: number, columns: number): Matrix;
+
+    /**
+     * Creates a matrix with the given dimensions. Values will be set to one.
+     * @param rows - Number of rows.
+     * @param columns - Number of columns.
+     * @returns The new matrix.
+     */
     static ones(rows: number, columns: number): Matrix;
+
+    /**
+     * Creates a matrix with the given dimensions. Values will be randomly set.
+     * @param rows - Number of rows.
+     * @param columns - Number of columns.
+     * @param options - Options object.
+     * @returns The new matrix.
+     */
     static rand(
       rows: number,
       columns: number,
@@ -76,10 +133,35 @@ declare module 'ml-matrix' {
     isRowVector(): boolean;
     isColumnVector(): boolean;
     isVector(): boolean;
+
+    /**
+     * Returns whether the matrix has the same number of rows and columns.
+     */
     isSquare(): boolean;
     isSymmetric(): boolean;
+
+    /**
+     * Returns whether the matrix is in row echelon form.
+     */
     isEchelonForm(): boolean;
+
+    /**
+     * Returns whether the matrix is in reduced row echelon form.
+     */
     isReducedEchelonForm(): boolean;
+
+    /**
+     * Returns the row echelon form of the matrix computed using gaussian
+     * elimination.
+     */
+    echelonForm(): Matrix;
+
+    /**
+     * Returns the reduced row echelon form of the matrix computed using
+     * gaussian elimination.
+     */
+    reducedEchelonForm(): Matrix;
+
     repeat(options?: IRepeatOptions): Matrix;
     fill(value: number): this;
     neg(): this;
