@@ -469,11 +469,6 @@ export class AbstractMatrix {
     return this;
   }
 
-  /**
-   * Subtracts the values of a vector from each row
-   * @param {Array|Matrix} vector - Array or vector
-   * @return {Matrix} this
-   */
   subRowVector(vector) {
     vector = checkRowVector(this, vector);
     for (var i = 0; i < this.rows; i++) {
@@ -484,11 +479,6 @@ export class AbstractMatrix {
     return this;
   }
 
-  /**
-   * Multiplies the values of a vector with each row
-   * @param {Array|Matrix} vector - Array or vector
-   * @return {Matrix} this
-   */
   mulRowVector(vector) {
     vector = checkRowVector(this, vector);
     for (var i = 0; i < this.rows; i++) {
@@ -499,11 +489,6 @@ export class AbstractMatrix {
     return this;
   }
 
-  /**
-   * Divides the values of each row by those of a vector
-   * @param {Array|Matrix} vector - Array or vector
-   * @return {Matrix} this
-   */
   divRowVector(vector) {
     vector = checkRowVector(this, vector);
     for (var i = 0; i < this.rows; i++) {
@@ -514,11 +499,6 @@ export class AbstractMatrix {
     return this;
   }
 
-  /**
-   * Adds the values of a vector to each column
-   * @param {Array|Matrix} vector - Array or vector
-   * @return {Matrix} this
-   */
   addColumnVector(vector) {
     vector = checkColumnVector(this, vector);
     for (var i = 0; i < this.rows; i++) {
@@ -529,11 +509,6 @@ export class AbstractMatrix {
     return this;
   }
 
-  /**
-   * Subtracts the values of a vector from each column
-   * @param {Array|Matrix} vector - Array or vector
-   * @return {Matrix} this
-   */
   subColumnVector(vector) {
     vector = checkColumnVector(this, vector);
     for (var i = 0; i < this.rows; i++) {
@@ -544,11 +519,6 @@ export class AbstractMatrix {
     return this;
   }
 
-  /**
-   * Multiplies the values of a vector with each column
-   * @param {Array|Matrix} vector - Array or vector
-   * @return {Matrix} this
-   */
   mulColumnVector(vector) {
     vector = checkColumnVector(this, vector);
     for (var i = 0; i < this.rows; i++) {
@@ -559,11 +529,6 @@ export class AbstractMatrix {
     return this;
   }
 
-  /**
-   * Divides the values of each column by those of a vector
-   * @param {Array|Matrix} vector - Array or vector
-   * @return {Matrix} this
-   */
   divColumnVector(vector) {
     vector = checkColumnVector(this, vector);
     for (var i = 0; i < this.rows; i++) {
@@ -574,12 +539,6 @@ export class AbstractMatrix {
     return this;
   }
 
-  /**
-   * Multiplies the values of a row with a scalar
-   * @param {number} index - Row index
-   * @param {number} value
-   * @return {Matrix} this
-   */
   mulRow(index, value) {
     checkRowIndex(this, index);
     for (var i = 0; i < this.columns; i++) {
@@ -588,12 +547,6 @@ export class AbstractMatrix {
     return this;
   }
 
-  /**
-   * Multiplies the values of a column with a scalar
-   * @param {number} index - Column index
-   * @param {number} value
-   * @return {Matrix} this
-   */
   mulColumn(index, value) {
     checkColumnIndex(this, index);
     for (var i = 0; i < this.rows; i++) {
@@ -602,10 +555,6 @@ export class AbstractMatrix {
     return this;
   }
 
-  /**
-   * Returns the maximum value of the matrix
-   * @return {number}
-   */
   max() {
     var v = this.get(0, 0);
     for (var i = 0; i < this.rows; i++) {
@@ -618,10 +567,6 @@ export class AbstractMatrix {
     return v;
   }
 
-  /**
-   * Returns the index of the maximum value
-   * @return {Array}
-   */
   maxIndex() {
     var v = this.get(0, 0);
     var idx = [0, 0];
@@ -637,10 +582,6 @@ export class AbstractMatrix {
     return idx;
   }
 
-  /**
-   * Returns the minimum value of the matrix
-   * @return {number}
-   */
   min() {
     var v = this.get(0, 0);
     for (var i = 0; i < this.rows; i++) {
@@ -653,10 +594,6 @@ export class AbstractMatrix {
     return v;
   }
 
-  /**
-   * Returns the index of the minimum value
-   * @return {Array}
-   */
   minIndex() {
     var v = this.get(0, 0);
     var idx = [0, 0];
@@ -672,11 +609,6 @@ export class AbstractMatrix {
     return idx;
   }
 
-  /**
-   * Returns the maximum value of one row
-   * @param {number} row - Row index
-   * @return {number}
-   */
   maxRow(row) {
     checkRowIndex(this, row);
     var v = this.get(row, 0);
@@ -688,11 +620,6 @@ export class AbstractMatrix {
     return v;
   }
 
-  /**
-   * Returns the index of the maximum value of one row
-   * @param {number} row - Row index
-   * @return {Array}
-   */
   maxRowIndex(row) {
     checkRowIndex(this, row);
     var v = this.get(row, 0);
@@ -706,11 +633,6 @@ export class AbstractMatrix {
     return idx;
   }
 
-  /**
-   * Returns the minimum value of one row
-   * @param {number} row - Row index
-   * @return {number}
-   */
   minRow(row) {
     checkRowIndex(this, row);
     var v = this.get(row, 0);
@@ -722,11 +644,6 @@ export class AbstractMatrix {
     return v;
   }
 
-  /**
-   * Returns the index of the maximum value of one row
-   * @param {number} row - Row index
-   * @return {Array}
-   */
   minRowIndex(row) {
     checkRowIndex(this, row);
     var v = this.get(row, 0);
@@ -740,11 +657,6 @@ export class AbstractMatrix {
     return idx;
   }
 
-  /**
-   * Returns the maximum value of one column
-   * @param {number} column - Column index
-   * @return {number}
-   */
   maxColumn(column) {
     checkColumnIndex(this, column);
     var v = this.get(0, column);
@@ -756,11 +668,6 @@ export class AbstractMatrix {
     return v;
   }
 
-  /**
-   * Returns the index of the maximum value of one column
-   * @param {number} column - Column index
-   * @return {Array}
-   */
   maxColumnIndex(column) {
     checkColumnIndex(this, column);
     var v = this.get(0, column);
@@ -774,11 +681,6 @@ export class AbstractMatrix {
     return idx;
   }
 
-  /**
-   * Returns the minimum value of one column
-   * @param {number} column - Column index
-   * @return {number}
-   */
   minColumn(column) {
     checkColumnIndex(this, column);
     var v = this.get(0, column);
@@ -790,11 +692,6 @@ export class AbstractMatrix {
     return v;
   }
 
-  /**
-   * Returns the index of the minimum value of one column
-   * @param {number} column - Column index
-   * @return {Array}
-   */
   minColumnIndex(column) {
     checkColumnIndex(this, column);
     var v = this.get(0, column);
@@ -808,10 +705,6 @@ export class AbstractMatrix {
     return idx;
   }
 
-  /**
-   * Returns an array containing the diagonal values of the matrix
-   * @return {Array}
-   */
   diag() {
     var min = Math.min(this.rows, this.columns);
     var diag = [];
@@ -821,11 +714,6 @@ export class AbstractMatrix {
     return diag;
   }
 
-  /**
-   * Returns the norm of a matrix.
-   * @param {string} type - "frobenius" (default) or "max" return resp. the Frobenius norm and the max norm.
-   * @return {number}
-   */
   norm(type = 'frobenius') {
     var result = 0;
     if (type === 'max') {
@@ -842,10 +730,6 @@ export class AbstractMatrix {
     }
   }
 
-  /**
-   * Computes the cumulative sum of the matrix elements (in place, row by row)
-   * @return {Matrix} this
-   */
   cumulativeSum() {
     var sum = 0;
     for (var i = 0; i < this.rows; i++) {
@@ -857,11 +741,6 @@ export class AbstractMatrix {
     return this;
   }
 
-  /**
-   * Computes the dot (scalar) product between the matrix and another.
-   * @param {Matrix} vector2 vector
-   * @return {number}
-   */
   dot(vector2) {
     if (AbstractMatrix.isMatrix(vector2)) vector2 = vector2.to1DArray();
     var vector1 = this.to1DArray();
@@ -875,11 +754,6 @@ export class AbstractMatrix {
     return dot;
   }
 
-  /**
-   * Returns the matrix product between this and other
-   * @param {Matrix} other
-   * @return {Matrix}
-   */
   mmul(other) {
     other = Matrix.checkMatrix(other);
     if (this.columns !== other.rows) {
@@ -1017,11 +891,6 @@ export class AbstractMatrix {
     return result;
   }
 
-  /**
-   * Returns the matrix product between x and y. More efficient than mmul(other) only when we multiply squared matrix and when the size of the matrix is > 1000.
-   * @param {Matrix} y
-   * @return {Matrix}
-   */
   mmulStrassen(y) {
     y = Matrix.checkMatrix(y);
     var x = this.clone();
@@ -1138,13 +1007,6 @@ export class AbstractMatrix {
     return blockMult(x, y, r, c);
   }
 
-  /**
-   * Returns a row-by-row scaled matrix
-   * @param {object} [options]
-   * @param {number} [options.min=0] - Minimum scaled value
-   * @param {number} [optiens.max=1] - Maximum scaled value
-   * @return {Matrix} - The scaled matrix
-   */
   scaleRows(options = {}) {
     if (typeof options !== 'object') {
       throw new TypeError('options must be an object');
@@ -1162,16 +1024,6 @@ export class AbstractMatrix {
     return newMatrix;
   }
 
-  /**
-   * Returns a new column-by-column scaled matrix
-   * @param {object} [options]
-   * @param {number} [options.min=0] - Minimum scaled value
-   * @param {number} [optiens.max=1] - Maximum scaled value
-   * @return {Matrix} - The new scaled matrix
-   * @example
-   * var matrix = new Matrix([[1,2],[-1,0]]);
-   * var scaledMatrix = matrix.scaleColumns(); // [[1,1],[0,0]]
-   */
   scaleColumns(options = {}) {
     if (typeof options !== 'object') {
       throw new TypeError('options must be an object');
@@ -1219,12 +1071,6 @@ export class AbstractMatrix {
     return this;
   }
 
-  /**
-   * Returns the Kronecker product (also known as tensor product) between this and other
-   * See https://en.wikipedia.org/wiki/Kronecker_product
-   * @param {Matrix} other
-   * @return {Matrix}
-   */
   kroneckerProduct(other) {
     other = Matrix.checkMatrix(other);
 
@@ -1246,10 +1092,6 @@ export class AbstractMatrix {
     return result;
   }
 
-  /**
-   * Transposes the matrix and returns a new one containing the result
-   * @return {Matrix}
-   */
   transpose() {
     var result = new Matrix(this.columns, this.rows);
     for (var i = 0; i < this.rows; i++) {
@@ -1260,11 +1102,6 @@ export class AbstractMatrix {
     return result;
   }
 
-  /**
-   * Sorts the rows (in place)
-   * @param {function} [compareFunction] - usual Array.prototype.sort comparison function
-   * @return {Matrix} this
-   */
   sortRows(compareFunction = compareNumbers) {
     for (var i = 0; i < this.rows; i++) {
       this.setRow(i, this.getRow(i).sort(compareFunction));
@@ -1272,11 +1109,6 @@ export class AbstractMatrix {
     return this;
   }
 
-  /**
-   * Sorts the columns (in place)
-   * @param {function} [compareFunction] - usual Array.prototype.sort comparison function
-   * @return {Matrix} this
-   */
   sortColumns(compareFunction = compareNumbers) {
     for (var i = 0; i < this.columns; i++) {
       this.setColumn(i, this.getColumn(i).sort(compareFunction));
@@ -1284,14 +1116,6 @@ export class AbstractMatrix {
     return this;
   }
 
-  /**
-   * Returns a subset of the matrix
-   * @param {number} startRow - First row index
-   * @param {number} endRow - Last row index
-   * @param {number} startColumn - First column index
-   * @param {number} endColumn - Last column index
-   * @return {Matrix}
-   */
   subMatrix(startRow, endRow, startColumn, endColumn) {
     checkRange(this, startRow, endRow, startColumn, endColumn);
     var newMatrix = new Matrix(
@@ -1306,13 +1130,6 @@ export class AbstractMatrix {
     return newMatrix;
   }
 
-  /**
-   * Returns a subset of the matrix based on an array of row indices
-   * @param {Array} indices - Array containing the row indices
-   * @param {number} [startColumn = 0] - First column index
-   * @param {number} [endColumn = this.columns-1] - Last column index
-   * @return {Matrix}
-   */
   subMatrixRow(indices, startColumn, endColumn) {
     if (startColumn === undefined) startColumn = 0;
     if (endColumn === undefined) endColumn = this.columns - 1;
@@ -1338,13 +1155,6 @@ export class AbstractMatrix {
     return newMatrix;
   }
 
-  /**
-   * Returns a subset of the matrix based on an array of column indices
-   * @param {Array} indices - Array containing the column indices
-   * @param {number} [startRow = 0] - First row index
-   * @param {number} [endRow = this.rows-1] - Last row index
-   * @return {Matrix}
-   */
   subMatrixColumn(indices, startRow, endRow) {
     if (startRow === undefined) startRow = 0;
     if (endRow === undefined) endRow = this.rows - 1;
@@ -1370,13 +1180,6 @@ export class AbstractMatrix {
     return newMatrix;
   }
 
-  /**
-   * Set a part of the matrix to the given sub-matrix
-   * @param {Matrix|Array< Array >} matrix - The source matrix from which to extract values.
-   * @param {number} startRow - The index of the first row to set
-   * @param {number} startColumn - The index of the first column to set
-   * @return {Matrix}
-   */
   setSubMatrix(matrix, startRow, startColumn) {
     matrix = Matrix.checkMatrix(matrix);
     var endRow = startRow + matrix.rows - 1;
@@ -1390,12 +1193,6 @@ export class AbstractMatrix {
     return this;
   }
 
-  /**
-   * Return a new matrix based on a selection of rows and columns
-   * @param {Array<number>} rowIndices - The row indices to select. Order matters and an index can be more than once.
-   * @param {Array<number>} columnIndices - The column indices to select. Order matters and an index can be use more than once.
-   * @return {Matrix} The new matrix
-   */
   selection(rowIndices, columnIndices) {
     var indices = checkIndices(this, rowIndices, columnIndices);
     var newMatrix = new Matrix(rowIndices.length, columnIndices.length);
@@ -1409,10 +1206,6 @@ export class AbstractMatrix {
     return newMatrix;
   }
 
-  /**
-   * Returns the trace of the matrix (sum of the diagonal elements)
-   * @return {number}
-   */
   trace() {
     var min = Math.min(this.rows, this.columns);
     var trace = 0;
@@ -1422,10 +1215,6 @@ export class AbstractMatrix {
     return trace;
   }
 
-  /**
-   * Creates an exact and independent copy of the matrix
-   * @return {Matrix}
-   */
   clone() {
     var newMatrix = new Matrix(this.rows, this.columns);
     for (var row = 0; row < this.rows; row++) {
@@ -1689,11 +1478,6 @@ export default class Matrix extends AbstractMatrix {
     return this.data[rowIndex][columnIndex];
   }
 
-  /**
-   * Removes a row from the given index
-   * @param {number} index - Row index
-   * @return {Matrix} this
-   */
   removeRow(index) {
     checkRowIndex(this, index);
     if (this.rows === 1) {
@@ -1704,12 +1488,6 @@ export default class Matrix extends AbstractMatrix {
     return this;
   }
 
-  /**
-   * Adds a row at the given index
-   * @param {number} [index = this.rows] - Row index
-   * @param {Array|Matrix} array - Array or vector
-   * @return {Matrix} this
-   */
   addRow(index, array) {
     if (array === undefined) {
       array = index;
@@ -1722,11 +1500,6 @@ export default class Matrix extends AbstractMatrix {
     return this;
   }
 
-  /**
-   * Removes a column from the given index
-   * @param {number} index - Column index
-   * @return {Matrix} this
-   */
   removeColumn(index) {
     checkColumnIndex(this, index);
     if (this.columns === 1) {
@@ -1739,12 +1512,6 @@ export default class Matrix extends AbstractMatrix {
     return this;
   }
 
-  /**
-   * Adds a column at the given index
-   * @param {number} [index = this.columns] - Column index
-   * @param {Array|Matrix} array - Array or vector
-   * @return {Matrix} this
-   */
   addColumn(index, array) {
     if (typeof array === 'undefined') {
       array = index;

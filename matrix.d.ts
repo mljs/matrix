@@ -42,7 +42,13 @@ export interface IRepeatOptions {
   columns?: number;
 }
 export interface IScaleOptions {
+  /**
+   * Minimum scaled value. Default: 0.
+   */
   min?: number;
+  /**
+   * Maximum scaled value. Default: 1.
+   */
   max?: number;
 }
 export interface IVarianceOptions {
@@ -186,7 +192,7 @@ export abstract class AbstractMatrix {
   static eye(rows: number, columns?: number, value?: number): Matrix;
 
   /**
-   * Alias for {@link Matrix.eye}.
+   * Alias for {@link AbstractMatrix.eye}.
    */
   static identity(rows: number, columns?: number, value?: number): Matrix;
 
@@ -200,7 +206,7 @@ export abstract class AbstractMatrix {
   static diag(data: number[], rows?: number, columns?: number): Matrix;
 
   /**
-   * Alias for {@link Matrix.diag}.
+   * Alias for {@link AbstractMatrix.diag}.
    */
   static diagonal(data: number[], rows?: number, columns?: number): Matrix;
 
@@ -331,7 +337,7 @@ export abstract class AbstractMatrix {
   neg(): this;
 
   /**
-   * Alias for {@link Matrix.prototype.neg}.
+   * Alias for {@link AbstractMatrix.neg}.
    */
   negate(): this;
 
@@ -393,69 +399,283 @@ export abstract class AbstractMatrix {
    */
   addRowVector(vector: number[] | AbstractMatrix): this;
 
+  /**
+   * Subtracts the values of a vector from each row.
+   * @param vector - Array or vector.
+   */
   subRowVector(vector: number[] | AbstractMatrix): this;
+
+  /**
+   * Multiplies the values of a vector with each row.
+   * @param vector - Array or vector.
+   */
   mulRowVector(vector: number[] | AbstractMatrix): this;
+
+  /**
+   * Divides the values of each row by those of a vector.
+   * @param vector - Array or vector.
+   */
   divRowVector(vector: number[] | AbstractMatrix): this;
+
+  /**
+   * Adds the values of a vector to each column.
+   * @param vector - Array or vector.
+   */
   addColumnVector(vector: number[] | AbstractMatrix): this;
+
+  /**
+   * Subtracts the values of a vector from each column.
+   * @param vector - Array or vector.
+   */
   subColumnVector(vector: number[] | AbstractMatrix): this;
+
+  /**
+   * Multiplies the values of a vector with each column.
+   * @param vector - Array or vector.
+   */
   mulColumnVector(vector: number[] | AbstractMatrix): this;
+
+  /**
+   * Divides the values of each column by those of a vector.
+   * @param vector - Array or vector.
+   */
   divColumnVector(vector: number[] | AbstractMatrix): this;
+
+  /**
+   * Multiplies the values of a row with a scalar.
+   * @param index - Row index.
+   * @param value
+   */
   mulRow(index: number, value: number): this;
+
+  /**
+   * Multiplies the values of a column with a scalar.
+   * @param index - Column index.
+   * @param value
+   */
   mulColumn(index: number, value: number): this;
+
+  /**
+   * Returns the maximum value of the matrix.
+   */
   max(): number;
+
+  /**
+   * Returns the index of the maximum value.
+   */
   maxIndex(): [number, number];
+
+  /**
+   * Returns the minimum value of the matrix.
+   */
   min(): number;
+
+  /**
+   * Returns the index of the minimum value.
+   */
   minIndex(): [number, number];
+
+  /**
+   * Returns the maximum value of one row.
+   * @param row - Row index.
+   */
   maxRow(row: number): number;
+
+  /**
+   * Returns the index of the maximum value of one row.
+   * @param row - Row index.
+   */
   maxRowIndex(row: number): [number, number];
+
+  /**
+   * Returns the minimum value of one row.
+   * @param row - Row index.
+   */
   minRow(row: number): number;
+
+  /**
+   * Returns the index of the maximum value of one row.
+   * @param row - Row index.
+   */
   minRowIndex(row: number): [number, number];
+
+  /**
+   * Returns the maximum value of one column.
+   * @param column - Column index.
+   */
   maxColumn(column: number): number;
+
+  /**
+   * Returns the index of the maximum value of one column.
+   * @param column - Column index.
+   */
   maxColumnIndex(column: number): [number, number];
+
+  /**
+   * Returns the minimum value of one column.
+   * @param column - Column index.
+   */
   minColumn(column: number): number;
+
+  /**
+   * Returns the index of the minimum value of one column.
+   * @param column - Column index.
+   */
   minColumnIndex(column: number): [number, number];
+
+  /**
+   * Returns an array containing the diagonal values of the matrix.
+   */
   diag(): number[];
+
+  /**
+   * Alias for {@link AbstractMatrix.diag}.
+   */
   diagonal(): number[];
 
+  /**
+   * Returns the norm of a matrix.
+   * @param type - Norm type. Default: `'frobenius'`.
+   */
   norm(type: 'frobenius' | 'max'): number;
+
+  /**
+   * Computes the cumulative sum of the matrix elements (in place, row by row).
+   */
   cumulativeSum(): this;
+
+  /**
+   * Computes the dot (scalar) product between the matrix and another.
+   * @param vector
+   */
   dot(vector: AbstractMatrix): number;
+
+  /**
+   * Returns the matrix product between `this` and `other`.
+   * @param other - Other matrix.
+   */
   mmul(other: MaybeMatrix): Matrix;
+
   strassen2x2(other: MaybeMatrix): Matrix;
+
   strassen3x3(other: MaybeMatrix): Matrix;
+
   mmulStrassen(y: MaybeMatrix): Matrix;
+
+  /**
+   * Returns a new row-by-row scaled matrix.
+   * @param options
+   */
   scaleRows(options?: IScaleOptions): Matrix;
+
+  /**
+   * Returns a new column-by-column scaled matrix. 
+   * @param options
+   * @example
+   * var matrix = new Matrix([[1, 2], [-1, 0]]);
+   * var scaledMatrix = matrix.scaleColumns(); // [[1, 1], [0, 0]]
+   */
   scaleColumns(options?: IScaleOptions): Matrix;
+
   flipRows(): this;
+
   flipColumns(): this;
+
+  /**
+   * Returns the Kronecker product (also known as tensor product) between `this` and `other`.
+   * @link https://en.wikipedia.org/wiki/Kronecker_product
+   * @param other - Other matrix.
+   */
   kroneckerProduct(other: MaybeMatrix): Matrix;
+
+  /**
+   * Alias for {@link AbstractMatrix.kroneckerProduct}.
+   */
   tensorProduct(other: MaybeMatrix): Matrix;
+
+  /**
+   * Transposes the matrix and returns a new one containing the result.
+   */
   transpose(): Matrix;
+
+  /**
+   * Sorts the rows in-place.
+   * @param compareFunction
+   */
   sortRows(compareFunction?: (a: number, b: number) => number): this;
+
+  /**
+   * Sorts the columns in-place.
+   * @param compareFunction
+   */
   sortColumns(compareFunction?: (a: number, b: number) => number): this;
+
+  /**
+   * Returns a subset of the matrix.
+   * @param startRow - First row index.
+   * @param endRow - Last row index.
+   * @param startColumn - First column index.
+   * @param endColumn - Last column index.
+   */
   subMatrix(
     startRow: number,
     endRow: number,
     startColumn: number,
     endColumn: number
   ): Matrix;
+
+  /**
+   * Returns a subset of the matrix based on an array of row indices.
+   * @param indices - Array containing the row indices.
+   * @param startColumn - First column index. Default: 0.
+   * @param endColumn - Last column index. Default: columns - 1.
+   */
   subMatrixRow(
     indices: number[],
     startColumn?: number,
     endColumn?: number
   ): Matrix;
+
+  /**
+   * Returns a subset of the matrix based on an array of column indices.
+   * @param indices - Array containing the column indices.
+   * @param startRow - First row index. Default: 0.
+   * @param endRow - Last row index. Default: rows - 1.
+   */
   subMatrixColumn(
     indices: number[],
     startRow?: number,
     endRow?: number
   ): Matrix;
+
+  /**
+   * Set a part of the matrix to the given sub-matrix.
+   * @param matrix - The source matrix from which to extract values.
+   * @param startRow - The index of the first row to set.
+   * @param startColumn - The index of the first column to set.
+   */
   setSubMatrix(
     matrix: MaybeMatrix | number[],
     startRow: number,
     startColumn: number
-  ): Matrix;
+  ): this;
+
+  /**
+   * Return a new matrix based on a selection of rows and columns.
+   * Order of the indices matters and the same index can be used more than once.
+   * @param rowIndices - The row indices to select.
+   * @param columnIndices - The column indices to select.
+   */
   selection(rowIndices: number[], columnIndices: number[]): Matrix;
+
+  /**
+   * Returns the trace of the matrix (sum of the diagonal elements).
+   */
   trace(): number;
+
+  /**
+   * Creates an exact and independent copy of the matrix.
+   */
   clone(): Matrix;
 
   /**
