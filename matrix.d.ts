@@ -388,7 +388,12 @@ declare module 'ml-matrix' {
      */
     swapColumns(column1: number, column2: number): this;
 
+    /**
+     * Adds the values of a vector to each row.
+     * @param vector - Array or vector.
+     */
     addRowVector(vector: number[] | AbstractMatrix): this;
+
     subRowVector(vector: number[] | AbstractMatrix): this;
     mulRowVector(vector: number[] | AbstractMatrix): this;
     divRowVector(vector: number[] | AbstractMatrix): this;

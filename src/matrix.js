@@ -459,11 +459,6 @@ export class AbstractMatrix {
     return this;
   }
 
-  /**
-   * Adds the values of a vector to each row
-   * @param {Array|Matrix} vector - Array or vector
-   * @return {Matrix} this
-   */
   addRowVector(vector) {
     vector = checkRowVector(this, vector);
     for (var i = 0; i < this.rows; i++) {
