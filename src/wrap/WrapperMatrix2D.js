@@ -1,10 +1,6 @@
 import { AbstractMatrix } from '../matrix';
 
 export default class WrapperMatrix2D extends AbstractMatrix {
-  /**
-   * @class WrapperMatrix2D
-   * @param {Array<Array<number>>} data
-   */
   constructor(data) {
     super();
     this.data = data;

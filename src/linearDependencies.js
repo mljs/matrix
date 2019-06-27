@@ -33,17 +33,6 @@ function dependenciesOneRow(
   }
 }
 
-/**
- * Creates a matrix which represents the dependencies between rows.
- * If a row is a linear combination of others rows, the result will be a row with the coefficients of this combination.
- * For example : for A = [[2, 0, 0, 1], [0, 1, 6, 0], [0, 3, 0, 1], [0, 0, 1, 0], [0, 1, 2, 0]], the result will be [[0, 0, 0, 0, 0], [0, 0, 0, 4, 1], [0, 0, 0, 0, 0], [0, 0.25, 0, 0, -0.25], [0, 1, 0, -4, 0]]
- * @param {Matrix} matrix
- * @param {Object} [options] includes thresholdValue and thresholdError.
- * @param {number} [options.thresholdValue = 10e-10] If an absolute value is inferior to this threshold, it will equals zero.
- * @param {number} [options.thresholdError = 10e-10] If the error is inferior to that threshold, the linear combination found is accepted and the row is dependent from other rows.
- * @return {Matrix} the matrix which represents the dependencies between rows.
- */
-
 export function linearDependencies(matrix, options = {}) {
   const { thresholdValue = 10e-10, thresholdError = 10e-10 } = options;
   matrix = Matrix.checkMatrix(matrix);

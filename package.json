@@ -12,6 +12,7 @@
     "src"
   ],
   "scripts": {
+    "build-docs": "typedoc --out docs --name \"ml-matrix\" --mode file --includeDeclarations --excludeExternals --hideGenerator --excludePrivate --moduleResolution node matrix.d.ts",
     "compile": "rollup -c",
     "eslint": "eslint benchmark src testUtils.js",
     "eslint-fix": "npm run eslint -- --fix",
@@ -63,7 +64,8 @@
     "mathjs": "^6.0.2",
     "numeric": "^1.2.6",
     "pretty-hrtime": "^1.0.3",
-    "rollup": "^1.16.2"
+    "rollup": "^1.16.2",
+    "typedoc": "^0.14.2"
   },
   "dependencies": {
     "ml-array-rescale": "^1.2.1"

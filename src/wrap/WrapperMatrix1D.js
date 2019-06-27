@@ -1,12 +1,6 @@
 import { AbstractMatrix } from '../matrix';
 
 export default class WrapperMatrix1D extends AbstractMatrix {
-  /**
-   * @class WrapperMatrix1D
-   * @param {Array<number>} data
-   * @param {object} [options]
-   * @param {object} [options.rows = 1]
-   */
   constructor(data, options = {}) {
     const { rows = 1 } = options;
 

@@ -3,13 +3,6 @@ import WrapperMatrix2D from '../wrap/WrapperMatrix2D';
 
 import { hypotenuse } from './util';
 
-/**
- * @class EigenvalueDecomposition
- * @link https://github.com/lutzroeder/Mapack/blob/master/Source/EigenvalueDecomposition.cs
- * @param {Matrix} matrix
- * @param {object} [options]
- * @param {boolean} [options.assumeSymmetric=false]
- */
 export default class EigenvalueDecomposition {
   constructor(matrix, options = {}) {
     const { assumeSymmetric = false } = options;
@@ -59,34 +52,18 @@ export default class EigenvalueDecomposition {
     this.V = V;
   }
 
-  /**
-   *
-   * @return {Array<number>}
-   */
   get realEigenvalues() {
     return this.d;
   }
 
-  /**
-   *
-   * @return {Array<number>}
-   */
   get imaginaryEigenvalues() {
     return this.e;
   }
 
-  /**
-   *
-   * @return {Matrix}
-   */
   get eigenvectorMatrix() {
     return this.V;
   }
 
-  /**
-   *
-   * @return {Matrix}
-   */
   get diagonalMatrix() {
     var n = this.n;
     var e = this.e;

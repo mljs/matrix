@@ -29,7 +29,7 @@ const { Matrix } = require('ml-matrix');
 const matrix = Matrix.ones(5, 5);
 ```
 
-## [API Documentation](https://mljs.github.io/matrix/)
+## [API Documentation](https://mljs.github.io/matrix/modules/_ml_matrix_.html)
 
 ## Examples
 

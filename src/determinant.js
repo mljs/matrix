@@ -2,10 +2,6 @@ import Matrix from './matrix';
 import LuDecomposition from './dc/lu';
 import MatrixSelectionView from './views/selection';
 
-/**
- * Calculates and returns the determinant of a matrix.
- * @return {number}
- */
 export function determinant(matrix) {
   matrix = Matrix.checkMatrix(matrix);
   if (matrix.isSquare()) {

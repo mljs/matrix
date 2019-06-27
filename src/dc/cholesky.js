@@ -1,11 +1,6 @@
 import Matrix from '../matrix';
 import WrapperMatrix2D from '../wrap/WrapperMatrix2D';
 
-/**
- * @class CholeskyDecomposition
- * @link https://github.com/lutzroeder/Mapack/blob/master/Source/CholeskyDecomposition.cs
- * @param {Matrix} value
- */
 export default class CholeskyDecomposition {
   constructor(value) {
     value = WrapperMatrix2D.checkMatrix(value);
@@ -47,11 +42,6 @@ export default class CholeskyDecomposition {
     this.L = l;
   }
 
-  /**
-   *
-   * @param {Matrix} value
-   * @return {Matrix}
-   */
   solve(value) {
     value = WrapperMatrix2D.checkMatrix(value);
 
@@ -87,10 +77,6 @@ export default class CholeskyDecomposition {
     return B;
   }
 
-  /**
-   *
-   * @return {Matrix}
-   */
   get lowerTriangularMatrix() {
     return this.L;
   }

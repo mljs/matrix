@@ -3,11 +3,6 @@ import WrapperMatrix2D from '../wrap/WrapperMatrix2D';
 
 import { hypotenuse } from './util';
 
-/**
- * @class QrDecomposition
- * @link https://github.com/lutzroeder/Mapack/blob/master/Source/QrDecomposition.cs
- * @param {Matrix} value
- */
 export default class QrDecomposition {
   constructor(value) {
     value = WrapperMatrix2D.checkMatrix(value);
@@ -49,14 +44,6 @@ export default class QrDecomposition {
     this.Rdiag = rdiag;
   }
 
-  /**
-   * Solve a problem of least square (Ax=b) by using the QR decomposition. Useful when A is rectangular, but not working when A is singular.
-   * Example : We search to approximate x, with A matrix shape m*n, x vector size n, b vector size m (m > n). We will use :
-   * var qr = QrDecomposition(A);
-   * var x = qr.solve(b);
-   * @param {Matrix} value - Matrix 1D which is the vector b (in the equation Ax = b)
-   * @return {Matrix} - The vector x
-   */
   solve(value) {
     value = Matrix.checkMatrix(value);
 
@@ -101,10 +88,6 @@ export default class QrDecomposition {
     return X.subMatrix(0, n - 1, 0, count - 1);
   }
 
-  /**
-   *
-   * @return {boolean}
-   */
   isFullRank() {
     var columns = this.QR.columns;
     for (var i = 0; i < columns; i++) {
@@ -115,10 +98,6 @@ export default class QrDecomposition {
     return true;
   }
 
-  /**
-   *
-   * @return {Matrix}
-   */
   get upperTriangularMatrix() {
     var qr = this.QR;
     var n = qr.columns;
@@ -138,10 +117,6 @@ export default class QrDecomposition {
     return X;
   }
 
-  /**
-   *
-   * @return {Matrix}
-   */
   get orthogonalMatrix() {
     var qr = this.QR;
     var rows = qr.rows;

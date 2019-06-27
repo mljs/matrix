@@ -3,15 +3,6 @@ import WrapperMatrix2D from '../wrap/WrapperMatrix2D';
 
 import { hypotenuse } from './util';
 
-/**
- * @class SingularValueDecomposition
- * @see https://github.com/accord-net/framework/blob/development/Sources/Accord.Math/Decompositions/SingularValueDecomposition.cs
- * @param {Matrix} value
- * @param {object} [options]
- * @param {boolean} [options.computeLeftSingularVectors=true]
- * @param {boolean} [options.computeRightSingularVectors=true]
- * @param {boolean} [options.autoTranspose=false]
- */
 export default class SingularValueDecomposition {
   constructor(value, options = {}) {
     value = WrapperMatrix2D.checkMatrix(value);
@@ -417,14 +408,6 @@ export default class SingularValueDecomposition {
     this.V = V;
   }
 
-  /**
-   * Solve a problem of least square (Ax=b) by using the SVD. Useful when A is singular. When A is not singular, it would be better to use qr.solve(value).
-   * Example : We search to approximate x, with A matrix shape m*n, x vector size n, b vector size m (m > n). We will use :
-   * var svd = SingularValueDecomposition(A);
-   * var x = svd.solve(b);
-   * @param {Matrix} value - Matrix 1D which is the vector b (in the equation Ax = b)
-   * @return {Matrix} - The vector x
-   */
   solve(value) {
     var Y = value;
     var e = this.threshold;
@@ -460,21 +443,10 @@ export default class SingularValueDecomposition {
     return VLU.mmul(Y);
   }
 
-  /**
-   *
-   * @param {Array<number>} value
-   * @return {Matrix}
-   */
   solveForDiagonal(value) {
     return this.solve(Matrix.diag(value));
   }
 
-  /**
-   * Get the inverse of the matrix. We compute the inverse of a matrix using SVD when this matrix is singular or ill-conditioned. Example :
-   * var svd = SingularValueDecomposition(A);
-   * var inverseA = svd.inverse();
-   * @return {Matrix} - The approximation of the inverse of the matrix
-   */
   inverse() {
     var V = this.V;
     var e = this.threshold;
@@ -509,26 +481,14 @@ export default class SingularValueDecomposition {
     return Y;
   }
 
-  /**
-   *
-   * @return {number}
-   */
   get condition() {
     return this.s[0] / this.s[Math.min(this.m, this.n) - 1];
   }
 
-  /**
-   *
-   * @return {number}
-   */
   get norm2() {
     return this.s[0];
   }
 
-  /**
-   *
-   * @return {number}
-   */
   get rank() {
     var tol = Math.max(this.m, this.n) * this.s[0] * Number.EPSILON;
     var r = 0;
@@ -541,42 +501,22 @@ export default class SingularValueDecomposition {
     return r;
   }
 
-  /**
-   *
-   * @return {Array<number>}
-   */
   get diagonal() {
     return this.s;
   }
 
-  /**
-   *
-   * @return {number}
-   */
   get threshold() {
     return (Number.EPSILON / 2) * Math.max(this.m, this.n) * this.s[0];
   }
 
-  /**
-   *
-   * @return {Matrix}
-   */
   get leftSingularVectors() {
     return this.U;
   }
 
-  /**
-   *
-   * @return {Matrix}
-   */
   get rightSingularVectors() {
     return this.V;
   }
 
-  /**
-   *
-   * @return {Matrix}
-   */
   get diagonalMatrix() {
     return Matrix.diag(this.s);
   }

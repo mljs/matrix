@@ -482,26 +482,33 @@ declare module 'ml-matrix' {
     constructor(data: number[][]);
     constructor(otherMatrix: AbstractMatrix);
   }
+
   export default Matrix;
 
   export class MatrixColumnView extends AbstractMatrix {
     constructor(matrix: AbstractMatrix, column: number);
   }
+
   export class MatrixColumnSelectionView extends AbstractMatrix {
     constructor(matrix: AbstractMatrix, columnIndices: number[]);
   }
+
   export class MatrixFlipColumnView extends AbstractMatrix {
     constructor(matrix: AbstractMatrix);
   }
+
   export class MatrixFlipRowView extends AbstractMatrix {
     constructor(matrix: AbstractMatrix);
   }
+
   export class MatrixRowView extends AbstractMatrix {
     constructor(matrix: AbstractMatrix, row: number);
   }
+
   export class MatrixRowSelectionView extends AbstractMatrix {
     constructor(matrix: AbstractMatrix, rowIndices: number[]);
   }
+
   export class MatrixSelectionView extends AbstractMatrix {
     constructor(
       matrix: AbstractMatrix,
@@ -509,6 +516,7 @@ declare module 'ml-matrix' {
       columnIndices: number[]
     );
   }
+
   export class MatrixSubView extends AbstractMatrix {
     constructor(
       matrix: AbstractMatrix,
@@ -518,17 +526,23 @@ declare module 'ml-matrix' {
       endColumn: number
     );
   }
+
   export class MatrixTransposeView extends AbstractMatrix {
     constructor(matrix: AbstractMatrix);
   }
 
   export interface IWrap1DOptions {
+    /**
+     * Default: 1.
+     */
     rows?: number;
   }
+
   export function wrap(
     array: number[],
     options?: IWrap1DOptions
   ): WrapperMatrix1D;
+
   export function wrap(twoDAray: number[][]): WrapperMatrix2D;
 
   export class WrapperMatrix1D extends AbstractMatrix {
@@ -539,26 +553,61 @@ declare module 'ml-matrix' {
     constructor(data: number[][]);
   }
 
+  /**
+   * @param useSVD - Default: false.
+   */
   export function solve(
     leftHandSide: MaybeMatrix,
     rightHandSide: MaybeMatrix,
     useSVD?: boolean
   ): Matrix;
 
+  /**
+   * Computes the inverse of a matrix.
+   * @param matrix - Matrix to invert.
+   * @param useSVD - Use the singular value decomposition to compute the inverse. Default: false.
+   */
   export function inverse(matrix: MaybeMatrix, useSVD?: boolean): Matrix;
 
+  /**
+   * Calculates and returns the determinant of a matrix.
+   * @param matrix
+   */
   export function determinant(matrix: MaybeMatrix): number;
 
   export interface ILinearDependenciesOptions {
+    /**
+     * If an absolute value is inferior to this threshold, it will equals zero.
+     * Default: 10e-10.
+     */
     thresholdValue?: number;
+
+    /**
+     * If the error is inferior to that threshold, the linear combination found is accepted and the row is dependent from other rows.
+     * Default: 10e-10.
+     */
     thresholdError?: number;
   }
 
+  /**
+   * Creates a matrix which represents the dependencies between rows.
+   * If a row is a linear combination of others rows, the result will be a row with the coefficients of this combination.
+   * For example : for A = [[2, 0, 0, 1], [0, 1, 6, 0], [0, 3, 0, 1], [0, 0, 1, 0], [0, 1, 2, 0]], the result will be [[0, 0, 0, 0, 0], [0, 0, 0, 4, 1], [0, 0, 0, 0, 0], [0, 0.25, 0, 0, -0.25], [0, 1, 0, -4, 0]]
+   * @param matrix
+   * @param options
+   * @returns - The matrix which represents the dependencies between rows.
+   */
   export function linearDependencies(
     matrix: MaybeMatrix,
     options?: ILinearDependenciesOptions
   ): Matrix;
 
+  /**
+   * Returns inverse of a matrix if it exists or the pseudoinverse.
+   * @param matrix
+   * @param threshold - Threshold for taking inverse of singular values. Default: Number.EPSILON.
+   * @returns - The (pseudo)inverted matrix.
+   */
   export function pseudoInverse(
     matrix: MaybeMatrix,
     threshold?: number
@@ -587,13 +636,44 @@ declare module 'ml-matrix' {
   ): Matrix;
 
   export interface ISVDOptions {
+    /**
+     * Default: true.
+     */
     computeLeftSingularVectors?: boolean;
+
+    /**
+     * Default: true.
+     */
     computeRightSingularVectors?: boolean;
+
+    /**
+     * Default: false.
+     */
     autoTranspose?: boolean;
   }
+
+  /**
+   * @see https://github.com/accord-net/framework/blob/development/Sources/Accord.Math/Decompositions/SingularValueDecomposition.cs
+   */
   export class SingularValueDecomposition {
     constructor(value: MaybeMatrix, options?: ISVDOptions);
+
+    /**
+     * Get the inverse of the matrix. We compute the inverse of a matrix using SVD when this matrix is singular or ill-conditioned. Example :
+     * var svd = SingularValueDecomposition(A);
+     * var inverseA = svd.inverse();
+     * @returns - The approximation of the inverse of the matrix.
+     */
     inverse(): Matrix;
+
+    /**
+     * Solve a problem of least square (Ax=b) by using the SVD. Useful when A is singular. When A is not singular, it would be better to use qr.solve(value).
+     * Example : We search to approximate x, with A matrix shape m*n, x vector size n, b vector size m (m > n). We will use :
+     * var svd = SingularValueDecomposition(A);
+     * var x = svd.solve(b);
+     * @param value - Matrix 1D which is the vector b (in the equation Ax = b).
+     * @returns - The vector x.
+     */
     solve(value: Matrix): Matrix;
     solveForDiagonal(value: number[]): Matrix;
     readonly norm2: number;
@@ -605,11 +685,19 @@ declare module 'ml-matrix' {
     readonly diagonal: number[];
     readonly diagonalMatrix: Matrix;
   }
+
   export { SingularValueDecomposition as SVD };
 
   export interface IEVDOptions {
+    /**
+     * Default: false.
+     */
     assumeSymmetric?: boolean;
   }
+
+  /**
+   * @link https://github.com/lutzroeder/Mapack/blob/master/Source/EigenvalueDecomposition.cs
+   */
   export class EigenvalueDecomposition {
     constructor(value: MaybeMatrix, options?: IEVDOptions);
     readonly diagonalMatrix: Matrix;
@@ -617,15 +705,27 @@ declare module 'ml-matrix' {
     readonly imaginaryEigenvalues: number[];
     readonly realEigenvalues: number[];
   }
+
   export { EigenvalueDecomposition as EVD };
 
+  /**
+   * @link https://github.com/lutzroeder/Mapack/blob/master/Source/CholeskyDecomposition.cs
+   */
   export class CholeskyDecomposition {
+    /**
+     * 
+     * @param value - The matrix to decompose
+     */
     constructor(value: MaybeMatrix);
     solve(value: Matrix): Matrix;
     readonly lowerTriangularMatrix: Matrix;
   }
+
   export { CholeskyDecomposition as CHO };
 
+  /**
+   * @link https://github.com/lutzroeder/Mapack/blob/master/Source/LuDecomposition.cs
+   */
   export class LuDecomposition {
     constructor(value: MaybeMatrix);
     isSingular(): boolean;
@@ -635,14 +735,28 @@ declare module 'ml-matrix' {
     readonly pivotPermutationVector: number[];
     readonly upperTriangularMatrix: Matrix;
   }
+
   export { LuDecomposition as LU };
 
+  /**
+   * @link https://github.com/lutzroeder/Mapack/blob/master/Source/QrDecomposition.cs
+   */
   class QrDecomposition {
     constructor(value: MaybeMatrix);
     isFullRank(): boolean;
+
+    /**
+     * Solve a problem of least square (Ax=b) by using the QR decomposition. Useful when A is rectangular, but not working when A is singular.
+     * Example : We search to approximate x, with A matrix shape m*n, x vector size n, b vector size m (m > n). We will use :
+     * var qr = QrDecomposition(A);
+     * var x = qr.solve(b);
+     * @param value - Matrix 1D which is the vector b (in the equation Ax = b).
+     * @returns - The vector x.
+     */
     solve(value: Matrix): Matrix;
     readonly orthogonalMatrix: Matrix;
     readonly upperTriangularMatrix: Matrix;
   }
+
   export { QrDecomposition, QrDecomposition as QR };
 }
