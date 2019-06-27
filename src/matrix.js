@@ -84,16 +84,6 @@ export class AbstractMatrix {
     return matrix;
   }
 
-  /**
-   * Creates a matrix with the given dimensions. Values will be random integers.
-   * @param {number} rows - Number of rows
-   * @param {number} columns - Number of columns
-   * @param {object} [options]
-   * @param {number} [options.min=0] - Minimum value
-   * @param {number} [options.max=1000] - Maximum value
-   * @param {function} [options.random=Math.random] - Random number generator
-   * @return {Matrix} The new matrix
-   */
   static randInt(rows, columns, options = {}) {
     if (typeof options !== 'object') {
       throw new TypeError('options must be an object');
@@ -113,13 +103,6 @@ export class AbstractMatrix {
     return matrix;
   }
 
-  /**
-   * Creates an identity matrix with the given dimension. Values of the diagonal will be 1 and others will be 0.
-   * @param {number} rows - Number of rows
-   * @param {number} [columns=rows] - Number of columns
-   * @param {number} [value=1] - Value to fill the diagonal with
-   * @return {Matrix} - The new identity matrix
-   */
   static eye(rows, columns, value) {
     if (columns === undefined) columns = rows;
     if (value === undefined) value = 1;
@@ -131,13 +114,6 @@ export class AbstractMatrix {
     return matrix;
   }
 
-  /**
-   * Creates a diagonal matrix based on the given array.
-   * @param {Array} data - Array containing the data for the diagonal
-   * @param {number} [rows] - Number of rows (Default: data.length)
-   * @param {number} [columns] - Number of columns (Default: rows)
-   * @return {Matrix} - The new diagonal matrix
-   */
   static diag(data, rows, columns) {
     var l = data.length;
     if (rows === undefined) rows = l;
@@ -150,12 +126,6 @@ export class AbstractMatrix {
     return matrix;
   }
 
-  /**
-   * Returns a matrix whose elements are the minimum between matrix1 and matrix2
-   * @param {Matrix} matrix1
-   * @param {Matrix} matrix2
-   * @return {Matrix}
-   */
   static min(matrix1, matrix2) {
     matrix1 = this.checkMatrix(matrix1);
     matrix2 = this.checkMatrix(matrix2);
@@ -170,12 +140,6 @@ export class AbstractMatrix {
     return result;
   }
 
-  /**
-   * Returns a matrix whose elements are the maximum between matrix1 and matrix2
-   * @param {Matrix} matrix1
-   * @param {Matrix} matrix2
-   * @return {Matrix}
-   */
   static max(matrix1, matrix2) {
     matrix1 = this.checkMatrix(matrix1);
     matrix2 = this.checkMatrix(matrix2);
@@ -190,36 +154,18 @@ export class AbstractMatrix {
     return result;
   }
 
-  /**
-   * Check that the provided value is a Matrix and tries to instantiate one if not
-   * @param {*} value - The value to check
-   * @return {Matrix}
-   */
   static checkMatrix(value) {
     return AbstractMatrix.isMatrix(value) ? value : new Matrix(value);
   }
 
-  /**
-   * Returns true if the argument is a Matrix, false otherwise
-   * @param {*} value - The value to check
-   * @return {boolean}
-   */
   static isMatrix(value) {
     return value != null && value.klass === 'Matrix';
   }
 
-  /**
-   * @prop {number} size - The number of elements in the matrix.
-   */
   get size() {
     return this.rows * this.columns;
   }
 
-  /**
-   * Applies a callback for each element of the matrix. The function is called in the matrix (this) context.
-   * @param {function} callback - Function that will be called with two parameters : i (row) and j (column)
-   * @return {Matrix} this
-   */
   apply(callback) {
     if (typeof callback !== 'function') {
       throw new TypeError('callback must be a function');
@@ -232,10 +178,6 @@ export class AbstractMatrix {
     return this;
   }
 
-  /**
-   * Returns a new 1D array filled row by row with the matrix values
-   * @return {Array}
-   */
   to1DArray() {
     var array = [];
     for (var i = 0; i < this.rows; i++) {
@@ -246,10 +188,6 @@ export class AbstractMatrix {
     return array;
   }
 
-  /**
-   * Returns a 2D array containing a copy of the data
-   * @return {Array}
-   */
   to2DArray() {
     var copy = [];
     for (var i = 0; i < this.rows; i++) {
@@ -265,23 +203,14 @@ export class AbstractMatrix {
     return this.to2DArray();
   }
 
-  /**
-   * @return {boolean} true if the matrix has one row
-   */
   isRowVector() {
     return this.rows === 1;
   }
 
-  /**
-   * @return {boolean} true if the matrix has one column
-   */
   isColumnVector() {
     return this.columns === 1;
   }
 
-  /**
-   * @return {boolean} true if the matrix has one row or one column
-   */
   isVector() {
     return this.rows === 1 || this.columns === 1;
   }
@@ -290,9 +219,6 @@ export class AbstractMatrix {
     return this.rows === this.columns;
   }
 
-  /**
-   * @return {boolean} true if the matrix is square and has the same values on both sides of the diagonal
-   */
   isSymmetric() {
     if (this.isSquare()) {
       for (var i = 0; i < this.rows; i++) {
@@ -426,42 +352,14 @@ export class AbstractMatrix {
     return result;
   }
 
-  /**
-   * Sets a given element of the matrix.
-   * @abstract
-   * @param {number} rowIndex - Index of the row
-   * @param {number} columnIndex - Index of the column
-   * @param {number} value - The new value for the element
-   * @return {Matrix} this
-   */
-  // eslint-disable-next-line no-unused-vars
-  set(rowIndex, columnIndex, value) {
+  set() {
     throw new Error('set method is unimplemented');
   }
 
-  /**
-   * Returns the given element of the matrix.
-   * @abstract
-   * @param {number} rowIndex - Index of the row
-   * @param {number} columnIndex - Index of the column
-   * @return {number}
-   */
-  // eslint-disable-next-line no-unused-vars
-  get(rowIndex, columnIndex) {
+  get() {
     throw new Error('get method is unimplemented');
   }
 
-  /**
-   * Creates a new matrix that is a repetition of the current matrix. New matrix has rows times the number of
-   * rows of the original matrix, and columns times the number of columns of the original matrix.
-   * @param {object} [options]
-   * @param {number} [options.rows=1] - Number of times the rows should be repeated
-   * @param {number} [options.columns=1] - Number of times the columns should be repeated
-   * @return {Matrix}
-   * @example
-   * var matrix = new Matrix([[1,2]]);
-   * matrix.repeat({ rows: 2 }); // [[1,2],[1,2]]
-   */
   repeat(options = {}) {
     if (typeof options !== 'object') {
       throw new TypeError('options must be an object');
@@ -482,11 +380,6 @@ export class AbstractMatrix {
     return matrix;
   }
 
-  /**
-   * Fills the matrix with a given value. All elements will be set to this value.
-   * @param {number} value - New value
-   * @return {Matrix} this
-   */
   fill(value) {
     for (var i = 0; i < this.rows; i++) {
       for (var j = 0; j < this.columns; j++) {
@@ -496,19 +389,10 @@ export class AbstractMatrix {
     return this;
   }
 
-  /**
-   * Negates the matrix. All elements will be multiplied by (-1)
-   * @return {Matrix} this
-   */
   neg() {
     return this.mulS(-1);
   }
 
-  /**
-   * Returns a new array from the given row index
-   * @param {number} index - Row index
-   * @return {Array}
-   */
   getRow(index) {
     checkRowIndex(this, index);
     var row = [];
@@ -518,21 +402,10 @@ export class AbstractMatrix {
     return row;
   }
 
-  /**
-   * Returns a new row vector from the given row index
-   * @param {number} index - Row index
-   * @return {Matrix}
-   */
   getRowVector(index) {
     return Matrix.rowVector(this.getRow(index));
   }
 
-  /**
-   * Sets a row at the given index
-   * @param {number} index - Row index
-   * @param {Array|Matrix} array - Array or vector
-   * @return {Matrix} this
-   */
   setRow(index, array) {
     checkRowIndex(this, index);
     array = checkRowVector(this, array);
@@ -542,12 +415,6 @@ export class AbstractMatrix {
     return this;
   }
 
-  /**
-   * Swaps two rows
-   * @param {number} row1 - First row index
-   * @param {number} row2 - Second row index
-   * @return {Matrix} this
-   */
   swapRows(row1, row2) {
     checkRowIndex(this, row1);
     checkRowIndex(this, row2);
@@ -559,11 +426,6 @@ export class AbstractMatrix {
     return this;
   }
 
-  /**
-   * Returns a new array from the given column index
-   * @param {number} index - Column index
-   * @return {Array}
-   */
   getColumn(index) {
     checkColumnIndex(this, index);
     var column = [];
@@ -573,21 +435,10 @@ export class AbstractMatrix {
     return column;
   }
 
-  /**
-   * Returns a new column vector from the given column index
-   * @param {number} index - Column index
-   * @return {Matrix}
-   */
   getColumnVector(index) {
     return Matrix.columnVector(this.getColumn(index));
   }
 
-  /**
-   * Sets a column at the given index
-   * @param {number} index - Column index
-   * @param {Array|Matrix} array - Array or vector
-   * @return {Matrix} this
-   */
   setColumn(index, array) {
     checkColumnIndex(this, index);
     array = checkColumnVector(this, array);
@@ -597,12 +448,6 @@ export class AbstractMatrix {
     return this;
   }
 
-  /**
-   * Swaps two columns
-   * @param {number} column1 - First column index
-   * @param {number} column2 - Second column index
-   * @return {Matrix} this
-   */
   swapColumns(column1, column2) {
     checkColumnIndex(this, column1);
     checkColumnIndex(this, column2);

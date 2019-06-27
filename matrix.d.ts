@@ -11,12 +11,35 @@ declare module 'ml-matrix' {
     random: () => number;
   }
   export interface IRandomIntOptions {
+    /**
+     * Minimum value.
+     * Default: 0.
+     */
     min: number;
+
+    /**
+     * Maximum value.
+     * Default: 1000.
+     */
     max: number;
+
+    /**
+     * Random number generator.
+     * Default: Math.random.
+     */
     random: () => number;
   }
   export interface IRepeatOptions {
+    /**
+     * Number of times the rows should be repeated.
+     * Default: 1.
+     */
     rows?: number;
+
+    /**
+     * Number of times the columns should be repeated.
+     * Default: 1.
+     */
     columns?: number;
   }
   export interface IScaleOptions {
@@ -141,35 +164,128 @@ declare module 'ml-matrix' {
       columns: number,
       options?: IRandomOptions
     ): Matrix;
+
+    /**
+     * Creates a matrix with the given dimensions. Values will be random integers.
+     * @param rows - Number of rows.
+     * @param columns - Number of columns.
+     * @returns - The new matrix.
+     */
     static randInt(
       rows: number,
       columns: number,
       options?: IRandomIntOptions
     ): Matrix;
+
+    /**
+     * Creates an identity matrix with the given dimension. Values of the diagonal will be 1 and others will be 0.
+     * @param rows - Number of rows.
+     * @param columns - Number of columns. Default: rows.
+     * @param value - Value to fill the diagonal with. Default: 1.
+     * @returns - The new identity matrix.
+     */
     static eye(rows: number, columns?: number, value?: number): Matrix;
+
+    /**
+     * Alias for {@link Matrix.eye}.
+     */
     static identity(rows: number, columns?: number, value?: number): Matrix;
+
+    /**
+     * Creates a diagonal matrix based on the given array.
+     * @param data - Array containing the data for the diagonal.
+     * @param rows - Number of rows. Default: `data.length`.
+     * @param columns - Number of columns. Default: `rows`.
+     * @returns - The new diagonal matrix.
+     */
     static diag(data: number[], rows?: number, columns?: number): Matrix;
+
+    /**
+     * Alias for {@link Matrix.diag}.
+     */
     static diagonal(data: number[], rows?: number, columns?: number): Matrix;
+
+    /**
+     * Returns a matrix whose elements are the minimum between `matrix1` and `matrix2`.
+     */
     static min(matrix1: MaybeMatrix, matrix2: MaybeMatrix): Matrix;
+
+    /**
+     * Returns a matrix whose elements are the maximum between `matrix1` and `matrix2`.
+     * @param matrix1 
+     * @param matrix2 
+     */
     static max(matrix1: MaybeMatrix, matrix2: MaybeMatrix): Matrix;
+
+    /**
+     * Check that the provided value is a Matrix and tries to instantiate one if not.
+     * @param value - The value to check.
+     */
     static checkMatrix(value: any): Matrix;
+
+    /**
+     * Returns whether `value` is a Matrix.
+     * @param value - The value to check.
+     */
     static isMatrix(value: any): value is AbstractMatrix;
 
+    /**
+     * Sets a given element of the matrix.
+     * @param rowIndex - Index of the element's row.
+     * @param columnIndex - Index of the element's column.
+     * @param value - The new value for the element.
+     */
     set(rowIndex: number, columnIndex: number, value: number): this;
+
+    /**
+     * Returns the value of the given element of the matrix.
+     * @param rowIndex - Index of the element's row.
+     * @param columnIndex - Index of the element's column.
+     * @returns - The value of the element.
+     */
     get(rowIndex: number, columnIndex: number): number;
 
+    /**
+     * Applies a callback for each element of the matrix. The function is called in the matrix (this) context.
+     * @param callback - Function that will be called for each element in the matrix.
+     */
     apply(callback: (row: number, column: number) => void): this;
+
+    /**
+     * Returns a new 1D array filled row by row with the matrix values.
+     */
     to1DArray(): number[];
+
+    /**
+     * Returns a 2D array containing a copy of the matrix data.
+     */
     to2DArray(): number[][];
+
     toJSON(): number[][];
+
+    /**
+     * Returns whether the matrix has one row.
+     */
     isRowVector(): boolean;
+
+    /**
+     * Returns whether the matrix has one column.
+     */
     isColumnVector(): boolean;
+
+    /**
+     * Returns whether the matrix has one row or one column.
+     */
     isVector(): boolean;
 
     /**
      * Returns whether the matrix has the same number of rows and columns.
      */
     isSquare(): boolean;
+
+    /**
+     * Returns whether the matrix is square and has the same values on both sides of the diagonal.
+     */
     isSymmetric(): boolean;
 
     /**
@@ -194,18 +310,84 @@ declare module 'ml-matrix' {
      */
     reducedEchelonForm(): Matrix;
 
+    /**
+     * Creates a new matrix that is a repetition of the current matrix. New matrix has rows times the number of
+     * rows of the original matrix, and columns times the number of columns of the original matrix.
+     * 
+     * @example
+     * var matrix = new Matrix([[1, 2]]);
+     * matrix.repeat({ rows: 2 }); // [[1, 2], [1, 2]]
+     */
     repeat(options?: IRepeatOptions): Matrix;
+
+    /**
+     * Fills the matrix with a given value. All elements will be set to this value.
+     * @param value - New value.
+     */
     fill(value: number): this;
+
+    /**
+     * Negates the matrix. All elements will be multiplied by `-1`.
+     */
     neg(): this;
+
+    /**
+     * Alias for {@link Matrix.prototype.neg}.
+     */
     negate(): this;
+
+    /**
+     * Returns a new array with the values from the given row index.
+     * @param index - Row index.
+     */
     getRow(index: number): number[];
+
+    /**
+     * Returns a new row vector with the values from the given row index.
+     * @param index - Row index.
+     */
     getRowVector(index: number): Matrix;
+
+    /**
+     * Sets a row at the given index.
+     * @param index - Row index.
+     * @param array - Array or vector to set.
+     */
     setRow(index: number, array: number[] | AbstractMatrix): this;
+
+    /**
+     * Swap two rows.
+     * @param row1 - First row index.
+     * @param row2 - Second row index.
+     */
     swapRows(row1: number, row2: number): this;
+
+    /**
+     * Returns a new array with the values from the given column index.
+     * @param index - Column index.
+     */
     getColumn(index: number): number[];
+
+    /**
+     * Returns a new column vector with the values from the given column index.
+     * @param index - Column index.
+     */
     getColumnVector(index: number): Matrix;
+
+    /**
+     * Sets a column at the given index.
+     * @param index - Column index.
+     * @param array - Array or vector to set.
+     */
     setColumn(index: number, array: number[] | AbstractMatrix): this;
+
+    /**
+     * Swap two columns.
+     * @param column1 - First column index.
+     * @param column2 - Second column index.
+     */
     swapColumns(column1: number, column2: number): this;
+
     addRowVector(vector: number[] | AbstractMatrix): this;
     subRowVector(vector: number[] | AbstractMatrix): this;
     mulRowVector(vector: number[] | AbstractMatrix): this;
