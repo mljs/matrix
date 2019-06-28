@@ -1,3 +1,7 @@
+## [6.1.1](https://github.com/mljs/matrix/compare/v6.1.0...v6.1.1) (2019-06-28)
+
+
+
 # [6.1.0](https://github.com/mljs/matrix/compare/v6.0.0...v6.1.0) (2019-06-22)
 
 
