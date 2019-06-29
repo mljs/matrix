@@ -14,8 +14,8 @@ export default class EigenvalueDecomposition {
 
     var n = matrix.columns;
     var V = new Matrix(n, n);
-    var d = new Array(n);
-    var e = new Array(n);
+    var d = new Float64Array(n);
+    var e = new Float64Array(n);
     var value = matrix;
     var i, j;
 
@@ -36,7 +36,7 @@ export default class EigenvalueDecomposition {
       tql2(n, e, d, V);
     } else {
       var H = new Matrix(n, n);
-      var ort = new Array(n);
+      var ort = new Float64Array(n);
       for (j = 0; j < n; j++) {
         for (i = 0; i < n; i++) {
           H.set(i, j, value.get(i, j));
@@ -53,11 +53,11 @@ export default class EigenvalueDecomposition {
   }
 
   get realEigenvalues() {
-    return this.d;
+    return Array.from(this.d);
   }
 
   get imaginaryEigenvalues() {
-    return this.e;
+    return Array.from(this.e);
   }
 
   get eigenvectorMatrix() {

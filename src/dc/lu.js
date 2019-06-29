@@ -8,7 +8,7 @@ export default class LuDecomposition {
     var lu = matrix.clone();
     var rows = lu.rows;
     var columns = lu.columns;
-    var pivotVector = new Array(rows);
+    var pivotVector = new Float64Array(rows);
     var pivotSign = 1;
     var i, j, k, p, s, t, v;
     var LUcolj, kmax;
@@ -17,7 +17,7 @@ export default class LuDecomposition {
       pivotVector[i] = i;
     }
 
-    LUcolj = new Array(rows);
+    LUcolj = new Float64Array(rows);
 
     for (j = 0; j < columns; j++) {
       for (i = 0; i < rows; i++) {
@@ -166,6 +166,6 @@ export default class LuDecomposition {
   }
 
   get pivotPermutationVector() {
-    return this.pivotVector.slice();
+    return Array.from(this.pivotVector);
   }
 }

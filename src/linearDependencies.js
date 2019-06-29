@@ -1,7 +1,6 @@
 import Matrix from './matrix';
 import SingularValueDecomposition from './dc/svd';
 
-// function used by rowsDependencies
 function xrange(n, exception) {
   var range = [];
   for (var i = 0; i < n; i++) {
@@ -12,7 +11,6 @@ function xrange(n, exception) {
   return range;
 }
 
-// function used by rowsDependencies
 function dependenciesOneRow(
   error,
   matrix,

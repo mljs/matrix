@@ -10,7 +10,7 @@ export default class QrDecomposition {
     var qr = value.clone();
     var m = value.rows;
     var n = value.columns;
-    var rdiag = new Array(n);
+    var rdiag = new Float64Array(n);
     var i, j, k, s;
 
     for (k = 0; k < n; k++) {
