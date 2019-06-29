@@ -2,8 +2,8 @@
 
 const { Matrix, SVD } = require('..');
 
-const m = Matrix.randInt(100, 200);
-const n = Matrix.randInt(200, 100);
+const m = Matrix.randInt(200, 300);
+const n = Matrix.randInt(300, 200);
 
 function test() {
   const x = n.mmul(m);
