@@ -756,12 +756,6 @@ export class AbstractMatrix {
 
   mmul(other) {
     other = Matrix.checkMatrix(other);
-    if (this.columns !== other.rows) {
-      // eslint-disable-next-line no-console
-      console.warn(
-        'Number of columns of left matrix are not equal to number of rows of right matrix.'
-      );
-    }
 
     var m = this.rows;
     var n = this.columns;
@@ -769,7 +763,7 @@ export class AbstractMatrix {
 
     var result = new Matrix(m, p);
 
-    var Bcolj = new Array(n);
+    var Bcolj = new Float64Array(n);
     for (var j = 0; j < p; j++) {
       for (var k = 0; k < n; k++) {
         Bcolj[k] = other.get(k, j);
@@ -1434,10 +1428,7 @@ export default class Matrix extends AbstractMatrix {
       this.data = [];
       if (Number.isInteger(nColumns) && nColumns > 0) {
         for (let i = 0; i < nRows; i++) {
-          this.data.push([]);
-          for (let j = 0; j < nColumns; j++) {
-            this.data[i].push(0);
-          }
+          this.data.push(new Float64Array(nColumns));
         }
       } else {
         throw new TypeError('nColumns must be a positive integer');
@@ -1457,7 +1448,7 @@ export default class Matrix extends AbstractMatrix {
         if (arrayData[i].length !== nColumns) {
           throw new RangeError('Inconsistent array dimensions');
         }
-        this.data.push(arrayData[i].slice());
+        this.data.push(Float64Array.from(arrayData[i]));
       }
     } else {
       throw new TypeError(
@@ -1494,7 +1485,7 @@ export default class Matrix extends AbstractMatrix {
       index = this.rows;
     }
     checkRowIndex(this, index, true);
-    array = checkRowVector(this, array, true);
+    array = Float64Array.from(checkRowVector(this, array, true));
     this.data.splice(index, 0, array);
     this.rows += 1;
     return this;
@@ -1506,7 +1497,14 @@ export default class Matrix extends AbstractMatrix {
       throw new RangeError('A matrix cannot have less than one column');
     }
     for (var i = 0; i < this.rows; i++) {
-      this.data[i].splice(index, 1);
+      const newRow = new Float64Array(this.columns - 1);
+      for (let j = 0; j < index; j++) {
+        newRow[j] = this.data[i][j];
+      }
+      for (let j = index + 1; j < this.columns; j++) {
+        newRow[j - 1] = this.data[i][j];
+      }
+      this.data[i] = newRow;
     }
     this.columns -= 1;
     return this;
@@ -1520,7 +1518,16 @@ export default class Matrix extends AbstractMatrix {
     checkColumnIndex(this, index, true);
     array = checkColumnVector(this, array);
     for (var i = 0; i < this.rows; i++) {
-      this.data[i].splice(index, 0, array[i]);
+      const newRow = new Float64Array(this.columns + 1);
+      let j = 0;
+      for (; j < index; j++) {
+        newRow[j] = this.data[i][j];
+      }
+      newRow[j++] = array[i];
+      for (; j < this.columns + 1; j++) {
+        newRow[j] = this.data[i][j - 1];
+      }
+      this.data[i] = newRow;
     }
     this.columns += 1;
     return this;
