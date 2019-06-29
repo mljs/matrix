@@ -43,14 +43,14 @@ export default class SingularValueDecomposition {
 
     var nu = Math.min(m, n);
     var ni = Math.min(m + 1, n);
-    var s = new Array(ni);
+    var s = new Float64Array(ni);
     var U = new Matrix(m, nu);
     var V = new Matrix(n, n);
 
-    var e = new Array(n);
-    var work = new Array(m);
+    var e = new Float64Array(n);
+    var work = new Float64Array(m);
 
-    var si = new Array(ni);
+    var si = new Float64Array(ni);
     for (let i = 0; i < ni; i++) si[i] = i;
 
     var nct = Math.min(m - 1, n);
@@ -502,7 +502,7 @@ export default class SingularValueDecomposition {
   }
 
   get diagonal() {
-    return this.s;
+    return Array.from(this.s);
   }
 
   get threshold() {
