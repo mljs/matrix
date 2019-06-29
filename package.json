@@ -64,7 +64,7 @@
     "mathjs": "^6.0.2",
     "numeric": "^1.2.6",
     "pretty-hrtime": "^1.0.3",
-    "rollup": "^1.16.2",
+    "rollup": "^1.16.3",
     "typedoc": "^0.14.2"
   },
   "dependencies": {
