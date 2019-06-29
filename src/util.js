@@ -130,14 +130,6 @@ export function checkRange(matrix, startRow, endRow, startColumn, endColumn) {
   }
 }
 
-export function getRange(from, to) {
-  var arr = new Array(to - from + 1);
-  for (var i = 0; i < arr.length; i++) {
-    arr[i] = from + i;
-  }
-  return arr;
-}
-
 export function newArray(length, value = 0) {
   var array = [];
   for (var i = 0; i < length; i++) {
