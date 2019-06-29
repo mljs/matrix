@@ -12,10 +12,10 @@ describe('multivariate linear regression', () => {
       [4, 8, 120, 16, 20],
       [8, 16, 24, 32, 40]
     ]);
-    expect(correlation(y).data[2]).toStrictEqual([-0.042727630263691335, -0.042727630263691335, 1.0000000000000002, -0.042727630263691335, -0.042727630263691335]);
-    expect(correlation(y, x).data[2]).toStrictEqual([0.14685194996208847, 0.14685194996208847, 0.14685194996208847, 0.14685194996208847, 0.14685194996208847]);
-    expect(correlation(x, y).data[2]).toStrictEqual([0.9819805060619657, 0.9819805060619657, 0.14685194996208847, 0.9819805060619657, 0.9819805060619657]);
-    expect(correlation(x).data[2]).toStrictEqual([1, 1, 1, 1, 1]);
+    expect(Array.from(correlation(y).data[2])).toStrictEqual([-0.042727630263691335, -0.042727630263691335, 1.0000000000000002, -0.042727630263691335, -0.042727630263691335]);
+    expect(Array.from(correlation(y, x).data[2])).toStrictEqual([0.14685194996208847, 0.14685194996208847, 0.14685194996208847, 0.14685194996208847, 0.14685194996208847]);
+    expect(Array.from(correlation(x, y).data[2])).toStrictEqual([0.9819805060619657, 0.9819805060619657, 0.14685194996208847, 0.9819805060619657, 0.9819805060619657]);
+    expect(Array.from(correlation(x).data[2])).toStrictEqual([1, 1, 1, 1, 1]);
   });
 });
 
