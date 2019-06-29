@@ -1,3 +1,14 @@
+## [6.1.2](https://github.com/mljs/matrix/compare/v6.1.1...v6.1.2) (2019-06-29)
+
+
+### Bug Fixes
+
+* use more Float64Array in decompositions ([0bd8f1b](https://github.com/mljs/matrix/commit/0bd8f1b))
+* **Matrix:** use Float64Array to improve performance ([9dfe983](https://github.com/mljs/matrix/commit/9dfe983))
+* **SVD:** use Float64Array to avoid deopt ([85acd13](https://github.com/mljs/matrix/commit/85acd13))
+
+
+
 ## [6.1.1](https://github.com/mljs/matrix/compare/v6.1.0...v6.1.1) (2019-06-28)
 
 
