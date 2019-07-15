@@ -1,6 +1,6 @@
 import { toBeDeepCloseTo } from 'jest-matcher-deep-close-to';
-import { Matrix, correlation } from '../..';
 
+import { Matrix, correlation } from '../..';
 import { nipals } from '../../dc/nipals';
 
 expect.extend({ toBeDeepCloseTo });
@@ -35,6 +35,7 @@ describe('nipals', () => {
     expect(corr.get(0, 0)).toBeCloseTo(1, 6);
     expect(model.t.to1DArray().sort((a, b) => a - b)).toBeDeepCloseTo(
       irisPC[0].sort((a, b) => a - b), 4);
+    expect(model.w.get(0, 0)).toBeCloseTo(0.5210659, 4);
 
     // second component
     let model2 = nipals(model.residual);
