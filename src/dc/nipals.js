@@ -4,6 +4,10 @@
  * @param {Matrix} X
  * @param {*} Y
  * @param {*} u
+ *  Geladi, P and Kowalski, B.R. (1986)
+ * Partial least squares and regression:
+ * a tutorial.
+ * Analytica Chimica Acta 185, 1-17.
  */
 export function nipals(X, options = {}) {
   const { Y } = options;
