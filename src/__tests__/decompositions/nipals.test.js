@@ -54,3 +54,63 @@ describe('nipals', () => {
     expect(corr4.get(0, 0)).toBeCloseTo(1, 2);
   });
 });
+
+// https://cran.r-project.org/web/packages/nipals/vignettes/nipals_algorithm.pdf
+describe('nipals with simple data set', () => {
+  it('test nipals error propagation', () => {
+    let simpleDataset = require('../../../data/simpleDataset.json');
+    let x = Matrix.from1DArray(7, 5, simpleDataset);
+
+    x = x.center('column').scale('column');
+
+    /*
+    library(nipals)
+    B <-matrix(c(50, 67, 90, ..., 117, 133, 155), ncol=5, byrow=TRUE)
+    m1 <- nipals::nipals(B, gramschmidt=FALSE)
+    m2 <- nipals::nipals(B, gramschmidt=TRUE)*/
+
+    // first component
+    let model = new NIPALS(x, { scaleScores: true });
+
+    let PC = require('../../../data/simpleDatasetPC1-5.json');
+    let loadings = require('../../../data/simpleDatasetLoadings1-5.json');
+    expect(model.t.to1DArray()).toHaveLength(7);
+    let corr = correlation(model.t.clone(), Matrix.from1DArray(7, 1, PC[0]));
+    expect(corr.get(0, 0)).toBeCloseTo(1, 6);
+    expect(model.t.to1DArray().sort((a, b) => a - b)).toBeDeepCloseTo(
+      PC[0].sort((a, b) => a - b), 4);
+    expect(model.w.to1DArray().sort((a, b) => a - b)).toBeDeepCloseTo(
+      loadings[0].sort((a, b) => a - b), 4);
+    expect(model.s.get(0, 0)).toBeCloseTo(5.02051842, 6);
+
+    // second component
+    let model2 = new NIPALS(model.xResidual, { scaleScores: true });
+
+    let corr2 = correlation(model2.t.clone(), Matrix.from1DArray(7, 1, PC[1]));
+    expect(corr2.get(0, 0)).toBeCloseTo(1, 6);
+    expect(model2.s.get(0, 0)).toBeCloseTo(1.87932350, 6);
+    expect(model2.t.to1DArray().sort((a, b) => a - b)).toBeDeepCloseTo(
+      PC[1].sort((a, b) => a - b), 3);
+    expect(model2.w.to1DArray().sort((a, b) => a - b)).toBeDeepCloseTo(
+      loadings[1].sort((a, b) => a - b), 3);
+
+    // next components
+    let model3 = new NIPALS(model2.xResidual, { scaleScores: true });
+    let model4 = new NIPALS(model3.xResidual, { scaleScores: true });
+    let model5 = new NIPALS(model4.xResidual, { scaleScores: true });
+
+    let corr3 = correlation(model3.t.clone(), Matrix.from1DArray(7, 1, PC[2]));
+    expect(corr3.get(0, 0)).toBeCloseTo(-1, 6);
+    expect(model3.s.get(0, 0)).toBeCloseTo(1.10817664, 4);
+    expect(model3.t.mul(-1).to1DArray()).toBeDeepCloseTo(PC[2], 3);
+    expect(model3.w.mul(-1).to1DArray()).toBeDeepCloseTo(
+      loadings[2], 3);
+
+    let corr5 = correlation(model5.t.clone(), Matrix.from1DArray(7, 1, PC[4]));
+    expect(corr5.get(0, 0)).toBeCloseTo(-1, 5);
+    expect(model5.s.get(0, 0)).toBeCloseTo(0.06936703, 4);
+    expect(model5.t.mul(-1).to1DArray()).toBeDeepCloseTo(PC[4], 3);
+    expect(model5.w.mul(-1).to1DArray()).toBeDeepCloseTo(
+      loadings[4], 3);
+  });
+});
