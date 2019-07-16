@@ -1,7 +1,6 @@
 import { toBeDeepCloseTo } from 'jest-matcher-deep-close-to';
 
-import { Matrix, correlation } from '../..';
-import { nipals } from '../../dc/nipals';
+import { Matrix, correlation, NIPALS } from '../..';
 
 expect.extend({ toBeDeepCloseTo });
 
@@ -28,7 +27,7 @@ describe('nipals', () => {
     toJSON(t(pca$x)) */
 
     // first component
-    let model = nipals(x);
+    let model = new NIPALS(x);
 
     expect(model.t.to1DArray()).toHaveLength(150);
     let corr = correlation(model.t.clone(), Matrix.from1DArray(150, 1, irisPC[0]));
@@ -38,19 +37,19 @@ describe('nipals', () => {
     expect(model.w.get(0, 0)).toBeCloseTo(0.5210659, 4);
 
     // second component
-    let model2 = nipals(model.residual);
+    let model2 = new NIPALS(model.xResidual);
 
     let corr2 = correlation(model2.t.clone(), Matrix.from1DArray(150, 1, irisPC[1]));
     // good correlation is expected, but it may diverge from pca
     expect(corr2.get(0, 0)).toBeCloseTo(-1, 6);
 
     // third component
-    let model3 = nipals(model2.residual);
+    let model3 = new NIPALS(model2.xResidual);
     let corr3 = correlation(model3.t.clone(), Matrix.from1DArray(150, 1, irisPC[2]));
     expect(corr3.get(0, 0)).toBeCloseTo(1, 2);
 
     // fourth component
-    let model4 = nipals(model3.residual);
+    let model4 = new NIPALS(model3.xResidual);
     let corr4 = correlation(model4.t.clone(), Matrix.from1DArray(150, 1, irisPC[3]));
     expect(corr4.get(0, 0)).toBeCloseTo(1, 2);
   });
