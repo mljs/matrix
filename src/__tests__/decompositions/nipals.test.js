@@ -1,13 +1,16 @@
 import { toBeDeepCloseTo } from 'jest-matcher-deep-close-to';
+import { getNumbers } from 'ml-dataset-iris';
 
 import { Matrix, correlation, NIPALS } from '../..';
 
+
 expect.extend({ toBeDeepCloseTo });
 
-describe('nipals', () => {
+const rawData = getNumbers();
+const metadata = require('../../../data/irisScaledClasses.json');
+
+describe('nipals pca', () => {
   it('test nipals dataArray to compare with R pca', () => {
-    let rawData = require('../../../data/irisDataset.json');
-    rawData = rawData.map((d) => d.slice(0, 4));
     let dataArray = new Matrix(150, 4);
     rawData.forEach((el, i) => dataArray.setRow(i, rawData[i]));
     let x = dataArray;
@@ -52,6 +55,30 @@ describe('nipals', () => {
     let model4 = new NIPALS(model3.xResidual);
     let corr4 = correlation(model4.t.clone(), Matrix.from1DArray(150, 1, irisPC[3]));
     expect(corr4.get(0, 0)).toBeCloseTo(1, 2);
+  });
+});
+
+describe('nipals pls', () => {
+  it('test nipals dataArray to compare with R pca', () => {
+    let dataArray = new Matrix(150, 4);
+    rawData.forEach((el, i) => dataArray.setRow(i, rawData[i]));
+    let x = dataArray;
+    x = x.center('column').scale('column');
+
+    let y = Matrix.from1DArray(150, 1, metadata);
+
+    let model = new NIPALS(x, { Y: y });
+    /*    library(MetaboMate)
+      data("iris");
+      metadata = iris[,5]
+      dataMatrix = iris[,1:4]
+      X = dataMatrix
+      Xcs = scale(as.matrix(X),center=TRUE)
+      un = NIPALS_PLS_component(Xcs, cbind(metadata)) */
+
+    expect(model.t.to1DArray()).toHaveLength(150);
+    expect(model.t.to1DArray()[0]).toBeCloseTo(-2.26393268, 4);
+    expect(model.w.get(0, 0)).toBeCloseTo(0.484385, 4);
   });
 });
 
