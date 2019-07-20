@@ -14,16 +14,16 @@ export { correlation } from './correlation';
 
 export {
   default as SingularValueDecomposition,
-  default as SVD
+  default as SVD,
 } from './dc/svd.js';
 export {
   default as EigenvalueDecomposition,
-  default as EVD
+  default as EVD,
 } from './dc/evd.js';
 export {
   default as CholeskyDecomposition,
-  default as CHO
+  default as CHO,
 } from './dc/cholesky.js';
 export { default as LuDecomposition, default as LU } from './dc/lu.js';
 export { default as QrDecomposition, default as QR } from './dc/qr.js';
-export { default as nipals, default as NIPALS } from './dc/nipals.js';
+export { default as Nipals, default as NIPALS } from './dc/nipals.js';
