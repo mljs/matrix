@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>ICovarianceOptions | ml-matrix</title>
+	<title>INipalsOptions | ml-matrix</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -54,10 +54,10 @@
 					<a href="../globals.html">Globals</a>
 				</li>
 				<li>
-					<a href="icovarianceoptions.html">ICovarianceOptions</a>
+					<a href="inipalsoptions.html">INipalsOptions</a>
 				</li>
 			</ul>
-			<h1>Interface ICovarianceOptions</h1>
+			<h1>Interface INipalsOptions</h1>
 		</div>
 	</div>
 </header>
@@ -68,7 +68,7 @@
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">ICovarianceOptions</span>
+						<span class="target">INipalsOptions</span>
 					</li>
 				</ul>
 			</section>
@@ -79,7 +79,9 @@
 						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="icovarianceoptions.html#center" class="tsd-kind-icon">center</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="inipalsoptions.html#y" class="tsd-kind-icon">Y</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="inipalsoptions.html#maxiterations" class="tsd-kind-icon">max<wbr>Iterations</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="inipalsoptions.html#terminationcriteria" class="tsd-kind-icon">termination<wbr>Criteria</a></li>
 							</ul>
 						</section>
 					</div>
@@ -88,17 +90,49 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="center" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagOptional">Optional</span> center</h3>
-					<div class="tsd-signature tsd-kind-icon">center<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+					<a name="y" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> Y</h3>
+					<div class="tsd-signature tsd-kind-icon">Y<span class="tsd-signature-symbol">:</span> <a href="../globals.html#maybematrix" class="tsd-signature-type">MaybeMatrix</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">[]</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/mljs/matrix/blob/a9d9f2a/matrix.d.ts#L81">matrix.d.ts:81</a></li>
+							<li>Defined in <a href="https://github.com/mljs/matrix/blob/a9d9f2a/matrix.d.ts#L1163">matrix.d.ts:1163</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
-							<p>Default: true.</p>
+							<p>A column vector of length <code>X.rows</code> that contains known labels for supervised PLS.</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="maxiterations" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> max<wbr>Iterations</h3>
+					<div class="tsd-signature tsd-kind-icon">max<wbr>Iterations<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/mljs/matrix/blob/a9d9f2a/matrix.d.ts#L1168">matrix.d.ts:1168</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>The maximum number of allowed iterations before beraking the loop if convergence is not achieved.
+							Default: 1000</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="terminationcriteria" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> termination<wbr>Criteria</h3>
+					<div class="tsd-signature tsd-kind-icon">termination<wbr>Criteria<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/mljs/matrix/blob/a9d9f2a/matrix.d.ts#L1173">matrix.d.ts:1173</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Termination criteria
+							Default: 1e-10</p>
 						</div>
 					</div>
 				</section>
@@ -117,10 +151,16 @@
 				</ul>
 				<ul class="current">
 					<li class="current tsd-kind-interface">
-						<a href="icovarianceoptions.html" class="tsd-kind-icon">ICovariance<wbr>Options</a>
+						<a href="inipalsoptions.html" class="tsd-kind-icon">INipals<wbr>Options</a>
 						<ul>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="icovarianceoptions.html#center" class="tsd-kind-icon">center</a>
+								<a href="inipalsoptions.html#y" class="tsd-kind-icon">Y</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="inipalsoptions.html#maxiterations" class="tsd-kind-icon">max<wbr>Iterations</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="inipalsoptions.html#terminationcriteria" class="tsd-kind-icon">termination<wbr>Criteria</a>
 							</li>
 						</ul>
 					</li>
