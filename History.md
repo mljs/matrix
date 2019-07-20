@@ -1,3 +1,12 @@
+# [6.2.0](https://github.com/mljs/matrix/compare/v6.1.2...v6.2.0) (2019-07-20)
+
+
+### Features
+
+* add NIPALS loop for factorization ([#91](https://github.com/mljs/matrix/issues/91)) ([043c8b6](https://github.com/mljs/matrix/commit/043c8b6))
+
+
+
 ## [6.1.2](https://github.com/mljs/matrix/compare/v6.1.1...v6.1.2) (2019-06-29)
 
 
