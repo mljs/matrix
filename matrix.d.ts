@@ -108,17 +108,17 @@ export abstract class AbstractMatrix {
    */
   readonly columns: number;
 
-/**
- * Constructs a matrix with the chosen dimensions from a 1D array.
- * @param newRows - Number of rows.
- * @param newColumns - Number of columns.
- * @param newData - A 1D array containing data for the matrix.
- * @returns The new matrix.
- */
+  /**
+   * Constructs a matrix with the chosen dimensions from a 1D array.
+   * @param newRows - Number of rows.
+   * @param newColumns - Number of columns.
+   * @param newData - A 1D array containing data for the matrix.
+   * @returns The new matrix.
+   */
   static from1DArray(
     newRows: number,
     newColumns: number,
-    newData: number[]
+    newData: number[],
   ): Matrix;
 
   /**
@@ -159,15 +159,11 @@ export abstract class AbstractMatrix {
    * @param options - Options object.
    * @returns The new matrix.
    */
-  static rand(
-    rows: number,
-    columns: number,
-    options?: IRandomOptions
-  ): Matrix;
+  static rand(rows: number, columns: number, options?: IRandomOptions): Matrix;
   static random(
     rows: number,
     columns: number,
-    options?: IRandomOptions
+    options?: IRandomOptions,
   ): Matrix;
 
   /**
@@ -179,7 +175,7 @@ export abstract class AbstractMatrix {
   static randInt(
     rows: number,
     columns: number,
-    options?: IRandomIntOptions
+    options?: IRandomIntOptions,
   ): Matrix;
 
   /**
@@ -217,8 +213,8 @@ export abstract class AbstractMatrix {
 
   /**
    * Returns a matrix whose elements are the maximum between `matrix1` and `matrix2`.
-   * @param matrix1 
-   * @param matrix2 
+   * @param matrix1
+   * @param matrix2
    */
   static max(matrix1: MaybeMatrix, matrix2: MaybeMatrix): Matrix;
 
@@ -318,7 +314,7 @@ export abstract class AbstractMatrix {
   /**
    * Creates a new matrix that is a repetition of the current matrix. New matrix has rows times the number of
    * rows of the original matrix, and columns times the number of columns of the original matrix.
-   * 
+   *
    * @example
    * var matrix = new Matrix([[1, 2]]);
    * matrix.repeat({ rows: 2 }); // [[1, 2], [1, 2]]
@@ -569,7 +565,7 @@ export abstract class AbstractMatrix {
   scaleRows(options?: IScaleOptions): Matrix;
 
   /**
-   * Returns a new column-by-column scaled matrix. 
+   * Returns a new column-by-column scaled matrix.
    * @param options
    * @example
    * var matrix = new Matrix([[1, 2], [-1, 0]]);
@@ -621,7 +617,7 @@ export abstract class AbstractMatrix {
     startRow: number,
     endRow: number,
     startColumn: number,
-    endColumn: number
+    endColumn: number,
   ): Matrix;
 
   /**
@@ -633,7 +629,7 @@ export abstract class AbstractMatrix {
   subMatrixRow(
     indices: number[],
     startColumn?: number,
-    endColumn?: number
+    endColumn?: number,
   ): Matrix;
 
   /**
@@ -645,7 +641,7 @@ export abstract class AbstractMatrix {
   subMatrixColumn(
     indices: number[],
     startRow?: number,
-    endRow?: number
+    endRow?: number,
   ): Matrix;
 
   /**
@@ -657,7 +653,7 @@ export abstract class AbstractMatrix {
   setSubMatrix(
     matrix: MaybeMatrix | number[],
     startRow: number,
-    startColumn: number
+    startColumn: number,
   ): this;
 
   /**
@@ -737,7 +733,7 @@ export abstract class AbstractMatrix {
    */
   standardDeviation(
     by: MatrixDimension,
-    options?: IVarianceByOptions
+    options?: IVarianceByOptions,
   ): number[];
 
   /**
@@ -806,13 +802,10 @@ export abstract class AbstractMatrix {
   static leftShift(matrix: MaybeMatrix, value: ScalarOrMatrix): Matrix;
   static signPropagatingRightShift(
     matrix: MaybeMatrix,
-    value: ScalarOrMatrix
+    value: ScalarOrMatrix,
   ): Matrix;
   static rightShift(matrix: MaybeMatrix, value: ScalarOrMatrix): Matrix;
-  static zeroFillRightShift(
-    matrix: MaybeMatrix,
-    value: ScalarOrMatrix
-  ): Matrix;
+  static zeroFillRightShift(matrix: MaybeMatrix, value: ScalarOrMatrix): Matrix;
 
   // Functional operators (one arg)
   // inplace
@@ -919,7 +912,7 @@ export class MatrixSelectionView extends AbstractMatrix {
   constructor(
     matrix: AbstractMatrix,
     rowIndices: number[],
-    columnIndices: number[]
+    columnIndices: number[],
   );
 }
 
@@ -929,7 +922,7 @@ export class MatrixSubView extends AbstractMatrix {
     startRow: number,
     endRow: number,
     startColumn: number,
-    endColumn: number
+    endColumn: number,
   );
 }
 
@@ -946,7 +939,7 @@ export interface IWrap1DOptions {
 
 export function wrap(
   array: number[],
-  options?: IWrap1DOptions
+  options?: IWrap1DOptions,
 ): WrapperMatrix1D;
 
 export function wrap(twoDAray: number[][]): WrapperMatrix2D;
@@ -965,7 +958,7 @@ export class WrapperMatrix2D extends AbstractMatrix {
 export function solve(
   leftHandSide: MaybeMatrix,
   rightHandSide: MaybeMatrix,
-  useSVD?: boolean
+  useSVD?: boolean,
 ): Matrix;
 
 /**
@@ -1005,7 +998,7 @@ export interface ILinearDependenciesOptions {
  */
 export function linearDependencies(
   matrix: MaybeMatrix,
-  options?: ILinearDependenciesOptions
+  options?: ILinearDependenciesOptions,
 ): Matrix;
 
 /**
@@ -1014,31 +1007,28 @@ export function linearDependencies(
  * @param threshold - Threshold for taking inverse of singular values. Default: Number.EPSILON.
  * @returns - The (pseudo)inverted matrix.
  */
-export function pseudoInverse(
-  matrix: MaybeMatrix,
-  threshold?: number
-): Matrix;
+export function pseudoInverse(matrix: MaybeMatrix, threshold?: number): Matrix;
 
 export function covariance(
   matrix: MaybeMatrix,
-  options?: ICovarianceOptions
+  options?: ICovarianceOptions,
 ): Matrix;
 
 export function covariance(
   xMatrix: MaybeMatrix,
   yMatrix: MaybeMatrix,
-  options?: ICovarianceOptions
+  options?: ICovarianceOptions,
 ): Matrix;
 
 export function correlation(
   matrix: MaybeMatrix,
-  options?: ICorrelationOptions
+  options?: ICorrelationOptions,
 ): Matrix;
 
 export function correlation(
   xMatrix: MaybeMatrix,
   yMatrix: MaybeMatrix,
-  options?: ICorrelationOptions
+  options?: ICorrelationOptions,
 ): Matrix;
 
 export interface ISVDOptions {
@@ -1119,7 +1109,7 @@ export { EigenvalueDecomposition as EVD };
  */
 export class CholeskyDecomposition {
   /**
-   * 
+   *
    * @param value - The matrix to decompose
    */
   constructor(value: MaybeMatrix);
@@ -1165,3 +1155,44 @@ export class QrDecomposition {
 }
 
 export { QrDecomposition as QR };
+
+export interface INipalsOptions {
+  /**
+   * A column vector of length `X.rows` that contains known labels for supervised PLS.
+   */
+  Y?: MaybeMatrix | number[];
+  /**
+   * The maximum number of allowed iterations before beraking the loop if convergence is not achieved.
+   * Default: 1000
+   */
+  maxIterations?: boolean;
+  /**
+   * Termination criteria
+   * Default: 1e-10
+   */
+  terminationCriteria?: number;
+}
+
+export class Nipals {
+  /**
+   * Implementation of the NIPALS algorithm.
+   * Geladi, P and Kowalski, B.R. (1986)
+   * Partial least squares and regression:
+   * a tutorial.
+   * Analytica Chimica Acta 185, 1-17.
+   * @param X - A matrix to be factored
+   * @param options
+   */
+  constructor(X: MaybeMatrix, options?: INipalsOptions);
+  w: Matrix;
+  s: Matrix;
+  t: number;
+  xResidual: Matrix;
+  p: Matrix;
+  q: Matrix;
+  u: number;
+  yResidual: Matrix;
+  betas: number;
+}
+
+export { Nipals as NIPALS };
