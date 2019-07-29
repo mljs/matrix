@@ -5,49 +5,51 @@ type MatrixDimension = 'row' | 'column';
 export interface IRandomOptions {
   /**
    * Random number generator.
-   * Default: `Math.random`
+   * @default `Math.random`
    */
   random: () => number;
 }
 export interface IRandomIntOptions {
   /**
    * Minimum value.
-   * Default: 0.
+   * @default `0`
    */
   min: number;
 
   /**
    * Maximum value.
-   * Default: 1000.
+   * @default `1000`
    */
   max: number;
 
   /**
    * Random number generator.
-   * Default: Math.random.
+   * @default `Math.random`
    */
   random: () => number;
 }
 export interface IRepeatOptions {
   /**
    * Number of times the rows should be repeated.
-   * Default: 1.
+   * @default `1`
    */
   rows?: number;
 
   /**
    * Number of times the columns should be repeated.
-   * Default: 1.
+   * @default `1`
    */
   columns?: number;
 }
 export interface IScaleOptions {
   /**
-   * Minimum scaled value. Default: 0.
+   * Minimum scaled value.
+   * @default `0`
    */
   min?: number;
   /**
-   * Maximum scaled value. Default: 1.
+   * Maximum scaled value.
+   * @default `1`
    */
   max?: number;
 }
@@ -76,18 +78,18 @@ export interface IScaleByOptions {
 
 export interface ICovarianceOptions {
   /**
-   * Default: true.
+   * @default `true`
    */
   center?: boolean;
 }
 
 export interface ICorrelationOptions {
   /**
-   * Default: true.
+   * @default `true`
    */
   center?: boolean;
   /**
-   * Default: true.
+   * @default `true`
    */
   scale?: boolean;
 }
@@ -181,8 +183,8 @@ export abstract class AbstractMatrix {
   /**
    * Creates an identity matrix with the given dimension. Values of the diagonal will be 1 and others will be 0.
    * @param rows - Number of rows.
-   * @param columns - Number of columns. Default: rows.
-   * @param value - Value to fill the diagonal with. Default: 1.
+   * @param columns - Number of columns. Default: `rows`.
+   * @param value - Value to fill the diagonal with. Default: `1`.
    * @returns - The new identity matrix.
    */
   static eye(rows: number, columns?: number, value?: number): Matrix;
@@ -623,8 +625,8 @@ export abstract class AbstractMatrix {
   /**
    * Returns a subset of the matrix based on an array of row indices.
    * @param indices - Array containing the row indices.
-   * @param startColumn - First column index. Default: 0.
-   * @param endColumn - Last column index. Default: columns - 1.
+   * @param startColumn - First column index. Default: `0`.
+   * @param endColumn - Last column index. Default: `this.columns - 1`.
    */
   subMatrixRow(
     indices: number[],
@@ -635,8 +637,8 @@ export abstract class AbstractMatrix {
   /**
    * Returns a subset of the matrix based on an array of column indices.
    * @param indices - Array containing the column indices.
-   * @param startRow - First row index. Default: 0.
-   * @param endRow - Last row index. Default: rows - 1.
+   * @param startRow - First row index. Default: `0`.
+   * @param endRow - Last row index. Default: `this.rows - 1`.
    */
   subMatrixColumn(
     indices: number[],
@@ -932,7 +934,7 @@ export class MatrixTransposeView extends AbstractMatrix {
 
 export interface IWrap1DOptions {
   /**
-   * Default: 1.
+   * @default: `1`
    */
   rows?: number;
 }
@@ -953,7 +955,9 @@ export class WrapperMatrix2D extends AbstractMatrix {
 }
 
 /**
- * @param useSVD - Default: false.
+ * @param leftHandSide
+ * @param rightHandSide
+ * @param useSVD - Default: `false`.
  */
 export function solve(
   leftHandSide: MaybeMatrix,
@@ -964,7 +968,7 @@ export function solve(
 /**
  * Computes the inverse of a matrix.
  * @param matrix - Matrix to invert.
- * @param useSVD - Use the singular value decomposition to compute the inverse. Default: false.
+ * @param useSVD - Use the singular value decomposition to compute the inverse. Default: `false`.
  */
 export function inverse(matrix: MaybeMatrix, useSVD?: boolean): Matrix;
 
@@ -977,13 +981,13 @@ export function determinant(matrix: MaybeMatrix): number;
 export interface ILinearDependenciesOptions {
   /**
    * If an absolute value is inferior to this threshold, it will equals zero.
-   * Default: 10e-10.
+   * @default `10e-10`
    */
   thresholdValue?: number;
 
   /**
    * If the error is inferior to that threshold, the linear combination found is accepted and the row is dependent from other rows.
-   * Default: 10e-10.
+   * @default `10e-10`
    */
   thresholdError?: number;
 }
@@ -1004,7 +1008,7 @@ export function linearDependencies(
 /**
  * Returns inverse of a matrix if it exists or the pseudoinverse.
  * @param matrix
- * @param threshold - Threshold for taking inverse of singular values. Default: Number.EPSILON.
+ * @param threshold - Threshold for taking inverse of singular values. Default: `Number.EPSILON`.
  * @returns - The (pseudo)inverted matrix.
  */
 export function pseudoInverse(matrix: MaybeMatrix, threshold?: number): Matrix;
@@ -1033,17 +1037,17 @@ export function correlation(
 
 export interface ISVDOptions {
   /**
-   * Default: true.
+   * @default `true`
    */
   computeLeftSingularVectors?: boolean;
 
   /**
-   * Default: true.
+   * @default `true`
    */
   computeRightSingularVectors?: boolean;
 
   /**
-   * Default: false.
+   * @default `false`
    */
   autoTranspose?: boolean;
 }
@@ -1086,7 +1090,7 @@ export { SingularValueDecomposition as SVD };
 
 export interface IEVDOptions {
   /**
-   * Default: false.
+   * @default `false`
    */
   assumeSymmetric?: boolean;
 }
@@ -1163,12 +1167,12 @@ export interface INipalsOptions {
   Y?: MaybeMatrix | number[];
   /**
    * The maximum number of allowed iterations before beraking the loop if convergence is not achieved.
-   * Default: 1000
+   * @default 1000
    */
   maxIterations?: boolean;
   /**
    * Termination criteria
-   * Default: 1e-10
+   * @default 1e-10
    */
   terminationCriteria?: number;
 }
