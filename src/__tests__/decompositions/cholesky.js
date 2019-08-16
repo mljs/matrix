@@ -8,7 +8,7 @@ describe('Cholesky decomposition', () => {
       [-1, 2, 0, 0, 0],
       [-1, 0, 3, 1, 1],
       [-1, 0, 1, 4, 2],
-      [-1, 0, 1, 2, 5]
+      [-1, 0, 1, 2, 5],
     ]);
 
     const cho = new CHO(matrix);
@@ -21,7 +21,7 @@ describe('Cholesky decomposition', () => {
   it('should throw on bad input', () => {
     expect(() => new CHO([[0, 1], [2, 0]])).toThrow('Matrix is not symmetric');
     expect(() => new CHO([[1, 2], [2, 1]])).toThrow(
-      'Matrix is not positive definite'
+      'Matrix is not positive definite',
     );
   });
 });

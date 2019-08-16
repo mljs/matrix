@@ -6,7 +6,7 @@ import {
   checkColumnIndex,
   checkColumnVector,
   checkRange,
-  checkIndices
+  checkIndices,
 } from './util';
 import {
   sumByRow,
@@ -26,20 +26,20 @@ import {
   scaleAll,
   getScaleByRow,
   getScaleByColumn,
-  getScaleAll
+  getScaleAll,
 } from './stat';
 import { inspectMatrix } from './inspect';
 import { installMathOperations } from './mathOperations';
 
 export class AbstractMatrix {
   static from1DArray(newRows, newColumns, newData) {
-    var length = newRows * newColumns;
+    let length = newRows * newColumns;
     if (length !== newData.length) {
       throw new RangeError('data length does not match given dimensions');
     }
-    var newMatrix = new Matrix(newRows, newColumns);
-    for (var row = 0; row < newRows; row++) {
-      for (var column = 0; column < newColumns; column++) {
+    let newMatrix = new Matrix(newRows, newColumns);
+    for (let row = 0; row < newRows; row++) {
+      for (let column = 0; column < newColumns; column++) {
         newMatrix.set(row, column, newData[row * newColumns + column]);
       }
     }
@@ -47,16 +47,16 @@ export class AbstractMatrix {
   }
 
   static rowVector(newData) {
-    var vector = new Matrix(1, newData.length);
-    for (var i = 0; i < newData.length; i++) {
+    let vector = new Matrix(1, newData.length);
+    for (let i = 0; i < newData.length; i++) {
       vector.set(0, i, newData[i]);
     }
     return vector;
   }
 
   static columnVector(newData) {
-    var vector = new Matrix(newData.length, 1);
-    for (var i = 0; i < newData.length; i++) {
+    let vector = new Matrix(newData.length, 1);
+    for (let i = 0; i < newData.length; i++) {
       vector.set(i, 0, newData[i]);
     }
     return vector;
@@ -75,9 +75,9 @@ export class AbstractMatrix {
       throw new TypeError('options must be an object');
     }
     const { random = Math.random } = options;
-    var matrix = new Matrix(rows, columns);
-    for (var i = 0; i < rows; i++) {
-      for (var j = 0; j < columns; j++) {
+    let matrix = new Matrix(rows, columns);
+    for (let i = 0; i < rows; i++) {
+      for (let j = 0; j < columns; j++) {
         matrix.set(i, j, random());
       }
     }
@@ -92,11 +92,11 @@ export class AbstractMatrix {
     if (!Number.isInteger(min)) throw new TypeError('min must be an integer');
     if (!Number.isInteger(max)) throw new TypeError('max must be an integer');
     if (min >= max) throw new RangeError('min must be smaller than max');
-    var interval = max - min;
-    var matrix = new Matrix(rows, columns);
-    for (var i = 0; i < rows; i++) {
-      for (var j = 0; j < columns; j++) {
-        var value = min + Math.round(random() * interval);
+    let interval = max - min;
+    let matrix = new Matrix(rows, columns);
+    for (let i = 0; i < rows; i++) {
+      for (let j = 0; j < columns; j++) {
+        let value = min + Math.round(random() * interval);
         matrix.set(i, j, value);
       }
     }
@@ -106,21 +106,21 @@ export class AbstractMatrix {
   static eye(rows, columns, value) {
     if (columns === undefined) columns = rows;
     if (value === undefined) value = 1;
-    var min = Math.min(rows, columns);
-    var matrix = this.zeros(rows, columns);
-    for (var i = 0; i < min; i++) {
+    let min = Math.min(rows, columns);
+    let matrix = this.zeros(rows, columns);
+    for (let i = 0; i < min; i++) {
       matrix.set(i, i, value);
     }
     return matrix;
   }
 
   static diag(data, rows, columns) {
-    var l = data.length;
+    let l = data.length;
     if (rows === undefined) rows = l;
     if (columns === undefined) columns = rows;
-    var min = Math.min(l, rows, columns);
-    var matrix = this.zeros(rows, columns);
-    for (var i = 0; i < min; i++) {
+    let min = Math.min(l, rows, columns);
+    let matrix = this.zeros(rows, columns);
+    for (let i = 0; i < min; i++) {
       matrix.set(i, i, data[i]);
     }
     return matrix;
@@ -129,11 +129,11 @@ export class AbstractMatrix {
   static min(matrix1, matrix2) {
     matrix1 = this.checkMatrix(matrix1);
     matrix2 = this.checkMatrix(matrix2);
-    var rows = matrix1.rows;
-    var columns = matrix1.columns;
-    var result = new Matrix(rows, columns);
-    for (var i = 0; i < rows; i++) {
-      for (var j = 0; j < columns; j++) {
+    let rows = matrix1.rows;
+    let columns = matrix1.columns;
+    let result = new Matrix(rows, columns);
+    for (let i = 0; i < rows; i++) {
+      for (let j = 0; j < columns; j++) {
         result.set(i, j, Math.min(matrix1.get(i, j), matrix2.get(i, j)));
       }
     }
@@ -143,11 +143,11 @@ export class AbstractMatrix {
   static max(matrix1, matrix2) {
     matrix1 = this.checkMatrix(matrix1);
     matrix2 = this.checkMatrix(matrix2);
-    var rows = matrix1.rows;
-    var columns = matrix1.columns;
-    var result = new this(rows, columns);
-    for (var i = 0; i < rows; i++) {
-      for (var j = 0; j < columns; j++) {
+    let rows = matrix1.rows;
+    let columns = matrix1.columns;
+    let result = new this(rows, columns);
+    for (let i = 0; i < rows; i++) {
+      for (let j = 0; j < columns; j++) {
         result.set(i, j, Math.max(matrix1.get(i, j), matrix2.get(i, j)));
       }
     }
@@ -170,8 +170,8 @@ export class AbstractMatrix {
     if (typeof callback !== 'function') {
       throw new TypeError('callback must be a function');
     }
-    for (var i = 0; i < this.rows; i++) {
-      for (var j = 0; j < this.columns; j++) {
+    for (let i = 0; i < this.rows; i++) {
+      for (let j = 0; j < this.columns; j++) {
         callback.call(this, i, j);
       }
     }
@@ -179,9 +179,9 @@ export class AbstractMatrix {
   }
 
   to1DArray() {
-    var array = [];
-    for (var i = 0; i < this.rows; i++) {
-      for (var j = 0; j < this.columns; j++) {
+    let array = [];
+    for (let i = 0; i < this.rows; i++) {
+      for (let j = 0; j < this.columns; j++) {
         array.push(this.get(i, j));
       }
     }
@@ -189,10 +189,10 @@ export class AbstractMatrix {
   }
 
   to2DArray() {
-    var copy = [];
-    for (var i = 0; i < this.rows; i++) {
+    let copy = [];
+    for (let i = 0; i < this.rows; i++) {
       copy.push([]);
-      for (var j = 0; j < this.columns; j++) {
+      for (let j = 0; j < this.columns; j++) {
         copy[i].push(this.get(i, j));
       }
     }
@@ -221,8 +221,8 @@ export class AbstractMatrix {
 
   isSymmetric() {
     if (this.isSquare()) {
-      for (var i = 0; i < this.rows; i++) {
-        for (var j = 0; j <= i; j++) {
+      for (let i = 0; i < this.rows; i++) {
+        for (let j = 0; j <= i; j++) {
           if (this.get(i, j) !== this.get(j, i)) {
             return false;
           }
@@ -292,7 +292,7 @@ export class AbstractMatrix {
     let result = this.clone();
     let h = 0;
     let k = 0;
-    while ((h < result.rows) && (k < result.columns)) {
+    while (h < result.rows && k < result.columns) {
       let iMax = h;
       for (let i = h; i < result.rows; i++) {
         if (result.get(i, k) > result.get(iMax, k)) {
@@ -332,7 +332,7 @@ export class AbstractMatrix {
       } else {
         let p = 0;
         let pivot = false;
-        while ((p < n) && (pivot === false)) {
+        while (p < n && pivot === false) {
           if (result.get(h, p) === 1) {
             pivot = true;
           } else {
@@ -371,9 +371,9 @@ export class AbstractMatrix {
     if (!Number.isInteger(columns) || columns <= 0) {
       throw new TypeError('columns must be a positive integer');
     }
-    var matrix = new Matrix(this.rows * rows, this.columns * columns);
-    for (var i = 0; i < rows; i++) {
-      for (var j = 0; j < columns; j++) {
+    let matrix = new Matrix(this.rows * rows, this.columns * columns);
+    for (let i = 0; i < rows; i++) {
+      for (let j = 0; j < columns; j++) {
         matrix.setSubMatrix(this, this.rows * i, this.columns * j);
       }
     }
@@ -381,8 +381,8 @@ export class AbstractMatrix {
   }
 
   fill(value) {
-    for (var i = 0; i < this.rows; i++) {
-      for (var j = 0; j < this.columns; j++) {
+    for (let i = 0; i < this.rows; i++) {
+      for (let j = 0; j < this.columns; j++) {
         this.set(i, j, value);
       }
     }
@@ -395,8 +395,8 @@ export class AbstractMatrix {
 
   getRow(index) {
     checkRowIndex(this, index);
-    var row = [];
-    for (var i = 0; i < this.columns; i++) {
+    let row = [];
+    for (let i = 0; i < this.columns; i++) {
       row.push(this.get(index, i));
     }
     return row;
@@ -409,7 +409,7 @@ export class AbstractMatrix {
   setRow(index, array) {
     checkRowIndex(this, index);
     array = checkRowVector(this, array);
-    for (var i = 0; i < this.columns; i++) {
+    for (let i = 0; i < this.columns; i++) {
       this.set(index, i, array[i]);
     }
     return this;
@@ -418,8 +418,8 @@ export class AbstractMatrix {
   swapRows(row1, row2) {
     checkRowIndex(this, row1);
     checkRowIndex(this, row2);
-    for (var i = 0; i < this.columns; i++) {
-      var temp = this.get(row1, i);
+    for (let i = 0; i < this.columns; i++) {
+      let temp = this.get(row1, i);
       this.set(row1, i, this.get(row2, i));
       this.set(row2, i, temp);
     }
@@ -428,8 +428,8 @@ export class AbstractMatrix {
 
   getColumn(index) {
     checkColumnIndex(this, index);
-    var column = [];
-    for (var i = 0; i < this.rows; i++) {
+    let column = [];
+    for (let i = 0; i < this.rows; i++) {
       column.push(this.get(i, index));
     }
     return column;
@@ -442,7 +442,7 @@ export class AbstractMatrix {
   setColumn(index, array) {
     checkColumnIndex(this, index);
     array = checkColumnVector(this, array);
-    for (var i = 0; i < this.rows; i++) {
+    for (let i = 0; i < this.rows; i++) {
       this.set(i, index, array[i]);
     }
     return this;
@@ -451,8 +451,8 @@ export class AbstractMatrix {
   swapColumns(column1, column2) {
     checkColumnIndex(this, column1);
     checkColumnIndex(this, column2);
-    for (var i = 0; i < this.rows; i++) {
-      var temp = this.get(i, column1);
+    for (let i = 0; i < this.rows; i++) {
+      let temp = this.get(i, column1);
       this.set(i, column1, this.get(i, column2));
       this.set(i, column2, temp);
     }
@@ -461,8 +461,8 @@ export class AbstractMatrix {
 
   addRowVector(vector) {
     vector = checkRowVector(this, vector);
-    for (var i = 0; i < this.rows; i++) {
-      for (var j = 0; j < this.columns; j++) {
+    for (let i = 0; i < this.rows; i++) {
+      for (let j = 0; j < this.columns; j++) {
         this.set(i, j, this.get(i, j) + vector[j]);
       }
     }
@@ -471,8 +471,8 @@ export class AbstractMatrix {
 
   subRowVector(vector) {
     vector = checkRowVector(this, vector);
-    for (var i = 0; i < this.rows; i++) {
-      for (var j = 0; j < this.columns; j++) {
+    for (let i = 0; i < this.rows; i++) {
+      for (let j = 0; j < this.columns; j++) {
         this.set(i, j, this.get(i, j) - vector[j]);
       }
     }
@@ -481,8 +481,8 @@ export class AbstractMatrix {
 
   mulRowVector(vector) {
     vector = checkRowVector(this, vector);
-    for (var i = 0; i < this.rows; i++) {
-      for (var j = 0; j < this.columns; j++) {
+    for (let i = 0; i < this.rows; i++) {
+      for (let j = 0; j < this.columns; j++) {
         this.set(i, j, this.get(i, j) * vector[j]);
       }
     }
@@ -491,8 +491,8 @@ export class AbstractMatrix {
 
   divRowVector(vector) {
     vector = checkRowVector(this, vector);
-    for (var i = 0; i < this.rows; i++) {
-      for (var j = 0; j < this.columns; j++) {
+    for (let i = 0; i < this.rows; i++) {
+      for (let j = 0; j < this.columns; j++) {
         this.set(i, j, this.get(i, j) / vector[j]);
       }
     }
@@ -501,8 +501,8 @@ export class AbstractMatrix {
 
   addColumnVector(vector) {
     vector = checkColumnVector(this, vector);
-    for (var i = 0; i < this.rows; i++) {
-      for (var j = 0; j < this.columns; j++) {
+    for (let i = 0; i < this.rows; i++) {
+      for (let j = 0; j < this.columns; j++) {
         this.set(i, j, this.get(i, j) + vector[i]);
       }
     }
@@ -511,8 +511,8 @@ export class AbstractMatrix {
 
   subColumnVector(vector) {
     vector = checkColumnVector(this, vector);
-    for (var i = 0; i < this.rows; i++) {
-      for (var j = 0; j < this.columns; j++) {
+    for (let i = 0; i < this.rows; i++) {
+      for (let j = 0; j < this.columns; j++) {
         this.set(i, j, this.get(i, j) - vector[i]);
       }
     }
@@ -521,8 +521,8 @@ export class AbstractMatrix {
 
   mulColumnVector(vector) {
     vector = checkColumnVector(this, vector);
-    for (var i = 0; i < this.rows; i++) {
-      for (var j = 0; j < this.columns; j++) {
+    for (let i = 0; i < this.rows; i++) {
+      for (let j = 0; j < this.columns; j++) {
         this.set(i, j, this.get(i, j) * vector[i]);
       }
     }
@@ -531,8 +531,8 @@ export class AbstractMatrix {
 
   divColumnVector(vector) {
     vector = checkColumnVector(this, vector);
-    for (var i = 0; i < this.rows; i++) {
-      for (var j = 0; j < this.columns; j++) {
+    for (let i = 0; i < this.rows; i++) {
+      for (let j = 0; j < this.columns; j++) {
         this.set(i, j, this.get(i, j) / vector[i]);
       }
     }
@@ -541,7 +541,7 @@ export class AbstractMatrix {
 
   mulRow(index, value) {
     checkRowIndex(this, index);
-    for (var i = 0; i < this.columns; i++) {
+    for (let i = 0; i < this.columns; i++) {
       this.set(index, i, this.get(index, i) * value);
     }
     return this;
@@ -549,16 +549,16 @@ export class AbstractMatrix {
 
   mulColumn(index, value) {
     checkColumnIndex(this, index);
-    for (var i = 0; i < this.rows; i++) {
+    for (let i = 0; i < this.rows; i++) {
       this.set(i, index, this.get(i, index) * value);
     }
     return this;
   }
 
   max() {
-    var v = this.get(0, 0);
-    for (var i = 0; i < this.rows; i++) {
-      for (var j = 0; j < this.columns; j++) {
+    let v = this.get(0, 0);
+    for (let i = 0; i < this.rows; i++) {
+      for (let j = 0; j < this.columns; j++) {
         if (this.get(i, j) > v) {
           v = this.get(i, j);
         }
@@ -568,10 +568,10 @@ export class AbstractMatrix {
   }
 
   maxIndex() {
-    var v = this.get(0, 0);
-    var idx = [0, 0];
-    for (var i = 0; i < this.rows; i++) {
-      for (var j = 0; j < this.columns; j++) {
+    let v = this.get(0, 0);
+    let idx = [0, 0];
+    for (let i = 0; i < this.rows; i++) {
+      for (let j = 0; j < this.columns; j++) {
         if (this.get(i, j) > v) {
           v = this.get(i, j);
           idx[0] = i;
@@ -583,9 +583,9 @@ export class AbstractMatrix {
   }
 
   min() {
-    var v = this.get(0, 0);
-    for (var i = 0; i < this.rows; i++) {
-      for (var j = 0; j < this.columns; j++) {
+    let v = this.get(0, 0);
+    for (let i = 0; i < this.rows; i++) {
+      for (let j = 0; j < this.columns; j++) {
         if (this.get(i, j) < v) {
           v = this.get(i, j);
         }
@@ -595,10 +595,10 @@ export class AbstractMatrix {
   }
 
   minIndex() {
-    var v = this.get(0, 0);
-    var idx = [0, 0];
-    for (var i = 0; i < this.rows; i++) {
-      for (var j = 0; j < this.columns; j++) {
+    let v = this.get(0, 0);
+    let idx = [0, 0];
+    for (let i = 0; i < this.rows; i++) {
+      for (let j = 0; j < this.columns; j++) {
         if (this.get(i, j) < v) {
           v = this.get(i, j);
           idx[0] = i;
@@ -611,8 +611,8 @@ export class AbstractMatrix {
 
   maxRow(row) {
     checkRowIndex(this, row);
-    var v = this.get(row, 0);
-    for (var i = 1; i < this.columns; i++) {
+    let v = this.get(row, 0);
+    for (let i = 1; i < this.columns; i++) {
       if (this.get(row, i) > v) {
         v = this.get(row, i);
       }
@@ -622,9 +622,9 @@ export class AbstractMatrix {
 
   maxRowIndex(row) {
     checkRowIndex(this, row);
-    var v = this.get(row, 0);
-    var idx = [row, 0];
-    for (var i = 1; i < this.columns; i++) {
+    let v = this.get(row, 0);
+    let idx = [row, 0];
+    for (let i = 1; i < this.columns; i++) {
       if (this.get(row, i) > v) {
         v = this.get(row, i);
         idx[1] = i;
@@ -635,8 +635,8 @@ export class AbstractMatrix {
 
   minRow(row) {
     checkRowIndex(this, row);
-    var v = this.get(row, 0);
-    for (var i = 1; i < this.columns; i++) {
+    let v = this.get(row, 0);
+    for (let i = 1; i < this.columns; i++) {
       if (this.get(row, i) < v) {
         v = this.get(row, i);
       }
@@ -646,9 +646,9 @@ export class AbstractMatrix {
 
   minRowIndex(row) {
     checkRowIndex(this, row);
-    var v = this.get(row, 0);
-    var idx = [row, 0];
-    for (var i = 1; i < this.columns; i++) {
+    let v = this.get(row, 0);
+    let idx = [row, 0];
+    for (let i = 1; i < this.columns; i++) {
       if (this.get(row, i) < v) {
         v = this.get(row, i);
         idx[1] = i;
@@ -659,8 +659,8 @@ export class AbstractMatrix {
 
   maxColumn(column) {
     checkColumnIndex(this, column);
-    var v = this.get(0, column);
-    for (var i = 1; i < this.rows; i++) {
+    let v = this.get(0, column);
+    for (let i = 1; i < this.rows; i++) {
       if (this.get(i, column) > v) {
         v = this.get(i, column);
       }
@@ -670,9 +670,9 @@ export class AbstractMatrix {
 
   maxColumnIndex(column) {
     checkColumnIndex(this, column);
-    var v = this.get(0, column);
-    var idx = [0, column];
-    for (var i = 1; i < this.rows; i++) {
+    let v = this.get(0, column);
+    let idx = [0, column];
+    for (let i = 1; i < this.rows; i++) {
       if (this.get(i, column) > v) {
         v = this.get(i, column);
         idx[0] = i;
@@ -683,8 +683,8 @@ export class AbstractMatrix {
 
   minColumn(column) {
     checkColumnIndex(this, column);
-    var v = this.get(0, column);
-    for (var i = 1; i < this.rows; i++) {
+    let v = this.get(0, column);
+    for (let i = 1; i < this.rows; i++) {
       if (this.get(i, column) < v) {
         v = this.get(i, column);
       }
@@ -694,9 +694,9 @@ export class AbstractMatrix {
 
   minColumnIndex(column) {
     checkColumnIndex(this, column);
-    var v = this.get(0, column);
-    var idx = [0, column];
-    for (var i = 1; i < this.rows; i++) {
+    let v = this.get(0, column);
+    let idx = [0, column];
+    for (let i = 1; i < this.rows; i++) {
       if (this.get(i, column) < v) {
         v = this.get(i, column);
         idx[0] = i;
@@ -706,21 +706,21 @@ export class AbstractMatrix {
   }
 
   diag() {
-    var min = Math.min(this.rows, this.columns);
-    var diag = [];
-    for (var i = 0; i < min; i++) {
+    let min = Math.min(this.rows, this.columns);
+    let diag = [];
+    for (let i = 0; i < min; i++) {
       diag.push(this.get(i, i));
     }
     return diag;
   }
 
   norm(type = 'frobenius') {
-    var result = 0;
+    let result = 0;
     if (type === 'max') {
       return this.max();
     } else if (type === 'frobenius') {
-      for (var i = 0; i < this.rows; i++) {
-        for (var j = 0; j < this.columns; j++) {
+      for (let i = 0; i < this.rows; i++) {
+        for (let j = 0; j < this.columns; j++) {
           result = result + this.get(i, j) * this.get(i, j);
         }
       }
@@ -731,9 +731,9 @@ export class AbstractMatrix {
   }
 
   cumulativeSum() {
-    var sum = 0;
-    for (var i = 0; i < this.rows; i++) {
-      for (var j = 0; j < this.columns; j++) {
+    let sum = 0;
+    for (let i = 0; i < this.rows; i++) {
+      for (let j = 0; j < this.columns; j++) {
         sum += this.get(i, j);
         this.set(i, j, sum);
       }
@@ -743,12 +743,12 @@ export class AbstractMatrix {
 
   dot(vector2) {
     if (AbstractMatrix.isMatrix(vector2)) vector2 = vector2.to1DArray();
-    var vector1 = this.to1DArray();
+    let vector1 = this.to1DArray();
     if (vector1.length !== vector2.length) {
       throw new RangeError('vectors do not have the same size');
     }
-    var dot = 0;
-    for (var i = 0; i < vector1.length; i++) {
+    let dot = 0;
+    for (let i = 0; i < vector1.length; i++) {
       dot += vector1[i] * vector2[i];
     }
     return dot;
@@ -757,21 +757,21 @@ export class AbstractMatrix {
   mmul(other) {
     other = Matrix.checkMatrix(other);
 
-    var m = this.rows;
-    var n = this.columns;
-    var p = other.columns;
+    let m = this.rows;
+    let n = this.columns;
+    let p = other.columns;
 
-    var result = new Matrix(m, p);
+    let result = new Matrix(m, p);
 
-    var Bcolj = new Float64Array(n);
-    for (var j = 0; j < p; j++) {
-      for (var k = 0; k < n; k++) {
+    let Bcolj = new Float64Array(n);
+    for (let j = 0; j < p; j++) {
+      for (let k = 0; k < n; k++) {
         Bcolj[k] = other.get(k, j);
       }
 
-      for (var i = 0; i < m; i++) {
-        var s = 0;
-        for (k = 0; k < n; k++) {
+      for (let i = 0; i < m; i++) {
+        let s = 0;
+        for (let k = 0; k < n; k++) {
           s += this.get(i, k) * Bcolj[k];
         }
 
@@ -783,7 +783,7 @@ export class AbstractMatrix {
 
   strassen2x2(other) {
     other = Matrix.checkMatrix(other);
-    var result = new Matrix(2, 2);
+    let result = new Matrix(2, 2);
     const a11 = this.get(0, 0);
     const b11 = other.get(0, 0);
     const a12 = this.get(0, 1);
@@ -817,7 +817,7 @@ export class AbstractMatrix {
 
   strassen3x3(other) {
     other = Matrix.checkMatrix(other);
-    var result = new Matrix(3, 3);
+    let result = new Matrix(3, 3);
 
     const a00 = this.get(0, 0);
     const a01 = this.get(0, 1);
@@ -887,27 +887,27 @@ export class AbstractMatrix {
 
   mmulStrassen(y) {
     y = Matrix.checkMatrix(y);
-    var x = this.clone();
-    var r1 = x.rows;
-    var c1 = x.columns;
-    var r2 = y.rows;
-    var c2 = y.columns;
+    let x = this.clone();
+    let r1 = x.rows;
+    let c1 = x.columns;
+    let r2 = y.rows;
+    let c2 = y.columns;
     if (c1 !== r2) {
       // eslint-disable-next-line no-console
       console.warn(
-        `Multiplying ${r1} x ${c1} and ${r2} x ${c2} matrix: dimensions do not match.`
+        `Multiplying ${r1} x ${c1} and ${r2} x ${c2} matrix: dimensions do not match.`,
       );
     }
 
     // Put a matrix into the top left of a matrix of zeros.
     // `rows` and `cols` are the dimensions of the output matrix.
     function embed(mat, rows, cols) {
-      var r = mat.rows;
-      var c = mat.columns;
+      let r = mat.rows;
+      let c = mat.columns;
       if (r === rows && c === cols) {
         return mat;
       } else {
-        var resultat = AbstractMatrix.zeros(rows, cols);
+        let resultat = AbstractMatrix.zeros(rows, cols);
         resultat = resultat.setSubMatrix(mat, 0, 0);
         return resultat;
       }
@@ -917,8 +917,8 @@ export class AbstractMatrix {
     // This is exclusively for simplicity:
     // this algorithm can be implemented with matrices of different sizes.
 
-    var r = Math.max(r1, r2);
-    var c = Math.max(c1, c2);
+    let r = Math.max(r1, r2);
+    let c = Math.max(c1, c2);
     x = embed(x, r, c);
     y = embed(y, r, c);
 
@@ -941,57 +941,57 @@ export class AbstractMatrix {
         b = embed(b, rows, cols + 1);
       }
 
-      var halfRows = parseInt(a.rows / 2, 10);
-      var halfCols = parseInt(a.columns / 2, 10);
+      let halfRows = parseInt(a.rows / 2, 10);
+      let halfCols = parseInt(a.columns / 2, 10);
       // Subdivide input matrices.
-      var a11 = a.subMatrix(0, halfRows - 1, 0, halfCols - 1);
-      var b11 = b.subMatrix(0, halfRows - 1, 0, halfCols - 1);
+      let a11 = a.subMatrix(0, halfRows - 1, 0, halfCols - 1);
+      let b11 = b.subMatrix(0, halfRows - 1, 0, halfCols - 1);
 
-      var a12 = a.subMatrix(0, halfRows - 1, halfCols, a.columns - 1);
-      var b12 = b.subMatrix(0, halfRows - 1, halfCols, b.columns - 1);
+      let a12 = a.subMatrix(0, halfRows - 1, halfCols, a.columns - 1);
+      let b12 = b.subMatrix(0, halfRows - 1, halfCols, b.columns - 1);
 
-      var a21 = a.subMatrix(halfRows, a.rows - 1, 0, halfCols - 1);
-      var b21 = b.subMatrix(halfRows, b.rows - 1, 0, halfCols - 1);
+      let a21 = a.subMatrix(halfRows, a.rows - 1, 0, halfCols - 1);
+      let b21 = b.subMatrix(halfRows, b.rows - 1, 0, halfCols - 1);
 
-      var a22 = a.subMatrix(halfRows, a.rows - 1, halfCols, a.columns - 1);
-      var b22 = b.subMatrix(halfRows, b.rows - 1, halfCols, b.columns - 1);
+      let a22 = a.subMatrix(halfRows, a.rows - 1, halfCols, a.columns - 1);
+      let b22 = b.subMatrix(halfRows, b.rows - 1, halfCols, b.columns - 1);
 
       // Compute intermediate values.
-      var m1 = blockMult(
+      let m1 = blockMult(
         AbstractMatrix.add(a11, a22),
         AbstractMatrix.add(b11, b22),
         halfRows,
-        halfCols
+        halfCols,
       );
-      var m2 = blockMult(AbstractMatrix.add(a21, a22), b11, halfRows, halfCols);
-      var m3 = blockMult(a11, AbstractMatrix.sub(b12, b22), halfRows, halfCols);
-      var m4 = blockMult(a22, AbstractMatrix.sub(b21, b11), halfRows, halfCols);
-      var m5 = blockMult(AbstractMatrix.add(a11, a12), b22, halfRows, halfCols);
-      var m6 = blockMult(
+      let m2 = blockMult(AbstractMatrix.add(a21, a22), b11, halfRows, halfCols);
+      let m3 = blockMult(a11, AbstractMatrix.sub(b12, b22), halfRows, halfCols);
+      let m4 = blockMult(a22, AbstractMatrix.sub(b21, b11), halfRows, halfCols);
+      let m5 = blockMult(AbstractMatrix.add(a11, a12), b22, halfRows, halfCols);
+      let m6 = blockMult(
         AbstractMatrix.sub(a21, a11),
         AbstractMatrix.add(b11, b12),
         halfRows,
-        halfCols
+        halfCols,
       );
-      var m7 = blockMult(
+      let m7 = blockMult(
         AbstractMatrix.sub(a12, a22),
         AbstractMatrix.add(b21, b22),
         halfRows,
-        halfCols
+        halfCols,
       );
 
       // Combine intermediate values into the output.
-      var c11 = AbstractMatrix.add(m1, m4);
+      let c11 = AbstractMatrix.add(m1, m4);
       c11.sub(m5);
       c11.add(m7);
-      var c12 = AbstractMatrix.add(m3, m5);
-      var c21 = AbstractMatrix.add(m2, m4);
-      var c22 = AbstractMatrix.sub(m1, m2);
+      let c12 = AbstractMatrix.add(m3, m5);
+      let c21 = AbstractMatrix.add(m2, m4);
+      let c22 = AbstractMatrix.sub(m1, m2);
       c22.add(m3);
       c22.add(m6);
 
       // Crop output to the desired size (undo dynamic padding).
-      var resultat = AbstractMatrix.zeros(2 * c11.rows, 2 * c11.columns);
+      let resultat = AbstractMatrix.zeros(2 * c11.rows, 2 * c11.columns);
       resultat = resultat.setSubMatrix(c11, 0, 0);
       resultat = resultat.setSubMatrix(c12, c11.rows, 0);
       resultat = resultat.setSubMatrix(c21, 0, c11.columns);
@@ -1009,8 +1009,8 @@ export class AbstractMatrix {
     if (!Number.isFinite(min)) throw new TypeError('min must be a number');
     if (!Number.isFinite(max)) throw new TypeError('max must be a number');
     if (min >= max) throw new RangeError('min must be smaller than max');
-    var newMatrix = new Matrix(this.rows, this.columns);
-    for (var i = 0; i < this.rows; i++) {
+    let newMatrix = new Matrix(this.rows, this.columns);
+    for (let i = 0; i < this.rows; i++) {
       const row = this.getRow(i);
       rescale(row, { min, max, output: row });
       newMatrix.setRow(i, row);
@@ -1026,13 +1026,13 @@ export class AbstractMatrix {
     if (!Number.isFinite(min)) throw new TypeError('min must be a number');
     if (!Number.isFinite(max)) throw new TypeError('max must be a number');
     if (min >= max) throw new RangeError('min must be smaller than max');
-    var newMatrix = new Matrix(this.rows, this.columns);
-    for (var i = 0; i < this.columns; i++) {
+    let newMatrix = new Matrix(this.rows, this.columns);
+    for (let i = 0; i < this.columns; i++) {
       const column = this.getColumn(i);
       rescale(column, {
         min: min,
         max: max,
-        output: column
+        output: column,
       });
       newMatrix.setColumn(i, column);
     }
@@ -1041,10 +1041,10 @@ export class AbstractMatrix {
 
   flipRows() {
     const middle = Math.ceil(this.columns / 2);
-    for (var i = 0; i < this.rows; i++) {
-      for (var j = 0; j < middle; j++) {
-        var first = this.get(i, j);
-        var last = this.get(i, this.columns - 1 - j);
+    for (let i = 0; i < this.rows; i++) {
+      for (let j = 0; j < middle; j++) {
+        let first = this.get(i, j);
+        let last = this.get(i, this.columns - 1 - j);
         this.set(i, j, last);
         this.set(i, this.columns - 1 - j, first);
       }
@@ -1054,10 +1054,10 @@ export class AbstractMatrix {
 
   flipColumns() {
     const middle = Math.ceil(this.rows / 2);
-    for (var j = 0; j < this.columns; j++) {
-      for (var i = 0; i < middle; i++) {
-        var first = this.get(i, j);
-        var last = this.get(this.rows - 1 - i, j);
+    for (let j = 0; j < this.columns; j++) {
+      for (let i = 0; i < middle; i++) {
+        let first = this.get(i, j);
+        let last = this.get(this.rows - 1 - i, j);
         this.set(i, j, last);
         this.set(this.rows - 1 - i, j, first);
       }
@@ -1068,16 +1068,16 @@ export class AbstractMatrix {
   kroneckerProduct(other) {
     other = Matrix.checkMatrix(other);
 
-    var m = this.rows;
-    var n = this.columns;
-    var p = other.rows;
-    var q = other.columns;
+    let m = this.rows;
+    let n = this.columns;
+    let p = other.rows;
+    let q = other.columns;
 
-    var result = new Matrix(m * p, n * q);
-    for (var i = 0; i < m; i++) {
-      for (var j = 0; j < n; j++) {
-        for (var k = 0; k < p; k++) {
-          for (var l = 0; l < q; l++) {
+    let result = new Matrix(m * p, n * q);
+    for (let i = 0; i < m; i++) {
+      for (let j = 0; j < n; j++) {
+        for (let k = 0; k < p; k++) {
+          for (let l = 0; l < q; l++) {
             result.set(p * i + k, q * j + l, this.get(i, j) * other.get(k, l));
           }
         }
@@ -1087,9 +1087,9 @@ export class AbstractMatrix {
   }
 
   transpose() {
-    var result = new Matrix(this.columns, this.rows);
-    for (var i = 0; i < this.rows; i++) {
-      for (var j = 0; j < this.columns; j++) {
+    let result = new Matrix(this.columns, this.rows);
+    for (let i = 0; i < this.rows; i++) {
+      for (let j = 0; j < this.columns; j++) {
         result.set(j, i, this.get(i, j));
       }
     }
@@ -1097,14 +1097,14 @@ export class AbstractMatrix {
   }
 
   sortRows(compareFunction = compareNumbers) {
-    for (var i = 0; i < this.rows; i++) {
+    for (let i = 0; i < this.rows; i++) {
       this.setRow(i, this.getRow(i).sort(compareFunction));
     }
     return this;
   }
 
   sortColumns(compareFunction = compareNumbers) {
-    for (var i = 0; i < this.columns; i++) {
+    for (let i = 0; i < this.columns; i++) {
       this.setColumn(i, this.getColumn(i).sort(compareFunction));
     }
     return this;
@@ -1112,12 +1112,12 @@ export class AbstractMatrix {
 
   subMatrix(startRow, endRow, startColumn, endColumn) {
     checkRange(this, startRow, endRow, startColumn, endColumn);
-    var newMatrix = new Matrix(
+    let newMatrix = new Matrix(
       endRow - startRow + 1,
-      endColumn - startColumn + 1
+      endColumn - startColumn + 1,
     );
-    for (var i = startRow; i <= endRow; i++) {
-      for (var j = startColumn; j <= endColumn; j++) {
+    for (let i = startRow; i <= endRow; i++) {
+      for (let j = startColumn; j <= endColumn; j++) {
         newMatrix.set(i - startRow, j - startColumn, this.get(i, j));
       }
     }
@@ -1137,9 +1137,9 @@ export class AbstractMatrix {
       throw new RangeError('Argument out of range');
     }
 
-    var newMatrix = new Matrix(indices.length, endColumn - startColumn + 1);
-    for (var i = 0; i < indices.length; i++) {
-      for (var j = startColumn; j <= endColumn; j++) {
+    let newMatrix = new Matrix(indices.length, endColumn - startColumn + 1);
+    for (let i = 0; i < indices.length; i++) {
+      for (let j = startColumn; j <= endColumn; j++) {
         if (indices[i] < 0 || indices[i] >= this.rows) {
           throw new RangeError(`Row index out of range: ${indices[i]}`);
         }
@@ -1162,9 +1162,9 @@ export class AbstractMatrix {
       throw new RangeError('Argument out of range');
     }
 
-    var newMatrix = new Matrix(endRow - startRow + 1, indices.length);
-    for (var i = 0; i < indices.length; i++) {
-      for (var j = startRow; j <= endRow; j++) {
+    let newMatrix = new Matrix(endRow - startRow + 1, indices.length);
+    for (let i = 0; i < indices.length; i++) {
+      for (let j = startRow; j <= endRow; j++) {
         if (indices[i] < 0 || indices[i] >= this.columns) {
           throw new RangeError(`Column index out of range: ${indices[i]}`);
         }
@@ -1176,11 +1176,11 @@ export class AbstractMatrix {
 
   setSubMatrix(matrix, startRow, startColumn) {
     matrix = Matrix.checkMatrix(matrix);
-    var endRow = startRow + matrix.rows - 1;
-    var endColumn = startColumn + matrix.columns - 1;
+    let endRow = startRow + matrix.rows - 1;
+    let endColumn = startColumn + matrix.columns - 1;
     checkRange(this, startRow, endRow, startColumn, endColumn);
-    for (var i = 0; i < matrix.rows; i++) {
-      for (var j = 0; j < matrix.columns; j++) {
+    for (let i = 0; i < matrix.rows; i++) {
+      for (let j = 0; j < matrix.columns; j++) {
         this.set(startRow + i, startColumn + j, matrix.get(i, j));
       }
     }
@@ -1188,12 +1188,12 @@ export class AbstractMatrix {
   }
 
   selection(rowIndices, columnIndices) {
-    var indices = checkIndices(this, rowIndices, columnIndices);
-    var newMatrix = new Matrix(rowIndices.length, columnIndices.length);
-    for (var i = 0; i < indices.row.length; i++) {
-      var rowIndex = indices.row[i];
-      for (var j = 0; j < indices.column.length; j++) {
-        var columnIndex = indices.column[j];
+    let indices = checkIndices(this, rowIndices, columnIndices);
+    let newMatrix = new Matrix(rowIndices.length, columnIndices.length);
+    for (let i = 0; i < indices.row.length; i++) {
+      let rowIndex = indices.row[i];
+      for (let j = 0; j < indices.column.length; j++) {
+        let columnIndex = indices.column[j];
         newMatrix.set(i, j, this.get(rowIndex, columnIndex));
       }
     }
@@ -1201,18 +1201,18 @@ export class AbstractMatrix {
   }
 
   trace() {
-    var min = Math.min(this.rows, this.columns);
-    var trace = 0;
-    for (var i = 0; i < min; i++) {
+    let min = Math.min(this.rows, this.columns);
+    let trace = 0;
+    for (let i = 0; i < min; i++) {
       trace += this.get(i, i);
     }
     return trace;
   }
 
   clone() {
-    var newMatrix = new Matrix(this.rows, this.columns);
-    for (var row = 0; row < this.rows; row++) {
-      for (var column = 0; column < this.columns; column++) {
+    let newMatrix = new Matrix(this.rows, this.columns);
+    for (let row = 0; row < this.rows; row++) {
+      for (let column = 0; column < this.columns; column++) {
         newMatrix.set(row, column, this.get(row, column));
       }
     }
@@ -1312,7 +1312,7 @@ export class AbstractMatrix {
     if (by === undefined) {
       return Math.sqrt(variance);
     } else {
-      for (var i = 0; i < variance.length; i++) {
+      for (let i = 0; i < variance.length; i++) {
         variance[i] = Math.sqrt(variance[i]);
       }
       return variance;
@@ -1342,7 +1342,8 @@ export class AbstractMatrix {
         }
         centerByColumn(this, center);
         return this;
-      } case undefined: {
+      }
+      case undefined: {
         if (typeof center !== 'number') {
           throw new TypeError('center must be a number');
         }
@@ -1440,7 +1441,7 @@ export default class Matrix extends AbstractMatrix {
       nColumns = arrayData[0].length;
       if (typeof nColumns !== 'number' || nColumns === 0) {
         throw new TypeError(
-          'Data must be a 2D array with at least one element'
+          'Data must be a 2D array with at least one element',
         );
       }
       this.data = [];
@@ -1452,7 +1453,7 @@ export default class Matrix extends AbstractMatrix {
       }
     } else {
       throw new TypeError(
-        'First argument must be a positive number or an array'
+        'First argument must be a positive number or an array',
       );
     }
     this.rows = nRows;
@@ -1496,7 +1497,7 @@ export default class Matrix extends AbstractMatrix {
     if (this.columns === 1) {
       throw new RangeError('A matrix cannot have less than one column');
     }
-    for (var i = 0; i < this.rows; i++) {
+    for (let i = 0; i < this.rows; i++) {
       const newRow = new Float64Array(this.columns - 1);
       for (let j = 0; j < index; j++) {
         newRow[j] = this.data[i][j];
@@ -1517,7 +1518,7 @@ export default class Matrix extends AbstractMatrix {
     }
     checkColumnIndex(this, index, true);
     array = checkColumnVector(this, array);
-    for (var i = 0; i < this.rows; i++) {
+    for (let i = 0; i < this.rows; i++) {
       const newRow = new Float64Array(this.columns + 1);
       let j = 0;
       for (; j < index; j++) {

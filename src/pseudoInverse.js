@@ -3,13 +3,13 @@ import Matrix from './matrix';
 
 export function pseudoInverse(matrix, threshold = Number.EPSILON) {
   matrix = Matrix.checkMatrix(matrix);
-  var svdSolution = new SVD(matrix, { autoTranspose: true });
+  let svdSolution = new SVD(matrix, { autoTranspose: true });
 
-  var U = svdSolution.leftSingularVectors;
-  var V = svdSolution.rightSingularVectors;
-  var s = svdSolution.diagonal;
+  let U = svdSolution.leftSingularVectors;
+  let V = svdSolution.rightSingularVectors;
+  let s = svdSolution.diagonal;
 
-  for (var i = 0; i < s.length; i++) {
+  for (let i = 0; i < s.length; i++) {
     if (Math.abs(s[i]) > threshold) {
       s[i] = 1.0 / s[i];
     } else {

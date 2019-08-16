@@ -19,7 +19,7 @@ describe('Selection view', () => {
     const msv = new MatrixSelectionView(
       m,
       Int8Array.from([1, 2]),
-      Int8Array.from([2, 1])
+      Int8Array.from([2, 1]),
     );
 
     expect(m.get(1, 2)).toBe(1);
@@ -34,7 +34,7 @@ describe('Selection view', () => {
   it('should throw when wrong arguments or range', () => {
     const m = Matrix.ones(2, 2);
     expect(() => new MatrixSelectionView(m, [1, 1, 2], [0, 2])).toThrow(
-      RangeError
+      RangeError,
     );
     expect(() => new MatrixSelectionView(m, [1, 1])).toThrow(TypeError);
   });

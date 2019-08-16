@@ -8,16 +8,16 @@ export default class CholeskyDecomposition {
       throw new Error('Matrix is not symmetric');
     }
 
-    var a = value;
-    var dimension = a.rows;
-    var l = new Matrix(dimension, dimension);
-    var positiveDefinite = true;
-    var i, j, k;
+    let a = value;
+    let dimension = a.rows;
+    let l = new Matrix(dimension, dimension);
+    let positiveDefinite = true;
+    let i, j, k;
 
     for (j = 0; j < dimension; j++) {
-      var d = 0;
+      let d = 0;
       for (k = 0; k < j; k++) {
-        var s = 0;
+        let s = 0;
         for (i = 0; i < k; i++) {
           s += l.get(k, i) * l.get(j, i);
         }
@@ -45,16 +45,16 @@ export default class CholeskyDecomposition {
   solve(value) {
     value = WrapperMatrix2D.checkMatrix(value);
 
-    var l = this.L;
-    var dimension = l.rows;
+    let l = this.L;
+    let dimension = l.rows;
 
     if (value.rows !== dimension) {
       throw new Error('Matrix dimensions do not match');
     }
 
-    var count = value.columns;
-    var B = value.clone();
-    var i, j, k;
+    let count = value.columns;
+    let B = value.clone();
+    let i, j, k;
 
     for (k = 0; k < dimension; k++) {
       for (j = 0; j < count; j++) {

@@ -70,8 +70,8 @@ const inplaceOperator = `
 
 const inplaceOperatorScalar = `
   AbstractMatrix.prototype.%name% = function %name%(value) {
-    for (var i = 0; i < this.rows; i++) {
-      for (var j = 0; j < this.columns; j++) {
+    for (let i = 0; i < this.rows; i++) {
+      for (let j = 0; j < this.columns; j++) {
         this.set(i, j, this.get(i, j) %op% value);
       }
     }
@@ -86,8 +86,8 @@ const inplaceOperatorMatrix = `
       this.columns !== matrix.columns) {
       throw new RangeError('Matrices dimensions must be equal');
     }
-    for (var i = 0; i < this.rows; i++) {
-      for (var j = 0; j < this.columns; j++) {
+    for (let i = 0; i < this.rows; i++) {
+      for (let j = 0; j < this.columns; j++) {
         this.set(i, j, this.get(i, j) %op% matrix.get(i, j));
       }
     }
@@ -97,15 +97,15 @@ const inplaceOperatorMatrix = `
 
 const staticOperator = `
   AbstractMatrix.%name% = function %name%(matrix, value) {
-    var newMatrix = new Matrix(matrix);
+    const newMatrix = new Matrix(matrix);
     return newMatrix.%name%(value);
   };
 `;
 
 const inplaceMethod = `
   AbstractMatrix.prototype.%name% = function %name%() {
-    for (var i = 0; i < this.rows; i++) {
-      for (var j = 0; j < this.columns; j++) {
+    for (let i = 0; i < this.rows; i++) {
+      for (let j = 0; j < this.columns; j++) {
         this.set(i, j, %method%(this.get(i, j)));
       }
     }
@@ -115,15 +115,15 @@ const inplaceMethod = `
 
 const staticMethod = `
   AbstractMatrix.%name% = function %name%(matrix) {
-    var newMatrix = new Matrix(matrix);
+    const newMatrix = new Matrix(matrix);
     return newMatrix.%name%();
   };
 `;
 
 const inplaceMethodWithArgs = `
   AbstractMatrix.prototype.%name% = function %name%(%args%) {
-    for (var i = 0; i < this.rows; i++) {
-      for (var j = 0; j < this.columns; j++) {
+    for (let i = 0; i < this.rows; i++) {
+      for (let j = 0; j < this.columns; j++) {
         this.set(i, j, %method%(this.get(i, j), %args%));
       }
     }
@@ -133,15 +133,15 @@ const inplaceMethodWithArgs = `
 
 const staticMethodWithArgs = `
   AbstractMatrix.%name% = function %name%(matrix, %args%) {
-    var newMatrix = new Matrix(matrix);
+    const newMatrix = new Matrix(matrix);
     return newMatrix.%name%(%args%);
   };
 `;
 
 const inplaceMethodWithOneArgScalar = `
   AbstractMatrix.prototype.%name% = function %name%(value) {
-    for (var i = 0; i < this.rows; i++) {
-      for (var j = 0; j < this.columns; j++) {
+    for (let i = 0; i < this.rows; i++) {
+      for (let j = 0; j < this.columns; j++) {
         this.set(i, j, %method%(this.get(i, j), value));
       }
     }
@@ -155,8 +155,8 @@ const inplaceMethodWithOneArgMatrix = `
       this.columns !== matrix.columns) {
       throw new RangeError('Matrices dimensions must be equal');
     }
-    for (var i = 0; i < this.rows; i++) {
-      for (var j = 0; j < this.columns; j++) {
+    for (let i = 0; i < this.rows; i++) {
+      for (let j = 0; j < this.columns; j++) {
         this.set(i, j, %method%(this.get(i, j), matrix.get(i, j)));
       }
     }
@@ -275,7 +275,7 @@ for (const methodWithArg of methodsWithArgs) {
       );
     }
   } else {
-    var tmplVar = {
+    const tmplVar = {
       name: methodWithArg[2],
       args: args,
       method: methodWithArg[0]

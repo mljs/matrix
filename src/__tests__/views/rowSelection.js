@@ -14,10 +14,10 @@ describe('Selection view', () => {
   it('should throw when wrong arguments or range', () => {
     const m = Matrix.ones(2, 2);
     expect(() => new MatrixRowSelectionView(m, [1, 1, 2])).toThrow(
-      'row indices are out of range'
+      'row indices are out of range',
     );
     expect(() => new MatrixRowSelectionView(m, 1)).toThrow(
-      'unexpected type for row indices'
+      'unexpected type for row indices',
     );
   });
 });

@@ -2,8 +2,8 @@ import Matrix from './matrix';
 import SingularValueDecomposition from './dc/svd';
 
 function xrange(n, exception) {
-  var range = [];
-  for (var i = 0; i < n; i++) {
+  let range = [];
+  for (let i = 0; i < n; i++) {
     if (i !== exception) {
       range.push(i);
     }
@@ -16,13 +16,13 @@ function dependenciesOneRow(
   matrix,
   index,
   thresholdValue = 10e-10,
-  thresholdError = 10e-10
+  thresholdError = 10e-10,
 ) {
   if (error > thresholdError) {
     return new Array(matrix.rows + 1).fill(0);
   } else {
-    var returnArray = matrix.addRow(index, [0]);
-    for (var i = 0; i < returnArray.rows; i++) {
+    let returnArray = matrix.addRow(index, [0]);
+    for (let i = 0; i < returnArray.rows; i++) {
       if (Math.abs(returnArray.get(i, 0)) < thresholdValue) {
         returnArray.set(i, 0, 0);
       }
@@ -35,20 +35,20 @@ export function linearDependencies(matrix, options = {}) {
   const { thresholdValue = 10e-10, thresholdError = 10e-10 } = options;
   matrix = Matrix.checkMatrix(matrix);
 
-  var n = matrix.rows;
-  var results = new Matrix(n, n);
+  let n = matrix.rows;
+  let results = new Matrix(n, n);
 
-  for (var i = 0; i < n; i++) {
-    var b = Matrix.columnVector(matrix.getRow(i));
-    var Abis = matrix.subMatrixRow(xrange(n, i)).transpose();
-    var svd = new SingularValueDecomposition(Abis);
-    var x = svd.solve(b);
-    var error = Matrix.sub(b, Abis.mmul(x))
+  for (let i = 0; i < n; i++) {
+    let b = Matrix.columnVector(matrix.getRow(i));
+    let Abis = matrix.subMatrixRow(xrange(n, i)).transpose();
+    let svd = new SingularValueDecomposition(Abis);
+    let x = svd.solve(b);
+    let error = Matrix.sub(b, Abis.mmul(x))
       .abs()
       .max();
     results.setRow(
       i,
-      dependenciesOneRow(error, x, i, thresholdValue, thresholdError)
+      dependenciesOneRow(error, x, i, thresholdValue, thresholdError),
     );
   }
   return results;

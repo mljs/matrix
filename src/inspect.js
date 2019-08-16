@@ -19,9 +19,9 @@ function inspectData(matrix, indent) {
   const maxI = Math.min(rows, maxRows);
   const maxJ = Math.min(columns, maxColumns);
   const result = [];
-  for (var i = 0; i < maxI; i++) {
+  for (let i = 0; i < maxI; i++) {
     let line = [];
-    for (var j = 0; j < maxJ; j++) {
+    for (let j = 0; j < maxJ; j++) {
       line.push(formatNumber(matrix.get(i, j)));
     }
     result.push(`${line.join(' ')}`);

@@ -8,7 +8,7 @@ import {
   EigenvalueDecomposition,
   EVD,
   CholeskyDecomposition,
-  CHO
+  CHO,
 } from '../..';
 
 describe('Decompositions exports', () => {

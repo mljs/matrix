@@ -12,14 +12,14 @@ export default class EigenvalueDecomposition {
       throw new Error('Matrix is not a square matrix');
     }
 
-    var n = matrix.columns;
-    var V = new Matrix(n, n);
-    var d = new Float64Array(n);
-    var e = new Float64Array(n);
-    var value = matrix;
-    var i, j;
+    let n = matrix.columns;
+    let V = new Matrix(n, n);
+    let d = new Float64Array(n);
+    let e = new Float64Array(n);
+    let value = matrix;
+    let i, j;
 
-    var isSymmetric = false;
+    let isSymmetric = false;
     if (assumeSymmetric) {
       isSymmetric = true;
     } else {
@@ -35,8 +35,8 @@ export default class EigenvalueDecomposition {
       tred2(n, e, d, V);
       tql2(n, e, d, V);
     } else {
-      var H = new Matrix(n, n);
-      var ort = new Float64Array(n);
+      let H = new Matrix(n, n);
+      let ort = new Float64Array(n);
       for (j = 0; j < n; j++) {
         for (i = 0; i < n; i++) {
           H.set(i, j, value.get(i, j));
@@ -65,11 +65,11 @@ export default class EigenvalueDecomposition {
   }
 
   get diagonalMatrix() {
-    var n = this.n;
-    var e = this.e;
-    var d = this.d;
-    var X = new Matrix(n, n);
-    var i, j;
+    let n = this.n;
+    let e = this.e;
+    let d = this.d;
+    let X = new Matrix(n, n);
+    let i, j;
     for (i = 0; i < n; i++) {
       for (j = 0; j < n; j++) {
         X.set(i, j, 0);
@@ -86,7 +86,7 @@ export default class EigenvalueDecomposition {
 }
 
 function tred2(n, e, d, V) {
-  var f, g, h, i, j, k, hh, scale;
+  let f, g, h, i, j, k, hh, scale;
 
   for (j = 0; j < n; j++) {
     d[j] = V.get(n - 1, j);
@@ -195,7 +195,7 @@ function tred2(n, e, d, V) {
 }
 
 function tql2(n, e, d, V) {
-  var g, h, i, j, k, l, m, p, r, dl1, c, c2, c3, el1, s, s2, iter;
+  let g, h, i, j, k, l, m, p, r, dl1, c, c2, c3, el1, s, s2, iter;
 
   for (i = 1; i < n; i++) {
     e[i - 1] = e[i];
@@ -203,9 +203,9 @@ function tql2(n, e, d, V) {
 
   e[n - 1] = 0;
 
-  var f = 0;
-  var tst1 = 0;
-  var eps = Number.EPSILON;
+  let f = 0;
+  let tst1 = 0;
+  let eps = Number.EPSILON;
 
   for (l = 0; l < n; l++) {
     tst1 = Math.max(tst1, Math.abs(d[l]) + Math.abs(e[l]));
@@ -298,10 +298,10 @@ function tql2(n, e, d, V) {
 }
 
 function orthes(n, H, ort, V) {
-  var low = 0;
-  var high = n - 1;
-  var f, g, h, i, j, m;
-  var scale;
+  let low = 0;
+  let high = n - 1;
+  let f, g, h, i, j, m;
+  let scale;
 
   for (m = low + 1; m <= high - 1; m++) {
     scale = 0;
@@ -381,21 +381,21 @@ function orthes(n, H, ort, V) {
 }
 
 function hqr2(nn, e, d, V, H) {
-  var n = nn - 1;
-  var low = 0;
-  var high = nn - 1;
-  var eps = Number.EPSILON;
-  var exshift = 0;
-  var norm = 0;
-  var p = 0;
-  var q = 0;
-  var r = 0;
-  var s = 0;
-  var z = 0;
-  var iter = 0;
-  var i, j, k, l, m, t, w, x, y;
-  var ra, sa, vr, vi;
-  var notlast, cdivres;
+  let n = nn - 1;
+  let low = 0;
+  let high = nn - 1;
+  let eps = Number.EPSILON;
+  let exshift = 0;
+  let norm = 0;
+  let p = 0;
+  let q = 0;
+  let r = 0;
+  let s = 0;
+  let z = 0;
+  let iter = 0;
+  let i, j, k, l, m, t, w, x, y;
+  let ra, sa, vr, vi;
+  let notlast, cdivres;
 
   for (i = 0; i < nn; i++) {
     if (i < low || i > high) {
@@ -660,7 +660,7 @@ function hqr2(nn, e, d, V, H) {
             H.set(
               i + 1,
               n,
-              Math.abs(x) > Math.abs(z) ? (-r - w * t) / x : (-s - y * t) / z
+              Math.abs(x) > Math.abs(z) ? (-r - w * t) / x : (-s - y * t) / z,
             );
           }
 
@@ -725,7 +725,7 @@ function hqr2(nn, e, d, V, H) {
               x * r - z * ra + q * sa,
               x * s - z * sa - q * ra,
               vr,
-              vi
+              vi,
             );
             H.set(i, n - 1, cdivres[0]);
             H.set(i, n, cdivres[1]);
@@ -733,19 +733,19 @@ function hqr2(nn, e, d, V, H) {
               H.set(
                 i + 1,
                 n - 1,
-                (-ra - w * H.get(i, n - 1) + q * H.get(i, n)) / x
+                (-ra - w * H.get(i, n - 1) + q * H.get(i, n)) / x,
               );
               H.set(
                 i + 1,
                 n,
-                (-sa - w * H.get(i, n) - q * H.get(i, n - 1)) / x
+                (-sa - w * H.get(i, n) - q * H.get(i, n - 1)) / x,
               );
             } else {
               cdivres = cdiv(
                 -r - y * H.get(i, n - 1),
                 -s - y * H.get(i, n),
                 z,
-                q
+                q,
               );
               H.set(i + 1, n - 1, cdivres[0]);
               H.set(i + 1, n, cdivres[1]);
@@ -784,7 +784,7 @@ function hqr2(nn, e, d, V, H) {
 }
 
 function cdiv(xr, xi, yr, yi) {
-  var r, d;
+  let r, d;
   if (Math.abs(yr) > Math.abs(yi)) {
     r = yi / yr;
     d = yr + r * yi;

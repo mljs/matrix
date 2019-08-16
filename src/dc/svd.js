@@ -7,33 +7,33 @@ export default class SingularValueDecomposition {
   constructor(value, options = {}) {
     value = WrapperMatrix2D.checkMatrix(value);
 
-    var m = value.rows;
-    var n = value.columns;
+    let m = value.rows;
+    let n = value.columns;
 
     const {
       computeLeftSingularVectors = true,
       computeRightSingularVectors = true,
-      autoTranspose = false
+      autoTranspose = false,
     } = options;
 
-    var wantu = Boolean(computeLeftSingularVectors);
-    var wantv = Boolean(computeRightSingularVectors);
+    let wantu = Boolean(computeLeftSingularVectors);
+    let wantv = Boolean(computeRightSingularVectors);
 
-    var swapped = false;
-    var a;
+    let swapped = false;
+    let a;
     if (m < n) {
       if (!autoTranspose) {
         a = value.clone();
         // eslint-disable-next-line no-console
         console.warn(
-          'Computing SVD on a matrix with more columns than rows. Consider enabling autoTranspose'
+          'Computing SVD on a matrix with more columns than rows. Consider enabling autoTranspose',
         );
       } else {
         a = value.transpose();
         m = a.rows;
         n = a.columns;
         swapped = true;
-        var aux = wantu;
+        let aux = wantu;
         wantu = wantv;
         wantv = aux;
       }
@@ -41,21 +41,21 @@ export default class SingularValueDecomposition {
       a = value.clone();
     }
 
-    var nu = Math.min(m, n);
-    var ni = Math.min(m + 1, n);
-    var s = new Float64Array(ni);
-    var U = new Matrix(m, nu);
-    var V = new Matrix(n, n);
+    let nu = Math.min(m, n);
+    let ni = Math.min(m + 1, n);
+    let s = new Float64Array(ni);
+    let U = new Matrix(m, nu);
+    let V = new Matrix(n, n);
 
-    var e = new Float64Array(n);
-    var work = new Float64Array(m);
+    let e = new Float64Array(n);
+    let work = new Float64Array(m);
 
-    var si = new Float64Array(ni);
+    let si = new Float64Array(ni);
     for (let i = 0; i < ni; i++) si[i] = i;
 
-    var nct = Math.min(m - 1, n);
-    var nrt = Math.max(0, Math.min(n - 2, m));
-    var mrc = Math.max(nct, nrt);
+    let nct = Math.min(m - 1, n);
+    let nrt = Math.max(0, Math.min(n - 2, m));
+    let mrc = Math.max(nct, nrt);
 
     for (let k = 0; k < mrc; k++) {
       if (k < nct) {
@@ -202,9 +202,9 @@ export default class SingularValueDecomposition {
       }
     }
 
-    var pp = p - 1;
-    var iter = 0;
-    var eps = Number.EPSILON;
+    let pp = p - 1;
+    let iter = 0;
+    let eps = Number.EPSILON;
     while (p > 0) {
       let k, kase;
       for (k = p - 2; k >= -1; k--) {
@@ -295,7 +295,7 @@ export default class SingularValueDecomposition {
             Math.abs(s[p - 2]),
             Math.abs(e[p - 2]),
             Math.abs(s[k]),
-            Math.abs(e[k])
+            Math.abs(e[k]),
           );
           const sp = s[p - 1] / scale;
           const spm1 = s[p - 2] / scale;
@@ -396,7 +396,7 @@ export default class SingularValueDecomposition {
     }
 
     if (swapped) {
-      var tmp = V;
+      let tmp = V;
       V = U;
       U = tmp;
     }
@@ -409,10 +409,10 @@ export default class SingularValueDecomposition {
   }
 
   solve(value) {
-    var Y = value;
-    var e = this.threshold;
-    var scols = this.s.length;
-    var Ls = Matrix.zeros(scols, scols);
+    let Y = value;
+    let e = this.threshold;
+    let scols = this.s.length;
+    let Ls = Matrix.zeros(scols, scols);
 
     for (let i = 0; i < scols; i++) {
       if (Math.abs(this.s[i]) <= e) {
@@ -422,13 +422,13 @@ export default class SingularValueDecomposition {
       }
     }
 
-    var U = this.U;
-    var V = this.rightSingularVectors;
+    let U = this.U;
+    let V = this.rightSingularVectors;
 
-    var VL = V.mmul(Ls);
-    var vrows = V.rows;
-    var urows = U.rows;
-    var VLU = Matrix.zeros(vrows, urows);
+    let VL = V.mmul(Ls);
+    let vrows = V.rows;
+    let urows = U.rows;
+    let VLU = Matrix.zeros(vrows, urows);
 
     for (let i = 0; i < vrows; i++) {
       for (let j = 0; j < urows; j++) {
@@ -448,11 +448,11 @@ export default class SingularValueDecomposition {
   }
 
   inverse() {
-    var V = this.V;
-    var e = this.threshold;
-    var vrows = V.rows;
-    var vcols = V.columns;
-    var X = new Matrix(vrows, this.s.length);
+    let V = this.V;
+    let e = this.threshold;
+    let vrows = V.rows;
+    let vcols = V.columns;
+    let X = new Matrix(vrows, this.s.length);
 
     for (let i = 0; i < vrows; i++) {
       for (let j = 0; j < vcols; j++) {
@@ -462,11 +462,11 @@ export default class SingularValueDecomposition {
       }
     }
 
-    var U = this.U;
+    let U = this.U;
 
-    var urows = U.rows;
-    var ucols = U.columns;
-    var Y = new Matrix(vrows, urows);
+    let urows = U.rows;
+    let ucols = U.columns;
+    let Y = new Matrix(vrows, urows);
 
     for (let i = 0; i < vrows; i++) {
       for (let j = 0; j < urows; j++) {
@@ -490,10 +490,10 @@ export default class SingularValueDecomposition {
   }
 
   get rank() {
-    var tol = Math.max(this.m, this.n) * this.s[0] * Number.EPSILON;
-    var r = 0;
-    var s = this.s;
-    for (var i = 0, ii = s.length; i < ii; i++) {
+    let tol = Math.max(this.m, this.n) * this.s[0] * Number.EPSILON;
+    let r = 0;
+    let s = this.s;
+    for (let i = 0, ii = s.length; i < ii; i++) {
       if (s[i] > tol) {
         r++;
       }

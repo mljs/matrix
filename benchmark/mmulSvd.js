@@ -18,7 +18,7 @@ test();
 console.log('now test');
 
 console.time('test');
-for (var i = 0; i < 10; i++) {
+for (let i = 0; i < 10; i++) {
   test();
 }
 console.timeEnd('test');

@@ -11,7 +11,7 @@ describe('Linear Dependencies', () => {
       [0, 1, 6, 0],
       [0, 3, 0, 1],
       [0, 0, 1, 0],
-      [0, 1, 2, 0]
+      [0, 1, 2, 0],
     ]);
     const dependencies = linearDependencies(A);
     expect(dependencies.to2DArray()).toBeDeepCloseTo(
@@ -20,9 +20,9 @@ describe('Linear Dependencies', () => {
         [0, 0, 0, 4, 1],
         [0, 0, 0, 0, 0],
         [0, 0.25, 0, 0, -0.25],
-        [0, 1, 0, -4, 0]
+        [0, 1, 0, -4, 0],
       ],
-      3
+      3,
     );
   });
 });

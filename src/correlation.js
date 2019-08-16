@@ -3,7 +3,11 @@ import Matrix from './matrix';
 export function correlation(xMatrix, yMatrix = xMatrix, options = {}) {
   xMatrix = Matrix.checkMatrix(xMatrix);
   let yIsSame = false;
-  if (typeof yMatrix === 'object' && !Matrix.isMatrix(yMatrix) && !Array.isArray(yMatrix)) {
+  if (
+    typeof yMatrix === 'object' &&
+    !Matrix.isMatrix(yMatrix) &&
+    !Array.isArray(yMatrix)
+  ) {
     options = yMatrix;
     yMatrix = xMatrix;
     yIsSame = true;
@@ -29,13 +33,19 @@ export function correlation(xMatrix, yMatrix = xMatrix, options = {}) {
   }
 
   const sdx = xMatrix.standardDeviation('column', { unbiased: true });
-  const sdy = yIsSame ? sdx : yMatrix.standardDeviation('column', { unbiased: true });
+  const sdy = yIsSame
+    ? sdx
+    : yMatrix.standardDeviation('column', { unbiased: true });
 
-  const correlation = xMatrix.transpose().mmul(yMatrix);
-  for (let i = 0; i < correlation.rows; i++) {
-    for (let j = 0; j < correlation.columns; j++) {
-      correlation.set(i, j, correlation.get(i, j) * (1 / (sdx[i] * sdy[j])) * (1 / (xMatrix.rows - 1)));
+  const corr = xMatrix.transpose().mmul(yMatrix);
+  for (let i = 0; i < corr.rows; i++) {
+    for (let j = 0; j < corr.columns; j++) {
+      corr.set(
+        i,
+        j,
+        corr.get(i, j) * (1 / (sdx[i] * sdy[j])) * (1 / (xMatrix.rows - 1)),
+      );
     }
   }
-  return correlation;
+  return corr;
 }

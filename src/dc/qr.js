@@ -7,14 +7,14 @@ export default class QrDecomposition {
   constructor(value) {
     value = WrapperMatrix2D.checkMatrix(value);
 
-    var qr = value.clone();
-    var m = value.rows;
-    var n = value.columns;
-    var rdiag = new Float64Array(n);
-    var i, j, k, s;
+    let qr = value.clone();
+    let m = value.rows;
+    let n = value.columns;
+    let rdiag = new Float64Array(n);
+    let i, j, k, s;
 
     for (k = 0; k < n; k++) {
-      var nrm = 0;
+      let nrm = 0;
       for (i = k; i < m; i++) {
         nrm = hypotenuse(nrm, qr.get(i, k));
       }
@@ -47,8 +47,8 @@ export default class QrDecomposition {
   solve(value) {
     value = Matrix.checkMatrix(value);
 
-    var qr = this.QR;
-    var m = qr.rows;
+    let qr = this.QR;
+    let m = qr.rows;
 
     if (value.rows !== m) {
       throw new Error('Matrix row dimensions must agree');
@@ -57,10 +57,10 @@ export default class QrDecomposition {
       throw new Error('Matrix is rank deficient');
     }
 
-    var count = value.columns;
-    var X = value.clone();
-    var n = qr.columns;
-    var i, j, k, s;
+    let count = value.columns;
+    let X = value.clone();
+    let n = qr.columns;
+    let i, j, k, s;
 
     for (k = 0; k < n; k++) {
       for (j = 0; j < count; j++) {
@@ -89,8 +89,8 @@ export default class QrDecomposition {
   }
 
   isFullRank() {
-    var columns = this.QR.columns;
-    for (var i = 0; i < columns; i++) {
+    let columns = this.QR.columns;
+    for (let i = 0; i < columns; i++) {
       if (this.Rdiag[i] === 0) {
         return false;
       }
@@ -99,10 +99,10 @@ export default class QrDecomposition {
   }
 
   get upperTriangularMatrix() {
-    var qr = this.QR;
-    var n = qr.columns;
-    var X = new Matrix(n, n);
-    var i, j;
+    let qr = this.QR;
+    let n = qr.columns;
+    let X = new Matrix(n, n);
+    let i, j;
     for (i = 0; i < n; i++) {
       for (j = 0; j < n; j++) {
         if (i < j) {
@@ -118,11 +118,11 @@ export default class QrDecomposition {
   }
 
   get orthogonalMatrix() {
-    var qr = this.QR;
-    var rows = qr.rows;
-    var columns = qr.columns;
-    var X = new Matrix(rows, columns);
-    var i, j, k, s;
+    let qr = this.QR;
+    let rows = qr.rows;
+    let columns = qr.columns;
+    let X = new Matrix(rows, columns);
+    let i, j, k, s;
 
     for (k = columns - 1; k >= 0; k--) {
       for (i = 0; i < rows; i++) {

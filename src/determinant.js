@@ -5,7 +5,7 @@ import MatrixSelectionView from './views/selection';
 export function determinant(matrix) {
   matrix = Matrix.checkMatrix(matrix);
   if (matrix.isSquare()) {
-    var a, b, c, d;
+    let a, b, c, d;
     if (matrix.columns === 2) {
       // 2 x 2 matrix
       a = matrix.get(0, 0);
@@ -16,7 +16,7 @@ export function determinant(matrix) {
       return a * d - b * c;
     } else if (matrix.columns === 3) {
       // 3 x 3 matrix
-      var subMatrix0, subMatrix1, subMatrix2;
+      let subMatrix0, subMatrix1, subMatrix2;
       subMatrix0 = new MatrixSelectionView(matrix, [1, 2], [1, 2]);
       subMatrix1 = new MatrixSelectionView(matrix, [1, 2], [0, 2]);
       subMatrix2 = new MatrixSelectionView(matrix, [1, 2], [0, 1]);

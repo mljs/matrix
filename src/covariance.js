@@ -3,7 +3,11 @@ import Matrix from './matrix';
 export function covariance(xMatrix, yMatrix = xMatrix, options = {}) {
   xMatrix = Matrix.checkMatrix(xMatrix);
   let yIsSame = false;
-  if (typeof yMatrix === 'object' && !Matrix.isMatrix(yMatrix) && !Array.isArray(yMatrix)) {
+  if (
+    typeof yMatrix === 'object' &&
+    !Matrix.isMatrix(yMatrix) &&
+    !Array.isArray(yMatrix)
+  ) {
     options = yMatrix;
     yMatrix = xMatrix;
     yIsSame = true;
@@ -20,11 +24,11 @@ export function covariance(xMatrix, yMatrix = xMatrix, options = {}) {
       yMatrix = yMatrix.center('column');
     }
   }
-  const covariance = xMatrix.transpose().mmul(yMatrix);
-  for (let i = 0; i < covariance.rows; i++) {
-    for (let j = 0; j < covariance.columns; j++) {
-      covariance.set(i, j, covariance.get(i, j) * (1 / (xMatrix.rows - 1)));
+  const cov = xMatrix.transpose().mmul(yMatrix);
+  for (let i = 0; i < cov.rows; i++) {
+    for (let j = 0; j < cov.columns; j++) {
+      cov.set(i, j, cov.get(i, j) * (1 / (xMatrix.rows - 1)));
     }
   }
-  return covariance;
+  return cov;
 }

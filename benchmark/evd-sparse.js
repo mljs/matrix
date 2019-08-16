@@ -7,7 +7,7 @@ const parse = require('csv-parse');
 const prettyHrtime = require('pretty-hrtime');
 const numeric = require('numeric');
 
-var { Matrix, EVD } = require('..');
+let { Matrix, EVD } = require('..');
 
 test('../data/9S.csv');
 test('../data/10S.csv');
@@ -15,7 +15,7 @@ test('../data/10S.csv');
 function test(filename) {
   let contents = fs.readFileSync(path.join(__dirname, filename), 'utf8');
   // eslint-disable-next-line camelcase
-  parse(contents, { delimiter: ',', auto_parse: true }, function (err, mat) {
+  parse(contents, { delimiter: ',', auto_parse: true }, function(err, mat) {
     if (err) throw err;
 
     const base = new Matrix(mat);
@@ -24,11 +24,11 @@ function test(filename) {
 
     console.log(`EVD benchmark for ${mat.length}x${mat.length} sparse matrix`);
 
-    run(function () {
+    run(function() {
       new EVD(matrix);
     }, 'Matrix');
 
-    run(function () {
+    run(function() {
       numeric.eig(matrixNum);
     }, 'numeric');
   });

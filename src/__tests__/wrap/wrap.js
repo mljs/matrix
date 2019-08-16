@@ -2,14 +2,14 @@ import { Matrix, wrap } from '../..';
 
 describe('matrix creation', () => {
   it('WrapperMatrix1D creation', () => {
-    var matrix = wrap([0, 1, 2, 3, 4, 5]);
+    let matrix = wrap([0, 1, 2, 3, 4, 5]);
     expect(matrix.get(0, 1)).toBe(1);
     matrix.set(0, 1, 2);
     expect(matrix.get(0, 1)).toBe(2);
   });
 
   it('WrapperMatrix2D creation', () => {
-    var matrix = wrap([[1, 0], [0, 1]]);
+    let matrix = wrap([[1, 0], [0, 1]]);
     expect(matrix.get(0, 0)).toBe(1);
     matrix.set(0, 0, 2);
     expect(matrix.get(0, 0)).toBe(2);
@@ -21,10 +21,10 @@ test('error testing', () => {
 });
 
 test('matrix methods', () => {
-  var matrix1 = wrap([0, 1, 2, 3], { rows: 2 });
-  var matrix2 = wrap([[1, 0], [0, 1]]);
+  let matrix1 = wrap([0, 1, 2, 3], { rows: 2 });
+  let matrix2 = wrap([[1, 0], [0, 1]]);
 
-  var result = matrix1.mmul(matrix2);
+  let result = matrix1.mmul(matrix2);
   expect(result).toBeInstanceOf(Matrix);
   expect(result.to2DArray()).toStrictEqual([[0, 1], [2, 3]]);
 

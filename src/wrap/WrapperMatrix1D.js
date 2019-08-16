@@ -14,13 +14,13 @@ export default class WrapperMatrix1D extends AbstractMatrix {
   }
 
   set(rowIndex, columnIndex, value) {
-    var index = this._calculateIndex(rowIndex, columnIndex);
+    let index = this._calculateIndex(rowIndex, columnIndex);
     this.data[index] = value;
     return this;
   }
 
   get(rowIndex, columnIndex) {
-    var index = this._calculateIndex(rowIndex, columnIndex);
+    let index = this._calculateIndex(rowIndex, columnIndex);
     return this.data[index];
   }
 

@@ -5,13 +5,13 @@ export default class LuDecomposition {
   constructor(matrix) {
     matrix = WrapperMatrix2D.checkMatrix(matrix);
 
-    var lu = matrix.clone();
-    var rows = lu.rows;
-    var columns = lu.columns;
-    var pivotVector = new Float64Array(rows);
-    var pivotSign = 1;
-    var i, j, k, p, s, t, v;
-    var LUcolj, kmax;
+    let lu = matrix.clone();
+    let rows = lu.rows;
+    let columns = lu.columns;
+    let pivotVector = new Float64Array(rows);
+    let pivotSign = 1;
+    let i, j, k, p, s, t, v;
+    let LUcolj, kmax;
 
     for (i = 0; i < rows; i++) {
       pivotVector[i] = i;
@@ -68,9 +68,9 @@ export default class LuDecomposition {
   }
 
   isSingular() {
-    var data = this.LU;
-    var col = data.columns;
-    for (var j = 0; j < col; j++) {
+    let data = this.LU;
+    let col = data.columns;
+    for (let j = 0; j < col; j++) {
       if (data.get(j, j) === 0) {
         return true;
       }
@@ -81,8 +81,8 @@ export default class LuDecomposition {
   solve(value) {
     value = Matrix.checkMatrix(value);
 
-    var lu = this.LU;
-    var rows = lu.rows;
+    let lu = this.LU;
+    let rows = lu.rows;
 
     if (rows !== value.rows) {
       throw new Error('Invalid matrix dimensions');
@@ -91,10 +91,10 @@ export default class LuDecomposition {
       throw new Error('LU matrix is singular');
     }
 
-    var count = value.columns;
-    var X = value.subMatrixRow(this.pivotVector, 0, count - 1);
-    var columns = lu.columns;
-    var i, j, k;
+    let count = value.columns;
+    let X = value.subMatrixRow(this.pivotVector, 0, count - 1);
+    let columns = lu.columns;
+    let i, j, k;
 
     for (k = 0; k < columns; k++) {
       for (i = k + 1; i < columns; i++) {
@@ -117,25 +117,25 @@ export default class LuDecomposition {
   }
 
   get determinant() {
-    var data = this.LU;
+    let data = this.LU;
     if (!data.isSquare()) {
       throw new Error('Matrix must be square');
     }
-    var determinant = this.pivotSign;
-    var col = data.columns;
-    for (var j = 0; j < col; j++) {
+    let determinant = this.pivotSign;
+    let col = data.columns;
+    for (let j = 0; j < col; j++) {
       determinant *= data.get(j, j);
     }
     return determinant;
   }
 
   get lowerTriangularMatrix() {
-    var data = this.LU;
-    var rows = data.rows;
-    var columns = data.columns;
-    var X = new Matrix(rows, columns);
-    for (var i = 0; i < rows; i++) {
-      for (var j = 0; j < columns; j++) {
+    let data = this.LU;
+    let rows = data.rows;
+    let columns = data.columns;
+    let X = new Matrix(rows, columns);
+    for (let i = 0; i < rows; i++) {
+      for (let j = 0; j < columns; j++) {
         if (i > j) {
           X.set(i, j, data.get(i, j));
         } else if (i === j) {
@@ -149,12 +149,12 @@ export default class LuDecomposition {
   }
 
   get upperTriangularMatrix() {
-    var data = this.LU;
-    var rows = data.rows;
-    var columns = data.columns;
-    var X = new Matrix(rows, columns);
-    for (var i = 0; i < rows; i++) {
-      for (var j = 0; j < columns; j++) {
+    let data = this.LU;
+    let rows = data.rows;
+    let columns = data.columns;
+    let X = new Matrix(rows, columns);
+    for (let i = 0; i < rows; i++) {
+      for (let j = 0; j < columns; j++) {
         if (i <= j) {
           X.set(i, j, data.get(i, j));
         } else {

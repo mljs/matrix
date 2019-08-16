@@ -1,5 +1,5 @@
 export function hypotenuse(a, b) {
-  var r = 0;
+  let r = 0;
   if (Math.abs(a) > Math.abs(b)) {
     r = b / a;
     return Math.abs(a) * Math.sqrt(1 + r * r);
