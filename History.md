@@ -1,3 +1,12 @@
+# [6.3.0](https://github.com/mljs/matrix/compare/v6.2.0...v6.3.0) (2019-08-16)
+
+
+### Features
+
+* add UMD build ([#92](https://github.com/mljs/matrix/issues/92)) ([3b82b07](https://github.com/mljs/matrix/commit/3b82b07))
+
+
+
 # [6.2.0](https://github.com/mljs/matrix/compare/v6.1.2...v6.2.0) (2019-07-20)
 
 
