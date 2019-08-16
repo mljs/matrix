@@ -62,26 +62,42 @@
 	<div class="row">
 		<div class="col-8 col-content">
 			<div class="tsd-panel tsd-typography">
-				<h1 id="ml-matrix">ml-matrix</h1>
+				<a href="#ml-matrix" id="ml-matrix" style="color: inherit; text-decoration: none;">
+					<h1>ml-matrix</h1>
+				</a>
 				<p><a href="https://npmjs.org/package/ml-matrix"><img src="https://img.shields.io/npm/v/ml-matrix.svg?style=flat-square" alt="NPM version"></a>
 					<a href="https://travis-ci.org/mljs/matrix"><img src="https://img.shields.io/travis/mljs/matrix/master.svg?style=flat-square" alt="build status"></a>
 					<a href="https://codecov.io/github/mljs/matrix"><img src="https://img.shields.io/codecov/c/github/mljs/matrix.svg?style=flat-square" alt="Test coverage"></a>
 				<a href="https://npmjs.org/package/ml-matrix"><img src="https://img.shields.io/npm/dm/ml-matrix.svg?style=flat-square" alt="npm download"></a></p>
 				<p>Matrix manipulation and computation library.</p>
-				<h2 id="installation">Installation</h2>
+				<a href="#installation" id="installation" style="color: inherit; text-decoration: none;">
+					<h2>Installation</h2>
+				</a>
 				<p><code>$ npm install ml-matrix</code></p>
-				<h2 id="usage">Usage</h2>
-				<h3 id="as-an-es-module">As an ES module</h3>
+				<a href="#usage" id="usage" style="color: inherit; text-decoration: none;">
+					<h2>Usage</h2>
+				</a>
+				<a href="#as-an-es-module" id="as-an-es-module" style="color: inherit; text-decoration: none;">
+					<h3>As an ES module</h3>
+				</a>
 				<pre><code class="language-js"><span class="hljs-keyword">import</span> { Matrix } <span class="hljs-keyword">from</span> <span class="hljs-string">'ml-matrix'</span>;
 
 <span class="hljs-keyword">const</span> matrix = Matrix.ones(<span class="hljs-number">5</span>, <span class="hljs-number">5</span>);</code></pre>
-				<h3 id="as-a-commonjs-module">As a CommonJS module</h3>
+				<a href="#as-a-commonjs-module" id="as-a-commonjs-module" style="color: inherit; text-decoration: none;">
+					<h3>As a CommonJS module</h3>
+				</a>
 				<pre><code class="language-js"><span class="hljs-keyword">const</span> { Matrix } = <span class="hljs-built_in">require</span>(<span class="hljs-string">'ml-matrix'</span>);
 
 <span class="hljs-keyword">const</span> matrix = Matrix.ones(<span class="hljs-number">5</span>, <span class="hljs-number">5</span>);</code></pre>
-				<h2 id="api-documentation"><a href="https://mljs.github.io/matrix/globals.html">API Documentation</a></h2>
-				<h2 id="examples">Examples</h2>
-				<h3 id="standard-operations">Standard operations</h3>
+				<a href="#a-hrefhttpsmljsgithubiomatrixglobalshtmlapi-documentationa" id="a-hrefhttpsmljsgithubiomatrixglobalshtmlapi-documentationa" style="color: inherit; text-decoration: none;">
+					<h2><a href="https://mljs.github.io/matrix/globals.html">API Documentation</a></h2>
+				</a>
+				<a href="#examples" id="examples" style="color: inherit; text-decoration: none;">
+					<h2>Examples</h2>
+				</a>
+				<a href="#standard-operations" id="standard-operations" style="color: inherit; text-decoration: none;">
+					<h3>Standard operations</h3>
+				</a>
 				<pre><code class="language-js"><span class="hljs-keyword">const</span> { Matrix } = <span class="hljs-built_in">require</span>(<span class="hljs-string">'ml-matrix'</span>);
 
 <span class="hljs-keyword">var</span> A = <span class="hljs-keyword">new</span> Matrix([[<span class="hljs-number">1</span>, <span class="hljs-number">1</span>], [<span class="hljs-number">2</span>, <span class="hljs-number">2</span>]]);
@@ -144,7 +160,9 @@ A.set(<span class="hljs-number">1</span>, <span class="hljs-number">0</span>, <s
 <span class="hljs-keyword">var</span> z = Matrix.zeros(<span class="hljs-number">3</span>, <span class="hljs-number">2</span>); <span class="hljs-comment">// z = Matrix [[0, 0], [0, 0], [0, 0], rows: 3, columns: 2]</span>
 <span class="hljs-keyword">var</span> z = Matrix.ones(<span class="hljs-number">2</span>, <span class="hljs-number">3</span>); <span class="hljs-comment">// z = Matrix [[1, 1, 1], [1, 1, 1], rows: 2, columns: 3]</span>
 <span class="hljs-keyword">var</span> z = Matrix.eye(<span class="hljs-number">3</span>, <span class="hljs-number">4</span>); <span class="hljs-comment">// Matrix [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], rows: 3, columns: 4]. there are 1 only in the diagonal</span></code></pre>
-				<h3 id="maths">Maths</h3>
+				<a href="#maths" id="maths" style="color: inherit; text-decoration: none;">
+					<h3>Maths</h3>
+				</a>
 				<pre><code class="language-js"><span class="hljs-keyword">const</span> {
   Matrix,
   inverse,
@@ -240,7 +258,9 @@ A.set(<span class="hljs-number">1</span>, <span class="hljs-number">0</span>, <s
   [<span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">0</span>]
 ]);
 <span class="hljs-keyword">var</span> dependencies = linearDependencies(A); <span class="hljs-comment">// dependencies is a matrix with the dependencies of the rows. When we look row by row, we see that the first row is [0, 0, 0, 0, 0], so it means that the first row is independent, and the second row is [ 0, 0, 0, 4, 1 ], i.e the second row = 4 times the 4th row + the 5th row.</span></code></pre>
-				<h2 id="license">License</h2>
+				<a href="#license" id="license" style="color: inherit; text-decoration: none;">
+					<h2>License</h2>
+				</a>
 				<p><a href="./LICENSE">MIT</a></p>
 			</div>
 		</div>
@@ -409,6 +429,7 @@ A.set(<span class="hljs-number">1</span>, <span class="hljs-number">0</span>, <s
 				<li class="tsd-kind-function tsd-has-type-parameter"><span class="tsd-kind-icon">Function with type parameter</span></li>
 				<li class="tsd-kind-index-signature"><span class="tsd-kind-icon">Index signature</span></li>
 				<li class="tsd-kind-type-alias"><span class="tsd-kind-icon">Type alias</span></li>
+				<li class="tsd-kind-type-alias tsd-has-type-parameter"><span class="tsd-kind-icon">Type alias with type parameter</span></li>
 			</ul>
 			<ul class="tsd-legend">
 				<li class="tsd-kind-enum"><span class="tsd-kind-icon">Enumeration</span></li>
