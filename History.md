@@ -1,3 +1,12 @@
+# [6.4.0](https://github.com/mljs/matrix/compare/v6.3.0...v6.4.0) (2019-08-16)
+
+
+### Features
+
+* add CholeskyDecomposition.isPositiveDefinite method ([#94](https://github.com/mljs/matrix/issues/94)) ([6bb33a9](https://github.com/mljs/matrix/commit/6bb33a9))
+
+
+
 # [6.3.0](https://github.com/mljs/matrix/compare/v6.2.0...v6.3.0) (2019-08-16)
 
 
