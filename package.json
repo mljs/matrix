@@ -4,11 +4,14 @@
   "description": "Matrix manipulation and computation library",
   "main": "matrix.js",
   "module": "src/index.js",
+  "jsdelivr": "matrix.umd.js",
+  "unpkg": "matrix.umd.js",
   "types": "matrix.d.ts",
   "sideEffects": false,
   "files": [
     "matrix.d.ts",
     "matrix.js",
+    "matrix.umd.js",
     "src"
   ],
   "scripts": {
@@ -66,6 +69,9 @@
     "numeric": "^1.2.6",
     "pretty-hrtime": "^1.0.3",
     "rollup": "^1.16.3",
+    "rollup-plugin-commonjs": "^10.0.2",
+    "rollup-plugin-node-resolve": "^5.2.0",
+    "rollup-plugin-terser": "^5.1.1",
     "typedoc": "^0.14.2"
   },
   "dependencies": {
