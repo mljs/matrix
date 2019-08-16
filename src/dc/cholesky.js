@@ -40,11 +40,22 @@ export default class CholeskyDecomposition {
       }
     }
 
-    if (!positiveDefinite) {
-      throw new Error('Matrix is not positive definite');
-    }
-
     this.L = l;
+    this.positiveDefinite = positiveDefinite;
+  }
+
+  /**
+   *
+   * @return {boolean}
+   */
+  isPositiveDefinite() {
+    var positiveDefnite = this.positiveDefinite;
+    if (!positiveDefnite) {
+      positiveDefnite = false;
+    } else {
+      positiveDefnite = true;
+    }
+    return positiveDefnite;
   }
 
   /**
@@ -60,6 +71,9 @@ export default class CholeskyDecomposition {
 
     if (value.rows !== dimension) {
       throw new Error('Matrix dimensions do not match');
+    }
+    if (this.isPositiveDefinite() === false) {
+      throw new Error('Matrix is not positive definite');
     }
 
     var count = value.columns;
