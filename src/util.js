@@ -1,5 +1,3 @@
-import Matrix from './matrix';
-
 /**
  * @private
  * Check that a row index is not out of bounds
@@ -8,7 +6,7 @@ import Matrix from './matrix';
  * @param {boolean} [outer]
  */
 export function checkRowIndex(matrix, index, outer) {
-  var max = outer ? matrix.rows : matrix.rows - 1;
+  let max = outer ? matrix.rows : matrix.rows - 1;
   if (index < 0 || index > max) {
     throw new RangeError('Row index out of range');
   }
@@ -22,7 +20,7 @@ export function checkRowIndex(matrix, index, outer) {
  * @param {boolean} [outer]
  */
 export function checkColumnIndex(matrix, index, outer) {
-  var max = outer ? matrix.columns : matrix.columns - 1;
+  let max = outer ? matrix.columns : matrix.columns - 1;
   if (index < 0 || index > max) {
     throw new RangeError('Column index out of range');
   }
@@ -42,7 +40,7 @@ export function checkRowVector(matrix, vector) {
   }
   if (vector.length !== matrix.columns) {
     throw new RangeError(
-      'vector size must be the same as the number of columns'
+      'vector size must be the same as the number of columns',
     );
   }
   return vector;
@@ -69,7 +67,7 @@ export function checkColumnVector(matrix, vector) {
 export function checkIndices(matrix, rowIndices, columnIndices) {
   return {
     row: checkRowIndices(matrix, rowIndices),
-    column: checkColumnIndices(matrix, columnIndices)
+    column: checkColumnIndices(matrix, columnIndices),
   };
 }
 
@@ -78,7 +76,7 @@ export function checkRowIndices(matrix, rowIndices) {
     throw new TypeError('unexpected type for row indices');
   }
 
-  var rowOut = rowIndices.some((r) => {
+  let rowOut = rowIndices.some((r) => {
     return r < 0 || r >= matrix.rows;
   });
 
@@ -96,7 +94,7 @@ export function checkColumnIndices(matrix, columnIndices) {
     throw new TypeError('unexpected type for column indices');
   }
 
-  var columnOut = columnIndices.some((c) => {
+  let columnOut = columnIndices.some((c) => {
     return c < 0 || c >= matrix.columns;
   });
 
@@ -132,42 +130,12 @@ export function checkRange(matrix, startRow, endRow, startColumn, endColumn) {
   }
 }
 
-export function getRange(from, to) {
-  var arr = new Array(to - from + 1);
-  for (var i = 0; i < arr.length; i++) {
-    arr[i] = from + i;
+export function newArray(length, value = 0) {
+  let array = [];
+  for (let i = 0; i < length; i++) {
+    array.push(value);
   }
-  return arr;
-}
-
-export function sumByRow(matrix) {
-  var sum = Matrix.zeros(matrix.rows, 1);
-  for (var i = 0; i < matrix.rows; ++i) {
-    for (var j = 0; j < matrix.columns; ++j) {
-      sum.set(i, 0, sum.get(i, 0) + matrix.get(i, j));
-    }
-  }
-  return sum;
-}
-
-export function sumByColumn(matrix) {
-  var sum = Matrix.zeros(1, matrix.columns);
-  for (var i = 0; i < matrix.rows; ++i) {
-    for (var j = 0; j < matrix.columns; ++j) {
-      sum.set(0, j, sum.get(0, j) + matrix.get(i, j));
-    }
-  }
-  return sum;
-}
-
-export function sumAll(matrix) {
-  var v = 0;
-  for (var i = 0; i < matrix.rows; i++) {
-    for (var j = 0; j < matrix.columns; j++) {
-      v += matrix.get(i, j);
-    }
-  }
-  return v;
+  return array;
 }
 
 function checkNumber(name, value) {

@@ -1,14 +1,8 @@
-import { Matrix, WrapperMatrix2D } from '../index';
+import Matrix from '../matrix';
+import WrapperMatrix2D from '../wrap/WrapperMatrix2D';
 
-import { hypotenuse, getFilled2DArray } from './util';
+import { hypotenuse } from './util';
 
-/**
- * @class EigenvalueDecomposition
- * @link https://github.com/lutzroeder/Mapack/blob/master/Source/EigenvalueDecomposition.cs
- * @param {Matrix} matrix
- * @param {object} [options]
- * @param {boolean} [options.assumeSymmetric=false]
- */
 export default class EigenvalueDecomposition {
   constructor(matrix, options = {}) {
     const { assumeSymmetric = false } = options;
@@ -18,14 +12,14 @@ export default class EigenvalueDecomposition {
       throw new Error('Matrix is not a square matrix');
     }
 
-    var n = matrix.columns;
-    var V = getFilled2DArray(n, n, 0);
-    var d = new Array(n);
-    var e = new Array(n);
-    var value = matrix;
-    var i, j;
+    let n = matrix.columns;
+    let V = new Matrix(n, n);
+    let d = new Float64Array(n);
+    let e = new Float64Array(n);
+    let value = matrix;
+    let i, j;
 
-    var isSymmetric = false;
+    let isSymmetric = false;
     if (assumeSymmetric) {
       isSymmetric = true;
     } else {
@@ -35,17 +29,17 @@ export default class EigenvalueDecomposition {
     if (isSymmetric) {
       for (i = 0; i < n; i++) {
         for (j = 0; j < n; j++) {
-          V[i][j] = value.get(i, j);
+          V.set(i, j, value.get(i, j));
         }
       }
       tred2(n, e, d, V);
       tql2(n, e, d, V);
     } else {
-      var H = getFilled2DArray(n, n, 0);
-      var ort = new Array(n);
+      let H = new Matrix(n, n);
+      let ort = new Float64Array(n);
       for (j = 0; j < n; j++) {
         for (i = 0; i < n; i++) {
-          H[i][j] = value.get(i, j);
+          H.set(i, j, value.get(i, j));
         }
       }
       orthes(n, H, ort, V);
@@ -58,52 +52,33 @@ export default class EigenvalueDecomposition {
     this.V = V;
   }
 
-  /**
-   *
-   * @return {Array<number>}
-   */
   get realEigenvalues() {
-    return this.d;
+    return Array.from(this.d);
   }
 
-  /**
-   *
-   * @return {Array<number>}
-   */
   get imaginaryEigenvalues() {
-    return this.e;
+    return Array.from(this.e);
   }
 
-  /**
-   *
-   * @return {Matrix}
-   */
   get eigenvectorMatrix() {
-    if (!Matrix.isMatrix(this.V)) {
-      this.V = new Matrix(this.V);
-    }
     return this.V;
   }
 
-  /**
-   *
-   * @return {Matrix}
-   */
   get diagonalMatrix() {
-    var n = this.n;
-    var e = this.e;
-    var d = this.d;
-    var X = new Matrix(n, n);
-    var i, j;
+    let n = this.n;
+    let e = this.e;
+    let d = this.d;
+    let X = new Matrix(n, n);
+    let i, j;
     for (i = 0; i < n; i++) {
       for (j = 0; j < n; j++) {
-        X[i][j] = 0;
+        X.set(i, j, 0);
       }
-      X[i][i] = d[i];
+      X.set(i, i, d[i]);
       if (e[i] > 0) {
-        X[i][i + 1] = e[i];
+        X.set(i, i + 1, e[i]);
       } else if (e[i] < 0) {
-        X[i][i - 1] = e[i];
+        X.set(i, i - 1, e[i]);
       }
     }
     return X;
@@ -111,10 +86,10 @@ export default class EigenvalueDecomposition {
 }
 
 function tred2(n, e, d, V) {
-  var f, g, h, i, j, k, hh, scale;
+  let f, g, h, i, j, k, hh, scale;
 
   for (j = 0; j < n; j++) {
-    d[j] = V[n - 1][j];
+    d[j] = V.get(n - 1, j);
   }
 
   for (i = n - 1; i > 0; i--) {
@@ -127,9 +102,9 @@ function tred2(n, e, d, V) {
     if (scale === 0) {
       e[i] = d[i - 1];
       for (j = 0; j < i; j++) {
-        d[j] = V[i - 1][j];
-        V[i][j] = 0;
-        V[j][i] = 0;
+        d[j] = V.get(i - 1, j);
+        V.set(i, j, 0);
+        V.set(j, i, 0);
       }
     } else {
       for (k = 0; k < i; k++) {
@@ -152,11 +127,11 @@ function tred2(n, e, d, V) {
 
       for (j = 0; j < i; j++) {
         f = d[j];
-        V[j][i] = f;
-        g = e[j] + V[j][j] * f;
+        V.set(j, i, f);
+        g = e[j] + V.get(j, j) * f;
         for (k = j + 1; k <= i - 1; k++) {
-          g += V[k][j] * d[k];
-          e[k] += V[k][j] * f;
+          g += V.get(k, j) * d[k];
+          e[k] += V.get(k, j) * f;
         }
         e[j] = g;
       }
@@ -176,51 +151,51 @@ function tred2(n, e, d, V) {
         f = d[j];
         g = e[j];
         for (k = j; k <= i - 1; k++) {
-          V[k][j] -= f * e[k] + g * d[k];
+          V.set(k, j, V.get(k, j) - (f * e[k] + g * d[k]));
         }
-        d[j] = V[i - 1][j];
-        V[i][j] = 0;
+        d[j] = V.get(i - 1, j);
+        V.set(i, j, 0);
       }
     }
     d[i] = h;
   }
 
   for (i = 0; i < n - 1; i++) {
-    V[n - 1][i] = V[i][i];
-    V[i][i] = 1;
+    V.set(n - 1, i, V.get(i, i));
+    V.set(i, i, 1);
     h = d[i + 1];
     if (h !== 0) {
       for (k = 0; k <= i; k++) {
-        d[k] = V[k][i + 1] / h;
+        d[k] = V.get(k, i + 1) / h;
       }
 
       for (j = 0; j <= i; j++) {
         g = 0;
         for (k = 0; k <= i; k++) {
-          g += V[k][i + 1] * V[k][j];
+          g += V.get(k, i + 1) * V.get(k, j);
         }
         for (k = 0; k <= i; k++) {
-          V[k][j] -= g * d[k];
+          V.set(k, j, V.get(k, j) - g * d[k]);
         }
       }
     }
 
     for (k = 0; k <= i; k++) {
-      V[k][i + 1] = 0;
+      V.set(k, i + 1, 0);
     }
   }
 
   for (j = 0; j < n; j++) {
-    d[j] = V[n - 1][j];
-    V[n - 1][j] = 0;
+    d[j] = V.get(n - 1, j);
+    V.set(n - 1, j, 0);
   }
 
-  V[n - 1][n - 1] = 1;
+  V.set(n - 1, n - 1, 1);
   e[0] = 0;
 }
 
 function tql2(n, e, d, V) {
-  var g, h, i, j, k, l, m, p, r, dl1, c, c2, c3, el1, s, s2, iter;
+  let g, h, i, j, k, l, m, p, r, dl1, c, c2, c3, el1, s, s2, iter;
 
   for (i = 1; i < n; i++) {
     e[i - 1] = e[i];
@@ -228,9 +203,9 @@ function tql2(n, e, d, V) {
 
   e[n - 1] = 0;
 
-  var f = 0;
-  var tst1 = 0;
-  var eps = Number.EPSILON;
+  let f = 0;
+  let tst1 = 0;
+  let eps = Number.EPSILON;
 
   for (l = 0; l < n; l++) {
     tst1 = Math.max(tst1, Math.abs(d[l]) + Math.abs(e[l]));
@@ -285,13 +260,13 @@ function tql2(n, e, d, V) {
           d[i + 1] = h + s * (c * g + s * d[i]);
 
           for (k = 0; k < n; k++) {
-            h = V[k][i + 1];
-            V[k][i + 1] = s * V[k][i] + c * h;
-            V[k][i] = c * V[k][i] - s * h;
+            h = V.get(k, i + 1);
+            V.set(k, i + 1, s * V.get(k, i) + c * h);
+            V.set(k, i, c * V.get(k, i) - s * h);
           }
         }
 
-        p = -s * s2 * c3 * el1 * e[l] / dl1;
+        p = (-s * s2 * c3 * el1 * e[l]) / dl1;
         e[l] = s * p;
         d[l] = c * p;
       } while (Math.abs(e[l]) > eps * tst1);
@@ -314,30 +289,30 @@ function tql2(n, e, d, V) {
       d[k] = d[i];
       d[i] = p;
       for (j = 0; j < n; j++) {
-        p = V[j][i];
-        V[j][i] = V[j][k];
-        V[j][k] = p;
+        p = V.get(j, i);
+        V.set(j, i, V.get(j, k));
+        V.set(j, k, p);
       }
     }
   }
 }
 
 function orthes(n, H, ort, V) {
-  var low = 0;
-  var high = n - 1;
-  var f, g, h, i, j, m;
-  var scale;
+  let low = 0;
+  let high = n - 1;
+  let f, g, h, i, j, m;
+  let scale;
 
   for (m = low + 1; m <= high - 1; m++) {
     scale = 0;
     for (i = m; i <= high; i++) {
-      scale = scale + Math.abs(H[i][m - 1]);
+      scale = scale + Math.abs(H.get(i, m - 1));
     }
 
     if (scale !== 0) {
       h = 0;
       for (i = high; i >= m; i--) {
-        ort[i] = H[i][m - 1] / scale;
+        ort[i] = H.get(i, m - 1) / scale;
         h += ort[i] * ort[i];
       }
 
@@ -352,53 +327,53 @@ function orthes(n, H, ort, V) {
       for (j = m; j < n; j++) {
         f = 0;
         for (i = high; i >= m; i--) {
-          f += ort[i] * H[i][j];
+          f += ort[i] * H.get(i, j);
         }
 
         f = f / h;
         for (i = m; i <= high; i++) {
-          H[i][j] -= f * ort[i];
+          H.set(i, j, H.get(i, j) - f * ort[i]);
         }
       }
 
       for (i = 0; i <= high; i++) {
         f = 0;
         for (j = high; j >= m; j--) {
-          f += ort[j] * H[i][j];
+          f += ort[j] * H.get(i, j);
         }
 
         f = f / h;
         for (j = m; j <= high; j++) {
-          H[i][j] -= f * ort[j];
+          H.set(i, j, H.get(i, j) - f * ort[j]);
         }
       }
 
       ort[m] = scale * ort[m];
-      H[m][m - 1] = scale * g;
+      H.set(m, m - 1, scale * g);
     }
   }
 
   for (i = 0; i < n; i++) {
     for (j = 0; j < n; j++) {
-      V[i][j] = i === j ? 1 : 0;
+      V.set(i, j, i === j ? 1 : 0);
     }
   }
 
   for (m = high - 1; m >= low + 1; m--) {
-    if (H[m][m - 1] !== 0) {
+    if (H.get(m, m - 1) !== 0) {
       for (i = m + 1; i <= high; i++) {
-        ort[i] = H[i][m - 1];
+        ort[i] = H.get(i, m - 1);
       }
 
       for (j = m; j <= high; j++) {
         g = 0;
         for (i = m; i <= high; i++) {
-          g += ort[i] * V[i][j];
+          g += ort[i] * V.get(i, j);
         }
 
-        g = g / ort[m] / H[m][m - 1];
+        g = g / ort[m] / H.get(m, m - 1);
         for (i = m; i <= high; i++) {
-          V[i][j] += g * ort[i];
+          V.set(i, j, V.get(i, j) + g * ort[i]);
         }
       }
     }
@@ -406,60 +381,60 @@ function orthes(n, H, ort, V) {
 }
 
 function hqr2(nn, e, d, V, H) {
-  var n = nn - 1;
-  var low = 0;
-  var high = nn - 1;
-  var eps = Number.EPSILON;
-  var exshift = 0;
-  var norm = 0;
-  var p = 0;
-  var q = 0;
-  var r = 0;
-  var s = 0;
-  var z = 0;
-  var iter = 0;
-  var i, j, k, l, m, t, w, x, y;
-  var ra, sa, vr, vi;
-  var notlast, cdivres;
+  let n = nn - 1;
+  let low = 0;
+  let high = nn - 1;
+  let eps = Number.EPSILON;
+  let exshift = 0;
+  let norm = 0;
+  let p = 0;
+  let q = 0;
+  let r = 0;
+  let s = 0;
+  let z = 0;
+  let iter = 0;
+  let i, j, k, l, m, t, w, x, y;
+  let ra, sa, vr, vi;
+  let notlast, cdivres;
 
   for (i = 0; i < nn; i++) {
     if (i < low || i > high) {
-      d[i] = H[i][i];
+      d[i] = H.get(i, i);
       e[i] = 0;
     }
 
     for (j = Math.max(i - 1, 0); j < nn; j++) {
-      norm = norm + Math.abs(H[i][j]);
+      norm = norm + Math.abs(H.get(i, j));
     }
   }
 
   while (n >= low) {
     l = n;
     while (l > low) {
-      s = Math.abs(H[l - 1][l - 1]) + Math.abs(H[l][l]);
+      s = Math.abs(H.get(l - 1, l - 1)) + Math.abs(H.get(l, l));
       if (s === 0) {
         s = norm;
       }
-      if (Math.abs(H[l][l - 1]) < eps * s) {
+      if (Math.abs(H.get(l, l - 1)) < eps * s) {
         break;
       }
       l--;
     }
 
     if (l === n) {
-      H[n][n] = H[n][n] + exshift;
-      d[n] = H[n][n];
+      H.set(n, n, H.get(n, n) + exshift);
+      d[n] = H.get(n, n);
       e[n] = 0;
       n--;
       iter = 0;
     } else if (l === n - 1) {
-      w = H[n][n - 1] * H[n - 1][n];
-      p = (H[n - 1][n - 1] - H[n][n]) / 2;
+      w = H.get(n, n - 1) * H.get(n - 1, n);
+      p = (H.get(n - 1, n - 1) - H.get(n, n)) / 2;
       q = p * p + w;
       z = Math.sqrt(Math.abs(q));
-      H[n][n] = H[n][n] + exshift;
-      H[n - 1][n - 1] = H[n - 1][n - 1] + exshift;
-      x = H[n][n];
+      H.set(n, n, H.get(n, n) + exshift);
+      H.set(n - 1, n - 1, H.get(n - 1, n - 1) + exshift);
+      x = H.get(n, n);
 
       if (q >= 0) {
         z = p >= 0 ? p + z : p - z;
@@ -470,7 +445,7 @@ function hqr2(nn, e, d, V, H) {
         }
         e[n - 1] = 0;
         e[n] = 0;
-        x = H[n][n - 1];
+        x = H.get(n, n - 1);
         s = Math.abs(x) + Math.abs(z);
         p = x / s;
         q = z / s;
@@ -479,21 +454,21 @@ function hqr2(nn, e, d, V, H) {
         q = q / r;
 
         for (j = n - 1; j < nn; j++) {
-          z = H[n - 1][j];
-          H[n - 1][j] = q * z + p * H[n][j];
-          H[n][j] = q * H[n][j] - p * z;
+          z = H.get(n - 1, j);
+          H.set(n - 1, j, q * z + p * H.get(n, j));
+          H.set(n, j, q * H.get(n, j) - p * z);
         }
 
         for (i = 0; i <= n; i++) {
-          z = H[i][n - 1];
-          H[i][n - 1] = q * z + p * H[i][n];
-          H[i][n] = q * H[i][n] - p * z;
+          z = H.get(i, n - 1);
+          H.set(i, n - 1, q * z + p * H.get(i, n));
+          H.set(i, n, q * H.get(i, n) - p * z);
         }
 
         for (i = low; i <= high; i++) {
-          z = V[i][n - 1];
-          V[i][n - 1] = q * z + p * V[i][n];
-          V[i][n] = q * V[i][n] - p * z;
+          z = V.get(i, n - 1);
+          V.set(i, n - 1, q * z + p * V.get(i, n));
+          V.set(i, n, q * V.get(i, n) - p * z);
         }
       } else {
         d[n - 1] = x + p;
@@ -505,20 +480,20 @@ function hqr2(nn, e, d, V, H) {
       n = n - 2;
       iter = 0;
     } else {
-      x = H[n][n];
+      x = H.get(n, n);
       y = 0;
       w = 0;
       if (l < n) {
-        y = H[n - 1][n - 1];
-        w = H[n][n - 1] * H[n - 1][n];
+        y = H.get(n - 1, n - 1);
+        w = H.get(n, n - 1) * H.get(n - 1, n);
       }
 
       if (iter === 10) {
         exshift += x;
         for (i = low; i <= n; i++) {
-          H[i][i] -= x;
+          H.set(i, i, H.get(i, i) - x);
         }
-        s = Math.abs(H[n][n - 1]) + Math.abs(H[n - 1][n - 2]);
+        s = Math.abs(H.get(n, n - 1)) + Math.abs(H.get(n - 1, n - 2));
         x = y = 0.75 * s;
         w = -0.4375 * s * s;
       }
@@ -533,7 +508,7 @@ function hqr2(nn, e, d, V, H) {
           }
           s = x - w / ((y - x) / 2 + s);
           for (i = low; i <= n; i++) {
-            H[i][i] -= s;
+            H.set(i, i, H.get(i, i) - s);
           }
           exshift += s;
           x = y = w = 0.964;
@@ -544,12 +519,12 @@ function hqr2(nn, e, d, V, H) {
 
       m = n - 2;
       while (m >= l) {
-        z = H[m][m];
+        z = H.get(m, m);
         r = x - z;
         s = y - z;
-        p = (r * s - w) / H[m + 1][m] + H[m][m + 1];
-        q = H[m + 1][m + 1] - z - r - s;
-        r = H[m + 2][m + 1];
+        p = (r * s - w) / H.get(m + 1, m) + H.get(m, m + 1);
+        q = H.get(m + 1, m + 1) - z - r - s;
+        r = H.get(m + 2, m + 1);
         s = Math.abs(p) + Math.abs(q) + Math.abs(r);
         p = p / s;
         q = q / s;
@@ -558,12 +533,12 @@ function hqr2(nn, e, d, V, H) {
           break;
         }
         if (
-          Math.abs(H[m][m - 1]) * (Math.abs(q) + Math.abs(r)) <
+          Math.abs(H.get(m, m - 1)) * (Math.abs(q) + Math.abs(r)) <
           eps *
             (Math.abs(p) *
-              (Math.abs(H[m - 1][m - 1]) +
+              (Math.abs(H.get(m - 1, m - 1)) +
                 Math.abs(z) +
-                Math.abs(H[m + 1][m + 1])))
+                Math.abs(H.get(m + 1, m + 1))))
         ) {
           break;
         }
@@ -571,18 +546,18 @@ function hqr2(nn, e, d, V, H) {
       }
 
       for (i = m + 2; i <= n; i++) {
-        H[i][i - 2] = 0;
+        H.set(i, i - 2, 0);
         if (i > m + 2) {
-          H[i][i - 3] = 0;
+          H.set(i, i - 3, 0);
         }
       }
 
       for (k = m; k <= n - 1; k++) {
         notlast = k !== n - 1;
         if (k !== m) {
-          p = H[k][k - 1];
-          q = H[k + 1][k - 1];
-          r = notlast ? H[k + 2][k - 1] : 0;
+          p = H.get(k, k - 1);
+          q = H.get(k + 1, k - 1);
+          r = notlast ? H.get(k + 2, k - 1) : 0;
           x = Math.abs(p) + Math.abs(q) + Math.abs(r);
           if (x !== 0) {
             p = p / x;
@@ -602,9 +577,9 @@ function hqr2(nn, e, d, V, H) {
 
         if (s !== 0) {
           if (k !== m) {
-            H[k][k - 1] = -s * x;
+            H.set(k, k - 1, -s * x);
           } else if (l !== m) {
-            H[k][k - 1] = -H[k][k - 1];
+            H.set(k, k - 1, -H.get(k, k - 1));
           }
 
           p = p + s;
@@ -615,36 +590,36 @@ function hqr2(nn, e, d, V, H) {
           r = r / p;
 
           for (j = k; j < nn; j++) {
-            p = H[k][j] + q * H[k + 1][j];
+            p = H.get(k, j) + q * H.get(k + 1, j);
             if (notlast) {
-              p = p + r * H[k + 2][j];
-              H[k + 2][j] = H[k + 2][j] - p * z;
+              p = p + r * H.get(k + 2, j);
+              H.set(k + 2, j, H.get(k + 2, j) - p * z);
             }
 
-            H[k][j] = H[k][j] - p * x;
-            H[k + 1][j] = H[k + 1][j] - p * y;
+            H.set(k, j, H.get(k, j) - p * x);
+            H.set(k + 1, j, H.get(k + 1, j) - p * y);
           }
 
           for (i = 0; i <= Math.min(n, k + 3); i++) {
-            p = x * H[i][k] + y * H[i][k + 1];
+            p = x * H.get(i, k) + y * H.get(i, k + 1);
             if (notlast) {
-              p = p + z * H[i][k + 2];
-              H[i][k + 2] = H[i][k + 2] - p * r;
+              p = p + z * H.get(i, k + 2);
+              H.set(i, k + 2, H.get(i, k + 2) - p * r);
             }
 
-            H[i][k] = H[i][k] - p;
-            H[i][k + 1] = H[i][k + 1] - p * q;
+            H.set(i, k, H.get(i, k) - p);
+            H.set(i, k + 1, H.get(i, k + 1) - p * q);
           }
 
           for (i = low; i <= high; i++) {
-            p = x * V[i][k] + y * V[i][k + 1];
+            p = x * V.get(i, k) + y * V.get(i, k + 1);
             if (notlast) {
-              p = p + z * V[i][k + 2];
-              V[i][k + 2] = V[i][k + 2] - p * r;
+              p = p + z * V.get(i, k + 2);
+              V.set(i, k + 2, V.get(i, k + 2) - p * r);
             }
 
-            V[i][k] = V[i][k] - p;
-            V[i][k + 1] = V[i][k + 1] - p * q;
+            V.set(i, k, V.get(i, k) - p);
+            V.set(i, k + 1, V.get(i, k + 1) - p * q);
           }
         }
       }
@@ -661,12 +636,12 @@ function hqr2(nn, e, d, V, H) {
 
     if (q === 0) {
       l = n;
-      H[n][n] = 1;
+      H.set(n, n, 1);
       for (i = n - 1; i >= 0; i--) {
-        w = H[i][i] - p;
+        w = H.get(i, i) - p;
         r = 0;
         for (j = l; j <= n; j++) {
-          r = r + H[i][j] * H[j][n];
+          r = r + H.get(i, j) * H.get(j, n);
         }
 
         if (e[i] < 0) {
@@ -675,21 +650,24 @@ function hqr2(nn, e, d, V, H) {
         } else {
           l = i;
           if (e[i] === 0) {
-            H[i][n] = w !== 0 ? -r / w : -r / (eps * norm);
+            H.set(i, n, w !== 0 ? -r / w : -r / (eps * norm));
           } else {
-            x = H[i][i + 1];
-            y = H[i + 1][i];
+            x = H.get(i, i + 1);
+            y = H.get(i + 1, i);
             q = (d[i] - p) * (d[i] - p) + e[i] * e[i];
             t = (x * s - z * r) / q;
-            H[i][n] = t;
-            H[i + 1][n] =
-              Math.abs(x) > Math.abs(z) ? (-r - w * t) / x : (-s - y * t) / z;
+            H.set(i, n, t);
+            H.set(
+              i + 1,
+              n,
+              Math.abs(x) > Math.abs(z) ? (-r - w * t) / x : (-s - y * t) / z,
+            );
           }
 
-          t = Math.abs(H[i][n]);
+          t = Math.abs(H.get(i, n));
           if (eps * t * t > 1) {
             for (j = i; j <= n; j++) {
-              H[j][n] = H[j][n] / t;
+              H.set(j, n, H.get(j, n) / t);
             }
           }
         }
@@ -697,26 +675,26 @@ function hqr2(nn, e, d, V, H) {
     } else if (q < 0) {
       l = n - 1;
 
-      if (Math.abs(H[n][n - 1]) > Math.abs(H[n - 1][n])) {
-        H[n - 1][n - 1] = q / H[n][n - 1];
-        H[n - 1][n] = -(H[n][n] - p) / H[n][n - 1];
+      if (Math.abs(H.get(n, n - 1)) > Math.abs(H.get(n - 1, n))) {
+        H.set(n - 1, n - 1, q / H.get(n, n - 1));
+        H.set(n - 1, n, -(H.get(n, n) - p) / H.get(n, n - 1));
       } else {
-        cdivres = cdiv(0, -H[n - 1][n], H[n - 1][n - 1] - p, q);
-        H[n - 1][n - 1] = cdivres[0];
-        H[n - 1][n] = cdivres[1];
+        cdivres = cdiv(0, -H.get(n - 1, n), H.get(n - 1, n - 1) - p, q);
+        H.set(n - 1, n - 1, cdivres[0]);
+        H.set(n - 1, n, cdivres[1]);
       }
 
-      H[n][n - 1] = 0;
-      H[n][n] = 1;
+      H.set(n, n - 1, 0);
+      H.set(n, n, 1);
       for (i = n - 2; i >= 0; i--) {
         ra = 0;
         sa = 0;
         for (j = l; j <= n; j++) {
-          ra = ra + H[i][j] * H[j][n - 1];
-          sa = sa + H[i][j] * H[j][n];
+          ra = ra + H.get(i, j) * H.get(j, n - 1);
+          sa = sa + H.get(i, j) * H.get(j, n);
         }
 
-        w = H[i][i] - p;
+        w = H.get(i, i) - p;
 
         if (e[i] < 0) {
           z = w;
@@ -726,11 +704,11 @@ function hqr2(nn, e, d, V, H) {
           l = i;
           if (e[i] === 0) {
             cdivres = cdiv(-ra, -sa, w, q);
-            H[i][n - 1] = cdivres[0];
-            H[i][n] = cdivres[1];
+            H.set(i, n - 1, cdivres[0]);
+            H.set(i, n, cdivres[1]);
           } else {
-            x = H[i][i + 1];
-            y = H[i + 1][i];
+            x = H.get(i, i + 1);
+            y = H.get(i + 1, i);
             vr = (d[i] - p) * (d[i] - p) + e[i] * e[i] - q * q;
             vi = (d[i] - p) * 2 * q;
             if (vr === 0 && vi === 0) {
@@ -747,25 +725,38 @@ function hqr2(nn, e, d, V, H) {
               x * r - z * ra + q * sa,
               x * s - z * sa - q * ra,
               vr,
-              vi
+              vi,
             );
-            H[i][n - 1] = cdivres[0];
-            H[i][n] = cdivres[1];
+            H.set(i, n - 1, cdivres[0]);
+            H.set(i, n, cdivres[1]);
             if (Math.abs(x) > Math.abs(z) + Math.abs(q)) {
-              H[i + 1][n - 1] = (-ra - w * H[i][n - 1] + q * H[i][n]) / x;
-              H[i + 1][n] = (-sa - w * H[i][n] - q * H[i][n - 1]) / x;
+              H.set(
+                i + 1,
+                n - 1,
+                (-ra - w * H.get(i, n - 1) + q * H.get(i, n)) / x,
+              );
+              H.set(
+                i + 1,
+                n,
+                (-sa - w * H.get(i, n) - q * H.get(i, n - 1)) / x,
+              );
             } else {
-              cdivres = cdiv(-r - y * H[i][n - 1], -s - y * H[i][n], z, q);
-              H[i + 1][n - 1] = cdivres[0];
-              H[i + 1][n] = cdivres[1];
+              cdivres = cdiv(
+                -r - y * H.get(i, n - 1),
+                -s - y * H.get(i, n),
+                z,
+                q,
+              );
+              H.set(i + 1, n - 1, cdivres[0]);
+              H.set(i + 1, n, cdivres[1]);
             }
           }
 
-          t = Math.max(Math.abs(H[i][n - 1]), Math.abs(H[i][n]));
+          t = Math.max(Math.abs(H.get(i, n - 1)), Math.abs(H.get(i, n)));
           if (eps * t * t > 1) {
             for (j = i; j <= n; j++) {
-              H[j][n - 1] = H[j][n - 1] / t;
-              H[j][n] = H[j][n] / t;
+              H.set(j, n - 1, H.get(j, n - 1) / t);
+              H.set(j, n, H.get(j, n) / t);
             }
           }
         }
@@ -776,7 +767,7 @@ function hqr2(nn, e, d, V, H) {
   for (i = 0; i < nn; i++) {
     if (i < low || i > high) {
       for (j = i; j < nn; j++) {
-        V[i][j] = H[i][j];
+        V.set(i, j, H.get(i, j));
       }
     }
   }
@@ -785,15 +776,15 @@ function hqr2(nn, e, d, V, H) {
     for (i = low; i <= high; i++) {
       z = 0;
       for (k = low; k <= Math.min(j, high); k++) {
-        z = z + V[i][k] * H[k][j];
+        z = z + V.get(i, k) * H.get(k, j);
       }
-      V[i][j] = z;
+      V.set(i, j, z);
     }
   }
 }
 
 function cdiv(xr, xi, yr, yi) {
-  var r, d;
+  let r, d;
   if (Math.abs(yr) > Math.abs(yi)) {
     r = yi / yr;
     d = yr + r * yi;

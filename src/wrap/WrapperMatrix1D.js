@@ -1,13 +1,6 @@
-import AbstractMatrix from '../abstractMatrix';
-import Matrix from '../matrix';
+import { AbstractMatrix } from '../matrix';
 
-export default class WrapperMatrix1D extends AbstractMatrix() {
-  /**
-   * @class WrapperMatrix1D
-   * @param {Array<number>} data
-   * @param {object} [options]
-   * @param {object} [options.rows = 1]
-   */
+export default class WrapperMatrix1D extends AbstractMatrix {
   constructor(data, options = {}) {
     const { rows = 1 } = options;
 
@@ -21,21 +14,17 @@ export default class WrapperMatrix1D extends AbstractMatrix() {
   }
 
   set(rowIndex, columnIndex, value) {
-    var index = this._calculateIndex(rowIndex, columnIndex);
+    let index = this._calculateIndex(rowIndex, columnIndex);
     this.data[index] = value;
     return this;
   }
 
   get(rowIndex, columnIndex) {
-    var index = this._calculateIndex(rowIndex, columnIndex);
+    let index = this._calculateIndex(rowIndex, columnIndex);
     return this.data[index];
   }
 
   _calculateIndex(row, column) {
     return row * this.columns + column;
-  }
-
-  static get [Symbol.species]() {
-    return Matrix;
   }
 }

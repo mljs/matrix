@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`custom Node.js inspect function should work with a simple matrix 1`] = `
+"Matrix {
+  [
+    0        10       200     
+    -0.3     -0.44    -0.5555 
+  ]
+  rows: 2
+  columns: 3
+}"
+`;

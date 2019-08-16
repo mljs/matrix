@@ -1,15 +1,9 @@
 import LuDecomposition from './dc/lu';
 import QrDecomposition from './dc/qr';
 import SingularValueDecomposition from './dc/svd';
+import Matrix from './matrix';
+import WrapperMatrix2D from './wrap/WrapperMatrix2D';
 
-import { Matrix, WrapperMatrix2D } from './index';
-
-/**
- * Computes the inverse of a Matrix
- * @param {Matrix} matrix
- * @param {boolean} [useSVD=false]
- * @return {Matrix}
- */
 export function inverse(matrix, useSVD = false) {
   matrix = WrapperMatrix2D.checkMatrix(matrix);
   if (useSVD) {
@@ -19,13 +13,6 @@ export function inverse(matrix, useSVD = false) {
   }
 }
 
-/**
- *
- * @param {Matrix} leftHandSide
- * @param {Matrix} rightHandSide
- * @param {boolean} [useSVD = false]
- * @return {Matrix}
- */
 export function solve(leftHandSide, rightHandSide, useSVD = false) {
   leftHandSide = WrapperMatrix2D.checkMatrix(leftHandSide);
   rightHandSide = WrapperMatrix2D.checkMatrix(rightHandSide);

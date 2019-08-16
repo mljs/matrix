@@ -7,14 +7,14 @@ describe('min - max', () => {
   it('min', () => {
     expect(Matrix.min(matrix1, matrix2).to2DArray()).toStrictEqual([
       [0, 0, 2],
-      [-6, 2, 5]
+      [-6, 2, 5],
     ]);
   });
 
   it('max', () => {
     expect(Matrix.max(matrix1, matrix2).to2DArray()).toStrictEqual([
       [3, 1, 2],
-      [3, 4, 12]
+      [3, 4, 12],
     ]);
   });
 });

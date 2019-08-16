@@ -4,7 +4,7 @@ import BaseView from './base';
 
 export default class MatrixSelectionView extends BaseView {
   constructor(matrix, rowIndices, columnIndices) {
-    var indices = checkIndices(matrix, rowIndices, columnIndices);
+    let indices = checkIndices(matrix, rowIndices, columnIndices);
     super(matrix, indices.row.length, indices.column.length);
     this.rowIndices = indices.row;
     this.columnIndices = indices.column;
@@ -14,7 +14,7 @@ export default class MatrixSelectionView extends BaseView {
     this.matrix.set(
       this.rowIndices[rowIndex],
       this.columnIndices[columnIndex],
-      value
+      value,
     );
     return this;
   }
@@ -22,7 +22,7 @@ export default class MatrixSelectionView extends BaseView {
   get(rowIndex, columnIndex) {
     return this.matrix.get(
       this.rowIndices[rowIndex],
-      this.columnIndices[columnIndex]
+      this.columnIndices[columnIndex],
     );
   }
 }

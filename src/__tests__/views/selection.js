@@ -1,9 +1,9 @@
-import { Matrix } from '../..';
+import { Matrix, MatrixSelectionView } from '../..';
 
 describe('Selection view', () => {
   it('should correctly remap coordinates', () => {
     const m = Matrix.ones(5, 8);
-    const msv = m.selectionView([1, 2], [2, 1]);
+    const msv = new MatrixSelectionView(m, [1, 2], [2, 1]);
 
     expect(m.get(1, 2)).toBe(1);
     msv.set(0, 0, 5);
@@ -16,7 +16,11 @@ describe('Selection view', () => {
 
   it('should handle typed arrays', () => {
     const m = Matrix.ones(5, 8);
-    const msv = m.selectionView(Int8Array.from([1, 2]), Int8Array.from([2, 1]));
+    const msv = new MatrixSelectionView(
+      m,
+      Int8Array.from([1, 2]),
+      Int8Array.from([2, 1]),
+    );
 
     expect(m.get(1, 2)).toBe(1);
     msv.set(0, 0, 5);
@@ -29,7 +33,9 @@ describe('Selection view', () => {
 
   it('should throw when wrong arguments or range', () => {
     const m = Matrix.ones(2, 2);
-    expect(() => m.selectionView([1, 1, 2], [0, 2])).toThrow(RangeError);
-    expect(() => m.selectionView([1, 1])).toThrow(TypeError);
+    expect(() => new MatrixSelectionView(m, [1, 1, 2], [0, 2])).toThrow(
+      RangeError,
+    );
+    expect(() => new MatrixSelectionView(m, [1, 1])).toThrow(TypeError);
   });
 });

@@ -1,7 +1,7 @@
 import { WrapperMatrix2D } from '../..';
 
 test('simple WrapperMatrix2D creation', () => {
-  var wrapperMatrix2D = new WrapperMatrix2D([[1, 0], [0, 1]]);
+  let wrapperMatrix2D = new WrapperMatrix2D([[1, 0], [0, 1]]);
   expect(wrapperMatrix2D.rows).toBe(2);
   expect(wrapperMatrix2D.columns).toBe(2);
 

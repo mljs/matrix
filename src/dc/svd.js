@@ -1,47 +1,39 @@
-import { Matrix, WrapperMatrix2D } from '../index';
+import Matrix from '../matrix';
+import WrapperMatrix2D from '../wrap/WrapperMatrix2D';
 
-import { hypotenuse, getFilled2DArray } from './util';
+import { hypotenuse } from './util';
 
-/**
- * @class SingularValueDecomposition
- * @see https://github.com/accord-net/framework/blob/development/Sources/Accord.Math/Decompositions/SingularValueDecomposition.cs
- * @param {Matrix} value
- * @param {object} [options]
- * @param {boolean} [options.computeLeftSingularVectors=true]
- * @param {boolean} [options.computeRightSingularVectors=true]
- * @param {boolean} [options.autoTranspose=false]
- */
 export default class SingularValueDecomposition {
   constructor(value, options = {}) {
     value = WrapperMatrix2D.checkMatrix(value);
 
-    var m = value.rows;
-    var n = value.columns;
+    let m = value.rows;
+    let n = value.columns;
 
     const {
       computeLeftSingularVectors = true,
       computeRightSingularVectors = true,
-      autoTranspose = false
+      autoTranspose = false,
     } = options;
 
-    var wantu = Boolean(computeLeftSingularVectors);
-    var wantv = Boolean(computeRightSingularVectors);
+    let wantu = Boolean(computeLeftSingularVectors);
+    let wantv = Boolean(computeRightSingularVectors);
 
-    var swapped = false;
-    var a;
+    let swapped = false;
+    let a;
     if (m < n) {
       if (!autoTranspose) {
         a = value.clone();
         // eslint-disable-next-line no-console
         console.warn(
-          'Computing SVD on a matrix with more columns than rows. Consider enabling autoTranspose'
+          'Computing SVD on a matrix with more columns than rows. Consider enabling autoTranspose',
         );
       } else {
         a = value.transpose();
         m = a.rows;
         n = a.columns;
         swapped = true;
-        var aux = wantu;
+        let aux = wantu;
         wantu = wantv;
         wantv = aux;
       }
@@ -49,36 +41,36 @@ export default class SingularValueDecomposition {
       a = value.clone();
     }
 
-    var nu = Math.min(m, n);
-    var ni = Math.min(m + 1, n);
-    var s = new Array(ni);
-    var U = getFilled2DArray(m, nu, 0);
-    var V = getFilled2DArray(n, n, 0);
+    let nu = Math.min(m, n);
+    let ni = Math.min(m + 1, n);
+    let s = new Float64Array(ni);
+    let U = new Matrix(m, nu);
+    let V = new Matrix(n, n);
 
-    var e = new Array(n);
-    var work = new Array(m);
+    let e = new Float64Array(n);
+    let work = new Float64Array(m);
 
-    var si = new Array(ni);
+    let si = new Float64Array(ni);
     for (let i = 0; i < ni; i++) si[i] = i;
 
-    var nct = Math.min(m - 1, n);
-    var nrt = Math.max(0, Math.min(n - 2, m));
-    var mrc = Math.max(nct, nrt);
+    let nct = Math.min(m - 1, n);
+    let nrt = Math.max(0, Math.min(n - 2, m));
+    let mrc = Math.max(nct, nrt);
 
     for (let k = 0; k < mrc; k++) {
       if (k < nct) {
         s[k] = 0;
         for (let i = k; i < m; i++) {
-          s[k] = hypotenuse(s[k], a[i][k]);
+          s[k] = hypotenuse(s[k], a.get(i, k));
         }
         if (s[k] !== 0) {
-          if (a[k][k] < 0) {
+          if (a.get(k, k) < 0) {
             s[k] = -s[k];
           }
           for (let i = k; i < m; i++) {
-            a[i][k] /= s[k];
+            a.set(i, k, a.get(i, k) / s[k]);
           }
-          a[k][k] += 1;
+          a.set(k, k, a.get(k, k) + 1);
         }
         s[k] = -s[k];
       }
@@ -87,19 +79,19 @@ export default class SingularValueDecomposition {
         if (k < nct && s[k] !== 0) {
           let t = 0;
           for (let i = k; i < m; i++) {
-            t += a[i][k] * a[i][j];
+            t += a.get(i, k) * a.get(i, j);
           }
-          t = -t / a[k][k];
+          t = -t / a.get(k, k);
           for (let i = k; i < m; i++) {
-            a[i][j] += t * a[i][k];
+            a.set(i, j, a.get(i, j) + t * a.get(i, k));
           }
         }
-        e[j] = a[k][j];
+        e[j] = a.get(k, j);
       }
 
       if (wantu && k < nct) {
         for (let i = k; i < m; i++) {
-          U[i][k] = a[i][k];
+          U.set(i, k, a.get(i, k));
         }
       }
 
@@ -124,19 +116,19 @@ export default class SingularValueDecomposition {
           }
           for (let i = k + 1; i < m; i++) {
             for (let j = k + 1; j < n; j++) {
-              work[i] += e[j] * a[i][j];
+              work[i] += e[j] * a.get(i, j);
             }
           }
           for (let j = k + 1; j < n; j++) {
             let t = -e[j] / e[k + 1];
             for (let i = k + 1; i < m; i++) {
-              a[i][j] += t * work[i];
+              a.set(i, j, a.get(i, j) + t * work[i]);
             }
           }
         }
         if (wantv) {
           for (let i = k + 1; i < n; i++) {
-            V[i][k] = e[i];
+            V.set(i, k, e[i]);
           }
         }
       }
@@ -144,47 +136,47 @@ export default class SingularValueDecomposition {
 
     let p = Math.min(n, m + 1);
     if (nct < n) {
-      s[nct] = a[nct][nct];
+      s[nct] = a.get(nct, nct);
     }
     if (m < p) {
       s[p - 1] = 0;
     }
     if (nrt + 1 < p) {
-      e[nrt] = a[nrt][p - 1];
+      e[nrt] = a.get(nrt, p - 1);
     }
     e[p - 1] = 0;
 
     if (wantu) {
       for (let j = nct; j < nu; j++) {
         for (let i = 0; i < m; i++) {
-          U[i][j] = 0;
+          U.set(i, j, 0);
         }
-        U[j][j] = 1;
+        U.set(j, j, 1);
       }
       for (let k = nct - 1; k >= 0; k--) {
         if (s[k] !== 0) {
           for (let j = k + 1; j < nu; j++) {
             let t = 0;
             for (let i = k; i < m; i++) {
-              t += U[i][k] * U[i][j];
+              t += U.get(i, k) * U.get(i, j);
             }
-            t = -t / U[k][k];
+            t = -t / U.get(k, k);
             for (let i = k; i < m; i++) {
-              U[i][j] += t * U[i][k];
+              U.set(i, j, U.get(i, j) + t * U.get(i, k));
             }
           }
           for (let i = k; i < m; i++) {
-            U[i][k] = -U[i][k];
+            U.set(i, k, -U.get(i, k));
           }
-          U[k][k] = 1 + U[k][k];
+          U.set(k, k, 1 + U.get(k, k));
           for (let i = 0; i < k - 1; i++) {
-            U[i][k] = 0;
+            U.set(i, k, 0);
           }
         } else {
           for (let i = 0; i < m; i++) {
-            U[i][k] = 0;
+            U.set(i, k, 0);
           }
-          U[k][k] = 1;
+          U.set(k, k, 1);
         }
       }
     }
@@ -195,24 +187,24 @@ export default class SingularValueDecomposition {
           for (let j = k + 1; j < n; j++) {
             let t = 0;
             for (let i = k + 1; i < n; i++) {
-              t += V[i][k] * V[i][j];
+              t += V.get(i, k) * V.get(i, j);
             }
-            t = -t / V[k + 1][k];
+            t = -t / V.get(k + 1, k);
             for (let i = k + 1; i < n; i++) {
-              V[i][j] += t * V[i][k];
+              V.set(i, j, V.get(i, j) + t * V.get(i, k));
             }
           }
         }
         for (let i = 0; i < n; i++) {
-          V[i][k] = 0;
+          V.set(i, k, 0);
         }
-        V[k][k] = 1;
+        V.set(k, k, 1);
       }
     }
 
-    var pp = p - 1;
-    var iter = 0;
-    var eps = Number.EPSILON;
+    let pp = p - 1;
+    let iter = 0;
+    let eps = Number.EPSILON;
     while (p > 0) {
       let k, kase;
       for (k = p - 2; k >= -1; k--) {
@@ -269,9 +261,9 @@ export default class SingularValueDecomposition {
             }
             if (wantv) {
               for (let i = 0; i < n; i++) {
-                t = cs * V[i][j] + sn * V[i][p - 1];
-                V[i][p - 1] = -sn * V[i][j] + cs * V[i][p - 1];
-                V[i][j] = t;
+                t = cs * V.get(i, j) + sn * V.get(i, p - 1);
+                V.set(i, p - 1, -sn * V.get(i, j) + cs * V.get(i, p - 1));
+                V.set(i, j, t);
               }
             }
           }
@@ -289,9 +281,9 @@ export default class SingularValueDecomposition {
             e[j] = cs * e[j];
             if (wantu) {
               for (let i = 0; i < m; i++) {
-                t = cs * U[i][j] + sn * U[i][k - 1];
-                U[i][k - 1] = -sn * U[i][j] + cs * U[i][k - 1];
-                U[i][j] = t;
+                t = cs * U.get(i, j) + sn * U.get(i, k - 1);
+                U.set(i, k - 1, -sn * U.get(i, j) + cs * U.get(i, k - 1));
+                U.set(i, j, t);
               }
             }
           }
@@ -303,7 +295,7 @@ export default class SingularValueDecomposition {
             Math.abs(s[p - 2]),
             Math.abs(e[p - 2]),
             Math.abs(s[k]),
-            Math.abs(e[k])
+            Math.abs(e[k]),
           );
           const sp = s[p - 1] / scale;
           const spm1 = s[p - 2] / scale;
@@ -337,9 +329,9 @@ export default class SingularValueDecomposition {
             s[j + 1] = cs * s[j + 1];
             if (wantv) {
               for (let i = 0; i < n; i++) {
-                t = cs * V[i][j] + sn * V[i][j + 1];
-                V[i][j + 1] = -sn * V[i][j] + cs * V[i][j + 1];
-                V[i][j] = t;
+                t = cs * V.get(i, j) + sn * V.get(i, j + 1);
+                V.set(i, j + 1, -sn * V.get(i, j) + cs * V.get(i, j + 1));
+                V.set(i, j, t);
               }
             }
             t = hypotenuse(f, g);
@@ -353,9 +345,9 @@ export default class SingularValueDecomposition {
             e[j + 1] = cs * e[j + 1];
             if (wantu && j < m - 1) {
               for (let i = 0; i < m; i++) {
-                t = cs * U[i][j] + sn * U[i][j + 1];
-                U[i][j + 1] = -sn * U[i][j] + cs * U[i][j + 1];
-                U[i][j] = t;
+                t = cs * U.get(i, j) + sn * U.get(i, j + 1);
+                U.set(i, j + 1, -sn * U.get(i, j) + cs * U.get(i, j + 1));
+                U.set(i, j, t);
               }
             }
           }
@@ -368,7 +360,7 @@ export default class SingularValueDecomposition {
             s[k] = s[k] < 0 ? -s[k] : 0;
             if (wantv) {
               for (let i = 0; i <= pp; i++) {
-                V[i][k] = -V[i][k];
+                V.set(i, k, -V.get(i, k));
               }
             }
           }
@@ -381,16 +373,16 @@ export default class SingularValueDecomposition {
             s[k + 1] = t;
             if (wantv && k < n - 1) {
               for (let i = 0; i < n; i++) {
-                t = V[i][k + 1];
-                V[i][k + 1] = V[i][k];
-                V[i][k] = t;
+                t = V.get(i, k + 1);
+                V.set(i, k + 1, V.get(i, k));
+                V.set(i, k, t);
               }
             }
             if (wantu && k < m - 1) {
               for (let i = 0; i < m; i++) {
-                t = U[i][k + 1];
-                U[i][k + 1] = U[i][k];
-                U[i][k] = t;
+                t = U.get(i, k + 1);
+                U.set(i, k + 1, U.get(i, k));
+                U.set(i, k, t);
               }
             }
             k++;
@@ -404,7 +396,7 @@ export default class SingularValueDecomposition {
     }
 
     if (swapped) {
-      var tmp = V;
+      let tmp = V;
       V = U;
       U = tmp;
     }
@@ -416,125 +408,92 @@ export default class SingularValueDecomposition {
     this.V = V;
   }
 
-  /**
-   * Solve a problem of least square (Ax=b) by using the SVD. Useful when A is singular. When A is not singular, it would be better to use qr.solve(value).
-   * Example : We search to approximate x, with A matrix shape m*n, x vector size n, b vector size m (m > n). We will use :
-   * var svd = SingularValueDecomposition(A);
-   * var x = svd.solve(b);
-   * @param {Matrix} value - Matrix 1D which is the vector b (in the equation Ax = b)
-   * @return {Matrix} - The vector x
-   */
   solve(value) {
-    var Y = value;
-    var e = this.threshold;
-    var scols = this.s.length;
-    var Ls = Matrix.zeros(scols, scols);
+    let Y = value;
+    let e = this.threshold;
+    let scols = this.s.length;
+    let Ls = Matrix.zeros(scols, scols);
 
     for (let i = 0; i < scols; i++) {
       if (Math.abs(this.s[i]) <= e) {
-        Ls[i][i] = 0;
+        Ls.set(i, i, 0);
       } else {
-        Ls[i][i] = 1 / this.s[i];
+        Ls.set(i, i, 1 / this.s[i]);
       }
     }
 
-    var U = this.U;
-    var V = this.rightSingularVectors;
+    let U = this.U;
+    let V = this.rightSingularVectors;
 
-    var VL = V.mmul(Ls);
-    var vrows = V.rows;
-    var urows = U.length;
-    var VLU = Matrix.zeros(vrows, urows);
+    let VL = V.mmul(Ls);
+    let vrows = V.rows;
+    let urows = U.rows;
+    let VLU = Matrix.zeros(vrows, urows);
 
     for (let i = 0; i < vrows; i++) {
       for (let j = 0; j < urows; j++) {
         let sum = 0;
         for (let k = 0; k < scols; k++) {
-          sum += VL[i][k] * U[j][k];
+          sum += VL.get(i, k) * U.get(j, k);
         }
-        VLU[i][j] = sum;
+        VLU.set(i, j, sum);
       }
     }
 
     return VLU.mmul(Y);
   }
 
-  /**
-   *
-   * @param {Array<number>} value
-   * @return {Matrix}
-   */
   solveForDiagonal(value) {
     return this.solve(Matrix.diag(value));
   }
 
-  /**
-   * Get the inverse of the matrix. We compute the inverse of a matrix using SVD when this matrix is singular or ill-conditioned. Example :
-   * var svd = SingularValueDecomposition(A);
-   * var inverseA = svd.inverse();
-   * @return {Matrix} - The approximation of the inverse of the matrix
-   */
   inverse() {
-    var V = this.V;
-    var e = this.threshold;
-    var vrows = V.length;
-    var vcols = V[0].length;
-    var X = new Matrix(vrows, this.s.length);
+    let V = this.V;
+    let e = this.threshold;
+    let vrows = V.rows;
+    let vcols = V.columns;
+    let X = new Matrix(vrows, this.s.length);
 
     for (let i = 0; i < vrows; i++) {
       for (let j = 0; j < vcols; j++) {
         if (Math.abs(this.s[j]) > e) {
-          X[i][j] = V[i][j] / this.s[j];
-        } else {
-          X[i][j] = 0;
+          X.set(i, j, V.get(i, j) / this.s[j]);
         }
       }
     }
 
-    var U = this.U;
+    let U = this.U;
 
-    var urows = U.length;
-    var ucols = U[0].length;
-    var Y = new Matrix(vrows, urows);
+    let urows = U.rows;
+    let ucols = U.columns;
+    let Y = new Matrix(vrows, urows);
 
     for (let i = 0; i < vrows; i++) {
       for (let j = 0; j < urows; j++) {
         let sum = 0;
         for (let k = 0; k < ucols; k++) {
-          sum += X[i][k] * U[j][k];
+          sum += X.get(i, k) * U.get(j, k);
         }
-        Y[i][j] = sum;
+        Y.set(i, j, sum);
       }
     }
 
     return Y;
   }
 
-  /**
-   *
-   * @return {number}
-   */
   get condition() {
     return this.s[0] / this.s[Math.min(this.m, this.n) - 1];
   }
 
-  /**
-   *
-   * @return {number}
-   */
   get norm2() {
     return this.s[0];
   }
 
-  /**
-   *
-   * @return {number}
-   */
   get rank() {
-    var tol = Math.max(this.m, this.n) * this.s[0] * Number.EPSILON;
-    var r = 0;
-    var s = this.s;
-    for (var i = 0, ii = s.length; i < ii; i++) {
+    let tol = Math.max(this.m, this.n) * this.s[0] * Number.EPSILON;
+    let r = 0;
+    let s = this.s;
+    for (let i = 0, ii = s.length; i < ii; i++) {
       if (s[i] > tol) {
         r++;
       }
@@ -542,48 +501,22 @@ export default class SingularValueDecomposition {
     return r;
   }
 
-  /**
-   *
-   * @return {Array<number>}
-   */
   get diagonal() {
-    return this.s;
+    return Array.from(this.s);
   }
 
-  /**
-   *
-   * @return {number}
-   */
   get threshold() {
-    return Number.EPSILON / 2 * Math.max(this.m, this.n) * this.s[0];
+    return (Number.EPSILON / 2) * Math.max(this.m, this.n) * this.s[0];
   }
 
-  /**
-   *
-   * @return {Matrix}
-   */
   get leftSingularVectors() {
-    if (!Matrix.isMatrix(this.U)) {
-      this.U = new Matrix(this.U);
-    }
     return this.U;
   }
 
-  /**
-   *
-   * @return {Matrix}
-   */
   get rightSingularVectors() {
-    if (!Matrix.isMatrix(this.V)) {
-      this.V = new Matrix(this.V);
-    }
     return this.V;
   }
 
-  /**
-   *
-   * @return {Matrix}
-   */
   get diagonalMatrix() {
     return Matrix.diag(this.s);
   }

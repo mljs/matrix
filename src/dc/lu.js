@@ -1,27 +1,23 @@
-import { Matrix, WrapperMatrix2D } from '../index';
+import Matrix from '../matrix';
+import WrapperMatrix2D from '../wrap/WrapperMatrix2D';
 
-/**
- * @class LuDecomposition
- * @link https://github.com/lutzroeder/Mapack/blob/master/Source/LuDecomposition.cs
- * @param {Matrix} matrix
- */
 export default class LuDecomposition {
   constructor(matrix) {
     matrix = WrapperMatrix2D.checkMatrix(matrix);
 
-    var lu = matrix.clone();
-    var rows = lu.rows;
-    var columns = lu.columns;
-    var pivotVector = new Array(rows);
-    var pivotSign = 1;
-    var i, j, k, p, s, t, v;
-    var LUcolj, kmax;
+    let lu = matrix.clone();
+    let rows = lu.rows;
+    let columns = lu.columns;
+    let pivotVector = new Float64Array(rows);
+    let pivotSign = 1;
+    let i, j, k, p, s, t, v;
+    let LUcolj, kmax;
 
     for (i = 0; i < rows; i++) {
       pivotVector[i] = i;
     }
 
-    LUcolj = new Array(rows);
+    LUcolj = new Float64Array(rows);
 
     for (j = 0; j < columns; j++) {
       for (i = 0; i < rows; i++) {
@@ -71,31 +67,22 @@ export default class LuDecomposition {
     this.pivotSign = pivotSign;
   }
 
-  /**
-   *
-   * @return {boolean}
-   */
   isSingular() {
-    var data = this.LU;
-    var col = data.columns;
-    for (var j = 0; j < col; j++) {
-      if (data[j][j] === 0) {
+    let data = this.LU;
+    let col = data.columns;
+    for (let j = 0; j < col; j++) {
+      if (data.get(j, j) === 0) {
         return true;
       }
     }
     return false;
   }
 
-  /**
-   *
-   * @param {Matrix} value
-   * @return {Matrix}
-   */
   solve(value) {
     value = Matrix.checkMatrix(value);
 
-    var lu = this.LU;
-    var rows = lu.rows;
+    let lu = this.LU;
+    let rows = lu.rows;
 
     if (rows !== value.rows) {
       throw new Error('Invalid matrix dimensions');
@@ -104,97 +91,81 @@ export default class LuDecomposition {
       throw new Error('LU matrix is singular');
     }
 
-    var count = value.columns;
-    var X = value.subMatrixRow(this.pivotVector, 0, count - 1);
-    var columns = lu.columns;
-    var i, j, k;
+    let count = value.columns;
+    let X = value.subMatrixRow(this.pivotVector, 0, count - 1);
+    let columns = lu.columns;
+    let i, j, k;
 
     for (k = 0; k < columns; k++) {
       for (i = k + 1; i < columns; i++) {
         for (j = 0; j < count; j++) {
-          X[i][j] -= X[k][j] * lu[i][k];
+          X.set(i, j, X.get(i, j) - X.get(k, j) * lu.get(i, k));
         }
       }
     }
     for (k = columns - 1; k >= 0; k--) {
       for (j = 0; j < count; j++) {
-        X[k][j] /= lu[k][k];
+        X.set(k, j, X.get(k, j) / lu.get(k, k));
       }
       for (i = 0; i < k; i++) {
         for (j = 0; j < count; j++) {
-          X[i][j] -= X[k][j] * lu[i][k];
+          X.set(i, j, X.get(i, j) - X.get(k, j) * lu.get(i, k));
         }
       }
     }
     return X;
   }
 
-  /**
-   *
-   * @return {number}
-   */
   get determinant() {
-    var data = this.LU;
+    let data = this.LU;
     if (!data.isSquare()) {
       throw new Error('Matrix must be square');
     }
-    var determinant = this.pivotSign;
-    var col = data.columns;
-    for (var j = 0; j < col; j++) {
-      determinant *= data[j][j];
+    let determinant = this.pivotSign;
+    let col = data.columns;
+    for (let j = 0; j < col; j++) {
+      determinant *= data.get(j, j);
     }
     return determinant;
   }
 
-  /**
-   *
-   * @return {Matrix}
-   */
   get lowerTriangularMatrix() {
-    var data = this.LU;
-    var rows = data.rows;
-    var columns = data.columns;
-    var X = new Matrix(rows, columns);
-    for (var i = 0; i < rows; i++) {
-      for (var j = 0; j < columns; j++) {
+    let data = this.LU;
+    let rows = data.rows;
+    let columns = data.columns;
+    let X = new Matrix(rows, columns);
+    for (let i = 0; i < rows; i++) {
+      for (let j = 0; j < columns; j++) {
         if (i > j) {
-          X[i][j] = data[i][j];
+          X.set(i, j, data.get(i, j));
         } else if (i === j) {
-          X[i][j] = 1;
+          X.set(i, j, 1);
         } else {
-          X[i][j] = 0;
+          X.set(i, j, 0);
         }
       }
     }
     return X;
   }
 
-  /**
-   *
-   * @return {Matrix}
-   */
   get upperTriangularMatrix() {
-    var data = this.LU;
-    var rows = data.rows;
-    var columns = data.columns;
-    var X = new Matrix(rows, columns);
-    for (var i = 0; i < rows; i++) {
-      for (var j = 0; j < columns; j++) {
+    let data = this.LU;
+    let rows = data.rows;
+    let columns = data.columns;
+    let X = new Matrix(rows, columns);
+    for (let i = 0; i < rows; i++) {
+      for (let j = 0; j < columns; j++) {
         if (i <= j) {
-          X[i][j] = data[i][j];
+          X.set(i, j, data.get(i, j));
         } else {
-          X[i][j] = 0;
+          X.set(i, j, 0);
         }
       }
     }
     return X;
   }
 
-  /**
-   *
-   * @return {Array<number>}
-   */
   get pivotPermutationVector() {
-    return this.pivotVector.slice();
+    return Array.from(this.pivotVector);
   }
 }

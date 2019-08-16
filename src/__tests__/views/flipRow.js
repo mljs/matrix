@@ -1,9 +1,9 @@
-import { Matrix } from '../..';
+import { Matrix, MatrixFlipRowView } from '../..';
 
 describe('Flip row view', () => {
   it('should set and get values', () => {
     const m = Matrix.ones(5, 8);
-    const view = m.flipRowView();
+    const view = new MatrixFlipRowView(m);
 
     m.set(0, 3, 5);
     expect(view.get(4, 3)).toBe(5);
