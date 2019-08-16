@@ -1117,6 +1117,7 @@ export class CholeskyDecomposition {
    * @param value - The matrix to decompose
    */
   constructor(value: MaybeMatrix);
+  isPositiveDefinite(): boolean;
   solve(value: Matrix): Matrix;
   readonly lowerTriangularMatrix: Matrix;
 }

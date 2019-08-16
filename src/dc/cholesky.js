@@ -36,21 +36,11 @@ export default class CholeskyDecomposition {
     }
 
     this.L = l;
-    this.positiveDefinite = positiveDefinite;
+    this.positiveDefinite = Boolean(positiveDefinite);
   }
 
-  /**
-   *
-   * @return {boolean}
-   */
   isPositiveDefinite() {
-    var positiveDefnite = this.positiveDefinite;
-    if (!positiveDefnite) {
-      positiveDefnite = false;
-    } else {
-      positiveDefnite = true;
-    }
-    return positiveDefnite;
+    return this.positiveDefinite;
   }
 
   solve(value) {
