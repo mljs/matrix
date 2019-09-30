@@ -136,7 +136,7 @@ export default class QrDecomposition {
             s += qr.get(i, k) * X.get(i, j);
           }
 
-          s = -s / qr[k][k];
+          s = -s / qr.get(k, k);
 
           for (i = k; i < rows; i++) {
             X.set(i, j, X.get(i, j) + s * qr.get(i, k));

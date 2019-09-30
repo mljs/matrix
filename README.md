@@ -110,7 +110,7 @@ const {
   linearDependencies,
   QrDecomposition,
   LuDecomposition,
-  CholeskyDecomposition
+  CholeskyDecomposition,
 } = require('ml-matrix');
 
 //===========================
@@ -157,7 +157,7 @@ var error = Matrix.sub(b, A.mmul(x)); // The error enables to evaluate the solut
 // QR Decomposition
 
 var A = new Matrix([[2, 3, 5], [4, 1, 6], [1, 3, 0]]);
-var QR = QrDecomposition(A);
+var QR = new QrDecomposition(A);
 var Q = QR.orthogonalMatrix;
 var R = QR.upperTriangularMatrix;
 // So you have the QR decomposition. If you multiply Q by R, you'll see that A = Q.R, with Q orthogonal and R upper triangular
@@ -165,7 +165,7 @@ var R = QR.upperTriangularMatrix;
 // LU Decomposition
 
 var A = new Matrix([[2, 3, 5], [4, 1, 6], [1, 3, 0]]);
-var LU = LuDecomposition(A);
+var LU = new LuDecomposition(A);
 var L = LU.lowerTriangularMatrix;
 var U = LU.upperTriangularMatrix;
 var P = LU.pivotPermutationVector;
@@ -174,13 +174,13 @@ var P = LU.pivotPermutationVector;
 // Cholesky Decomposition
 
 var A = new Matrix([[2, 3, 5], [4, 1, 6], [1, 3, 0]]);
-var cholesky = CholeskyDecomposition(A);
+var cholesky = new CholeskyDecomposition(A);
 var L = cholesky.lowerTriangularMatrix;
 
 // Eigenvalues & eigenvectors
 
 var A = new Matrix([[2, 3, 5], [4, 1, 6], [1, 3, 0]]);
-var e = EigenvalueDecomposition(A);
+var e = new EigenvalueDecomposition(A);
 var real = e.realEigenvalues;
 var imaginary = e.imaginaryEigenvalues;
 var vectors = e.eigenvectorMatrix;
@@ -195,7 +195,7 @@ var A = new Matrix([
   [0, 1, 6, 0],
   [0, 3, 0, 1],
   [0, 0, 1, 0],
-  [0, 1, 2, 0]
+  [0, 1, 2, 0],
 ]);
 var dependencies = linearDependencies(A); // dependencies is a matrix with the dependencies of the rows. When we look row by row, we see that the first row is [0, 0, 0, 0, 0], so it means that the first row is independent, and the second row is [ 0, 0, 0, 4, 1 ], i.e the second row = 4 times the 4th row + the 5th row.
 ```

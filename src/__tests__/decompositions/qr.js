@@ -50,4 +50,13 @@ describe('Qr decomposition', () => {
     const qr = new QR(A);
     expect(qr.solve(b).to2DArray()).toBeDeepCloseTo([[1], [0.9999]], 4);
   });
+
+  it('should work with the example in the documentation', () => {
+    const A = [[2, 3, 5], [4, 1, 6], [1, 3, 0]];
+    const dc = new QR(A);
+    const Q = dc.orthogonalMatrix;
+    const R = dc.upperTriangularMatrix;
+    const qR = Q.mmul(R);
+    expect(qR.to2DArray()).toBeDeepCloseTo(A, 4);
+  });
 });
