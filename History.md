@@ -1,3 +1,12 @@
+## [6.4.1](https://github.com/mljs/matrix/compare/v6.4.0...v6.4.1) (2019-09-30)
+
+
+### Bug Fixes
+
+* correctly ready elements in QR#orthogonalMatrix ([2f527a3](https://github.com/mljs/matrix/commit/2f527a3))
+
+
+
 # [6.4.0](https://github.com/mljs/matrix/compare/v6.3.0...v6.4.0) (2019-08-16)
 
 
