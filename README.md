@@ -1,8 +1,7 @@
 # ml-matrix
 
 [![NPM version][npm-image]][npm-url]
-[![build status][travis-image]][travis-url]
-[![Test coverage][codecov-image]][codecov-url]
+[![build status][ci-image]][ci-url]
 [![npm download][download-image]][download-url]
 
 Matrix manipulation and computation library.
@@ -204,11 +203,9 @@ var dependencies = linearDependencies(A); // dependencies is a matrix with the d
 
 [MIT](./LICENSE)
 
-[npm-image]: https://img.shields.io/npm/v/ml-matrix.svg?style=flat-square
+[npm-image]: https://img.shields.io/npm/v/ml-matrix.svg
 [npm-url]: https://npmjs.org/package/ml-matrix
-[travis-image]: https://img.shields.io/travis/mljs/matrix/master.svg?style=flat-square
-[travis-url]: https://travis-ci.org/mljs/matrix
-[codecov-image]: https://img.shields.io/codecov/c/github/mljs/matrix.svg?style=flat-square
-[codecov-url]: https://codecov.io/github/mljs/matrix
-[download-image]: https://img.shields.io/npm/dm/ml-matrix.svg?style=flat-square
+[ci-image]: https://github.com/mljs/matrix/workflows/Node.js%20CI/badge.svg?branch=master
+[ci-url]: https://github.com/mljs/matrix/actions?query=workflow%3A%22Node.js+CI%22
+[download-image]: https://img.shields.io/npm/dm/ml-matrix.svg
 [download-url]: https://npmjs.org/package/ml-matrix
