@@ -41,4 +41,11 @@ describe('multivariate linear regression', () => {
       25,
     ]);
   });
+  it('covariance doesn\'t change input matrices', () => {
+    const x = new Matrix([[1, 2, 3], [4, 3, 6], [7, 1, 9]]);
+    const y = new Matrix([[5, 2, 3], [4, 1, 6], [7, 1, 7]]);
+    const corr = covariance(x, y);
+    expect(x.to1DArray()).toStrictEqual([1, 2, 3, 4, 3, 6, 7, 1, 9]);
+    expect(y.to1DArray()).toStrictEqual([5, 2, 3, 4, 1, 6, 7, 1, 7]);
+  });
 });
