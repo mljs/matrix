@@ -1,7 +1,7 @@
 import Matrix from './matrix';
 
 export function covariance(xMatrix, yMatrix = xMatrix, options = {}) {
-  xMatrix = Matrix.checkMatrix(xMatrix);
+  xMatrix = new Matrix(xMatrix);
   let yIsSame = false;
   if (
     typeof yMatrix === 'object' &&
@@ -12,7 +12,7 @@ export function covariance(xMatrix, yMatrix = xMatrix, options = {}) {
     yMatrix = xMatrix;
     yIsSame = true;
   } else {
-    yMatrix = Matrix.checkMatrix(yMatrix);
+    yMatrix = new Matrix(yMatrix);
   }
   if (xMatrix.rows !== yMatrix.rows) {
     throw new TypeError('Both matrices must have the same number of rows');
