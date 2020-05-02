@@ -18,7 +18,10 @@ describe('utility methods', () => {
     notAMatrix(null);
     notAMatrix(new Array(6));
     notAMatrix([[]]);
-    notAMatrix([[1, 2], [3, 4]]);
+    notAMatrix([
+      [1, 2],
+      [3, 4],
+    ]);
 
     expect(Matrix.isMatrix(new Matrix(4, 4))).toBe(true);
     expect(Matrix.isMatrix(Matrix.ones(4, 4))).toBe(true);
@@ -120,22 +123,37 @@ describe('utility methods', () => {
   });
 
   it('norm Frobenius', () => {
-    let m1 = new Matrix([[1, 1, 1], [3, 3, 3], [1, 1, 1]]);
+    let m1 = new Matrix([
+      [1, 1, 1],
+      [3, 3, 3],
+      [1, 1, 1],
+    ]);
     expect(m1.norm()).toBeCloseTo(5.7445626465380286, 2);
   });
 
   it('norm Frobenius 2', () => {
-    let m1 = new Matrix([[1, 1, 1], [3, 3, 3], [1, 1, 1]]);
+    let m1 = new Matrix([
+      [1, 1, 1],
+      [3, 3, 3],
+      [1, 1, 1],
+    ]);
     expect(m1.norm('frobenius')).toBeCloseTo(5.7445626465380286, 2);
   });
 
   it('norm max', () => {
-    let m1 = new Matrix([[1, 1, 1], [3, 3, 3], [1, 1, 1]]);
+    let m1 = new Matrix([
+      [1, 1, 1],
+      [3, 3, 3],
+      [1, 1, 1],
+    ]);
     expect(m1.norm('max')).toBe(3);
   });
 
   it('transpose rectangular', () => {
-    let matrix = new Matrix([[0, 1, 2], [3, 4, 5]]);
+    let matrix = new Matrix([
+      [0, 1, 2],
+      [3, 4, 5],
+    ]);
     let transpose = matrix.transpose();
     expect(transpose.get(0, 0)).toBe(matrix.get(0, 0));
     expect(transpose.get(1, 0)).toBe(matrix.get(0, 1));
@@ -145,7 +163,10 @@ describe('utility methods', () => {
   });
 
   it('scale rows', () => {
-    let matrix = new Matrix([[-1, 0, 1], [6, 9, 7]]);
+    let matrix = new Matrix([
+      [-1, 0, 1],
+      [6, 9, 7],
+    ]);
     expect(matrix.scaleRows().to2DArray()).toStrictEqual([
       [0, 1 / 2, 1],
       [0, 1, 1 / 3],
@@ -164,7 +185,11 @@ describe('utility methods', () => {
   });
 
   it('scale columns', () => {
-    let matrix = new Matrix([[1, 2], [-5, 3], [2, 4]]);
+    let matrix = new Matrix([
+      [1, 2],
+      [-5, 3],
+      [2, 4],
+    ]);
     expect(matrix.scaleColumns().to2DArray()).toStrictEqual([
       [6 / 7, 0],
       [0, 1 / 2],
@@ -176,7 +201,11 @@ describe('utility methods', () => {
       [2, 2],
     ]);
     expect(matrix.scaleColumns({ min: -2, max: -1 }).to2DArray()).toStrictEqual(
-      [[-8 / 7, -2], [-2, -3 / 2], [-1, -1]],
+      [
+        [-8 / 7, -2],
+        [-2, -3 / 2],
+        [-1, -1],
+      ],
     );
     expect(() => matrix.scaleColumns({ min: 2, max: 1 })).toThrow(
       /^min must be smaller than max$/,
@@ -184,7 +213,11 @@ describe('utility methods', () => {
   });
 
   it('set sub matrix', () => {
-    let matrix = new Matrix([[1, 2], [-5, 3], [2, 4]]);
+    let matrix = new Matrix([
+      [1, 2],
+      [-5, 3],
+      [2, 4],
+    ]);
     expect(matrix.setSubMatrix([[1, 2]], 1, 0).to2DArray()).toStrictEqual([
       [1, 2],
       [1, 2],
@@ -199,14 +232,24 @@ describe('utility methods', () => {
   });
 
   it('selection matrix', () => {
-    let matrix = new Matrix([[1, 2], [-5, 3], [2, 4]]);
+    let matrix = new Matrix([
+      [1, 2],
+      [-5, 3],
+      [2, 4],
+    ]);
     let selMatrix = matrix.selection([2, 1], [1]);
     expect(selMatrix.to2DArray()).toStrictEqual([[4], [3]]);
   });
 
   it('repeat matrix', () => {
-    let matrix = new Matrix([[1, 2], [3, 4]]);
-    expect(matrix.repeat().to2DArray()).toStrictEqual([[1, 2], [3, 4]]);
+    let matrix = new Matrix([
+      [1, 2],
+      [3, 4],
+    ]);
+    expect(matrix.repeat().to2DArray()).toStrictEqual([
+      [1, 2],
+      [3, 4],
+    ]);
     expect(matrix.repeat({ rows: 2, columns: 2 }).to2DArray()).toStrictEqual([
       [1, 2, 1, 2],
       [3, 4, 3, 4],
@@ -220,8 +263,14 @@ describe('utility methods', () => {
   });
 
   it('mmul strassen', () => {
-    let matrix = new Matrix([[2, 4], [7, 1]]);
-    let matrix2 = new Matrix([[2, 1], [1, 1]]);
+    let matrix = new Matrix([
+      [2, 4],
+      [7, 1],
+    ]);
+    let matrix2 = new Matrix([
+      [2, 1],
+      [1, 1],
+    ]);
     expect(matrix.mmulStrassen(matrix2).to2DArray()).toStrictEqual([
       [8, 6],
       [15, 8],
@@ -229,15 +278,29 @@ describe('utility methods', () => {
   });
 
   it('mmul 2x2 and 3x3', () => {
-    let matrix = new Matrix([[2, 4], [7, 1]]);
-    let matrix2 = new Matrix([[2, 1], [1, 1]]);
+    let matrix = new Matrix([
+      [2, 4],
+      [7, 1],
+    ]);
+    let matrix2 = new Matrix([
+      [2, 1],
+      [1, 1],
+    ]);
     expect(matrix.strassen2x2(matrix2).to2DArray()).toStrictEqual([
       [8, 6],
       [15, 8],
     ]);
 
-    matrix = new Matrix([[2, 4, 1], [7, 1, 2], [5, 1, 3]]);
-    matrix2 = new Matrix([[2, 1, 3], [7, 1, 1], [6, 2, 7]]);
+    matrix = new Matrix([
+      [2, 4, 1],
+      [7, 1, 2],
+      [5, 1, 3],
+    ]);
+    matrix2 = new Matrix([
+      [2, 1, 3],
+      [7, 1, 1],
+      [6, 2, 7],
+    ]);
     expect(matrix.strassen3x3(matrix2).to2DArray()).toStrictEqual([
       [38, 8, 17],
       [33, 12, 36],
@@ -248,7 +311,10 @@ describe('utility methods', () => {
   it('pseudoinverse', () => {
     // Actual values calculated by the Numpy library
 
-    let matrix = new Matrix([[2, 4], [7, 1]]);
+    let matrix = new Matrix([
+      [2, 4],
+      [7, 1],
+    ]);
     let result = pseudoInverse(matrix).to2DArray();
 
     expect(result[0][0]).toBeCloseTo(-0.03846153846153843, 5);
@@ -256,7 +322,10 @@ describe('utility methods', () => {
     expect(result[1][0]).toBeCloseTo(0.2692307692307691, 5);
     expect(result[1][1]).toBeCloseTo(-0.076923076923077, 5);
 
-    matrix = new Matrix([[4, 7], [2, 6]]);
+    matrix = new Matrix([
+      [4, 7],
+      [2, 6],
+    ]);
     result = pseudoInverse(matrix).to2DArray();
     expect(result[0][0]).toBeCloseTo(0.6, 5);
     expect(result[0][1]).toBeCloseTo(-0.7, 5);
@@ -264,7 +333,11 @@ describe('utility methods', () => {
     expect(result[1][1]).toBeCloseTo(0.4, 5);
 
     // Example from http://reference.wolfram.com/language/ref/PseudoInverse.html
-    matrix = new Matrix([[1, 2, 3], [4, 5, 6], [7, 8, 9]]);
+    matrix = new Matrix([
+      [1, 2, 3],
+      [4, 5, 6],
+      [7, 8, 9],
+    ]);
     result = pseudoInverse(matrix).to2DArray();
 
     expect(result[0][0]).toBeCloseTo(-6.38888889e-1, 5);
@@ -280,7 +353,10 @@ describe('utility methods', () => {
     expect(result[2][2]).toBeCloseTo(-1.94444444e-1, 5);
 
     // non-square matrix.
-    matrix = new Matrix([[1, 0, 1], [2, 4, 5]]);
+    matrix = new Matrix([
+      [1, 0, 1],
+      [2, 4, 5],
+    ]);
     result = pseudoInverse(matrix).to2DArray();
 
     expect(result[0][0]).toBeCloseTo(0.75609756, 5);
@@ -292,32 +368,68 @@ describe('utility methods', () => {
   });
 
   it('isEchelonForm', () => {
-    const matrix = new Matrix([[1, 0], [0, 1]]);
-    const matrix2 = new Matrix([[2, 1], [1, 1]]);
+    const matrix = new Matrix([
+      [1, 0],
+      [0, 1],
+    ]);
+    const matrix2 = new Matrix([
+      [2, 1],
+      [1, 1],
+    ]);
     expect(matrix.isEchelonForm()).toStrictEqual(true);
     expect(matrix2.isEchelonForm()).toStrictEqual(false);
   });
 
   it('isReducedEchelonForm', () => {
-    const matrix = new Matrix([[1, 0], [0, 1]]);
-    const matrix2 = new Matrix([[1, 1], [0, 1]]);
+    const matrix = new Matrix([
+      [1, 0],
+      [0, 1],
+    ]);
+    const matrix2 = new Matrix([
+      [1, 1],
+      [0, 1],
+    ]);
     expect(matrix.isReducedEchelonForm()).toStrictEqual(true);
     expect(matrix2.isReducedEchelonForm()).toStrictEqual(false);
   });
 
   it('echelonForm', () => {
-    const matrix = new Matrix([[1, 3], [4, 8]]);
-    const result = [[1, 2], [0, 1]];
+    const matrix = new Matrix([
+      [1, 3],
+      [4, 8],
+    ]);
+    const result = [
+      [1, 2],
+      [0, 1],
+    ];
     expect(matrix.echelonForm().to2DArray()).toStrictEqual(result);
   });
 
   it('reducedEchelonForm', () => {
-    const matrix = new Matrix([[1, 3], [4, 8]]);
-    const result = [[1, 0], [0, 1]];
-    const matrix2 = new Matrix([[1, 3], [2, 6]]);
-    const result2 = [[1, 3], [0, 0]];
-    const matrix3 = new Matrix([[1, 3, -1], [0, 2, 14]]);
-    const result3 = [[1, 0, -22], [0, 1, 7]];
+    const matrix = new Matrix([
+      [1, 3],
+      [4, 8],
+    ]);
+    const result = [
+      [1, 0],
+      [0, 1],
+    ];
+    const matrix2 = new Matrix([
+      [1, 3],
+      [2, 6],
+    ]);
+    const result2 = [
+      [1, 3],
+      [0, 0],
+    ];
+    const matrix3 = new Matrix([
+      [1, 3, -1],
+      [0, 2, 14],
+    ]);
+    const result3 = [
+      [1, 0, -22],
+      [0, 1, 7],
+    ];
     expect(matrix.reducedEchelonForm().to2DArray()).toStrictEqual(result);
     expect(matrix2.reducedEchelonForm().to2DArray()).toStrictEqual(result2);
     expect(matrix3.reducedEchelonForm().to2DArray()).toStrictEqual(result3);
@@ -351,17 +463,34 @@ describe('utility methods', () => {
   });
 
   it('isSymmetric', () => {
-    let m = new Matrix([[1, 0, 2], [0, 4, 9], [2, 9, 3]]);
+    let m = new Matrix([
+      [1, 0, 2],
+      [0, 4, 9],
+      [2, 9, 3],
+    ]);
     expect(m.isSymmetric()).toBe(true);
-    m = new Matrix([[1, 0, 4], [0, 4, 1], [2, 9, 3]]);
+    m = new Matrix([
+      [1, 0, 4],
+      [0, 4, 1],
+      [2, 9, 3],
+    ]);
     expect(m.isSymmetric()).toBe(false);
-    m = new Matrix([[1, 0, 2], [0, 4, 9]]);
+    m = new Matrix([
+      [1, 0, 2],
+      [0, 4, 9],
+    ]);
     expect(m.isSymmetric()).toBe(false);
   });
 
   it('neg', () => {
-    let m = new Matrix([[-1, 0, 2], [3, -42, 4]]);
+    let m = new Matrix([
+      [-1, 0, 2],
+      [3, -42, 4],
+    ]);
     m.neg();
-    expect(m.to2DArray()).toStrictEqual([[1, -0, -2], [-3, 42, -4]]);
+    expect(m.to2DArray()).toStrictEqual([
+      [1, -0, -2],
+      [-3, 42, -4],
+    ]);
   });
 });

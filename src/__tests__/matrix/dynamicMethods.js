@@ -89,15 +89,27 @@ describe('Dynamic methods on matrices', () => {
 
     it('inplace MathPow with matrix', () => {
       matrix = matrix.subMatrix(0, 1, 0, 1);
-      let retMatrix = matrix.pow([[1, 10], [2, 0]]);
-      expect(matrix.to2DArray()).toStrictEqual([[0, 1], [9, 1]]);
+      let retMatrix = matrix.pow([
+        [1, 10],
+        [2, 0],
+      ]);
+      expect(matrix.to2DArray()).toStrictEqual([
+        [0, 1],
+        [9, 1],
+      ]);
       expect(retMatrix).toBe(matrix);
     });
 
     it('static MathPow with matrix', () => {
       matrix = matrix.subMatrix(0, 1, 0, 1);
-      let newMatrix = Matrix.pow(matrix, [[1, 10], [2, 0]]);
-      expect(newMatrix.to2DArray()).toStrictEqual([[0, 1], [9, 1]]);
+      let newMatrix = Matrix.pow(matrix, [
+        [1, 10],
+        [2, 0],
+      ]);
+      expect(newMatrix.to2DArray()).toStrictEqual([
+        [0, 1],
+        [9, 1],
+      ]);
     });
   });
 });

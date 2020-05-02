@@ -1,5 +1,5 @@
-import Matrix from './matrix';
 import LuDecomposition from './dc/lu';
+import Matrix from './matrix';
 import MatrixSelectionView from './views/selection';
 
 export function determinant(matrix) {

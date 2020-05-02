@@ -33,9 +33,15 @@ describe('Singular value decomposition', () => {
   });
 
   describe('inverse', () => {
-    let value = new Matrix([[1, 1], [2, 2]]);
+    let value = new Matrix([
+      [1, 1],
+      [2, 2],
+    ]);
     let target = new SVD(value);
-    let expected = [[0.1, 0.2], [0.1, 0.2]];
+    let expected = [
+      [0.1, 0.2],
+      [0.1, 0.2],
+    ];
 
     it('should solve with identity matrix', () => {
       let actual = target.solve(Matrix.eye(2));
@@ -59,7 +65,12 @@ describe('Singular value decomposition', () => {
   });
 
   describe('less rows than columns, no autotranspose', () => {
-    let value = new Matrix([[1, 2], [3, 4], [5, 6], [7, 8]]).transpose();
+    let value = new Matrix([
+      [1, 2],
+      [3, 4],
+      [5, 6],
+      [7, 8],
+    ]).transpose();
     let target = new SVD(value, {
       computeLeftSingularVectors: true,
       computeRightSingularVectors: true,
@@ -100,7 +111,12 @@ describe('Singular value decomposition', () => {
   });
 
   describe('more rows than columns', () => {
-    let value = new Matrix([[1, 2], [3, 4], [5, 6], [7, 8]]);
+    let value = new Matrix([
+      [1, 2],
+      [3, 4],
+      [5, 6],
+      [7, 8],
+    ]);
     let target = new SVD(value, {
       computeLeftSingularVectors: true,
       computeRightSingularVectors: true,
@@ -141,7 +157,12 @@ describe('Singular value decomposition', () => {
   });
 
   describe('less rows than columns, with autotranspose', () => {
-    let value = new Matrix([[1, 2], [3, 4], [5, 6], [7, 8]]).transpose();
+    let value = new Matrix([
+      [1, 2],
+      [3, 4],
+      [5, 6],
+      [7, 8],
+    ]).transpose();
     let target = new SVD(value, {
       computeLeftSingularVectors: true,
       computeRightSingularVectors: true,
@@ -182,7 +203,12 @@ describe('Singular value decomposition', () => {
   });
 
   describe('less rows than column, with autotranspose, not computing right singular vectors', () => {
-    let value = new Matrix([[1, 2], [3, 4], [5, 6], [7, 8]]).transpose();
+    let value = new Matrix([
+      [1, 2],
+      [3, 4],
+      [5, 6],
+      [7, 8],
+    ]).transpose();
     let target = new SVD(value, {
       computeLeftSingularVectors: true,
       computeRightSingularVectors: false,
@@ -198,7 +224,12 @@ describe('Singular value decomposition', () => {
     });
 
     it('right singular vectors (0)', () => {
-      let V = [[0, 0], [0, 0], [0, 0], [0, 0]];
+      let V = [
+        [0, 0],
+        [0, 0],
+        [0, 0],
+        [0, 0],
+      ];
       expect(target.rightSingularVectors.to2DArray()).toBeDeepCloseTo(V, 6);
     });
 
@@ -209,7 +240,12 @@ describe('Singular value decomposition', () => {
   });
 
   describe('less rows than column, with autotranspose, not computing left singular vectors', () => {
-    let value = new Matrix([[1, 2], [3, 4], [5, 6], [7, 8]]).transpose();
+    let value = new Matrix([
+      [1, 2],
+      [3, 4],
+      [5, 6],
+      [7, 8],
+    ]).transpose();
     let target = new SVD(value, {
       computeLeftSingularVectors: false,
       computeRightSingularVectors: true,
@@ -217,7 +253,10 @@ describe('Singular value decomposition', () => {
     });
 
     it('left singular vectors', () => {
-      let U = [[0, 0], [0, 0]];
+      let U = [
+        [0, 0],
+        [0, 0],
+      ];
       expect(target.leftSingularVectors.to2DArray()).toBeDeepCloseTo(U, 6);
     });
 

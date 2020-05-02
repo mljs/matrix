@@ -1,7 +1,7 @@
 'use strict';
 
-let prettyHrtime = require('pretty-hrtime');
 let numeric = require('numeric');
+let prettyHrtime = require('pretty-hrtime');
 
 let { Matrix, EVD } = require('..');
 
@@ -14,11 +14,11 @@ let m = Matrix.rand(n, n);
 let matrix = new Matrix(m.to2DArray());
 let matrixNum = m.to2DArray();
 
-run(function() {
+run(function () {
   new EVD(matrix);
 }, 'Matrix');
 
-run(function() {
+run(function () {
   numeric.eig(matrixNum);
 }, 'numeric');
 

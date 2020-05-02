@@ -9,7 +9,10 @@ describe('matrix creation', () => {
   });
 
   it('WrapperMatrix2D creation', () => {
-    let matrix = wrap([[1, 0], [0, 1]]);
+    let matrix = wrap([
+      [1, 0],
+      [0, 1],
+    ]);
     expect(matrix.get(0, 0)).toBe(1);
     matrix.set(0, 0, 2);
     expect(matrix.get(0, 0)).toBe(2);
@@ -22,13 +25,22 @@ test('error testing', () => {
 
 test('matrix methods', () => {
   let matrix1 = wrap([0, 1, 2, 3], { rows: 2 });
-  let matrix2 = wrap([[1, 0], [0, 1]]);
+  let matrix2 = wrap([
+    [1, 0],
+    [0, 1],
+  ]);
 
   let result = matrix1.mmul(matrix2);
   expect(result).toBeInstanceOf(Matrix);
-  expect(result.to2DArray()).toStrictEqual([[0, 1], [2, 3]]);
+  expect(result.to2DArray()).toStrictEqual([
+    [0, 1],
+    [2, 3],
+  ]);
 
   result = matrix2.mmul(matrix1);
   expect(result).toBeInstanceOf(Matrix);
-  expect(result.to2DArray()).toStrictEqual([[0, 1], [2, 3]]);
+  expect(result.to2DArray()).toStrictEqual([
+    [0, 1],
+    [2, 3],
+  ]);
 });

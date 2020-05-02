@@ -1,7 +1,10 @@
 import { Matrix } from '../..';
 
 describe('mean by row and columns', () => {
-  const matrix = new Matrix([[1, 2, 3], [4, 5, 6]]);
+  const matrix = new Matrix([
+    [1, 2, 3],
+    [4, 5, 6],
+  ]);
   it('mean by row', () => {
     expect(matrix.mean('row')).toStrictEqual([2, 5]);
   });

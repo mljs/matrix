@@ -1,6 +1,6 @@
 import { Matrix, wrap } from '../..';
-import MatrixTransposeView from '../../views/transpose';
 import * as util from '../../../testUtils';
+import MatrixTransposeView from '../../views/transpose';
 
 describe('Matrix creation', () => {
   it('should create a new object', () => {
@@ -36,9 +36,13 @@ describe('Matrix creation', () => {
       /^Data must be a 2D array with at least one element$/,
     );
     expect(() => new Matrix([0, 1, 2, 3])).toThrow(/^Data must be a 2D array/);
-    expect(() => new Matrix([[0, 1], [0, 1, 2]])).toThrow(
-      /^Inconsistent array dimensions$/,
-    );
+    expect(
+      () =>
+        new Matrix([
+          [0, 1],
+          [0, 1, 2],
+        ]),
+    ).toThrow(/^Inconsistent array dimensions$/);
     expect(() => new Matrix()).toThrow(
       /^First argument must be a positive number or an array$/,
     );
@@ -93,7 +97,10 @@ describe('Matrix creation', () => {
   });
 
   it('ones', () => {
-    expect(Matrix.ones(2, 3).to2DArray()).toStrictEqual([[1, 1, 1], [1, 1, 1]]);
+    expect(Matrix.ones(2, 3).to2DArray()).toStrictEqual([
+      [1, 1, 1],
+      [1, 1, 1],
+    ]);
   });
 
   it('random', () => {
@@ -118,24 +125,43 @@ describe('Matrix creation', () => {
   it('eye/identity', () => {
     let eye1 = Matrix.eye(3);
     expect(eye1).toStrictEqual(Matrix.identity(3));
-    expect(eye1.to2DArray()).toStrictEqual([[1, 0, 0], [0, 1, 0], [0, 0, 1]]);
+    expect(eye1.to2DArray()).toStrictEqual([
+      [1, 0, 0],
+      [0, 1, 0],
+      [0, 0, 1],
+    ]);
 
     let eye2 = Matrix.eye(3, 2);
-    expect(eye2.to2DArray()).toStrictEqual([[1, 0], [0, 1], [0, 0]]);
+    expect(eye2.to2DArray()).toStrictEqual([
+      [1, 0],
+      [0, 1],
+      [0, 0],
+    ]);
   });
 
   it('eye with other value than 1', () => {
     let eye1 = Matrix.eye(3, 3, 3);
-    expect(eye1.to2DArray()).toStrictEqual([[3, 0, 0], [0, 3, 0], [0, 0, 3]]);
+    expect(eye1.to2DArray()).toStrictEqual([
+      [3, 0, 0],
+      [0, 3, 0],
+      [0, 0, 3],
+    ]);
   });
 
   it('diag/diagonal', () => {
     let arr = [1, 2, 3];
     let diag = Matrix.diag(arr);
     expect(diag).toStrictEqual(Matrix.diagonal(arr));
-    expect(diag.to2DArray()).toStrictEqual([[1, 0, 0], [0, 2, 0], [0, 0, 3]]);
+    expect(diag.to2DArray()).toStrictEqual([
+      [1, 0, 0],
+      [0, 2, 0],
+      [0, 0, 3],
+    ]);
 
-    expect(Matrix.diag(arr, 2).to2DArray()).toStrictEqual([[1, 0], [0, 2]]);
+    expect(Matrix.diag(arr, 2).to2DArray()).toStrictEqual([
+      [1, 0],
+      [0, 2],
+    ]);
     expect(Matrix.diag(arr, 2, 4).to2DArray()).toStrictEqual([
       [1, 0, 0, 0],
       [0, 2, 0, 0],
@@ -149,7 +175,10 @@ describe('Matrix creation', () => {
   });
 
   it('views should return new instances of Matrix', () => {
-    let matrix = new Matrix([[1, 1, 1], [1, 1, 1]]);
+    let matrix = new Matrix([
+      [1, 1, 1],
+      [1, 1, 1],
+    ]);
     let view = new MatrixTransposeView(matrix);
     expect(matrix.transpose().mmul(matrix)).toStrictEqual(view.mmul(matrix));
   });
@@ -164,7 +193,10 @@ describe('Matrix creation', () => {
   });
 
   it('JSON.stringify should always return a 2D array', () => {
-    const data = [[0, 1], [2, 3]];
+    const data = [
+      [0, 1],
+      [2, 3],
+    ];
     const json = JSON.stringify(data);
     const matrix = new Matrix(data);
     expect(JSON.stringify(matrix)).toBe(json);

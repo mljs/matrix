@@ -2,8 +2,14 @@ import { Matrix } from '../..';
 
 describe('Kronecker product', () => {
   it('should compute the Kronecker product', () => {
-    const matrix1 = new Matrix([[1, 2], [3, 4]]);
-    const matrix2 = new Matrix([[0, 5], [6, 7]]);
+    const matrix1 = new Matrix([
+      [1, 2],
+      [3, 4],
+    ]);
+    const matrix2 = new Matrix([
+      [0, 5],
+      [6, 7],
+    ]);
     const product = matrix1.kroneckerProduct(matrix2);
     expect(product.to2DArray()).toStrictEqual([
       [0, 5, 0, 10],

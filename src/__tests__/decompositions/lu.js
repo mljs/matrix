@@ -38,9 +38,13 @@ describe('LU decomposition', () => {
   });
 
   it('should throw on bad input', () => {
-    expect(() => new LU([[0, 1, 2], [0, 1, 2]]).determinant).toThrow(
-      'Matrix must be square',
-    );
+    expect(
+      () =>
+        new LU([
+          [0, 1, 2],
+          [0, 1, 2],
+        ]).determinant,
+    ).toThrow('Matrix must be square');
   });
 });
 

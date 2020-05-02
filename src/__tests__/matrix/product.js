@@ -1,7 +1,10 @@
 import { Matrix } from '../..';
 
 describe('product by row and columns', () => {
-  const matrix = new Matrix([[1, 2, 3], [4, 5, 6]]);
+  const matrix = new Matrix([
+    [1, 2, 3],
+    [4, 5, 6],
+  ]);
   it('product by row', () => {
     expect(matrix.product('row')).toStrictEqual([6, 120]);
   });

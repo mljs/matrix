@@ -52,7 +52,11 @@ describe('Qr decomposition', () => {
   });
 
   it('should work with the example in the documentation', () => {
-    const A = [[2, 3, 5], [4, 1, 6], [1, 3, 0]];
+    const A = [
+      [2, 3, 5],
+      [4, 1, 6],
+      [1, 3, 0],
+    ];
     const dc = new QR(A);
     const Q = dc.orthogonalMatrix;
     const R = dc.upperTriangularMatrix;

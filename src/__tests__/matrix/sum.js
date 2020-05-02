@@ -1,7 +1,10 @@
 import { Matrix } from '../..';
 
 describe('sum by row and columns', () => {
-  const matrix = new Matrix([[1, 2, 3], [4, 5, 6]]);
+  const matrix = new Matrix([
+    [1, 2, 3],
+    [4, 5, 6],
+  ]);
   it('sum by row', () => {
     expect(matrix.sum('row')).toStrictEqual([6, 15]);
   });

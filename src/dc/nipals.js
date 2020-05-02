@@ -1,5 +1,5 @@
-import WrapperMatrix2D from '../wrap/WrapperMatrix2D';
 import Matrix from '../matrix';
+import WrapperMatrix2D from '../wrap/WrapperMatrix2D';
 
 export default class nipals {
   constructor(X, options = {}) {
@@ -34,79 +34,33 @@ export default class nipals {
       counter < maxIterations && diff > terminationCriteria;
       counter++
     ) {
-      w = X.transpose()
-        .mmul(u)
-        .div(
-          u
-            .transpose()
-            .mmul(u)
-            .get(0, 0),
-        );
+      w = X.transpose().mmul(u).div(u.transpose().mmul(u).get(0, 0));
       w = w.div(w.norm());
 
-      t = X.mmul(w).div(
-        w
-          .transpose()
-          .mmul(w)
-          .get(0, 0),
-      );
+      t = X.mmul(w).div(w.transpose().mmul(w).get(0, 0));
 
       if (counter > 0) {
-        diff = t
-          .clone()
-          .sub(tOld)
-          .pow(2)
-          .sum();
+        diff = t.clone().sub(tOld).pow(2).sum();
       }
       tOld = t.clone();
 
       if (Y) {
-        q = Y.transpose()
-          .mmul(t)
-          .div(
-            t
-              .transpose()
-              .mmul(t)
-              .get(0, 0),
-          );
+        q = Y.transpose().mmul(t).div(t.transpose().mmul(t).get(0, 0));
         q = q.div(q.norm());
 
-        u = Y.mmul(q).div(
-          q
-            .transpose()
-            .mmul(q)
-            .get(0, 0),
-        );
+        u = Y.mmul(q).div(q.transpose().mmul(q).get(0, 0));
       } else {
         u = t;
       }
     }
 
     if (Y) {
-      let p = X.transpose()
-        .mmul(t)
-        .div(
-          t
-            .transpose()
-            .mmul(t)
-            .get(0, 0),
-        );
+      let p = X.transpose().mmul(t).div(t.transpose().mmul(t).get(0, 0));
       p = p.div(p.norm());
       let xResidual = X.clone().sub(t.clone().mmul(p.transpose()));
-      let residual = u
-        .transpose()
-        .mmul(t)
-        .div(
-          t
-            .transpose()
-            .mmul(t)
-            .get(0, 0),
-        );
+      let residual = u.transpose().mmul(t).div(t.transpose().mmul(t).get(0, 0));
       let yResidual = Y.clone().sub(
-        t
-          .clone()
-          .mulS(residual.get(0, 0))
-          .mmul(q.transpose()),
+        t.clone().mulS(residual.get(0, 0)).mmul(q.transpose()),
       );
 
       this.t = t;
@@ -120,10 +74,7 @@ export default class nipals {
       this.betas = residual;
     } else {
       this.w = w.transpose();
-      this.s = t
-        .transpose()
-        .mmul(t)
-        .sqrt();
+      this.s = t.transpose().mmul(t).sqrt();
       if (scaleScores) {
         this.t = t.clone().div(this.s.get(0, 0));
       } else {

@@ -17,16 +17,16 @@ let matrix = new Matrix(m.to2DArray());
 let matrixNum = m.to2DArray();
 
 suite
-  .add('Matrix', function() {
+  .add('Matrix', function () {
     inverse(matrix);
   })
-  .add('numeric', function() {
+  .add('numeric', function () {
     numeric.inv(matrixNum);
   })
-  .on('cycle', function(event) {
+  .on('cycle', function (event) {
     console.log(String(event.target));
   })
-  .on('complete', function() {
+  .on('complete', function () {
     console.log(`Fastest is ${this.filter('fastest').map('name')}`);
   })
   .run();

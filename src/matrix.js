@@ -1,13 +1,7 @@
 import rescale from 'ml-array-rescale';
 
-import {
-  checkRowVector,
-  checkRowIndex,
-  checkColumnIndex,
-  checkColumnVector,
-  checkRange,
-  checkIndices,
-} from './util';
+import { inspectMatrix } from './inspect';
+import { installMathOperations } from './mathOperations';
 import {
   sumByRow,
   sumByColumn,
@@ -28,8 +22,14 @@ import {
   getScaleByColumn,
   getScaleAll,
 } from './stat';
-import { inspectMatrix } from './inspect';
-import { installMathOperations } from './mathOperations';
+import {
+  checkRowVector,
+  checkRowIndex,
+  checkColumnIndex,
+  checkColumnVector,
+  checkRange,
+  checkIndices,
+} from './util';
 
 export class AbstractMatrix {
   static from1DArray(newRows, newColumns, newData) {

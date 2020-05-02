@@ -19,10 +19,20 @@ describe('Cholesky decomposition', () => {
     expect(ltm.mmul(ltm.transpose())).toStrictEqual(matrix);
   });
   it('should throw if not symmetric', () => {
-    expect(() => new CHO([[0, 1], [2, 0]])).toThrow('Matrix is not symmetric');
+    expect(
+      () =>
+        new CHO([
+          [0, 1],
+          [2, 0],
+        ]),
+    ).toThrow('Matrix is not symmetric');
   });
   it('test for positive definiteness', () => {
-    let A = new Matrix([[1, 2, 3], [4, 5, 6], [7, 8, 9]]);
+    let A = new Matrix([
+      [1, 2, 3],
+      [4, 5, 6],
+      [7, 8, 9],
+    ]);
     let AtA = A.transpose().mmul(A);
 
     let choAtA = new CHO(AtA);
