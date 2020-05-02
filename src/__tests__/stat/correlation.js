@@ -17,7 +17,7 @@ describe('multivariate linear regression', () => {
       -0.04272763026369126,
       1,
       -0.04272763026369126,
-      -0.04272763026369126
+      -0.04272763026369126,
     ]);
     expect(Array.from(correlation(y, x).data[2])).toStrictEqual([
       0.14685194996208847,
@@ -35,10 +35,18 @@ describe('multivariate linear regression', () => {
     ]);
     expect(Array.from(correlation(x).data[2])).toStrictEqual([1, 1, 1, 1, 1]);
   });
-  it('correlation doesn\'t change input matrices', () => {
-    const x = new Matrix([[1, 2, 3], [4, 3, 6], [7, 1, 9]]);
-    const y = new Matrix([[5, 2, 3], [4, 1, 6], [7, 1, 7]]);
-    const corr = correlation(x, y);
+  it(`correlation doesn't change input matrices`, () => {
+    const x = new Matrix([
+      [1, 2, 3],
+      [4, 3, 6],
+      [7, 1, 9],
+    ]);
+    const y = new Matrix([
+      [5, 2, 3],
+      [4, 1, 6],
+      [7, 1, 7],
+    ]);
+    correlation(x, y);
     expect(x.to1DArray()).toStrictEqual([1, 2, 3, 4, 3, 6, 7, 1, 9]);
     expect(y.to1DArray()).toStrictEqual([5, 2, 3, 4, 1, 6, 7, 1, 7]);
   });
