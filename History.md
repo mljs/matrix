@@ -1,3 +1,18 @@
+# [6.5.0](https://github.com/mljs/matrix/compare/v6.4.1...v6.5.0) (2020-05-03)
+
+
+### Bug Fixes
+
+* do not change input matrices in correlation and covariance functions ([#103](https://github.com/mljs/matrix/issues/103)) ([32e3537](https://github.com/mljs/matrix/commit/32e3537aae0ed4d8cf20c6230a4d411f944b1bcb))
+
+
+### Features
+
+* add options to toString method ([67b007c](https://github.com/mljs/matrix/commit/67b007cd0e3fb80131e3cdb434868fe3c503ef89))
+* add toString method ([dcd5ab2](https://github.com/mljs/matrix/commit/dcd5ab28a8190e3602335bca40d7d34b7afbb15e))
+
+
+
 ## [6.4.1](https://github.com/mljs/matrix/compare/v6.4.0...v6.4.1) (2019-09-30)
 
 
