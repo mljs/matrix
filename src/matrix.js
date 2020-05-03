@@ -1396,6 +1396,10 @@ export class AbstractMatrix {
         throw new Error(`invalid option: ${by}`);
     }
   }
+
+  toString() {
+    return inspectMatrix.call(this);
+  }
 }
 
 AbstractMatrix.prototype.klass = 'Matrix';
