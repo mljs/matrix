@@ -1,5 +1,5 @@
-import resolve from 'rollup-plugin-node-resolve';
-import commonJS from 'rollup-plugin-commonjs';
+import resolve from '@rollup/plugin-node-resolve';
+import commonJS from '@rollup/plugin-commonjs';
 import { terser } from 'rollup-plugin-terser';
 
 export default [
@@ -8,9 +8,9 @@ export default [
     output: {
       file: 'matrix.js',
       format: 'cjs',
-      exports: 'named'
+      exports: 'named',
     },
-    external: ['ml-array-rescale']
+    external: ['ml-array-rescale'],
   },
   {
     input: 'src/index.js',
@@ -18,12 +18,8 @@ export default [
       name: 'mlMatrix',
       file: 'matrix.umd.js',
       format: 'umd',
-      exports: 'named'
+      exports: 'named',
     },
-    plugins: [
-      resolve(),
-      commonJS(),
-      terser()
-    ]
-  }
+    plugins: [resolve(), commonJS(), terser()],
+  },
 ];
