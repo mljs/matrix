@@ -1,5 +1,16 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`custom toString function should use clamp options 1`] = `
+"Matrix {
+  [
+    10     200    3.0e+6 ... 2 more columns
+    ... 1 more rows
+  ]
+  rows: 2
+  columns: 5
+}"
+`;
+
 exports[`custom toString function should work with a simple matrix 1`] = `
 "Matrix {
   [

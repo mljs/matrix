@@ -1,6 +1,6 @@
 import rescale from 'ml-array-rescale';
 
-import { inspectMatrix } from './inspect';
+import { inspectMatrix, inspectMatrixWithOptions } from './inspect';
 import { installMathOperations } from './mathOperations';
 import {
   sumByRow,
@@ -1397,8 +1397,8 @@ export class AbstractMatrix {
     }
   }
 
-  toString() {
-    return inspectMatrix.call(this);
+  toString(options) {
+    return inspectMatrixWithOptions(this, options);
   }
 }
 

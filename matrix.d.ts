@@ -94,6 +94,24 @@ export interface ICorrelationOptions {
   scale?: boolean;
 }
 
+export interface IToStringOptions {
+  /**
+   * Maximum number of printed rows.
+   * @default `15`
+   */
+  maxRows?: number;
+  /**
+   * Maximum number of printed columns.
+   * @default `10`
+   */
+  maxColumns?: number;
+  /**
+   * Maximum size (number of characters) of printed numbers.
+   * @default `8`
+   */
+  maxNumSize?: number;
+}
+
 export abstract class AbstractMatrix {
   /**
    * Total number of elements in the matrix.
@@ -767,6 +785,8 @@ export abstract class AbstractMatrix {
    * @param options
    */
   scale(by: MatrixDimension, options?: IScaleByOptions): this;
+
+  toString(options?: IToStringOptions): string;
 
   // From here we document methods dynamically generated from operators
 
