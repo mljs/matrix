@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>ILinearDependenciesOptions | ml-matrix</title>
+	<title>IToStringOptions | ml-matrix</title>
 	<meta name="description" content="Documentation for ml-matrix">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -54,10 +54,10 @@
 					<a href="../globals.html">Globals</a>
 				</li>
 				<li>
-					<a href="ilineardependenciesoptions.html">ILinearDependenciesOptions</a>
+					<a href="itostringoptions.html">IToStringOptions</a>
 				</li>
 			</ul>
-			<h1>Interface ILinearDependenciesOptions</h1>
+			<h1>Interface IToStringOptions</h1>
 		</div>
 	</div>
 </header>
@@ -68,7 +68,7 @@
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">ILinearDependenciesOptions</span>
+						<span class="target">IToStringOptions</span>
 					</li>
 				</ul>
 			</section>
@@ -79,8 +79,9 @@
 						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="ilineardependenciesoptions.html#thresholderror" class="tsd-kind-icon">threshold<wbr>Error</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="ilineardependenciesoptions.html#thresholdvalue" class="tsd-kind-icon">threshold<wbr>Value</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="itostringoptions.html#maxcolumns" class="tsd-kind-icon">max<wbr>Columns</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="itostringoptions.html#maxnumsize" class="tsd-kind-icon">max<wbr>Num<wbr>Size</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="itostringoptions.html#maxrows" class="tsd-kind-icon">max<wbr>Rows</a></li>
 							</ul>
 						</section>
 					</div>
@@ -89,41 +90,61 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="thresholderror" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagOptional">Optional</span> threshold<wbr>Error</h3>
-					<div class="tsd-signature tsd-kind-icon">threshold<wbr>Error<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<a name="maxcolumns" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> max<wbr>Columns</h3>
+					<div class="tsd-signature tsd-kind-icon">max<wbr>Columns<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/mljs/matrix/blob/fd236dc/matrix.d.ts#L1012">matrix.d.ts:1012</a></li>
+							<li>Defined in <a href="https://github.com/mljs/matrix/blob/fd236dc/matrix.d.ts#L107">matrix.d.ts:107</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
-							<p>If the error is inferior to that threshold, the linear combination found is accepted and the row is dependent from other rows.</p>
+							<p>Maximum number of printed columns.</p>
 						</div>
 						<dl class="tsd-comment-tags">
 							<dt>default</dt>
-							<dd><p><code>10e-10</code></p>
+							<dd><p><code>10</code></p>
 							</dd>
 						</dl>
 					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="thresholdvalue" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagOptional">Optional</span> threshold<wbr>Value</h3>
-					<div class="tsd-signature tsd-kind-icon">threshold<wbr>Value<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<a name="maxnumsize" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> max<wbr>Num<wbr>Size</h3>
+					<div class="tsd-signature tsd-kind-icon">max<wbr>Num<wbr>Size<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/mljs/matrix/blob/fd236dc/matrix.d.ts#L1006">matrix.d.ts:1006</a></li>
+							<li>Defined in <a href="https://github.com/mljs/matrix/blob/fd236dc/matrix.d.ts#L112">matrix.d.ts:112</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
-							<p>If an absolute value is inferior to this threshold, it will equals zero.</p>
+							<p>Maximum size (number of characters) of printed numbers.</p>
 						</div>
 						<dl class="tsd-comment-tags">
 							<dt>default</dt>
-							<dd><p><code>10e-10</code></p>
+							<dd><p><code>8</code></p>
+							</dd>
+						</dl>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="maxrows" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> max<wbr>Rows</h3>
+					<div class="tsd-signature tsd-kind-icon">max<wbr>Rows<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/mljs/matrix/blob/fd236dc/matrix.d.ts#L102">matrix.d.ts:102</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Maximum number of printed rows.</p>
+						</div>
+						<dl class="tsd-comment-tags">
+							<dt>default</dt>
+							<dd><p><code>15</code></p>
 							</dd>
 						</dl>
 					</div>
@@ -143,13 +164,16 @@
 				</ul>
 				<ul class="current">
 					<li class="current tsd-kind-interface">
-						<a href="ilineardependenciesoptions.html" class="tsd-kind-icon">ILinear<wbr>Dependencies<wbr>Options</a>
+						<a href="itostringoptions.html" class="tsd-kind-icon">ITo<wbr>String<wbr>Options</a>
 						<ul>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="ilineardependenciesoptions.html#thresholderror" class="tsd-kind-icon">threshold<wbr>Error</a>
+								<a href="itostringoptions.html#maxcolumns" class="tsd-kind-icon">max<wbr>Columns</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="ilineardependenciesoptions.html#thresholdvalue" class="tsd-kind-icon">threshold<wbr>Value</a>
+								<a href="itostringoptions.html#maxnumsize" class="tsd-kind-icon">max<wbr>Num<wbr>Size</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="itostringoptions.html#maxrows" class="tsd-kind-icon">max<wbr>Rows</a>
 							</li>
 						</ul>
 					</li>
