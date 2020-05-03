@@ -1,5 +1,5 @@
-import WrapperMatrix1D from './WrapperMatrix1D';
-import WrapperMatrix2D from './WrapperMatrix2D';
+import WrapperMatrix1D from './WrapperMatrix1D.js';
+import WrapperMatrix2D from './WrapperMatrix2D.js';
 
 export function wrap(array, options) {
   if (Array.isArray(array)) {

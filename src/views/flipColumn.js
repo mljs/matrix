@@ -1,4 +1,4 @@
-import BaseView from './base';
+import BaseView from './base.js';
 
 export default class MatrixFlipColumnView extends BaseView {
   constructor(matrix) {

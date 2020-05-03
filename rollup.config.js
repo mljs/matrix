@@ -1,12 +1,12 @@
-import resolve from '@rollup/plugin-node-resolve';
 import commonJS from '@rollup/plugin-commonjs';
+import resolve from '@rollup/plugin-node-resolve';
 import { terser } from 'rollup-plugin-terser';
 
 export default [
   {
     input: 'src/index.js',
     output: {
-      file: 'matrix.js',
+      file: 'matrix.cjs',
       format: 'cjs',
       exports: 'named',
     },
@@ -16,7 +16,7 @@ export default [
     input: 'src/index.js',
     output: {
       name: 'mlMatrix',
-      file: 'matrix.umd.js',
+      file: 'matrix.umd.cjs',
       format: 'umd',
       exports: 'named',
     },

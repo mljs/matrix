@@ -1,8 +1,8 @@
-import { toBeDeepCloseTo } from 'jest-matcher-deep-close-to';
+import matcher from 'jest-matcher-deep-close-to';
 
 import { Matrix, QR } from '../..';
 
-expect.extend({ toBeDeepCloseTo });
+expect.extend({ toBeDeepCloseTo: matcher.toBeDeepCloseTo });
 
 describe('Qr decomposition', () => {
   it('should compute lower triangular matrix', () => {

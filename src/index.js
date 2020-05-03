@@ -1,16 +1,16 @@
-export { AbstractMatrix, default, default as Matrix } from './matrix';
-export * from './views/index';
+export { AbstractMatrix, default, default as Matrix } from './matrix.js';
+export * from './views/index.js';
 
-export { wrap } from './wrap/wrap';
-export { default as WrapperMatrix1D } from './wrap/WrapperMatrix1D';
-export { default as WrapperMatrix2D } from './wrap/WrapperMatrix2D';
+export { wrap } from './wrap/wrap.js';
+export { default as WrapperMatrix1D } from './wrap/WrapperMatrix1D.js';
+export { default as WrapperMatrix2D } from './wrap/WrapperMatrix2D.js';
 
-export { solve, inverse } from './decompositions';
-export { determinant } from './determinant';
-export { linearDependencies } from './linearDependencies';
-export { pseudoInverse } from './pseudoInverse';
-export { covariance } from './covariance';
-export { correlation } from './correlation';
+export { solve, inverse } from './decompositions.js';
+export { determinant } from './determinant.js';
+export { linearDependencies } from './linearDependencies.js';
+export { pseudoInverse } from './pseudoInverse.js';
+export { covariance } from './covariance.js';
+export { correlation } from './correlation.js';
 
 export {
   default as SingularValueDecomposition,

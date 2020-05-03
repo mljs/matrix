@@ -1,4 +1,4 @@
-import { AbstractMatrix } from '../matrix';
+import { AbstractMatrix } from '../matrix.js';
 
 export default class BaseView extends AbstractMatrix {
   constructor(matrix, rows, columns) {

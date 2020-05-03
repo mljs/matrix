@@ -1,12 +1,24 @@
-import { toBeDeepCloseTo } from 'jest-matcher-deep-close-to';
-import { getNumbers } from 'ml-dataset-iris';
+import { readFileSync } from 'fs';
+import { dirname } from 'path';
+import { fileURLToPath } from 'url';
+
+import matcher from 'jest-matcher-deep-close-to';
+import iris from 'ml-dataset-iris';
 
 import { Matrix, correlation, NIPALS } from '../..';
 
-expect.extend({ toBeDeepCloseTo });
+expect.extend({ toBeDeepCloseTo: matcher.toBeDeepCloseTo });
 
-const rawData = getNumbers();
-const metadata = require('../../../data/irisScaledClasses.json');
+const __dirname = dirname(fileURLToPath(import.meta.url));
+
+function readJson(file) {
+  return JSON.parse(readFileSync(`${__dirname}/../../../data/${file}`));
+}
+
+const rawData = iris.getNumbers();
+const metadata = readJson('irisScaledClasses.json');
+
+const irisPC = readJson('irisPC1-4.json');
 
 describe('NIPALS pca', () => {
   it('test NIPALS dataArray to compare with R pca', () => {
@@ -15,18 +27,6 @@ describe('NIPALS pca', () => {
     let x = dataArray;
 
     x = x.center('column').scale('column');
-
-    let irisPC = require('../../../data/irisPC1-4.json');
-    /* data("iris");
-    metadata = iris[,5]
-    dataMatrix = iris[,1:4]
-    X = dataMatrix
-    Xcs = scale(as.matrix(X),center=TRUE)
-    pca = prcomp(Xcs)
-    plot(pca$x[,1], pca$x[,2], col=c(rep(1,50), rep(2,50), rep(3,50)))
-
-    library(jsonlite)
-    toJSON(t(pca$x)) */
 
     // first component
     let model = new NIPALS(x);
@@ -98,7 +98,7 @@ describe('NIPALS pls', () => {
 // https://cran.r-project.org/web/packages/nipals/vignettes/nipals_algorithm.pdf
 describe('NIPALS with simple data set', () => {
   it('test NIPALS error propagation', () => {
-    let simpleDataset = require('../../../data/simpleDataset.json');
+    let simpleDataset = readJson('simpleDataset.json');
     let x = Matrix.from1DArray(7, 5, simpleDataset);
 
     x = x.center('column').scale('column');
@@ -112,8 +112,8 @@ describe('NIPALS with simple data set', () => {
     // first component
     let model = new NIPALS(x, { scaleScores: true });
 
-    let PC = require('../../../data/simpleDatasetPC1-5.json');
-    let loadings = require('../../../data/simpleDatasetLoadings1-5.json');
+    let PC = readJson('simpleDatasetPC1-5.json');
+    let loadings = readJson('simpleDatasetLoadings1-5.json');
     expect(model.t.to1DArray()).toHaveLength(7);
     let corr = correlation(model.t.clone(), Matrix.from1DArray(7, 1, PC[0]));
     expect(corr.get(0, 0)).toBeCloseTo(1, 6);

@@ -1,4 +1,4 @@
-import Matrix from './matrix';
+import Matrix from './matrix.js';
 
 export function covariance(xMatrix, yMatrix = xMatrix, options = {}) {
   xMatrix = new Matrix(xMatrix);

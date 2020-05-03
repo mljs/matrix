@@ -1,6 +1,6 @@
-import { checkIndices } from '../util';
+import { checkIndices } from '../util.js';
 
-import BaseView from './base';
+import BaseView from './base.js';
 
 export default class MatrixSelectionView extends BaseView {
   constructor(matrix, rowIndices, columnIndices) {

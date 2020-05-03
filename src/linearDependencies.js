@@ -1,5 +1,5 @@
-import SingularValueDecomposition from './dc/svd';
-import Matrix from './matrix';
+import SingularValueDecomposition from './dc/svd.js';
+import Matrix from './matrix.js';
 
 function xrange(n, exception) {
   let range = [];

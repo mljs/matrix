@@ -1,6 +1,6 @@
-import { checkColumnIndices } from '../util';
+import { checkColumnIndices } from '../util.js';
 
-import BaseView from './base';
+import BaseView from './base.js';
 
 export default class MatrixColumnSelectionView extends BaseView {
   constructor(matrix, columnIndices) {

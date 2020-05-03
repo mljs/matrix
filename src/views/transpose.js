@@ -1,4 +1,4 @@
-import BaseView from './base';
+import BaseView from './base.js';
 
 export default class MatrixTransposeView extends BaseView {
   constructor(matrix) {

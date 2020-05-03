@@ -1,6 +1,6 @@
-import LuDecomposition from './dc/lu';
-import Matrix from './matrix';
-import MatrixSelectionView from './views/selection';
+import LuDecomposition from './dc/lu.js';
+import Matrix from './matrix.js';
+import MatrixSelectionView from './views/selection.js';
 
 export function determinant(matrix) {
   matrix = Matrix.checkMatrix(matrix);

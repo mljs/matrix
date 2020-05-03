@@ -1,8 +1,8 @@
-import { toBeDeepCloseTo } from 'jest-matcher-deep-close-to';
+import matcher from 'jest-matcher-deep-close-to';
 
 import { Matrix, linearDependencies } from '../..';
 
-expect.extend({ toBeDeepCloseTo });
+expect.extend({ toBeDeepCloseTo: matcher.toBeDeepCloseTo });
 
 describe('Linear Dependencies', () => {
   it('should compute the rows dependencies', () => {

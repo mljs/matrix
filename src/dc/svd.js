@@ -1,7 +1,7 @@
-import Matrix from '../matrix';
-import WrapperMatrix2D from '../wrap/WrapperMatrix2D';
+import Matrix from '../matrix.js';
+import WrapperMatrix2D from '../wrap/WrapperMatrix2D.js';
 
-import { hypotenuse } from './util';
+import { hypotenuse } from './util.js';
 
 export default class SingularValueDecomposition {
   constructor(value, options = {}) {

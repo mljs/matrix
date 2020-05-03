@@ -1,7 +1,7 @@
 import rescale from 'ml-array-rescale';
 
-import { inspectMatrix, inspectMatrixWithOptions } from './inspect';
-import { installMathOperations } from './mathOperations';
+import { inspectMatrix, inspectMatrixWithOptions } from './inspect.js';
+import { installMathOperations } from './mathOperations.js';
 import {
   sumByRow,
   sumByColumn,
@@ -21,7 +21,7 @@ import {
   getScaleByRow,
   getScaleByColumn,
   getScaleAll,
-} from './stat';
+} from './stat.js';
 import {
   checkRowVector,
   checkRowIndex,
@@ -29,7 +29,7 @@ import {
   checkColumnVector,
   checkRange,
   checkIndices,
-} from './util';
+} from './util.js';
 
 export class AbstractMatrix {
   static from1DArray(newRows, newColumns, newData) {

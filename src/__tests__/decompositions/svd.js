@@ -1,12 +1,23 @@
-import { toBeDeepCloseTo } from 'jest-matcher-deep-close-to';
+import { readFileSync } from 'fs';
+import { dirname } from 'path';
+import { fileURLToPath } from 'url';
+
+import matcher from 'jest-matcher-deep-close-to';
 
 import { Matrix, SVD, inverse, solve } from '../..';
 
-expect.extend({ toBeDeepCloseTo });
+expect.extend({ toBeDeepCloseTo: matcher.toBeDeepCloseTo });
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
+
+function readJson(file) {
+  return JSON.parse(readFileSync(`${__dirname}/../../../data/${file}`));
+}
+
+const svdbug = readJson('svdbug.json');
 
 describe('Singular value decomposition', () => {
   it('Regress 1', () => {
-    const svdbug = require('./svdbug.json');
     // Should not hang
     let res = new SVD(svdbug);
     expect(res.diagonal).toHaveLength(73);

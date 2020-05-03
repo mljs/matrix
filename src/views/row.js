@@ -1,6 +1,6 @@
-import { checkRowIndex } from '../util';
+import { checkRowIndex } from '../util.js';
 
-import BaseView from './base';
+import BaseView from './base.js';
 
 export default class MatrixRowView extends BaseView {
   constructor(matrix, row) {

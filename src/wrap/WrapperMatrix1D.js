@@ -1,4 +1,4 @@
-import { AbstractMatrix } from '../matrix';
+import { AbstractMatrix } from '../matrix.js';
 
 export default class WrapperMatrix1D extends AbstractMatrix {
   constructor(data, options = {}) {

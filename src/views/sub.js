@@ -1,6 +1,6 @@
-import { checkRange } from '../util';
+import { checkRange } from '../util.js';
 
-import BaseView from './base';
+import BaseView from './base.js';
 
 export default class MatrixSubView extends BaseView {
   constructor(matrix, startRow, endRow, startColumn, endColumn) {
