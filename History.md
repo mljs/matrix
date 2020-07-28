@@ -1,3 +1,13 @@
+## [6.5.1](https://github.com/mljs/matrix/compare/v6.5.0...v6.5.1) (2020-07-28)
+
+
+### Bug Fixes
+
+* **types:** add missing removeColumn and removeRow types ([8010f31](https://github.com/mljs/matrix/commit/8010f3182684589558e8497d9b9230dc4725d848))
+* **types:** add types for addColum and addRow ([#105](https://github.com/mljs/matrix/issues/105)) ([b372b80](https://github.com/mljs/matrix/commit/b372b8083b24c8ff4ce55b3a5c0d2d67e16e0e8e))
+
+
+
 # [6.5.0](https://github.com/mljs/matrix/compare/v6.4.1...v6.5.0) (2020-05-03)
 
 
