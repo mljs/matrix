@@ -904,18 +904,18 @@ export class Matrix extends AbstractMatrix {
   constructor(otherMatrix: AbstractMatrix);
 
   /**
-   * 
-   * @param index - Column index
-   * @param array - Column to add
+   * Adds a new column to the matrix (in place).
+   * @param index - Column index. Default: `this.columns`.
+   * @param array - Column to add.
    */
-  addColumn(index: number, array: number[]): Matrix;
+  addColumn(index: number, array: number[] | AbstractMatrix): Matrix;
 
   /**
-   * 
-   * @param index - Row index
-   * @param array - Row to add
+   * Adds a new row to the matrix (in place).
+   * @param index - Row index. Default: `this.rows`.
+   * @param array - Row to add.
    */
-  addRow(index: number, array: number[]): Matrix;
+  addRow(index: number, array: number[] | AbstractMatrix): Matrix;
 }
 
 export default Matrix;
