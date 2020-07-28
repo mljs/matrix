@@ -79,13 +79,13 @@
 				<a href="#as-an-es-module" id="as-an-es-module" style="color: inherit; text-decoration: none;">
 					<h3>As an ES module</h3>
 				</a>
-				<pre><code class="language-js"><span class="hljs-keyword">import</span> { Matrix } <span class="hljs-keyword">from</span> <span class="hljs-string">'ml-matrix'</span>;
+				<pre><code class="language-js"><span class="hljs-keyword">import</span> { Matrix } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;ml-matrix&#x27;</span>;
 
 <span class="hljs-keyword">const</span> matrix = Matrix.ones(<span class="hljs-number">5</span>, <span class="hljs-number">5</span>);</code></pre>
 				<a href="#as-a-commonjs-module" id="as-a-commonjs-module" style="color: inherit; text-decoration: none;">
 					<h3>As a CommonJS module</h3>
 				</a>
-				<pre><code class="language-js"><span class="hljs-keyword">const</span> { Matrix } = <span class="hljs-built_in">require</span>(<span class="hljs-string">'ml-matrix'</span>);
+				<pre><code class="language-js"><span class="hljs-keyword">const</span> { Matrix } = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;ml-matrix&#x27;</span>);
 
 <span class="hljs-keyword">const</span> matrix = Matrix.ones(<span class="hljs-number">5</span>, <span class="hljs-number">5</span>);</code></pre>
 				<a href="#api-documentation" id="api-documentation" style="color: inherit; text-decoration: none;">
@@ -97,7 +97,7 @@
 				<a href="#standard-operations" id="standard-operations" style="color: inherit; text-decoration: none;">
 					<h3>Standard operations</h3>
 				</a>
-				<pre><code class="language-js"><span class="hljs-keyword">const</span> { Matrix } = <span class="hljs-built_in">require</span>(<span class="hljs-string">'ml-matrix'</span>);
+				<pre><code class="language-js"><span class="hljs-keyword">const</span> { Matrix } = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;ml-matrix&#x27;</span>);
 
 <span class="hljs-keyword">var</span> A = <span class="hljs-keyword">new</span> Matrix([[<span class="hljs-number">1</span>, <span class="hljs-number">1</span>], [<span class="hljs-number">2</span>, <span class="hljs-number">2</span>]]);
 <span class="hljs-keyword">var</span> B = <span class="hljs-keyword">new</span> Matrix([[<span class="hljs-number">3</span>, <span class="hljs-number">3</span>], [<span class="hljs-number">1</span>, <span class="hljs-number">1</span>]]);
@@ -129,7 +129,7 @@ C.mod(<span class="hljs-number">2</span>); <span class="hljs-comment">// =&gt; C
 <span class="hljs-keyword">var</span> expon = Matrix.exp(A); <span class="hljs-comment">// expon = Matrix [[Math.exp(1), Math.exp(1)], [Math.exp(-1), Math.exp(-1)], rows: 2, columns: 2].</span>
 <span class="hljs-keyword">var</span> cosinus = Matrix.cos(A); <span class="hljs-comment">// cosinus = Matrix [[Math.cos(1), Math.cos(1)], [Math.cos(-1), Math.cos(-1)], rows: 2, columns: 2].</span>
 <span class="hljs-keyword">var</span> absolute = Matrix.abs(A); <span class="hljs-comment">// expon = absolute [[1, 1], [1, 1], rows: 2, columns: 2].</span>
-<span class="hljs-comment">// you can use 'abs', 'acos', 'acosh', 'asin', 'asinh', 'atan', 'atanh', 'cbrt', 'ceil', 'clz32', 'cos', 'cosh', 'exp', 'expm1', 'floor', 'fround', 'log', 'log1p', 'log10', 'log2', 'round', 'sign', 'sin', 'sinh', 'sqrt', 'tan', 'tanh', 'trunc'</span>
+<span class="hljs-comment">// you can use &#x27;abs&#x27;, &#x27;acos&#x27;, &#x27;acosh&#x27;, &#x27;asin&#x27;, &#x27;asinh&#x27;, &#x27;atan&#x27;, &#x27;atanh&#x27;, &#x27;cbrt&#x27;, &#x27;ceil&#x27;, &#x27;clz32&#x27;, &#x27;cos&#x27;, &#x27;cosh&#x27;, &#x27;exp&#x27;, &#x27;expm1&#x27;, &#x27;floor&#x27;, &#x27;fround&#x27;, &#x27;log&#x27;, &#x27;log1p&#x27;, &#x27;log10&#x27;, &#x27;log2&#x27;, &#x27;round&#x27;, &#x27;sign&#x27;, &#x27;sin&#x27;, &#x27;sinh&#x27;, &#x27;sqrt&#x27;, &#x27;tan&#x27;, &#x27;tanh&#x27;, &#x27;trunc&#x27;</span>
 <span class="hljs-comment">// Note : you can do it inplace too as A.abs()</span>
 
 <span class="hljs-comment">// ============================</span>
@@ -170,7 +170,7 @@ A.set(<span class="hljs-number">1</span>, <span class="hljs-number">0</span>, <s
   QrDecomposition,
   LuDecomposition,
   CholeskyDecomposition,
-} = <span class="hljs-built_in">require</span>(<span class="hljs-string">'ml-matrix'</span>);
+} = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;ml-matrix&#x27;</span>);
 
 <span class="hljs-comment">//===========================</span>
 <span class="hljs-comment">// inverse and pseudo-inverse</span>
@@ -181,14 +181,14 @@ A.set(<span class="hljs-number">1</span>, <span class="hljs-number">0</span>, <s
 <span class="hljs-keyword">var</span> B = A.mmul(inverseA); <span class="hljs-comment">// B = A * inverse(A), so B ~= Identity</span>
 
 <span class="hljs-comment">// if A is singular, you can use SVD :</span>
-<span class="hljs-keyword">var</span> A = <span class="hljs-keyword">new</span> Matrix([[<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>], [<span class="hljs-number">4</span>, <span class="hljs-number">5</span>, <span class="hljs-number">6</span>], [<span class="hljs-number">7</span>, <span class="hljs-number">8</span>, <span class="hljs-number">9</span>]]); <span class="hljs-comment">// A is singular, so the standard computation of inverse won't work (you can test if you don't trust me^^)</span>
+<span class="hljs-keyword">var</span> A = <span class="hljs-keyword">new</span> Matrix([[<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>], [<span class="hljs-number">4</span>, <span class="hljs-number">5</span>, <span class="hljs-number">6</span>], [<span class="hljs-number">7</span>, <span class="hljs-number">8</span>, <span class="hljs-number">9</span>]]); <span class="hljs-comment">// A is singular, so the standard computation of inverse won&#x27;t work (you can test if you don&#x27;t trust me^^)</span>
 <span class="hljs-keyword">var</span> inverseA = inverse(A, (useSVD = <span class="hljs-literal">true</span>)); <span class="hljs-comment">// inverseA is only an approximation of the inverse, by using the Singular Values Decomposition</span>
-<span class="hljs-keyword">var</span> B = A.mmul(inverseA); <span class="hljs-comment">// B = A * inverse(A), but inverse(A) is only an approximation, so B doesn't really be identity.</span>
+<span class="hljs-keyword">var</span> B = A.mmul(inverseA); <span class="hljs-comment">// B = A * inverse(A), but inverse(A) is only an approximation, so B doesn&#x27;t really be identity.</span>
 
 <span class="hljs-comment">// if you want the pseudo-inverse of a matrix :</span>
 <span class="hljs-keyword">var</span> A = <span class="hljs-keyword">new</span> Matrix([[<span class="hljs-number">1</span>, <span class="hljs-number">2</span>], [<span class="hljs-number">3</span>, <span class="hljs-number">4</span>], [<span class="hljs-number">5</span>, <span class="hljs-number">6</span>]]);
 <span class="hljs-keyword">var</span> pseudoInverseA = A.pseudoInverse();
-<span class="hljs-keyword">var</span> B = A.mmul(pseudoInverseA).mmul(A); <span class="hljs-comment">// with pseudo inverse, A*pseudo-inverse(A)*A ~= A. It's the case here</span>
+<span class="hljs-keyword">var</span> B = A.mmul(pseudoInverseA).mmul(A); <span class="hljs-comment">// with pseudo inverse, A*pseudo-inverse(A)*A ~= A. It&#x27;s the case here</span>
 
 <span class="hljs-comment">//=============</span>
 <span class="hljs-comment">// Least square</span>
@@ -219,7 +219,7 @@ A.set(<span class="hljs-number">1</span>, <span class="hljs-number">0</span>, <s
 <span class="hljs-keyword">var</span> QR = <span class="hljs-keyword">new</span> QrDecomposition(A);
 <span class="hljs-keyword">var</span> Q = QR.orthogonalMatrix;
 <span class="hljs-keyword">var</span> R = QR.upperTriangularMatrix;
-<span class="hljs-comment">// So you have the QR decomposition. If you multiply Q by R, you'll see that A = Q.R, with Q orthogonal and R upper triangular</span>
+<span class="hljs-comment">// So you have the QR decomposition. If you multiply Q by R, you&#x27;ll see that A = Q.R, with Q orthogonal and R upper triangular</span>
 
 <span class="hljs-comment">// LU Decomposition</span>
 
@@ -443,6 +443,5 @@ A.set(<span class="hljs-number">1</span>, <span class="hljs-number">0</span>, <s
 </footer>
 <div class="overlay"></div>
 <script src="assets/js/main.js"></script>
-<script>if (location.protocol == 'file:') document.write('<script src="assets/js/search.js"><' + '/script>');</script>
 </body>
 </html>
