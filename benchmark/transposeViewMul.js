@@ -2,7 +2,7 @@
 
 let benchmark = require('benchmark');
 
-let { Matrix } = require('..');
+let { Matrix, MatrixTransposeView } = require('..');
 
 let n = 100;
 
@@ -16,7 +16,8 @@ suite
     A1.transpose().mmul(A2);
   })
   .add('transposeView mmul', function () {
-    A1.transposeView().mmul(A2);
+    let transposeA1 = new MatrixTransposeView(A1);
+    transposeA1.mmul(A2);
   })
   .on('cycle', function (event) {
     console.log(String(event.target));
