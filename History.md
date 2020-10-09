@@ -1,3 +1,15 @@
+### [6.5.2](https://github.com/mljs/matrix/compare/v6.5.1...v6.5.2) (2020-10-09)
+
+
+### Bug Fixes
+
+* benchmark of transposeViewMul ([#106](https://github.com/mljs/matrix/issues/106)) ([6407086](https://github.com/mljs/matrix/commit/64070866dfcde5fe48fa70de443ddd804f67d998))
+
+
+### Reverts
+
+* Revert "chore: migrate release to GitHub actions (#107)" ([21ba23a](https://github.com/mljs/matrix/commit/21ba23ac133fba057769d843d09614fad09edfc9)), closes [#107](https://github.com/mljs/matrix/issues/107)
+
 ## [6.5.1](https://github.com/mljs/matrix/compare/v6.5.0...v6.5.1) (2020-07-28)
 
 
