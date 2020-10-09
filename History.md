@@ -1,5 +1,3 @@
-# Changelog
-
 ## [6.5.1](https://github.com/mljs/matrix/compare/v6.5.0...v6.5.1) (2020-07-28)
 
 
