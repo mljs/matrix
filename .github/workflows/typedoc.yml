@@ -1,0 +1,22 @@
+name: Deploy TypeDoc on GitHub pages
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Build documentation
+        uses: zakodium/typedoc-action@v1
+        with:
+          entry: 'matrix.d.ts'
+      - name: Deploy to GitHub pages
+        uses: JamesIves/github-pages-deploy-action@releases/v3
+        with:
+          GITHUB_TOKEN: ${{ secrets.BOT_TOKEN }}
+          BRANCH: gh-pages
+          FOLDER: docs
+          CLEAN: true

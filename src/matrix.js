@@ -1427,6 +1427,7 @@ export default class Matrix extends AbstractMatrix {
   constructor(nRows, nColumns) {
     super();
     if (Matrix.isMatrix(nRows)) {
+      // eslint-disable-next-line no-constructor-return
       return nRows.clone();
     } else if (Number.isInteger(nRows) && nRows > 0) {
       // Create an empty matrix
@@ -1462,7 +1463,6 @@ export default class Matrix extends AbstractMatrix {
     }
     this.rows = nRows;
     this.columns = nColumns;
-    return this;
   }
 
   set(rowIndex, columnIndex, value) {

@@ -10,14 +10,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Use Node.js 14
-        uses: actions/setup-node@v1
+      - uses: actions/setup-node@v2-beta
         with:
-          node-version: 14
-      - name: npm install and test
-        run: |
-          npm install
-          npm run eslint
+          node-version: 14.x
+      - name: Install dependencies
+        run: npm install
+      - name: Run ESLint
+        run: npm run eslint
   test:
     runs-on: ubuntu-latest
     strategy:
@@ -26,10 +25,12 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v2-beta
         with:
           node-version: ${{ matrix.node-version }}
-      - name: npm install and test
-        run: |
-          npm install
-          npm run test-coverage
+      - name: Install dependencies
+        run: npm install
+      - name: Run tests
+        run: npm run test-coverage
+      - name: Send coverage report to Codecov
+        uses: codecov/codecov-action@v1
