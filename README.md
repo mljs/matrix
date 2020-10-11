@@ -47,7 +47,7 @@ var C = new Matrix([[3, 3], [1, 1]]);
 
 // operations :
 const addition = Matrix.add(A, B); // addition = Matrix [[4, 4], [3, 3], rows: 2, columns: 2]
-const substraction = Matrix.sub(A, B); // substraction = Matrix [[-2, -2], [1, 1], rows: 2, columns: 2]
+const subtraction = Matrix.sub(A, B); // subtraction = Matrix [[-2, -2], [1, 1], rows: 2, columns: 2]
 const multiplication = A.mmul(B); // multiplication = Matrix [[4, 4], [8, 8], rows: 2, columns: 2]
 const mulByNumber = Matrix.mul(A, 10); // mulByNumber = Matrix [[10, 10], [20, 20], rows: 2, columns: 2]
 const divByNumber = Matrix.div(A, 10); // divByNumber = Matrix [[0.1, 0.1], [0.2, 0.2], rows: 2, columns: 2]
@@ -88,10 +88,10 @@ var diag = A.diag(); // diag = [1, -1], i.e values in the diagonal.
 var m = A.mean(); // m = 2.75
 var product = A.prod(); // product = -10, i.e product of all values of the matrix
 var norm = A.norm(); // norm = 10.14889156509222, i.e Frobenius norm of the matrix
-var transpose = A.transpose(); // tranpose = Matrix [[1, 10], [1, -1], rows: 2, columns: 2]
+var transpose = A.transpose(); // transpose = Matrix [[1, 10], [1, -1], rows: 2, columns: 2]
 
 // ============================
-// Instanciation of matrix :
+// Instantiation of matrix :
 // =============================
 
 var z = Matrix.zeros(3, 2); // z = Matrix [[0, 0], [0, 0], [0, 0], rows: 3, columns: 2]
