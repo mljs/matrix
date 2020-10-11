@@ -1,5 +1,12 @@
 # Changelog
 
+### [6.5.3](https://www.github.com/mljs/matrix/compare/v6.5.2...v6.5.3) (2020-10-11)
+
+
+### Bug Fixes
+
+* update dependencies and move documentation to gh-pages ([78e0724](https://www.github.com/mljs/matrix/commit/78e07240ae9f114c4876a7838e37d9cc95336620))
+
 ### [6.5.2](https://github.com/mljs/matrix/compare/v6.5.1...v6.5.2) (2020-10-09)
 
 
@@ -509,6 +516,3 @@ There is no known backward incompatibility though.
 
 
 ## 0.0.1 (2014-10-24)
-
-
-
