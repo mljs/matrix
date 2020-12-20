@@ -219,6 +219,10 @@ export class AbstractMatrix {
     return this.rows === this.columns;
   }
 
+  isEmpty() {
+    return this.rows === 0 || this.columns === 0;
+  }
+
   isSymmetric() {
     if (this.isSquare()) {
       for (let i = 0; i < this.rows; i++) {
@@ -556,6 +560,9 @@ export class AbstractMatrix {
   }
 
   max() {
+    if (this.isEmpty()) {
+      return NaN;
+    }
     let v = this.get(0, 0);
     for (let i = 0; i < this.rows; i++) {
       for (let j = 0; j < this.columns; j++) {
@@ -567,7 +574,11 @@ export class AbstractMatrix {
     return v;
   }
 
+  // TODO test cases
   maxIndex() {
+    if (this.isEmpty()) {
+      throw new Error('Empty matrix has elements to index');
+    }
     let v = this.get(0, 0);
     let idx = [0, 0];
     for (let i = 0; i < this.rows; i++) {
@@ -583,6 +594,9 @@ export class AbstractMatrix {
   }
 
   min() {
+    if (this.isEmpty()) {
+      return NaN;
+    }
     let v = this.get(0, 0);
     for (let i = 0; i < this.rows; i++) {
       for (let j = 0; j < this.columns; j++) {
@@ -594,7 +608,11 @@ export class AbstractMatrix {
     return v;
   }
 
+  // TODO test cases
   minIndex() {
+    if (this.isEmpty()) {
+      throw new Error('Empty matrix has elements to index');
+    }
     let v = this.get(0, 0);
     let idx = [0, 0];
     for (let i = 0; i < this.rows; i++) {
@@ -741,6 +759,7 @@ export class AbstractMatrix {
     return this;
   }
 
+  // TODO tests?
   dot(vector2) {
     if (AbstractMatrix.isMatrix(vector2)) vector2 = vector2.to1DArray();
     let vector1 = this.to1DArray();
@@ -754,6 +773,7 @@ export class AbstractMatrix {
     return dot;
   }
 
+  // TODO tests? we test strassen but not this
   mmul(other) {
     other = Matrix.checkMatrix(other);
 
@@ -1012,7 +1032,9 @@ export class AbstractMatrix {
     let newMatrix = new Matrix(this.rows, this.columns);
     for (let i = 0; i < this.rows; i++) {
       const row = this.getRow(i);
-      rescale(row, { min, max, output: row });
+      if (row.length > 0) {
+        rescale(row, { min, max, output: row });
+      }
       newMatrix.setRow(i, row);
     }
     return newMatrix;
@@ -1029,11 +1051,13 @@ export class AbstractMatrix {
     let newMatrix = new Matrix(this.rows, this.columns);
     for (let i = 0; i < this.columns; i++) {
       const column = this.getColumn(i);
-      rescale(column, {
-        min: min,
-        max: max,
-        output: column,
-      });
+      if (column.length) {
+        rescale(column, {
+          min: min,
+          max: max,
+          output: column,
+        });
+      }
       newMatrix.setColumn(i, column);
     }
     return newMatrix;
@@ -1176,6 +1200,9 @@ export class AbstractMatrix {
 
   setSubMatrix(matrix, startRow, startColumn) {
     matrix = Matrix.checkMatrix(matrix);
+    if (matrix.isEmpty()) {
+      return this;
+    }
     let endRow = startRow + matrix.rows - 1;
     let endColumn = startColumn + matrix.columns - 1;
     checkRange(this, startRow, endRow, startColumn, endColumn);
@@ -1429,10 +1456,10 @@ export default class Matrix extends AbstractMatrix {
     if (Matrix.isMatrix(nRows)) {
       // eslint-disable-next-line no-constructor-return
       return nRows.clone();
-    } else if (Number.isInteger(nRows) && nRows > 0) {
+    } else if (Number.isInteger(nRows) && nRows >= 0) {
       // Create an empty matrix
       this.data = [];
-      if (Number.isInteger(nColumns) && nColumns > 0) {
+      if (Number.isInteger(nColumns) && nColumns >= 0) {
         for (let i = 0; i < nRows; i++) {
           this.data.push(new Float64Array(nColumns));
         }
@@ -1443,8 +1470,8 @@ export default class Matrix extends AbstractMatrix {
       // Copy the values from the 2D array
       const arrayData = nRows;
       nRows = arrayData.length;
-      nColumns = arrayData[0].length;
-      if (typeof nColumns !== 'number' || nColumns === 0) {
+      nColumns = nRows ? arrayData[0].length : 0;
+      if (typeof nColumns !== 'number') {
         throw new TypeError(
           'Data must be a 2D array with at least one element',
         );
@@ -1474,11 +1501,9 @@ export default class Matrix extends AbstractMatrix {
     return this.data[rowIndex][columnIndex];
   }
 
+  // TODO add test
   removeRow(index) {
     checkRowIndex(this, index);
-    if (this.rows === 1) {
-      throw new RangeError('A matrix cannot have less than one row');
-    }
     this.data.splice(index, 1);
     this.rows -= 1;
     return this;
@@ -1490,17 +1515,15 @@ export default class Matrix extends AbstractMatrix {
       index = this.rows;
     }
     checkRowIndex(this, index, true);
-    array = Float64Array.from(checkRowVector(this, array, true));
+    array = Float64Array.from(checkRowVector(this, array));
     this.data.splice(index, 0, array);
     this.rows += 1;
     return this;
   }
 
+  // TODO add a test
   removeColumn(index) {
     checkColumnIndex(this, index);
-    if (this.columns === 1) {
-      throw new RangeError('A matrix cannot have less than one column');
-    }
     for (let i = 0; i < this.rows; i++) {
       const newRow = new Float64Array(this.columns - 1);
       for (let j = 0; j < index; j++) {
@@ -1515,6 +1538,7 @@ export default class Matrix extends AbstractMatrix {
     return this;
   }
 
+  // TODO add test
   addColumn(index, array) {
     if (typeof array === 'undefined') {
       array = index;

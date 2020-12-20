@@ -13,6 +13,13 @@ test('flip rows', () => {
   ]);
 });
 
+test('flip rows of 0 row matrix', () => {
+  const matrix = new Matrix([]);
+  const result = matrix.flipRows();
+  expect(result).toBe(matrix);
+  expect(result.to2DArray()).toStrictEqual([]);
+});
+
 test('flip columns', () => {
   const matrix = new Matrix([
     [1, 2, 3],
@@ -24,4 +31,12 @@ test('flip columns', () => {
     [4, 5, 6],
     [1, 2, 3],
   ]);
+});
+
+test('flip columns of 0 row matrix', () => {
+  const matrix = new Matrix(0, 5);
+  const result = matrix.flipColumns();
+  expect(result).toBe(matrix);
+  expect(result.rows).toBe(0);
+  expect(result.columns).toBe(5);
 });

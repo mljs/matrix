@@ -10,6 +10,9 @@ describe('min - max', () => {
     [-6, 2, 12],
   ]);
 
+  const empty1 = new Matrix(2, 0);
+  const empty2 = new Matrix(2, 0);
+
   it('min', () => {
     expect(Matrix.min(matrix1, matrix2).to2DArray()).toStrictEqual([
       [0, 0, 2],
@@ -22,5 +25,13 @@ describe('min - max', () => {
       [3, 1, 2],
       [3, 4, 12],
     ]);
+  });
+
+  it('empty matrix max', () => {
+    expect(Matrix.max(empty1, empty2).to2DArray()).toStrictEqual([[], []]);
+  });
+
+  it('empty matrix min', () => {
+    expect(Matrix.min(empty1, empty2).to2DArray()).toStrictEqual([[], []]);
   });
 });

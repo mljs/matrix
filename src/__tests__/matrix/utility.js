@@ -3,8 +3,12 @@ import * as util from '../../../testUtils';
 
 describe('utility methods', () => {
   let squareMatrix;
+  let zeroColumnMatrix;
+  let zeroRowMatrix;
   beforeEach(() => {
     squareMatrix = util.getSquareMatrix();
+    zeroColumnMatrix = new Matrix(3, 0);
+    zeroRowMatrix = new Matrix(0, 2);
   });
 
   it('isMatrix', () => {
@@ -30,6 +34,8 @@ describe('utility methods', () => {
   it('size', () => {
     expect(new Matrix(3, 4).size).toBe(12);
     expect(new Matrix(5, 5).size).toBe(25);
+    expect(zeroRowMatrix.size).toBe(0);
+    expect(zeroColumnMatrix.size).toBe(0);
   });
 
   it('apply', () => {
@@ -50,6 +56,10 @@ describe('utility methods', () => {
     matrix.apply(cb);
     expect(matrix.get(5, 4)).toBe(20);
     expect(called).toBe(30);
+
+    called = 0;
+    zeroRowMatrix.apply(cb);
+    expect(called).toBe(0);
   });
 
   it('should throw if apply is called without a callback', () => {
@@ -81,6 +91,9 @@ describe('utility methods', () => {
     expect(array).toStrictEqual([9, 13, 5, 1, 11, 7, 2, 6, 3]);
     expect(array).not.toBeInstanceOf(Matrix);
     expect(Matrix.isMatrix(array)).toBe(false);
+
+    expect(zeroRowMatrix.to1DArray()).toStrictEqual([]);
+    expect(zeroColumnMatrix.to1DArray()).toStrictEqual([]);
   });
 
   it('to2DArray', () => {
@@ -93,6 +106,9 @@ describe('utility methods', () => {
     expect(array[0]).toHaveLength(3);
     expect(array).not.toBeInstanceOf(Matrix);
     expect(Matrix.isMatrix(array)).toBe(false);
+
+    expect(zeroRowMatrix.to2DArray()).toStrictEqual([]);
+    expect(zeroColumnMatrix.to2DArray()).toStrictEqual([[], [], []]);
   });
 
   it('transpose square', () => {
@@ -108,6 +124,8 @@ describe('utility methods', () => {
     let subMatrix = squareMatrix.selection([1, 2], [1, 2]);
     det = determinant(subMatrix);
     expect(det).toBe(-9);
+
+    expect(determinant(new Matrix(0, 0))).toBe(1);
   });
 
   it('determinant n>3', () => {
@@ -129,15 +147,8 @@ describe('utility methods', () => {
       [1, 1, 1],
     ]);
     expect(m1.norm()).toBeCloseTo(5.7445626465380286, 2);
-  });
 
-  it('norm Frobenius 2', () => {
-    let m1 = new Matrix([
-      [1, 1, 1],
-      [3, 3, 3],
-      [1, 1, 1],
-    ]);
-    expect(m1.norm('frobenius')).toBeCloseTo(5.7445626465380286, 2);
+    expect(new Matrix(0, 0).norm()).toBe(0);
   });
 
   it('norm max', () => {
@@ -147,6 +158,8 @@ describe('utility methods', () => {
       [1, 1, 1],
     ]);
     expect(m1.norm('max')).toBe(3);
+
+    expect(new Matrix(0, 0).norm('max')).toBe(NaN);
   });
 
   it('transpose rectangular', () => {
@@ -160,6 +173,14 @@ describe('utility methods', () => {
     expect(transpose.get(2, 1)).toBe(matrix.get(1, 2));
     expect(transpose.rows).toBe(3);
     expect(transpose.columns).toBe(2);
+
+    const zeroColumnTranspose = zeroColumnMatrix.transpose();
+    expect(zeroColumnTranspose.rows).toBe(0);
+    expect(zeroColumnTranspose.columns).toBe(3);
+
+    const zeroRowTranspose = zeroRowMatrix.transpose();
+    expect(zeroRowTranspose.rows).toBe(2);
+    expect(zeroRowTranspose.columns).toBe(0);
   });
 
   it('scale rows', () => {
@@ -178,6 +199,12 @@ describe('utility methods', () => {
     expect(matrix.scaleRows({ min: -2, max: -1 }).to2DArray()).toStrictEqual([
       [-2, -3 / 2, -1],
       [-2, -1, -5 / 3],
+    ]);
+    expect(zeroRowMatrix.scaleRows().to2DArray()).toStrictEqual([]);
+    expect(zeroColumnMatrix.scaleRows().to2DArray()).toStrictEqual([
+      [],
+      [],
+      [],
     ]);
     expect(() => matrix.scaleRows({ min: 2, max: 1 })).toThrow(
       /^min must be smaller than max$/,
@@ -207,6 +234,13 @@ describe('utility methods', () => {
         [-1, -1],
       ],
     );
+    expect(zeroRowMatrix.scaleColumns().to2DArray()).toStrictEqual([]);
+    expect(zeroColumnMatrix.scaleColumns().to2DArray()).toStrictEqual([
+      [],
+      [],
+      [],
+    ]);
+
     expect(() => matrix.scaleColumns({ min: 2, max: 1 })).toThrow(
       /^min must be smaller than max$/,
     );
@@ -228,6 +262,14 @@ describe('utility methods', () => {
       [1, 10],
       [2, 10],
     ]);
+    expect(
+      matrix.setSubMatrix(new Matrix(0, 0), 2, 0).to2DArray(),
+    ).toStrictEqual([
+      [1, 2],
+      [1, 10],
+      [2, 10],
+    ]);
+
     expect(() => matrix.setSubMatrix([[1, 2]], 1, 1)).toThrow(RangeError);
   });
 
@@ -260,6 +302,12 @@ describe('utility methods', () => {
       [1, 2, 1, 2],
       [3, 4, 3, 4],
     ]);
+    expect(
+      zeroRowMatrix.repeat({ columns: 2, rows: 2 }).to2DArray(),
+    ).toStrictEqual([]);
+    expect(
+      zeroColumnMatrix.repeat({ columns: 2, rows: 2 }).to2DArray(),
+    ).toStrictEqual([[], [], [], [], [], []]);
   });
 
   it('mmul strassen', () => {
@@ -274,6 +322,18 @@ describe('utility methods', () => {
     expect(matrix.mmulStrassen(matrix2).to2DArray()).toStrictEqual([
       [8, 6],
       [15, 8],
+    ]);
+  });
+
+  it('mmul strassen on empty matrices', () => {
+    // https://github.com/mljs/matrix/issues/114
+    // while the mathematically correct result is 0x0, we assert a 2x2 padded result that the current implementation produces
+    // (this call is actually just delegated to block multiplication in mmul())
+    expect(
+      new Matrix(0, 2).mmulStrassen(new Matrix(2, 0)).to2DArray(),
+    ).toStrictEqual([
+      [0, 0],
+      [0, 0],
     ]);
   });
 
@@ -365,6 +425,12 @@ describe('utility methods', () => {
     expect(result[1][1]).toBeCloseTo(0.19512195, 5);
     expect(result[2][0]).toBeCloseTo(0.24390244, 5);
     expect(result[2][1]).toBeCloseTo(0.07317073, 5);
+
+    result = pseudoInverse(zeroColumnMatrix);
+    expect(result).toStrictEqual([]);
+
+    result = pseudoInverse(zeroRowMatrix);
+    expect(result).toStrictEqual([[], []]);
   });
 
   it('isEchelonForm', () => {
@@ -482,6 +548,13 @@ describe('utility methods', () => {
     expect(m.isSymmetric()).toBe(false);
   });
 
+  it('isEmpty', () => {
+    expect(new Matrix(0, 0).isEmpty()).toBe(true);
+    expect(new Matrix(0, 1).isEmpty()).toBe(true);
+    expect(new Matrix(1, 0).isEmpty()).toBe(true);
+    expect(new Matrix(1, 1).isEmpty()).toBe(false);
+  });
+
   it('neg', () => {
     let m = new Matrix([
       [-1, 0, 2],
@@ -492,5 +565,8 @@ describe('utility methods', () => {
       [1, -0, -2],
       [-3, 42, -4],
     ]);
+
+    zeroColumnMatrix.neg();
+    expect(zeroColumnMatrix.to2DArray()).toStrictEqual([[], [], []]);
   });
 });
