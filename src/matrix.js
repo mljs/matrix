@@ -29,6 +29,7 @@ import {
   checkColumnVector,
   checkRange,
   checkIndices,
+  checkNonEmpty,
 } from './util';
 
 export class AbstractMatrix {
@@ -574,11 +575,8 @@ export class AbstractMatrix {
     return v;
   }
 
-  // TODO test cases
   maxIndex() {
-    if (this.isEmpty()) {
-      throw new Error('Empty matrix has elements to index');
-    }
+    checkNonEmpty(this);
     let v = this.get(0, 0);
     let idx = [0, 0];
     for (let i = 0; i < this.rows; i++) {
@@ -608,11 +606,8 @@ export class AbstractMatrix {
     return v;
   }
 
-  // TODO test cases
   minIndex() {
-    if (this.isEmpty()) {
-      throw new Error('Empty matrix has elements to index');
-    }
+    checkNonEmpty(this);
     let v = this.get(0, 0);
     let idx = [0, 0];
     for (let i = 0; i < this.rows; i++) {
@@ -629,6 +624,9 @@ export class AbstractMatrix {
 
   maxRow(row) {
     checkRowIndex(this, row);
+    if (this.isEmpty()) {
+      return NaN;
+    }
     let v = this.get(row, 0);
     for (let i = 1; i < this.columns; i++) {
       if (this.get(row, i) > v) {
@@ -640,6 +638,7 @@ export class AbstractMatrix {
 
   maxRowIndex(row) {
     checkRowIndex(this, row);
+    checkNonEmpty(this);
     let v = this.get(row, 0);
     let idx = [row, 0];
     for (let i = 1; i < this.columns; i++) {
@@ -653,6 +652,9 @@ export class AbstractMatrix {
 
   minRow(row) {
     checkRowIndex(this, row);
+    if (this.isEmpty()) {
+      return NaN;
+    }
     let v = this.get(row, 0);
     for (let i = 1; i < this.columns; i++) {
       if (this.get(row, i) < v) {
@@ -664,6 +666,7 @@ export class AbstractMatrix {
 
   minRowIndex(row) {
     checkRowIndex(this, row);
+    checkNonEmpty(this);
     let v = this.get(row, 0);
     let idx = [row, 0];
     for (let i = 1; i < this.columns; i++) {
@@ -677,6 +680,9 @@ export class AbstractMatrix {
 
   maxColumn(column) {
     checkColumnIndex(this, column);
+    if (this.isEmpty()) {
+      return NaN;
+    }
     let v = this.get(0, column);
     for (let i = 1; i < this.rows; i++) {
       if (this.get(i, column) > v) {
@@ -688,6 +694,7 @@ export class AbstractMatrix {
 
   maxColumnIndex(column) {
     checkColumnIndex(this, column);
+    checkNonEmpty(this);
     let v = this.get(0, column);
     let idx = [0, column];
     for (let i = 1; i < this.rows; i++) {
@@ -701,6 +708,9 @@ export class AbstractMatrix {
 
   minColumn(column) {
     checkColumnIndex(this, column);
+    if (this.isEmpty()) {
+      return NaN;
+    }
     let v = this.get(0, column);
     for (let i = 1; i < this.rows; i++) {
       if (this.get(i, column) < v) {
@@ -712,6 +722,7 @@ export class AbstractMatrix {
 
   minColumnIndex(column) {
     checkColumnIndex(this, column);
+    checkNonEmpty(this);
     let v = this.get(0, column);
     let idx = [0, column];
     for (let i = 1; i < this.rows; i++) {
@@ -759,7 +770,6 @@ export class AbstractMatrix {
     return this;
   }
 
-  // TODO tests?
   dot(vector2) {
     if (AbstractMatrix.isMatrix(vector2)) vector2 = vector2.to1DArray();
     let vector1 = this.to1DArray();
@@ -773,7 +783,6 @@ export class AbstractMatrix {
     return dot;
   }
 
-  // TODO tests? we test strassen but not this
   mmul(other) {
     other = Matrix.checkMatrix(other);
 
@@ -1501,7 +1510,6 @@ export default class Matrix extends AbstractMatrix {
     return this.data[rowIndex][columnIndex];
   }
 
-  // TODO add test
   removeRow(index) {
     checkRowIndex(this, index);
     this.data.splice(index, 1);
@@ -1521,7 +1529,6 @@ export default class Matrix extends AbstractMatrix {
     return this;
   }
 
-  // TODO add a test
   removeColumn(index) {
     checkColumnIndex(this, index);
     for (let i = 0; i < this.rows; i++) {
@@ -1538,7 +1545,6 @@ export default class Matrix extends AbstractMatrix {
     return this;
   }
 
-  // TODO add test
   addColumn(index, array) {
     if (typeof array === 'undefined') {
       array = index;

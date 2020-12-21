@@ -569,4 +569,57 @@ describe('utility methods', () => {
     zeroColumnMatrix.neg();
     expect(zeroColumnMatrix.to2DArray()).toStrictEqual([[], [], []]);
   });
+
+  it('dot product', () => {
+    expect(new Matrix([[1, 2, 3]]).dot(new Matrix([[3, 2, 1]]))).toStrictEqual(
+      10,
+    );
+  });
+
+  it('block multiplication', () => {
+    const empty1 = new Matrix(3, 0);
+    const empty2 = new Matrix(0, 3);
+    const mat1 = new Matrix([
+      [1, 2],
+      [3, 4],
+      [5, 6],
+    ]);
+    const mat2 = new Matrix([
+      [6, 5, 4],
+      [3, 2, 1],
+    ]);
+
+    expect(mat2.mmul(mat1).to2DArray()).toStrictEqual([
+      [6 * 1 + 5 * 3 + 4 * 5, 6 * 2 + 5 * 4 + 4 * 6],
+      [3 * 1 + 2 * 3 + 1 * 5, 3 * 2 + 2 * 4 + 1 * 6],
+    ]);
+    expect(empty1.mmul(empty2).to2DArray()).toStrictEqual(
+      Matrix.zeros(3, 3).to2DArray(),
+    );
+  });
+
+  it('columns and rows modification', () => {
+    expect(zeroRowMatrix.removeColumn(1).columns).toStrictEqual(1);
+    expect(zeroColumnMatrix.removeRow(2).rows).toStrictEqual(2);
+
+    expect(squareMatrix.removeColumn(0).to2DArray()).toStrictEqual([
+      [13, 5],
+      [11, 7],
+      [6, 3],
+    ]);
+    expect(squareMatrix.removeRow(1).to2DArray()).toStrictEqual([
+      [13, 5],
+      [6, 3],
+    ]);
+    expect(squareMatrix.addRow(0, [1, 11]).to2DArray()).toStrictEqual([
+      [1, 11],
+      [13, 5],
+      [6, 3],
+    ]);
+    expect(squareMatrix.addColumn(2, [2, 22, 222]).to2DArray()).toStrictEqual([
+      [1, 11, 2],
+      [13, 5, 22],
+      [6, 3, 222],
+    ]);
+  });
 });
