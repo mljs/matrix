@@ -1,6 +1,15 @@
 import { Matrix } from '../..';
 
 describe('Centering matrix', () => {
+  let emptyMatrix;
+  let zeroRowMatrix;
+  let zeroColumnMatrix;
+  beforeEach(() => {
+    emptyMatrix = new Matrix(0, 0);
+    zeroRowMatrix = new Matrix(0, 3);
+    zeroColumnMatrix = new Matrix(2, 0);
+  });
+
   it('center should work for centering rows, columns and the whole matrix', () => {
     let x = new Matrix([
       [1, 2, 3, 4, 5],
@@ -34,5 +43,41 @@ describe('Centering matrix', () => {
     expect(
       Array.from(x.clone().center('column').data[2].map(Math.round)),
     ).toStrictEqual([5, 5, 5, 5, 5]);
+  });
+
+  it('should center by row for an empty matrix', () => {
+    emptyMatrix.center('row');
+    expect(emptyMatrix.rows).toBe(0);
+    expect(emptyMatrix.columns).toBe(0);
+    zeroRowMatrix.center('row');
+    expect(zeroRowMatrix.rows).toBe(0);
+    expect(zeroRowMatrix.columns).toBe(3);
+    zeroColumnMatrix.center('row');
+    expect(zeroColumnMatrix.rows).toBe(2);
+    expect(zeroColumnMatrix.columns).toBe(0);
+  });
+
+  it('should center by column for an empty matrix', () => {
+    emptyMatrix.center('column');
+    expect(emptyMatrix.rows).toBe(0);
+    expect(emptyMatrix.columns).toBe(0);
+    zeroRowMatrix.center('column');
+    expect(zeroRowMatrix.rows).toBe(0);
+    expect(zeroRowMatrix.columns).toBe(3);
+    zeroColumnMatrix.center('column');
+    expect(zeroColumnMatrix.rows).toBe(2);
+    expect(zeroColumnMatrix.columns).toBe(0);
+  });
+
+  it('should center for an empty matrix', () => {
+    emptyMatrix.center();
+    expect(emptyMatrix.rows).toBe(0);
+    expect(emptyMatrix.columns).toBe(0);
+    zeroRowMatrix.center();
+    expect(zeroRowMatrix.rows).toBe(0);
+    expect(zeroRowMatrix.columns).toBe(3);
+    zeroColumnMatrix.center();
+    expect(zeroColumnMatrix.rows).toBe(2);
+    expect(zeroColumnMatrix.columns).toBe(0);
   });
 });
