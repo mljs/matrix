@@ -328,7 +328,7 @@ describe('utility methods', () => {
   it('mmul strassen on empty matrices', () => {
     // https://github.com/mljs/matrix/issues/114
     // while the mathematically correct result is 0x0, we assert a 2x2 padded result that the current implementation produces
-    // (this call is actually just delegated to block multiplication in mmul())
+    // (this call is actually just delegated to standard multiplication in mmul())
     expect(
       new Matrix(0, 2).mmulStrassen(new Matrix(2, 0)).to2DArray(),
     ).toStrictEqual([
@@ -576,7 +576,7 @@ describe('utility methods', () => {
     );
   });
 
-  it('block multiplication', () => {
+  it('simple multiplication', () => {
     const empty1 = new Matrix(3, 0);
     const empty2 = new Matrix(0, 3);
     const mat1 = new Matrix([
@@ -596,6 +596,10 @@ describe('utility methods', () => {
     expect(empty1.mmul(empty2).to2DArray()).toStrictEqual(
       Matrix.zeros(3, 3).to2DArray(),
     );
+
+    const emptyMult = mat2.mmul(empty1);
+    expect(emptyMult.rows).toStrictEqual(2);
+    expect(emptyMult.columns).toStrictEqual(0);
   });
 
   it('columns and rows modification', () => {
