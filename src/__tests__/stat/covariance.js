@@ -1,4 +1,4 @@
-import {Matrix, covariance, correlation} from '../..';
+import { Matrix, covariance } from '../..';
 
 describe('multivariate linear regression', () => {
   it('covariance should work with 1 or 2 matrix inputs', () => {
