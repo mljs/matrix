@@ -305,6 +305,11 @@ export abstract class AbstractMatrix {
   isSquare(): boolean;
 
   /**
+   * Returns whether the matrix has one or more 0 dimensions
+   */
+  isEmpty(): boolean;
+
+  /**
    * Returns whether the matrix is square and has the same values on both sides of the diagonal.
    */
   isSymmetric(): boolean;

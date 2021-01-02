@@ -336,7 +336,7 @@ describe('Singular value decomposition', () => {
   });
 
   describe('empty matrix', () => {
-    it('should produce a set of empty decomposition matrices', () => {
+    it('should throw for an empty matrix', () => {
       const matrix = new Matrix([]);
       expect(() => new SVD(matrix)).toThrow('Matrix must be non-empty');
     });

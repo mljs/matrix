@@ -7,7 +7,7 @@ export function pseudoInverse(matrix, threshold = Number.EPSILON) {
     // with a zero dimension, the pseudo-inverse is the transpose, since all 0xn and nx0 matrices are singular
     // (0xn)*(nx0)*(0xn) = 0xn
     // (nx0)*(0xn)*(nx0) = nx0
-    return matrix.transpose().to2DArray();
+    return matrix.transpose();
   }
   let svdSolution = new SVD(matrix, { autoTranspose: true });
 

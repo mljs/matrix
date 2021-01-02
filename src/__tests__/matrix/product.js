@@ -26,7 +26,7 @@ describe('product by row and columns', () => {
   });
 
   it('product by column of empty matrix', () => {
-    expect(emptyMatrix.product('row')).toStrictEqual([]);
+    expect(emptyMatrix.product('column')).toStrictEqual([]);
   });
 
   it('product by column of 0 row matrix', () => {

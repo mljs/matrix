@@ -426,10 +426,10 @@ describe('utility methods', () => {
     expect(result[2][0]).toBeCloseTo(0.24390244, 5);
     expect(result[2][1]).toBeCloseTo(0.07317073, 5);
 
-    result = pseudoInverse(zeroColumnMatrix);
+    result = pseudoInverse(zeroColumnMatrix).to2DArray();
     expect(result).toStrictEqual([]);
 
-    result = pseudoInverse(zeroRowMatrix);
+    result = pseudoInverse(zeroRowMatrix).to2DArray();
     expect(result).toStrictEqual([[], []]);
   });
 
