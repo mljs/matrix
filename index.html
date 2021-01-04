@@ -109,7 +109,7 @@
 
 <span class="hljs-comment">// operations :</span>
 <span class="hljs-keyword">const</span> addition = Matrix.add(A, B); <span class="hljs-comment">// addition = Matrix [[4, 4], [3, 3], rows: 2, columns: 2]</span>
-<span class="hljs-keyword">const</span> substraction = Matrix.sub(A, B); <span class="hljs-comment">// substraction = Matrix [[-2, -2], [1, 1], rows: 2, columns: 2]</span>
+<span class="hljs-keyword">const</span> subtraction = Matrix.sub(A, B); <span class="hljs-comment">// subtraction = Matrix [[-2, -2], [1, 1], rows: 2, columns: 2]</span>
 <span class="hljs-keyword">const</span> multiplication = A.mmul(B); <span class="hljs-comment">// multiplication = Matrix [[4, 4], [8, 8], rows: 2, columns: 2]</span>
 <span class="hljs-keyword">const</span> mulByNumber = Matrix.mul(A, <span class="hljs-number">10</span>); <span class="hljs-comment">// mulByNumber = Matrix [[10, 10], [20, 20], rows: 2, columns: 2]</span>
 <span class="hljs-keyword">const</span> divByNumber = Matrix.div(A, <span class="hljs-number">10</span>); <span class="hljs-comment">// divByNumber = Matrix [[0.1, 0.1], [0.2, 0.2], rows: 2, columns: 2]</span>
@@ -150,10 +150,10 @@ A.set(<span class="hljs-number">1</span>, <span class="hljs-number">0</span>, <s
 <span class="hljs-keyword">var</span> m = A.mean(); <span class="hljs-comment">// m = 2.75</span>
 <span class="hljs-keyword">var</span> product = A.prod(); <span class="hljs-comment">// product = -10, i.e product of all values of the matrix</span>
 <span class="hljs-keyword">var</span> norm = A.norm(); <span class="hljs-comment">// norm = 10.14889156509222, i.e Frobenius norm of the matrix</span>
-<span class="hljs-keyword">var</span> transpose = A.transpose(); <span class="hljs-comment">// tranpose = Matrix [[1, 10], [1, -1], rows: 2, columns: 2]</span>
+<span class="hljs-keyword">var</span> transpose = A.transpose(); <span class="hljs-comment">// transpose = Matrix [[1, 10], [1, -1], rows: 2, columns: 2]</span>
 
 <span class="hljs-comment">// ============================</span>
-<span class="hljs-comment">// Instanciation of matrix :</span>
+<span class="hljs-comment">// Instantiation of matrix :</span>
 <span class="hljs-comment">// =============================</span>
 
 <span class="hljs-keyword">var</span> z = Matrix.zeros(<span class="hljs-number">3</span>, <span class="hljs-number">2</span>); <span class="hljs-comment">// z = Matrix [[0, 0], [0, 0], [0, 0], rows: 3, columns: 2]</span>
