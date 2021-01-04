@@ -305,7 +305,7 @@ export abstract class AbstractMatrix {
   isSquare(): boolean;
 
   /**
-   * Returns whether the matrix has one or more 0 dimensions.
+   * Returns whether the number of rows or columns (or both) is zero.
    */
   isEmpty(): boolean;
 
