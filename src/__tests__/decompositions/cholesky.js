@@ -42,6 +42,10 @@ describe('Cholesky decomposition', () => {
     expect(choAtA.isPositiveDefinite()).toStrictEqual(false);
     expect(() => choAtA.solve(b)).toThrow('Matrix is not positive definite');
   });
+  it('should handle empty matrices', () => {
+    const decomp = new CHO([]);
+    expect(decomp.lowerTriangularMatrix.to2DArray()).toStrictEqual([]);
+  });
 });
 
 function checkTriangular(matrix) {

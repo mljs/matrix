@@ -50,4 +50,16 @@ describe('multivariate linear regression', () => {
     expect(x.to1DArray()).toStrictEqual([1, 2, 3, 4, 3, 6, 7, 1, 9]);
     expect(y.to1DArray()).toStrictEqual([5, 2, 3, 4, 1, 6, 7, 1, 7]);
   });
+  it('correlation should work on empty matrices', () => {
+    const x = new Matrix(0, 0);
+    const y = new Matrix(0, 3);
+    const z = new Matrix(3, 0);
+    expect(correlation(x).to2DArray()).toStrictEqual([]);
+    expect(correlation(y).to2DArray()).toStrictEqual([
+      [NaN, NaN, NaN],
+      [NaN, NaN, NaN],
+      [NaN, NaN, NaN],
+    ]);
+    expect(correlation(z).to2DArray()).toStrictEqual([]);
+  });
 });

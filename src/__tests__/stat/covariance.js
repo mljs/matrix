@@ -56,4 +56,11 @@ describe('multivariate linear regression', () => {
     expect(x.to1DArray()).toStrictEqual([1, 2, 3, 4, 3, 6, 7, 1, 9]);
     expect(y.to1DArray()).toStrictEqual([5, 2, 3, 4, 1, 6, 7, 1, 7]);
   });
+
+  it('covariance should work on empty matrices', () => {
+    const x = new Matrix(0, 0);
+    const z = new Matrix(3, 0);
+    expect(covariance(x).to2DArray()).toStrictEqual([]);
+    expect(covariance(z).to2DArray()).toStrictEqual([]);
+  });
 });

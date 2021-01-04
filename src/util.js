@@ -143,3 +143,9 @@ function checkNumber(name, value) {
     throw new TypeError(`${name} must be a number`);
   }
 }
+
+export function checkNonEmpty(matrix) {
+  if (matrix.isEmpty()) {
+    throw new Error('Empty matrix has no elements to index');
+  }
+}

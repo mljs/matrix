@@ -5,6 +5,10 @@ import MatrixSelectionView from './views/selection';
 export function determinant(matrix) {
   matrix = Matrix.checkMatrix(matrix);
   if (matrix.isSquare()) {
+    if (matrix.columns === 0) {
+      return 1;
+    }
+
     let a, b, c, d;
     if (matrix.columns === 2) {
       // 2 x 2 matrix

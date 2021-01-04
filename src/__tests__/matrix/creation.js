@@ -18,22 +18,28 @@ describe('Matrix creation', () => {
     expect(matrix).toStrictEqual(original);
   });
 
-  it('should create an empty matrix', () => {
+  it('should create a zero matrix', () => {
     let matrix = new Matrix(3, 9);
     expect(matrix.rows).toBe(3);
     expect(matrix.columns).toBe(9);
     expect(matrix.get(0, 0)).toBe(0);
   });
 
+  it('should create an empty  matrix', () => {
+    const matrix00 = new Matrix(0, 0);
+    expect(matrix00.rows).toBe(0);
+    expect(matrix00.columns).toBe(0);
+    const matrix01 = new Matrix(0, 1);
+    expect(matrix01.rows).toBe(0);
+    expect(matrix01.columns).toBe(1);
+    const matrix00FromArray = new Matrix([[]]);
+    expect(matrix00FromArray.rows).toBe(1);
+    expect(matrix00FromArray.columns).toBe(0);
+  });
+
   it('should throw with wrong arguments', () => {
     expect(() => new Matrix(6, -1)).toThrow(
       /^nColumns must be a positive integer/,
-    );
-    expect(() => new Matrix(0, 0)).toThrow(
-      /^First argument must be a positive number or an array$/,
-    );
-    expect(() => new Matrix([[]])).toThrow(
-      /^Data must be a 2D array with at least one element$/,
     );
     expect(() => new Matrix([0, 1, 2, 3])).toThrow(/^Data must be a 2D array/);
     expect(
@@ -137,6 +143,9 @@ describe('Matrix creation', () => {
       [0, 1],
       [0, 0],
     ]);
+
+    let eye0 = Matrix.eye(0, 0);
+    expect(eye0.to2DArray()).toStrictEqual([]);
   });
 
   it('eye with other value than 1', () => {
@@ -172,6 +181,9 @@ describe('Matrix creation', () => {
       [0, 0, 3, 0],
       [0, 0, 0, 0],
     ]);
+    expect(Matrix.diag([], 0, 0).to2DArray()).toStrictEqual([]);
+    expect(Matrix.diag([[]], 1, 0).to2DArray()).toStrictEqual([[]]);
+    expect(Matrix.diag([], 0, 2).to2DArray()).toStrictEqual([]);
   });
 
   it('views should return new instances of Matrix', () => {

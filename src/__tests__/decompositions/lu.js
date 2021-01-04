@@ -46,6 +46,15 @@ describe('LU decomposition', () => {
         ]).determinant,
     ).toThrow('Matrix must be square');
   });
+
+  it('should handle empty matrices', () => {
+    const matrix = new Matrix([]);
+    const decomp = new LU(matrix);
+    expect(decomp.lowerTriangularMatrix.to2DArray()).toStrictEqual([]);
+    expect(decomp.upperTriangularMatrix.to2DArray()).toStrictEqual([]);
+    // https://en.wikipedia.org/wiki/Matrix_(mathematics)#Empty_matrices
+    expect(decomp.determinant).toStrictEqual(1);
+  });
 });
 
 function checkTriangular(matrix) {

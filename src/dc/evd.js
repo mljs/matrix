@@ -12,6 +12,10 @@ export default class EigenvalueDecomposition {
       throw new Error('Matrix is not a square matrix');
     }
 
+    if (matrix.isEmpty()) {
+      throw new Error('Matrix must be non-empty');
+    }
+
     let n = matrix.columns;
     let V = new Matrix(n, n);
     let d = new Float64Array(n);

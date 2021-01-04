@@ -63,4 +63,12 @@ describe('Qr decomposition', () => {
     const qR = Q.mmul(R);
     expect(qR.to2DArray()).toBeDeepCloseTo(A, 4);
   });
+
+  it('should work with empty matrices', () => {
+    const matrix = new Matrix([]);
+    const decomp = new QR(matrix);
+    expect(decomp.upperTriangularMatrix.to2DArray()).toStrictEqual([]);
+    expect(decomp.orthogonalMatrix.to2DArray()).toStrictEqual([]);
+    expect(decomp.isFullRank()).toStrictEqual(true);
+  });
 });

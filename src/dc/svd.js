@@ -7,6 +7,10 @@ export default class SingularValueDecomposition {
   constructor(value, options = {}) {
     value = WrapperMatrix2D.checkMatrix(value);
 
+    if (value.isEmpty()) {
+      throw new Error('Matrix must be non-empty');
+    }
+
     let m = value.rows;
     let n = value.columns;
 

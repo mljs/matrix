@@ -334,4 +334,11 @@ describe('Singular value decomposition', () => {
       expect(actual).toBeDeepCloseTo(output, 8);
     });
   });
+
+  describe('empty matrix', () => {
+    it('should throw for an empty matrix', () => {
+      const matrix = new Matrix([]);
+      expect(() => new SVD(matrix)).toThrow('Matrix must be non-empty');
+    });
+  });
 });

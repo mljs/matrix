@@ -13,4 +13,9 @@ describe('Eigenvalue decomposition', () => {
       [0, 3],
     ]);
   });
+
+  it('empty matrix', () => {
+    const matrix = new Matrix([]);
+    expect(() => new EVD(matrix)).toThrow('Matrix must be non-empty');
+  });
 });
