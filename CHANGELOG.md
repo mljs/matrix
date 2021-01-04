@@ -1,5 +1,12 @@
 # Changelog
 
+## [6.6.0](https://www.github.com/mljs/matrix/compare/v6.5.3...v6.6.0) (2021-01-04)
+
+
+### Features
+
+* add support for empty matrices ([#116](https://www.github.com/mljs/matrix/issues/116)) ([211de6e](https://www.github.com/mljs/matrix/commit/211de6e0880720033862f94a9629e48ae1787109))
+
 ### [6.5.3](https://www.github.com/mljs/matrix/compare/v6.5.2...v6.5.3) (2020-10-11)
 
 
