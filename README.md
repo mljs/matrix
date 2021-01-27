@@ -110,6 +110,7 @@ const {
   QrDecomposition,
   LuDecomposition,
   CholeskyDecomposition,
+  EigenvalueDecomposition
 } = require('ml-matrix');
 
 //===========================
