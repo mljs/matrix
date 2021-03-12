@@ -1119,6 +1119,18 @@ export class AbstractMatrix {
     return result;
   }
 
+  kroneckerSum(other) {
+    other = Matrix.checkMatrix(other);
+    if (!this.isSquare() || !other.isSquare()) {
+      throw new Error('Kronecker Sum needs two Square Matrices');
+    }
+    let m = this.rows;
+    let n = other.rows;
+    let AxI = this.kroneckerProduct(Matrix.eye(n, n));
+    let IxB = Matrix.eye(m, m).kroneckerProduct(other);
+    return AxI.add(IxB);
+  }
+
   transpose() {
     let result = new Matrix(this.columns, this.rows);
     for (let i = 0; i < this.rows; i++) {

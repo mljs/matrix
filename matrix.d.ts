@@ -608,6 +608,13 @@ export abstract class AbstractMatrix {
    * @param other - Other matrix.
    */
   kroneckerProduct(other: MaybeMatrix): Matrix;
+  
+  /**
+   * Returns the Kronecker sum between `this` and `other`.
+   * @link https://en.wikipedia.org/wiki/Kronecker_product#Kronecker_sum
+   * @param other - Other matrix.
+   */
+  kroneckerSum(other: MaybeMatrix): Matrix;
 
   /**
    * Alias for {@link AbstractMatrix.kroneckerProduct}.
