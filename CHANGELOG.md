@@ -1,5 +1,12 @@
 # Changelog
 
+## [6.7.0](https://www.github.com/mljs/matrix/compare/v6.6.0...v6.7.0) (2021-03-12)
+
+
+### Features
+
+* add Kronecker sum ([#119](https://www.github.com/mljs/matrix/issues/119)) ([a600b2c](https://www.github.com/mljs/matrix/commit/a600b2cb00f86576620a187f158d52680f752d89))
+
 ## [6.6.0](https://www.github.com/mljs/matrix/compare/v6.5.3...v6.6.0) (2021-01-04)
 
 
