@@ -18,15 +18,22 @@ export default class nipals {
       } else {
         Y = WrapperMatrix2D.checkMatrix(Y);
       }
+      if (Y.rows !== X.rows) {
+        throw new Error('Y should have the same number of rows as X');
+      }
       u = Y.getColumnVector(0);
     } else {
       u = X.getColumnVector(0);
     }
+
     let diff = 1;
     let t, q, w, tOld;
-    let counter = 0;
 
-    do {
+    for (
+      let counter = 0;
+      counter < maxIterations && diff > terminationCriteria;
+      counter++
+    ) {
       w = X.transpose().mmul(u).div(u.transpose().mmul(u).get(0, 0));
       w = w.div(w.norm());
 
@@ -40,19 +47,16 @@ export default class nipals {
       if (Y) {
         q = Y.transpose().mmul(t).div(t.transpose().mmul(t).get(0, 0));
         q = q.div(q.norm());
+
         u = Y.mmul(q).div(q.transpose().mmul(q).get(0, 0));
       } else {
         u = t;
       }
-      counter++;
-      if (counter === maxIterations) {
-        throw new Error('The maximum number of iterations has been reached');
-      }
-    } while (diff > terminationCriteria);
+    }
 
     if (Y) {
       let p = X.transpose().mmul(t).div(t.transpose().mmul(t).get(0, 0));
-      p = p.div(q.norm());
+      p = p.div(p.norm());
       let xResidual = X.clone().sub(t.clone().mmul(p.transpose()));
       let residual = u.transpose().mmul(t).div(t.transpose().mmul(t).get(0, 0));
       let yResidual = Y.clone().sub(
