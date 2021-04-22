@@ -99,23 +99,23 @@ describe('NIPALS pls', () => {
     multiY.setColumn(0, metadata);
     multiY.setColumn(1, metadata);
     let model = new NIPALS(rawData, { Y: multiY });
-    expect(model.yResidual.rows).toStrictEqual(150);
-    expect(model.yResidual.columns).toStrictEqual(2);
-    expect(model.q.getColumn(0)).toStrictEqual([
+    expect(model.yResidual.rows).toBeDeepCloseTo(150);
+    expect(model.yResidual.columns).toBeDeepCloseTo(2);
+    expect(model.q.getColumn(0)).toBeDeepCloseTo([
       0.7071067811865475,
       0.7071067811865475,
     ]);
-    expect(model.w.getRow(0)).toStrictEqual([
+    expect(model.w.getRow(0)).toBeDeepCloseTo([
       0.3327368933273334,
       -0.09548833727598557,
       0.8602363424202241,
       0.37438158667677224,
     ]);
-    expect(model.betas.getRow(0)).toStrictEqual([0.08379809713380146]);
-    expect(model.t.getRow(0)).toStrictEqual([2.6419561722271188]);
-    expect(model.t.getRow(1)).toStrictEqual([2.623152962199645]);
-    expect(model.t.getRow(2)).toStrictEqual([2.4514842818369593]);
-    expect(model.p.getRow(0)).toStrictEqual([
+    expect(model.betas.getRow(0)).toBeDeepCloseTo([0.08379809713380146]);
+    expect(model.t.getRow(0)).toBeDeepCloseTo([2.6419561722271188]);
+    expect(model.t.getRow(1)).toBeDeepCloseTo([2.623152962199645]);
+    expect(model.t.getRow(2)).toBeDeepCloseTo([2.4514842818369593]);
+    expect(model.p.getRow(0)).toBeDeepCloseTo([
       0.7412430875909641,
       0.361751117023612,
       0.536251754575879,
