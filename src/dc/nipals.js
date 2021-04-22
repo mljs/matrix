@@ -18,10 +18,10 @@ export default class nipals {
       } else {
         Y = WrapperMatrix2D.checkMatrix(Y);
       }
-      if (!Y.isColumnVector() || Y.rows !== X.rows) {
-        throw new Error('Y must be a column vector of length X.rows');
+      if (Y.rows !== X.rows) {
+        throw new Error('Y should have the same number of rows as X');
       }
-      u = Y;
+      u = Y.getColumnVector(0);
     } else {
       u = X.getColumnVector(0);
     }
