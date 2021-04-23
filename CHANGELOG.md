@@ -1,5 +1,12 @@
 # Changelog
 
+## [6.8.0](https://www.github.com/mljs/matrix/compare/v6.7.0...v6.8.0) (2021-04-23)
+
+
+### Features
+
+* add multi Y options to nipals ([#122](https://www.github.com/mljs/matrix/issues/122)) ([#123](https://www.github.com/mljs/matrix/issues/123)) ([c251328](https://www.github.com/mljs/matrix/commit/c2513281294f832b4d58b3734c6bc54b6261576d))
+
 ## [6.7.0](https://www.github.com/mljs/matrix/compare/v6.6.0...v6.7.0) (2021-03-12)
 
 
