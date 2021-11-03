@@ -1228,7 +1228,7 @@ export interface INipalsOptions {
    * The maximum number of allowed iterations before beraking the loop if convergence is not achieved.
    * @default 1000
    */
-  maxIterations?: boolean;
+  maxIterations?: number;
   /**
    * Termination criteria
    * @default 1e-10
@@ -1249,13 +1249,13 @@ export class Nipals {
   constructor(X: MaybeMatrix, options?: INipalsOptions);
   w: Matrix;
   s: Matrix;
-  t: number;
+  t: Matrix;
   xResidual: Matrix;
   p: Matrix;
   q: Matrix;
-  u: number;
+  u: Matrix;
   yResidual: Matrix;
-  betas: number;
+  betas: Matrix;
 }
 
 export { Nipals as NIPALS };
