@@ -21,9 +21,8 @@
     "prepack": "npm run compile",
     "prettier": "prettier --check src",
     "prettier-write": "prettier --write src",
-    "test": "npm run test-coverage && npm run eslint && npm run prettier",
-    "test-only": "jest",
-    "test-coverage": "jest --coverage"
+    "test": "npm run test-only && npm run eslint && npm run prettier",
+    "test-only": "jest --coverage"
   },
   "jest": {
     "testEnvironment": "node"
