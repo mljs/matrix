@@ -1,10 +1,10 @@
-import Matrix from "./matrix";
+import Matrix from './matrix';
 
 export function correlation(xMatrix, yMatrix = xMatrix, options = {}) {
   xMatrix = new Matrix(xMatrix);
   let yIsSame = false;
   if (
-    typeof yMatrix === "object" &&
+    typeof yMatrix === 'object' &&
     !Matrix.isMatrix(yMatrix) &&
     !Array.isArray(yMatrix)
   ) {
@@ -15,27 +15,27 @@ export function correlation(xMatrix, yMatrix = xMatrix, options = {}) {
     yMatrix = new Matrix(yMatrix);
   }
   if (xMatrix.rows !== yMatrix.rows) {
-    throw new TypeError("Both matrices must have the same number of rows");
+    throw new TypeError('Both matrices must have the same number of rows');
   }
 
   const { center = true, scale = true } = options;
   if (center) {
-    xMatrix.center("column");
+    xMatrix.center('column');
     if (!yIsSame) {
-      yMatrix.center("column");
+      yMatrix.center('column');
     }
   }
   if (scale) {
-    xMatrix.scale("column");
+    xMatrix.scale('column');
     if (!yIsSame) {
-      yMatrix.scale("column");
+      yMatrix.scale('column');
     }
   }
 
-  const sdx = xMatrix.standardDeviation("column", { unbiased: true });
+  const sdx = xMatrix.standardDeviation('column', { unbiased: true });
   const sdy = yIsSame
     ? sdx
-    : yMatrix.standardDeviation("column", { unbiased: true });
+    : yMatrix.standardDeviation('column', { unbiased: true });
 
   const corr = xMatrix.transpose().mmul(yMatrix);
   for (let i = 0; i < corr.rows; i++) {
@@ -43,7 +43,7 @@ export function correlation(xMatrix, yMatrix = xMatrix, options = {}) {
       corr.set(
         i,
         j,
-        corr.get(i, j) * (1 / (sdx[i] * sdy[j])) * (1 / (xMatrix.rows - 1))
+        corr.get(i, j) * (1 / (sdx[i] * sdy[j])) * (1 / (xMatrix.rows - 1)),
       );
     }
   }

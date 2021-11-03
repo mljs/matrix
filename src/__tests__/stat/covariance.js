@@ -1,7 +1,7 @@
-import { Matrix, covariance } from "../..";
+import { Matrix, covariance } from '../..';
 
-describe("multivariate linear regression", () => {
-  it("covariance should work with 1 or 2 matrix inputs", () => {
+describe('multivariate linear regression', () => {
+  it('covariance should work with 1 or 2 matrix inputs', () => {
     let x = new Matrix([
       [1, 2, 3, 4, 5],
       [6, 7, 8, 9, 10],
@@ -41,7 +41,7 @@ describe("multivariate linear regression", () => {
     expect(y.to1DArray()).toStrictEqual([5, 2, 3, 4, 1, 6, 7, 1, 7]);
   });
 
-  it("covariance should work on empty matrices", () => {
+  it('covariance should work on empty matrices', () => {
     const x = new Matrix(0, 0);
     const z = new Matrix(3, 0);
     expect(covariance(x).to2DArray()).toStrictEqual([]);

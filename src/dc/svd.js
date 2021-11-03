@@ -1,14 +1,14 @@
-import Matrix from "../matrix";
-import WrapperMatrix2D from "../wrap/WrapperMatrix2D";
+import Matrix from '../matrix';
+import WrapperMatrix2D from '../wrap/WrapperMatrix2D';
 
-import { hypotenuse } from "./util";
+import { hypotenuse } from './util';
 
 export default class SingularValueDecomposition {
   constructor(value, options = {}) {
     value = WrapperMatrix2D.checkMatrix(value);
 
     if (value.isEmpty()) {
-      throw new Error("Matrix must be non-empty");
+      throw new Error('Matrix must be non-empty');
     }
 
     let m = value.rows;
@@ -30,7 +30,7 @@ export default class SingularValueDecomposition {
         a = value.clone();
         // eslint-disable-next-line no-console
         console.warn(
-          "Computing SVD on a matrix with more columns than rows. Consider enabling autoTranspose"
+          'Computing SVD on a matrix with more columns than rows. Consider enabling autoTranspose',
         );
       } else {
         a = value.transpose();
@@ -299,7 +299,7 @@ export default class SingularValueDecomposition {
             Math.abs(s[p - 2]),
             Math.abs(e[p - 2]),
             Math.abs(s[k]),
-            Math.abs(e[k])
+            Math.abs(e[k]),
           );
           const sp = s[p - 1] / scale;
           const spm1 = s[p - 2] / scale;

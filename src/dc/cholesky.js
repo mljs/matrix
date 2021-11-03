@@ -1,11 +1,11 @@
-import Matrix from "../matrix";
-import WrapperMatrix2D from "../wrap/WrapperMatrix2D";
+import Matrix from '../matrix';
+import WrapperMatrix2D from '../wrap/WrapperMatrix2D';
 
 export default class CholeskyDecomposition {
   constructor(value) {
     value = WrapperMatrix2D.checkMatrix(value);
     if (!value.isSymmetric()) {
-      throw new Error("Matrix is not symmetric");
+      throw new Error('Matrix is not symmetric');
     }
 
     let a = value;
@@ -50,10 +50,10 @@ export default class CholeskyDecomposition {
     let dimension = l.rows;
 
     if (value.rows !== dimension) {
-      throw new Error("Matrix dimensions do not match");
+      throw new Error('Matrix dimensions do not match');
     }
     if (this.isPositiveDefinite() === false) {
-      throw new Error("Matrix is not positive definite");
+      throw new Error('Matrix is not positive definite');
     }
 
     let count = value.columns;

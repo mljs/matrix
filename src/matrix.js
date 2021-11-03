@@ -1,7 +1,7 @@
-import rescale from "ml-array-rescale";
+import rescale from 'ml-array-rescale';
 
-import { inspectMatrix, inspectMatrixWithOptions } from "./inspect";
-import { installMathOperations } from "./mathOperations";
+import { inspectMatrix, inspectMatrixWithOptions } from './inspect';
+import { installMathOperations } from './mathOperations';
 import {
   sumByRow,
   sumByColumn,
@@ -21,7 +21,7 @@ import {
   getScaleByRow,
   getScaleByColumn,
   getScaleAll,
-} from "./stat";
+} from './stat';
 import {
   checkRowVector,
   checkRowIndex,
@@ -30,13 +30,13 @@ import {
   checkRange,
   checkIndices,
   checkNonEmpty,
-} from "./util";
+} from './util';
 
 export class AbstractMatrix {
   static from1DArray(newRows, newColumns, newData) {
     let length = newRows * newColumns;
     if (length !== newData.length) {
-      throw new RangeError("data length does not match given dimensions");
+      throw new RangeError('data length does not match given dimensions');
     }
     let newMatrix = new Matrix(newRows, newColumns);
     for (let row = 0; row < newRows; row++) {
@@ -72,8 +72,8 @@ export class AbstractMatrix {
   }
 
   static rand(rows, columns, options = {}) {
-    if (typeof options !== "object") {
-      throw new TypeError("options must be an object");
+    if (typeof options !== 'object') {
+      throw new TypeError('options must be an object');
     }
     const { random = Math.random } = options;
     let matrix = new Matrix(rows, columns);
@@ -86,13 +86,13 @@ export class AbstractMatrix {
   }
 
   static randInt(rows, columns, options = {}) {
-    if (typeof options !== "object") {
-      throw new TypeError("options must be an object");
+    if (typeof options !== 'object') {
+      throw new TypeError('options must be an object');
     }
     const { min = 0, max = 1000, random = Math.random } = options;
-    if (!Number.isInteger(min)) throw new TypeError("min must be an integer");
-    if (!Number.isInteger(max)) throw new TypeError("max must be an integer");
-    if (min >= max) throw new RangeError("min must be smaller than max");
+    if (!Number.isInteger(min)) throw new TypeError('min must be an integer');
+    if (!Number.isInteger(max)) throw new TypeError('max must be an integer');
+    if (min >= max) throw new RangeError('min must be smaller than max');
     let interval = max - min;
     let matrix = new Matrix(rows, columns);
     for (let i = 0; i < rows; i++) {
@@ -160,7 +160,7 @@ export class AbstractMatrix {
   }
 
   static isMatrix(value) {
-    return value != null && value.klass === "Matrix";
+    return value != null && value.klass === 'Matrix';
   }
 
   get size() {
@@ -168,8 +168,8 @@ export class AbstractMatrix {
   }
 
   apply(callback) {
-    if (typeof callback !== "function") {
-      throw new TypeError("callback must be a function");
+    if (typeof callback !== 'function') {
+      throw new TypeError('callback must be a function');
     }
     for (let i = 0; i < this.rows; i++) {
       for (let j = 0; j < this.columns; j++) {
@@ -358,23 +358,23 @@ export class AbstractMatrix {
   }
 
   set() {
-    throw new Error("set method is unimplemented");
+    throw new Error('set method is unimplemented');
   }
 
   get() {
-    throw new Error("get method is unimplemented");
+    throw new Error('get method is unimplemented');
   }
 
   repeat(options = {}) {
-    if (typeof options !== "object") {
-      throw new TypeError("options must be an object");
+    if (typeof options !== 'object') {
+      throw new TypeError('options must be an object');
     }
     const { rows = 1, columns = 1 } = options;
     if (!Number.isInteger(rows) || rows <= 0) {
-      throw new TypeError("rows must be a positive integer");
+      throw new TypeError('rows must be a positive integer');
     }
     if (!Number.isInteger(columns) || columns <= 0) {
-      throw new TypeError("columns must be a positive integer");
+      throw new TypeError('columns must be a positive integer');
     }
     let matrix = new Matrix(this.rows * rows, this.columns * columns);
     for (let i = 0; i < rows; i++) {
@@ -743,11 +743,11 @@ export class AbstractMatrix {
     return diag;
   }
 
-  norm(type = "frobenius") {
+  norm(type = 'frobenius') {
     let result = 0;
-    if (type === "max") {
+    if (type === 'max') {
       return this.max();
-    } else if (type === "frobenius") {
+    } else if (type === 'frobenius') {
       for (let i = 0; i < this.rows; i++) {
         for (let j = 0; j < this.columns; j++) {
           result = result + this.get(i, j) * this.get(i, j);
@@ -774,7 +774,7 @@ export class AbstractMatrix {
     if (AbstractMatrix.isMatrix(vector2)) vector2 = vector2.to1DArray();
     let vector1 = this.to1DArray();
     if (vector1.length !== vector2.length) {
-      throw new RangeError("vectors do not have the same size");
+      throw new RangeError('vectors do not have the same size');
     }
     let dot = 0;
     for (let i = 0; i < vector1.length; i++) {
@@ -924,7 +924,7 @@ export class AbstractMatrix {
     if (c1 !== r2) {
       // eslint-disable-next-line no-console
       console.warn(
-        `Multiplying ${r1} x ${c1} and ${r2} x ${c2} matrix: dimensions do not match.`
+        `Multiplying ${r1} x ${c1} and ${r2} x ${c2} matrix: dimensions do not match.`,
       );
     }
 
@@ -990,7 +990,7 @@ export class AbstractMatrix {
         AbstractMatrix.add(a11, a22),
         AbstractMatrix.add(b11, b22),
         halfRows,
-        halfCols
+        halfCols,
       );
       let m2 = blockMult(AbstractMatrix.add(a21, a22), b11, halfRows, halfCols);
       let m3 = blockMult(a11, AbstractMatrix.sub(b12, b22), halfRows, halfCols);
@@ -1000,13 +1000,13 @@ export class AbstractMatrix {
         AbstractMatrix.sub(a21, a11),
         AbstractMatrix.add(b11, b12),
         halfRows,
-        halfCols
+        halfCols,
       );
       let m7 = blockMult(
         AbstractMatrix.sub(a12, a22),
         AbstractMatrix.add(b21, b22),
         halfRows,
-        halfCols
+        halfCols,
       );
 
       // Combine intermediate values into the output.
@@ -1031,13 +1031,13 @@ export class AbstractMatrix {
   }
 
   scaleRows(options = {}) {
-    if (typeof options !== "object") {
-      throw new TypeError("options must be an object");
+    if (typeof options !== 'object') {
+      throw new TypeError('options must be an object');
     }
     const { min = 0, max = 1 } = options;
-    if (!Number.isFinite(min)) throw new TypeError("min must be a number");
-    if (!Number.isFinite(max)) throw new TypeError("max must be a number");
-    if (min >= max) throw new RangeError("min must be smaller than max");
+    if (!Number.isFinite(min)) throw new TypeError('min must be a number');
+    if (!Number.isFinite(max)) throw new TypeError('max must be a number');
+    if (min >= max) throw new RangeError('min must be smaller than max');
     let newMatrix = new Matrix(this.rows, this.columns);
     for (let i = 0; i < this.rows; i++) {
       const row = this.getRow(i);
@@ -1050,13 +1050,13 @@ export class AbstractMatrix {
   }
 
   scaleColumns(options = {}) {
-    if (typeof options !== "object") {
-      throw new TypeError("options must be an object");
+    if (typeof options !== 'object') {
+      throw new TypeError('options must be an object');
     }
     const { min = 0, max = 1 } = options;
-    if (!Number.isFinite(min)) throw new TypeError("min must be a number");
-    if (!Number.isFinite(max)) throw new TypeError("max must be a number");
-    if (min >= max) throw new RangeError("min must be smaller than max");
+    if (!Number.isFinite(min)) throw new TypeError('min must be a number');
+    if (!Number.isFinite(max)) throw new TypeError('max must be a number');
+    if (min >= max) throw new RangeError('min must be smaller than max');
     let newMatrix = new Matrix(this.rows, this.columns);
     for (let i = 0; i < this.columns; i++) {
       const column = this.getColumn(i);
@@ -1122,7 +1122,7 @@ export class AbstractMatrix {
   kroneckerSum(other) {
     other = Matrix.checkMatrix(other);
     if (!this.isSquare() || !other.isSquare()) {
-      throw new Error("Kronecker Sum needs two Square Matrices");
+      throw new Error('Kronecker Sum needs two Square Matrices');
     }
     let m = this.rows;
     let n = other.rows;
@@ -1159,7 +1159,7 @@ export class AbstractMatrix {
     checkRange(this, startRow, endRow, startColumn, endColumn);
     let newMatrix = new Matrix(
       endRow - startRow + 1,
-      endColumn - startColumn + 1
+      endColumn - startColumn + 1,
     );
     for (let i = startRow; i <= endRow; i++) {
       for (let j = startColumn; j <= endColumn; j++) {
@@ -1179,7 +1179,7 @@ export class AbstractMatrix {
       endColumn < 0 ||
       endColumn >= this.columns
     ) {
-      throw new RangeError("Argument out of range");
+      throw new RangeError('Argument out of range');
     }
 
     let newMatrix = new Matrix(indices.length, endColumn - startColumn + 1);
@@ -1204,7 +1204,7 @@ export class AbstractMatrix {
       endRow < 0 ||
       endRow >= this.rows
     ) {
-      throw new RangeError("Argument out of range");
+      throw new RangeError('Argument out of range');
     }
 
     let newMatrix = new Matrix(endRow - startRow + 1, indices.length);
@@ -1269,9 +1269,9 @@ export class AbstractMatrix {
 
   sum(by) {
     switch (by) {
-      case "row":
+      case 'row':
         return sumByRow(this);
-      case "column":
+      case 'column':
         return sumByColumn(this);
       case undefined:
         return sumAll(this);
@@ -1282,9 +1282,9 @@ export class AbstractMatrix {
 
   product(by) {
     switch (by) {
-      case "row":
+      case 'row':
         return productByRow(this);
-      case "column":
+      case 'column':
         return productByColumn(this);
       case undefined:
         return productAll(this);
@@ -1296,13 +1296,13 @@ export class AbstractMatrix {
   mean(by) {
     const sum = this.sum(by);
     switch (by) {
-      case "row": {
+      case 'row': {
         for (let i = 0; i < this.rows; i++) {
           sum[i] /= this.columns;
         }
         return sum;
       }
-      case "column": {
+      case 'column': {
         for (let i = 0; i < this.columns; i++) {
           sum[i] /= this.rows;
         }
@@ -1316,33 +1316,33 @@ export class AbstractMatrix {
   }
 
   variance(by, options = {}) {
-    if (typeof by === "object") {
+    if (typeof by === 'object') {
       options = by;
       by = undefined;
     }
-    if (typeof options !== "object") {
-      throw new TypeError("options must be an object");
+    if (typeof options !== 'object') {
+      throw new TypeError('options must be an object');
     }
     const { unbiased = true, mean = this.mean(by) } = options;
-    if (typeof unbiased !== "boolean") {
-      throw new TypeError("unbiased must be a boolean");
+    if (typeof unbiased !== 'boolean') {
+      throw new TypeError('unbiased must be a boolean');
     }
     switch (by) {
-      case "row": {
+      case 'row': {
         if (!Array.isArray(mean)) {
-          throw new TypeError("mean must be an array");
+          throw new TypeError('mean must be an array');
         }
         return varianceByRow(this, unbiased, mean);
       }
-      case "column": {
+      case 'column': {
         if (!Array.isArray(mean)) {
-          throw new TypeError("mean must be an array");
+          throw new TypeError('mean must be an array');
         }
         return varianceByColumn(this, unbiased, mean);
       }
       case undefined: {
-        if (typeof mean !== "number") {
-          throw new TypeError("mean must be a number");
+        if (typeof mean !== 'number') {
+          throw new TypeError('mean must be a number');
         }
         return varianceAll(this, unbiased, mean);
       }
@@ -1352,7 +1352,7 @@ export class AbstractMatrix {
   }
 
   standardDeviation(by, options) {
-    if (typeof by === "object") {
+    if (typeof by === 'object') {
       options = by;
       by = undefined;
     }
@@ -1368,32 +1368,32 @@ export class AbstractMatrix {
   }
 
   center(by, options = {}) {
-    if (typeof by === "object") {
+    if (typeof by === 'object') {
       options = by;
       by = undefined;
     }
-    if (typeof options !== "object") {
-      throw new TypeError("options must be an object");
+    if (typeof options !== 'object') {
+      throw new TypeError('options must be an object');
     }
     const { center = this.mean(by) } = options;
     switch (by) {
-      case "row": {
+      case 'row': {
         if (!Array.isArray(center)) {
-          throw new TypeError("center must be an array");
+          throw new TypeError('center must be an array');
         }
         centerByRow(this, center);
         return this;
       }
-      case "column": {
+      case 'column': {
         if (!Array.isArray(center)) {
-          throw new TypeError("center must be an array");
+          throw new TypeError('center must be an array');
         }
         centerByColumn(this, center);
         return this;
       }
       case undefined: {
-        if (typeof center !== "number") {
-          throw new TypeError("center must be a number");
+        if (typeof center !== 'number') {
+          throw new TypeError('center must be a number');
         }
         centerAll(this, center);
         return this;
@@ -1404,29 +1404,29 @@ export class AbstractMatrix {
   }
 
   scale(by, options = {}) {
-    if (typeof by === "object") {
+    if (typeof by === 'object') {
       options = by;
       by = undefined;
     }
-    if (typeof options !== "object") {
-      throw new TypeError("options must be an object");
+    if (typeof options !== 'object') {
+      throw new TypeError('options must be an object');
     }
     let scale = options.scale;
     switch (by) {
-      case "row": {
+      case 'row': {
         if (scale === undefined) {
           scale = getScaleByRow(this);
         } else if (!Array.isArray(scale)) {
-          throw new TypeError("scale must be an array");
+          throw new TypeError('scale must be an array');
         }
         scaleByRow(this, scale);
         return this;
       }
-      case "column": {
+      case 'column': {
         if (scale === undefined) {
           scale = getScaleByColumn(this);
         } else if (!Array.isArray(scale)) {
-          throw new TypeError("scale must be an array");
+          throw new TypeError('scale must be an array');
         }
         scaleByColumn(this, scale);
         return this;
@@ -1434,8 +1434,8 @@ export class AbstractMatrix {
       case undefined: {
         if (scale === undefined) {
           scale = getScaleAll(this);
-        } else if (typeof scale !== "number") {
-          throw new TypeError("scale must be a number");
+        } else if (typeof scale !== 'number') {
+          throw new TypeError('scale must be a number');
         }
         scaleAll(this, scale);
         return this;
@@ -1450,9 +1450,9 @@ export class AbstractMatrix {
   }
 }
 
-AbstractMatrix.prototype.klass = "Matrix";
-if (typeof Symbol !== "undefined") {
-  AbstractMatrix.prototype[Symbol.for("nodejs.util.inspect.custom")] =
+AbstractMatrix.prototype.klass = 'Matrix';
+if (typeof Symbol !== 'undefined') {
+  AbstractMatrix.prototype[Symbol.for('nodejs.util.inspect.custom')] =
     inspectMatrix;
 }
 
@@ -1484,28 +1484,28 @@ export default class Matrix extends AbstractMatrix {
           this.data.push(new Float64Array(nColumns));
         }
       } else {
-        throw new TypeError("nColumns must be a positive integer");
+        throw new TypeError('nColumns must be a positive integer');
       }
     } else if (Array.isArray(nRows)) {
       // Copy the values from the 2D array
       const arrayData = nRows;
       nRows = arrayData.length;
       nColumns = nRows ? arrayData[0].length : 0;
-      if (typeof nColumns !== "number") {
+      if (typeof nColumns !== 'number') {
         throw new TypeError(
-          "Data must be a 2D array with at least one element"
+          'Data must be a 2D array with at least one element',
         );
       }
       this.data = [];
       for (let i = 0; i < nRows; i++) {
         if (arrayData[i].length !== nColumns) {
-          throw new RangeError("Inconsistent array dimensions");
+          throw new RangeError('Inconsistent array dimensions');
         }
         this.data.push(Float64Array.from(arrayData[i]));
       }
     } else {
       throw new TypeError(
-        "First argument must be a positive number or an array"
+        'First argument must be a positive number or an array',
       );
     }
     this.rows = nRows;
@@ -1557,7 +1557,7 @@ export default class Matrix extends AbstractMatrix {
   }
 
   addColumn(index, array) {
-    if (typeof array === "undefined") {
+    if (typeof array === 'undefined') {
       array = index;
       index = this.columns;
     }

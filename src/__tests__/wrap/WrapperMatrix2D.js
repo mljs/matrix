@@ -1,6 +1,6 @@
-import { WrapperMatrix2D } from "../..";
+import { WrapperMatrix2D } from '../..';
 
-test("simple WrapperMatrix2D creation", () => {
+test('simple WrapperMatrix2D creation', () => {
   let wrapperMatrix2D = new WrapperMatrix2D([
     [1, 0],
     [0, 1],

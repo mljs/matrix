@@ -1,5 +1,5 @@
-import SingularValueDecomposition from "./dc/svd";
-import Matrix from "./matrix";
+import SingularValueDecomposition from './dc/svd';
+import Matrix from './matrix';
 
 function xrange(n, exception) {
   let range = [];
@@ -16,7 +16,7 @@ function dependenciesOneRow(
   matrix,
   index,
   thresholdValue = 10e-10,
-  thresholdError = 10e-10
+  thresholdError = 10e-10,
 ) {
   if (error > thresholdError) {
     return new Array(matrix.rows + 1).fill(0);
@@ -46,7 +46,7 @@ export function linearDependencies(matrix, options = {}) {
     let error = Matrix.sub(b, Abis.mmul(x)).abs().max();
     results.setRow(
       i,
-      dependenciesOneRow(error, x, i, thresholdValue, thresholdError)
+      dependenciesOneRow(error, x, i, thresholdValue, thresholdError),
     );
   }
   return results;

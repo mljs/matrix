@@ -1,4 +1,4 @@
-import { newArray } from "./util";
+import { newArray } from './util';
 
 export function sumByRow(matrix) {
   let sum = newArray(matrix.rows);

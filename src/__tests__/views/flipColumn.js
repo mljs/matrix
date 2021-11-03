@@ -1,7 +1,7 @@
-import { Matrix, MatrixFlipColumnView } from "../..";
+import { Matrix, MatrixFlipColumnView } from '../..';
 
-describe("Flip column view", () => {
-  it("should set and get values", () => {
+describe('Flip column view', () => {
+  it('should set and get values', () => {
     const m = Matrix.ones(5, 8);
     const view = new MatrixFlipColumnView(m);
 

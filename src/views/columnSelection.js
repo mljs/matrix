@@ -1,6 +1,6 @@
-import { checkColumnIndices } from "../util";
+import { checkColumnIndices } from '../util';
 
-import BaseView from "./base";
+import BaseView from './base';
 
 export default class MatrixColumnSelectionView extends BaseView {
   constructor(matrix, columnIndices) {

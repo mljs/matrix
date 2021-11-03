@@ -1,7 +1,7 @@
-import { Matrix, MatrixColumnSelectionView } from "../..";
+import { Matrix, MatrixColumnSelectionView } from '../..';
 
-describe("Selection column view", () => {
-  it("should correctly remap coordinates", () => {
+describe('Selection column view', () => {
+  it('should correctly remap coordinates', () => {
     const m = Matrix.ones(5, 8);
     const msv = new MatrixColumnSelectionView(m, [1, 2]);
 
@@ -11,13 +11,13 @@ describe("Selection column view", () => {
     expect(m.get(0, 2)).toBe(5);
   });
 
-  it("should throw when wrong arguments or range", () => {
+  it('should throw when wrong arguments or range', () => {
     const m = Matrix.ones(2, 2);
     expect(() => new MatrixColumnSelectionView(m, [1, 1, 2])).toThrow(
-      "column indices are out of range"
+      'column indices are out of range',
     );
     expect(() => new MatrixColumnSelectionView(m, 1)).toThrow(
-      "unexpected type for column indices"
+      'unexpected type for column indices',
     );
   });
 });

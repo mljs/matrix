@@ -1,7 +1,7 @@
-import { WrapperMatrix1D } from "../..";
+import { WrapperMatrix1D } from '../..';
 
-describe("manual creation", () => {
-  it("default WrapperMatrix1D creation", () => {
+describe('manual creation', () => {
+  it('default WrapperMatrix1D creation', () => {
     let wrapperMatrix1D = new WrapperMatrix1D([0, 1, 2, 3, 4, 5]);
     expect(wrapperMatrix1D.rows).toBe(1);
     expect(wrapperMatrix1D.columns).toBe(6);
@@ -11,7 +11,7 @@ describe("manual creation", () => {
     expect(wrapperMatrix1D.get(0, 1)).toBe(2);
   });
 
-  it("more rows WrapperMatrix1D creation", () => {
+  it('more rows WrapperMatrix1D creation', () => {
     let wrapperMatrix1D = new WrapperMatrix1D([0, 1, 2, 3, 4, 5], { rows: 2 });
     expect(wrapperMatrix1D.rows).toBe(2);
     expect(wrapperMatrix1D.columns).toBe(3);
@@ -22,8 +22,8 @@ describe("manual creation", () => {
   });
 });
 
-test("error testing", () => {
+test('error testing', () => {
   expect(() => new WrapperMatrix1D([0, 1, 2, 3, 4, 5, 6], { rows: 2 })).toThrow(
-    "the data length is not divisible by the number of rows"
+    'the data length is not divisible by the number of rows',
   );
 });

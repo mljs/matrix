@@ -1,6 +1,6 @@
-import LuDecomposition from "./dc/lu";
-import Matrix from "./matrix";
-import MatrixSelectionView from "./views/selection";
+import LuDecomposition from './dc/lu';
+import Matrix from './matrix';
+import MatrixSelectionView from './views/selection';
 
 export function determinant(matrix) {
   matrix = Matrix.checkMatrix(matrix);
@@ -38,6 +38,6 @@ export function determinant(matrix) {
       return new LuDecomposition(matrix).determinant;
     }
   } else {
-    throw Error("determinant can only be calculated for a square matrix");
+    throw Error('determinant can only be calculated for a square matrix');
   }
 }

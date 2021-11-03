@@ -1,7 +1,7 @@
-import Matrix from "../matrix";
-import WrapperMatrix2D from "../wrap/WrapperMatrix2D";
+import Matrix from '../matrix';
+import WrapperMatrix2D from '../wrap/WrapperMatrix2D';
 
-import { hypotenuse } from "./util";
+import { hypotenuse } from './util';
 
 export default class EigenvalueDecomposition {
   constructor(matrix, options = {}) {
@@ -9,11 +9,11 @@ export default class EigenvalueDecomposition {
 
     matrix = WrapperMatrix2D.checkMatrix(matrix);
     if (!matrix.isSquare()) {
-      throw new Error("Matrix is not a square matrix");
+      throw new Error('Matrix is not a square matrix');
     }
 
     if (matrix.isEmpty()) {
-      throw new Error("Matrix must be non-empty");
+      throw new Error('Matrix must be non-empty');
     }
 
     let n = matrix.columns;
@@ -664,7 +664,7 @@ function hqr2(nn, e, d, V, H) {
             H.set(
               i + 1,
               n,
-              Math.abs(x) > Math.abs(z) ? (-r - w * t) / x : (-s - y * t) / z
+              Math.abs(x) > Math.abs(z) ? (-r - w * t) / x : (-s - y * t) / z,
             );
           }
 
@@ -729,7 +729,7 @@ function hqr2(nn, e, d, V, H) {
               x * r - z * ra + q * sa,
               x * s - z * sa - q * ra,
               vr,
-              vi
+              vi,
             );
             H.set(i, n - 1, cdivres[0]);
             H.set(i, n, cdivres[1]);
@@ -737,19 +737,19 @@ function hqr2(nn, e, d, V, H) {
               H.set(
                 i + 1,
                 n - 1,
-                (-ra - w * H.get(i, n - 1) + q * H.get(i, n)) / x
+                (-ra - w * H.get(i, n - 1) + q * H.get(i, n)) / x,
               );
               H.set(
                 i + 1,
                 n,
-                (-sa - w * H.get(i, n) - q * H.get(i, n - 1)) / x
+                (-sa - w * H.get(i, n) - q * H.get(i, n - 1)) / x,
               );
             } else {
               cdivres = cdiv(
                 -r - y * H.get(i, n - 1),
                 -s - y * H.get(i, n),
                 z,
-                q
+                q,
               );
               H.set(i + 1, n - 1, cdivres[0]);
               H.set(i + 1, n, cdivres[1]);

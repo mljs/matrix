@@ -1,6 +1,6 @@
-import { Matrix } from "../..";
+import { Matrix } from '../..';
 
-test("flip rows", () => {
+test('flip rows', () => {
   const matrix = new Matrix([
     [1, 2, 3],
     [4, 5, 6],
@@ -13,14 +13,14 @@ test("flip rows", () => {
   ]);
 });
 
-test("flip rows of 0 row matrix", () => {
+test('flip rows of 0 row matrix', () => {
   const matrix = new Matrix([]);
   const result = matrix.flipRows();
   expect(result).toBe(matrix);
   expect(result.to2DArray()).toStrictEqual([]);
 });
 
-test("flip columns", () => {
+test('flip columns', () => {
   const matrix = new Matrix([
     [1, 2, 3],
     [4, 5, 6],
@@ -33,7 +33,7 @@ test("flip columns", () => {
   ]);
 });
 
-test("flip columns of 0 row matrix", () => {
+test('flip columns of 0 row matrix', () => {
   const matrix = new Matrix(0, 5);
   const result = matrix.flipColumns();
   expect(result).toBe(matrix);
