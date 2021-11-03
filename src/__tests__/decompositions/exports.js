@@ -9,10 +9,10 @@ import {
   EVD,
   CholeskyDecomposition,
   CHO,
-} from '../..';
+} from "../..";
 
-describe('Decompositions exports', () => {
-  it('should export full and short names', () => {
+describe("Decompositions exports", () => {
+  it("should export full and short names", () => {
     expect(LuDecomposition).toStrictEqual(LU);
     expect(QrDecomposition).toStrictEqual(QR);
     expect(SingularValueDecomposition).toStrictEqual(SVD);

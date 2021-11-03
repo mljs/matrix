@@ -1,5 +1,5 @@
-import Matrix from '../matrix';
-import WrapperMatrix2D from '../wrap/WrapperMatrix2D';
+import Matrix from "../matrix";
+import WrapperMatrix2D from "../wrap/WrapperMatrix2D";
 
 export default class LuDecomposition {
   constructor(matrix) {
@@ -85,10 +85,10 @@ export default class LuDecomposition {
     let rows = lu.rows;
 
     if (rows !== value.rows) {
-      throw new Error('Invalid matrix dimensions');
+      throw new Error("Invalid matrix dimensions");
     }
     if (this.isSingular()) {
-      throw new Error('LU matrix is singular');
+      throw new Error("LU matrix is singular");
     }
 
     let count = value.columns;
@@ -119,7 +119,7 @@ export default class LuDecomposition {
   get determinant() {
     let data = this.LU;
     if (!data.isSquare()) {
-      throw new Error('Matrix must be square');
+      throw new Error("Matrix must be square");
     }
     let determinant = this.pivotSign;
     let col = data.columns;

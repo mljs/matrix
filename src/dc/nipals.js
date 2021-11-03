@@ -1,5 +1,5 @@
-import Matrix from '../matrix';
-import WrapperMatrix2D from '../wrap/WrapperMatrix2D';
+import Matrix from "../matrix";
+import WrapperMatrix2D from "../wrap/WrapperMatrix2D";
 
 export default class nipals {
   constructor(X, options = {}) {
@@ -13,13 +13,13 @@ export default class nipals {
 
     let u;
     if (Y) {
-      if (Array.isArray(Y) && typeof Y[0] === 'number') {
+      if (Array.isArray(Y) && typeof Y[0] === "number") {
         Y = Matrix.columnVector(Y);
       } else {
         Y = WrapperMatrix2D.checkMatrix(Y);
       }
       if (Y.rows !== X.rows) {
-        throw new Error('Y should have the same number of rows as X');
+        throw new Error("Y should have the same number of rows as X");
       }
       u = Y.getColumnVector(0);
     } else {
@@ -60,7 +60,7 @@ export default class nipals {
       let xResidual = X.clone().sub(t.clone().mmul(p.transpose()));
       let residual = u.transpose().mmul(t).div(t.transpose().mmul(t).get(0, 0));
       let yResidual = Y.clone().sub(
-        t.clone().mulS(residual.get(0, 0)).mmul(q.transpose()),
+        t.clone().mulS(residual.get(0, 0)).mmul(q.transpose())
       );
 
       this.t = t;

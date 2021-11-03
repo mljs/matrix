@@ -1,7 +1,7 @@
-import Matrix from '../matrix';
-import WrapperMatrix2D from '../wrap/WrapperMatrix2D';
+import Matrix from "../matrix";
+import WrapperMatrix2D from "../wrap/WrapperMatrix2D";
 
-import { hypotenuse } from './util';
+import { hypotenuse } from "./util";
 
 export default class QrDecomposition {
   constructor(value) {
@@ -51,10 +51,10 @@ export default class QrDecomposition {
     let m = qr.rows;
 
     if (value.rows !== m) {
-      throw new Error('Matrix row dimensions must agree');
+      throw new Error("Matrix row dimensions must agree");
     }
     if (!this.isFullRank()) {
-      throw new Error('Matrix is rank deficient');
+      throw new Error("Matrix is rank deficient");
     }
 
     let count = value.columns;

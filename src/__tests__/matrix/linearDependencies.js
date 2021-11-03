@@ -1,11 +1,11 @@
-import { toBeDeepCloseTo } from 'jest-matcher-deep-close-to';
+import { toBeDeepCloseTo } from "jest-matcher-deep-close-to";
 
-import { Matrix, linearDependencies } from '../..';
+import { Matrix, linearDependencies } from "../..";
 
 expect.extend({ toBeDeepCloseTo });
 
-describe('Linear Dependencies', () => {
-  it('should compute the rows dependencies', () => {
+describe("Linear Dependencies", () => {
+  it("should compute the rows dependencies", () => {
     const A = new Matrix([
       [2, 0, 0, 1],
       [0, 1, 6, 0],
@@ -22,7 +22,7 @@ describe('Linear Dependencies', () => {
         [0, 0.25, 0, 0, -0.25],
         [0, 1, 0, -4, 0],
       ],
-      3,
+      3
     );
   });
 });

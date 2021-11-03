@@ -1,5 +1,5 @@
-import SVD from './dc/svd';
-import Matrix from './matrix';
+import SVD from "./dc/svd";
+import Matrix from "./matrix";
 
 export function pseudoInverse(matrix, threshold = Number.EPSILON) {
   matrix = Matrix.checkMatrix(matrix);

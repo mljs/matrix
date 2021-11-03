@@ -1,7 +1,7 @@
-import { Matrix, MatrixRowView } from '../..';
+import { Matrix, MatrixRowView } from "../..";
 
-describe('Row view', () => {
-  it('should set and get column values', () => {
+describe("Row view", () => {
+  it("should set and get column values", () => {
     const m = Matrix.ones(5, 8);
     const mrv1 = new MatrixRowView(m, 0);
     const mrv2 = new MatrixRowView(m, 3);

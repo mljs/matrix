@@ -1,7 +1,7 @@
-import { Matrix, LU } from '../..';
+import { Matrix, LU } from "../..";
 
-describe('LU decomposition', () => {
-  it('should compute lower triangular matrix', () => {
+describe("LU decomposition", () => {
+  it("should compute lower triangular matrix", () => {
     // http://ch.mathworks.com/help/matlab/ref/lu.html
     let matrix = new Matrix([
       [1, -1, -1, -1, -1],
@@ -19,7 +19,7 @@ describe('LU decomposition', () => {
     expect(ltm.mmul(ltm.transpose())).toStrictEqual(matrix);
   });
 
-  it('should work with arrays', () => {
+  it("should work with arrays", () => {
     // http://ch.mathworks.com/help/matlab/ref/lu.html
     let matrix = [
       [1, -1, -1, -1, -1],
@@ -37,17 +37,17 @@ describe('LU decomposition', () => {
     expect(ltm.mmul(ltm.transpose())).toStrictEqual(new Matrix(matrix));
   });
 
-  it('should throw on bad input', () => {
+  it("should throw on bad input", () => {
     expect(
       () =>
         new LU([
           [0, 1, 2],
           [0, 1, 2],
-        ]).determinant,
-    ).toThrow('Matrix must be square');
+        ]).determinant
+    ).toThrow("Matrix must be square");
   });
 
-  it('should handle empty matrices', () => {
+  it("should handle empty matrices", () => {
     const matrix = new Matrix([]);
     const decomp = new LU(matrix);
     expect(decomp.lowerTriangularMatrix.to2DArray()).toStrictEqual([]);

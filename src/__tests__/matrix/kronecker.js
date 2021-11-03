@@ -1,7 +1,7 @@
-import { Matrix } from '../..';
+import { Matrix } from "../..";
 
-describe('Kronecker product', () => {
-  it('should compute the Kronecker product', () => {
+describe("Kronecker product", () => {
+  it("should compute the Kronecker product", () => {
     const matrix1 = new Matrix([
       [1, 2],
       [3, 4],
@@ -19,7 +19,7 @@ describe('Kronecker product', () => {
     ]);
   });
 
-  it('should compute on empty matrices', () => {
+  it("should compute on empty matrices", () => {
     const matrix1 = new Matrix([[]]);
     const matrix2 = new Matrix(0, 3);
     const matrix3 = new Matrix([
@@ -38,7 +38,7 @@ describe('Kronecker product', () => {
     expect(product23.columns).toBe(6);
   });
 
-  it('should compute the Kronecker sum', () => {
+  it("should compute the Kronecker sum", () => {
     const matrix1 = new Matrix([
       [1, 2],
       [3, 4],

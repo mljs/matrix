@@ -1,7 +1,7 @@
-import { Matrix, CHO } from '../..';
+import { Matrix, CHO } from "../..";
 
-describe('Cholesky decomposition', () => {
-  it('should compute lower triangular matrix', () => {
+describe("Cholesky decomposition", () => {
+  it("should compute lower triangular matrix", () => {
     // http://ch.mathworks.com/help/matlab/ref/chol.html
     let matrix = new Matrix([
       [1, -1, -1, -1, -1],
@@ -18,16 +18,16 @@ describe('Cholesky decomposition', () => {
 
     expect(ltm.mmul(ltm.transpose())).toStrictEqual(matrix);
   });
-  it('should throw if not symmetric', () => {
+  it("should throw if not symmetric", () => {
     expect(
       () =>
         new CHO([
           [0, 1],
           [2, 0],
-        ]),
-    ).toThrow('Matrix is not symmetric');
+        ])
+    ).toThrow("Matrix is not symmetric");
   });
-  it('test for positive definiteness', () => {
+  it("test for positive definiteness", () => {
     let A = new Matrix([
       [1, 2, 3],
       [4, 5, 6],
@@ -40,9 +40,9 @@ describe('Cholesky decomposition', () => {
     let b = new Matrix([[1], [2], [3]]);
 
     expect(choAtA.isPositiveDefinite()).toBe(false);
-    expect(() => choAtA.solve(b)).toThrow('Matrix is not positive definite');
+    expect(() => choAtA.solve(b)).toThrow("Matrix is not positive definite");
   });
-  it('should handle empty matrices', () => {
+  it("should handle empty matrices", () => {
     const decomp = new CHO([]);
     expect(decomp.lowerTriangularMatrix.to2DArray()).toStrictEqual([]);
   });

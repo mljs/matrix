@@ -1,6 +1,6 @@
-import { checkRange } from '../util';
+import { checkRange } from "../util";
 
-import BaseView from './base';
+import BaseView from "./base";
 
 export default class MatrixSubView extends BaseView {
   constructor(matrix, startRow, endRow, startColumn, endColumn) {
@@ -14,7 +14,7 @@ export default class MatrixSubView extends BaseView {
     this.matrix.set(
       this.startRow + rowIndex,
       this.startColumn + columnIndex,
-      value,
+      value
     );
     return this;
   }
@@ -22,7 +22,7 @@ export default class MatrixSubView extends BaseView {
   get(rowIndex, columnIndex) {
     return this.matrix.get(
       this.startRow + rowIndex,
-      this.startColumn + columnIndex,
+      this.startColumn + columnIndex
     );
   }
 }

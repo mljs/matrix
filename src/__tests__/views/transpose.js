@@ -1,7 +1,7 @@
-import { Matrix, MatrixTransposeView } from '../..';
+import { Matrix, MatrixTransposeView } from "../..";
 
-describe('Transpose view', () => {
-  it('should set and get opposite coordinates', () => {
+describe("Transpose view", () => {
+  it("should set and get opposite coordinates", () => {
     const m = Matrix.ones(5, 8);
     const mtv = new MatrixTransposeView(m);
 

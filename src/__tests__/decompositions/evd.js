@@ -1,7 +1,7 @@
-import { Matrix, EVD } from '../..';
+import { Matrix, EVD } from "../..";
 
-describe('Eigenvalue decomposition', () => {
-  it('simple example', () => {
+describe("Eigenvalue decomposition", () => {
+  it("simple example", () => {
     let matrix = new Matrix([
       [1, 0],
       [1, 3],
@@ -14,8 +14,8 @@ describe('Eigenvalue decomposition', () => {
     ]);
   });
 
-  it('empty matrix', () => {
+  it("empty matrix", () => {
     const matrix = new Matrix([]);
-    expect(() => new EVD(matrix)).toThrow('Matrix must be non-empty');
+    expect(() => new EVD(matrix)).toThrow("Matrix must be non-empty");
   });
 });

@@ -8,7 +8,7 @@
 export function checkRowIndex(matrix, index, outer) {
   let max = outer ? matrix.rows : matrix.rows - 1;
   if (index < 0 || index > max) {
-    throw new RangeError('Row index out of range');
+    throw new RangeError("Row index out of range");
   }
 }
 
@@ -22,7 +22,7 @@ export function checkRowIndex(matrix, index, outer) {
 export function checkColumnIndex(matrix, index, outer) {
   let max = outer ? matrix.columns : matrix.columns - 1;
   if (index < 0 || index > max) {
-    throw new RangeError('Column index out of range');
+    throw new RangeError("Column index out of range");
   }
 }
 
@@ -40,7 +40,7 @@ export function checkRowVector(matrix, vector) {
   }
   if (vector.length !== matrix.columns) {
     throw new RangeError(
-      'vector size must be the same as the number of columns',
+      "vector size must be the same as the number of columns"
     );
   }
   return vector;
@@ -59,7 +59,7 @@ export function checkColumnVector(matrix, vector) {
     vector = vector.to1DArray();
   }
   if (vector.length !== matrix.rows) {
-    throw new RangeError('vector size must be the same as the number of rows');
+    throw new RangeError("vector size must be the same as the number of rows");
   }
   return vector;
 }
@@ -72,8 +72,8 @@ export function checkIndices(matrix, rowIndices, columnIndices) {
 }
 
 export function checkRowIndices(matrix, rowIndices) {
-  if (typeof rowIndices !== 'object') {
-    throw new TypeError('unexpected type for row indices');
+  if (typeof rowIndices !== "object") {
+    throw new TypeError("unexpected type for row indices");
   }
 
   let rowOut = rowIndices.some((r) => {
@@ -81,7 +81,7 @@ export function checkRowIndices(matrix, rowIndices) {
   });
 
   if (rowOut) {
-    throw new RangeError('row indices are out of range');
+    throw new RangeError("row indices are out of range");
   }
 
   if (!Array.isArray(rowIndices)) rowIndices = Array.from(rowIndices);
@@ -90,8 +90,8 @@ export function checkRowIndices(matrix, rowIndices) {
 }
 
 export function checkColumnIndices(matrix, columnIndices) {
-  if (typeof columnIndices !== 'object') {
-    throw new TypeError('unexpected type for column indices');
+  if (typeof columnIndices !== "object") {
+    throw new TypeError("unexpected type for column indices");
   }
 
   let columnOut = columnIndices.some((c) => {
@@ -99,7 +99,7 @@ export function checkColumnIndices(matrix, columnIndices) {
   });
 
   if (columnOut) {
-    throw new RangeError('column indices are out of range');
+    throw new RangeError("column indices are out of range");
   }
   if (!Array.isArray(columnIndices)) columnIndices = Array.from(columnIndices);
 
@@ -108,12 +108,12 @@ export function checkColumnIndices(matrix, columnIndices) {
 
 export function checkRange(matrix, startRow, endRow, startColumn, endColumn) {
   if (arguments.length !== 5) {
-    throw new RangeError('expected 4 arguments');
+    throw new RangeError("expected 4 arguments");
   }
-  checkNumber('startRow', startRow);
-  checkNumber('endRow', endRow);
-  checkNumber('startColumn', startColumn);
-  checkNumber('endColumn', endColumn);
+  checkNumber("startRow", startRow);
+  checkNumber("endRow", endRow);
+  checkNumber("startColumn", startColumn);
+  checkNumber("endColumn", endColumn);
   if (
     startRow > endRow ||
     startColumn > endColumn ||
@@ -126,7 +126,7 @@ export function checkRange(matrix, startRow, endRow, startColumn, endColumn) {
     endColumn < 0 ||
     endColumn >= matrix.columns
   ) {
-    throw new RangeError('Submatrix indices are out of range');
+    throw new RangeError("Submatrix indices are out of range");
   }
 }
 
@@ -139,13 +139,13 @@ export function newArray(length, value = 0) {
 }
 
 function checkNumber(name, value) {
-  if (typeof value !== 'number') {
+  if (typeof value !== "number") {
     throw new TypeError(`${name} must be a number`);
   }
 }
 
 export function checkNonEmpty(matrix) {
   if (matrix.isEmpty()) {
-    throw new Error('Empty matrix has no elements to index');
+    throw new Error("Empty matrix has no elements to index");
   }
 }

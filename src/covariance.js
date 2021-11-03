@@ -1,10 +1,10 @@
-import Matrix from './matrix';
+import Matrix from "./matrix";
 
 export function covariance(xMatrix, yMatrix = xMatrix, options = {}) {
   xMatrix = new Matrix(xMatrix);
   let yIsSame = false;
   if (
-    typeof yMatrix === 'object' &&
+    typeof yMatrix === "object" &&
     !Matrix.isMatrix(yMatrix) &&
     !Array.isArray(yMatrix)
   ) {
@@ -15,13 +15,13 @@ export function covariance(xMatrix, yMatrix = xMatrix, options = {}) {
     yMatrix = new Matrix(yMatrix);
   }
   if (xMatrix.rows !== yMatrix.rows) {
-    throw new TypeError('Both matrices must have the same number of rows');
+    throw new TypeError("Both matrices must have the same number of rows");
   }
   const { center = true } = options;
   if (center) {
-    xMatrix = xMatrix.center('column');
+    xMatrix = xMatrix.center("column");
     if (!yIsSame) {
-      yMatrix = yMatrix.center('column');
+      yMatrix = yMatrix.center("column");
     }
   }
   const cov = xMatrix.transpose().mmul(yMatrix);

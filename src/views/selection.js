@@ -1,6 +1,6 @@
-import { checkIndices } from '../util';
+import { checkIndices } from "../util";
 
-import BaseView from './base';
+import BaseView from "./base";
 
 export default class MatrixSelectionView extends BaseView {
   constructor(matrix, rowIndices, columnIndices) {
@@ -14,7 +14,7 @@ export default class MatrixSelectionView extends BaseView {
     this.matrix.set(
       this.rowIndices[rowIndex],
       this.columnIndices[columnIndex],
-      value,
+      value
     );
     return this;
   }
@@ -22,7 +22,7 @@ export default class MatrixSelectionView extends BaseView {
   get(rowIndex, columnIndex) {
     return this.matrix.get(
       this.rowIndices[rowIndex],
-      this.columnIndices[columnIndex],
+      this.columnIndices[columnIndex]
     );
   }
 }

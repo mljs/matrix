@@ -1,9 +1,9 @@
-import { Matrix, wrap } from '../..';
-import * as util from '../../../testUtils';
-import MatrixTransposeView from '../../views/transpose';
+import { Matrix, wrap } from "../..";
+import * as util from "../../../testUtils";
+import MatrixTransposeView from "../../views/transpose";
 
-describe('Matrix creation', () => {
-  it('should create a new object', () => {
+describe("Matrix creation", () => {
+  it("should create a new object", () => {
     let array = util.getSquareArray();
     let matrix = new Matrix(array);
     expect(matrix).not.toBe(array);
@@ -11,21 +11,21 @@ describe('Matrix creation', () => {
     expect(Matrix.isMatrix(matrix)).toBe(true);
   });
 
-  it('should clone existing matrix', () => {
+  it("should clone existing matrix", () => {
     let original = util.getSquareMatrix();
     let matrix = new Matrix(original);
     expect(matrix).not.toBe(original);
     expect(matrix).toStrictEqual(original);
   });
 
-  it('should create a zero matrix', () => {
+  it("should create a zero matrix", () => {
     let matrix = new Matrix(3, 9);
     expect(matrix.rows).toBe(3);
     expect(matrix.columns).toBe(9);
     expect(matrix.get(0, 0)).toBe(0);
   });
 
-  it('should create an empty  matrix', () => {
+  it("should create an empty  matrix", () => {
     const matrix00 = new Matrix(0, 0);
     expect(matrix00.rows).toBe(0);
     expect(matrix00.columns).toBe(0);
@@ -37,9 +37,9 @@ describe('Matrix creation', () => {
     expect(matrix00FromArray.columns).toBe(0);
   });
 
-  it('should throw with wrong arguments', () => {
+  it("should throw with wrong arguments", () => {
     expect(() => new Matrix(6, -1)).toThrow(
-      /^nColumns must be a positive integer/,
+      /^nColumns must be a positive integer/
     );
     expect(() => new Matrix([0, 1, 2, 3])).toThrow(/^Data must be a 2D array/);
     expect(
@@ -47,69 +47,69 @@ describe('Matrix creation', () => {
         new Matrix([
           [0, 1],
           [0, 1, 2],
-        ]),
+        ])
     ).toThrow(/^Inconsistent array dimensions$/);
     expect(() => new Matrix()).toThrow(
-      /^First argument must be a positive number or an array$/,
+      /^First argument must be a positive number or an array$/
     );
   });
 
-  it('should correctly set rows, columns and values', () => {
+  it("should correctly set rows, columns and values", () => {
     let matrix = util.getSquareMatrix();
     expect(matrix.rows).toBe(3);
     expect(matrix.columns).toBe(3);
     expect(matrix.get(1, 2)).toBe(7);
   });
 
-  it('should correctly check if argument is a matrix', () => {
+  it("should correctly check if argument is a matrix", () => {
     let array = util.getSquareArray();
     let matrix = Matrix.checkMatrix(array);
     expect(Matrix.isMatrix(matrix)).toBe(true);
     let check2 = Matrix.checkMatrix(matrix);
     expect(check2).toBe(matrix);
     expect(() => Matrix.checkMatrix()).toThrow(
-      /^First argument must be a positive number or an array$/,
+      /^First argument must be a positive number or an array$/
     );
   });
 
-  it('should create a matrix from 1D array', () => {
+  it("should create a matrix from 1D array", () => {
     let matrix = Matrix.from1DArray(3, 2, [0, 1, 2, 3, 4, 5]);
     expect(matrix.rows).toBe(3);
     expect(matrix.columns).toBe(2);
     expect(() => Matrix.from1DArray(3, 2, [0, 1, 2, 3])).toThrow(
-      /^data length does not match given dimensions$/,
+      /^data length does not match given dimensions$/
     );
   });
 
-  it('row vector', () => {
+  it("row vector", () => {
     let vector = Matrix.rowVector([0, 1, 2, 3]);
     expect(vector.rows).toBe(1);
     expect(vector.columns).toBe(4);
     expect(vector.to2DArray()).toStrictEqual([[0, 1, 2, 3]]);
   });
 
-  it('column vector', () => {
+  it("column vector", () => {
     let vector = Matrix.columnVector([0, 1, 2, 3]);
     expect(vector.rows).toBe(4);
     expect(vector.columns).toBe(1);
     expect(vector.to2DArray()).toStrictEqual([[0], [1], [2], [3]]);
   });
 
-  it('zeros', () => {
+  it("zeros", () => {
     expect(Matrix.zeros(2, 3).to2DArray()).toStrictEqual([
       [0, 0, 0],
       [0, 0, 0],
     ]);
   });
 
-  it('ones', () => {
+  it("ones", () => {
     expect(Matrix.ones(2, 3).to2DArray()).toStrictEqual([
       [1, 1, 1],
       [1, 1, 1],
     ]);
   });
 
-  it('random', () => {
+  it("random", () => {
     let random = Matrix.rand(2, 3);
     let random2 = Matrix.rand(2, 3);
     expect(random.to2DArray()).not.toStrictEqual(random2.to2DArray());
@@ -120,7 +120,7 @@ describe('Matrix creation', () => {
     }
   });
 
-  it('random with custom RNG', () => {
+  it("random with custom RNG", () => {
     let fakeRNG = () => 2;
     expect(Matrix.rand(2, 2, { random: fakeRNG }).to2DArray()).toStrictEqual([
       [2, 2],
@@ -128,7 +128,7 @@ describe('Matrix creation', () => {
     ]);
   });
 
-  it('eye/identity', () => {
+  it("eye/identity", () => {
     let eye1 = Matrix.eye(3);
     expect(eye1).toStrictEqual(Matrix.identity(3));
     expect(eye1.to2DArray()).toStrictEqual([
@@ -148,7 +148,7 @@ describe('Matrix creation', () => {
     expect(eye0.to2DArray()).toStrictEqual([]);
   });
 
-  it('eye with other value than 1', () => {
+  it("eye with other value than 1", () => {
     let eye1 = Matrix.eye(3, 3, 3);
     expect(eye1.to2DArray()).toStrictEqual([
       [3, 0, 0],
@@ -157,7 +157,7 @@ describe('Matrix creation', () => {
     ]);
   });
 
-  it('diag/diagonal', () => {
+  it("diag/diagonal", () => {
     let arr = [1, 2, 3];
     let diag = Matrix.diag(arr);
     expect(diag).toStrictEqual(Matrix.diagonal(arr));
@@ -186,7 +186,7 @@ describe('Matrix creation', () => {
     expect(Matrix.diag([], 0, 2).to2DArray()).toStrictEqual([]);
   });
 
-  it('views should return new instances of Matrix', () => {
+  it("views should return new instances of Matrix", () => {
     let matrix = new Matrix([
       [1, 1, 1],
       [1, 1, 1],
@@ -195,7 +195,7 @@ describe('Matrix creation', () => {
     expect(matrix.transpose().mmul(matrix)).toStrictEqual(view.mmul(matrix));
   });
 
-  it('static evaluated methods should return new instances of Matrix', () => {
+  it("static evaluated methods should return new instances of Matrix", () => {
     let a = [[1, 2]];
     let b = [[3, 1]];
     expect(Matrix.subtract(a, b).to2DArray()).toStrictEqual([[-2, 1]]);
@@ -204,7 +204,7 @@ describe('Matrix creation', () => {
     ]);
   });
 
-  it('JSON.stringify should always return a 2D array', () => {
+  it("JSON.stringify should always return a 2D array", () => {
     const data = [
       [0, 1],
       [2, 3],
@@ -215,7 +215,7 @@ describe('Matrix creation', () => {
     const mat1D = wrap(matrix.to1DArray(), { rows: 2 });
     expect(JSON.stringify(mat1D)).toBe(json);
     const transposeTwice = new MatrixTransposeView(
-      new MatrixTransposeView(matrix),
+      new MatrixTransposeView(matrix)
     );
     expect(JSON.stringify(transposeTwice)).toBe(json);
   });

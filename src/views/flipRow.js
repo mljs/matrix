@@ -1,4 +1,4 @@
-import BaseView from './base';
+import BaseView from "./base";
 
 export default class MatrixFlipRowView extends BaseView {
   constructor(matrix) {
