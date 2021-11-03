@@ -39,7 +39,7 @@ describe('Cholesky decomposition', () => {
 
     let b = new Matrix([[1], [2], [3]]);
 
-    expect(choAtA.isPositiveDefinite()).toStrictEqual(false);
+    expect(choAtA.isPositiveDefinite()).toBe(false);
     expect(() => choAtA.solve(b)).toThrow('Matrix is not positive definite');
   });
   it('should handle empty matrices', () => {

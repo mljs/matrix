@@ -48,7 +48,7 @@ describe('Qr decomposition', () => {
     let b = Matrix.columnVector([20001, 20003, 20005, 20007, 20009]);
 
     const qr = new QR(A);
-    expect(qr.solve(b).to2DArray()).toBeDeepCloseTo([[1], [0.9999]], 4);
+    expect(qr.solve(b).to2DArray()).toBeDeepCloseTo([[1], [0.9999]], 3);
   });
 
   it('should work with the example in the documentation', () => {
@@ -69,6 +69,6 @@ describe('Qr decomposition', () => {
     const decomp = new QR(matrix);
     expect(decomp.upperTriangularMatrix.to2DArray()).toStrictEqual([]);
     expect(decomp.orthogonalMatrix.to2DArray()).toStrictEqual([]);
-    expect(decomp.isFullRank()).toStrictEqual(true);
+    expect(decomp.isFullRank()).toBe(true);
   });
 });

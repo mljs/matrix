@@ -53,7 +53,7 @@ describe('LU decomposition', () => {
     expect(decomp.lowerTriangularMatrix.to2DArray()).toStrictEqual([]);
     expect(decomp.upperTriangularMatrix.to2DArray()).toStrictEqual([]);
     // https://en.wikipedia.org/wiki/Matrix_(mathematics)#Empty_matrices
-    expect(decomp.determinant).toStrictEqual(1);
+    expect(decomp.determinant).toBe(1);
   });
 });
 

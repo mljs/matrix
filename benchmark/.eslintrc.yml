@@ -5,3 +5,4 @@ rules:
   no-new: off
   no-useless-constructor: off
   import/no-unresolved: off
+  require: on

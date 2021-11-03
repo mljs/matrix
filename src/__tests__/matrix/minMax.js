@@ -43,8 +43,8 @@ describe('matrix min/max', () => {
     const min = emptyMatrix.min();
     const max = emptyMatrix.max();
 
-    expect(min).toBe(NaN);
-    expect(max).toBe(NaN);
+    expect(min).toBeNaN();
+    expect(max).toBeNaN();
 
     expect(() => emptyMatrix.maxIndex()).toThrow(
       'Empty matrix has no elements to index',
@@ -114,22 +114,22 @@ describe('vector min/max', () => {
   });
 
   it('maxRow', () => {
-    expect(zeroColumnMatrix.maxRow(0)).toBe(NaN);
+    expect(zeroColumnMatrix.maxRow(0)).toBeNaN();
     expect(squareMatrix.maxRow(1)).toBe(11);
   });
 
   it('minRow', () => {
-    expect(zeroColumnMatrix.minRow(0)).toBe(NaN);
+    expect(zeroColumnMatrix.minRow(0)).toBeNaN();
     expect(squareMatrix.minRow(1)).toBe(1);
   });
 
   it('maxColumn', () => {
-    expect(zeroRowMatrix.maxColumn(0)).toBe(NaN);
+    expect(zeroRowMatrix.maxColumn(0)).toBeNaN();
     expect(squareMatrix.maxColumn(0)).toBe(9);
   });
 
   it('minColumn', () => {
-    expect(zeroRowMatrix.minColumn(0)).toBe(NaN);
+    expect(zeroRowMatrix.minColumn(0)).toBeNaN();
     expect(squareMatrix.minColumn(0)).toBe(1);
   });
 });

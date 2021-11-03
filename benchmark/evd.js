@@ -16,16 +16,16 @@ let matrix = new Matrix(m.to2DArray());
 let matrixNum = m.to2DArray();
 
 suite
-  .add('Matrix', function () {
+  .add('Matrix', () => {
     new EVD(matrix);
   })
-  .add('numeric', function () {
+  .add('numeric', () => {
     numeric.eig(matrixNum);
   })
-  .on('cycle', function (event) {
+  .on('cycle', (event) => {
     console.log(String(event.target));
   })
-  .on('complete', function () {
+  .on('complete', () => {
     console.log(`Fastest is ${this.filter('fastest').map('name')}`);
   })
   .run();

@@ -34,19 +34,19 @@ function transpose(mat) {
 }
 
 suite
-  .add('Matrix', function () {
+  .add('Matrix', () => {
     matrix.transpose();
   })
-  .add('numeric', function () {
+  .add('numeric', () => {
     numeric.transpose(matrixNum);
   })
-  .add('custom', function () {
+  .add('custom', () => {
     transpose(matrixNum);
   })
-  .on('cycle', function (event) {
+  .on('cycle', (event) => {
     console.log(String(event.target));
   })
-  .on('complete', function () {
+  .on('complete', () => {
     console.log(`Fastest is ${this.filter('fastest').map('name')}`);
   })
   .run();
