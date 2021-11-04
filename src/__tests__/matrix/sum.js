@@ -30,7 +30,7 @@ describe('sum by row and columns', () => {
   });
 
   it('sum all of 0x0 matrix', () => {
-    expect(emptyMatrix.sum()).toStrictEqual(0);
+    expect(emptyMatrix.sum()).toBe(0);
   });
 
   /* these correspond to the empty sum: https://en.wikipedia.org/wiki/Empty_sum */

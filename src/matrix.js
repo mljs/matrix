@@ -1452,9 +1452,8 @@ export class AbstractMatrix {
 
 AbstractMatrix.prototype.klass = 'Matrix';
 if (typeof Symbol !== 'undefined') {
-  AbstractMatrix.prototype[
-    Symbol.for('nodejs.util.inspect.custom')
-  ] = inspectMatrix;
+  AbstractMatrix.prototype[Symbol.for('nodejs.util.inspect.custom')] =
+    inspectMatrix;
 }
 
 function compareNumbers(a, b) {

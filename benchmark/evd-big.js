@@ -14,11 +14,11 @@ let m = Matrix.rand(n, n);
 let matrix = new Matrix(m.to2DArray());
 let matrixNum = m.to2DArray();
 
-run(function () {
+run(() => {
   new EVD(matrix);
 }, 'Matrix');
 
-run(function () {
+run(() => {
   numeric.eig(matrixNum);
 }, 'numeric');
 

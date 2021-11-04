@@ -22,12 +22,12 @@ describe('mean by row and columns', () => {
   it('means of 0 row matrix', () => {
     expect(zeroRowMatrix.mean('row')).toStrictEqual([]);
     expect(zeroRowMatrix.mean('column')).toStrictEqual([NaN, NaN]);
-    expect(zeroRowMatrix.mean()).toStrictEqual(NaN);
+    expect(zeroRowMatrix.mean()).toBeNaN();
   });
 
   it('means of 0 column matrix', () => {
     expect(zeroColumnMatrix.mean('row')).toStrictEqual([NaN]);
     expect(zeroColumnMatrix.mean('column')).toStrictEqual([]);
-    expect(zeroColumnMatrix.mean()).toStrictEqual(NaN);
+    expect(zeroColumnMatrix.mean()).toBeNaN();
   });
 });

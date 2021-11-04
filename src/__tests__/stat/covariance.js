@@ -13,32 +13,16 @@ describe('multivariate linear regression', () => {
       [8, 16, 24, 32, 40],
     ]);
     expect(Array.from(covariance(y).data[2].map(Math.round))).toStrictEqual([
-      -8,
-      -16,
-      3756,
-      -32,
-      -40,
+      -8, -16, 3756, -32, -40,
     ]);
     expect(Array.from(covariance(y, x).data[2].map(Math.round))).toStrictEqual([
-      45,
-      45,
-      45,
-      45,
-      45,
+      45, 45, 45, 45, 45,
     ]);
     expect(Array.from(covariance(x, y).data[2].map(Math.round))).toStrictEqual([
-      15,
-      30,
-      45,
-      60,
-      75,
+      15, 30, 45, 60, 75,
     ]);
     expect(Array.from(covariance(x).data[2].map(Math.round))).toStrictEqual([
-      25,
-      25,
-      25,
-      25,
-      25,
+      25, 25, 25, 25, 25,
     ]);
   });
   it(`covariance doesn't change input matrices`, () => {

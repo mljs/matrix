@@ -25,11 +25,7 @@ describe('Centering matrix', () => {
       [5, 10, 15, 20, 25],
     ]);
     expect(Array.from(y.center().data[0].map(Math.round))).toStrictEqual([
-      -8,
-      -7,
-      -6,
-      -5,
-      -4,
+      -8, -7, -6, -5, -4,
     ]);
     expect(
       Array.from(x.clone().center('row').data[0].map(Math.round)),

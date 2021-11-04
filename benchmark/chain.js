@@ -19,19 +19,19 @@ let matrixNum = m.to2DArray();
 let matrixMath = m.to2DArray();
 
 suite
-  .add('Matrix', function () {
+  .add('Matrix', () => {
     matrix.subS(5).mulS(Math.PI).abs();
   })
-  .add('numeric', function () {
+  .add('numeric', () => {
     numeric.abs(numeric.muleq(numeric.subeq(matrixNum, 5), Math.PI));
   })
-  .add('mathjs', function () {
+  .add('mathjs', () => {
     math.chain(matrixMath).subtract(5).multiply(Math.PI).abs().done();
   })
-  .on('cycle', function (event) {
+  .on('cycle', (event) => {
     console.log(String(event.target));
   })
-  .on('complete', function () {
+  .on('complete', () => {
     console.log(`Fastest is ${this.filter('fastest').map('name')}`);
   })
   .run();

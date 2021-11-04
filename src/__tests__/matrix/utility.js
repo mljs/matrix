@@ -159,7 +159,7 @@ describe('utility methods', () => {
     ]);
     expect(m1.norm('max')).toBe(3);
 
-    expect(new Matrix(0, 0).norm('max')).toBe(NaN);
+    expect(new Matrix(0, 0).norm('max')).toBeNaN();
   });
 
   it('transpose rectangular', () => {
@@ -442,8 +442,8 @@ describe('utility methods', () => {
       [2, 1],
       [1, 1],
     ]);
-    expect(matrix.isEchelonForm()).toStrictEqual(true);
-    expect(matrix2.isEchelonForm()).toStrictEqual(false);
+    expect(matrix.isEchelonForm()).toBe(true);
+    expect(matrix2.isEchelonForm()).toBe(false);
   });
 
   it('isReducedEchelonForm', () => {
@@ -455,8 +455,8 @@ describe('utility methods', () => {
       [1, 1],
       [0, 1],
     ]);
-    expect(matrix.isReducedEchelonForm()).toStrictEqual(true);
-    expect(matrix2.isReducedEchelonForm()).toStrictEqual(false);
+    expect(matrix.isReducedEchelonForm()).toBe(true);
+    expect(matrix2.isReducedEchelonForm()).toBe(false);
   });
 
   it('echelonForm', () => {
@@ -571,9 +571,7 @@ describe('utility methods', () => {
   });
 
   it('dot product', () => {
-    expect(new Matrix([[1, 2, 3]]).dot(new Matrix([[3, 2, 1]]))).toStrictEqual(
-      10,
-    );
+    expect(new Matrix([[1, 2, 3]]).dot(new Matrix([[3, 2, 1]]))).toBe(10);
   });
 
   it('simple multiplication', () => {
@@ -598,13 +596,13 @@ describe('utility methods', () => {
     );
 
     const emptyMult = mat2.mmul(empty1);
-    expect(emptyMult.rows).toStrictEqual(2);
-    expect(emptyMult.columns).toStrictEqual(0);
+    expect(emptyMult.rows).toBe(2);
+    expect(emptyMult.columns).toBe(0);
   });
 
   it('columns and rows modification', () => {
-    expect(zeroRowMatrix.removeColumn(1).columns).toStrictEqual(1);
-    expect(zeroColumnMatrix.removeRow(2).rows).toStrictEqual(2);
+    expect(zeroRowMatrix.removeColumn(1).columns).toBe(1);
+    expect(zeroColumnMatrix.removeRow(2).rows).toBe(2);
 
     expect(squareMatrix.removeColumn(0).to2DArray()).toStrictEqual([
       [13, 5],
