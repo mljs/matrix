@@ -1,5 +1,12 @@
 # Changelog
 
+### [6.8.1](https://www.github.com/mljs/matrix/compare/v6.8.0...v6.8.1) (2021-11-04)
+
+
+### Bug Fixes
+
+* type definitions in NIPALS ([#129](https://www.github.com/mljs/matrix/issues/129)) ([2e1447d](https://www.github.com/mljs/matrix/commit/2e1447d75e3c2fe2450f474d15336f8ae2a26d5f))
+
 ## [6.8.0](https://www.github.com/mljs/matrix/compare/v6.7.0...v6.8.0) (2021-04-23)
 
 
