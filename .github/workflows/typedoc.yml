@@ -7,7 +7,7 @@ on:
 
 env:
   NODE_VERSION: 16.x
-  ENTRY_FILE: 'src/index.ts'
+  ENTRY_FILE: 'matrix.d.ts'
 
 jobs:
   deploy:
