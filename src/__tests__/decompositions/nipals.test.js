@@ -1,5 +1,5 @@
 import { toBeDeepCloseTo } from 'jest-matcher-deep-close-to';
-import { getNumbers } from 'ml-dataset-iris';
+import { getNumbers, getClasses } from 'ml-dataset-iris';
 
 import { Matrix, correlation, NIPALS } from '../..';
 
@@ -95,26 +95,64 @@ describe('NIPALS pls', () => {
   });
 
   it('NIPALS with multi Y', () => {
-    let multiY = new Matrix(metadata.length, 2);
-    multiY.setColumn(0, metadata);
-    multiY.setColumn(1, metadata);
-    let model = new NIPALS(rawData, { Y: multiY });
+    // library(MetaboMate)
+    // data(iris)
+    // X=as.matrix(iris[,1:4])
+    // labels=cbind(as.character(iris[,5]))
+    // create_dummy_Y=function(Y){
+    //   if(!is.numeric(Y)){
+    //     Y_levels=unique(Y)
+    //     if(length(Y_levels)==2){Y_new=cbind(as.numeric(as.factor(Y)))}else{
+    //       Y_new=matrix(-1, nrow=length(Y), ncol=length(Y_levels))
+    //       for(i in 1:length(Y_levels)){
+    //         Y_new[which(Y==Y_levels[i]),i]=1
+    //       }
+    //       colnames(Y_new)=Y_levels}
+    //     Y_levs=unique(data.frame(Original=Y, Numeric=Y_new, stringsAsFactors = F))
+    //     # return(list(Y_new, Y_levs))
+    //     return(list(Y_new, Y_levs))}else{return(list(cbind(Y), data.frame()))}
+    // }
+    // Y1 <- create_dummy_Y(labels)
+    // Y <- Y1[[1]]
+    // model=NIPALS_PLS_component(X, Y)
+
+    const y = createDummyY(getClasses());
+    const multiY = new Matrix(y).transpose();
+    const model = new NIPALS(rawData, { Y: multiY });
     expect(model.yResidual.rows).toBeDeepCloseTo(150);
-    expect(model.yResidual.columns).toBeDeepCloseTo(2);
-    expect(model.q.getColumn(0)).toBeDeepCloseTo([
-      0.7071067811865475, 0.7071067811865475,
-    ]);
-    expect(model.w.getRow(0)).toBeDeepCloseTo([
-      0.3327368933273334, -0.09548833727598557, 0.8602363424202241,
-      0.37438158667677224,
-    ]);
-    expect(model.betas.getRow(0)).toBeDeepCloseTo([0.08379809713380146]);
-    expect(model.t.getRow(0)).toBeDeepCloseTo([2.6419561722271188]);
-    expect(model.t.getRow(1)).toBeDeepCloseTo([2.623152962199645]);
-    expect(model.t.getRow(2)).toBeDeepCloseTo([2.4514842818369593]);
+    expect(model.yResidual.columns).toBeDeepCloseTo(3);
+    // model$Qpc
+    // [,1]
+    // setosa     0.8174360
+    // versicolor 0.4949954
+    // virginica  0.2945810
+    expect(model.q.getColumn(0)).toBeDeepCloseTo(
+      [0.817436, 0.4949954, 0.294581],
+      7,
+    );
+    //model$weights
+    //      Sepal.Length Sepal.Width Petal.Length Petal.Width
+    // [1,]   -0.7191595  -0.3262784   -0.5792555  -0.2020273
+    expect(model.w.getRow(0)).toBeDeepCloseTo(
+      [-0.7191595, -0.3262784, -0.5792555, -0.2020273],
+      7,
+    );
+    //model$betas
+    // [1] 0.07794152
+    expect(model.betas.getRow(0)).toBeDeepCloseTo([0.07794152]);
+    //model$scores
+    //            [,1]
+    // [1,]  -5.661051
+    // [2,]  -5.354080
+    // [3,]  -5.217578
+    expect(model.t.getRow(0)).toBeDeepCloseTo([-5.661051]);
+    expect(model.t.getRow(1)).toBeDeepCloseTo([-5.35408]);
+    expect(model.t.getRow(2)).toBeDeepCloseTo([-5.217578]);
+    //model$loadings
+    //     Sepal.Length Sepal.Width Petal.Length Petal.Width
+    // [1,]   -0.7501523   -0.378257   -0.5153763  -0.1690576
     expect(model.p.getRow(0)).toBeDeepCloseTo([
-      0.7412430875909641, 0.361751117023612, 0.536251754575879,
-      0.1792452792825361,
+      -0.7501523, -0.378257, -0.5153763, -0.1690576,
     ]);
   });
 });
@@ -184,3 +222,26 @@ describe('NIPALS with simple data set', () => {
     expect(model5.w.mul(-1).to1DArray()).toBeDeepCloseTo(loadings[4], 3);
   });
 });
+
+function createDummyY(array) {
+  const features = [...new Set(array)];
+  const result = [];
+  if (features.length > 2) {
+    for (let i = 0; i < features.length; i++) {
+      const feature = [];
+      for (let j = 0; j < array.length; j++) {
+        const point = features[i] === array[j] ? 1 : -1;
+        feature.push(point);
+      }
+      result.push(feature);
+    }
+    return result;
+  } else {
+    const result = [];
+    for (let j = 0; j < array.length; j++) {
+      const point = features[0] === array[j] ? 2 : 1;
+      result.push(point);
+    }
+    return [result];
+  }
+}
