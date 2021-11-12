@@ -1,5 +1,12 @@
 # Changelog
 
+### [6.8.2](https://www.github.com/mljs/matrix/compare/v6.8.1...v6.8.2) (2021-11-12)
+
+
+### Bug Fixes
+
+* dummy commit to republish package ([9ae2abe](https://www.github.com/mljs/matrix/commit/9ae2abea0a3f20b2f7fa02866f6870e4609a2441))
+
 ### [6.8.1](https://www.github.com/mljs/matrix/compare/v6.8.0...v6.8.1) (2021-11-04)
 
 
