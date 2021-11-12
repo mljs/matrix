@@ -1027,6 +1027,7 @@ export class AbstractMatrix {
       resultat = resultat.setSubMatrix(c22, c11.rows, c11.columns);
       return resultat.subMatrix(0, rows - 1, 0, cols - 1);
     }
+
     return blockMult(x, y, r, c);
   }
 
