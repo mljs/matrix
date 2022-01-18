@@ -72,6 +72,54 @@ describe('Matrix creation', () => {
     );
   });
 
+  it('should create numerical array from array with strings', () => {
+    let dataset = [
+      [73, 'a', 'o', 152],
+      [93, 'b', 'u', 185],
+      [89, 'c', 'p', 180],
+      [96, 'd', 'v', 196],
+      [73, 'e', 'j', 142],
+      [53, 'f', 'w', 101],
+      [69, 'g', 'x', 149],
+      [47, 'h', 'y', 115],
+      [87, 'i', 'p', 175],
+      [79, 'j', 'b', 164],
+      [69, 'j', 'm', 141],
+      [70, 'k', 'g', 141],
+      [93, 'l', 'c', 184],
+      [79, 'a', 'm', 152],
+      [70, 'm', 'z', 148],
+      [93, 'n', 'aa', 192],
+      [78, 'o', 'ab', 147],
+      [81, 'p', 'u', 183],
+      [88, 'q', 's', 177],
+      [78, 'r', 'x', 159],
+      [82, 's', 'p', 177],
+      [86, 't', 'n', 175],
+      [78, 'r', 'ac', 175],
+      [76, 'r', 'ad', 149],
+      [96, 'u', 'l', 192],
+    ];
+    let array = new Array(dataset.length);
+    for (let i = 0; i < dataset.length; ++i) {
+      array[i] = dataset[i].slice(0, 3);
+    }
+    let matrix = Matrix.checkMatrix(array);
+
+    function allNumbers(matrix) {
+      for (let i = 0; i < matrix.rows; i++) {
+        for (let j = 0; j < matrix.columns; j++) {
+          if (typeof matrix.get(i, j) === 'string') {
+            return false;
+          }
+        }
+      }
+      return true;
+    }
+
+    expect(allNumbers(matrix)).toBe(true);
+  });
+
   it('should create a matrix from 1D array', () => {
     let matrix = Matrix.from1DArray(3, 2, [0, 1, 2, 3, 4, 5]);
     expect(matrix.rows).toBe(3);
