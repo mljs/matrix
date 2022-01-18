@@ -1,4 +1,5 @@
 import { Matrix, correlation } from '../..';
+import { varianceByRow } from '../../stat';
 
 describe('multivariate linear regression', () => {
   it('correlation should work with 1 or 2 matrix inputs', () => {
@@ -52,5 +53,15 @@ describe('multivariate linear regression', () => {
       [NaN, NaN, NaN],
     ]);
     expect(correlation(z).to2DArray()).toStrictEqual([]);
+  });
+
+  it('testing the variance by row', () => {
+    const data = new Matrix([
+      [5, 2],
+      [4, 1],
+      [7, 1],
+    ]);
+    let variance = varianceByRow(data, true, [3.5, 2.5, 4]);
+    expect(variance).toStrictEqual([4.5, 4.5, 18]);
   });
 });
