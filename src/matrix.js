@@ -155,7 +155,26 @@ export class AbstractMatrix {
     return result;
   }
 
-  static checkMatrix(value) {
+  static checkMatrix(value, encoding = null, dictCategoricalToNumerical =  null, k = null) {
+    this.encoding = encoding;
+    if(dictCategoricalToNumerical != null && Object.keys(dictCategoricalToNumerical).length != 0) {
+      if(encoding === "labelEncoding") {
+        let kValue = k;
+        for(let i=0; i < value.length; i++) {
+          for(let j=0; j < value[0].length; j++) {
+            if (typeof value[i][j] === 'string') {
+              if (value[i][j] in dictCategoricalToNumerical) {
+                value[i][j] = dictCategoricalToNumerical[value[i][j]];
+              } else {
+                kValue = kValue + 1;
+                value[i][j] = kValue;
+                dictCategoricalToNumerical[value[i][j]] = kValue;
+              }
+            }
+          }
+        }
+      }
+    }
     return AbstractMatrix.isMatrix(value) ? value : new Matrix(value);
   }
 
@@ -1502,8 +1521,33 @@ export default class Matrix extends AbstractMatrix {
         if (arrayData[i].length !== nColumns) {
           throw new RangeError('Inconsistent array dimensions');
         }
+      }
+
+      // In the case we have String encoding for categorical features 
+      let k = 0;
+      let dictCategoricalToNumerical = {};
+
+      for (let i =0; i < nRows; i++) {
+        for(let j = 0; j < nColumns; j++) {
+          if(typeof arrayData[i][j] === 'string') {
+            if(arrayData[i][j] in dictCategoricalToNumerical) {
+              arrayData[i][j] = dictCategoricalToNumerical[arrayData[i][j]];
+            } else {
+              dictCategoricalToNumerical[arrayData[i][j]] = k;
+              arrayData[i][j] = k;
+              k = k + 1;
+            }
+          }
+        }
+      }
+
+      this.dictCategoricalToNumerical = dictCategoricalToNumerical;
+      this.k = k;
+
+      for (let i = 0; i < nRows; i++) {
         this.data.push(Float64Array.from(arrayData[i]));
       }
+
     } else {
       throw new TypeError(
         'First argument must be a positive number or an array',
