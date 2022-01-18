@@ -155,13 +155,21 @@ export class AbstractMatrix {
     return result;
   }
 
-  static checkMatrix(value, encoding = null, dictCategoricalToNumerical =  null, k = null) {
+  static checkMatrix(
+    value,
+    encoding = null,
+    dictCategoricalToNumerical = null,
+    k = null,
+  ) {
     this.encoding = encoding;
-    if(dictCategoricalToNumerical != null && Object.keys(dictCategoricalToNumerical).length != 0) {
-      if(encoding === "labelEncoding") {
+    if (
+      dictCategoricalToNumerical != null &&
+      Object.keys(dictCategoricalToNumerical).length !== 0
+    ) {
+      if (encoding === 'labelEncoding') {
         let kValue = k;
-        for(let i=0; i < value.length; i++) {
-          for(let j=0; j < value[0].length; j++) {
+        for (let i = 0; i < value.length; i++) {
+          for (let j = 0; j < value[0].length; j++) {
             if (typeof value[i][j] === 'string') {
               if (value[i][j] in dictCategoricalToNumerical) {
                 value[i][j] = dictCategoricalToNumerical[value[i][j]];
@@ -1523,31 +1531,36 @@ export default class Matrix extends AbstractMatrix {
         }
       }
 
-      // In the case we have String encoding for categorical features 
-      let k = 0;
-      let dictCategoricalToNumerical = {};
-
-      for (let i =0; i < nRows; i++) {
-        for(let j = 0; j < nColumns; j++) {
-          if(typeof arrayData[i][j] === 'string') {
-            if(arrayData[i][j] in dictCategoricalToNumerical) {
-              arrayData[i][j] = dictCategoricalToNumerical[arrayData[i][j]];
-            } else {
-              dictCategoricalToNumerical[arrayData[i][j]] = k;
-              arrayData[i][j] = k;
-              k = k + 1;
-            }
+      // In the case we have String encoding for categorical features
+      for (let i = 0; i < nRows; i++) {
+        for (let j = 0; j < nColumns; j++) {
+          if (typeof arrayData[i][j] === 'string') {
+            this.dictCategoricalToNumerical = {};
+            this.k = {};
+            break;
           }
         }
       }
 
-      this.dictCategoricalToNumerical = dictCategoricalToNumerical;
-      this.k = k;
+      for (let i = 0; i < nRows; i++) {
+        for (let j = 0; j < nColumns; j++) {
+          if (typeof arrayData[i][j] === 'string') {
+            if (arrayData[i][j] in this.dictCategoricalToNumerical) {
+              arrayData[i][j] =
+                this.dictCategoricalToNumerical[arrayData[i][j]];
+            } else {
+              this.dictCategoricalToNumerical[arrayData[i][j]] = this.k;
+              arrayData[i][j] = this.k;
+              this.k = this.k + 1;
+            }
+          }
+        }
+      }
+      //
 
       for (let i = 0; i < nRows; i++) {
         this.data.push(Float64Array.from(arrayData[i]));
       }
-
     } else {
       throw new TypeError(
         'First argument must be a positive number or an array',
