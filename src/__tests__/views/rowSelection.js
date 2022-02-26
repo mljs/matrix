@@ -17,7 +17,7 @@ describe('Selection view', () => {
       'row indices are out of range',
     );
     expect(() => new MatrixRowSelectionView(m, 1)).toThrow(
-      'unexpected type for row indices',
+      'row indices must be an array',
     );
   });
 });

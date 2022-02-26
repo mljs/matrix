@@ -1,3 +1,5 @@
+import { isAnyArray } from 'is-any-array';
+
 import Matrix from './matrix';
 
 export function covariance(xMatrix, yMatrix = xMatrix, options = {}) {
@@ -6,7 +8,7 @@ export function covariance(xMatrix, yMatrix = xMatrix, options = {}) {
   if (
     typeof yMatrix === 'object' &&
     !Matrix.isMatrix(yMatrix) &&
-    !Array.isArray(yMatrix)
+    !isAnyArray(yMatrix)
   ) {
     options = yMatrix;
     yMatrix = xMatrix;

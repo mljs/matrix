@@ -1,3 +1,5 @@
+import { isAnyArray } from 'is-any-array';
+
 import Matrix from '../matrix';
 import WrapperMatrix2D from '../wrap/WrapperMatrix2D';
 
@@ -13,7 +15,7 @@ export default class nipals {
 
     let u;
     if (Y) {
-      if (Array.isArray(Y) && typeof Y[0] === 'number') {
+      if (isAnyArray(Y) && typeof Y[0] === 'number') {
         Y = Matrix.columnVector(Y);
       } else {
         Y = WrapperMatrix2D.checkMatrix(Y);

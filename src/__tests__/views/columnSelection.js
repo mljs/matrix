@@ -17,7 +17,7 @@ describe('Selection column view', () => {
       'column indices are out of range',
     );
     expect(() => new MatrixColumnSelectionView(m, 1)).toThrow(
-      'unexpected type for column indices',
+      'column indices must be an array',
     );
   });
 });

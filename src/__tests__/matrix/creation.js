@@ -11,6 +11,20 @@ describe('Matrix creation', () => {
     expect(Matrix.isMatrix(matrix)).toBe(true);
   });
 
+  it('should work with a typed array', () => {
+    const array = [
+      Float64Array.of(1, 2, 3),
+      Float64Array.of(4, 5, 6),
+      Float64Array.of(7, 8, 9),
+    ];
+    const matrix = new Matrix(array);
+    expect(matrix.to2DArray()).toStrictEqual([
+      [1, 2, 3],
+      [4, 5, 6],
+      [7, 8, 9],
+    ]);
+  });
+
   it('should clone existing matrix', () => {
     let original = util.getSquareMatrix();
     let matrix = new Matrix(original);
