@@ -1,5 +1,12 @@
 # Changelog
 
+## [6.9.0](https://github.com/mljs/matrix/compare/v6.8.2...v6.9.0) (2022-02-26)
+
+
+### Features
+
+* allow to pass any array in all APIs ([362d8a1](https://github.com/mljs/matrix/commit/362d8a153c5ecab765f88b5b01756565d39ad927))
+
 ### [6.8.2](https://www.github.com/mljs/matrix/compare/v6.8.1...v6.8.2) (2021-11-12)
 
 
