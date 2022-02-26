@@ -3,7 +3,7 @@ name: Release
 on:
   push:
     branches:
-      - master
+      - main
 
 jobs:
   release:
@@ -14,4 +14,3 @@ jobs:
     secrets:
       github-token: ${{ secrets.BOT_TOKEN }}
       npm-token: ${{ secrets.NPM_BOT_TOKEN }}
-

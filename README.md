@@ -12,9 +12,9 @@ Matrix manipulation and computation library.
     Maintained by <a href="https://www.zakodium.com">Zakodium</a>
   </p>
 
-  [![NPM version][npm-image]][npm-url]
-  [![build status][ci-image]][ci-url]
-  [![npm download][download-image]][download-url]
+[![NPM version][npm-image]][npm-url]
+[![build status][ci-image]][ci-url]
+[![npm download][download-image]][download-url]
 
 </h3>
 
@@ -49,9 +49,18 @@ const matrix = Matrix.ones(5, 5);
 ```js
 const { Matrix } = require('ml-matrix');
 
-var A = new Matrix([[1, 1], [2, 2]]);
-var B = new Matrix([[3, 3], [1, 1]]);
-var C = new Matrix([[3, 3], [1, 1]]);
+var A = new Matrix([
+  [1, 1],
+  [2, 2],
+]);
+var B = new Matrix([
+  [3, 3],
+  [1, 1],
+]);
+var C = new Matrix([
+  [3, 3],
+  [1, 1],
+]);
 
 // ============================
 // Operations with the matrix :
@@ -75,7 +84,10 @@ C.div(10); // => C = Cinit
 C.mod(2); // => C = Cinit % 2
 
 // Standard Math operations : (abs, cos, round, etc.)
-var A = new Matrix([[1, 1], [-1, -1]]);
+var A = new Matrix([
+  [1, 1],
+  [-1, -1],
+]);
 var exponential = Matrix.exp(A); // exponential = Matrix [[Math.exp(1), Math.exp(1)], [Math.exp(-1), Math.exp(-1)], rows: 2, columns: 2].
 var cosinus = Matrix.cos(A); // cosinus = Matrix [[Math.cos(1), Math.cos(1)], [Math.cos(-1), Math.cos(-1)], rows: 2, columns: 2].
 var absolute = Matrix.abs(A); // expon = absolute [[1, 1], [1, 1], rows: 2, columns: 2].
@@ -122,24 +134,36 @@ const {
   QrDecomposition,
   LuDecomposition,
   CholeskyDecomposition,
-  EigenvalueDecomposition
+  EigenvalueDecomposition,
 } = require('ml-matrix');
 
 //===========================
 // inverse and pseudo-inverse
 //===========================
 
-var A = new Matrix([[2, 3, 5], [4, 1, 6], [1, 3, 0]]);
+var A = new Matrix([
+  [2, 3, 5],
+  [4, 1, 6],
+  [1, 3, 0],
+]);
 var inverseA = inverse(A);
 var B = A.mmul(inverseA); // B = A * inverse(A), so B ~= Identity
 
 // if A is singular, you can use SVD :
-var A = new Matrix([[1, 2, 3], [4, 5, 6], [7, 8, 9]]); // A is singular, so the standard computation of inverse won't work (you can test if you don't trust me^^)
+var A = new Matrix([
+  [1, 2, 3],
+  [4, 5, 6],
+  [7, 8, 9],
+]); // A is singular, so the standard computation of inverse won't work (you can test if you don't trust me^^)
 var inverseA = inverse(A, (useSVD = true)); // inverseA is only an approximation of the inverse, by using the Singular Values Decomposition
 var B = A.mmul(inverseA); // B = A * inverse(A), but inverse(A) is only an approximation, so B doesn't really be identity.
 
 // if you want the pseudo-inverse of a matrix :
-var A = new Matrix([[1, 2], [3, 4], [5, 6]]);
+var A = new Matrix([
+  [1, 2],
+  [3, 4],
+  [5, 6],
+]);
 var pseudoInverseA = A.pseudoInverse();
 var B = A.mmul(pseudoInverseA).mmul(A); // with pseudo inverse, A*pseudo-inverse(A)*A ~= A. It's the case here
 
@@ -151,13 +175,22 @@ var B = A.mmul(pseudoInverseA).mmul(A); // with pseudo inverse, A*pseudo-inverse
 // Below, how to solve least square with our function
 
 // If A is non singular :
-var A = new Matrix([[3, 1], [4.25, 1], [5.5, 1], [8, 1]]);
+var A = new Matrix([
+  [3, 1],
+  [4.25, 1],
+  [5.5, 1],
+  [8, 1],
+]);
 var b = Matrix.columnVector([4.5, 4.25, 5.5, 5.5]);
 var x = solve(A, b);
 var error = Matrix.sub(b, A.mmul(x)); // The error enables to evaluate the solution x found.
 
 // If A is non singular :
-var A = new Matrix([[1, 2, 3], [4, 5, 6], [7, 8, 9]]);
+var A = new Matrix([
+  [1, 2, 3],
+  [4, 5, 6],
+  [7, 8, 9],
+]);
 var b = Matrix.columnVector([8, 20, 32]);
 var x = solve(A, b, (useSVD = true)); // there are many solutions. x can be [1, 2, 1].transpose(), or [1.33, 1.33, 1.33].transpose(), etc.
 var error = Matrix.sub(b, A.mmul(x)); // The error enables to evaluate the solution x found.
@@ -168,7 +201,11 @@ var error = Matrix.sub(b, A.mmul(x)); // The error enables to evaluate the solut
 
 // QR Decomposition
 
-var A = new Matrix([[2, 3, 5], [4, 1, 6], [1, 3, 0]]);
+var A = new Matrix([
+  [2, 3, 5],
+  [4, 1, 6],
+  [1, 3, 0],
+]);
 var QR = new QrDecomposition(A);
 var Q = QR.orthogonalMatrix;
 var R = QR.upperTriangularMatrix;
@@ -176,7 +213,11 @@ var R = QR.upperTriangularMatrix;
 
 // LU Decomposition
 
-var A = new Matrix([[2, 3, 5], [4, 1, 6], [1, 3, 0]]);
+var A = new Matrix([
+  [2, 3, 5],
+  [4, 1, 6],
+  [1, 3, 0],
+]);
 var LU = new LuDecomposition(A);
 var L = LU.lowerTriangularMatrix;
 var U = LU.upperTriangularMatrix;
@@ -185,13 +226,21 @@ var P = LU.pivotPermutationVector;
 
 // Cholesky Decomposition
 
-var A = new Matrix([[2, 3, 5], [4, 1, 6], [1, 3, 0]]);
+var A = new Matrix([
+  [2, 3, 5],
+  [4, 1, 6],
+  [1, 3, 0],
+]);
 var cholesky = new CholeskyDecomposition(A);
 var L = cholesky.lowerTriangularMatrix;
 
 // Eigenvalues & eigenvectors
 
-var A = new Matrix([[2, 3, 5], [4, 1, 6], [1, 3, 0]]);
+var A = new Matrix([
+  [2, 3, 5],
+  [4, 1, 6],
+  [1, 3, 0],
+]);
 var e = new EigenvalueDecomposition(A);
 var real = e.realEigenvalues;
 var imaginary = e.imaginaryEigenvalues;
@@ -218,7 +267,7 @@ var dependencies = linearDependencies(A); // dependencies is a matrix with the d
 
 [npm-image]: https://img.shields.io/npm/v/ml-matrix.svg
 [npm-url]: https://npmjs.org/package/ml-matrix
-[ci-image]: https://github.com/mljs/matrix/workflows/Node.js%20CI/badge.svg?branch=master
+[ci-image]: https://github.com/mljs/matrix/workflows/Node.js%20CI/badge.svg?branch=main
 [ci-url]: https://github.com/mljs/matrix/actions?query=workflow%3A%22Node.js+CI%22
 [download-image]: https://img.shields.io/npm/dm/ml-matrix.svg
 [download-url]: https://npmjs.org/package/ml-matrix
