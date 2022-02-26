@@ -1,13 +1,14 @@
-import { checkIndices } from '../util';
+import { checkRowIndices, checkColumnIndices } from '../util';
 
 import BaseView from './base';
 
 export default class MatrixSelectionView extends BaseView {
   constructor(matrix, rowIndices, columnIndices) {
-    let indices = checkIndices(matrix, rowIndices, columnIndices);
-    super(matrix, indices.row.length, indices.column.length);
-    this.rowIndices = indices.row;
-    this.columnIndices = indices.column;
+    checkRowIndices(matrix, rowIndices);
+    checkColumnIndices(matrix, columnIndices);
+    super(matrix, rowIndices.length, columnIndices.length);
+    this.rowIndices = rowIndices;
+    this.columnIndices = columnIndices;
   }
 
   set(rowIndex, columnIndex, value) {

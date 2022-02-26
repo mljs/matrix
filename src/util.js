@@ -1,3 +1,5 @@
+import { isAnyArray } from 'is-any-array';
+
 /**
  * @private
  * Check that a row index is not out of bounds
@@ -64,46 +66,28 @@ export function checkColumnVector(matrix, vector) {
   return vector;
 }
 
-export function checkIndices(matrix, rowIndices, columnIndices) {
-  return {
-    row: checkRowIndices(matrix, rowIndices),
-    column: checkColumnIndices(matrix, columnIndices),
-  };
-}
-
 export function checkRowIndices(matrix, rowIndices) {
-  if (typeof rowIndices !== 'object') {
-    throw new TypeError('unexpected type for row indices');
+  if (!isAnyArray(rowIndices)) {
+    throw new TypeError('row indices must be an array');
   }
 
-  let rowOut = rowIndices.some((r) => {
-    return r < 0 || r >= matrix.rows;
-  });
-
-  if (rowOut) {
-    throw new RangeError('row indices are out of range');
+  for (let i = 0; i < rowIndices.length; i++) {
+    if (rowIndices[i] < 0 || rowIndices[i] >= matrix.rows) {
+      throw new RangeError('row indices are out of range');
+    }
   }
-
-  if (!Array.isArray(rowIndices)) rowIndices = Array.from(rowIndices);
-
-  return rowIndices;
 }
 
 export function checkColumnIndices(matrix, columnIndices) {
-  if (typeof columnIndices !== 'object') {
-    throw new TypeError('unexpected type for column indices');
+  if (!isAnyArray(columnIndices)) {
+    throw new TypeError('column indices must be an array');
   }
 
-  let columnOut = columnIndices.some((c) => {
-    return c < 0 || c >= matrix.columns;
-  });
-
-  if (columnOut) {
-    throw new RangeError('column indices are out of range');
+  for (let i = 0; i < columnIndices.length; i++) {
+    if (columnIndices[i] < 0 || columnIndices[i] >= matrix.columns) {
+      throw new RangeError('column indices are out of range');
+    }
   }
-  if (!Array.isArray(columnIndices)) columnIndices = Array.from(columnIndices);
-
-  return columnIndices;
 }
 
 export function checkRange(matrix, startRow, endRow, startColumn, endColumn) {

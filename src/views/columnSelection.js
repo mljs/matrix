@@ -4,7 +4,7 @@ import BaseView from './base';
 
 export default class MatrixColumnSelectionView extends BaseView {
   constructor(matrix, columnIndices) {
-    columnIndices = checkColumnIndices(matrix, columnIndices);
+    checkColumnIndices(matrix, columnIndices);
     super(matrix, matrix.rows, columnIndices.length);
     this.columnIndices = columnIndices;
   }

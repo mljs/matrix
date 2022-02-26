@@ -1,3 +1,4 @@
+import { isAnyArray } from 'is-any-array';
 import rescale from 'ml-array-rescale';
 
 import { inspectMatrix, inspectMatrixWithOptions } from './inspect';
@@ -28,8 +29,9 @@ import {
   checkColumnIndex,
   checkColumnVector,
   checkRange,
-  checkIndices,
   checkNonEmpty,
+  checkRowIndices,
+  checkColumnIndices,
 } from './util';
 
 export class AbstractMatrix {
@@ -1237,12 +1239,13 @@ export class AbstractMatrix {
   }
 
   selection(rowIndices, columnIndices) {
-    let indices = checkIndices(this, rowIndices, columnIndices);
+    checkRowIndices(this, rowIndices);
+    checkColumnIndices(this, columnIndices);
     let newMatrix = new Matrix(rowIndices.length, columnIndices.length);
-    for (let i = 0; i < indices.row.length; i++) {
-      let rowIndex = indices.row[i];
-      for (let j = 0; j < indices.column.length; j++) {
-        let columnIndex = indices.column[j];
+    for (let i = 0; i < rowIndices.length; i++) {
+      let rowIndex = rowIndices[i];
+      for (let j = 0; j < columnIndices.length; j++) {
+        let columnIndex = columnIndices[j];
         newMatrix.set(i, j, this.get(rowIndex, columnIndex));
       }
     }
@@ -1330,13 +1333,13 @@ export class AbstractMatrix {
     }
     switch (by) {
       case 'row': {
-        if (!Array.isArray(mean)) {
+        if (!isAnyArray(mean)) {
           throw new TypeError('mean must be an array');
         }
         return varianceByRow(this, unbiased, mean);
       }
       case 'column': {
-        if (!Array.isArray(mean)) {
+        if (!isAnyArray(mean)) {
           throw new TypeError('mean must be an array');
         }
         return varianceByColumn(this, unbiased, mean);
@@ -1379,14 +1382,14 @@ export class AbstractMatrix {
     const { center = this.mean(by) } = options;
     switch (by) {
       case 'row': {
-        if (!Array.isArray(center)) {
+        if (!isAnyArray(center)) {
           throw new TypeError('center must be an array');
         }
         centerByRow(this, center);
         return this;
       }
       case 'column': {
-        if (!Array.isArray(center)) {
+        if (!isAnyArray(center)) {
           throw new TypeError('center must be an array');
         }
         centerByColumn(this, center);
@@ -1417,7 +1420,7 @@ export class AbstractMatrix {
       case 'row': {
         if (scale === undefined) {
           scale = getScaleByRow(this);
-        } else if (!Array.isArray(scale)) {
+        } else if (!isAnyArray(scale)) {
           throw new TypeError('scale must be an array');
         }
         scaleByRow(this, scale);
@@ -1426,7 +1429,7 @@ export class AbstractMatrix {
       case 'column': {
         if (scale === undefined) {
           scale = getScaleByColumn(this);
-        } else if (!Array.isArray(scale)) {
+        } else if (!isAnyArray(scale)) {
           throw new TypeError('scale must be an array');
         }
         scaleByColumn(this, scale);
@@ -1487,7 +1490,7 @@ export default class Matrix extends AbstractMatrix {
       } else {
         throw new TypeError('nColumns must be a positive integer');
       }
-    } else if (Array.isArray(nRows)) {
+    } else if (isAnyArray(nRows)) {
       // Copy the values from the 2D array
       const arrayData = nRows;
       nRows = arrayData.length;

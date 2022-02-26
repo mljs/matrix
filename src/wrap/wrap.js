@@ -1,9 +1,11 @@
+import { isAnyArray } from 'is-any-array';
+
 import WrapperMatrix1D from './WrapperMatrix1D';
 import WrapperMatrix2D from './WrapperMatrix2D';
 
 export function wrap(array, options) {
-  if (Array.isArray(array)) {
-    if (array[0] && Array.isArray(array[0])) {
+  if (isAnyArray(array)) {
+    if (array[0] && isAnyArray(array[0])) {
       return new WrapperMatrix2D(array);
     } else {
       return new WrapperMatrix1D(array, options);
