@@ -24,9 +24,6 @@
     "test": "npm run test-only && npm run eslint && npm run prettier",
     "test-only": "jest --coverage"
   },
-  "jest": {
-    "testEnvironment": "node"
-  },
   "repository": {
     "type": "git",
     "url": "https://github.com/mljs/matrix.git"
