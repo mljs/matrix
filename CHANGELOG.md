@@ -1,5 +1,12 @@
 # Changelog
 
+## [6.10.0](https://github.com/mljs/matrix/compare/v6.9.0...v6.10.0) (2022-04-19)
+
+
+### Features
+
+* add min(by) and max(by) ([#144](https://github.com/mljs/matrix/issues/144)) ([6c7cdbe](https://github.com/mljs/matrix/commit/6c7cdbec64dc9ed55fadbba3442a2458002c4c82))
+
 ## [6.9.0](https://github.com/mljs/matrix/compare/v6.8.2...v6.9.0) (2022-02-26)
 
 
