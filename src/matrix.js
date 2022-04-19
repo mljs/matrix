@@ -562,19 +562,47 @@ export class AbstractMatrix {
     return this;
   }
 
-  max() {
+  max(by) {
     if (this.isEmpty()) {
       return NaN;
     }
-    let v = this.get(0, 0);
-    for (let i = 0; i < this.rows; i++) {
-      for (let j = 0; j < this.columns; j++) {
-        if (this.get(i, j) > v) {
-          v = this.get(i, j);
+    switch (by) {
+      case 'row': {
+        const max = new Array(this.rows).fill(Number.NEGATIVE_INFINITY);
+        for (let row = 0; row < this.rows; row++) {
+          for (let column = 0; column < this.columns; column++) {
+            if (this.get(row, column) > max[row]) {
+              max[row] = this.get(row, column);
+            }
+          }
         }
+        return max;
       }
+      case 'column': {
+        const max = new Array(this.columns).fill(Number.NEGATIVE_INFINITY);
+        for (let row = 0; row < this.rows; row++) {
+          for (let column = 0; column < this.columns; column++) {
+            if (this.get(row, column) > max[column]) {
+              max[column] = this.get(row, column);
+            }
+          }
+        }
+        return max;
+      }
+      case undefined: {
+        let max = this.get(0, 0);
+        for (let row = 0; row < this.rows; row++) {
+          for (let column = 0; column < this.columns; column++) {
+            if (this.get(row, column) > max) {
+              max = this.get(row, column);
+            }
+          }
+        }
+        return max;
+      }
+      default:
+        throw new Error(`invalid option: ${by}`);
     }
-    return v;
   }
 
   maxIndex() {
@@ -593,19 +621,48 @@ export class AbstractMatrix {
     return idx;
   }
 
-  min() {
+  min(by) {
     if (this.isEmpty()) {
       return NaN;
     }
-    let v = this.get(0, 0);
-    for (let i = 0; i < this.rows; i++) {
-      for (let j = 0; j < this.columns; j++) {
-        if (this.get(i, j) < v) {
-          v = this.get(i, j);
+
+    switch (by) {
+      case 'row': {
+        const min = new Array(this.rows).fill(Number.POSITIVE_INFINITY);
+        for (let row = 0; row < this.rows; row++) {
+          for (let column = 0; column < this.columns; column++) {
+            if (this.get(row, column) < min[row]) {
+              min[row] = this.get(row, column);
+            }
+          }
         }
+        return min;
       }
+      case 'column': {
+        const min = new Array(this.columns).fill(Number.POSITIVE_INFINITY);
+        for (let row = 0; row < this.rows; row++) {
+          for (let column = 0; column < this.columns; column++) {
+            if (this.get(row, column) < min[column]) {
+              min[column] = this.get(row, column);
+            }
+          }
+        }
+        return min;
+      }
+      case undefined: {
+        let min = this.get(0, 0);
+        for (let row = 0; row < this.rows; row++) {
+          for (let column = 0; column < this.columns; column++) {
+            if (this.get(row, column) < min) {
+              min = this.get(row, column);
+            }
+          }
+        }
+        return min;
+      }
+      default:
+        throw new Error(`invalid option: ${by}`);
     }
-    return v;
   }
 
   minIndex() {
