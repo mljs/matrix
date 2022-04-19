@@ -486,6 +486,12 @@ export abstract class AbstractMatrix {
   max(): number;
 
   /**
+   * Returns the maximum value by the given dimension.
+   * @param by - max by 'row' or 'column'.
+   */
+  max(by: MatrixDimension): number[];
+
+  /**
    * Returns the index of the maximum value.
    */
   maxIndex(): [number, number];
@@ -494,6 +500,12 @@ export abstract class AbstractMatrix {
    * Returns the minimum value of the matrix.
    */
   min(): number;
+
+  /**
+   * Returns the minimum value by the given dimension.
+   * @param by - min by 'row' or 'column'.
+   */
+  min(by: MatrixDimension): number[];
 
   /**
    * Returns the index of the minimum value.

@@ -60,14 +60,14 @@ describe('matrix min/max', () => {
       [7, 3],
       [-1, 5],
     ]);
-    const min = mat.min();
-    const max = mat.max();
-    const minIndex = mat.minIndex();
-    const maxIndex = mat.maxIndex();
-    expect(min).toBe(-1);
-    expect(max).toBe(7);
-    expect(minIndex).toStrictEqual([2, 0]);
-    expect(maxIndex).toStrictEqual([1, 0]);
+    expect(mat.min()).toBe(-1);
+    expect(mat.max()).toBe(7);
+    expect(mat.min('row')).toStrictEqual([1, 3, -1]);
+    expect(mat.max('row')).toStrictEqual([2, 7, 5]);
+    expect(mat.min('column')).toStrictEqual([-1, 2]);
+    expect(mat.max('column')).toStrictEqual([7, 5]);
+    expect(mat.minIndex()).toStrictEqual([2, 0]);
+    expect(mat.maxIndex()).toStrictEqual([1, 0]);
   });
 });
 
