@@ -1521,6 +1521,12 @@ function compareNumbers(a, b) {
   return a - b;
 }
 
+function isArrayOfNumbers(array) {
+  return array.every(element => {
+    return typeof element === 'number';
+  });
+}
+
 // Synonyms
 AbstractMatrix.random = AbstractMatrix.rand;
 AbstractMatrix.randomInt = AbstractMatrix.randInt;
@@ -1561,6 +1567,11 @@ export default class Matrix extends AbstractMatrix {
       for (let i = 0; i < nRows; i++) {
         if (arrayData[i].length !== nColumns) {
           throw new RangeError('Inconsistent array dimensions');
+        }
+        if (!isArrayOfNumbers(arrayData[i])) {
+          throw new TypeError(
+            'Input data contains non-numeric values',
+          );
         }
         this.data.push(Float64Array.from(arrayData[i]));
       }
