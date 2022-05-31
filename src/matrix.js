@@ -1522,7 +1522,7 @@ function compareNumbers(a, b) {
 }
 
 function isArrayOfNumbers(array) {
-  return array.every(element => {
+  return array.every((element) => {
     return typeof element === 'number';
   });
 }
@@ -1569,9 +1569,7 @@ export default class Matrix extends AbstractMatrix {
           throw new RangeError('Inconsistent array dimensions');
         }
         if (!isArrayOfNumbers(arrayData[i])) {
-          throw new TypeError(
-            'Input data contains non-numeric values',
-          );
+          throw new TypeError('Input data contains non-numeric values');
         }
         this.data.push(Float64Array.from(arrayData[i]));
       }
