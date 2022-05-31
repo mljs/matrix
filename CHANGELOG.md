@@ -1,5 +1,12 @@
 # Changelog
 
+### [6.10.1](https://github.com/mljs/matrix/compare/v6.10.0...v6.10.1) (2022-05-31)
+
+
+### Bug Fixes
+
+* type check input array ([#149](https://github.com/mljs/matrix/issues/149)) ([d8ac6f7](https://github.com/mljs/matrix/commit/d8ac6f7545b423b1bc0055e66e7edc2829488113)), closes [#148](https://github.com/mljs/matrix/issues/148)
+
 ## [6.10.0](https://github.com/mljs/matrix/compare/v6.9.0...v6.10.0) (2022-04-19)
 
 
