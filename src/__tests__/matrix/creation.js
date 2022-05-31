@@ -66,6 +66,14 @@ describe('Matrix creation', () => {
     expect(() => new Matrix()).toThrow(
       /^First argument must be a positive number or an array$/,
     );
+    expect(
+      () =>
+        new Matrix([
+          [1, 2, 3],
+          [4, 5, 6],
+          [7, undefined, 9],
+        ]),
+    ).toThrow(/^Input data contains non-numeric values$/);
   });
 
   it('should correctly set rows, columns and values', () => {
