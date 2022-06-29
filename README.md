@@ -67,42 +67,41 @@ var C = new Matrix([
 
 #### Operations
 ```js
-const addition       = Matrix.add(A, B);   // addition = Matrix [[4, 4], [3, 3], rows: 2, columns: 2]
-const subtraction    = Matrix.sub(A, B);   // subtraction = Matrix [[-2, -2], [1, 1], rows: 2, columns: 2]
+const addition       = Matrix.add(A, B);   // addition       = Matrix [[4, 4], [3, 3], rows: 2, columns: 2]
+const subtraction    = Matrix.sub(A, B);   // subtraction    = Matrix [[-2, -2], [1, 1], rows: 2, columns: 2]
 const multiplication = A.mmul(B);          // multiplication = Matrix [[4, 4], [8, 8], rows: 2, columns: 2]
-const mulByNumber    = Matrix.mul(A, 10);  // mulByNumber = Matrix [[10, 10], [20, 20], rows: 2, columns: 2]
-const divByNumber    = Matrix.div(A, 10);  // divByNumber = Matrix [[0.1, 0.1], [0.2, 0.2], rows: 2, columns: 2]
-const modulo         = Matrix.mod(B, 2);   // modulo = Matrix [[ 1, 1], [1, 1], rows: 2, columns: 2]
-const maxMatrix      = Matrix.max(A, B);   // max = Matrix [[3, 3], [2, 2], rows: 2, columns: 2]
-const minMatrix      = Matrix.min(A, B);   // max = Matrix [[1, 1], [1, 1], rows: 2, columns: 2]
+const mulByNumber    = Matrix.mul(A, 10);  // mulByNumber    = Matrix [[10, 10], [20, 20], rows: 2, columns: 2]
+const divByNumber    = Matrix.div(A, 10);  // divByNumber    = Matrix [[0.1, 0.1], [0.2, 0.2], rows: 2, columns: 2]
+const modulo         = Matrix.mod(B, 2);   // modulo         = Matrix [[1, 1], [1, 1], rows: 2, columns: 2]
+const maxMatrix      = Matrix.max(A, B);   // max            = Matrix [[3, 3], [2, 2], rows: 2, columns: 2]
+const minMatrix      = Matrix.min(A, B);   // max            = Matrix [[1, 1], [1, 1], rows: 2, columns: 2]
 ```
 
-#### Inplace Operations: (consider that Cinit = C before all the operations below)
+#### Inplace Operations
 ```js
-C.add(A);   // => C = Cinit + A
-C.sub(A);   // => C = Cinit
-C.mul(10);  // => C = 10 * Cinit
-C.div(10);  // => C = Cinit
-C.mod(2);   // => C = Cinit % 2
+C.add(A);   // => C = C + A
+C.sub(A);   // => C = C - A
+C.mul(10);  // => C = 10 * C
+C.div(10);  // => C = C / 10
+C.mod(2);   // => C = C % 2
 ```
 
 #### Math Operations
 ```js
-// Standard Math operations : (abs, cos, round, etc.)
+// Standard Math operations: (abs, cos, round, etc.)
 var A = new Matrix([
   [ 1,  1],
   [-1, -1],
 ]);
 
 var exponential = Matrix.exp(A);  // exponential = Matrix [[Math.exp(1), Math.exp(1)], [Math.exp(-1), Math.exp(-1)], rows: 2, columns: 2].
-var cosinus     = Matrix.cos(A);  // cosinus = Matrix [[Math.cos(1), Math.cos(1)], [Math.cos(-1), Math.cos(-1)], rows: 2, columns: 2].
-var absolute    = Matrix.abs(A);  // expon = absolute [[1, 1], [1, 1], rows: 2, columns: 2].
-
-// Note : you can do it inplace too as A.abs()
+var cosinus     = Matrix.cos(A);  // cosinus     = Matrix [[Math.cos(1), Math.cos(1)], [Math.cos(-1), Math.cos(-1)], rows: 2, columns: 2].
+var absolute    = Matrix.abs(A);  // absolute    = Matrix [[1, 1], [1, 1], rows: 2, columns: 2].
+// Note: you can do it inplace too as A.abs()
 ```
-you can use 
+Available Methods:
 ```js
-'abs', 'acos', 'acosh', 'asin', 'asinh', 'atan', 'atanh', 'cbrt', 'ceil', 'clz32', 'cos', 'cosh', 'exp', 'expm1', 'floor', 'fround', 'log', 'log1p', 'log10', 'log2', 'round', 'sign', 'sin', 'sinh', 'sqrt', 'tan', 'tanh', 'trunc'
+abs, acos, acosh, asin, asinh, atan, atanh, cbrt, ceil, clz32, cos, cosh, exp, expm1, floor, fround, log, log1p, log10, log2, round, sign, sin, sinh, sqrt, tan, tanh, trunc
 ```
 #### Manipulation of the matrix
 ```js
@@ -112,15 +111,15 @@ var numberRows     = A.rows;             // A has 2 rows
 var numberCols     = A.columns;          // A has 2 columns
 var firstValue     = A.get(0, 0);        // get(rows, columns)
 var numberElements = A.size;             // 2 * 2 = 4 elements
-var isRow          = A.isRowVector();    // false because A has more that 1 row
-var isColumn       = A.isColumnVector(); // false because A has more that 1 column
+var isRow          = A.isRowVector();    // false because A has more than 1 row
+var isColumn       = A.isColumnVector(); // false because A has more than 1 column
 var isSquare       = A.isSquare();       // true, because A is 2 * 2 matrix
 var isSym          = A.isSymmetric();    // false, because A is not symmetric
-A.set(1, 0, 10);                         // A = Matrix [[1, 1], [10, -1], rows: 2, columns: 2]. We have change the second row and the first column
-var diag           = A.diag();           // diag = [1, -1], i.e values in the diagonal.
+A.set(1, 0, 10);                         // A = Matrix [[1, 1], [10, -1], rows: 2, columns: 2]. We have changed the second row and the first column
+var diag           = A.diag();           // diag = [1, -1] (values in the diagonal)
 var m              = A.mean();           // m = 2.75
-var product        = A.prod();           // product = -10, i.e product of all values of the matrix
-var norm           = A.norm();           // norm = 10.14889156509222, i.e Frobenius norm of the matrix
+var product        = A.prod();           // product = -10 (product of all values of the matrix)
+var norm           = A.norm();           // norm = 10.14889156509222 (Frobenius norm of the matrix)
 var transpose      = A.transpose();      // transpose = Matrix [[1, 10], [1, -1], rows: 2, columns: 2]
 ```
 
@@ -128,7 +127,7 @@ var transpose      = A.transpose();      // transpose = Matrix [[1, 10], [1, -1]
 ```js
 var z = Matrix.zeros(3, 2); // z = Matrix [[0, 0], [0, 0], [0, 0], rows: 3, columns: 2]
 var z = Matrix.ones(2, 3);  // z = Matrix [[1, 1, 1], [1, 1, 1], rows: 2, columns: 3]
-var z = Matrix.eye(3, 4);   // Matrix [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], rows: 3, columns: 4]. there are 1 only in the diagonal
+var z = Matrix.eye(3, 4);   // z = Matrix [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], rows: 3, columns: 4]. there are 1 only in the diagonal
 ```
 
 ### Maths
@@ -155,6 +154,7 @@ var A = new Matrix([
 var inverseA = inverse(A);
 var B = A.mmul(inverseA); // B = A * inverse(A), so B ~= Identity
 
+
 // if A is singular, you can use SVD :
 var A = new Matrix([
   [1, 2, 3],
@@ -165,7 +165,8 @@ var A = new Matrix([
 
 var inverseA = inverse(A, (useSVD = true)); // inverseA is only an approximation of the inverse, by using the Singular Values Decomposition
 var B = A.mmul(inverseA); // B = A * inverse(A), but inverse(A) is only an approximation, so B doesn't really be identity.
-
+```
+```js
 // if you want the pseudo-inverse of a matrix :
 var A = new Matrix([
   [1, 2],
@@ -177,10 +178,9 @@ var pseudoInverseA = A.pseudoInverse();
 var B = A.mmul(pseudoInverseA).mmul(A); // with pseudo inverse, A*pseudo-inverse(A)*A ~= A. It's the case here
 ```
 #### Least square
+Least square is the following problem: We search for `x`, such that `A.x = B` (`A`, `x` and `B` are matrix or vectors).
+Below, how to solve least square with our function
 ```js
-// Least square is the following problem: We search x, such as A.x = b (A, x and b are matrix or vectors).
-// Below, how to solve least square with our function
-
 // If A is non singular :
 var A = new Matrix([
   [3,    1],
@@ -189,10 +189,11 @@ var A = new Matrix([
   [8,    1],
 ]);
 
-var b = Matrix.columnVector([4.5, 4.25, 5.5, 5.5]);
-var x = solve(A, b);
-var error = Matrix.sub(b, A.mmul(x)); // The error enables to evaluate the solution x found.
-
+var B = Matrix.columnVector([4.5, 4.25, 5.5, 5.5]);
+var x = solve(A, B);
+var error = Matrix.sub(B, A.mmul(x)); // The error enables to evaluate the solution x found.
+```
+```js
 // If A is non singular :
 var A = new Matrix([
   [1, 2, 3],
@@ -200,9 +201,9 @@ var A = new Matrix([
   [7, 8, 9],
 ]);
 
-var b = Matrix.columnVector([8, 20, 32]);
-var x = solve(A, b, (useSVD = true)); // there are many solutions. x can be [1, 2, 1].transpose(), or [1.33, 1.33, 1.33].transpose(), etc.
-var error = Matrix.sub(b, A.mmul(x)); // The error enables to evaluate the solution x found.
+var B = Matrix.columnVector([8, 20, 32]);
+var x = solve(A, B, (useSVD = true)); // there are many solutions. x can be [1, 2, 1].transpose(), or [1.33, 1.33, 1.33].transpose(), etc.
+var error = Matrix.sub(B, A.mmul(x)); // The error enables to evaluate the solution x found.
 ```
 #### Decompositions
 
@@ -220,7 +221,7 @@ var R = QR.upperTriangularMatrix;
 // So you have the QR decomposition. If you multiply Q by R, you'll see that A = Q.R, with Q orthogonal and R upper triangular
 ```
 ##### LU Decomposition
-```ja
+```js
 var A = new Matrix([
   [2, 3, 5],
   [4, 1, 6],
