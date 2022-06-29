@@ -1,5 +1,12 @@
 # Changelog
 
+## [6.10.2](https://github.com/mljs/matrix/compare/v6.10.1...v6.10.2) (2022-06-29)
+
+
+### Bug Fixes
+
+* improve README documentation ([#151](https://github.com/mljs/matrix/issues/151)) ([bb1a8cb](https://github.com/mljs/matrix/commit/bb1a8cbd33b048d9f21e460030e4726e5aea4802))
+
 ### [6.10.1](https://github.com/mljs/matrix/compare/v6.10.0...v6.10.1) (2022-05-31)
 
 
