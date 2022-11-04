@@ -260,7 +260,7 @@ export abstract class AbstractMatrix {
    * @param columnIndex - Index of the element's column.
    * @param value - The new value for the element.
    */
-  set(rowIndex: number, columnIndex: number, value: number): this;
+  abstract set(rowIndex: number, columnIndex: number, value: number): this;
 
   /**
    * Returns the value of the given element of the matrix.
@@ -268,7 +268,7 @@ export abstract class AbstractMatrix {
    * @param columnIndex - Index of the element's column.
    * @returns - The value of the element.
    */
-  get(rowIndex: number, columnIndex: number): number;
+  abstract get(rowIndex: number, columnIndex: number): number;
 
   /**
    * Applies a callback for each element of the matrix. The function is called in the matrix (this) context.
@@ -934,6 +934,9 @@ export class Matrix extends AbstractMatrix {
   constructor(data: ArrayLike<ArrayLike<number>>);
   constructor(otherMatrix: AbstractMatrix);
 
+  set(rowIndex: number, columnIndex: number, value: number): this;
+  get(rowIndex: number, columnIndex: number): number;
+
   /**
    * Removes a column from the matrix (in place).
    * @param index - Column index.
@@ -965,26 +968,38 @@ export default Matrix;
 
 export class MatrixColumnView extends AbstractMatrix {
   constructor(matrix: AbstractMatrix, column: number);
+  set(rowIndex: number, columnIndex: number, value: number): this;
+  get(rowIndex: number, columnIndex: number): number;
 }
 
 export class MatrixColumnSelectionView extends AbstractMatrix {
   constructor(matrix: AbstractMatrix, columnIndices: ArrayLike<number>);
+  set(rowIndex: number, columnIndex: number, value: number): this;
+  get(rowIndex: number, columnIndex: number): number;
 }
 
 export class MatrixFlipColumnView extends AbstractMatrix {
   constructor(matrix: AbstractMatrix);
+  set(rowIndex: number, columnIndex: number, value: number): this;
+  get(rowIndex: number, columnIndex: number): number;
 }
 
 export class MatrixFlipRowView extends AbstractMatrix {
   constructor(matrix: AbstractMatrix);
+  set(rowIndex: number, columnIndex: number, value: number): this;
+  get(rowIndex: number, columnIndex: number): number;
 }
 
 export class MatrixRowView extends AbstractMatrix {
   constructor(matrix: AbstractMatrix, row: number);
+  set(rowIndex: number, columnIndex: number, value: number): this;
+  get(rowIndex: number, columnIndex: number): number;
 }
 
 export class MatrixRowSelectionView extends AbstractMatrix {
   constructor(matrix: AbstractMatrix, rowIndices: ArrayLike<number>);
+  set(rowIndex: number, columnIndex: number, value: number): this;
+  get(rowIndex: number, columnIndex: number): number;
 }
 
 export class MatrixSelectionView extends AbstractMatrix {
@@ -993,6 +1008,8 @@ export class MatrixSelectionView extends AbstractMatrix {
     rowIndices: ArrayLike<number>,
     columnIndices: ArrayLike<number>,
   );
+  set(rowIndex: number, columnIndex: number, value: number): this;
+  get(rowIndex: number, columnIndex: number): number;
 }
 
 export class MatrixSubView extends AbstractMatrix {
@@ -1003,10 +1020,14 @@ export class MatrixSubView extends AbstractMatrix {
     startColumn: number,
     endColumn: number,
   );
+  set(rowIndex: number, columnIndex: number, value: number): this;
+  get(rowIndex: number, columnIndex: number): number;
 }
 
 export class MatrixTransposeView extends AbstractMatrix {
   constructor(matrix: AbstractMatrix);
+  set(rowIndex: number, columnIndex: number, value: number): this;
+  get(rowIndex: number, columnIndex: number): number;
 }
 
 export interface IWrap1DOptions {
@@ -1025,10 +1046,14 @@ export function wrap(twoDAray: ArrayLike<ArrayLike<number>>): WrapperMatrix2D;
 
 export class WrapperMatrix1D extends AbstractMatrix {
   constructor(data: ArrayLike<number>, options?: IWrap1DOptions);
+  set(rowIndex: number, columnIndex: number, value: number): this;
+  get(rowIndex: number, columnIndex: number): number;
 }
 
 export class WrapperMatrix2D extends AbstractMatrix {
   constructor(data: ArrayLike<ArrayLike<number>>);
+  set(rowIndex: number, columnIndex: number, value: number): this;
+  get(rowIndex: number, columnIndex: number): number;
 }
 
 /**
