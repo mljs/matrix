@@ -14,7 +14,7 @@ exports[`custom toString function should use clamp options 1`] = `
 exports[`custom toString function should work with a simple matrix 1`] = `
 "Matrix {
   [
-    0        10       200     
+     0        10       200    
     -0.3     -0.44    -0.5555 
   ]
   rows: 2

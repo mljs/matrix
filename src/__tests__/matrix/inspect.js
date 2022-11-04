@@ -13,4 +13,33 @@ describe('custom Node.js inspect function', () => {
       ),
     ).toMatchSnapshot();
   });
+  it('should properly format numbers', () => {
+    const a10 = Array.from({ length: 10 }, (_, i) => i);
+    expect(
+      inspect(
+        new Matrix([
+          a10,
+          a10.map((e) => 0.123456789 * 10 ** e),
+          a10.map((e) => 0.123456789 / 10 ** e),
+          a10.map((e) => 0.123 * 10 ** e),
+          a10.map((e) => 0.123 / 10 ** e),
+          a10.map((e) => 0.12 * 10 ** e),
+          a10.map((e) => 0.12 / 10 ** e),
+        ]),
+      ),
+    ).toMatchSnapshot();
+    expect(
+      inspect(
+        new Matrix([
+          a10,
+          a10.map((e) => (-1) ** e * 0.123456789 * 10 ** e),
+          a10.map((e) => ((-1) ** e * -0.123456789) / 10 ** e),
+          a10.map((e) => (-1) ** e * 0.123 * 10 ** e),
+          a10.map((e) => ((-1) ** e * -0.123) / 10 ** e),
+          a10.map((e) => (-1) ** e * 0.12 * 10 ** e),
+          a10.map((e) => ((-1) ** e * -0.12) / 10 ** e),
+        ]),
+      ),
+    ).toMatchSnapshot();
+  });
 });
