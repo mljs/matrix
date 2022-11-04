@@ -74,7 +74,13 @@ function formatNumber2(num, len) {
   if (fix.length > len) {
     fix = num.toFixed(Math.max(0, len - (fix.length - len)));
   }
-  if (fix.length <= len && !fix.startsWith('0.000')) return fix;
+  if (
+    fix.length <= len &&
+    !fix.startsWith('0.000') &&
+    !fix.startsWith('-0.000')
+  ) {
+    return fix;
+  }
 
   // well, if it's still too long the user should've used longer numbers
   let exp = num.toExponential(len);

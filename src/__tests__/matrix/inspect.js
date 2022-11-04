@@ -25,6 +25,8 @@ describe('custom Node.js inspect function', () => {
           a10.map((e) => 0.123 / 10 ** e),
           a10.map((e) => 0.12 * 10 ** e),
           a10.map((e) => 0.12 / 10 ** e),
+          a10.map((e) => 1 + 0.12 * 10 ** e),
+          a10.map((e) => 1 + 0.12 / 10 ** e),
         ]),
       ),
     ).toMatchSnapshot();
@@ -38,6 +40,11 @@ describe('custom Node.js inspect function', () => {
           a10.map((e) => ((-1) ** e * -0.123) / 10 ** e),
           a10.map((e) => (-1) ** e * 0.12 * 10 ** e),
           a10.map((e) => ((-1) ** e * -0.12) / 10 ** e),
+          a10.map((e) => -0.12 / 10 ** e),
+          a10.map((e) => 1 + 0.12 * 10 ** e),
+          a10.map((e) => 1 + 0.12 / 10 ** e),
+          a10.map((e) => -1 - 0.12 * 10 ** e),
+          a10.map((e) => -1 - 0.12 / 10 ** e),
         ]),
       ),
     ).toMatchSnapshot();
