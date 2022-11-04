@@ -1,5 +1,12 @@
 # Changelog
 
+## [6.10.3](https://github.com/mljs/matrix/compare/v6.10.2...v6.10.3) (2022-11-04)
+
+
+### Bug Fixes
+
+* **typings:** mark get/set of AbstractMatrix as abstract ([#155](https://github.com/mljs/matrix/issues/155)) ([d07f5c6](https://github.com/mljs/matrix/commit/d07f5c622fbe204a861768c2e2c2b7fa39008e76))
+
 ## [6.10.2](https://github.com/mljs/matrix/compare/v6.10.1...v6.10.2) (2022-06-29)
 
 
