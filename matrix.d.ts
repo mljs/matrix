@@ -110,6 +110,11 @@ export interface IToStringOptions {
    * @default `8`
    */
   maxNumSize?: number;
+  /**
+   * Place minus signs in their own column.
+   * @default `'auto'`
+   */
+  padMinus?: true | false | 'auto';
 }
 
 export abstract class AbstractMatrix {
