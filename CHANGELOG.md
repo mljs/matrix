@@ -1,5 +1,12 @@
 # Changelog
 
+## [6.10.4](https://github.com/mljs/matrix/compare/v6.10.3...v6.10.4) (2022-11-05)
+
+
+### Bug Fixes
+
+* improve inspect/toString number formatter ([#157](https://github.com/mljs/matrix/issues/157)) ([4ed872e](https://github.com/mljs/matrix/commit/4ed872e3fe747b1cb0a026b359b9d8e0672f6ea1))
+
 ## [6.10.3](https://github.com/mljs/matrix/compare/v6.10.2...v6.10.3) (2022-11-04)
 
 
