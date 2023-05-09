@@ -10,5 +10,3 @@ jobs:
   nodejs:
     # Documentation: https://github.com/zakodium/workflows#nodejs-ci
     uses: zakodium/workflows/.github/workflows/nodejs.yml@nodejs-v1
-    with:
-      node-version-matrix: '[12, 14, 16, 18]'
