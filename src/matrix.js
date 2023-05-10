@@ -1079,12 +1079,12 @@ export class AbstractMatrix {
       c22.add(m6);
 
       // Crop output to the desired size (undo dynamic padding).
-      let resultat = AbstractMatrix.zeros(2 * c11.rows, 2 * c11.columns);
-      resultat = resultat.setSubMatrix(c11, 0, 0);
-      resultat = resultat.setSubMatrix(c12, c11.rows, 0);
-      resultat = resultat.setSubMatrix(c21, 0, c11.columns);
-      resultat = resultat.setSubMatrix(c22, c11.rows, c11.columns);
-      return resultat.subMatrix(0, rows - 1, 0, cols - 1);
+      let result = AbstractMatrix.zeros(2 * c11.rows, 2 * c11.columns);
+      result = result.setSubMatrix(c11, 0, 0);
+      result = result.setSubMatrix(c12, c11.rows, 0);
+      result = result.setSubMatrix(c21, 0, c11.columns);
+      result = result.setSubMatrix(c22, c11.rows, c11.columns);
+      return result.subMatrix(0, rows - 1, 0, cols - 1);
     }
 
     return blockMult(x, y, r, c);
@@ -1122,8 +1122,8 @@ export class AbstractMatrix {
       const column = this.getColumn(i);
       if (column.length) {
         rescale(column, {
-          min: min,
-          max: max,
+          min,
+          max,
           output: column,
         });
       }
