@@ -498,6 +498,7 @@ function hqr2(nn, e, d, V, H) {
           H.set(i, i, H.get(i, i) - x);
         }
         s = Math.abs(H.get(n, n - 1)) + Math.abs(H.get(n - 1, n - 2));
+        // eslint-disable-next-line no-multi-assign
         x = y = 0.75 * s;
         w = -0.4375 * s * s;
       }
@@ -515,6 +516,7 @@ function hqr2(nn, e, d, V, H) {
             H.set(i, i, H.get(i, i) - s);
           }
           exshift += s;
+          // eslint-disable-next-line no-multi-assign
           x = y = w = 0.964;
         }
       }
