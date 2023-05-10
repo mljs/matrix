@@ -10,7 +10,7 @@ export default [
       format: 'cjs',
       exports: 'named',
     },
-    external: ['ml-array-rescale'],
+    external: ['is-any-array', 'ml-array-rescale'],
   },
   {
     input: 'src/index.js',
