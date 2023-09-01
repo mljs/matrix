@@ -802,7 +802,8 @@ export class AbstractMatrix {
     return diag;
   }
 
-  norm(type = 'frobenius') {
+  norm(type) {
+    if (type === undefined) type = 'frobenius';
     let result = 0;
     if (type === 'max') {
       return this.max();
