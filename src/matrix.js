@@ -803,19 +803,13 @@ export class AbstractMatrix {
   }
 
   norm(type) {
-    if (type === undefined) type = 'frobenius';
-    let result = 0;
-    if (type === 'max') {
-      return this.max();
-    } else if (type === 'frobenius') {
-      for (let i = 0; i < this.rows; i++) {
-        for (let j = 0; j < this.columns; j++) {
-          result = result + this.get(i, j) * this.get(i, j);
-        }
-      }
-      return Math.sqrt(result);
-    } else {
-      throw new RangeError(`unknown norm type: ${type}`);
+    switch (type ?? 'frobenius') {
+      case 'max':
+        return this.max();
+      case 'frobenius':
+        return Math.sqrt(this.dot(this));
+      default:
+        throw new RangeError(`unknown norm type: ${type}`);
     }
   }
 
