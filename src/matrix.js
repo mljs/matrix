@@ -802,8 +802,8 @@ export class AbstractMatrix {
     return diag;
   }
 
-  norm(type) {
-    switch (type ?? 'frobenius') {
+  norm(type = 'frobenius') {
+    switch (type) {
       case 'max':
         return this.max();
       case 'frobenius':
