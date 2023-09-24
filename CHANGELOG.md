@@ -1,5 +1,17 @@
 # Changelog
 
+## [6.10.5](https://github.com/mljs/matrix/compare/v6.10.4...v6.10.5) (2023-09-24)
+
+
+### Bug Fixes
+
+* **types:** optional argument for `norm()` ([#165](https://github.com/mljs/matrix/issues/165)) ([8869e22](https://github.com/mljs/matrix/commit/8869e2250751843d693b4347286d03052f2a6806))
+
+
+### Documentation
+
+* add DOI badge ([#159](https://github.com/mljs/matrix/issues/159)) ([2b98189](https://github.com/mljs/matrix/commit/2b98189295e297a6c3a48f76ca05ca0641d14e2b))
+
 ## [6.10.4](https://github.com/mljs/matrix/compare/v6.10.3...v6.10.4) (2022-11-05)
 
 
