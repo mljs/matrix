@@ -1,4 +1,4 @@
-<!DOCTYPE html><html class="default" lang="en"><head><meta charSet="utf-8"/><meta http-equiv="x-ua-compatible" content="IE=edge"/><title>IRandomOptions | ml-matrix</title><meta name="description" content="Documentation for ml-matrix"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="../assets/style.css"/><link rel="stylesheet" href="../assets/highlight.css"/><script defer src="../assets/main.js"></script><script async src="../assets/search.js" id="tsd-search-script"></script><script async src="../assets/navigation.js" id="tsd-nav-script"></script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex/dist/katex.min.css"/><script src="https://cdn.jsdelivr.net/npm/katex/dist/katex.min.js"></script><script src="https://cdn.jsdelivr.net/npm/katex/dist/contrib/auto-render.min.js"></script><script>
+<!DOCTYPE html><html class="default" lang="en"><head><meta charSet="utf-8"/><meta http-equiv="x-ua-compatible" content="IE=edge"/><title>covariance | ml-matrix</title><meta name="description" content="Documentation for ml-matrix"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="../assets/style.css"/><link rel="stylesheet" href="../assets/highlight.css"/><script defer src="../assets/main.js"></script><script async src="../assets/search.js" id="tsd-search-script"></script><script async src="../assets/navigation.js" id="tsd-nav-script"></script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex/dist/katex.min.css"/><script src="https://cdn.jsdelivr.net/npm/katex/dist/katex.min.js"></script><script src="https://cdn.jsdelivr.net/npm/katex/dist/contrib/auto-render.min.js"></script><script>
 					window.__typeDocPluginKatexOptions={"delimiters":[{"left":"$","right":"$","display":true}],"fleqn":"true","leqno":"false"};
 					window.addEventListener('load', () => window.renderMathInElement(document.body, window.__typeDocPluginKatexOptions));
 				</script></head><body><script>document.documentElement.dataset.theme = localStorage.getItem("tsd-theme") || "os"</script><header class="tsd-page-toolbar">
@@ -16,43 +16,36 @@
 <div class="tsd-page-title">
 <ul class="tsd-breadcrumb">
 <li><a href="../modules.html">ml-matrix</a></li>
-<li><a href="IRandomOptions.html">IRandomOptions</a></li></ul>
-<h1>Interface IRandomOptions</h1></div>
-<section class="tsd-panel tsd-hierarchy">
-<h4>Hierarchy</h4>
-<ul class="tsd-hierarchy">
-<li><span class="target">IRandomOptions</span></li></ul></section><aside class="tsd-sources">
-<ul>
-<li>Defined in <a href="https://github.com/mljs/matrix/blob/bde1c9a/matrix.d.ts#L5">matrix.d.ts:5</a></li></ul></aside>
-<section class="tsd-panel-group tsd-index-group">
-<section class="tsd-panel tsd-index-panel">
-<details class="tsd-index-content tsd-index-accordion" open><summary class="tsd-accordion-summary tsd-index-summary">
-<h5 class="tsd-index-heading uppercase" role="button" aria-expanded="false" tabIndex=0><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><use href="#icon-chevronSmall"></use></svg> Index</h5></summary>
-<div class="tsd-accordion-details">
-<section class="tsd-index-section">
-<h3 class="tsd-index-heading">Properties</h3>
-<div class="tsd-index-list"><a href="IRandomOptions.html#random" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-1024"></use></svg><span>random</span></a>
-</div></section></div></details></section></section>
-<section class="tsd-panel-group tsd-member-group">
-<h2>Properties</h2>
-<section class="tsd-panel tsd-member"><a id="random" class="tsd-anchor"></a>
-<h3 class="tsd-anchor-link"><span>random</span><a href="#random" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
-<div class="tsd-signature"><span class="tsd-kind-property">random</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span></div>
-<div class="tsd-type-declaration">
-<h4>Type declaration</h4>
-<ul class="tsd-parameters">
-<li class="tsd-parameter-signature">
+<li><a href="covariance.html">covariance</a></li></ul>
+<h1>Function covariance</h1></div>
+<section class="tsd-panel">
 <ul class="tsd-signatures">
-<li class="tsd-signature" id="random.__type.__type-1"><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></li>
+<li class="tsd-signature tsd-anchor-link" id="covariance"><span class="tsd-kind-call-signature">covariance</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">matrix</span>, <span class="tsd-kind-parameter">options</span><span class="tsd-signature-symbol">?</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../classes/Matrix.html" class="tsd-signature-type tsd-kind-class">Matrix</a><a href="#covariance" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></li>
 <li class="tsd-description">
-<div class="tsd-comment tsd-typography"><p>Random number generator.</p>
-</div>
-<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
-<div class="tsd-comment tsd-typography">
-<h4>Default</h4><p><code>Math.random</code></p>
-</div></li></ul></li></ul></div><aside class="tsd-sources">
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
+<li>
+<h5><span class="tsd-kind-parameter">matrix</span>: <span class="tsd-signature-type ">MaybeMatrix</span></h5></li>
+<li>
+<h5><code class="tsd-tag ts-flagOptional">Optional</code> <span class="tsd-kind-parameter">options</span>: <a href="../interfaces/ICovarianceOptions.html" class="tsd-signature-type tsd-kind-interface">ICovarianceOptions</a></h5></li></ul></div>
+<h4 class="tsd-returns-title">Returns <a href="../classes/Matrix.html" class="tsd-signature-type tsd-kind-class">Matrix</a></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/mljs/matrix/blob/bde1c9a/matrix.d.ts#L10">matrix.d.ts:10</a></li></ul></aside></section></section></div>
+<li>Defined in <a href="https://github.com/mljs/matrix/blob/bde1c9a/matrix.d.ts#L1123">matrix.d.ts:1123</a></li></ul></aside></li>
+<li class="tsd-signature tsd-anchor-link" id="covariance-1"><span class="tsd-kind-call-signature">covariance</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">xMatrix</span>, <span class="tsd-kind-parameter">yMatrix</span>, <span class="tsd-kind-parameter">options</span><span class="tsd-signature-symbol">?</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../classes/Matrix.html" class="tsd-signature-type tsd-kind-class">Matrix</a><a href="#covariance-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></li>
+<li class="tsd-description">
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
+<li>
+<h5><span class="tsd-kind-parameter">xMatrix</span>: <span class="tsd-signature-type ">MaybeMatrix</span></h5></li>
+<li>
+<h5><span class="tsd-kind-parameter">yMatrix</span>: <span class="tsd-signature-type ">MaybeMatrix</span></h5></li>
+<li>
+<h5><code class="tsd-tag ts-flagOptional">Optional</code> <span class="tsd-kind-parameter">options</span>: <a href="../interfaces/ICovarianceOptions.html" class="tsd-signature-type tsd-kind-interface">ICovarianceOptions</a></h5></li></ul></div>
+<h4 class="tsd-returns-title">Returns <a href="../classes/Matrix.html" class="tsd-signature-type tsd-kind-class">Matrix</a></h4><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/mljs/matrix/blob/bde1c9a/matrix.d.ts#L1128">matrix.d.ts:1128</a></li></ul></aside></li></ul></section></div>
 <div class="col-sidebar">
 <div class="page-menu">
 <div class="tsd-navigation settings">
@@ -66,12 +59,7 @@
 <li class="tsd-filter-item"><label class="tsd-filter-input"><input type="checkbox" id="tsd-filter-inherited" name="inherited" checked/><svg width="32" height="32" viewBox="0 0 32 32" aria-hidden="true"><use href="#icon-checkbox"></use></svg><span>Inherited</span></label></li>
 <li class="tsd-filter-item"><label class="tsd-filter-input"><input type="checkbox" id="tsd-filter-external" name="external"/><svg width="32" height="32" viewBox="0 0 32 32" aria-hidden="true"><use href="#icon-checkbox"></use></svg><span>External</span></label></li></ul></form></div>
 <div class="tsd-theme-toggle">
-<h4 class="uppercase">Theme</h4><select id="tsd-theme"><option value="os">OS</option><option value="light">Light</option><option value="dark">Dark</option></select></div></div></details></div>
-<details open class="tsd-index-accordion tsd-page-navigation"><summary class="tsd-accordion-summary">
-<h3><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><use href="#icon-chevronDown"></use></svg>On This Page</h3></summary>
-<div class="tsd-accordion-details">
-<ul>
-<li><a href="#random" class=""><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-1024"></use></svg><span>random</span></a></li></ul></div></details></div>
+<h4 class="uppercase">Theme</h4><select id="tsd-theme"><option value="os">OS</option><option value="light">Light</option><option value="dark">Dark</option></select></div></div></details></div></div>
 <div class="site-menu">
 <nav class="tsd-navigation"><a href="../modules.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-1"></use></svg><span>ml-matrix</span></a>
 <ul class="tsd-small-nested-navigation" id="tsd-nav-container" data-base="..">
