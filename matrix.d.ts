@@ -579,7 +579,7 @@ export abstract class AbstractMatrix {
    * Returns the norm of a matrix.
    * @param type - Norm type. Default: `'frobenius'`.
    */
-  norm(type: 'frobenius' | 'max'): number;
+  norm(type?: 'frobenius' | 'max'): number;
 
   /**
    * Computes the cumulative sum of the matrix elements (in place, row by row).
