@@ -1,4 +1,5 @@
 import SingularValueDecomposition from './dc/svd';
+import { abs } from './dc/util';
 import Matrix from './matrix';
 
 function xrange(n, exception) {
@@ -23,7 +24,7 @@ function dependenciesOneRow(
   } else {
     let returnArray = matrix.addRow(index, [0]);
     for (let i = 0; i < returnArray.rows; i++) {
-      if (Math.abs(returnArray.get(i, 0)) < thresholdValue) {
+      if (abs(returnArray.get(i, 0)) < thresholdValue) {
         returnArray.set(i, 0, 0);
       }
     }

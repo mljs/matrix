@@ -1,4 +1,5 @@
 import SVD from './dc/svd';
+import { abs } from './dc/util';
 import Matrix from './matrix';
 
 export function pseudoInverse(matrix, threshold = Number.EPSILON) {
@@ -16,7 +17,7 @@ export function pseudoInverse(matrix, threshold = Number.EPSILON) {
   let s = svdSolution.diagonal;
 
   for (let i = 0; i < s.length; i++) {
-    if (Math.abs(s[i]) > threshold) {
+    if (abs(s[i]) > threshold) {
       s[i] = 1.0 / s[i];
     } else {
       s[i] = 0.0;

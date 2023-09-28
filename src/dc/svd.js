@@ -1,7 +1,7 @@
 import Matrix from '../matrix';
 import WrapperMatrix2D from '../wrap/WrapperMatrix2D';
 
-import { hypotenuse } from './util';
+import { abs, hypotenuse } from './util';
 
 export default class SingularValueDecomposition {
   constructor(value, options = {}) {
@@ -215,9 +215,8 @@ export default class SingularValueDecomposition {
         if (k === -1) {
           break;
         }
-        const alpha =
-          Number.MIN_VALUE + eps * Math.abs(s[k] + Math.abs(s[k + 1]));
-        if (Math.abs(e[k]) <= alpha || Number.isNaN(e[k])) {
+        const alpha = Number.MIN_VALUE + eps * abs(s[k] + abs(s[k + 1]));
+        if (abs(e[k]) <= alpha || Number.isNaN(e[k])) {
           e[k] = 0;
           break;
         }
@@ -231,9 +230,8 @@ export default class SingularValueDecomposition {
             break;
           }
           let t =
-            (ks !== p ? Math.abs(e[ks]) : 0) +
-            (ks !== k + 1 ? Math.abs(e[ks - 1]) : 0);
-          if (Math.abs(s[ks]) <= eps * t) {
+            (ks !== p ? abs(e[ks]) : 0) + (ks !== k + 1 ? abs(e[ks - 1]) : 0);
+          if (abs(s[ks]) <= eps * t) {
             s[ks] = 0;
             break;
           }
@@ -295,11 +293,11 @@ export default class SingularValueDecomposition {
         }
         case 3: {
           const scale = Math.max(
-            Math.abs(s[p - 1]),
-            Math.abs(s[p - 2]),
-            Math.abs(e[p - 2]),
-            Math.abs(s[k]),
-            Math.abs(e[k]),
+            abs(s[p - 1]),
+            abs(s[p - 2]),
+            abs(e[p - 2]),
+            abs(s[k]),
+            abs(e[k]),
           );
           const sp = s[p - 1] / scale;
           const spm1 = s[p - 2] / scale;
@@ -419,7 +417,7 @@ export default class SingularValueDecomposition {
     let Ls = Matrix.zeros(scols, scols);
 
     for (let i = 0; i < scols; i++) {
-      if (Math.abs(this.s[i]) <= e) {
+      if (abs(this.s[i]) <= e) {
         Ls.set(i, i, 0);
       } else {
         Ls.set(i, i, 1 / this.s[i]);
@@ -460,7 +458,7 @@ export default class SingularValueDecomposition {
 
     for (let i = 0; i < vrows; i++) {
       for (let j = 0; j < vcols; j++) {
-        if (Math.abs(this.s[j]) > e) {
+        if (abs(this.s[j]) > e) {
           X.set(i, j, V.get(i, j) / this.s[j]);
         }
       }

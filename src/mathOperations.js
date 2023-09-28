@@ -1,3 +1,5 @@
+import { abs as numberAbs } from './dc/util';
+
 export function installMathOperations(AbstractMatrix, Matrix) {
   AbstractMatrix.prototype.add = function add(value) {
     if (typeof value === 'number') return this.addS(value);
@@ -399,7 +401,7 @@ export function installMathOperations(AbstractMatrix, Matrix) {
   AbstractMatrix.prototype.abs = function abs() {
     for (let i = 0; i < this.rows; i++) {
       for (let j = 0; j < this.columns; j++) {
-        this.set(i, j, Math.abs(this.get(i, j)));
+        this.set(i, j, numberAbs(this.get(i, j)));
       }
     }
     return this;

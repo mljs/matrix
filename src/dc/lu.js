@@ -1,6 +1,8 @@
 import Matrix from '../matrix';
 import WrapperMatrix2D from '../wrap/WrapperMatrix2D';
 
+import { abs } from './util';
+
 export default class LuDecomposition {
   constructor(matrix) {
     matrix = WrapperMatrix2D.checkMatrix(matrix);
@@ -36,7 +38,7 @@ export default class LuDecomposition {
 
       p = j;
       for (i = j + 1; i < rows; i++) {
-        if (Math.abs(LUcolj[i]) > Math.abs(LUcolj[p])) {
+        if (abs(LUcolj[i]) > abs(LUcolj[p])) {
           p = i;
         }
       }

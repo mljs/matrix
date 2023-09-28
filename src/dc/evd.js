@@ -539,10 +539,8 @@ function hqr2(nn, e, d, V, H) {
         if (
           abs(H.get(m, m - 1)) * (abs(q) + abs(r)) <
           eps *
-          (abs(p) *
-            (abs(H.get(m - 1, m - 1)) +
-              abs(z) +
-              abs(H.get(m + 1, m + 1))))
+            (abs(p) *
+              (abs(H.get(m - 1, m - 1)) + abs(z) + abs(H.get(m + 1, m + 1))))
         ) {
           break;
         }
@@ -716,14 +714,7 @@ function hqr2(nn, e, d, V, H) {
             vr = (d[i] - p) * (d[i] - p) + e[i] * e[i] - q * q;
             vi = (d[i] - p) * 2 * q;
             if (vr === 0 && vi === 0) {
-              vr =
-                eps *
-                norm *
-                (abs(w) +
-                  abs(q) +
-                  abs(x) +
-                  abs(y) +
-                  abs(z));
+              vr = eps * norm * (abs(w) + abs(q) + abs(x) + abs(y) + abs(z));
             }
             cdivres = cdiv(
               x * r - z * ra + q * sa,
