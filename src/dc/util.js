@@ -10,3 +10,8 @@ export function hypotenuse(a, b) {
   }
   return 0;
 }
+
+export function abs(a) {
+  if (a >= 0) return a;
+  return -a;
+}

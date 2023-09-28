@@ -1,7 +1,7 @@
 import Matrix from '../matrix';
 import WrapperMatrix2D from '../wrap/WrapperMatrix2D';
 
-import { hypotenuse } from './util';
+import { hypotenuse, abs } from './util';
 
 export default class EigenvalueDecomposition {
   constructor(matrix, options = {}) {
@@ -100,7 +100,7 @@ function tred2(n, e, d, V) {
     scale = 0;
     h = 0;
     for (k = 0; k < i; k++) {
-      scale = scale + Math.abs(d[k]);
+      scale = scale + abs(d[k]);
     }
 
     if (scale === 0) {
@@ -212,10 +212,10 @@ function tql2(n, e, d, V) {
   let eps = Number.EPSILON;
 
   for (l = 0; l < n; l++) {
-    tst1 = Math.max(tst1, Math.abs(d[l]) + Math.abs(e[l]));
+    tst1 = Math.max(tst1, abs(d[l]) + abs(e[l]));
     m = l;
     while (m < n) {
-      if (Math.abs(e[m]) <= eps * tst1) {
+      if (abs(e[m]) <= eps * tst1) {
         break;
       }
       m++;
@@ -273,7 +273,7 @@ function tql2(n, e, d, V) {
         p = (-s * s2 * c3 * el1 * e[l]) / dl1;
         e[l] = s * p;
         d[l] = c * p;
-      } while (Math.abs(e[l]) > eps * tst1);
+      } while (abs(e[l]) > eps * tst1);
     }
     d[l] = d[l] + f;
     e[l] = 0;
@@ -310,7 +310,7 @@ function orthes(n, H, ort, V) {
   for (m = low + 1; m <= high - 1; m++) {
     scale = 0;
     for (i = m; i <= high; i++) {
-      scale = scale + Math.abs(H.get(i, m - 1));
+      scale = scale + abs(H.get(i, m - 1));
     }
 
     if (scale !== 0) {
@@ -408,18 +408,18 @@ function hqr2(nn, e, d, V, H) {
     }
 
     for (j = Math.max(i - 1, 0); j < nn; j++) {
-      norm = norm + Math.abs(H.get(i, j));
+      norm = norm + abs(H.get(i, j));
     }
   }
 
   while (n >= low) {
     l = n;
     while (l > low) {
-      s = Math.abs(H.get(l - 1, l - 1)) + Math.abs(H.get(l, l));
+      s = abs(H.get(l - 1, l - 1)) + abs(H.get(l, l));
       if (s === 0) {
         s = norm;
       }
-      if (Math.abs(H.get(l, l - 1)) < eps * s) {
+      if (abs(H.get(l, l - 1)) < eps * s) {
         break;
       }
       l--;
@@ -435,7 +435,7 @@ function hqr2(nn, e, d, V, H) {
       w = H.get(n, n - 1) * H.get(n - 1, n);
       p = (H.get(n - 1, n - 1) - H.get(n, n)) / 2;
       q = p * p + w;
-      z = Math.sqrt(Math.abs(q));
+      z = Math.sqrt(abs(q));
       H.set(n, n, H.get(n, n) + exshift);
       H.set(n - 1, n - 1, H.get(n - 1, n - 1) + exshift);
       x = H.get(n, n);
@@ -450,7 +450,7 @@ function hqr2(nn, e, d, V, H) {
         e[n - 1] = 0;
         e[n] = 0;
         x = H.get(n, n - 1);
-        s = Math.abs(x) + Math.abs(z);
+        s = abs(x) + abs(z);
         p = x / s;
         q = z / s;
         r = Math.sqrt(p * p + q * q);
@@ -497,7 +497,7 @@ function hqr2(nn, e, d, V, H) {
         for (i = low; i <= n; i++) {
           H.set(i, i, H.get(i, i) - x);
         }
-        s = Math.abs(H.get(n, n - 1)) + Math.abs(H.get(n - 1, n - 2));
+        s = abs(H.get(n, n - 1)) + abs(H.get(n - 1, n - 2));
         x = y = 0.75 * s;
         w = -0.4375 * s * s;
       }
@@ -529,7 +529,7 @@ function hqr2(nn, e, d, V, H) {
         p = (r * s - w) / H.get(m + 1, m) + H.get(m, m + 1);
         q = H.get(m + 1, m + 1) - z - r - s;
         r = H.get(m + 2, m + 1);
-        s = Math.abs(p) + Math.abs(q) + Math.abs(r);
+        s = abs(p) + abs(q) + abs(r);
         p = p / s;
         q = q / s;
         r = r / s;
@@ -537,12 +537,12 @@ function hqr2(nn, e, d, V, H) {
           break;
         }
         if (
-          Math.abs(H.get(m, m - 1)) * (Math.abs(q) + Math.abs(r)) <
+          abs(H.get(m, m - 1)) * (abs(q) + abs(r)) <
           eps *
-            (Math.abs(p) *
-              (Math.abs(H.get(m - 1, m - 1)) +
-                Math.abs(z) +
-                Math.abs(H.get(m + 1, m + 1))))
+          (abs(p) *
+            (abs(H.get(m - 1, m - 1)) +
+              abs(z) +
+              abs(H.get(m + 1, m + 1))))
         ) {
           break;
         }
@@ -562,7 +562,7 @@ function hqr2(nn, e, d, V, H) {
           p = H.get(k, k - 1);
           q = H.get(k + 1, k - 1);
           r = notlast ? H.get(k + 2, k - 1) : 0;
-          x = Math.abs(p) + Math.abs(q) + Math.abs(r);
+          x = abs(p) + abs(q) + abs(r);
           if (x !== 0) {
             p = p / x;
             q = q / x;
@@ -664,11 +664,11 @@ function hqr2(nn, e, d, V, H) {
             H.set(
               i + 1,
               n,
-              Math.abs(x) > Math.abs(z) ? (-r - w * t) / x : (-s - y * t) / z,
+              abs(x) > abs(z) ? (-r - w * t) / x : (-s - y * t) / z,
             );
           }
 
-          t = Math.abs(H.get(i, n));
+          t = abs(H.get(i, n));
           if (eps * t * t > 1) {
             for (j = i; j <= n; j++) {
               H.set(j, n, H.get(j, n) / t);
@@ -679,7 +679,7 @@ function hqr2(nn, e, d, V, H) {
     } else if (q < 0) {
       l = n - 1;
 
-      if (Math.abs(H.get(n, n - 1)) > Math.abs(H.get(n - 1, n))) {
+      if (abs(H.get(n, n - 1)) > abs(H.get(n - 1, n))) {
         H.set(n - 1, n - 1, q / H.get(n, n - 1));
         H.set(n - 1, n, -(H.get(n, n) - p) / H.get(n, n - 1));
       } else {
@@ -719,11 +719,11 @@ function hqr2(nn, e, d, V, H) {
               vr =
                 eps *
                 norm *
-                (Math.abs(w) +
-                  Math.abs(q) +
-                  Math.abs(x) +
-                  Math.abs(y) +
-                  Math.abs(z));
+                (abs(w) +
+                  abs(q) +
+                  abs(x) +
+                  abs(y) +
+                  abs(z));
             }
             cdivres = cdiv(
               x * r - z * ra + q * sa,
@@ -733,7 +733,7 @@ function hqr2(nn, e, d, V, H) {
             );
             H.set(i, n - 1, cdivres[0]);
             H.set(i, n, cdivres[1]);
-            if (Math.abs(x) > Math.abs(z) + Math.abs(q)) {
+            if (abs(x) > abs(z) + abs(q)) {
               H.set(
                 i + 1,
                 n - 1,
@@ -756,7 +756,7 @@ function hqr2(nn, e, d, V, H) {
             }
           }
 
-          t = Math.max(Math.abs(H.get(i, n - 1)), Math.abs(H.get(i, n)));
+          t = Math.max(abs(H.get(i, n - 1)), abs(H.get(i, n)));
           if (eps * t * t > 1) {
             for (j = i; j <= n; j++) {
               H.set(j, n - 1, H.get(j, n - 1) / t);
@@ -789,7 +789,7 @@ function hqr2(nn, e, d, V, H) {
 
 function cdiv(xr, xi, yr, yi) {
   let r, d;
-  if (Math.abs(yr) > Math.abs(yi)) {
+  if (abs(yr) > abs(yi)) {
     r = yi / yr;
     d = yr + r * yi;
     return [(xr + r * xi) / d, (xi - r * xr) / d];
