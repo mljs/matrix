@@ -1,5 +1,4 @@
 .idea
 node_modules
-/matrix.js
-/matrix.umd.js
+/matrix.*js
 coverage/
