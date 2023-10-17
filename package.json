@@ -7,18 +7,27 @@
   "jsdelivr": "matrix.umd.js",
   "unpkg": "matrix.umd.js",
   "types": "matrix.d.ts",
+  "exports": {
+    ".": {
+      "types": "./matrix.d.ts",
+      "require": "./matrix.js",
+      "default": "./matrix.mjs"
+    }
+  },
   "sideEffects": false,
   "files": [
     "matrix.d.ts",
     "matrix.js",
+    "matrix.mjs",
     "matrix.umd.js",
     "src"
   ],
   "scripts": {
+    "build-esm-facade": "node tools/build-esm-facade.mjs",
     "compile": "rollup -c",
     "eslint": "eslint src testUtils.js",
     "eslint-fix": "npm run eslint -- --fix",
-    "prepack": "npm run compile",
+    "prepack": "npm run compile && npm run build-esm-facade",
     "prettier": "prettier --check src",
     "prettier-write": "prettier --write src",
     "test": "npm run test-only && npm run eslint && npm run prettier",
@@ -52,23 +61,23 @@
   },
   "homepage": "https://github.com/mljs/matrix",
   "devDependencies": {
-    "@babel/plugin-transform-modules-commonjs": "^7.21.5",
-    "@rollup/plugin-commonjs": "^24.1.0",
-    "@rollup/plugin-node-resolve": "^15.0.2",
-    "@rollup/plugin-terser": "^0.4.1",
-    "@vitest/coverage-c8": "^0.31.0",
+    "@babel/plugin-transform-modules-commonjs": "^7.23.0",
+    "@rollup/plugin-commonjs": "^25.0.7",
+    "@rollup/plugin-node-resolve": "^15.2.3",
+    "@rollup/plugin-terser": "^0.4.4",
+    "@vitest/coverage-v8": "^0.34.6",
     "benchmark": "^2.1.4",
-    "csv-parse": "^5.3.10",
-    "eslint": "^8.40.0",
-    "eslint-config-cheminfo": "^8.2.0",
+    "csv-parse": "^5.5.2",
+    "eslint": "^8.51.0",
+    "eslint-config-cheminfo": "^9.0.2",
     "jest-matcher-deep-close-to": "^3.0.2",
-    "mathjs": "^11.8.0",
+    "mathjs": "^11.11.2",
     "ml-dataset-iris": "^1.2.1",
     "numeric": "^1.2.6",
-    "prettier": "^2.8.8",
+    "prettier": "^3.0.3",
     "pretty-hrtime": "^1.0.3",
-    "rollup": "^3.21.5",
-    "vitest": "^0.31.0"
+    "rollup": "^4.1.4",
+    "vitest": "^0.34.6"
   },
   "dependencies": {
     "is-any-array": "^2.0.1",
