@@ -1,5 +1,12 @@
 # Changelog
 
+## [6.10.6](https://github.com/mljs/matrix/compare/v6.10.5...v6.10.6) (2023-10-17)
+
+
+### Bug Fixes
+
+* default export for ESM importers ([#168](https://github.com/mljs/matrix/issues/168)) ([dd8e729](https://github.com/mljs/matrix/commit/dd8e729c68454cc179f4542053e1e55c5de92c70))
+
 ## [6.10.5](https://github.com/mljs/matrix/compare/v6.10.4...v6.10.5) (2023-09-24)
 
 
