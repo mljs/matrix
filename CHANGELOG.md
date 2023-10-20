@@ -1,5 +1,12 @@
 # Changelog
 
+## [6.10.7](https://github.com/mljs/matrix/compare/v6.10.6...v6.10.7) (2023-10-20)
+
+
+### Bug Fixes
+
+* disable esModule in CJS build ([#171](https://github.com/mljs/matrix/issues/171)) ([bc4ba15](https://github.com/mljs/matrix/commit/bc4ba151dcab5dc3c2cc0d4f1f326d541e44217f))
+
 ## [6.10.6](https://github.com/mljs/matrix/compare/v6.10.5...v6.10.6) (2023-10-17)
 
 
