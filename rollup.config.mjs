@@ -6,6 +6,7 @@ export default [
   {
     input: 'src/index.js',
     output: {
+      esModule: false,
       file: 'matrix.js',
       format: 'cjs',
       exports: 'named',
