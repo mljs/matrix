@@ -1,5 +1,12 @@
 # Changelog
 
+## [6.10.8](https://github.com/mljs/matrix/compare/v6.10.7...v6.10.8) (2023-11-04)
+
+
+### Bug Fixes
+
+* make default import work in TS esModuleInterop ([#176](https://github.com/mljs/matrix/issues/176)) ([ac52cb0](https://github.com/mljs/matrix/commit/ac52cb05cafe3a0ceb06b547e09944f81d2592cc))
+
 ## [6.10.7](https://github.com/mljs/matrix/compare/v6.10.6...v6.10.7) (2023-10-20)
 
 
