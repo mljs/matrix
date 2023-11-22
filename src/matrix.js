@@ -1646,3 +1646,124 @@ export default class Matrix extends AbstractMatrix {
 }
 
 installMathOperations(AbstractMatrix, Matrix);
+
+export class SymmetricMatrix extends AbstractMatrix {
+  /**
+   * not the same as matrix.isSymmetric()
+   * Here is to check if it's instanceof SymmetricMatrix without bundling issues
+   *
+   * @param value
+   * @returns {boolean}
+   */
+  static isSymmetricMatrix(value) {
+    return Matrix.isMatrix(value) && value.klassType === 'SymmetricMatrix';
+  }
+
+  /**
+   * upper-left corner flat 1DArray length
+   *
+   * 1 2 3 4
+   * 0 5 6 7
+   * 0 0 8 9
+   * 0 0 0 10
+   *
+   * 1DArray flat is [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+   * So the length is 10
+   *
+   * @param {number} sideSize
+   * @returns {number}
+   * @private
+   */
+  static computeInternalDataLength(sideSize) {
+    // Summation(i=0, n=sideSize)
+    return (sideSize * (sideSize + 1)) / 2;
+  }
+
+  /**
+   * upper-right matrix corner in 1D flat array
+   *
+   * @type {Float64Array}
+   * @private
+   */
+  data;
+
+  /**
+   * @public
+   * @readonly
+   * @type {number}
+   */
+  sideSize;
+
+  get rows() {
+    return this.sideSize;
+  }
+  get columns() {
+    return this.sideSize;
+  }
+
+  constructor(sideSize) {
+    super();
+
+    let _sideSize = sideSize;
+
+    if (SymmetricMatrix.isSymmetricMatrix(sideSize)) {
+      // eslint-disable-next-line no-constructor-return
+      return sideSize.clone();
+    }
+    if (Matrix.isMatrix(sideSize)) {
+      if (!(sideSize.isSquare() && sideSize.isSymmetric())) {
+        throw new TypeError(
+          'first argument is a matrix but is not square or is not symmetric',
+        );
+      }
+
+      _sideSize = sideSize.rows;
+
+      this.data = new Float64Array(
+        SymmetricMatrix.computeInternalDataLength(_sideSize),
+      );
+      for (let col = 0, row = 0, index = 0; index < this.data.length; index++) {
+        this.data[index] = sideSize.get(row, col);
+
+        if (++col > _sideSize) col = ++row;
+      }
+    } else if (Number.isInteger(sideSize) && sideSize >= 0) {
+      // Create an empty matrix
+      this.data = new Float64Array(
+        SymmetricMatrix.computeInternalDataLength(sideSize),
+      );
+    } else if (isAnyArray(sideSize)) {
+      // Copy the values from the 2D array
+      const matrix = new Matrix(sideSize);
+      if (!(matrix.isSquare() && matrix.isSymmetric())) {
+        throw new TypeError(
+          'first argument is a matrix like but is not square or is not symmetric',
+        );
+      }
+
+      _sideSize = matrix.columns;
+      this.data = new Float64Array(
+        SymmetricMatrix.computeInternalDataLength(_sideSize),
+      );
+      for (let col = 0, row = 0, index = 0; index < this.data.length; index++) {
+        this.data[index] = matrix.get(row, col);
+
+        if (++col > _sideSize) col = ++row;
+      }
+    } else {
+      throw new TypeError(
+        'First argument must be a Matrix or array of array or positive number',
+      );
+    }
+
+    this.sideSize = _sideSize;
+  }
+
+  clone() {
+    const matrix = new SymmetricMatrix(this.sideSize);
+    matrix.data = this.data.slice();
+
+    return matrix;
+  }
+}
+SymmetricMatrix.prototype.klassType = 'Symmetric';
