@@ -1533,6 +1533,11 @@ AbstractMatrix.prototype.tensorProduct =
   AbstractMatrix.prototype.kroneckerProduct;
 
 export default class Matrix extends AbstractMatrix {
+  /**
+   * @type {Float64Array[]}
+   */
+  data;
+
   constructor(nRows, nColumns) {
     super();
     if (Matrix.isMatrix(nRows)) {
@@ -1647,7 +1652,27 @@ export default class Matrix extends AbstractMatrix {
 
 installMathOperations(AbstractMatrix, Matrix);
 
-export class SymmetricMatrix extends AbstractMatrix {
+/**
+ * @typedef {0 | 1 | number | boolean} Mask
+ */
+
+export class SymmetricMatrix extends Matrix {
+  /**
+   * @param {number} sideSize
+   * @returns {SymmetricMatrix}
+   */
+  static zeros(sideSize) {
+    return new SymmetricMatrix(sideSize);
+  }
+
+  /**
+   * @param {number} sideSize
+   * @returns {SymmetricMatrix}
+   */
+  static ones(sideSize) {
+    return new SymmetricMatrix(sideSize).fill(1);
+  }
+
   /**
    * not the same as matrix.isSymmetric()
    * Here is to check if it's instanceof SymmetricMatrix without bundling issues
@@ -1660,108 +1685,136 @@ export class SymmetricMatrix extends AbstractMatrix {
   }
 
   /**
-   * upper-left corner flat 1DArray length
-   *
-   * 1 2 3 4
-   * 0 5 6 7
-   * 0 0 8 9
-   * 0 0 0 10
-   *
-   * 1DArray flat is [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-   * So the length is 10
-   *
-   * @param {number} sideSize
-   * @returns {number}
-   * @private
-   */
-  static computeInternalDataLength(sideSize) {
-    // Summation(i=0, n=sideSize)
-    return (sideSize * (sideSize + 1)) / 2;
-  }
-
-  /**
-   * upper-right matrix corner in 1D flat array
-   *
-   * @type {Float64Array}
-   * @private
-   */
-  data;
-
-  /**
    * @public
    * @readonly
    * @type {number}
    */
   sideSize;
 
-  get rows() {
-    return this.sideSize;
-  }
-  get columns() {
-    return this.sideSize;
-  }
-
   constructor(sideSize) {
-    super();
-
-    let _sideSize = sideSize;
-
     if (SymmetricMatrix.isSymmetricMatrix(sideSize)) {
       // eslint-disable-next-line no-constructor-return
       return sideSize.clone();
     }
+
     if (Matrix.isMatrix(sideSize)) {
       if (!(sideSize.isSquare() && sideSize.isSymmetric())) {
         throw new TypeError(
           'first argument is a matrix but is not square or is not symmetric',
         );
       }
-
-      _sideSize = sideSize.rows;
-
-      this.data = new Float64Array(
-        SymmetricMatrix.computeInternalDataLength(_sideSize),
-      );
-      for (let col = 0, row = 0, index = 0; index < this.data.length; index++) {
-        this.data[index] = sideSize.get(row, col);
-
-        if (++col > _sideSize) col = ++row;
-      }
-    } else if (Number.isInteger(sideSize) && sideSize >= 0) {
-      // Create an empty matrix
-      this.data = new Float64Array(
-        SymmetricMatrix.computeInternalDataLength(sideSize),
-      );
-    } else if (isAnyArray(sideSize)) {
-      // Copy the values from the 2D array
-      const matrix = new Matrix(sideSize);
-      if (!(matrix.isSquare() && matrix.isSymmetric())) {
-        throw new TypeError(
-          'first argument is a matrix like but is not square or is not symmetric',
-        );
-      }
-
-      _sideSize = matrix.columns;
-      this.data = new Float64Array(
-        SymmetricMatrix.computeInternalDataLength(_sideSize),
-      );
-      for (let col = 0, row = 0, index = 0; index < this.data.length; index++) {
-        this.data[index] = matrix.get(row, col);
-
-        if (++col > _sideSize) col = ++row;
-      }
-    } else {
-      throw new TypeError(
-        'First argument must be a Matrix or array of array or positive number',
-      );
     }
 
-    this.sideSize = _sideSize;
+    if (typeof sideSize === 'number') {
+      super(sideSize, sideSize);
+    } else {
+      super(sideSize);
+    }
+
+    this.sideSize = this.rows;
   }
 
   clone() {
-    const matrix = new SymmetricMatrix(this.sideSize);
-    matrix.data = this.data.slice();
+    const matrix = Object.create(SymmetricMatrix.prototype);
+
+    // eslint-disable-next-line no-multi-assign
+    matrix.rows = matrix.columns = matrix.sideSize = this.sideSize;
+    matrix.data = this.data.map((row) => row.slice());
+
+    return matrix;
+  }
+
+  set(rowIndex, columnIndex, value) {
+    // symmetric set
+    super.set(rowIndex, columnIndex, value);
+    super.set(columnIndex, rowIndex, value);
+
+    return this;
+  }
+
+  removeSide(index) {
+    // symmetric remove side
+    super.removeRow(index);
+    super.removeColumn(index);
+
+    return this;
+  }
+
+  addSide(index, array) {
+    super.addRow(index, array);
+    super.addColumn(index, array);
+
+    return this;
+  }
+
+  removeRow(index) {
+    return this.removeSide(index);
+  }
+
+  addRow(index, array) {
+    return this.addSide(index, array);
+  }
+
+  removeColumn(index) {
+    return this.removeSide(index);
+  }
+
+  addColumn(index, array) {
+    return this.addSide(index, array);
+  }
+
+  /**
+   * @param {Mask[]} mask
+   */
+  applyMask(mask) {
+    if (mask.length !== this.sideSize) {
+      throw new RangeError('mask size do not match with matrix size');
+    }
+
+    // prepare sides to remove from matrix from mask
+    /** @type {number[]} */
+    const sidesToRemove = [];
+    for (const [index, passthroughs] of mask.entries()) {
+      if (passthroughs) continue;
+      sidesToRemove.push(index);
+    }
+    // to remove from highest to lowest for no mutation shifting
+    sidesToRemove.reverse();
+
+    // remove sides
+    for (const sideIndex of sidesToRemove) {
+      this.removeSide(sideIndex);
+    }
+  }
+
+  toCompact() {
+    const { sideSize } = this;
+    /** @type {number[]} */
+    const compact = new Array((sideSize * (sideSize + 1)) / 2);
+    for (let col = 0, row = 0, index = 0; index < compact.length; index++) {
+      compact[index] = this.get(row, col);
+
+      if (++col >= this.sideSize) col = ++row;
+    }
+
+    return compact;
+  }
+
+  /**
+   * @param {number[]} compact
+   */
+  static fromCompact(compact) {
+    const compactSize = compact.length;
+    // compactSize = (sideSize * (sideSize + 1)) / 2
+    // https://mathsolver.microsoft.com/fr/solve-problem/y%20%3D%20%20x%20%60cdot%20%20%20%60frac%7B%20%20%60left(%20x%2B1%20%20%60right)%20%20%20%20%7D%7B%202%20%20%7D
+    // sideSize = (Sqrt(8 × compactSize + 1) - 1) / 2
+    const sideSize = (Math.sqrt(8 * compactSize + 1) - 1) / 2;
+
+    const matrix = new SymmetricMatrix(sideSize);
+    for (let col = 0, row = 0, index = 0; index < compactSize; index++) {
+      matrix.set(col, row);
+      if (++col >= sideSize) col = ++row;
+    }
 
     return matrix;
   }
