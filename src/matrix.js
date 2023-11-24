@@ -1550,7 +1550,7 @@ export class AbstractMatrix {
    * yield [row, column, value]
    *
    * @param {number} [borderMax = this.rows] - if specified will check if <= to rows and columns
-   * @param [missValue = 0] - number or function returning a number
+   * @param {any} [missValue = 0] - number or function returning a number
    *
    * @returns {Generator<[number, number, number], void, *>}
    */

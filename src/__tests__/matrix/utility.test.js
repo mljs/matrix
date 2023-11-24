@@ -550,6 +550,44 @@ describe('utility methods', () => {
     expect(m.isSymmetric()).toBe(false);
   });
 
+  it('isDistance', () => {
+    expect(
+      new Matrix([
+        [1, 0, 2],
+        [0, 4, 9],
+        [2, 9, 3],
+      ]).isDistance(),
+    ).toBe(false);
+    expect(
+      new Matrix([
+        [1, 0, 4],
+        [0, 4, 1],
+        [2, 9, 3],
+      ]).isDistance(),
+    ).toBe(false);
+    expect(
+      new Matrix([
+        [1, 0, 2],
+        [0, 4, 9],
+      ]).isDistance(),
+    ).toBe(false);
+
+    expect(
+      new Matrix([
+        [0, 1, 2],
+        [1, 0, 9],
+        [2, 9, 0],
+      ]).isDistance(),
+    ).toBe(true);
+    expect(
+      new Matrix([
+        [0, 1, 2],
+        [1, 1, 9],
+        [2, 9, 0],
+      ]).isDistance(),
+    ).toBe(false);
+  });
+
   it('isEmpty', () => {
     expect(new Matrix(0, 0).isEmpty()).toBe(true);
     expect(new Matrix(0, 1).isEmpty()).toBe(true);
