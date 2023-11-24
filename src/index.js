@@ -1,4 +1,10 @@
-export { AbstractMatrix, default, default as Matrix } from './matrix';
+export {
+  AbstractMatrix,
+  default,
+  default as Matrix,
+  SymmetricMatrix,
+  DistanceMatrix,
+} from './matrix';
 export * from './views/index';
 
 export { wrap } from './wrap/wrap';
