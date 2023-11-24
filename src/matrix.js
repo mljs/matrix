@@ -240,6 +240,16 @@ export class AbstractMatrix {
     return false;
   }
 
+  isDistance() {
+    if (!this.isSymmetric()) return false;
+
+    for (let i = 0; i < this.rows; i++) {
+      if (this.get(i, i) !== 0) return false;
+    }
+
+    return true;
+  }
+
   isEchelonForm() {
     let i = 0;
     let j = 0;
@@ -1697,31 +1707,36 @@ export class SymmetricMatrix extends Matrix {
       return sideSize.clone();
     }
 
-    if (Matrix.isMatrix(sideSize)) {
-      if (!(sideSize.isSquare() && sideSize.isSymmetric())) {
-        throw new TypeError(
-          'first argument is a matrix but is not square or is not symmetric',
-        );
-      }
-    }
-
     if (typeof sideSize === 'number') {
       super(sideSize, sideSize);
     } else {
       super(sideSize);
+
+      if (!this.isSymmetric()) {
+        throw new TypeError('not symmetric data');
+      }
     }
 
     this.sideSize = this.rows;
   }
 
   clone() {
-    const matrix = Object.create(SymmetricMatrix.prototype);
+    /*
+     * Optimized matrix cloning support inheritance
+     * create with current prototype and add data
+     * skip constructor checks and full-scan iterations
+     */
+    const matrix = Object.create(this.constructor.prototype);
 
     // eslint-disable-next-line no-multi-assign
     matrix.rows = matrix.columns = matrix.sideSize = this.sideSize;
     matrix.data = this.data.map((row) => row.slice());
 
     return matrix;
+  }
+
+  toMatrix() {
+    return new Matrix(this);
   }
 
   set(rowIndex, columnIndex, value) {
@@ -1787,8 +1802,27 @@ export class SymmetricMatrix extends Matrix {
     }
   }
 
+  /**
+   * Compact format upper-right corner of matrix
+   * iterable from left to right, from top to bottom.
+   *
+   * ```
+   *   A B C D
+   * A 1 2 3 4
+   * B 2 5 6 7
+   * C 3 6 8 9
+   * D 4 7 9 10
+   * ```
+   *
+   * will return compact 1D array `[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]`
+   *
+   * length is S(i=0, n=sideSize) => 10 for a 4 sideSized matrix
+   *
+   * @returns {number[]}
+   */
   toCompact() {
     const { sideSize } = this;
+
     /** @type {number[]} */
     const compact = new Array((sideSize * (sideSize + 1)) / 2);
     for (let col = 0, row = 0, index = 0; index < compact.length; index++) {
@@ -1810,6 +1844,14 @@ export class SymmetricMatrix extends Matrix {
     // sideSize = (Sqrt(8 × compactSize + 1) - 1) / 2
     const sideSize = (Math.sqrt(8 * compactSize + 1) - 1) / 2;
 
+    if (!Number.isInteger(sideSize)) {
+      throw new TypeError(
+        `this array is not a compact representation of a Symmetric, ${JSON.stringify(
+          compact,
+        )}`,
+      );
+    }
+
     const matrix = new SymmetricMatrix(sideSize);
     for (let col = 0, row = 0, index = 0; index < compactSize; index++) {
       matrix.set(col, row);
@@ -1820,3 +1862,73 @@ export class SymmetricMatrix extends Matrix {
   }
 }
 SymmetricMatrix.prototype.klassType = 'Symmetric';
+
+export class DistanceMatrix extends SymmetricMatrix {
+  constructor(sideSize) {
+    super(sideSize);
+
+    if (!this.isDistance()) {
+      throw new Error('provided arguments do no produce a distance matrix');
+    }
+  }
+
+  /**
+   * Compact format upper-right corner of matrix
+   * no diagonal (only zeros)
+   * iterable from left to right, from top to bottom.
+   *
+   * ```
+   *   A B C D
+   * A 0 1 2 3
+   * B 1 0 4 5
+   * C 2 4 0 6
+   * D 3 5 6 0
+   * ```
+   *
+   * will return compact 1D array `[1, 2, 3, 4, 5, 6]`
+   *
+   * length is S(i=0, n=sideSize-1) => 6 for a 4 side sized matrix
+   *
+   * @returns {number[]}
+   */
+  toCompact() {
+    const { sideSize } = this;
+    const compactLength = ((sideSize - 1) * sideSize) / 2;
+
+    /** @type {number[]} */
+    const compact = new Array(compactLength);
+    for (let col = 0, row = 0, index = 0; index < compact.length; index++) {
+      compact[index] = this.get(row, col);
+
+      if (++col >= this.sideSize) col = ++row;
+    }
+
+    return compact;
+  }
+
+  /**
+   * @param {number[]} compact
+   */
+  static fromCompact(compact) {
+    const compactSize = compact.length;
+    // compactSize = (sideSize * (sideSize - 1)) / 2
+    // sideSize = (Sqrt(8 × compactSize + 1) + 1) / 2
+    const sideSize = (Math.sqrt(8 * compactSize + 1) + 1) / 2;
+
+    if (!Number.isInteger(sideSize)) {
+      throw new TypeError(
+        `this array is not a compact representation of a DistanceMatrix, ${JSON.stringify(
+          compact,
+        )}`,
+      );
+    }
+
+    const matrix = new SymmetricMatrix(sideSize);
+    for (let col = 1, row = 0, index = 0; index < compactSize; index++) {
+      matrix.set(col, row);
+      if (++col >= sideSize) col = ++row + 1;
+    }
+
+    return matrix;
+  }
+}
