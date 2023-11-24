@@ -66,11 +66,11 @@ export class AbstractMatrix {
   }
 
   static zeros(rows, columns) {
-    return new this(rows, columns);
+    return new Matrix(rows, columns);
   }
 
   static ones(rows, columns) {
-    return new this(rows, columns).fill(1);
+    return new Matrix(rows, columns).fill(1);
   }
 
   static rand(rows, columns, options = {}) {
@@ -1514,6 +1514,99 @@ export class AbstractMatrix {
   toString(options) {
     return inspectMatrixWithOptions(this, options);
   }
+
+  [Symbol.iterator]() {
+    return this.entries();
+  }
+
+  /**
+   * iterator from left to right, from top to bottom
+   * yield [row, column, value]
+   * @returns {Generator<[number, number, number], void, *>}
+   */
+  *entries() {
+    for (let row = 0; row < this.rows; row++) {
+      for (let col = 0; col < this.columns; col++) {
+        yield [row, col, this.get(row, col)];
+      }
+    }
+  }
+
+  /**
+   * iterator from left to right, from top to bottom
+   * yield value
+   * @returns {Generator<number, void, *>}
+   */
+  *values() {
+    for (let row = 0; row < this.rows; row++) {
+      for (let col = 0; col < this.columns; col++) {
+        yield this.get(row, col);
+      }
+    }
+  }
+
+  /**
+   * half iterator upper-right-corner from left to right, from top to bottom
+   * yield [row, column, value]
+   *
+   * @param {number} [borderMax = this.rows] - if specified will check if <= to rows and columns
+   * @param [missValue = 0] - number or function returning a number
+   *
+   * @returns {Generator<[number, number, number], void, *>}
+   */
+  *upperRightEntries(borderMax = this.rows, missValue = 0) {
+    borderMax = Math.min(
+      Math.max(this.rows, this.columns),
+      Math.max(0, borderMax),
+    );
+
+    const isMissValueFunction = typeof missValue?.call === 'function';
+
+    for (let row = 0, col = 0; row < borderMax; void 0) {
+      const value =
+        row >= this.rows || col >= this.columns
+          ? isMissValueFunction
+            ? missValue.call(this, row, col)
+            : missValue
+          : this.get(row, col);
+
+      yield [row, col, value];
+
+      // at the end of row, move cursor to next row at diagonal position
+      if (++col >= borderMax) col = ++row;
+    }
+  }
+
+  /**
+   * half iterator upper-right-corner from left to right, from top to bottom
+   * yield value
+   *
+   * @param {number} [borderMax = this.rows] - if specified will check if <= to rows and columns
+   * @param [missValue = 0] - number or function returning a number
+   *
+   * @returns {Generator<[number, number, number], void, *>}
+   */
+  *upperRightValues(borderMax = this.rows, missValue = 0) {
+    borderMax = Math.min(
+      Math.max(this.rows, this.columns),
+      Math.max(0, borderMax),
+    );
+    const isMissValueFunction = typeof missValue?.call === 'function';
+
+    for (let row = 0, col = 0; row < borderMax; void 0) {
+      const value =
+        row >= this.rows || col >= this.columns
+          ? isMissValueFunction
+            ? missValue.call(this, row, col)
+            : missValue
+          : this.get(row, col);
+
+      yield value;
+
+      // at the end of row, move cursor to next row at diagonal position
+      if (++col >= borderMax) col = ++row;
+    }
+  }
 }
 
 AbstractMatrix.prototype.klass = 'Matrix';
@@ -1676,6 +1769,14 @@ export class SymmetricMatrix extends Matrix {
    */
   static isSymmetricMatrix(value) {
     return Matrix.isMatrix(value) && value.klassType === 'SymmetricMatrix';
+  }
+
+  static zeros(rows, columns) {
+    return new this(rows, columns);
+  }
+
+  static ones(rows, columns) {
+    return new this(rows, columns).fill(1);
   }
 
   get sideSize() {

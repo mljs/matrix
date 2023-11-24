@@ -830,6 +830,60 @@ export abstract class AbstractMatrix {
 
   toString(options?: IToStringOptions): string;
 
+  // iterators methods
+
+  /**
+   * iterator from left to right, from top to bottom
+   * yield [row, column, value]
+   */
+  [Symbol.iterator](): Generator<
+    [row: number, column: number, value: number],
+    void,
+    never
+  >;
+
+  /**
+   * iterator from left to right, from top to bottom
+   * yield [row, column, value]
+   */
+  entries(): Generator<
+    [row: number, column: number, value: number],
+    void,
+    never
+  >;
+
+  /**
+   * iterator from left to right, from top to bottom
+   * yield value
+   */
+  values(): Generator<number, void, never>;
+
+  /**
+   * half iterator upper-right-corner from left to right, from top to bottom
+   * yield [row, column, value]
+   * @param [borderMax=this.rows] - clamp between Max(rows, columns) and 0.
+   * @param [missValue=0]
+   */
+  upperRightEntries<Miss = number>(
+    borderMax?: number,
+    missValue?: Miss | ((this: this, row: number, column: number) => Miss),
+  ): Generator<
+    [row: number, column: number, value: number | Miss],
+    void,
+    never
+  >;
+
+  /**
+   * half iterator upper-right-corner from left to right, from top to bottom
+   * yield value
+   * @param [borderMax=this.rows] - clamp between Max(rows, columns) and 0.
+   * @param [missValue=0]
+   */
+  upperRightValues<Miss = number>(
+    borderMax?: number,
+    missValue?: Miss | ((this: this, row: number, column: number) => Miss),
+  ): Generator<number | Miss, void, never>;
+
   // From here we document methods dynamically generated from operators
 
   // Mathematical operators
