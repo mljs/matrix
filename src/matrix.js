@@ -66,11 +66,11 @@ export class AbstractMatrix {
   }
 
   static zeros(rows, columns) {
-    return new Matrix(rows, columns);
+    return new this(rows, columns);
   }
 
   static ones(rows, columns) {
-    return new Matrix(rows, columns).fill(1);
+    return new this(rows, columns).fill(1);
   }
 
   static rand(rows, columns, options = {}) {
@@ -1668,22 +1668,6 @@ installMathOperations(AbstractMatrix, Matrix);
 
 export class SymmetricMatrix extends Matrix {
   /**
-   * @param {number} sideSize
-   * @returns {SymmetricMatrix}
-   */
-  static zeros(sideSize) {
-    return new SymmetricMatrix(sideSize);
-  }
-
-  /**
-   * @param {number} sideSize
-   * @returns {SymmetricMatrix}
-   */
-  static ones(sideSize) {
-    return new SymmetricMatrix(sideSize).fill(1);
-  }
-
-  /**
    * not the same as matrix.isSymmetric()
    * Here is to check if it's instanceof SymmetricMatrix without bundling issues
    *
@@ -1694,12 +1678,9 @@ export class SymmetricMatrix extends Matrix {
     return Matrix.isMatrix(value) && value.klassType === 'SymmetricMatrix';
   }
 
-  /**
-   * @public
-   * @readonly
-   * @type {number}
-   */
-  sideSize;
+  get sideSize() {
+    return this.rows;
+  }
 
   constructor(sideSize) {
     if (SymmetricMatrix.isSymmetricMatrix(sideSize)) {
@@ -1716,8 +1697,6 @@ export class SymmetricMatrix extends Matrix {
         throw new TypeError('not symmetric data');
       }
     }
-
-    this.sideSize = this.rows;
   }
 
   clone() {
@@ -1729,7 +1708,7 @@ export class SymmetricMatrix extends Matrix {
     const matrix = Object.create(this.constructor.prototype);
 
     // eslint-disable-next-line no-multi-assign
-    matrix.rows = matrix.columns = matrix.sideSize = this.sideSize;
+    matrix.rows = matrix.columns = this.sideSize;
     matrix.data = this.data.map((row) => row.slice());
 
     return matrix;
@@ -1800,11 +1779,13 @@ export class SymmetricMatrix extends Matrix {
     for (const sideIndex of sidesToRemove) {
       this.removeSide(sideIndex);
     }
+
+    return this;
   }
 
   /**
    * Compact format upper-right corner of matrix
-   * iterable from left to right, from top to bottom.
+   * iterate from left to right, from top to bottom.
    *
    * ```
    *   A B C D
@@ -1861,15 +1842,40 @@ export class SymmetricMatrix extends Matrix {
     return matrix;
   }
 }
-SymmetricMatrix.prototype.klassType = 'Symmetric';
+SymmetricMatrix.prototype.klassType = 'SymmetricMatrix';
 
 export class DistanceMatrix extends SymmetricMatrix {
+  /**
+   * not the same as matrix.isSymmetric()
+   * Here is to check if it's instanceof SymmetricMatrix without bundling issues
+   *
+   * @param value
+   * @returns {boolean}
+   */
+  static isDistanceMatrix(value) {
+    return (
+      SymmetricMatrix.isSymmetricMatrix(value) &&
+      value.klassSubType === 'DistanceMatrix'
+    );
+  }
+
   constructor(sideSize) {
     super(sideSize);
 
     if (!this.isDistance()) {
-      throw new Error('provided arguments do no produce a distance matrix');
+      throw new TypeError('provided arguments do no produce a distance matrix');
     }
+  }
+
+  set(rowIndex, columnIndex, value) {
+    // distance matrix diagonal is 0
+    if (rowIndex === columnIndex) value = 0;
+
+    return super.set(rowIndex, columnIndex, value);
+  }
+
+  toSymmetricMatrix() {
+    return new SymmetricMatrix(this);
   }
 
   /**
@@ -1923,7 +1929,7 @@ export class DistanceMatrix extends SymmetricMatrix {
       );
     }
 
-    const matrix = new SymmetricMatrix(sideSize);
+    const matrix = new this(sideSize);
     for (let col = 1, row = 0, index = 0; index < compactSize; index++) {
       matrix.set(col, row);
       if (++col >= sideSize) col = ++row + 1;
@@ -1932,3 +1938,4 @@ export class DistanceMatrix extends SymmetricMatrix {
     return matrix;
   }
 }
+DistanceMatrix.prototype.klassSubType = 'DistanceMatrix';
