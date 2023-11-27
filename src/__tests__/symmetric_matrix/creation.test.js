@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 
-import { Matrix, SymmetricMatrix } from '../../index';
+import { DistanceMatrix, Matrix, SymmetricMatrix } from '../../index';
 
 describe('SymmetricMatrix creation', () => {
   it('should create a new object', () => {
@@ -158,5 +158,12 @@ describe('SymmetricMatrix creation', () => {
     const matrix = sMatrix.toMatrix();
     expect(matrix).not.toBeInstanceOf(SymmetricMatrix);
     expect(matrix).toBeInstanceOf(Matrix);
+  });
+
+  it('construct from child class', () => {
+    const dMatrix = DistanceMatrix.zeros(3);
+    const sMatrix = new SymmetricMatrix(dMatrix);
+    expect(sMatrix).not.toBeInstanceOf(DistanceMatrix);
+    expect(sMatrix).toBeInstanceOf(SymmetricMatrix);
   });
 });

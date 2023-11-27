@@ -98,4 +98,10 @@ describe('DistanceMatrix creation', () => {
       [1, 1, 0],
     ]);
   });
+
+  it('clone', () => {
+    const matrix = DistanceMatrix.zeros(3);
+    const clone = matrix.clone();
+    expect(clone).toBeInstanceOf(DistanceMatrix);
+  });
 });
