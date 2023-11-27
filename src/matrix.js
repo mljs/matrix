@@ -1811,16 +1811,11 @@ export class SymmetricMatrix extends Matrix {
   }
 
   clone() {
-    /*
-     * Optimized matrix cloning support inheritance
-     * create with current prototype and add data
-     * skip constructor checks and full-scan iterations
-     */
-    const matrix = Object.create(this.constructor.prototype);
+    const matrix = new SymmetricMatrix(this.sideSize);
 
-    // eslint-disable-next-line no-multi-assign
-    matrix.rows = matrix.columns = this.sideSize;
-    matrix.data = this.data.map((row) => row.slice());
+    for (const [row, col, value] of this.upperRightEntries()) {
+      matrix.set(row, col, value);
+    }
 
     return matrix;
   }
@@ -1999,6 +1994,16 @@ export class DistanceMatrix extends SymmetricMatrix {
 
   toSymmetricMatrix() {
     return new SymmetricMatrix(this);
+  }
+
+  clone() {
+    const matrix = new DistanceMatrix(this.sideSize);
+
+    for (const [row, col, value] of this.upperRightEntries()) {
+      matrix.set(row, col, value);
+    }
+
+    return matrix;
   }
 
   /**
