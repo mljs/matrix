@@ -1785,8 +1785,8 @@ export class SymmetricMatrix extends Matrix {
    * @param sideSize
    * @return {SymmetricMatrix}
    */
-  static ones(rows, columns) {
-    return new this(rows, columns).fill(1);
+  static ones(sideSize) {
+    return new this(sideSize).fill(1);
   }
 
   get sideSize() {
@@ -1970,7 +1970,7 @@ export class DistanceMatrix extends SymmetricMatrix {
     super(sideSize);
 
     if (!this.isDistance()) {
-      throw new TypeError('provided arguments do no produce a distance matrix');
+      throw new TypeError('Provided arguments do no produce a distance matrix');
     }
   }
 
@@ -1979,6 +1979,19 @@ export class DistanceMatrix extends SymmetricMatrix {
     if (rowIndex === columnIndex) value = 0;
 
     return super.set(rowIndex, columnIndex, value);
+  }
+
+  addSide(index, array) {
+    if (array === undefined) {
+      array = index;
+      index = this.sideSize;
+    }
+
+    // ensure distance
+    // array = array.slice();
+    // array[index] = 0;
+
+    return super.addSide(index, array);
   }
 
   toSymmetricMatrix() {
@@ -2030,7 +2043,7 @@ export class DistanceMatrix extends SymmetricMatrix {
 
     if (!Number.isInteger(sideSize)) {
       throw new TypeError(
-        `this array is not a compact representation of a DistanceMatrix, ${JSON.stringify(
+        `This array is not a compact representation of a DistanceMatrix, ${JSON.stringify(
           compact,
         )}`,
       );
