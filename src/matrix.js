@@ -1771,10 +1771,20 @@ export class SymmetricMatrix extends Matrix {
     return Matrix.isMatrix(value) && value.klassType === 'SymmetricMatrix';
   }
 
-  static zeros(rows, columns) {
-    return new this(rows, columns);
+  /**
+   *
+   * @param sideSize
+   * @return {SymmetricMatrix}
+   */
+  static zeros(sideSize) {
+    return new this(sideSize);
   }
 
+  /**
+   *
+   * @param sideSize
+   * @return {SymmetricMatrix}
+   */
   static ones(rows, columns) {
     return new this(rows, columns).fill(1);
   }
@@ -1836,26 +1846,15 @@ export class SymmetricMatrix extends Matrix {
   }
 
   addSide(index, array) {
-    super.addRow(index, array);
+    if (array === undefined) {
+      array = index;
+      index = this.sideSize;
+    }
+
+    super.addRow(index, array.slice(0, -1));
     super.addColumn(index, array);
 
     return this;
-  }
-
-  removeRow(index) {
-    return this.removeSide(index);
-  }
-
-  addRow(index, array) {
-    return this.addSide(index, array);
-  }
-
-  removeColumn(index) {
-    return this.removeSide(index);
-  }
-
-  addColumn(index, array) {
-    return this.addSide(index, array);
   }
 
   /**
@@ -1863,7 +1862,7 @@ export class SymmetricMatrix extends Matrix {
    */
   applyMask(mask) {
     if (mask.length !== this.sideSize) {
-      throw new RangeError('mask size do not match with matrix size');
+      throw new RangeError('Mask size do not match with matrix size');
     }
 
     // prepare sides to remove from matrix from mask
@@ -1918,6 +1917,7 @@ export class SymmetricMatrix extends Matrix {
 
   /**
    * @param {number[]} compact
+   * @return {SymmetricMatrix}
    */
   static fromCompact(compact) {
     const compactSize = compact.length;
@@ -1928,7 +1928,7 @@ export class SymmetricMatrix extends Matrix {
 
     if (!Number.isInteger(sideSize)) {
       throw new TypeError(
-        `this array is not a compact representation of a Symmetric, ${JSON.stringify(
+        `This array is not a compact representation of a Symmetric Matrix, ${JSON.stringify(
           compact,
         )}`,
       );
@@ -1936,7 +1936,7 @@ export class SymmetricMatrix extends Matrix {
 
     const matrix = new SymmetricMatrix(sideSize);
     for (let col = 0, row = 0, index = 0; index < compactSize; index++) {
-      matrix.set(col, row);
+      matrix.set(col, row, compact[index]);
       if (++col >= sideSize) col = ++row;
     }
 
@@ -1944,6 +1944,12 @@ export class SymmetricMatrix extends Matrix {
   }
 }
 SymmetricMatrix.prototype.klassType = 'SymmetricMatrix';
+// eslint-disable-next-line no-multi-assign
+SymmetricMatrix.prototype.removeRow = SymmetricMatrix.prototype.removeColumn =
+  SymmetricMatrix.prototype.removeSide;
+// eslint-disable-next-line no-multi-assign
+SymmetricMatrix.prototype.addRow = SymmetricMatrix.prototype.addColumn =
+  SymmetricMatrix.prototype.addSide;
 
 export class DistanceMatrix extends SymmetricMatrix {
   /**
@@ -2032,7 +2038,7 @@ export class DistanceMatrix extends SymmetricMatrix {
 
     const matrix = new this(sideSize);
     for (let col = 1, row = 0, index = 0; index < compactSize; index++) {
-      matrix.set(col, row);
+      matrix.set(col, row, compact[index]);
       if (++col >= sideSize) col = ++row + 1;
     }
 

@@ -1020,6 +1020,7 @@ export class Matrix extends AbstractMatrix {
    * @param array - Column to add.
    */
   addColumn(index: number, array: ArrayLike<number> | AbstractMatrix): this;
+  addColumn(array: ArrayLike<number> | AbstractMatrix): this;
 
   /**
    * Adds a new row to the matrix (in place).
@@ -1027,6 +1028,7 @@ export class Matrix extends AbstractMatrix {
    * @param array - Row to add.
    */
   addRow(index: number, array: ArrayLike<number> | AbstractMatrix): this;
+  addRow(array: ArrayLike<number> | AbstractMatrix): this;
 }
 
 export default Matrix;
@@ -1083,6 +1085,7 @@ export class SymmetricMatrix extends Matrix {
    * @param array
    */
   addSide(index: number, array: ArrayLike<number> | AbstractMatrix): this;
+  addSide(array: ArrayLike<number> | AbstractMatrix): this;
 
   /**
    * alias to removeSide
@@ -1095,6 +1098,7 @@ export class SymmetricMatrix extends Matrix {
    * @param array
    */
   addRow(index: number, array: ArrayLike<number> | AbstractMatrix): this;
+  addRow(array: ArrayLike<number> | AbstractMatrix): this;
   /**
    * alias to removeSide
    * @param index
@@ -1106,6 +1110,7 @@ export class SymmetricMatrix extends Matrix {
    * @param array
    */
   addColumn(index: number, array: ArrayLike<number> | AbstractMatrix): this;
+  addColumn(array: ArrayLike<number> | AbstractMatrix): this;
 
   /**
    * remove sides (rows / columns) with falsy value from mask.
