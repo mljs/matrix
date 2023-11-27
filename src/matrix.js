@@ -1645,7 +1645,7 @@ export default class Matrix extends AbstractMatrix {
     super();
     if (Matrix.isMatrix(nRows)) {
       // eslint-disable-next-line no-constructor-return
-      return nRows.clone();
+      return Matrix.prototype.clone.call(nRows);
     } else if (Number.isInteger(nRows) && nRows >= 0) {
       // Create an empty matrix
       this.data = [];
@@ -1796,7 +1796,7 @@ export class SymmetricMatrix extends Matrix {
   constructor(sideSize) {
     if (SymmetricMatrix.isSymmetricMatrix(sideSize)) {
       // eslint-disable-next-line no-constructor-return
-      return sideSize.clone();
+      return SymmetricMatrix.prototype.clone.call(sideSize);
     }
 
     if (typeof sideSize === 'number') {
@@ -1851,7 +1851,10 @@ export class SymmetricMatrix extends Matrix {
       index = this.sideSize;
     }
 
-    super.addRow(index, array.slice(0, -1));
+    const row = array.slice();
+    row.splice(index, 1);
+
+    super.addRow(index, row);
     super.addColumn(index, array);
 
     return this;
@@ -1988,8 +1991,8 @@ export class DistanceMatrix extends SymmetricMatrix {
     }
 
     // ensure distance
-    // array = array.slice();
-    // array[index] = 0;
+    array = array.slice();
+    array[index] = 0;
 
     return super.addSide(index, array);
   }
@@ -2023,10 +2026,10 @@ export class DistanceMatrix extends SymmetricMatrix {
 
     /** @type {number[]} */
     const compact = new Array(compactLength);
-    for (let col = 0, row = 0, index = 0; index < compact.length; index++) {
+    for (let col = 1, row = 0, index = 0; index < compact.length; index++) {
       compact[index] = this.get(row, col);
 
-      if (++col >= this.sideSize) col = ++row;
+      if (++col >= this.sideSize) col = ++row + 1;
     }
 
     return compact;
@@ -2059,3 +2062,5 @@ export class DistanceMatrix extends SymmetricMatrix {
   }
 }
 DistanceMatrix.prototype.klassSubType = 'DistanceMatrix';
+DistanceMatrix.prototype.addRow = DistanceMatrix.prototype.addSide;
+DistanceMatrix.prototype.addColumn = DistanceMatrix.prototype.addSide;
