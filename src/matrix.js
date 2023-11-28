@@ -1324,13 +1324,21 @@ export class AbstractMatrix {
   }
 
   clone() {
-    let newMatrix = new Matrix(this.rows, this.columns);
-    for (let row = 0; row < this.rows; row++) {
-      for (let column = 0; column < this.columns; column++) {
-        newMatrix.set(row, column, this.get(row, column));
-      }
+    return this.constructor.copy(this, new Matrix(this.rows, this.columns));
+  }
+
+  /**
+   * @template {AbstractMatrix} M
+   * @param {AbstractMatrix} from
+   * @param {M} to
+   * @return {M}
+   */
+  static copy(from, to) {
+    for (const [row, column, value] of from.entries()) {
+      to.set(row, column, value);
     }
-    return newMatrix;
+
+    return to;
   }
 
   sum(by) {
@@ -1641,21 +1649,33 @@ export default class Matrix extends AbstractMatrix {
    */
   data;
 
+  /**
+   * Init an empty matrix
+   * @param {number} nRows
+   * @param {number} nColumns
+   */
+  #initData(nRows, nColumns) {
+    this.data = [];
+
+    if (Number.isInteger(nColumns) && nColumns >= 0) {
+      for (let i = 0; i < nRows; i++) {
+        this.data.push(new Float64Array(nColumns));
+      }
+    } else {
+      throw new TypeError('nColumns must be a positive integer');
+    }
+
+    this.rows = nRows;
+    this.columns = nColumns;
+  }
+
   constructor(nRows, nColumns) {
     super();
     if (Matrix.isMatrix(nRows)) {
-      // eslint-disable-next-line no-constructor-return
-      return Matrix.prototype.clone.call(nRows);
+      this.#initData(nRows.rows, nRows.columns);
+      Matrix.copy(nRows, this);
     } else if (Number.isInteger(nRows) && nRows >= 0) {
-      // Create an empty matrix
-      this.data = [];
-      if (Number.isInteger(nColumns) && nColumns >= 0) {
-        for (let i = 0; i < nRows; i++) {
-          this.data.push(new Float64Array(nColumns));
-        }
-      } else {
-        throw new TypeError('nColumns must be a positive integer');
-      }
+      this.#initData(nRows, nColumns);
     } else if (isAnyArray(nRows)) {
       // Copy the values from the 2D array
       const arrayData = nRows;
@@ -1667,6 +1687,7 @@ export default class Matrix extends AbstractMatrix {
         );
       }
       this.data = [];
+
       for (let i = 0; i < nRows; i++) {
         if (arrayData[i].length !== nColumns) {
           throw new RangeError('Inconsistent array dimensions');
@@ -1676,13 +1697,14 @@ export default class Matrix extends AbstractMatrix {
         }
         this.data.push(Float64Array.from(arrayData[i]));
       }
+
+      this.rows = nRows;
+      this.columns = nColumns;
     } else {
       throw new TypeError(
         'First argument must be a positive number or an array',
       );
     }
-    this.rows = nRows;
-    this.columns = nColumns;
   }
 
   set(rowIndex, columnIndex, value) {
@@ -1759,7 +1781,26 @@ installMathOperations(AbstractMatrix, Matrix);
  * @typedef {0 | 1 | number | boolean} Mask
  */
 
-export class SymmetricMatrix extends Matrix {
+export class SymmetricMatrix extends AbstractMatrix {
+  /** @type {Matrix} */
+  #matrix;
+
+  get size() {
+    return this.#matrix.size;
+  }
+
+  get rows() {
+    return this.#matrix.rows;
+  }
+
+  get columns() {
+    return this.#matrix.columns;
+  }
+
+  get diagonalSize() {
+    return this.rows;
+  }
+
   /**
    * not the same as matrix.isSymmetric()
    * Here is to check if it's instanceof SymmetricMatrix without bundling issues
@@ -1772,37 +1813,41 @@ export class SymmetricMatrix extends Matrix {
   }
 
   /**
-   *
-   * @param sideSize
+   * @param diagonalSize
    * @return {SymmetricMatrix}
    */
-  static zeros(sideSize) {
-    return new this(sideSize);
+  static zeros(diagonalSize) {
+    return new this(diagonalSize);
   }
 
   /**
-   *
-   * @param sideSize
+   * @param diagonalSize
    * @return {SymmetricMatrix}
    */
-  static ones(sideSize) {
-    return new this(sideSize).fill(1);
+  static ones(diagonalSize) {
+    return new this(diagonalSize).fill(1);
   }
 
-  get sideSize() {
-    return this.rows;
-  }
+  /**
+   * @param {number | AbstractMatrix | ArrayBuffer<ArrayLike<number>>} diagonalSize
+   * @return {this}
+   */
+  constructor(diagonalSize) {
+    super();
 
-  constructor(sideSize) {
-    if (SymmetricMatrix.isSymmetricMatrix(sideSize)) {
-      // eslint-disable-next-line no-constructor-return
-      return SymmetricMatrix.prototype.clone.call(sideSize);
-    }
+    if (Matrix.isMatrix(diagonalSize)) {
+      if (!diagonalSize.isSymmetric()) {
+        throw new TypeError('not symmetric data');
+      }
 
-    if (typeof sideSize === 'number') {
-      super(sideSize, sideSize);
+      this.#matrix = Matrix.copy(
+        diagonalSize,
+        new Matrix(diagonalSize.rows, diagonalSize.rows),
+      );
+    } else if (Number.isInteger(diagonalSize) && diagonalSize >= 0) {
+      this.#matrix = new Matrix(diagonalSize, diagonalSize);
     } else {
-      super(sideSize);
+      this.#matrix = new Matrix(diagonalSize);
 
       if (!this.isSymmetric()) {
         throw new TypeError('not symmetric data');
@@ -1811,7 +1856,7 @@ export class SymmetricMatrix extends Matrix {
   }
 
   clone() {
-    const matrix = new SymmetricMatrix(this.sideSize);
+    const matrix = new SymmetricMatrix(this.diagonalSize);
 
     for (const [row, col, value] of this.upperRightEntries()) {
       matrix.set(row, col, value);
@@ -1824,33 +1869,36 @@ export class SymmetricMatrix extends Matrix {
     return new Matrix(this);
   }
 
+  get(rowIndex, columnIndex) {
+    return this.#matrix.get(rowIndex, columnIndex);
+  }
   set(rowIndex, columnIndex, value) {
     // symmetric set
-    super.set(rowIndex, columnIndex, value);
-    super.set(columnIndex, rowIndex, value);
+    this.#matrix.set(rowIndex, columnIndex, value);
+    this.#matrix.set(columnIndex, rowIndex, value);
 
     return this;
   }
 
-  removeSide(index) {
+  removeCross(index) {
     // symmetric remove side
-    super.removeRow(index);
-    super.removeColumn(index);
+    this.#matrix.removeRow(index);
+    this.#matrix.removeColumn(index);
 
     return this;
   }
 
-  addSide(index, array) {
+  addCross(index, array) {
     if (array === undefined) {
       array = index;
-      index = this.sideSize;
+      index = this.diagonalSize;
     }
 
     const row = array.slice();
     row.splice(index, 1);
 
-    super.addRow(index, row);
-    super.addColumn(index, array);
+    this.#matrix.addRow(index, row);
+    this.#matrix.addColumn(index, array);
 
     return this;
   }
@@ -1859,7 +1907,7 @@ export class SymmetricMatrix extends Matrix {
    * @param {Mask[]} mask
    */
   applyMask(mask) {
-    if (mask.length !== this.sideSize) {
+    if (mask.length !== this.diagonalSize) {
       throw new RangeError('Mask size do not match with matrix size');
     }
 
@@ -1875,7 +1923,7 @@ export class SymmetricMatrix extends Matrix {
 
     // remove sides
     for (const sideIndex of sidesToRemove) {
-      this.removeSide(sideIndex);
+      this.removeCross(sideIndex);
     }
 
     return this;
@@ -1900,14 +1948,14 @@ export class SymmetricMatrix extends Matrix {
    * @returns {number[]}
    */
   toCompact() {
-    const { sideSize } = this;
+    const { diagonalSize } = this;
 
     /** @type {number[]} */
-    const compact = new Array((sideSize * (sideSize + 1)) / 2);
+    const compact = new Array((diagonalSize * (diagonalSize + 1)) / 2);
     for (let col = 0, row = 0, index = 0; index < compact.length; index++) {
       compact[index] = this.get(row, col);
 
-      if (++col >= this.sideSize) col = ++row;
+      if (++col >= diagonalSize) col = ++row;
     }
 
     return compact;
@@ -1922,9 +1970,9 @@ export class SymmetricMatrix extends Matrix {
     // compactSize = (sideSize * (sideSize + 1)) / 2
     // https://mathsolver.microsoft.com/fr/solve-problem/y%20%3D%20%20x%20%60cdot%20%20%20%60frac%7B%20%20%60left(%20x%2B1%20%20%60right)%20%20%20%20%7D%7B%202%20%20%7D
     // sideSize = (Sqrt(8 × compactSize + 1) - 1) / 2
-    const sideSize = (Math.sqrt(8 * compactSize + 1) - 1) / 2;
+    const diagonalSize = (Math.sqrt(8 * compactSize + 1) - 1) / 2;
 
-    if (!Number.isInteger(sideSize)) {
+    if (!Number.isInteger(diagonalSize)) {
       throw new TypeError(
         `This array is not a compact representation of a Symmetric Matrix, ${JSON.stringify(
           compact,
@@ -1932,22 +1980,16 @@ export class SymmetricMatrix extends Matrix {
       );
     }
 
-    const matrix = new SymmetricMatrix(sideSize);
+    const matrix = new SymmetricMatrix(diagonalSize);
     for (let col = 0, row = 0, index = 0; index < compactSize; index++) {
       matrix.set(col, row, compact[index]);
-      if (++col >= sideSize) col = ++row;
+      if (++col >= diagonalSize) col = ++row;
     }
 
     return matrix;
   }
 }
 SymmetricMatrix.prototype.klassType = 'SymmetricMatrix';
-// eslint-disable-next-line no-multi-assign
-SymmetricMatrix.prototype.removeRow = SymmetricMatrix.prototype.removeColumn =
-  SymmetricMatrix.prototype.removeSide;
-// eslint-disable-next-line no-multi-assign
-SymmetricMatrix.prototype.addRow = SymmetricMatrix.prototype.addColumn =
-  SymmetricMatrix.prototype.addSide;
 
 export class DistanceMatrix extends SymmetricMatrix {
   /**

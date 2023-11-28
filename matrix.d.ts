@@ -734,7 +734,9 @@ export abstract class AbstractMatrix {
   /**
    * Creates an exact and independent copy of the matrix.
    */
-  clone(): Matrix;
+  clone(): this;
+
+  static copy<M extends AbstractMatrix>(from: AbstractMatrix, to: M): M;
 
   /**
    * Returns the sum of all elements of the matrix.
@@ -1037,36 +1039,36 @@ export class SymmetricMatrix extends Matrix {
   /**
    * Creates a symmetric matrix with the given dimensions. Values will be set to zero.
    * This is equivalent to calling the Matrix constructor.
-   * @param sidesSize - Number of rows or columns (square).
+   * @param diagonalSize - Number of rows or columns (square).
    * @returns The new symmetric matrix.
    */
-  static zeros(sidesSize: number): SymmetricMatrix;
+  static zeros(diagonalSize: number): SymmetricMatrix;
 
   /**
    * Creates a symmetric matrix with the given dimensions. Values will be set to one.
-   * @param sidesSize - Number of rows or columns (square).
+   * @param diagonalSize - Number of rows or columns (square).
    * @returns The new symmetric matrix.
    */
-  static ones(sidesSize: number): SymmetricMatrix;
+  static ones(diagonalSize: number): SymmetricMatrix;
 
   static isSymmetricMatrix(value: unknown): value is SymmetricMatrix;
 
   /**
    * alias for `rows` or `columns` (square matrix so equals)
    */
-  get sideSize(): number;
+  get diagonalSize(): number;
 
-  constructor(sidesSize: number);
-  /**
-   * @throws TypeError if data are not symmetric
-   * @param data
-   */
-  constructor(data: ArrayLike<ArrayLike<number>>);
   /**
    * @throws TypeError if otherMatrix is not symmetric
    * @param otherMatrix
    */
   constructor(otherMatrix: AbstractMatrix);
+  constructor(diagonalSize: number);
+  /**
+   * @throws TypeError if data are not symmetric
+   * @param data
+   */
+  constructor(data: ArrayLike<ArrayLike<number>>);
 
   /**
    * copy to a new matrix
@@ -1077,40 +1079,15 @@ export class SymmetricMatrix extends Matrix {
    * Symmetric remove row / column
    * @param index
    */
-  removeSide(index: number): this;
+  removeCross(index: number): this;
 
   /**
    * Symmetric add row / column
    * @param index
    * @param array
    */
-  addSide(index: number, array: ArrayLike<number> | AbstractMatrix): this;
-  addSide(array: ArrayLike<number> | AbstractMatrix): this;
-
-  /**
-   * alias to removeSide
-   * @param index
-   */
-  removeRow(index: number): this;
-  /**
-   * alias to addSide
-   * @param index
-   * @param array
-   */
-  addRow(index: number, array: ArrayLike<number> | AbstractMatrix): this;
-  addRow(array: ArrayLike<number> | AbstractMatrix): this;
-  /**
-   * alias to removeSide
-   * @param index
-   */
-  removeColumn(index: number): this;
-  /**
-   * alias to addSide
-   * @param index
-   * @param array
-   */
-  addColumn(index: number, array: ArrayLike<number> | AbstractMatrix): this;
-  addColumn(array: ArrayLike<number> | AbstractMatrix): this;
+  addCross(index: number, array: ArrayLike<number> | AbstractMatrix): this;
+  addCross(array: ArrayLike<number> | AbstractMatrix): this;
 
   /**
    * remove sides (rows / columns) with falsy value from mask.
@@ -1163,6 +1140,8 @@ export class SymmetricMatrix extends Matrix {
    * @param compact
    */
   static fromCompact(compact: number[]): SymmetricMatrix;
+
+  clone(): this;
 }
 
 export class DistanceMatrix extends SymmetricMatrix {
@@ -1235,6 +1214,8 @@ export class DistanceMatrix extends SymmetricMatrix {
    * @param compact
    */
   static fromCompact(compact: number[]): DistanceMatrix;
+
+  clone(): this;
 }
 
 export class MatrixColumnView extends AbstractMatrix {
