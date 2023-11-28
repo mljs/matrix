@@ -10,10 +10,7 @@ describe('DistanceMatrix mutation', () => {
       [2, 3, 0],
     ]);
 
-    expect(matrix.addSide).toBe(matrix.addRow);
-    expect(matrix.addSide).toBe(matrix.addColumn);
-
-    matrix.addSide([3, 4, 5, 6]);
+    matrix.addCross([3, 4, 5, 6]);
     expect(matrix.to2DArray()).toStrictEqual([
       [0, 1, 2, 3],
       [1, 0, 3, 4],
@@ -21,7 +18,7 @@ describe('DistanceMatrix mutation', () => {
       [3, 4, 5, 0],
     ]);
 
-    matrix.addSide(2, [9, 9, 9, 9, 9]);
+    matrix.addCross(2, [9, 9, 9, 9, 9]);
     expect(matrix.to2DArray()).toStrictEqual([
       [0, 1, 9, 2, 3],
       [1, 0, 9, 3, 4],

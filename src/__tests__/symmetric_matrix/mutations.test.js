@@ -10,10 +10,7 @@ describe('Symmetric mutation', () => {
       [2, 0, 2],
     ]);
 
-    expect(matrix.addSide).toBe(matrix.addRow);
-    expect(matrix.addSide).toBe(matrix.addColumn);
-
-    matrix.addSide([4, 0, 0, 4]);
+    matrix.addCross([4, 0, 0, 4]);
     expect(matrix.to2DArray()).toStrictEqual([
       [0, 1, 2, 4],
       [1, 1, 0, 0],
@@ -21,7 +18,7 @@ describe('Symmetric mutation', () => {
       [4, 0, 0, 4],
     ]);
 
-    matrix.addSide(2, [1.5, 1.5, 1.5, 1.5, 1.5]);
+    matrix.addCross(2, [1.5, 1.5, 1.5, 1.5, 1.5]);
     expect(matrix.to2DArray()).toStrictEqual([
       [0, 1, 1.5, 2, 4],
       [1, 1, 1.5, 0, 0],
@@ -40,10 +37,7 @@ describe('Symmetric mutation', () => {
       [4, 0, 1.5, 0, 4],
     ]);
 
-    expect(matrix.removeSide).toBe(matrix.removeRow);
-    expect(matrix.removeSide).toBe(matrix.removeColumn);
-
-    matrix.removeSide(2);
+    matrix.removeCross(2);
     expect(matrix.to2DArray()).toStrictEqual([
       [0, 1, 2, 4],
       [1, 1, 0, 0],

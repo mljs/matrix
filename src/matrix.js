@@ -1830,7 +1830,7 @@ export class SymmetricMatrix extends AbstractMatrix {
   }
 
   /**
-   * @param {number | AbstractMatrix | ArrayBuffer<ArrayLike<number>>} diagonalSize
+   * @param {number | AbstractMatrix | ArrayLike<ArrayLike<number>>} diagonalSize
    * @return {this}
    */
   constructor(diagonalSize) {

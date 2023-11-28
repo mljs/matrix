@@ -69,7 +69,7 @@ describe('DistanceMatrix creation', () => {
 
   it('should create a distance matrix from compact 1D array', () => {
     const matrix = DistanceMatrix.fromCompact([1, 2, 3, 4, 5, 6]);
-    expect(matrix.sideSize).toBe(4);
+    expect(matrix.diagonalSize).toBe(4);
     expect(matrix).toStrictEqual(
       new DistanceMatrix([
         [0, 1, 2, 3],

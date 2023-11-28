@@ -115,13 +115,13 @@ describe('SymmetricMatrix creation', () => {
     ]);
     expect(matrix.rows).toBe(3);
     expect(matrix.columns).toBe(3);
-    expect(matrix.sideSize).toBe(3);
+    expect(matrix.diagonalSize).toBe(3);
     expect(matrix.get(1, 2)).toBe(7);
   });
 
   it('should create a symmetric matrix from compact 1D array', () => {
     const matrix = SymmetricMatrix.fromCompact([0, 1, 2, 3, 4, 5, 6, 7, 8, 9]);
-    expect(matrix.sideSize).toBe(4);
+    expect(matrix.diagonalSize).toBe(4);
     expect(matrix).toStrictEqual(
       new SymmetricMatrix([
         [0, 1, 2, 3],
