@@ -1,4 +1,5 @@
 import { isAnyArray } from 'is-any-array';
+import { index } from 'mathjs';
 import rescale from 'ml-array-rescale';
 
 import { inspectMatrix, inspectMatrixWithOptions } from './inspect';
@@ -2021,17 +2022,17 @@ export class DistanceMatrix extends SymmetricMatrix {
     return super.set(rowIndex, columnIndex, value);
   }
 
-  addSide(index, array) {
+  addCross(index, array) {
     if (array === undefined) {
       array = index;
-      index = this.sideSize;
+      index = this.diagonalSize;
     }
 
     // ensure distance
     array = array.slice();
     array[index] = 0;
 
-    return super.addSide(index, array);
+    return super.addCross(index, array);
   }
 
   toSymmetricMatrix() {
@@ -2039,9 +2040,10 @@ export class DistanceMatrix extends SymmetricMatrix {
   }
 
   clone() {
-    const matrix = new DistanceMatrix(this.sideSize);
+    const matrix = new DistanceMatrix(this.diagonalSize);
 
     for (const [row, col, value] of this.upperRightEntries()) {
+      if (row === col) continue;
       matrix.set(row, col, value);
     }
 
@@ -2068,15 +2070,15 @@ export class DistanceMatrix extends SymmetricMatrix {
    * @returns {number[]}
    */
   toCompact() {
-    const { sideSize } = this;
-    const compactLength = ((sideSize - 1) * sideSize) / 2;
+    const { diagonalSize } = this;
+    const compactLength = ((diagonalSize - 1) * diagonalSize) / 2;
 
     /** @type {number[]} */
     const compact = new Array(compactLength);
     for (let col = 1, row = 0, index = 0; index < compact.length; index++) {
       compact[index] = this.get(row, col);
 
-      if (++col >= this.sideSize) col = ++row + 1;
+      if (++col >= diagonalSize) col = ++row + 1;
     }
 
     return compact;
@@ -2089,9 +2091,9 @@ export class DistanceMatrix extends SymmetricMatrix {
     const compactSize = compact.length;
     // compactSize = (sideSize * (sideSize - 1)) / 2
     // sideSize = (Sqrt(8 × compactSize + 1) + 1) / 2
-    const sideSize = (Math.sqrt(8 * compactSize + 1) + 1) / 2;
+    const diagonalSize = (Math.sqrt(8 * compactSize + 1) + 1) / 2;
 
-    if (!Number.isInteger(sideSize)) {
+    if (!Number.isInteger(diagonalSize)) {
       throw new TypeError(
         `This array is not a compact representation of a DistanceMatrix, ${JSON.stringify(
           compact,
@@ -2099,15 +2101,13 @@ export class DistanceMatrix extends SymmetricMatrix {
       );
     }
 
-    const matrix = new this(sideSize);
+    const matrix = new this(diagonalSize);
     for (let col = 1, row = 0, index = 0; index < compactSize; index++) {
       matrix.set(col, row, compact[index]);
-      if (++col >= sideSize) col = ++row + 1;
+      if (++col >= diagonalSize) col = ++row + 1;
     }
 
     return matrix;
   }
 }
 DistanceMatrix.prototype.klassSubType = 'DistanceMatrix';
-DistanceMatrix.prototype.addRow = DistanceMatrix.prototype.addSide;
-DistanceMatrix.prototype.addColumn = DistanceMatrix.prototype.addSide;
