@@ -1552,69 +1552,6 @@ export class AbstractMatrix {
       }
     }
   }
-
-  /**
-   * half iterator upper-right-corner from left to right, from top to bottom
-   * yield [row, column, value]
-   *
-   * @param {number} [borderMax = this.rows] - if specified will check if <= to rows and columns
-   * @param {any} [missValue = 0] - number or function returning a number
-   *
-   * @returns {Generator<[number, number, number], void, *>}
-   */
-  *upperRightEntries(borderMax = this.rows, missValue = 0) {
-    borderMax = Math.min(
-      Math.max(this.rows, this.columns),
-      Math.max(0, borderMax),
-    );
-
-    const isMissValueFunction = typeof missValue?.call === 'function';
-
-    for (let row = 0, col = 0; row < borderMax; void 0) {
-      const value =
-        row >= this.rows || col >= this.columns
-          ? isMissValueFunction
-            ? missValue.call(this, row, col)
-            : missValue
-          : this.get(row, col);
-
-      yield [row, col, value];
-
-      // at the end of row, move cursor to next row at diagonal position
-      if (++col >= borderMax) col = ++row;
-    }
-  }
-
-  /**
-   * half iterator upper-right-corner from left to right, from top to bottom
-   * yield value
-   *
-   * @param {number} [borderMax = this.rows] - if specified will check if <= to rows and columns
-   * @param [missValue = 0] - number or function returning a number
-   *
-   * @returns {Generator<[number, number, number], void, *>}
-   */
-  *upperRightValues(borderMax = this.rows, missValue = 0) {
-    borderMax = Math.min(
-      Math.max(this.rows, this.columns),
-      Math.max(0, borderMax),
-    );
-    const isMissValueFunction = typeof missValue?.call === 'function';
-
-    for (let row = 0, col = 0; row < borderMax; void 0) {
-      const value =
-        row >= this.rows || col >= this.columns
-          ? isMissValueFunction
-            ? missValue.call(this, row, col)
-            : missValue
-          : this.get(row, col);
-
-      yield value;
-
-      // at the end of row, move cursor to next row at diagonal position
-      if (++col >= borderMax) col = ++row;
-    }
-  }
 }
 
 AbstractMatrix.prototype.klass = 'Matrix';

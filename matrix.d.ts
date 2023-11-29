@@ -860,32 +860,6 @@ export abstract class AbstractMatrix {
    */
   values(): Generator<number, void, never>;
 
-  /**
-   * half iterator upper-right-corner from left to right, from top to bottom
-   * yield [row, column, value]
-   * @param [borderMax=this.rows] - clamp between Max(rows, columns) and 0.
-   * @param [missValue=0]
-   */
-  upperRightEntries<Miss = number>(
-    borderMax?: number,
-    missValue?: Miss | ((this: this, row: number, column: number) => Miss),
-  ): Generator<
-    [row: number, column: number, value: number | Miss],
-    void,
-    never
-  >;
-
-  /**
-   * half iterator upper-right-corner from left to right, from top to bottom
-   * yield value
-   * @param [borderMax=this.rows] - clamp between Max(rows, columns) and 0.
-   * @param [missValue=0]
-   */
-  upperRightValues<Miss = number>(
-    borderMax?: number,
-    missValue?: Miss | ((this: this, row: number, column: number) => Miss),
-  ): Generator<number | Miss, void, never>;
-
   // From here we document methods dynamically generated from operators
 
   // Mathematical operators
@@ -1142,6 +1116,22 @@ export class SymmetricMatrix extends Matrix {
   static fromCompact(compact: number[]): SymmetricMatrix;
 
   clone(): this;
+
+  /**
+   * half iterator upper-right-corner from left to right, from top to bottom
+   * yield [row, column, value]
+   */
+  upperRightEntries(): Generator<
+    [row: number, column: number, value: number],
+    void,
+    never
+  >;
+
+  /**
+   * half iterator upper-right-corner from left to right, from top to bottom
+   * yield value
+   */
+  upperRightValues(): Generator<number, void, never>;
 }
 
 export class DistanceMatrix extends SymmetricMatrix {

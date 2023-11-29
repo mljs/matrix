@@ -210,5 +210,39 @@ export class SymmetricMatrix extends AbstractMatrix {
 
     return matrix;
   }
+
+  /**
+   * half iterator upper-right-corner from left to right, from top to bottom
+   * yield [row, column, value]
+   *
+   * @returns {Generator<[number, number, number], void, *>}
+   */
+  *upperRightEntries() {
+    for (let row = 0, col = 0; row < this.diagonalSize; void 0) {
+      const value = this.get(row, col);
+
+      yield [row, col, value];
+
+      // at the end of row, move cursor to next row at diagonal position
+      if (++col >= this.diagonalSize) col = ++row;
+    }
+  }
+
+  /**
+   * half iterator upper-right-corner from left to right, from top to bottom
+   * yield value
+   *
+   * @returns {Generator<[number, number, number], void, *>}
+   */
+  *upperRightValues() {
+    for (let row = 0, col = 0; row < this.diagonalSize; void 0) {
+      const value = this.get(row, col);
+
+      yield value;
+
+      // at the end of row, move cursor to next row at diagonal position
+      if (++col >= this.diagonalSize) col = ++row;
+    }
+  }
 }
 SymmetricMatrix.prototype.klassType = 'SymmetricMatrix';
