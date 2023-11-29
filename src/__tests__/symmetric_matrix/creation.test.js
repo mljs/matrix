@@ -29,7 +29,7 @@ describe('SymmetricMatrix creation', () => {
     ]);
   });
 
-  it('should clone existing symmetric matrix', () => {
+  it('should clone existing symmetric matrix (from constructor)', () => {
     const original = new SymmetricMatrix([
       [1, 2, 3],
       [2, 4, 5],
@@ -40,6 +40,23 @@ describe('SymmetricMatrix creation', () => {
     expect(matrix).toBeInstanceOf(SymmetricMatrix);
     expect(SymmetricMatrix.isSymmetricMatrix(matrix)).toBe(true);
     expect(matrix).toStrictEqual(original);
+  });
+
+  it('should clone existing symmetric matrix (.clone())', () => {
+    const original = new SymmetricMatrix([
+      [1, 2, 3],
+      [2, 4, 5],
+      [3, 5, 6],
+    ]);
+    const matrix = original.clone();
+    expect(matrix).not.toBe(original);
+    expect(matrix).toBeInstanceOf(SymmetricMatrix);
+    expect(SymmetricMatrix.isSymmetricMatrix(matrix)).toBe(true);
+    expect(matrix).toStrictEqual(original);
+
+    original.set(1, 1, 3);
+    expect(original.get(1, 1)).toBe(3);
+    expect(matrix.get(1, 1)).toBe(4);
   });
 
   it('should create a zero symmetric matrix', () => {
