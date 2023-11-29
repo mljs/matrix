@@ -170,9 +170,13 @@ export abstract class AbstractMatrix {
    * This is equivalent to calling the Matrix constructor.
    * @param rows - Number of rows.
    * @param columns - Number of columns.
+   * @template _M is private. Don't override it.
    * @returns The new matrix.
    */
-  static zeros(rows: number, columns: number): Matrix;
+  static zeros<_M extends AbstractMatrix = Matrix>(
+    rows: number,
+    columns: number,
+  ): _M;
 
   /**
    * Creates a matrix with the given dimensions. Values will be set to one.
@@ -180,7 +184,10 @@ export abstract class AbstractMatrix {
    * @param columns - Number of columns.
    * @returns The new matrix.
    */
-  static ones(rows: number, columns: number): Matrix;
+  static ones<M extends AbstractMatrix = Matrix>(
+    rows: number,
+    columns: number,
+  ): M;
 
   /**
    * Creates a matrix with the given dimensions. Values will be randomly set.
@@ -1009,28 +1016,11 @@ export class Matrix extends AbstractMatrix {
 
 export default Matrix;
 
-export class SymmetricMatrix extends Matrix {
-  /**
-   * Creates a symmetric matrix with the given dimensions. Values will be set to zero.
-   * This is equivalent to calling the Matrix constructor.
-   * @param diagonalSize - Number of rows or columns (square).
-   * @returns The new symmetric matrix.
-   */
-  static zeros(diagonalSize: number): SymmetricMatrix;
-
-  /**
-   * Creates a symmetric matrix with the given dimensions. Values will be set to one.
-   * @param diagonalSize - Number of rows or columns (square).
-   * @returns The new symmetric matrix.
-   */
-  static ones(diagonalSize: number): SymmetricMatrix;
-
-  static isSymmetricMatrix(value: unknown): value is SymmetricMatrix;
-
+export class SymmetricMatrix extends AbstractMatrix {
   /**
    * alias for `rows` or `columns` (square matrix so equals)
    */
-  get diagonalSize(): number;
+  readonly diagonalSize: number;
 
   /**
    * @throws TypeError if otherMatrix is not symmetric
@@ -1043,6 +1033,32 @@ export class SymmetricMatrix extends Matrix {
    * @param data
    */
   constructor(data: ArrayLike<ArrayLike<number>>);
+
+  get(rowIndex: number, columnIndex: number): number;
+  set(rowIndex: number, columnIndex: number, value: number): this;
+
+  /**
+   * Creates a symmetric matrix with the given dimensions. Values will be set to zero.
+   * This is equivalent to calling the Matrix constructor.
+   *
+   * @param diagonalSize - Number of rows or columns (square).
+   * @template _M is private, do not override it.
+   * @returns The new symmetric matrix.
+   */
+  static zeros<_M extends AbstractMatrix = SymmetricMatrix>(
+    diagonalSize: number,
+  ): _M;
+  /**
+   * Creates a symmetric matrix with the given dimensions. Values will be set to one.
+   * @param diagonalSize - Number of rows or columns (square).
+   * @template _M is private, do not override it.
+   * @returns The new symmetric matrix.
+   */
+  static ones<_M extends AbstractMatrix = SymmetricMatrix>(
+    diagonalSize: number,
+  ): _M;
+
+  static isSymmetricMatrix(value: unknown): value is SymmetricMatrix;
 
   /**
    * copy to a new matrix
@@ -1139,16 +1155,22 @@ export class DistanceMatrix extends SymmetricMatrix {
    * Creates a distance matrix with the given dimensions. Values will be set to zero.
    * This is equivalent to calling the Matrix constructor.
    * @param sidesSize - Number of rows or columns (square).
+   * @template _M is private, do not specify it
    * @returns The new symmetric matrix.
    */
-  static zeros(sidesSize: number): DistanceMatrix;
+  static zeros<_M extends AbstractMatrix = DistanceMatrix>(
+    sidesSize: number,
+  ): _M;
 
   /**
    * Creates a symmetric matrix with the given dimensions. Values will be set to one.
    * @param sidesSize - Number of rows or columns (square).
+   * @template _M is private, do not specify it
    * @returns The new symmetric matrix.
    */
-  static ones(sidesSize: number): DistanceMatrix;
+  static ones<_M extends AbstractMatrix = DistanceMatrix>(
+    sidesSize: number,
+  ): _M;
 
   static isDistanceMatrix(value: unknown): value is DistanceMatrix;
 
