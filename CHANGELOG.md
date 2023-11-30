@@ -1,5 +1,12 @@
 # Changelog
 
+## [6.11.0](https://github.com/mljs/matrix/compare/v6.10.8...v6.11.0) (2023-11-30)
+
+
+### Features
+
+* add Symmetric and Distance Matrix ([#178](https://github.com/mljs/matrix/issues/178)) ([cfe50db](https://github.com/mljs/matrix/commit/cfe50db84440d8be309057acd17a4d9e8bf42681))
+
 ## [6.10.8](https://github.com/mljs/matrix/compare/v6.10.7...v6.10.8) (2023-11-04)
 
 
