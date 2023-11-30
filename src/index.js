@@ -1,4 +1,6 @@
 export { AbstractMatrix, default, default as Matrix } from './matrix';
+export * from './symmetricMatrix';
+export * from './distanceMatrix';
 export * from './views/index';
 
 export { wrap } from './wrap/wrap';

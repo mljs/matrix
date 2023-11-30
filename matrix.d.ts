@@ -1,6 +1,11 @@
 type MaybeMatrix = AbstractMatrix | ArrayLike<ArrayLike<number>>;
 type ScalarOrMatrix = number | MaybeMatrix;
 type MatrixDimension = 'row' | 'column';
+type MaskValue = 0 | 1 | number | boolean;
+/**
+ * allow use of numbers (only 0 is considered false) and booleans
+ */
+type Mask = MaskValue[];
 
 export interface IRandomOptions {
   /**
@@ -165,9 +170,13 @@ export abstract class AbstractMatrix {
    * This is equivalent to calling the Matrix constructor.
    * @param rows - Number of rows.
    * @param columns - Number of columns.
+   * @template _M is private. Don't override it.
    * @returns The new matrix.
    */
-  static zeros(rows: number, columns: number): Matrix;
+  static zeros<_M extends AbstractMatrix = Matrix>(
+    rows: number,
+    columns: number,
+  ): _M;
 
   /**
    * Creates a matrix with the given dimensions. Values will be set to one.
@@ -175,7 +184,10 @@ export abstract class AbstractMatrix {
    * @param columns - Number of columns.
    * @returns The new matrix.
    */
-  static ones(rows: number, columns: number): Matrix;
+  static ones<M extends AbstractMatrix = Matrix>(
+    rows: number,
+    columns: number,
+  ): M;
 
   /**
    * Creates a matrix with the given dimensions. Values will be randomly set.
@@ -195,6 +207,7 @@ export abstract class AbstractMatrix {
    * Creates a matrix with the given dimensions. Values will be random integers.
    * @param rows - Number of rows.
    * @param columns - Number of columns.
+   * @param options
    * @returns - The new matrix.
    */
   static randInt(
@@ -312,6 +325,11 @@ export abstract class AbstractMatrix {
    * Returns whether the matrix has the same number of rows and columns.
    */
   isSquare(): boolean;
+
+  /**
+   * Returns whether the matrix is symmetric and diagonal values are equals to 0
+   */
+  isDistance(): boolean;
 
   /**
    * Returns whether the number of rows or columns (or both) is zero.
@@ -728,7 +746,9 @@ export abstract class AbstractMatrix {
   /**
    * Creates an exact and independent copy of the matrix.
    */
-  clone(): Matrix;
+  clone(): this;
+
+  static copy<M extends AbstractMatrix>(from: AbstractMatrix, to: M): M;
 
   /**
    * Returns the sum of all elements of the matrix.
@@ -823,6 +843,34 @@ export abstract class AbstractMatrix {
   scale(by: MatrixDimension, options?: IScaleByOptions): this;
 
   toString(options?: IToStringOptions): string;
+
+  // iterators methods
+
+  /**
+   * iterator from left to right, from top to bottom
+   * yield [row, column, value]
+   */
+  [Symbol.iterator](): Generator<
+    [row: number, column: number, value: number],
+    void,
+    never
+  >;
+
+  /**
+   * iterator from left to right, from top to bottom
+   * yield [row, column, value]
+   */
+  entries(): Generator<
+    [row: number, column: number, value: number],
+    void,
+    never
+  >;
+
+  /**
+   * iterator from left to right, from top to bottom
+   * yield value
+   */
+  values(): Generator<number, void, never>;
 
   // From here we document methods dynamically generated from operators
 
@@ -960,6 +1008,7 @@ export class Matrix extends AbstractMatrix {
    * @param array - Column to add.
    */
   addColumn(index: number, array: ArrayLike<number> | AbstractMatrix): this;
+  addColumn(array: ArrayLike<number> | AbstractMatrix): this;
 
   /**
    * Adds a new row to the matrix (in place).
@@ -967,9 +1016,224 @@ export class Matrix extends AbstractMatrix {
    * @param array - Row to add.
    */
   addRow(index: number, array: ArrayLike<number> | AbstractMatrix): this;
+  addRow(array: ArrayLike<number> | AbstractMatrix): this;
 }
 
 export default Matrix;
+
+export class SymmetricMatrix extends AbstractMatrix {
+  /**
+   * alias for `rows` or `columns` (square matrix so equals)
+   */
+  readonly diagonalSize: number;
+
+  /**
+   * @throws TypeError if otherMatrix is not symmetric
+   * @param otherMatrix
+   */
+  constructor(otherMatrix: AbstractMatrix);
+  constructor(diagonalSize: number);
+  /**
+   * @throws TypeError if data are not symmetric
+   * @param data
+   */
+  constructor(data: ArrayLike<ArrayLike<number>>);
+
+  get(rowIndex: number, columnIndex: number): number;
+  set(rowIndex: number, columnIndex: number, value: number): this;
+
+  /**
+   * Creates a symmetric matrix with the given dimensions. Values will be set to zero.
+   * This is equivalent to calling the Matrix constructor.
+   *
+   * @param diagonalSize - Number of rows or columns (square).
+   * @template _M is private, do not override it.
+   * @returns The new symmetric matrix.
+   */
+  static zeros<_M extends AbstractMatrix = SymmetricMatrix>(
+    diagonalSize: number,
+  ): _M;
+  /**
+   * Creates a symmetric matrix with the given dimensions. Values will be set to one.
+   * @param diagonalSize - Number of rows or columns (square).
+   * @template _M is private, do not override it.
+   * @returns The new symmetric matrix.
+   */
+  static ones<_M extends AbstractMatrix = SymmetricMatrix>(
+    diagonalSize: number,
+  ): _M;
+
+  static isSymmetricMatrix(value: unknown): value is SymmetricMatrix;
+
+  /**
+   * copy to a new matrix
+   */
+  toMatrix(): Matrix;
+
+  /**
+   * Symmetric remove row / column
+   * @param index
+   */
+  removeCross(index: number): this;
+
+  /**
+   * Symmetric add row / column
+   * @param index
+   * @param array
+   */
+  addCross(index: number, array: ArrayLike<number> | AbstractMatrix): this;
+  addCross(array: ArrayLike<number> | AbstractMatrix): this;
+
+  /**
+   * remove sides (rows / columns) with falsy value from mask.
+   *
+   * @example
+   *
+   * ```js
+   * const matrix = new SymmetricMatrix([
+   *  [0,1,2,3],
+   *  [1,0,4,5],
+   *  [2,4,0,6],
+   *  [3,5,6,0],
+   * ]);
+   * matrix.applyMask([1,0,0,1]);
+   * assert.deepEqual(matrix.toCompact(), new SymmetricMatrix([
+   *  [0,3],
+   *  [3,0],
+   * ]).toCompact());
+   * ```
+   *
+   * @throws RangeError if mask length is different of matrix sideSize
+   *
+   * @param mask
+   */
+  applyMask(mask: Mask): this;
+
+  /**
+   * Compact format upper-right corner of matrix
+   * iterate from left to right, from top to bottom.
+   *
+   * ```
+   *  full view | usefull data
+   *   A B C D  |   A B C D
+   * A 1 2 3 4  | A 1 2 3 4
+   * B 2 5 6 7  | B · 5 6 7
+   * C 3 6 8 9  | C · · 8 9
+   * D 4 7 9 10 | D · · · 10
+   * ```
+   *
+   * will return compact 1D array `[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]`
+   *
+   * length is S(i=0, n=sideSize) => 10 for a 4 sideSized matrix
+   */
+  toCompact(): number[];
+
+  /**
+   * @throws TypeError if `compact` is not the compact form of a Symmetric Matrix
+   * `(Math.sqrt(8 * compactLength + 1) - 1) / 2` must be an integer
+   *
+   * @param compact
+   */
+  static fromCompact(compact: number[]): SymmetricMatrix;
+
+  clone(): this;
+
+  /**
+   * half iterator upper-right-corner from left to right, from top to bottom
+   * yield [row, column, value]
+   */
+  upperRightEntries(): Generator<
+    [row: number, column: number, value: number],
+    void,
+    never
+  >;
+
+  /**
+   * half iterator upper-right-corner from left to right, from top to bottom
+   * yield value
+   */
+  upperRightValues(): Generator<number, void, never>;
+}
+
+export class DistanceMatrix extends SymmetricMatrix {
+  /**
+   * Creates a distance matrix with the given dimensions. Values will be set to zero.
+   * This is equivalent to calling the Matrix constructor.
+   * @param sidesSize - Number of rows or columns (square).
+   * @template _M is private, do not specify it
+   * @returns The new symmetric matrix.
+   */
+  static zeros<_M extends AbstractMatrix = DistanceMatrix>(
+    sidesSize: number,
+  ): _M;
+
+  /**
+   * Creates a symmetric matrix with the given dimensions. Values will be set to one.
+   * @param sidesSize - Number of rows or columns (square).
+   * @template _M is private, do not specify it
+   * @returns The new symmetric matrix.
+   */
+  static ones<_M extends AbstractMatrix = DistanceMatrix>(
+    sidesSize: number,
+  ): _M;
+
+  static isDistanceMatrix(value: unknown): value is DistanceMatrix;
+
+  constructor(sidesSize: number);
+  /**
+   * @throws TypeError if data are not symmetric and diagonal is not 0
+   * @param data
+   */
+  constructor(data: ArrayLike<ArrayLike<number>>);
+  /**
+   * @throws TypeError if otherMatrix is not symmetric and diagonal is not 0
+   * @param otherMatrix
+   */
+  constructor(otherMatrix: AbstractMatrix);
+
+  /**
+   * because it's a distance matrix, if rowIndex === columnIndex,
+   * value will be set to 0
+   *
+   * @param rowIndex
+   * @param columnIndex
+   * @param value
+   */
+  set(rowIndex: number, columnIndex: number, value: number): this;
+
+  toSymmetricMatrix(): SymmetricMatrix;
+
+  /**
+   * Compact format upper-right corner of matrix
+   * no diagonal (because only store zeros)
+   * iterable from left to right, from top to bottom.
+   *
+   * ```
+   *   A B C D
+   * A 0 1 2 3
+   * B 1 0 4 5
+   * C 2 4 0 6
+   * D 3 5 6 0
+   * ```
+   *
+   * will return compact 1D array `[1, 2, 3, 4, 5, 6]`
+   *
+   * length is S(i=0, n=sideSize-1) => 6 for a 4 side sized matrix
+   *
+   * @returns {number[]}
+   */
+  toCompact(): number[];
+
+  /**
+   * @throws TypeError if `compact` is not the compact form of a Distance Matrix
+   * `(Math.sqrt(8 * compactSize + 1) + 1) / 2` must be an integer
+   *
+   * @param compact
+   */
+  static fromCompact(compact: number[]): DistanceMatrix;
+
+  clone(): this;
+}
 
 export class MatrixColumnView extends AbstractMatrix {
   constructor(matrix: AbstractMatrix, column: number);
