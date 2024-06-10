@@ -1,5 +1,12 @@
 # Changelog
 
+## [6.11.1](https://github.com/mljs/matrix/compare/v6.11.0...v6.11.1) (2024-06-10)
+
+
+### Bug Fixes
+
+* **DistanceMatrix:** fromCompact with an empty array ([637598e](https://github.com/mljs/matrix/commit/637598edb96d3066baef6d0241915898158f43d7))
+
 ## [6.11.0](https://github.com/mljs/matrix/compare/v6.10.8...v6.11.0) (2023-11-30)
 
 
