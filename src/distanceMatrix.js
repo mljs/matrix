@@ -97,6 +97,12 @@ export class DistanceMatrix extends SymmetricMatrix {
    */
   static fromCompact(compact) {
     const compactSize = compact.length;
+
+    if (compactSize === 0) {
+      return new this(0);
+    }
+
+    // compactSize in Natural integer range ]0;∞]
     // compactSize = (sideSize * (sideSize - 1)) / 2
     // sideSize = (Sqrt(8 × compactSize + 1) + 1) / 2
     const diagonalSize = (Math.sqrt(8 * compactSize + 1) + 1) / 2;
