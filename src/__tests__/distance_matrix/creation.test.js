@@ -83,6 +83,10 @@ describe('DistanceMatrix creation', () => {
     );
   });
 
+  it('fromCompact empty', () => {
+    expect(DistanceMatrix.fromCompact([]).to2DArray()).toStrictEqual([]);
+  });
+
   it('zeros', () => {
     expect(DistanceMatrix.zeros(3).to2DArray()).toStrictEqual([
       [0, 0, 0],

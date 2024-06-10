@@ -13,6 +13,10 @@ describe('DistanceMatrix export', () => {
     expect(matrix.toCompact()).toStrictEqual([1, 2, 3, 2, 3, 3]);
   });
 
+  it('toCompact empty', () => {
+    expect(new DistanceMatrix(0).toCompact()).toStrictEqual([]);
+  });
+
   it('toSymmetricMatrix', () => {
     const matrix = new DistanceMatrix([
       [0, 1, 2, 3],
