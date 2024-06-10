@@ -45,6 +45,11 @@ describe('utility methods', () => {
     matrix.set(0, 0, 10);
     let called = 0;
 
+    /**
+     * @this {Matrix}
+     * @param i
+     * @param j
+     */
     function cb(i, j) {
       called++;
       expect(this).toBeInstanceOf(Matrix);
