@@ -1530,7 +1530,7 @@ export class AbstractMatrix {
   /**
    * iterator from left to right, from top to bottom
    * yield [row, column, value]
-   * @returns {Generator<[number, number, number], void, *>}
+   * @returns {Generator<[number, number, number], void, void>}
    */
   *entries() {
     for (let row = 0; row < this.rows; row++) {
@@ -1543,7 +1543,7 @@ export class AbstractMatrix {
   /**
    * iterator from left to right, from top to bottom
    * yield value
-   * @returns {Generator<number, void, *>}
+   * @returns {Generator<number, void, void>}
    */
   *values() {
     for (let row = 0; row < this.rows; row++) {

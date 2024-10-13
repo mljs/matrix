@@ -853,8 +853,8 @@ export abstract class AbstractMatrix {
   [Symbol.iterator](): Generator<
     [row: number, column: number, value: number],
     void,
-    never
-  >;
+    void
+    >;
 
   /**
    * iterator from left to right, from top to bottom
@@ -863,14 +863,14 @@ export abstract class AbstractMatrix {
   entries(): Generator<
     [row: number, column: number, value: number],
     void,
-    never
+    void
   >;
 
   /**
    * iterator from left to right, from top to bottom
    * yield value
    */
-  values(): Generator<number, void, never>;
+  values(): Generator<number, void, void>;
 
   // From here we document methods dynamically generated from operators
 
@@ -1145,14 +1145,14 @@ export class SymmetricMatrix extends AbstractMatrix {
   upperRightEntries(): Generator<
     [row: number, column: number, value: number],
     void,
-    never
+    void
   >;
 
   /**
    * half iterator upper-right-corner from left to right, from top to bottom
    * yield value
    */
-  upperRightValues(): Generator<number, void, never>;
+  upperRightValues(): Generator<number, void, void>;
 }
 
 export class DistanceMatrix extends SymmetricMatrix {

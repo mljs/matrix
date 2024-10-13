@@ -215,7 +215,7 @@ export class SymmetricMatrix extends AbstractMatrix {
    * half iterator upper-right-corner from left to right, from top to bottom
    * yield [row, column, value]
    *
-   * @returns {Generator<[number, number, number], void, *>}
+   * @returns {Generator<[number, number, number], void, void>}
    */
   *upperRightEntries() {
     for (let row = 0, col = 0; row < this.diagonalSize; void 0) {
@@ -232,7 +232,7 @@ export class SymmetricMatrix extends AbstractMatrix {
    * half iterator upper-right-corner from left to right, from top to bottom
    * yield value
    *
-   * @returns {Generator<[number, number, number], void, *>}
+   * @returns {Generator<[number, number, number], void, void>}
    */
   *upperRightValues() {
     for (let row = 0, col = 0; row < this.diagonalSize; void 0) {
