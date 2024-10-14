@@ -874,6 +874,26 @@ export class AbstractMatrix {
     return result;
   }
 
+  mpow(scalar) {
+    if (!this.isSquare()) {
+      throw new RangeError('Matrix must be square');
+    }
+    if (!Number.isInteger(scalar) || scalar < 0) {
+      throw new RangeError('Exponent must be a non-negative integer');
+    }
+    // Russian Peasant exponentiation, i.e. exponentiation by squaring
+    let result = Matrix.eye(this.rows);
+    let bb = this;
+    // Note: Don't bit shift. In JS, that would truncate at 32 bits
+    for (let e = scalar; 1 < e; e /= 2) {
+      if (e & (1 !== 0)) {
+        result = result.mmul(bb);
+      }
+      bb = bb.mmul(bb);
+    }
+    return result;
+  }
+
   strassen2x2(other) {
     other = Matrix.checkMatrix(other);
     let result = new Matrix(2, 2);

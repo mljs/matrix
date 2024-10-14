@@ -616,6 +616,12 @@ export abstract class AbstractMatrix {
    */
   mmul(other: MaybeMatrix): Matrix;
 
+  /**
+   * Returns the square matrix raised to the given power
+   * @param scalar - the non-negative integer power to raise this matrix to
+   */
+  mpow(scalar: number): Matrix;
+
   strassen2x2(other: MaybeMatrix): Matrix;
 
   strassen3x3(other: MaybeMatrix): Matrix;
