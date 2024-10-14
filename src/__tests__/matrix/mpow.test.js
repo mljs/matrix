@@ -1,6 +1,7 @@
-import { describe, it, expect } from 'vitest';
+import { describe, it, expect } from 'vitest'
 
 import { Matrix } from '../..';
+
 describe('matrix power', () => {
   it('power of a non-square matrix is not defined', () => {
     let x = new Matrix(3, 5);
