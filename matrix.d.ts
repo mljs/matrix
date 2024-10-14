@@ -1480,16 +1480,33 @@ export class EigenvalueDecomposition {
 export { EigenvalueDecomposition as EVD };
 
 /**
+ * The Cholesky decomposition of a matrix. Given a matrix A, the Cholesky Decomposition of A is L
+ * such that A = (L)(L.transpose).
+ * Only works for symmetric, positive definite matrix A.
+ * 
  * @link https://github.com/lutzroeder/Mapack/blob/master/Source/CholeskyDecomposition.cs
  */
 export class CholeskyDecomposition {
   /**
    *
-   * @param value - The matrix to decompose
+   * @param value - The matrix A to decompose
+   * @throws if A is not symmetric
    */
   constructor(value: MaybeMatrix);
+  /**
+   * true if A is positive definite (and therefore we could perform the decomposition)
+   */
   isPositiveDefinite(): boolean;
+  /**
+   * Given column vector b, solve for x such that Ax=b.
+   * @param value
+   * @throws if A is not positive-definite
+   */
   solve(value: Matrix): Matrix;
+  /**
+   * A lower triangular matrix L such that A=(L)(L.transpose)
+   * This will ONLY be the case if A is positive-definite.
+   */
   readonly lowerTriangularMatrix: Matrix;
 }
 
