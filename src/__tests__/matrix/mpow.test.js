@@ -1,4 +1,4 @@
-import { describe, it, expect } from 'vitest'
+import { describe, it, expect } from 'vitest';
 
 import { Matrix } from '../..';
 
@@ -31,17 +31,23 @@ describe('matrix power', () => {
     expect(x.size).toBe(1);
     expect(x.get(0, 0)).toBeCloseTo(1.5 ** 50);
   });
-  it('Matches scalar exponentiation', () => {
-    expect(
-      new Matrix([
-        [1, 2],
-        [3, -1],
-      ])
-        .mpow(21)
-        .to2DArray(),
-    ).toStrictEqual([
-      [282475249, 564950498],
-      [847425747, -282475249],
+  it('Handles high integer exponent', () => {
+    let e = Number.MAX_SAFE_INTEGER;
+    let x = new Matrix([[-1]]).mpow(e);
+    expect(x.size).toBe(1);
+    expect(x.get(0, 0)).toBe(-1);
+  });
+  it('Exponentiates a small matrix correctly', () => {
+    let u = new Matrix([
+      [1, 2],
+      [3, -1],
     ]);
+    let e = 21;
+    let resultLoop = Matrix.eye(2);
+    for (let i = 0; i < e; ++i) {
+      resultLoop = resultLoop.mmul(u);
+    }
+    let resultMpow = u.mpow(e);
+    expect(resultLoop.to2DArray()).toStrictEqual(resultMpow.to2DArray());
   });
 });
