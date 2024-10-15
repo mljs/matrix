@@ -1666,11 +1666,13 @@ export default class Matrix extends AbstractMatrix {
 
   set(rowIndex, columnIndex, value) {
     this.data[rowIndex][columnIndex] = value;
+    //this.data[columnIndex][rowIndex] = value;
     return this;
   }
 
   get(rowIndex, columnIndex) {
     return this.data[rowIndex][columnIndex];
+    //return this.data[columnIndex][rowIndex];
   }
 
   removeRow(index) {
