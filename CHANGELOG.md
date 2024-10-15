@@ -1,5 +1,17 @@
 # Changelog
 
+## [6.12.0](https://github.com/mljs/matrix/compare/v6.11.1...v6.12.0) (2024-10-15)
+
+
+### Features
+
+* add `mpow` to compute matrix power using exponentiation by squaring ([#193](https://github.com/mljs/matrix/issues/193)) ([dbfd8e4](https://github.com/mljs/matrix/commit/dbfd8e4c39e75a5d344c1058f94f0fc21dbd8713))
+
+
+### Bug Fixes
+
+* **typings:** improve generator types ([#190](https://github.com/mljs/matrix/issues/190)) ([ee83c8b](https://github.com/mljs/matrix/commit/ee83c8be47179736e8fafad9be6ea4dca0eb3ec3))
+
 ## [6.11.1](https://github.com/mljs/matrix/compare/v6.11.0...v6.11.1) (2024-06-10)
 
 
