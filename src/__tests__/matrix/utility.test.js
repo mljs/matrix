@@ -344,6 +344,33 @@ describe('utility methods', () => {
     ]);
   });
 
+  it('an incompatible matrix dimension is allowed', () => {
+    const A = new Matrix([[1], [2], [3]]);
+    const A2 = new Matrix([
+      [1, 0, 0],
+      [2, 0, 0],
+      [3, 0, 0],
+    ]);
+    const B = new Matrix([
+      [4, 5, 6],
+      [4, 5, 6],
+      [4, 5, 6],
+    ]);
+
+    expect(A2.mmul(B).to2DArray()).toEqual([
+      [4, 5, 6],
+      [8, 10, 12],
+      [12, 15, 18],
+    ]);
+
+    // A.mmul(B) is equal to A2.mmul(B);
+    //console.log('result not expected', A.mmul(B).to2DArray());
+
+    expect(() => A.mmul(B)).toThrow(
+      'Matrix dimensions are incompatible for multiplication',
+    );
+  });
+
   it('mmul 2x2 and 3x3', () => {
     let matrix = new Matrix([
       [2, 4],
