@@ -854,6 +854,12 @@ export class AbstractMatrix {
     let n = this.columns;
     let p = other.columns;
 
+    if (n !== other.rows) {
+      throw new RangeError(
+        'Matrix dimensions are incompatible for multiplication',
+      );
+    }
+
     let result = new Matrix(m, p);
 
     let Bcolj = new Float64Array(n);
