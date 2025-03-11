@@ -1,6 +1,6 @@
 {
   "name": "ml-matrix",
-  "version": "6.12.0",
+  "version": "6.12.1",
   "description": "Matrix manipulation and computation library",
   "main": "matrix.js",
   "module": "src/index.js",

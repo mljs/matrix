@@ -1,5 +1,12 @@
 # Changelog
 
+## [6.12.1](https://github.com/mljs/matrix/compare/v6.12.0...v6.12.1) (2025-03-11)
+
+
+### Bug Fixes
+
+* mpow(2**n) for integer n ([#197](https://github.com/mljs/matrix/issues/197)) ([f91b210](https://github.com/mljs/matrix/commit/f91b2105761c9f28bfc53c15427fc737e8ea86fd))
+
 ## [6.12.0](https://github.com/mljs/matrix/compare/v6.11.1...v6.12.0) (2024-10-15)
 
 
