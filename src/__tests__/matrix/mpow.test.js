@@ -11,6 +11,18 @@ describe('matrix power', () => {
     let x = new Matrix(3, 3);
     expect(() => x.mpow(-2)).toThrowError();
   });
+  it('Small integer powers', () => {
+    let m = new Matrix([
+      [1, 2],
+      [3, 4],
+    ]);
+    let mpowByMmul = Matrix.eye(2);
+    for (let i = 0; i < 10; ++i) {
+      expect(m.mpow(i)).toStrictEqual(mpowByMmul);
+      mpowByMmul = mpowByMmul.mmul(m);
+    }
+  });
+
   it('A matrix to the power 0 is identity', () => {
     expect(
       new Matrix([
