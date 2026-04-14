@@ -10,7 +10,16 @@ export default [
       format: 'cjs',
       exports: 'named',
     },
-    external: ['is-any-array', 'ml-array-rescale'],
+    plugins: [resolve()],
+  },
+  {
+    input: 'src/index.js',
+    output: {
+      file: 'matrix.mjs',
+      format: 'esm',
+      exports: 'named',
+    },
+    plugins: [resolve()],
   },
   {
     input: 'src/index.js',
