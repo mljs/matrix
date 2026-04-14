@@ -20,16 +20,16 @@
     "matrix.js",
     "matrix.js.map",
     "matrix.mjs",
-    "matrix.mjs.map",
     "matrix.umd.js",
     "matrix.umd.js.map",
     "src"
   ],
   "scripts": {
+    "build-esm-facade": "node tools/build-esm-facade.mjs",
     "compile": "rollup -c",
     "eslint": "eslint src testUtils.js",
     "eslint-fix": "npm run eslint -- --fix",
-    "prepack": "npm run compile",
+    "prepack": "npm run compile && npm run build-esm-facade",
     "prettier": "prettier --check src",
     "prettier-write": "prettier --write src",
     "test": "npm run test-only && npm run eslint && npm run prettier",

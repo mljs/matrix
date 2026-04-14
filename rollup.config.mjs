@@ -16,16 +16,6 @@ export default [
   {
     input: 'src/index.js',
     output: {
-      file: 'matrix.mjs',
-      format: 'esm',
-      exports: 'named',
-      sourcemap: true,
-    },
-    plugins: [resolve()],
-  },
-  {
-    input: 'src/index.js',
-    output: {
       name: 'mlMatrix',
       file: 'matrix.umd.js',
       format: 'umd',
