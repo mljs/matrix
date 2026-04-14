@@ -18,8 +18,11 @@
   "files": [
     "matrix.d.ts",
     "matrix.js",
+    "matrix.js.map",
     "matrix.mjs",
+    "matrix.mjs.map",
     "matrix.umd.js",
+    "matrix.umd.js.map",
     "src"
   ],
   "scripts": {
