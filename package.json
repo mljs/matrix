@@ -72,15 +72,17 @@
     "csv-parse": "^5.6.0",
     "eslint": "^9.29.0",
     "eslint-config-cheminfo": "^14.1.1",
-    "is-any-array": "^3.0.0",
     "jest-matcher-deep-close-to": "^3.0.2",
     "mathjs": "^14.5.2",
-    "ml-array-rescale": "^2.0.0",
     "ml-dataset-iris": "^1.2.1",
     "numeric": "^1.2.6",
     "prettier": "^3.5.3",
     "pretty-hrtime": "^1.0.3",
     "rollup": "^4.44.0",
     "vitest": "^3.2.4"
+  },
+  "dependencies": {
+    "is-any-array": "^3.0.0",
+    "ml-array-rescale": "^2.0.0"
   }
 }
