@@ -9,8 +9,9 @@ export default [
       file: 'matrix.js',
       format: 'cjs',
       exports: 'named',
+      sourcemap: true,
     },
-    external: ['is-any-array', 'ml-array-rescale'],
+    plugins: [resolve()],
   },
   {
     input: 'src/index.js',
@@ -19,6 +20,7 @@ export default [
       file: 'matrix.umd.js',
       format: 'umd',
       exports: 'named',
+      sourcemap: true,
     },
     plugins: [resolve(), commonJS(), terser()],
   },
