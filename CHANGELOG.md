@@ -1,5 +1,12 @@
 # Changelog
 
+## [6.12.2](https://github.com/mljs/matrix/compare/v6.12.1...v6.12.2) (2026-04-15)
+
+
+### Bug Fixes
+
+* bundle `array` deps ([#204](https://github.com/mljs/matrix/issues/204)) ([94360fe](https://github.com/mljs/matrix/commit/94360fee498de0aae5e292825290aa63ad586974))
+
 ## [6.12.1](https://github.com/mljs/matrix/compare/v6.12.0...v6.12.1) (2025-03-11)
 
 
