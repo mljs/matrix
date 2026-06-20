@@ -1,7 +1,7 @@
 import Matrix from '../matrix';
 import WrapperMatrix2D from '../wrap/WrapperMatrix2D';
 
-import { hypotenuse } from './util';
+import { hypotenuse, transposeSquareInPlace } from './util';
 
 export default class SingularValueDecomposition {
   constructor(value, options = {}) {
@@ -408,9 +408,11 @@ export default class SingularValueDecomposition {
     }
 
     // Restore the logical (row-major) layout of the singular vectors, which were
-    // accumulated in transposed storage for cache-sequential inner loops.
-    U = U.transpose();
-    V = V.transpose();
+    // accumulated in transposed storage for cache-sequential inner loops. V is
+    // always square and U is square whenever the input is, so this is done in
+    // place (no allocation) in the common case.
+    U = U.isSquare() ? transposeSquareInPlace(U) : U.transpose();
+    V = transposeSquareInPlace(V);
 
     if (swapped) {
       let tmp = V;

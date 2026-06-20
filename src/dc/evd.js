@@ -1,7 +1,7 @@
 import Matrix from '../matrix';
 import WrapperMatrix2D from '../wrap/WrapperMatrix2D';
 
-import { hypotenuse } from './util';
+import { hypotenuse, transposeSquareInPlace } from './util';
 
 export default class EigenvalueDecomposition {
   constructor(matrix, options = {}) {
@@ -43,7 +43,8 @@ export default class EigenvalueDecomposition {
       }
       tred2(n, e, d, V);
       tql2(n, e, d, V);
-      V = V.transpose();
+      // V is square; restore the logical layout in place (no allocation).
+      transposeSquareInPlace(V);
     } else {
       // The non-symmetric path (orthes/hqr2) has two O(n^3) phases with opposite
       // memory-layout preferences (the QR sweep favours column-major eigenvectors
