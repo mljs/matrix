@@ -332,6 +332,21 @@ describe('utility methods', () => {
     ]);
   });
 
+  it('mmulByTranspose', () => {
+    let matrix = new Matrix([
+      [1, 2, 3],
+      [4, 5, 6],
+    ]);
+    expect(matrix.mmulByTranspose().to2DArray()).toStrictEqual([
+      [14, 32],
+      [32, 77],
+    ]);
+    // equivalent to this.mmul(this.transpose()), but symmetric and without transpose
+    expect(matrix.mmulByTranspose().to2DArray()).toStrictEqual(
+      matrix.mmul(matrix.transpose()).to2DArray(),
+    );
+  });
+
   it('mmul strassen on empty matrices', () => {
     // https://github.com/mljs/matrix/issues/114
     // while the mathematically correct result is 0x0, we assert a 2x2 padded result that the current implementation produces

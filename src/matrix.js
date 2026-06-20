@@ -908,6 +908,33 @@ export class AbstractMatrix {
     return result;
   }
 
+  mmulByTranspose() {
+    let m = this.rows;
+    let n = this.columns;
+
+    let result = new Matrix(m, m);
+
+    // result = this · thisᵀ is symmetric, so only the upper triangle is
+    // computed and mirrored, and the transpose is never materialized.
+    let rowj = new Float64Array(n);
+    for (let j = 0; j < m; j++) {
+      for (let k = 0; k < n; k++) {
+        rowj[k] = this.get(j, k);
+      }
+
+      for (let i = j; i < m; i++) {
+        let s = 0;
+        for (let k = 0; k < n; k++) {
+          s += this.get(i, k) * rowj[k];
+        }
+
+        result.set(i, j, s);
+        result.set(j, i, s);
+      }
+    }
+    return result;
+  }
+
   mpow(scalar) {
     if (!this.isSquare()) {
       throw new RangeError('Matrix must be square');

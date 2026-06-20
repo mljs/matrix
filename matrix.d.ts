@@ -627,6 +627,14 @@ export abstract class AbstractMatrix {
   gram(): Matrix;
 
   /**
+   * Returns the matrix product between `this` and its transpose (`this · thisᵀ`).
+   * The result is symmetric, so only its upper triangle is computed and mirrored
+   * and the transpose is never materialized, making it about twice as fast as
+   * `this.mmul(this.transpose())`.
+   */
+  mmulByTranspose(): Matrix;
+
+  /**
    * Returns the square matrix raised to the given power
    * @param scalar - the non-negative integer power to raise this matrix to
    */
