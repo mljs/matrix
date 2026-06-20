@@ -1,4 +1,5 @@
 import { toBeDeepCloseTo } from 'jest-matcher-deep-close-to';
+import { XSadd } from 'ml-xsadd';
 import { describe, it, expect } from 'vitest';
 
 import { Matrix, EVD } from '../..';
@@ -68,7 +69,7 @@ describe('Eigenvalue decomposition', () => {
 
   it('larger symmetric matrix: A·V = V·D', () => {
     const n = 12;
-    const base = Matrix.rand(n, n, { random: seededRandom(42) });
+    const base = Matrix.rand(n, n, { random: new XSadd(42).random });
     // make it symmetric
     const matrix = base.add(base.transpose());
     const evd = new EVD(matrix, { assumeSymmetric: true });
@@ -97,14 +98,3 @@ describe('Eigenvalue decomposition', () => {
     ).toBeDeepCloseTo([-1, 1], 8);
   });
 });
-
-function seededRandom(seed) {
-  let a = seed >>> 0;
-  return function random() {
-    a |= 0;
-    a = (a + 0x6d2b79f5) | 0;
-    let t = Math.imul(a ^ (a >>> 15), 1 | a);
-    t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
-    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
-  };
-}

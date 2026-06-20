@@ -1,5 +1,7 @@
 'use strict';
 
+const { XSadd } = require('ml-xsadd');
+
 const { Matrix, SVD, LU, EVD } = require('../matrix');
 
 const sizes = [10, 100, 500, 1000];
@@ -45,23 +47,12 @@ function test(size) {
   return benchmark;
 }
 
+// Deterministic seed so every run/layout uses identical input matrices.
 function randomMatrix(size) {
-  return Matrix.rand(size, size, { random: mulberry32(size) });
+  return Matrix.rand(size, size, { random: new XSadd(size).random });
 }
 
 function symmetricMatrix(size) {
-  const base = Matrix.rand(size, size, { random: mulberry32(size) });
+  const base = Matrix.rand(size, size, { random: new XSadd(size).random });
   return base.add(base.transpose());
-}
-
-// Deterministic PRNG so every run/layout uses identical input matrices.
-function mulberry32(seed) {
-  let a = seed >>> 0;
-  return function random() {
-    a |= 0;
-    a = (a + 0x6d2b79f5) | 0;
-    let t = Math.imul(a ^ (a >>> 15), 1 | a);
-    t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
-    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
-  };
 }
