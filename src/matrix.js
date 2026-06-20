@@ -908,18 +908,29 @@ export class AbstractMatrix {
     return result;
   }
 
-  mmulByTranspose() {
+  mmulByTranspose(scale) {
     let m = this.rows;
     let n = this.columns;
 
+    if (scale !== undefined && scale.length !== n) {
+      throw new RangeError('scale must have one value per column');
+    }
+
     let result = new Matrix(m, m);
 
-    // result = this · thisᵀ is symmetric, so only the upper triangle is
-    // computed and mirrored, and the transpose is never materialized.
+    // result = this · diag(scale) · thisᵀ is symmetric, so only the upper
+    // triangle is computed and mirrored, and the transpose is never
+    // materialized. `scale` (one factor per column) is folded into one operand.
     let rowj = new Float64Array(n);
     for (let j = 0; j < m; j++) {
-      for (let k = 0; k < n; k++) {
-        rowj[k] = this.get(j, k);
+      if (scale === undefined) {
+        for (let k = 0; k < n; k++) {
+          rowj[k] = this.get(j, k);
+        }
+      } else {
+        for (let k = 0; k < n; k++) {
+          rowj[k] = scale[k] * this.get(j, k);
+        }
       }
 
       for (let i = j; i < m; i++) {
