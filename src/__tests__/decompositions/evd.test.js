@@ -36,7 +36,10 @@ describe('Eigenvalue decomposition', () => {
     const D = evd.diagonalMatrix;
 
     // eigen relation
-    expect(matrix.mmul(V).to2DArray()).toBeDeepCloseTo(V.mmul(D).to2DArray(), 8);
+    expect(matrix.mmul(V).to2DArray()).toBeDeepCloseTo(
+      V.mmul(D).to2DArray(),
+      8,
+    );
     // eigenvectors of a symmetric matrix are orthonormal: VᵀV = I
     expect(V.transpose().mmul(V).to2DArray()).toBeDeepCloseTo(
       Matrix.eye(4).to2DArray(),
@@ -57,7 +60,10 @@ describe('Eigenvalue decomposition', () => {
       [2, 3, 4],
       8,
     );
-    expect(matrix.mmul(V).to2DArray()).toBeDeepCloseTo(V.mmul(D).to2DArray(), 8);
+    expect(matrix.mmul(V).to2DArray()).toBeDeepCloseTo(
+      V.mmul(D).to2DArray(),
+      8,
+    );
   });
 
   it('larger symmetric matrix: A·V = V·D', () => {
@@ -68,7 +74,10 @@ describe('Eigenvalue decomposition', () => {
     const evd = new EVD(matrix, { assumeSymmetric: true });
     const V = evd.eigenvectorMatrix;
     const D = evd.diagonalMatrix;
-    expect(matrix.mmul(V).to2DArray()).toBeDeepCloseTo(V.mmul(D).to2DArray(), 6);
+    expect(matrix.mmul(V).to2DArray()).toBeDeepCloseTo(
+      V.mmul(D).to2DArray(),
+      6,
+    );
     expect(V.transpose().mmul(V).to2DArray()).toBeDeepCloseTo(
       Matrix.eye(n).to2DArray(),
       6,
@@ -83,10 +92,9 @@ describe('Eigenvalue decomposition', () => {
     ]);
     const evd = new EVD(matrix);
     expect(evd.realEigenvalues).toBeDeepCloseTo([1, 1], 8);
-    expect(evd.imaginaryEigenvalues.slice().sort((a, b) => a - b)).toBeDeepCloseTo(
-      [-1, 1],
-      8,
-    );
+    expect(
+      evd.imaginaryEigenvalues.slice().sort((a, b) => a - b),
+    ).toBeDeepCloseTo([-1, 1], 8);
   });
 });
 
