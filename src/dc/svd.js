@@ -23,32 +23,40 @@ export default class SingularValueDecomposition {
     let wantu = Boolean(computeLeftSingularVectors);
     let wantv = Boolean(computeRightSingularVectors);
 
+    // Work on the transpose of the input so the hot inner loops (which iterate
+    // over rows for a fixed column) scan memory sequentially in the row-major
+    // backing store. `at` holds the transpose: at.get(j, i) === a.get(i, j)
+    // where `a` is the logical m x n working matrix.
     let swapped = false;
-    let a;
+    let at;
     if (m < n) {
       if (!autoTranspose) {
-        a = value.clone();
         // eslint-disable-next-line no-console
         console.warn(
           'Computing SVD on a matrix with more columns than rows. Consider enabling autoTranspose',
         );
+        at = value.transpose();
       } else {
-        a = value.transpose();
-        m = a.rows;
-        n = a.columns;
+        at = value.clone();
+        m = value.columns;
+        n = value.rows;
         swapped = true;
         let aux = wantu;
         wantu = wantv;
         wantv = aux;
       }
     } else {
-      a = value.clone();
+      at = value.transpose();
     }
 
     let nu = Math.min(m, n);
     let ni = Math.min(m + 1, n);
     let s = new Float64Array(ni);
-    let U = new Matrix(m, nu);
+    // U and V are stored transposed during the computation so the inner loops
+    // (which always vary the row index) scan memory sequentially. They are
+    // transposed back to their logical layout before being returned.
+    // Ut.get(j, i) === U.get(i, j) and Vt.get(j, i) === V.get(i, j).
+    let U = new Matrix(nu, m);
     let V = new Matrix(n, n);
 
     let e = new Float64Array(n);
@@ -65,16 +73,16 @@ export default class SingularValueDecomposition {
       if (k < nct) {
         s[k] = 0;
         for (let i = k; i < m; i++) {
-          s[k] = hypotenuse(s[k], a.get(i, k));
+          s[k] = hypotenuse(s[k], at.get(k, i));
         }
         if (s[k] !== 0) {
-          if (a.get(k, k) < 0) {
+          if (at.get(k, k) < 0) {
             s[k] = -s[k];
           }
           for (let i = k; i < m; i++) {
-            a.set(i, k, a.get(i, k) / s[k]);
+            at.set(k, i, at.get(k, i) / s[k]);
           }
-          a.set(k, k, a.get(k, k) + 1);
+          at.set(k, k, at.get(k, k) + 1);
         }
         s[k] = -s[k];
       }
@@ -83,19 +91,19 @@ export default class SingularValueDecomposition {
         if (k < nct && s[k] !== 0) {
           let t = 0;
           for (let i = k; i < m; i++) {
-            t += a.get(i, k) * a.get(i, j);
+            t += at.get(k, i) * at.get(j, i);
           }
-          t = -t / a.get(k, k);
+          t = -t / at.get(k, k);
           for (let i = k; i < m; i++) {
-            a.set(i, j, a.get(i, j) + t * a.get(i, k));
+            at.set(j, i, at.get(j, i) + t * at.get(k, i));
           }
         }
-        e[j] = a.get(k, j);
+        e[j] = at.get(j, k);
       }
 
       if (wantu && k < nct) {
         for (let i = k; i < m; i++) {
-          U.set(i, k, a.get(i, k));
+          U.set(k, i, at.get(k, i));
         }
       }
 
@@ -120,19 +128,19 @@ export default class SingularValueDecomposition {
           }
           for (let i = k + 1; i < m; i++) {
             for (let j = k + 1; j < n; j++) {
-              work[i] += e[j] * a.get(i, j);
+              work[i] += e[j] * at.get(j, i);
             }
           }
           for (let j = k + 1; j < n; j++) {
             let t = -e[j] / e[k + 1];
             for (let i = k + 1; i < m; i++) {
-              a.set(i, j, a.get(i, j) + t * work[i]);
+              at.set(j, i, at.get(j, i) + t * work[i]);
             }
           }
         }
         if (wantv) {
           for (let i = k + 1; i < n; i++) {
-            V.set(i, k, e[i]);
+            V.set(k, i, e[i]);
           }
         }
       }
@@ -140,20 +148,20 @@ export default class SingularValueDecomposition {
 
     let p = Math.min(n, m + 1);
     if (nct < n) {
-      s[nct] = a.get(nct, nct);
+      s[nct] = at.get(nct, nct);
     }
     if (m < p) {
       s[p - 1] = 0;
     }
     if (nrt + 1 < p) {
-      e[nrt] = a.get(nrt, p - 1);
+      e[nrt] = at.get(p - 1, nrt);
     }
     e[p - 1] = 0;
 
     if (wantu) {
       for (let j = nct; j < nu; j++) {
         for (let i = 0; i < m; i++) {
-          U.set(i, j, 0);
+          U.set(j, i, 0);
         }
         U.set(j, j, 1);
       }
@@ -162,23 +170,23 @@ export default class SingularValueDecomposition {
           for (let j = k + 1; j < nu; j++) {
             let t = 0;
             for (let i = k; i < m; i++) {
-              t += U.get(i, k) * U.get(i, j);
+              t += U.get(k, i) * U.get(j, i);
             }
             t = -t / U.get(k, k);
             for (let i = k; i < m; i++) {
-              U.set(i, j, U.get(i, j) + t * U.get(i, k));
+              U.set(j, i, U.get(j, i) + t * U.get(k, i));
             }
           }
           for (let i = k; i < m; i++) {
-            U.set(i, k, -U.get(i, k));
+            U.set(k, i, -U.get(k, i));
           }
           U.set(k, k, 1 + U.get(k, k));
           for (let i = 0; i < k - 1; i++) {
-            U.set(i, k, 0);
+            U.set(k, i, 0);
           }
         } else {
           for (let i = 0; i < m; i++) {
-            U.set(i, k, 0);
+            U.set(k, i, 0);
           }
           U.set(k, k, 1);
         }
@@ -191,16 +199,16 @@ export default class SingularValueDecomposition {
           for (let j = k + 1; j < n; j++) {
             let t = 0;
             for (let i = k + 1; i < n; i++) {
-              t += V.get(i, k) * V.get(i, j);
+              t += V.get(k, i) * V.get(j, i);
             }
-            t = -t / V.get(k + 1, k);
+            t = -t / V.get(k, k + 1);
             for (let i = k + 1; i < n; i++) {
-              V.set(i, j, V.get(i, j) + t * V.get(i, k));
+              V.set(j, i, V.get(j, i) + t * V.get(k, i));
             }
           }
         }
         for (let i = 0; i < n; i++) {
-          V.set(i, k, 0);
+          V.set(k, i, 0);
         }
         V.set(k, k, 1);
       }
@@ -265,9 +273,9 @@ export default class SingularValueDecomposition {
             }
             if (wantv) {
               for (let i = 0; i < n; i++) {
-                t = cs * V.get(i, j) + sn * V.get(i, p - 1);
-                V.set(i, p - 1, -sn * V.get(i, j) + cs * V.get(i, p - 1));
-                V.set(i, j, t);
+                t = cs * V.get(j, i) + sn * V.get(p - 1, i);
+                V.set(p - 1, i, -sn * V.get(j, i) + cs * V.get(p - 1, i));
+                V.set(j, i, t);
               }
             }
           }
@@ -285,9 +293,9 @@ export default class SingularValueDecomposition {
             e[j] = cs * e[j];
             if (wantu) {
               for (let i = 0; i < m; i++) {
-                t = cs * U.get(i, j) + sn * U.get(i, k - 1);
-                U.set(i, k - 1, -sn * U.get(i, j) + cs * U.get(i, k - 1));
-                U.set(i, j, t);
+                t = cs * U.get(j, i) + sn * U.get(k - 1, i);
+                U.set(k - 1, i, -sn * U.get(j, i) + cs * U.get(k - 1, i));
+                U.set(j, i, t);
               }
             }
           }
@@ -333,9 +341,9 @@ export default class SingularValueDecomposition {
             s[j + 1] = cs * s[j + 1];
             if (wantv) {
               for (let i = 0; i < n; i++) {
-                t = cs * V.get(i, j) + sn * V.get(i, j + 1);
-                V.set(i, j + 1, -sn * V.get(i, j) + cs * V.get(i, j + 1));
-                V.set(i, j, t);
+                t = cs * V.get(j, i) + sn * V.get(j + 1, i);
+                V.set(j + 1, i, -sn * V.get(j, i) + cs * V.get(j + 1, i));
+                V.set(j, i, t);
               }
             }
             t = hypotenuse(f, g);
@@ -349,9 +357,9 @@ export default class SingularValueDecomposition {
             e[j + 1] = cs * e[j + 1];
             if (wantu && j < m - 1) {
               for (let i = 0; i < m; i++) {
-                t = cs * U.get(i, j) + sn * U.get(i, j + 1);
-                U.set(i, j + 1, -sn * U.get(i, j) + cs * U.get(i, j + 1));
-                U.set(i, j, t);
+                t = cs * U.get(j, i) + sn * U.get(j + 1, i);
+                U.set(j + 1, i, -sn * U.get(j, i) + cs * U.get(j + 1, i));
+                U.set(j, i, t);
               }
             }
           }
@@ -364,7 +372,7 @@ export default class SingularValueDecomposition {
             s[k] = s[k] < 0 ? -s[k] : 0;
             if (wantv) {
               for (let i = 0; i <= pp; i++) {
-                V.set(i, k, -V.get(i, k));
+                V.set(k, i, -V.get(k, i));
               }
             }
           }
@@ -377,16 +385,16 @@ export default class SingularValueDecomposition {
             s[k + 1] = t;
             if (wantv && k < n - 1) {
               for (let i = 0; i < n; i++) {
-                t = V.get(i, k + 1);
-                V.set(i, k + 1, V.get(i, k));
-                V.set(i, k, t);
+                t = V.get(k + 1, i);
+                V.set(k + 1, i, V.get(k, i));
+                V.set(k, i, t);
               }
             }
             if (wantu && k < m - 1) {
               for (let i = 0; i < m; i++) {
-                t = U.get(i, k + 1);
-                U.set(i, k + 1, U.get(i, k));
-                U.set(i, k, t);
+                t = U.get(k + 1, i);
+                U.set(k + 1, i, U.get(k, i));
+                U.set(k, i, t);
               }
             }
             k++;
@@ -398,6 +406,11 @@ export default class SingularValueDecomposition {
         // no default
       }
     }
+
+    // Restore the logical (row-major) layout of the singular vectors, which were
+    // accumulated in transposed storage for cache-sequential inner loops.
+    U = U.transpose();
+    V = V.transpose();
 
     if (swapped) {
       let tmp = V;
