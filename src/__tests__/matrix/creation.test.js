@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 
-import { Matrix, wrap } from '../..';
+import { DistanceMatrix, Matrix, SymmetricMatrix, wrap } from '../..';
 import * as util from '../../../testUtils';
 import MatrixTransposeView from '../../views/transpose';
 
@@ -242,5 +242,14 @@ describe('Matrix creation', () => {
       new MatrixTransposeView(matrix),
     );
     expect(JSON.stringify(transposeTwice)).toBe(json);
+  });
+
+  it('construct from child class', () => {
+    const dMatrix = DistanceMatrix.zeros(3);
+    const sMatrix = new SymmetricMatrix(dMatrix);
+    const matrix = new Matrix(sMatrix);
+    expect(matrix).not.toBeInstanceOf(DistanceMatrix);
+    expect(matrix).not.toBeInstanceOf(SymmetricMatrix);
+    expect(matrix).toBeInstanceOf(Matrix);
   });
 });

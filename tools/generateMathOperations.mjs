@@ -1,6 +1,4 @@
-'use strict';
-
-const fs = require('fs');
+import fs from 'fs';
 
 const operators = [
   // Arithmetic operators
@@ -15,7 +13,7 @@ const operators = [
   ['^', 'xor'],
   ['<<', 'leftShift'],
   ['>>', 'signPropagatingRightShift'],
-  ['>>>', 'rightShift', 'zeroFillRightShift']
+  ['>>>', 'rightShift', 'zeroFillRightShift'],
 ];
 
 const methods = [['~', 'not']];
@@ -47,8 +45,8 @@ const methods = [['~', 'not']];
   'sqrt',
   'tan',
   'tanh',
-  'trunc'
-].forEach(function (mathMethod) {
+  'trunc',
+].forEach((mathMethod) => {
   methods.push([`Math.${mathMethod}`, mathMethod]);
 });
 
@@ -173,48 +171,44 @@ const inplaceMethodWithOneArg = `
 
 const staticMethodWithOneArg = staticMethodWithArgs;
 
-const mathOperations = ['export function installMathOperations(AbstractMatrix, Matrix) {'];
+const mathOperations = [
+  'export function installMathOperations(AbstractMatrix, Matrix) {',
+];
 
 for (const operator of operators) {
   mathOperations.push(
     fillTemplateFunction(inplaceOperator, {
       name: operator[1],
-      op: operator[0]
-    })
+      op: operator[0],
+    }),
   );
   mathOperations.push(
     fillTemplateFunction(inplaceOperatorScalar, {
       name: `${operator[1]}S`,
-      op: operator[0]
-    })
+      op: operator[0],
+    }),
   );
   mathOperations.push(
     fillTemplateFunction(inplaceOperatorMatrix, {
       name: `${operator[1]}M`,
-      op: operator[0]
-    })
+      op: operator[0],
+    }),
   );
   mathOperations.push(
-    fillTemplateFunction(staticOperator, { name: operator[1] })
+    fillTemplateFunction(staticOperator, { name: operator[1] }),
   );
   for (let i = 2; i < operator.length; i++) {
     mathOperations.push(
-      `  AbstractMatrix.prototype.${operator[i]} = AbstractMatrix.prototype.${
-        operator[1]
-      };\n`
+      `  AbstractMatrix.prototype.${operator[i]} = AbstractMatrix.prototype.${operator[1]};\n`,
     );
     mathOperations.push(
-      `  AbstractMatrix.prototype.${operator[i]}S = AbstractMatrix.prototype.${
-        operator[1]
-      }S;\n`
+      `  AbstractMatrix.prototype.${operator[i]}S = AbstractMatrix.prototype.${operator[1]}S;\n`,
     );
     mathOperations.push(
-      `  AbstractMatrix.prototype.${operator[i]}M = AbstractMatrix.prototype.${
-        operator[1]
-      }M;\n`
+      `  AbstractMatrix.prototype.${operator[i]}M = AbstractMatrix.prototype.${operator[1]}M;\n`,
     );
     mathOperations.push(
-      `  AbstractMatrix.${operator[i]} = AbstractMatrix.${operator[1]};\n`
+      `  AbstractMatrix.${operator[i]} = AbstractMatrix.${operator[1]};\n`,
     );
   }
 }
@@ -223,22 +217,20 @@ for (const method of methods) {
   mathOperations.push(
     fillTemplateFunction(inplaceMethod, {
       name: method[1],
-      method: method[0]
-    })
+      method: method[0],
+    }),
   );
   mathOperations.push(
     fillTemplateFunction(staticMethod, {
-      name: method[1]
-    })
+      name: method[1],
+    }),
   );
   for (let i = 2; i < method.length; i++) {
     mathOperations.push(
-      `  AbstractMatrix.prototype.${method[i]} = AbstractMatrix.prototype.${
-        method[1]
-      }`
+      `  AbstractMatrix.prototype.${method[i]} = AbstractMatrix.prototype.${method[1]}`,
     );
     mathOperations.push(
-      `  AbstractMatrix.${method[i]} = AbstractMatrix.${method[1]}`
+      `  AbstractMatrix.${method[i]} = AbstractMatrix.${method[1]}`,
     );
   }
 }
@@ -253,63 +245,51 @@ for (const methodWithArg of methodsWithArgs) {
       fillTemplateFunction(inplaceMethodWithArgs, {
         name: methodWithArg[2],
         method: methodWithArg[0],
-        args: args
-      })
+        args,
+      }),
     );
     mathOperations.push(
       fillTemplateFunction(staticMethodWithArgs, {
         name: methodWithArg[2],
-        args: args
-      })
+        args,
+      }),
     );
     for (let i = 3; i < methodWithArg.length; i++) {
       mathOperations.push(
-        `  AbstractMatrix.prototype.${
-          methodWithArg[i]
-        } = AbstractMatrix.prototype.${methodWithArg[2]}`
+        `  AbstractMatrix.prototype.${methodWithArg[i]} = AbstractMatrix.prototype.${methodWithArg[2]}`,
       );
       mathOperations.push(
-        `  AbstractMatrix.${methodWithArg[i]} = AbstractMatrix.${
-          methodWithArg[2]
-        }`
+        `  AbstractMatrix.${methodWithArg[i]} = AbstractMatrix.${methodWithArg[2]}`,
       );
     }
   } else {
     const tmplVar = {
       name: methodWithArg[2],
-      args: args,
-      method: methodWithArg[0]
+      args,
+      method: methodWithArg[0],
     };
     mathOperations.push(fillTemplateFunction(staticMethodWithOneArg, tmplVar));
     mathOperations.push(fillTemplateFunction(inplaceMethodWithOneArg, tmplVar));
     tmplVar.name = `${methodWithArg[2]}S`;
     mathOperations.push(
-      fillTemplateFunction(inplaceMethodWithOneArgScalar, tmplVar)
+      fillTemplateFunction(inplaceMethodWithOneArgScalar, tmplVar),
     );
     tmplVar.name = `${methodWithArg[2]}M`;
     mathOperations.push(
-      fillTemplateFunction(inplaceMethodWithOneArgMatrix, tmplVar)
+      fillTemplateFunction(inplaceMethodWithOneArgMatrix, tmplVar),
     );
     for (let i = 3; i < methodWithArg.length; i++) {
       mathOperations.push(
-        `  AbstractMatrix.prototype.${
-          methodWithArg[i]
-        } = AbstractMatrix.prototype.${methodWithArg[2]};\n`
+        `  AbstractMatrix.prototype.${methodWithArg[i]} = AbstractMatrix.prototype.${methodWithArg[2]};\n`,
       );
       mathOperations.push(
-        `  AbstractMatrix.${methodWithArg[i]} = AbstractMatrix.${
-          methodWithArg[2]
-        };\n`
+        `  AbstractMatrix.${methodWithArg[i]} = AbstractMatrix.${methodWithArg[2]};\n`,
       );
       mathOperations.push(
-        `  AbstractMatrix.prototype.${
-          methodWithArg[i]
-        }S = AbstractMatrix.prototype.${methodWithArg[2]}S;\n`
+        `  AbstractMatrix.prototype.${methodWithArg[i]}S = AbstractMatrix.prototype.${methodWithArg[2]}S;\n`,
       );
       mathOperations.push(
-        `  AbstractMatrix.prototype.${
-          methodWithArg[i]
-        }M = AbstractMatrix.prototype.${methodWithArg[2]}M;\n`
+        `  AbstractMatrix.prototype.${methodWithArg[i]}M = AbstractMatrix.prototype.${methodWithArg[2]}M;\n`,
       );
     }
   }

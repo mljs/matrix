@@ -1,6 +1,10 @@
 const indent = ' '.repeat(2);
 const indentData = ' '.repeat(4);
 
+/**
+ * @this {Matrix}
+ * @returns {string}
+ */
 export function inspectMatrix() {
   return inspectMatrixWithOptions(this);
 }

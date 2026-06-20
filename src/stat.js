@@ -157,7 +157,7 @@ export function getScaleByRow(matrix) {
   for (let i = 0; i < matrix.rows; i++) {
     let sum = 0;
     for (let j = 0; j < matrix.columns; j++) {
-      sum += Math.pow(matrix.get(i, j), 2) / (matrix.columns - 1);
+      sum += matrix.get(i, j) ** 2 / (matrix.columns - 1);
     }
     scale.push(Math.sqrt(sum));
   }
@@ -177,7 +177,7 @@ export function getScaleByColumn(matrix) {
   for (let j = 0; j < matrix.columns; j++) {
     let sum = 0;
     for (let i = 0; i < matrix.rows; i++) {
-      sum += Math.pow(matrix.get(i, j), 2) / (matrix.rows - 1);
+      sum += matrix.get(i, j) ** 2 / (matrix.rows - 1);
     }
     scale.push(Math.sqrt(sum));
   }
@@ -197,7 +197,7 @@ export function getScaleAll(matrix) {
   let sum = 0;
   for (let j = 0; j < matrix.columns; j++) {
     for (let i = 0; i < matrix.rows; i++) {
-      sum += Math.pow(matrix.get(i, j), 2) / divider;
+      sum += matrix.get(i, j) ** 2 / divider;
     }
   }
   return Math.sqrt(sum);

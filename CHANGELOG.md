@@ -1,5 +1,66 @@
 # Changelog
 
+## [6.12.2](https://github.com/mljs/matrix/compare/v6.12.1...v6.12.2) (2026-04-15)
+
+
+### Bug Fixes
+
+* bundle `array` deps ([#204](https://github.com/mljs/matrix/issues/204)) ([94360fe](https://github.com/mljs/matrix/commit/94360fee498de0aae5e292825290aa63ad586974))
+
+## [6.12.1](https://github.com/mljs/matrix/compare/v6.12.0...v6.12.1) (2025-03-11)
+
+
+### Bug Fixes
+
+* mpow(2**n) for integer n ([#197](https://github.com/mljs/matrix/issues/197)) ([f91b210](https://github.com/mljs/matrix/commit/f91b2105761c9f28bfc53c15427fc737e8ea86fd))
+
+## [6.12.0](https://github.com/mljs/matrix/compare/v6.11.1...v6.12.0) (2024-10-15)
+
+
+### Features
+
+* add `mpow` to compute matrix power using exponentiation by squaring ([#193](https://github.com/mljs/matrix/issues/193)) ([dbfd8e4](https://github.com/mljs/matrix/commit/dbfd8e4c39e75a5d344c1058f94f0fc21dbd8713))
+
+
+### Bug Fixes
+
+* **typings:** improve generator types ([#190](https://github.com/mljs/matrix/issues/190)) ([ee83c8b](https://github.com/mljs/matrix/commit/ee83c8be47179736e8fafad9be6ea4dca0eb3ec3))
+
+## [6.11.1](https://github.com/mljs/matrix/compare/v6.11.0...v6.11.1) (2024-06-10)
+
+
+### Bug Fixes
+
+* **DistanceMatrix:** fromCompact with an empty array ([637598e](https://github.com/mljs/matrix/commit/637598edb96d3066baef6d0241915898158f43d7))
+
+## [6.11.0](https://github.com/mljs/matrix/compare/v6.10.8...v6.11.0) (2023-11-30)
+
+
+### Features
+
+* add Symmetric and Distance Matrix ([#178](https://github.com/mljs/matrix/issues/178)) ([cfe50db](https://github.com/mljs/matrix/commit/cfe50db84440d8be309057acd17a4d9e8bf42681))
+
+## [6.10.8](https://github.com/mljs/matrix/compare/v6.10.7...v6.10.8) (2023-11-04)
+
+
+### Bug Fixes
+
+* make default import work in TS esModuleInterop ([#176](https://github.com/mljs/matrix/issues/176)) ([ac52cb0](https://github.com/mljs/matrix/commit/ac52cb05cafe3a0ceb06b547e09944f81d2592cc))
+
+## [6.10.7](https://github.com/mljs/matrix/compare/v6.10.6...v6.10.7) (2023-10-20)
+
+
+### Bug Fixes
+
+* disable esModule in CJS build ([#171](https://github.com/mljs/matrix/issues/171)) ([bc4ba15](https://github.com/mljs/matrix/commit/bc4ba151dcab5dc3c2cc0d4f1f326d541e44217f))
+
+## [6.10.6](https://github.com/mljs/matrix/compare/v6.10.5...v6.10.6) (2023-10-17)
+
+
+### Bug Fixes
+
+* default export for ESM importers ([#168](https://github.com/mljs/matrix/issues/168)) ([dd8e729](https://github.com/mljs/matrix/commit/dd8e729c68454cc179f4542053e1e55c5de92c70))
+
 ## [6.10.5](https://github.com/mljs/matrix/compare/v6.10.4...v6.10.5) (2023-09-24)
 
 

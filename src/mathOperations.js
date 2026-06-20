@@ -801,7 +801,7 @@ export function installMathOperations(AbstractMatrix, Matrix) {
   AbstractMatrix.prototype.powS = function powS(value) {
     for (let i = 0; i < this.rows; i++) {
       for (let j = 0; j < this.columns; j++) {
-        this.set(i, j, Math.pow(this.get(i, j), value));
+        this.set(i, j, this.get(i, j) ** value);
       }
     }
     return this;
@@ -815,7 +815,7 @@ export function installMathOperations(AbstractMatrix, Matrix) {
     }
     for (let i = 0; i < this.rows; i++) {
       for (let j = 0; j < this.columns; j++) {
-        this.set(i, j, Math.pow(this.get(i, j), matrix.get(i, j)));
+        this.set(i, j, this.get(i, j) ** matrix.get(i, j));
       }
     }
     return this;

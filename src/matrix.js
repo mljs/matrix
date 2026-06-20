@@ -240,6 +240,16 @@ export class AbstractMatrix {
     return false;
   }
 
+  isDistance() {
+    if (!this.isSymmetric()) return false;
+
+    for (let i = 0; i < this.rows; i++) {
+      if (this.get(i, i) !== 0) return false;
+    }
+
+    return true;
+  }
+
   isEchelonForm() {
     let i = 0;
     let j = 0;
@@ -864,6 +874,26 @@ export class AbstractMatrix {
     return result;
   }
 
+  mpow(scalar) {
+    if (!this.isSquare()) {
+      throw new RangeError('Matrix must be square');
+    }
+    if (!Number.isInteger(scalar) || scalar < 0) {
+      throw new RangeError('Exponent must be a non-negative integer');
+    }
+    // Russian Peasant exponentiation, i.e. exponentiation by squaring
+    let result = Matrix.eye(this.rows);
+    let bb = this;
+    // Note: Don't bit shift. In JS, that would truncate at 32 bits
+    for (let e = scalar; e >= 1; e /= 2) {
+      if ((e & 1) !== 0) {
+        result = result.mmul(bb);
+      }
+      bb = bb.mmul(bb);
+    }
+    return result;
+  }
+
   strassen2x2(other) {
     other = Matrix.checkMatrix(other);
     let result = new Matrix(2, 2);
@@ -1314,13 +1344,21 @@ export class AbstractMatrix {
   }
 
   clone() {
-    let newMatrix = new Matrix(this.rows, this.columns);
-    for (let row = 0; row < this.rows; row++) {
-      for (let column = 0; column < this.columns; column++) {
-        newMatrix.set(row, column, this.get(row, column));
-      }
+    return this.constructor.copy(this, new Matrix(this.rows, this.columns));
+  }
+
+  /**
+   * @template {AbstractMatrix} M
+   * @param {AbstractMatrix} from
+   * @param {M} to
+   * @return {M}
+   */
+  static copy(from, to) {
+    for (const [row, column, value] of from.entries()) {
+      to.set(row, column, value);
     }
-    return newMatrix;
+
+    return to;
   }
 
   sum(by) {
@@ -1504,6 +1542,36 @@ export class AbstractMatrix {
   toString(options) {
     return inspectMatrixWithOptions(this, options);
   }
+
+  [Symbol.iterator]() {
+    return this.entries();
+  }
+
+  /**
+   * iterator from left to right, from top to bottom
+   * yield [row, column, value]
+   * @returns {Generator<[number, number, number], void, void>}
+   */
+  *entries() {
+    for (let row = 0; row < this.rows; row++) {
+      for (let col = 0; col < this.columns; col++) {
+        yield [row, col, this.get(row, col)];
+      }
+    }
+  }
+
+  /**
+   * iterator from left to right, from top to bottom
+   * yield value
+   * @returns {Generator<number, void, void>}
+   */
+  *values() {
+    for (let row = 0; row < this.rows; row++) {
+      for (let col = 0; col < this.columns; col++) {
+        yield this.get(row, col);
+      }
+    }
+  }
 }
 
 AbstractMatrix.prototype.klass = 'Matrix';
@@ -1533,21 +1601,38 @@ AbstractMatrix.prototype.tensorProduct =
   AbstractMatrix.prototype.kroneckerProduct;
 
 export default class Matrix extends AbstractMatrix {
+  /**
+   * @type {Float64Array[]}
+   */
+  data;
+
+  /**
+   * Init an empty matrix
+   * @param {number} nRows
+   * @param {number} nColumns
+   */
+  #initData(nRows, nColumns) {
+    this.data = [];
+
+    if (Number.isInteger(nColumns) && nColumns >= 0) {
+      for (let i = 0; i < nRows; i++) {
+        this.data.push(new Float64Array(nColumns));
+      }
+    } else {
+      throw new TypeError('nColumns must be a positive integer');
+    }
+
+    this.rows = nRows;
+    this.columns = nColumns;
+  }
+
   constructor(nRows, nColumns) {
     super();
     if (Matrix.isMatrix(nRows)) {
-      // eslint-disable-next-line no-constructor-return
-      return nRows.clone();
+      this.#initData(nRows.rows, nRows.columns);
+      Matrix.copy(nRows, this);
     } else if (Number.isInteger(nRows) && nRows >= 0) {
-      // Create an empty matrix
-      this.data = [];
-      if (Number.isInteger(nColumns) && nColumns >= 0) {
-        for (let i = 0; i < nRows; i++) {
-          this.data.push(new Float64Array(nColumns));
-        }
-      } else {
-        throw new TypeError('nColumns must be a positive integer');
-      }
+      this.#initData(nRows, nColumns);
     } else if (isAnyArray(nRows)) {
       // Copy the values from the 2D array
       const arrayData = nRows;
@@ -1559,6 +1644,7 @@ export default class Matrix extends AbstractMatrix {
         );
       }
       this.data = [];
+
       for (let i = 0; i < nRows; i++) {
         if (arrayData[i].length !== nColumns) {
           throw new RangeError('Inconsistent array dimensions');
@@ -1568,13 +1654,14 @@ export default class Matrix extends AbstractMatrix {
         }
         this.data.push(Float64Array.from(arrayData[i]));
       }
+
+      this.rows = nRows;
+      this.columns = nColumns;
     } else {
       throw new TypeError(
         'First argument must be a positive number or an array',
       );
     }
-    this.rows = nRows;
-    this.columns = nColumns;
   }
 
   set(rowIndex, columnIndex, value) {

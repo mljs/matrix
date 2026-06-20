@@ -28,7 +28,7 @@ export default class CholeskyDecomposition {
 
       d = a.get(j, j) - d;
 
-      positiveDefinite &= d > 0;
+      positiveDefinite &&= d > 0;
       l.set(j, j, Math.sqrt(Math.max(d, 0)));
       for (k = j + 1; k < dimension; k++) {
         l.set(j, k, 0);
@@ -36,7 +36,7 @@ export default class CholeskyDecomposition {
     }
 
     this.L = l;
-    this.positiveDefinite = Boolean(positiveDefinite);
+    this.positiveDefinite = positiveDefinite;
   }
 
   isPositiveDefinite() {
