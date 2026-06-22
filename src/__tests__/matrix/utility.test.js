@@ -375,6 +375,35 @@ describe('utility methods', () => {
     ]);
   });
 
+  it('gram', () => {
+    let matrix = new Matrix([
+      [1, 2, 3],
+      [4, 5, 6],
+    ]);
+    // thisᵀ · this: each entry is the dot product of two columns.
+    expect(matrix.gram().to2DArray()).toStrictEqual([
+      [17, 22, 27],
+      [22, 29, 36],
+      [27, 36, 45],
+    ]);
+    // equivalent to this.transpose().mmul(this), but symmetric and without transpose
+    expect(matrix.gram().to2DArray()).toStrictEqual(
+      matrix.transpose().mmul(matrix).to2DArray(),
+    );
+  });
+
+  it('gram skips zeros and stays identical on a sparse matrix', () => {
+    let matrix = new Matrix([
+      [1, 0, 2],
+      [0, 3, 0],
+      [4, 0, 0],
+      [0, 0, 5],
+    ]);
+    expect(matrix.gram().to2DArray()).toStrictEqual(
+      matrix.transpose().mmul(matrix).to2DArray(),
+    );
+  });
+
   it('pseudoinverse', () => {
     // Actual values calculated by the Numpy library
 

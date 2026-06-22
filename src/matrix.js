@@ -874,6 +874,40 @@ export class AbstractMatrix {
     return result;
   }
 
+  gram() {
+    const rows = this.rows;
+    const n = this.columns;
+
+    // The Gram matrix `thisᵀ · this` is symmetric, so only its upper triangle is
+    // accumulated (then mirrored) and the transpose is never materialized.
+    // Row-streaming rank-1 updates read each row of `this` contiguously and skip
+    // zero entries, so the cost scales with the number of non-zeros: it is as
+    // fast as the dense version on dense matrices (the skip never fires) and far
+    // faster on sparse ones.
+    const gramData = new Float64Array(n * n);
+    for (let r = 0; r < rows; r++) {
+      for (let i = 0; i < n; i++) {
+        const value = this.get(r, i);
+        if (value === 0) continue;
+        const offset = i * n;
+        for (let j = i; j < n; j++) {
+          gramData[offset + j] += value * this.get(r, j);
+        }
+      }
+    }
+
+    const result = new Matrix(n, n);
+    for (let i = 0; i < n; i++) {
+      const offset = i * n;
+      for (let j = i; j < n; j++) {
+        const value = gramData[offset + j];
+        result.set(i, j, value);
+        result.set(j, i, value);
+      }
+    }
+    return result;
+  }
+
   mpow(scalar) {
     if (!this.isSquare()) {
       throw new RangeError('Matrix must be square');

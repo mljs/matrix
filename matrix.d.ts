@@ -617,6 +617,16 @@ export abstract class AbstractMatrix {
   mmul(other: MaybeMatrix): Matrix;
 
   /**
+   * Returns the Gram matrix `thisᵀ · this` (the `columns × columns` matrix of
+   * the dot products of every pair of columns). The result is symmetric, so only
+   * its upper triangle is computed and mirrored, and the transpose is never
+   * materialized, making it about twice as fast as `this.transpose().mmul(this)`
+   * on dense matrices and much faster on sparse ones (zero entries are skipped).
+   * For finite inputs the result is identical to `this.transpose().mmul(this)`.
+   */
+  gram(): Matrix;
+
+  /**
    * Returns the square matrix raised to the given power
    * @param scalar - the non-negative integer power to raise this matrix to
    */
@@ -860,7 +870,7 @@ export abstract class AbstractMatrix {
     [row: number, column: number, value: number],
     void,
     void
-    >;
+  >;
 
   /**
    * iterator from left to right, from top to bottom
@@ -1489,7 +1499,7 @@ export { EigenvalueDecomposition as EVD };
  * The Cholesky decomposition of a matrix. Given a matrix A, the Cholesky Decomposition of A is L
  * such that A = (L)(L.transpose).
  * Only works for symmetric, positive definite matrix A.
- * 
+ *
  * @link https://github.com/lutzroeder/Mapack/blob/master/Source/CholeskyDecomposition.cs
  */
 export class CholeskyDecomposition {
