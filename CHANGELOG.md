@@ -1,5 +1,18 @@
 # Changelog
 
+## [6.13.0](https://github.com/mljs/matrix/compare/v6.12.2...v6.13.0) (2026-06-23)
+
+
+### Features
+
+* add Matrix.gram() for the symmetric XᵀX product ([#208](https://github.com/mljs/matrix/issues/208)) ([436258b](https://github.com/mljs/matrix/commit/436258bcb5aa122fde5eda8425d595d38a37f9b4))
+* add Matrix.mmulByTranspose() ([#207](https://github.com/mljs/matrix/issues/207)) ([9b3835a](https://github.com/mljs/matrix/commit/9b3835ab1a82fe63070a0fee0fdad252f22fc81f))
+
+
+### Performance Improvements
+
+* speed up SVD (~4.7x) and symmetric EVD (~1.7x) via transposed internal storage ([#167](https://github.com/mljs/matrix/issues/167)) ([22548f2](https://github.com/mljs/matrix/commit/22548f25c918dad29922ed24ee91dcf8c4f51565))
+
 ## [6.12.2](https://github.com/mljs/matrix/compare/v6.12.1...v6.12.2) (2026-04-15)
 
 
