@@ -1,7 +1,7 @@
 import Matrix from '../matrix';
 import WrapperMatrix2D from '../wrap/WrapperMatrix2D';
 
-import { hypotenuse } from './util';
+import { hypotenuse, transposeSquareInPlace } from './util';
 
 export default class EigenvalueDecomposition {
   constructor(matrix, options = {}) {
@@ -31,14 +31,25 @@ export default class EigenvalueDecomposition {
     }
 
     if (isSymmetric) {
+      // tred2/tql2 access V almost exclusively down columns (the row index
+      // varies in the hot loops). Storing V transposed turns those into
+      // sequential row scans of the row-major backing store; we transpose it
+      // back to the logical layout before returning. V.get(j, i) holds the
+      // logical V(i, j).
       for (i = 0; i < n; i++) {
         for (j = 0; j < n; j++) {
-          V.set(i, j, value.get(i, j));
+          V.set(j, i, value.get(i, j));
         }
       }
       tred2(n, e, d, V);
       tql2(n, e, d, V);
+      // V is square; restore the logical layout in place (no allocation).
+      transposeSquareInPlace(V);
     } else {
+      // The non-symmetric path (orthes/hqr2) has two O(n^3) phases with opposite
+      // memory-layout preferences (the QR sweep favours column-major eigenvectors
+      // while the back-transform favours row-major), so a single transposed
+      // storage cannot help both. It is left in the original row-major layout.
       let H = new Matrix(n, n);
       let ort = new Float64Array(n);
       for (j = 0; j < n; j++) {
@@ -93,7 +104,7 @@ function tred2(n, e, d, V) {
   let f, g, h, i, j, k, hh, scale;
 
   for (j = 0; j < n; j++) {
-    d[j] = V.get(n - 1, j);
+    d[j] = V.get(j, n - 1);
   }
 
   for (i = n - 1; i > 0; i--) {
@@ -106,9 +117,9 @@ function tred2(n, e, d, V) {
     if (scale === 0) {
       e[i] = d[i - 1];
       for (j = 0; j < i; j++) {
-        d[j] = V.get(i - 1, j);
-        V.set(i, j, 0);
+        d[j] = V.get(j, i - 1);
         V.set(j, i, 0);
+        V.set(i, j, 0);
       }
     } else {
       for (k = 0; k < i; k++) {
@@ -131,11 +142,11 @@ function tred2(n, e, d, V) {
 
       for (j = 0; j < i; j++) {
         f = d[j];
-        V.set(j, i, f);
+        V.set(i, j, f);
         g = e[j] + V.get(j, j) * f;
         for (k = j + 1; k <= i - 1; k++) {
-          g += V.get(k, j) * d[k];
-          e[k] += V.get(k, j) * f;
+          g += V.get(j, k) * d[k];
+          e[k] += V.get(j, k) * f;
         }
         e[j] = g;
       }
@@ -155,43 +166,43 @@ function tred2(n, e, d, V) {
         f = d[j];
         g = e[j];
         for (k = j; k <= i - 1; k++) {
-          V.set(k, j, V.get(k, j) - (f * e[k] + g * d[k]));
+          V.set(j, k, V.get(j, k) - (f * e[k] + g * d[k]));
         }
-        d[j] = V.get(i - 1, j);
-        V.set(i, j, 0);
+        d[j] = V.get(j, i - 1);
+        V.set(j, i, 0);
       }
     }
     d[i] = h;
   }
 
   for (i = 0; i < n - 1; i++) {
-    V.set(n - 1, i, V.get(i, i));
+    V.set(i, n - 1, V.get(i, i));
     V.set(i, i, 1);
     h = d[i + 1];
     if (h !== 0) {
       for (k = 0; k <= i; k++) {
-        d[k] = V.get(k, i + 1) / h;
+        d[k] = V.get(i + 1, k) / h;
       }
 
       for (j = 0; j <= i; j++) {
         g = 0;
         for (k = 0; k <= i; k++) {
-          g += V.get(k, i + 1) * V.get(k, j);
+          g += V.get(i + 1, k) * V.get(j, k);
         }
         for (k = 0; k <= i; k++) {
-          V.set(k, j, V.get(k, j) - g * d[k]);
+          V.set(j, k, V.get(j, k) - g * d[k]);
         }
       }
     }
 
     for (k = 0; k <= i; k++) {
-      V.set(k, i + 1, 0);
+      V.set(i + 1, k, 0);
     }
   }
 
   for (j = 0; j < n; j++) {
-    d[j] = V.get(n - 1, j);
-    V.set(n - 1, j, 0);
+    d[j] = V.get(j, n - 1);
+    V.set(j, n - 1, 0);
   }
 
   V.set(n - 1, n - 1, 1);
@@ -264,9 +275,9 @@ function tql2(n, e, d, V) {
           d[i + 1] = h + s * (c * g + s * d[i]);
 
           for (k = 0; k < n; k++) {
-            h = V.get(k, i + 1);
-            V.set(k, i + 1, s * V.get(k, i) + c * h);
-            V.set(k, i, c * V.get(k, i) - s * h);
+            h = V.get(i + 1, k);
+            V.set(i + 1, k, s * V.get(i, k) + c * h);
+            V.set(i, k, c * V.get(i, k) - s * h);
           }
         }
 
@@ -293,9 +304,9 @@ function tql2(n, e, d, V) {
       d[k] = d[i];
       d[i] = p;
       for (j = 0; j < n; j++) {
-        p = V.get(j, i);
-        V.set(j, i, V.get(j, k));
-        V.set(j, k, p);
+        p = V.get(i, j);
+        V.set(i, j, V.get(k, j));
+        V.set(k, j, p);
       }
     }
   }
