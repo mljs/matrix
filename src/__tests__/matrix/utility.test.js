@@ -332,6 +332,45 @@ describe('utility methods', () => {
     ]);
   });
 
+  it('mmulByTranspose', () => {
+    let matrix = new Matrix([
+      [1, 2, 3],
+      [4, 5, 6],
+    ]);
+    expect(matrix.mmulByTranspose().to2DArray()).toStrictEqual([
+      [14, 32],
+      [32, 77],
+    ]);
+    // equivalent to this.mmul(this.transpose()), but symmetric and without transpose
+    expect(matrix.mmulByTranspose().to2DArray()).toStrictEqual(
+      matrix.mmul(matrix.transpose()).to2DArray(),
+    );
+  });
+
+  it('mmulByTranspose with column scale', () => {
+    let matrix = new Matrix([
+      [1, 2, 3],
+      [4, 5, 6],
+    ]);
+    let scale = [2, 1, 0.5];
+
+    // this · diag(scale) · thisᵀ
+    expect(matrix.mmulByTranspose(scale).to2DArray()).toStrictEqual([
+      [2 * 1 + 1 * 4 + 0.5 * 9, 2 * 4 + 1 * 10 + 0.5 * 18],
+      [2 * 4 + 1 * 10 + 0.5 * 18, 2 * 16 + 1 * 25 + 0.5 * 36],
+    ]);
+
+    // equivalent to this.mmul(diag(scale)).mmul(this.transpose())
+    const diag = Matrix.diag(scale);
+    expect(matrix.mmulByTranspose(scale).to2DArray()).toStrictEqual(
+      matrix.mmul(diag).mmul(matrix.transpose()).to2DArray(),
+    );
+
+    expect(() => matrix.mmulByTranspose([1, 2])).toThrow(
+      'scale must have one value per column',
+    );
+  });
+
   it('mmul strassen on empty matrices', () => {
     // https://github.com/mljs/matrix/issues/114
     // while the mathematically correct result is 0x0, we assert a 2x2 padded result that the current implementation produces
