@@ -7,6 +7,7 @@
 let benchmark = require('benchmark');
 
 let { Matrix } = require('..');
+let { SparseMatrix } = require('ml-sparse-matrix');
 
 // (m x n)ᵀ · (m x p) -> (n x p)
 const cases = [
@@ -42,16 +43,20 @@ for (const { m, n, p, label } of cases) {
 }
 
 // Sparse `this`: the zero-skip in transposeMultiply avoids most of the work.
-const sparse = Matrix.zeros(512, 512);
+// Build the sparse operand with the real ml-sparse-matrix package (a few
+// non-zeros per row, as in the NMR spin-simulation operators) and densify it,
+// the path such callers take before multiplying.
+const builder = new SparseMatrix(512, 512);
 for (let i = 0; i < 512; i++) {
-  for (let k = 0; k < 4; k++) sparse.set(i, (i * 7 + k * 131) % 512, k + 1);
+  for (let k = 0; k < 9; k++) builder.set(i, (i * 31 + k * 101) % 512, k + 1);
 }
+const sparse = new Matrix(builder.to2DArray());
 const dense = Matrix.rand(512, 256);
 new benchmark.Suite('sparse')
-  .add('sparse 512x512 (4 nnz/row): transpose().mmul()', () => {
+  .add('sparse 512x512 (9 nnz/row): transpose().mmul()', () => {
     sparse.transpose().mmul(dense);
   })
-  .add('sparse 512x512 (4 nnz/row): transposeMultiply()', () => {
+  .add('sparse 512x512 (9 nnz/row): transposeMultiply()', () => {
     sparse.transposeMultiply(dense);
   })
   .on('cycle', (event) => {

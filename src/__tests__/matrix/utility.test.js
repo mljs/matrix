@@ -1,3 +1,4 @@
+import { SparseMatrix } from 'ml-sparse-matrix';
 import { describe, it, beforeEach, expect } from 'vitest';
 
 import { Matrix, pseudoInverse, determinant } from '../..';
@@ -484,6 +485,31 @@ describe('utility methods', () => {
     ]);
     expect(() => a.transposeMultiply(b)).toThrow(
       'the number of rows of the two matrices must be equal',
+    );
+  });
+
+  it('transposeMultiply on a matrix built with ml-sparse-matrix', () => {
+    // A genuinely sparse operand, built with our ml-sparse-matrix package.
+    let sparse = new SparseMatrix(6, 4);
+    sparse.set(0, 1, 2);
+    sparse.set(2, 0, 3);
+    sparse.set(3, 3, 5);
+    sparse.set(5, 2, 7);
+    expect(sparse.cardinality).toBe(4);
+
+    // Densify into a Matrix, the path a caller such as the NMR spin simulation
+    // takes before multiplying, and check `sparseᵀ · b`.
+    let a = new Matrix(sparse.to2DArray());
+    let b = new Matrix([
+      [1, 2, 3],
+      [4, 5, 6],
+      [7, 8, 9],
+      [10, 11, 12],
+      [13, 14, 15],
+      [16, 17, 18],
+    ]);
+    expect(a.transposeMultiply(b).to2DArray()).toStrictEqual(
+      a.transpose().mmul(b).to2DArray(),
     );
   });
 
