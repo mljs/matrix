@@ -908,6 +908,49 @@ export class AbstractMatrix {
     return result;
   }
 
+  transposeMultiply(other) {
+    other = Matrix.checkMatrix(other);
+    if (this.rows !== other.rows) {
+      throw new RangeError(
+        'the number of rows of the two matrices must be equal',
+      );
+    }
+    const rows = this.rows;
+    const n = this.columns;
+    const p = other.columns;
+
+    // `thisᵀ · other`, computed by streaming each shared row once and applying a
+    // rank-1 update, so the transpose is never materialized. Both operands are
+    // read row-major (contiguously) and zero entries of `this` are skipped, so
+    // the cost scales with the number of non-zeros: as fast as
+    // `this.transpose().mmul(other)` on dense matrices (the skip never fires) and
+    // faster on sparse ones, with an identical result.
+    const resultData = new Float64Array(n * p);
+    const otherRow = new Float64Array(p);
+    for (let r = 0; r < rows; r++) {
+      for (let j = 0; j < p; j++) {
+        otherRow[j] = other.get(r, j);
+      }
+      for (let i = 0; i < n; i++) {
+        const value = this.get(r, i);
+        if (value === 0) continue;
+        const offset = i * p;
+        for (let j = 0; j < p; j++) {
+          resultData[offset + j] += value * otherRow[j];
+        }
+      }
+    }
+
+    const result = new Matrix(n, p);
+    for (let i = 0; i < n; i++) {
+      const offset = i * p;
+      for (let j = 0; j < p; j++) {
+        result.set(i, j, resultData[offset + j]);
+      }
+    }
+    return result;
+  }
+
   mmulByTranspose(scale) {
     let m = this.rows;
     let n = this.columns;

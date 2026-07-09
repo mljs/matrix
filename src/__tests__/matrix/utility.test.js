@@ -443,6 +443,50 @@ describe('utility methods', () => {
     );
   });
 
+  it('transposeMultiply', () => {
+    let a = new Matrix([
+      [1, 2, 3],
+      [4, 5, 6],
+    ]);
+    let b = new Matrix([
+      [7, 8],
+      [9, 10],
+    ]);
+    // aᵀ · b, equivalent to a.transpose().mmul(b) without materializing the transpose
+    expect(a.transposeMultiply(b).to2DArray()).toStrictEqual(
+      a.transpose().mmul(b).to2DArray(),
+    );
+  });
+
+  it('transposeMultiply stays identical on a sparse matrix', () => {
+    let a = new Matrix([
+      [1, 0, 2],
+      [0, 3, 0],
+      [4, 0, 0],
+      [0, 0, 5],
+    ]);
+    let b = new Matrix([
+      [1, 2, 3],
+      [4, 5, 6],
+      [7, 8, 9],
+      [10, 11, 12],
+    ]);
+    expect(a.transposeMultiply(b).to2DArray()).toStrictEqual(
+      a.transpose().mmul(b).to2DArray(),
+    );
+  });
+
+  it('transposeMultiply throws on row mismatch', () => {
+    let a = new Matrix([[1, 2, 3]]);
+    let b = new Matrix([
+      [1, 2],
+      [3, 4],
+    ]);
+    expect(() => a.transposeMultiply(b)).toThrow(
+      'the number of rows of the two matrices must be equal',
+    );
+  });
+
   it('pseudoinverse', () => {
     // Actual values calculated by the Numpy library
 

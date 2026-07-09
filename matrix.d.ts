@@ -627,6 +627,16 @@ export abstract class AbstractMatrix {
   gram(): Matrix;
 
   /**
+   * Returns the matrix product `thisᵀ · other` without materializing the
+   * transpose: each shared row is streamed once and applied as a rank-1 update,
+   * so both operands are read row-major (contiguously) and zero entries of
+   * `this` are skipped. As fast as `this.transpose().mmul(other)` on dense
+   * matrices and much faster on sparse ones, with an identical result.
+   * @param other - Other matrix, with the same number of rows as `this`.
+   */
+  transposeMultiply(other: MaybeMatrix): Matrix;
+
+  /**
    * Returns the matrix product between `this` and its transpose (`this · thisᵀ`),
    * optionally weighting each column by `scale` (`this · diag(scale) · thisᵀ`).
    * The result is symmetric, so only its upper triangle is computed and mirrored
