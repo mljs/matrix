@@ -1,5 +1,12 @@
 # Changelog
 
+## [6.14.0](https://github.com/mljs/matrix/compare/v6.13.0...v6.14.0) (2026-07-13)
+
+
+### Features
+
+* add transposeMultiply (thisᵀ · other) without materializing the transpose ([#211](https://github.com/mljs/matrix/issues/211)) ([f0f21a7](https://github.com/mljs/matrix/commit/f0f21a737303c513569c025e3baee9a4248e4e2b))
+
 ## [6.13.0](https://github.com/mljs/matrix/compare/v6.12.2...v6.13.0) (2026-06-23)
 
 
