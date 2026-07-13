@@ -26,7 +26,7 @@ export function covariance(xMatrix, yMatrix = xMatrix, options = {}) {
       yMatrix = yMatrix.center('column');
     }
   }
-  const cov = xMatrix.transpose().mmul(yMatrix);
+  const cov = xMatrix.transposeMultiply(yMatrix);
   for (let i = 0; i < cov.rows; i++) {
     for (let j = 0; j < cov.columns; j++) {
       cov.set(i, j, cov.get(i, j) * (1 / (xMatrix.rows - 1)));

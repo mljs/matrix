@@ -39,7 +39,7 @@ export function correlation(xMatrix, yMatrix = xMatrix, options = {}) {
     ? sdx
     : yMatrix.standardDeviation('column', { unbiased: true });
 
-  const corr = xMatrix.transpose().mmul(yMatrix);
+  const corr = xMatrix.transposeMultiply(yMatrix);
   for (let i = 0; i < corr.rows; i++) {
     for (let j = 0; j < corr.columns; j++) {
       corr.set(

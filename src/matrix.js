@@ -908,6 +908,34 @@ export class AbstractMatrix {
     return result;
   }
 
+  transposeMultiply(other) {
+    other = Matrix.checkMatrix(other);
+    if (this.rows !== other.rows) {
+      throw new RangeError(
+        'the number of rows of the two matrices must be equal',
+      );
+    }
+    const n = this.columns;
+    const p = other.columns;
+
+    const result = new Matrix(n, p);
+    const otherRow = new Float64Array(p);
+    for (let r = 0; r < this.rows; r++) {
+      for (let j = 0; j < p; j++) {
+        otherRow[j] = other.get(r, j);
+      }
+      for (let i = 0; i < n; i++) {
+        const value = this.get(r, i);
+        if (value === 0) continue;
+        const resultRow = result.data[i];
+        for (let j = 0; j < p; j++) {
+          resultRow[j] += value * otherRow[j];
+        }
+      }
+    }
+    return result;
+  }
+
   mmulByTranspose(scale) {
     let m = this.rows;
     let n = this.columns;
