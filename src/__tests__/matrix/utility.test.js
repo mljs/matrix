@@ -578,6 +578,122 @@ describe('utility methods', () => {
     expect(result).toStrictEqual([[], []]);
   });
 
+  it('pseudoinverse of rank-deficient matrices', () => {
+    // Actual values calculated by the Numpy library
+    let result = pseudoInverse(
+      new Matrix([
+        [10, 20, 30],
+        [40, 50, 60],
+        [70, 80, 90],
+      ]),
+    ).to2DArray();
+
+    expect(result[0][0]).toBeCloseTo(-6.38888889e-2, 8);
+    expect(result[0][1]).toBeCloseTo(-1.66666667e-2, 8);
+    expect(result[0][2]).toBeCloseTo(3.05555556e-2, 8);
+
+    expect(result[1][0]).toBeCloseTo(-5.55555556e-3, 8);
+    expect(result[1][1]).toBeCloseTo(0, 8);
+    expect(result[1][2]).toBeCloseTo(5.55555556e-3, 8);
+
+    expect(result[2][0]).toBeCloseTo(5.27777778e-2, 8);
+    expect(result[2][1]).toBeCloseTo(1.66666667e-2, 8);
+    expect(result[2][2]).toBeCloseTo(-1.94444444e-2, 8);
+
+    result = pseudoInverse(
+      new Matrix([
+        [1, 2],
+        [2, 4],
+        [3, 6],
+        [4, 8],
+      ]),
+    ).to2DArray();
+
+    expect(result[0][0]).toBeCloseTo(6.66666667e-3, 8);
+    expect(result[0][1]).toBeCloseTo(1.33333333e-2, 8);
+    expect(result[0][2]).toBeCloseTo(2.0e-2, 8);
+    expect(result[0][3]).toBeCloseTo(2.66666667e-2, 8);
+
+    expect(result[1][0]).toBeCloseTo(1.33333333e-2, 8);
+    expect(result[1][1]).toBeCloseTo(2.66666667e-2, 8);
+    expect(result[1][2]).toBeCloseTo(4.0e-2, 8);
+    expect(result[1][3]).toBeCloseTo(5.33333333e-2, 8);
+  });
+
+  it('pseudoinverse is scale invariant', () => {
+    // pinv(k*A) = pinv(A)/k exactly, at any k
+    const matrices = [
+      [
+        [1, 2, 3],
+        [4, 5, 6],
+        [7, 8, 9],
+      ],
+      [
+        [2, 4],
+        [7, 1],
+      ],
+      [
+        [1, 2],
+        [2, 4],
+        [3, 6],
+        [4, 8],
+      ],
+      [
+        [1, 2, 3, 4],
+        [2, 4, 6, 8],
+      ],
+    ];
+
+    for (const rows of matrices) {
+      const reference = pseudoInverse(new Matrix(rows)).to2DArray();
+      for (const k of [1e-17, 1e-12, 1e-6, 1e-2, 1e2, 1e6, 1e12, 1e17]) {
+        const scaled = pseudoInverse(new Matrix(rows).mul(k)).to2DArray();
+        expectCloseRelative(
+          scaled.map((row) => row.map((value) => value * k)),
+          reference,
+        );
+      }
+    }
+  });
+
+  it('pseudoinverse satisfies the Moore-Penrose conditions', () => {
+    const matrices = [
+      [
+        [1, 2, 3],
+        [4, 5, 6],
+        [7, 8, 9],
+      ],
+      [
+        [4, 7],
+        [2, 6],
+      ],
+      [
+        [1, 2],
+        [2, 4],
+        [3, 6],
+        [4, 8],
+      ],
+      [
+        [1, 2, 3, 4],
+        [2, 4, 6, 8],
+      ],
+    ];
+
+    for (const rows of matrices) {
+      for (const k of [1e-8, 1, 1e8]) {
+        const A = new Matrix(rows).mul(k);
+        const P = pseudoInverse(A);
+        const AP = A.mmul(P);
+        const PA = P.mmul(A);
+
+        expectCloseRelative(AP.mmul(A).to2DArray(), A.to2DArray());
+        expectCloseRelative(PA.mmul(P).to2DArray(), P.to2DArray());
+        expectCloseRelative(AP.transpose().to2DArray(), AP.to2DArray());
+        expectCloseRelative(PA.transpose().to2DArray(), PA.to2DArray());
+      }
+    }
+  });
+
   it('isEchelonForm', () => {
     const matrix = new Matrix([
       [1, 0],
@@ -808,3 +924,21 @@ describe('utility methods', () => {
     ]);
   });
 });
+
+// Compares entries relative to the magnitude of the expected matrix, so the
+// same assertion holds for results spanning many orders of magnitude.
+function expectCloseRelative(actual, expected) {
+  let scale = 0;
+  for (const row of expected) {
+    for (const value of row) {
+      scale = Math.max(scale, Math.abs(value));
+    }
+  }
+  for (let i = 0; i < expected.length; i++) {
+    for (let j = 0; j < expected[i].length; j++) {
+      expect(Math.abs(actual[i][j] - expected[i][j])).toBeLessThan(
+        1e-12 * scale,
+      );
+    }
+  }
+}

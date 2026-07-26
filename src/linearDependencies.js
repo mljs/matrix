@@ -43,7 +43,9 @@ export function linearDependencies(matrix, options = {}) {
     let Abis = matrix.subMatrixRow(xrange(n, i)).transpose();
     let svd = new SingularValueDecomposition(Abis);
     let x = svd.solve(b);
-    let error = Matrix.sub(b, Abis.mmul(x)).abs().max();
+    // The residual scales with the row it explains; the coefficients don't.
+    let scale = Matrix.abs(b).max() || 1;
+    let error = Matrix.sub(b, Abis.mmul(x)).abs().max() / scale;
     results.setRow(
       i,
       dependenciesOneRow(error, x, i, thresholdValue, thresholdError),
