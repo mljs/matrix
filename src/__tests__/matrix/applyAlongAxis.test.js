@@ -84,6 +84,14 @@ describe('applyAlongAxis on other matrix kinds', () => {
       [3, 5],
     ]);
   });
+
+  it('always returns a plain matrix', () => {
+    const symmetric = new SymmetricMatrix([
+      [1, 2],
+      [2, 3],
+    ]);
+    expect(symmetric.applyAlongAxis(sum, 'row')).toBeInstanceOf(Matrix);
+  });
 });
 
 describe('applyAlongAxis with degenerate matrices', () => {
