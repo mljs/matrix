@@ -88,6 +88,34 @@ describe('concat', () => {
       [7, 8],
     ]);
   });
+
+  it('appends a column vector', () => {
+    const result = matrix.concat(Matrix.columnVector([5, 6]), 'column');
+    expect(result.to2DArray()).toStrictEqual([
+      [1, 2, 5],
+      [3, 4, 6],
+    ]);
+  });
+
+  it('appends a row vector', () => {
+    const result = matrix.concat(Matrix.rowVector([5, 6]), 'row');
+    expect(result.to2DArray()).toStrictEqual([
+      [1, 2],
+      [3, 4],
+      [5, 6],
+    ]);
+  });
+
+  it('chains to gather several matrices', () => {
+    const result = matrix
+      .concat([[5, 6]], 'row')
+      .concat(Matrix.columnVector([7, 8, 9]), 'column');
+    expect(result.to2DArray()).toStrictEqual([
+      [1, 2, 7],
+      [3, 4, 8],
+      [5, 6, 9],
+    ]);
+  });
 });
 
 describe('concat with degenerate matrices', () => {
