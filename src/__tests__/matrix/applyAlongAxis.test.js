@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 
-import { Matrix } from '../..';
+import { Matrix, MatrixTransposeView, SymmetricMatrix } from '../..';
 
 describe('applyAlongAxis', () => {
   const matrix = new Matrix([
@@ -53,6 +53,36 @@ describe('applyAlongAxis', () => {
       'row',
     );
     expect(result.to2DArray()).toStrictEqual([[3], [6]]);
+  });
+});
+
+describe('applyAlongAxis on other matrix kinds', () => {
+  function sum(vector) {
+    return vector.reduce((accumulator, value) => accumulator + value, 0);
+  }
+
+  it('reads a transpose view along the view dimensions', () => {
+    const view = new MatrixTransposeView(
+      new Matrix([
+        [1, 2, 3],
+        [4, 5, 6],
+      ]),
+    );
+    expect(view.applyAlongAxis(sum, 'row').to2DArray()).toStrictEqual([
+      [5],
+      [7],
+      [9],
+    ]);
+  });
+
+  it('works on a symmetric matrix', () => {
+    const symmetric = new SymmetricMatrix([
+      [1, 2],
+      [2, 3],
+    ]);
+    expect(symmetric.applyAlongAxis(sum, 'column').to2DArray()).toStrictEqual([
+      [3, 5],
+    ]);
   });
 });
 
