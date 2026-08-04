@@ -122,7 +122,6 @@ var m              = A.mean();           // m = 2.75
 var product        = A.prod();           // product = -10 (product of all values of the matrix)
 var norm           = A.norm();           // norm = 10.14889156509222 (Frobenius norm of the matrix)
 var transpose      = A.transpose();      // transpose = Matrix [[1, 10], [1, -1], rows: 2, columns: 2]
-var rowMax         = A.applyAlongAxis(v => Math.max(...v), 'row'); // rowMax = Matrix [[1], [10], rows: 2, columns: 1]
 ```
 
 #### Row and column wise reductions
