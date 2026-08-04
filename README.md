@@ -125,6 +125,20 @@ var transpose      = A.transpose();      // transpose = Matrix [[1, 10], [1, -1]
 var rowMax         = A.applyAlongAxis(v => Math.max(...v), 'row'); // rowMax = Matrix [[1], [10], rows: 2, columns: 1]
 ```
 
+#### Row and column wise reductions
+```js
+var M = new Matrix([
+  [1, 2, 3],
+  [4, 5, 6],
+]);
+
+var sumOf = (vector) => vector.reduce((total, value) => total + value, 0);
+
+var rowSums    = M.applyAlongAxis(sumOf, 'row');    // rowSums    = Matrix [[6], [15], rows: 2, columns: 1]
+var columnSums = M.applyAlongAxis(sumOf, 'column'); // columnSums = Matrix [[5, 7, 9], rows: 1, columns: 3]
+```
+The callback receives each row or column as a plain array along with its index, so any reduction can be expressed with it.
+
 #### Instantiation of matrix
 ```js
 var z = Matrix.zeros(3, 2); // z = Matrix [[0, 0], [0, 0], [0, 0], rows: 3, columns: 2]
