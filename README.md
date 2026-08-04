@@ -124,6 +124,16 @@ var norm           = A.norm();           // norm = 10.14889156509222 (Frobenius 
 var transpose      = A.transpose();      // transpose = Matrix [[1, 10], [1, -1], rows: 2, columns: 2]
 ```
 
+#### Concatenation of matrices
+```js
+var M = new Matrix([
+  [1, 2],
+  [3, 4],
+]);
+
+var stacked = M.concat([[5, 6]]); // stacked = Matrix [[1, 2], [3, 4], [5, 6], rows: 3, columns: 2]
+```
+
 #### Instantiation of matrix
 ```js
 var z = Matrix.zeros(3, 2); // z = Matrix [[0, 0], [0, 0], [0, 0], rows: 3, columns: 2]
