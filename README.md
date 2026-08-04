@@ -131,8 +131,8 @@ var M = new Matrix([
   [3, 4],
 ]);
 
-var stacked = M.concat([[5, 6]]);                                 // stacked = Matrix [[1, 2], [3, 4], [5, 6], rows: 3, columns: 2]
-var widened = M.concat(Matrix.columnVector([5, 6]), 'column');    // widened = Matrix [[1, 2, 5], [3, 4, 6], rows: 2, columns: 3]
+var stacked = M.concat([[5, 6]]);                              // stacked = Matrix [[1, 2], [3, 4], [5, 6], rows: 3, columns: 2]
+var widened = M.concat(Matrix.columnVector([5, 6]), 'column'); // widened = Matrix [[1, 2, 5], [3, 4, 6], rows: 2, columns: 3]
 ```
 Concatenating by row needs the same number of columns on both sides, concatenating by column needs the same number of rows. The two operands are left untouched.
 
