@@ -181,6 +181,30 @@ export class AbstractMatrix {
     return this;
   }
 
+  applyAlongAxis(callback, by) {
+    if (typeof callback !== 'function') {
+      throw new TypeError('callback must be a function');
+    }
+    switch (by) {
+      case 'row': {
+        const result = new Matrix(this.rows, 1);
+        for (let i = 0; i < this.rows; i++) {
+          result.set(i, 0, callback.call(this, this.getRow(i), i));
+        }
+        return result;
+      }
+      case 'column': {
+        const result = new Matrix(1, this.columns);
+        for (let i = 0; i < this.columns; i++) {
+          result.set(0, i, callback.call(this, this.getColumn(i), i));
+        }
+        return result;
+      }
+      default:
+        throw new Error(`invalid option: ${by}`);
+    }
+  }
+
   to1DArray() {
     let array = [];
     for (let i = 0; i < this.rows; i++) {
