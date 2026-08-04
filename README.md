@@ -124,6 +124,13 @@ var norm           = A.norm();           // norm = 10.14889156509222 (Frobenius 
 var transpose      = A.transpose();      // transpose = Matrix [[1, 10], [1, -1], rows: 2, columns: 2]
 ```
 
+#### Instantiation of matrix
+```js
+var z = Matrix.zeros(3, 2); // z = Matrix [[0, 0], [0, 0], [0, 0], rows: 3, columns: 2]
+var z = Matrix.ones(2, 3);  // z = Matrix [[1, 1, 1], [1, 1, 1], rows: 2, columns: 3]
+var z = Matrix.eye(3, 4);   // z = Matrix [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], rows: 3, columns: 4]. there are 1 only in the diagonal
+```
+
 #### Concatenation of matrices
 ```js
 var M = new Matrix([
@@ -135,13 +142,6 @@ var stacked = M.concat([[5, 6]]);                              // stacked = Matr
 var widened = M.concat(Matrix.columnVector([5, 6]), 'column'); // widened = Matrix [[1, 2, 5], [3, 4, 6], rows: 2, columns: 3]
 ```
 Concatenating by row needs the same number of columns on both sides, concatenating by column needs the same number of rows. The two operands are left untouched.
-
-#### Instantiation of matrix
-```js
-var z = Matrix.zeros(3, 2); // z = Matrix [[0, 0], [0, 0], [0, 0], rows: 3, columns: 2]
-var z = Matrix.ones(2, 3);  // z = Matrix [[1, 1, 1], [1, 1, 1], rows: 2, columns: 3]
-var z = Matrix.eye(3, 4);   // z = Matrix [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], rows: 3, columns: 4]. there are 1 only in the diagonal
-```
 
 ### Maths
 ```js
