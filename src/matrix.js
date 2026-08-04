@@ -1420,6 +1420,36 @@ export class AbstractMatrix {
     return this;
   }
 
+  concat(other, by = 'row') {
+    other = Matrix.checkMatrix(other);
+    switch (by) {
+      case 'row': {
+        if (this.columns !== other.columns) {
+          throw new RangeError(
+            'both matrices must have the same number of columns',
+          );
+        }
+        const result = new Matrix(this.rows + other.rows, this.columns);
+        result.setSubMatrix(this, 0, 0);
+        result.setSubMatrix(other, this.rows, 0);
+        return result;
+      }
+      case 'column': {
+        if (this.rows !== other.rows) {
+          throw new RangeError(
+            'both matrices must have the same number of rows',
+          );
+        }
+        const result = new Matrix(this.rows, this.columns + other.columns);
+        result.setSubMatrix(this, 0, 0);
+        result.setSubMatrix(other, 0, this.columns);
+        return result;
+      }
+      default:
+        throw new Error(`invalid option: ${by}`);
+    }
+  }
+
   selection(rowIndices, columnIndices) {
     checkRowIndices(this, rowIndices);
     checkColumnIndices(this, columnIndices);
