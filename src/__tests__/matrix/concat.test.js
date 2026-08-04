@@ -139,6 +139,18 @@ describe('concat with degenerate matrices', () => {
     expect(result.to2DArray()).toStrictEqual([[1], [2]]);
   });
 
+  it('by column of two matrices without rows', () => {
+    const result = new Matrix(0, 1).concat(new Matrix(0, 2), 'column');
+    expect(result.rows).toBe(0);
+    expect(result.columns).toBe(3);
+  });
+
+  it('by row of two matrices without columns', () => {
+    const result = new Matrix(1, 0).concat(new Matrix(2, 0), 'row');
+    expect(result.rows).toBe(3);
+    expect(result.columns).toBe(0);
+  });
+
   it('by row of two 0x0 matrices', () => {
     const result = new Matrix(0, 0).concat(new Matrix(0, 0), 'row');
     expect(result.rows).toBe(0);
