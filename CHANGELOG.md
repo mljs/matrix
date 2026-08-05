@@ -1,5 +1,18 @@
 # Changelog
 
+## [6.15.0](https://github.com/mljs/matrix/compare/v6.14.0...v6.15.0) (2026-08-05)
+
+
+### Features
+
+* add applyAlongAxis to reduce a matrix along a chosen dimension ([#214](https://github.com/mljs/matrix/issues/214)) ([49a6a1a](https://github.com/mljs/matrix/commit/49a6a1afb5c59f3b0293505174b092568fa5ba6d))
+* add concat to join two matrices along a chosen dimension ([#215](https://github.com/mljs/matrix/issues/215)) ([e625603](https://github.com/mljs/matrix/commit/e6256039750e9828f6026773ca1623f773dafcf1))
+
+
+### Bug Fixes
+
+* use relative cutoffs for singular values and residuals ([#213](https://github.com/mljs/matrix/issues/213)) ([cdb74bb](https://github.com/mljs/matrix/commit/cdb74bb193d0e1336908bc08d54aa93a79cf5837))
+
 ## [6.14.0](https://github.com/mljs/matrix/compare/v6.13.0...v6.14.0) (2026-07-13)
 
 
