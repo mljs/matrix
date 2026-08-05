@@ -1570,6 +1570,9 @@ export class CholeskyDecomposition {
 export { CholeskyDecomposition as CHO };
 
 /**
+ * The LU decomposition of a matrix with at least as many rows as columns.
+ * A matrix carrying more columns than rows is rejected with a `RangeError`.
+ *
  * @link https://github.com/lutzroeder/Mapack/blob/master/Source/LuDecomposition.cs
  */
 export class LuDecomposition {
@@ -1585,6 +1588,9 @@ export class LuDecomposition {
 export { LuDecomposition as LU };
 
 /**
+ * The QR decomposition of a matrix with at least as many rows as columns.
+ * A matrix carrying more columns than rows is rejected with a `RangeError`.
+ *
  * @link https://github.com/lutzroeder/Mapack/blob/master/Source/QrDecomposition.cs
  */
 export class QrDecomposition {
