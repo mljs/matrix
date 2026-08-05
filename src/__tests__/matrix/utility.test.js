@@ -374,14 +374,10 @@ describe('utility methods', () => {
 
   it('mmul strassen on empty matrices', () => {
     // https://github.com/mljs/matrix/issues/114
-    // while the mathematically correct result is 0x0, we assert a 2x2 padded result that the current implementation produces
-    // (this call is actually just delegated to standard multiplication in mmul())
-    expect(
-      new Matrix(0, 2).mmulStrassen(new Matrix(2, 0)).to2DArray(),
-    ).toStrictEqual([
-      [0, 0],
-      [0, 0],
-    ]);
+    const result = new Matrix(0, 2).mmulStrassen(new Matrix(2, 0));
+    expect(result.rows).toBe(0);
+    expect(result.columns).toBe(0);
+    expect(result.to2DArray()).toStrictEqual([]);
   });
 
   it('mmul 2x2 and 3x3', () => {
