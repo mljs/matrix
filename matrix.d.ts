@@ -1402,7 +1402,7 @@ export interface ILinearDependenciesOptions {
   thresholdValue?: number;
 
   /**
-   * If the error is inferior to that threshold, the linear combination found is accepted and the row is dependent from other rows.
+   * If the error, relative to the magnitude of the row being explained, is inferior to that threshold, the linear combination found is accepted and the row is dependent from other rows.
    * @default `10e-10`
    */
   thresholdError?: number;
@@ -1424,7 +1424,7 @@ export function linearDependencies(
 /**
  * Returns inverse of a matrix if it exists or the pseudoinverse.
  * @param matrix
- * @param threshold - Threshold for taking inverse of singular values. Default: `Number.EPSILON`.
+ * @param threshold - Relative threshold for taking inverse of singular values. Singular values smaller than `threshold * max(rows, columns) * largestSingularValue` are treated as zero. Default: `Number.EPSILON`.
  * @returns - The (pseudo)inverted matrix.
  */
 export function pseudoInverse(matrix: MaybeMatrix, threshold?: number): Matrix;

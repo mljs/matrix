@@ -15,8 +15,12 @@ export function pseudoInverse(matrix, threshold = Number.EPSILON) {
   let V = svdSolution.rightSingularVectors;
   let s = svdSolution.diagonal;
 
+  // Singular values scale with the matrix, so the cutoff must too. Same
+  // tolerance as SVD.rank, and the `rcond * max(s)` rule used by LAPACK.
+  const cutoff = threshold * Math.max(matrix.rows, matrix.columns) * s[0];
+
   for (let i = 0; i < s.length; i++) {
-    if (Math.abs(s[i]) > threshold) {
+    if (Math.abs(s[i]) > cutoff) {
       s[i] = 1.0 / s[i];
     } else {
       s[i] = 0.0;
