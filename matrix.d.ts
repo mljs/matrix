@@ -292,7 +292,19 @@ export abstract class AbstractMatrix {
    * Applies a callback for each element of the matrix. The function is called in the matrix (this) context.
    * @param callback - Function that will be called for each element in the matrix.
    */
-  apply(callback: (row: number, column: number) => void): this;
+  apply(callback: (this: this, row: number, column: number) => void): this;
+
+  /**
+   * Applies a callback to each row or each column of the matrix and collects the returned values.
+   * The function is called in the matrix (this) context.
+   * @param callback - Function that will be called with each row or column and its index.
+   * @param by - Iterate by 'row' or 'column'.
+   * @returns - An array with the reduced column or row.
+   */
+  applyAlongAxis<ReturnType>(
+    callback: (this: this, vector: number[], index: number) => ReturnType,
+    by: MatrixDimension,
+  ): ReturnType[];
 
   /**
    * Returns a new 1D array filled row by row with the matrix values.

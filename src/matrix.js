@@ -4,34 +4,34 @@ import rescale from 'ml-array-rescale';
 import { inspectMatrix, inspectMatrixWithOptions } from './inspect';
 import { installMathOperations } from './mathOperations';
 import {
-  sumByRow,
-  sumByColumn,
-  sumAll,
-  productByRow,
-  productByColumn,
-  productAll,
-  varianceByRow,
-  varianceByColumn,
-  varianceAll,
-  centerByRow,
-  centerByColumn,
   centerAll,
-  scaleByRow,
-  scaleByColumn,
-  scaleAll,
-  getScaleByRow,
-  getScaleByColumn,
+  centerByColumn,
+  centerByRow,
   getScaleAll,
+  getScaleByColumn,
+  getScaleByRow,
+  productAll,
+  productByColumn,
+  productByRow,
+  scaleAll,
+  scaleByColumn,
+  scaleByRow,
+  sumAll,
+  sumByColumn,
+  sumByRow,
+  varianceAll,
+  varianceByColumn,
+  varianceByRow,
 } from './stat';
 import {
-  checkRowVector,
-  checkRowIndex,
   checkColumnIndex,
-  checkColumnVector,
-  checkRange,
-  checkNonEmpty,
-  checkRowIndices,
   checkColumnIndices,
+  checkColumnVector,
+  checkNonEmpty,
+  checkRange,
+  checkRowIndex,
+  checkRowIndices,
+  checkRowVector,
 } from './util';
 
 export class AbstractMatrix {
@@ -179,6 +179,30 @@ export class AbstractMatrix {
       }
     }
     return this;
+  }
+
+  applyAlongAxis(callback, by) {
+    if (typeof callback !== 'function') {
+      throw new TypeError('callback must be a function');
+    }
+    const result = [];
+    switch (by) {
+      case 'row': {
+        for (let i = 0; i < this.rows; i++) {
+          result.push(callback.call(this, this.getRow(i), i));
+        }
+        break;
+      }
+      case 'column': {
+        for (let i = 0; i < this.columns; i++) {
+          result.push(callback.call(this, this.getColumn(i), i));
+        }
+        break;
+      }
+      default:
+        throw new Error(`invalid option: ${by}`);
+    }
+    return result;
   }
 
   to1DArray() {
