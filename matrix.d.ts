@@ -299,12 +299,12 @@ export abstract class AbstractMatrix {
    * The function is called in the matrix (this) context.
    * @param callback - Function that will be called with each row or column and its index.
    * @param by - Iterate by 'row' or 'column'.
-   * @returns - A column vector when iterating by row, a row vector when iterating by column.
+   * @returns - An array with the reduced column or row.
    */
   applyAlongAxis(
     callback: (this: this, vector: number[], index: number) => number,
     by: MatrixDimension,
-  ): Matrix;
+  ): number[];
 
   /**
    * Returns a new 1D array filled row by row with the matrix values.

@@ -1,4 +1,4 @@
-import { describe, it, expect } from 'vitest';
+import { describe, expect, it } from 'vitest';
 
 import { Matrix, MatrixTransposeView, SymmetricMatrix } from '../..';
 
@@ -14,16 +14,12 @@ describe('applyAlongAxis', () => {
 
   it('by row returns a column vector', () => {
     const result = matrix.applyAlongAxis(sum, 'row');
-    expect(result.rows).toBe(2);
-    expect(result.columns).toBe(1);
-    expect(result.to2DArray()).toStrictEqual([[6], [15]]);
+    expect(result).toStrictEqual([6, 15]);
   });
 
   it('by column returns a row vector', () => {
     const result = matrix.applyAlongAxis(sum, 'column');
-    expect(result.rows).toBe(1);
-    expect(result.columns).toBe(3);
-    expect(result.to2DArray()).toStrictEqual([[5, 7, 9]]);
+    expect(result).toStrictEqual([5, 7, 9]);
   });
 
   it('the callback gets the vector and its index', () => {
@@ -52,7 +48,17 @@ describe('applyAlongAxis', () => {
       (vector) => Math.max(...vector),
       'row',
     );
-    expect(result.to2DArray()).toStrictEqual([[3], [6]]);
+    expect(result).toStrictEqual([3, 6]);
+  });
+
+  it('receives the matrix as `this`', () => {
+    const matrix = Matrix.zeros(1, 1);
+    let that;
+    matrix.applyAlongAxis(function cb() {
+      // eslint-disable-next-line no-invalid-this
+      that = this;
+    }, 'row');
+    expect(that).toBe(matrix);
   });
 });
 
@@ -68,11 +74,7 @@ describe('applyAlongAxis on other matrix kinds', () => {
         [4, 5, 6],
       ]),
     );
-    expect(view.applyAlongAxis(sum, 'row').to2DArray()).toStrictEqual([
-      [5],
-      [7],
-      [9],
-    ]);
+    expect(view.applyAlongAxis(sum, 'row')).toStrictEqual([5, 7, 9]);
   });
 
   it('works on a symmetric matrix', () => {
@@ -80,17 +82,7 @@ describe('applyAlongAxis on other matrix kinds', () => {
       [1, 2],
       [2, 3],
     ]);
-    expect(symmetric.applyAlongAxis(sum, 'column').to2DArray()).toStrictEqual([
-      [3, 5],
-    ]);
-  });
-
-  it('always returns a plain matrix', () => {
-    const symmetric = new SymmetricMatrix([
-      [1, 2],
-      [2, 3],
-    ]);
-    expect(symmetric.applyAlongAxis(sum, 'row')).toBeInstanceOf(Matrix);
+    expect(symmetric.applyAlongAxis(sum, 'column')).toStrictEqual([3, 5]);
   });
 });
 
@@ -105,26 +97,22 @@ describe('applyAlongAxis with degenerate matrices', () => {
 
   it('by row of a 0x0 matrix', () => {
     const result = emptyMatrix.applyAlongAxis(count, 'row');
-    expect(result.rows).toBe(0);
-    expect(result.columns).toBe(1);
+    expect(result).toStrictEqual([]);
   });
 
   it('by column of a 0x0 matrix', () => {
     const result = emptyMatrix.applyAlongAxis(count, 'column');
-    expect(result.rows).toBe(1);
-    expect(result.columns).toBe(0);
+    expect(result).toStrictEqual([]);
   });
 
   it('by column of a 0 row matrix', () => {
-    expect(
-      zeroRowMatrix.applyAlongAxis(count, 'column').to2DArray(),
-    ).toStrictEqual([[0, 0]]);
+    expect(zeroRowMatrix.applyAlongAxis(count, 'column')).toStrictEqual([0, 0]);
   });
 
   it('by row of a 0 column matrix', () => {
-    expect(
-      zeroColumnMatrix.applyAlongAxis(count, 'row').to2DArray(),
-    ).toStrictEqual([[0], [0], [0]]);
+    expect(zeroColumnMatrix.applyAlongAxis(count, 'row')).toStrictEqual([
+      0, 0, 0,
+    ]);
   });
 });
 

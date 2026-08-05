@@ -4,34 +4,34 @@ import rescale from 'ml-array-rescale';
 import { inspectMatrix, inspectMatrixWithOptions } from './inspect';
 import { installMathOperations } from './mathOperations';
 import {
-  sumByRow,
-  sumByColumn,
-  sumAll,
-  productByRow,
-  productByColumn,
-  productAll,
-  varianceByRow,
-  varianceByColumn,
-  varianceAll,
-  centerByRow,
-  centerByColumn,
   centerAll,
-  scaleByRow,
-  scaleByColumn,
-  scaleAll,
-  getScaleByRow,
-  getScaleByColumn,
+  centerByColumn,
+  centerByRow,
   getScaleAll,
+  getScaleByColumn,
+  getScaleByRow,
+  productAll,
+  productByColumn,
+  productByRow,
+  scaleAll,
+  scaleByColumn,
+  scaleByRow,
+  sumAll,
+  sumByColumn,
+  sumByRow,
+  varianceAll,
+  varianceByColumn,
+  varianceByRow,
 } from './stat';
 import {
-  checkRowVector,
-  checkRowIndex,
   checkColumnIndex,
-  checkColumnVector,
-  checkRange,
-  checkNonEmpty,
-  checkRowIndices,
   checkColumnIndices,
+  checkColumnVector,
+  checkNonEmpty,
+  checkRange,
+  checkRowIndex,
+  checkRowIndices,
+  checkRowVector,
 } from './util';
 
 export class AbstractMatrix {
@@ -185,24 +185,24 @@ export class AbstractMatrix {
     if (typeof callback !== 'function') {
       throw new TypeError('callback must be a function');
     }
+    const result = [];
     switch (by) {
       case 'row': {
-        const result = new Matrix(this.rows, 1);
         for (let i = 0; i < this.rows; i++) {
-          result.set(i, 0, callback.call(this, this.getRow(i), i));
+          result.push(callback.call(this, this.getRow(i), i));
         }
-        return result;
+        break;
       }
       case 'column': {
-        const result = new Matrix(1, this.columns);
         for (let i = 0; i < this.columns; i++) {
-          result.set(0, i, callback.call(this, this.getColumn(i), i));
+          result.push(callback.call(this, this.getColumn(i), i));
         }
-        return result;
+        break;
       }
       default:
         throw new Error(`invalid option: ${by}`);
     }
+    return result;
   }
 
   to1DArray() {

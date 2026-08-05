@@ -133,8 +133,8 @@ var M = new Matrix([
 
 var sumOf = (vector) => vector.reduce((total, value) => total + value, 0);
 
-var rowSums    = M.applyAlongAxis(sumOf, 'row');    // rowSums    = Matrix [[6], [15], rows: 2, columns: 1]
-var columnSums = M.applyAlongAxis(sumOf, 'column'); // columnSums = Matrix [[5, 7, 9], rows: 1, columns: 3]
+var rowSums    = M.applyAlongAxis(sumOf, 'row');    // rowSums    = [6, 15]
+var columnSums = M.applyAlongAxis(sumOf, 'column'); // columnSums = [5, 7, 9]
 ```
 The callback receives each row or column as a plain array along with its index, so any reduction can be expressed with it.
 
