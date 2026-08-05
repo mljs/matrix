@@ -1135,6 +1135,9 @@ export class AbstractMatrix {
         `Multiplying ${r1} x ${c1} and ${r2} x ${c2} matrix: dimensions do not match.`,
       );
     }
+    if (r1 === 0 || c2 === 0) {
+      return new Matrix(r1, c2);
+    }
 
     // Put a matrix into the top left of a matrix of zeros.
     // `rows` and `cols` are the dimensions of the output matrix.
@@ -1150,14 +1153,12 @@ export class AbstractMatrix {
       }
     }
 
-    // Make sure both matrices are the same size.
-    // This is exclusively for simplicity:
-    // this algorithm can be implemented with matrices of different sizes.
-
-    let r = Math.max(r1, r2);
-    let c = Math.max(c1, c2);
-    x = embed(x, r, c);
-    y = embed(y, r, c);
+    // pad both operands into the same square so that the block split lines up.
+    // zeros never reach the top left r1 x c2 corner of the product, which is
+    // the part that gets returned.
+    let n = Math.max(r1, c1, r2, c2);
+    x = embed(x, n, n);
+    y = embed(y, n, n);
 
     // Our recursive multiplication function.
     function blockMult(a, b, rows, cols) {
@@ -1236,7 +1237,11 @@ export class AbstractMatrix {
       return result.subMatrix(0, rows - 1, 0, cols - 1);
     }
 
-    return blockMult(x, y, r, c);
+    const product = blockMult(x, y, n, n);
+    if (product.rows === r1 && product.columns === c2) {
+      return product;
+    }
+    return product.subMatrix(0, r1 - 1, 0, c2 - 1);
   }
 
   scaleRows(options = {}) {
