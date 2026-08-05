@@ -764,6 +764,15 @@ export abstract class AbstractMatrix {
   ): this;
 
   /**
+   * Returns a new matrix made of this matrix followed by the other one.
+   * Concatenating by 'row' stacks the two matrices vertically and requires the same number of columns.
+   * Concatenating by 'column' stacks them side by side and requires the same number of rows.
+   * @param other - The matrix to append.
+   * @param by - Concatenate by 'row' or 'column'. Default: `'row'`.
+   */
+  concat(other: MaybeMatrix, by?: MatrixDimension): Matrix;
+
+  /**
    * Return a new matrix based on a selection of rows and columns.
    * Order of the indices matters and the same index can be used more than once.
    * @param rowIndices - The row indices to select.

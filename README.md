@@ -131,6 +131,18 @@ var z = Matrix.ones(2, 3);  // z = Matrix [[1, 1, 1], [1, 1, 1], rows: 2, column
 var z = Matrix.eye(3, 4);   // z = Matrix [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], rows: 3, columns: 4]. there are 1 only in the diagonal
 ```
 
+#### Concatenation of matrices
+```js
+var M = new Matrix([
+  [1, 2],
+  [3, 4],
+]);
+
+var stacked = M.concat([[5, 6]]);                              // stacked = Matrix [[1, 2], [3, 4], [5, 6], rows: 3, columns: 2]
+var widened = M.concat(Matrix.columnVector([5, 6]), 'column'); // widened = Matrix [[1, 2, 5], [3, 4, 6], rows: 2, columns: 3]
+```
+Concatenating by row needs the same number of columns on both sides, concatenating by column needs the same number of rows. The two operands are left untouched.
+
 ### Maths
 ```js
 const {
