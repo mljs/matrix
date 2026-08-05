@@ -234,6 +234,10 @@ var error = Matrix.sub(B, A.mmul(x)); // The error enables to evaluate the solut
 ```
 #### Decompositions
 
+`QrDecomposition` along with `LuDecomposition` need a matrix with at least as many rows as columns. A matrix carrying more columns than rows is rejected with a `RangeError`.
+
+`SingularValueDecomposition` is an economy decomposition, meaning a matrix of shape m by n with m at least n gives left singular vectors of shape m by n, right singular vectors of shape n by n, and n singular values. The vectors it returns therefore do not span the null space of a wide matrix. Pass `autoTranspose` to decompose a matrix carrying more columns than rows.
+
 ##### QR Decomposition
 ```js
 var A = new Matrix([
