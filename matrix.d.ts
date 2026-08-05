@@ -668,6 +668,12 @@ export abstract class AbstractMatrix {
 
   strassen3x3(other: MaybeMatrix): Matrix;
 
+  /**
+   * Returns the same product as {@link AbstractMatrix.mmul}, computed with the Strassen algorithm.
+   * The recursive path only kicks in once both dimensions of the padded operands pass 512,
+   * below that the call is handed to the plain multiplication.
+   * @param y - The right operand.
+   */
   mmulStrassen(y: MaybeMatrix): Matrix;
 
   /**

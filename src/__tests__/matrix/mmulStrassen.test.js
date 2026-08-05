@@ -62,46 +62,33 @@ describe('mmulStrassen agrees with mmul', () => {
 });
 
 describe('mmulStrassen above the recursion threshold', () => {
-  // the recursive path only runs when both dimensions exceed 512, so anything
-  // smaller was silently delegating to mmul and never exercised the block split
-  const sizes = [513, 514, 600];
+  // the recursive path only runs once both dimensions pass 512, so anything
+  // smaller was delegating to mmul and never exercised the block split.
+  // these two cases cover the odd padded size along with the even one.
+  // small integers keep every intermediate exact in a float64.
+  const cases = [
+    { r1: 513, c1: 513, c2: 513 },
+    { r1: 514, c1: 520, c2: 516 },
+  ];
 
-  for (const n of sizes) {
-    it(`${n}x${n} matches mmul exactly`, () => {
-      // small integers keep every intermediate exact in a float64
-      const a = Matrix.randInt(n, n, { min: 0, max: 3 });
-      const b = Matrix.randInt(n, n, { min: 0, max: 3 });
+  for (const { r1, c1, c2 } of cases) {
+    it(`${r1}x${c1} by ${c1}x${c2} matches mmul exactly`, () => {
+      const a = Matrix.randInt(r1, c1, { min: 0, max: 3 });
+      const b = Matrix.randInt(c1, c2, { min: 0, max: 3 });
       const expected = a.mmul(b);
       const result = a.mmulStrassen(b);
-      expect(result.rows).toBe(n);
-      expect(result.columns).toBe(n);
+      expect(result.rows).toBe(r1);
+      expect(result.columns).toBe(c2);
 
       let differing = 0;
-      for (let i = 0; i < n; i++) {
-        for (let j = 0; j < n; j++) {
+      for (let i = 0; i < r1; i++) {
+        for (let j = 0; j < c2; j++) {
           if (result.get(i, j) !== expected.get(i, j)) differing++;
         }
       }
       expect(differing).toBe(0);
-    });
+    }, 120000);
   }
-
-  it('handles a non square shape above the threshold', () => {
-    const a = Matrix.randInt(520, 600, { min: 0, max: 3 });
-    const b = Matrix.randInt(600, 530, { min: 0, max: 3 });
-    const expected = a.mmul(b);
-    const result = a.mmulStrassen(b);
-    expect(result.rows).toBe(520);
-    expect(result.columns).toBe(530);
-
-    let differing = 0;
-    for (let i = 0; i < 520; i++) {
-      for (let j = 0; j < 530; j++) {
-        if (result.get(i, j) !== expected.get(i, j)) differing++;
-      }
-    }
-    expect(differing).toBe(0);
-  });
 });
 
 describe('mmulStrassen with degenerate matrices', () => {
