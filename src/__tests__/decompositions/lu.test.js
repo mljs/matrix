@@ -45,6 +45,15 @@ describe('LU decomposition', () => {
         new LU([
           [0, 1, 2],
           [0, 1, 2],
+        ]),
+    ).toThrow('Matrix must have at least as many rows as columns');
+
+    expect(
+      () =>
+        new LU([
+          [0, 1],
+          [0, 1],
+          [0, 1],
         ]).determinant,
     ).toThrow('Matrix must be square');
   });

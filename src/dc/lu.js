@@ -4,6 +4,9 @@ import WrapperMatrix2D from '../wrap/WrapperMatrix2D';
 export default class LuDecomposition {
   constructor(matrix) {
     matrix = WrapperMatrix2D.checkMatrix(matrix);
+    if (matrix.rows < matrix.columns) {
+      throw new RangeError('Matrix must have at least as many rows as columns');
+    }
 
     let lu = matrix.clone();
     let rows = lu.rows;

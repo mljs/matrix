@@ -6,6 +6,9 @@ import { hypotenuse } from './util';
 export default class QrDecomposition {
   constructor(value) {
     value = WrapperMatrix2D.checkMatrix(value);
+    if (value.rows < value.columns) {
+      throw new RangeError('Matrix must have at least as many rows as columns');
+    }
 
     let qr = value.clone();
     let m = value.rows;
