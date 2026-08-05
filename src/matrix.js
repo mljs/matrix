@@ -1230,8 +1230,8 @@ export class AbstractMatrix {
       // Crop output to the desired size (undo dynamic padding).
       let result = AbstractMatrix.zeros(2 * c11.rows, 2 * c11.columns);
       result = result.setSubMatrix(c11, 0, 0);
-      result = result.setSubMatrix(c12, c11.rows, 0);
-      result = result.setSubMatrix(c21, 0, c11.columns);
+      result = result.setSubMatrix(c12, 0, c11.columns);
+      result = result.setSubMatrix(c21, c11.rows, 0);
       result = result.setSubMatrix(c22, c11.rows, c11.columns);
       return result.subMatrix(0, rows - 1, 0, cols - 1);
     }
