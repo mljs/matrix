@@ -60,6 +60,11 @@ describe('applyAlongAxis', () => {
     }, 'row');
     expect(that).toBe(matrix);
   });
+
+  it('can return any type', () => {
+    const rows = matrix.applyAlongAxis((row) => row, 'row');
+    expect(rows).toStrictEqual(matrix.to2DArray());
+  });
 });
 
 describe('applyAlongAxis on other matrix kinds', () => {

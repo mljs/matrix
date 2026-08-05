@@ -301,10 +301,10 @@ export abstract class AbstractMatrix {
    * @param by - Iterate by 'row' or 'column'.
    * @returns - An array with the reduced column or row.
    */
-  applyAlongAxis(
-    callback: (this: this, vector: number[], index: number) => number,
+  applyAlongAxis<ReturnType>(
+    callback: (this: this, vector: number[], index: number) => ReturnType,
     by: MatrixDimension,
-  ): number[];
+  ): ReturnType[];
 
   /**
    * Returns a new 1D array filled row by row with the matrix values.
