@@ -77,6 +77,8 @@ const modulo         = Matrix.mod(B, 2);   // modulo         = Matrix [[1, 1], [
 const maxMatrix      = Matrix.max(A, B);   // max            = Matrix [[3, 3], [2, 2], rows: 2, columns: 2]
 const minMatrix      = Matrix.min(A, B);   // max            = Matrix [[1, 1], [1, 1], rows: 2, columns: 2]
 ```
+`mmul` needs the number of columns of the left operand to equal the number of rows of the right one. A pair that does not line up is logged as a warning, the result of such a call being undefined: a taller right operand has its trailing rows dropped, a shorter one raises a `TypeError`.
+
 
 #### Inplace Operations
 ```js
