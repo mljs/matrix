@@ -80,8 +80,16 @@ describe('Singular value decomposition', () => {
     });
 
     it('should be possible to get back original matrix', () => {
+      // the economy form reports more singular values than the singular vectors
+      // can carry here, so the diagonal is cut to the shape the two sides expect
       let actual = target.leftSingularVectors
-        .mmul(Matrix.diag(target.diagonal))
+        .mmul(
+          Matrix.diag(
+            target.diagonal,
+            target.leftSingularVectors.columns,
+            target.rightSingularVectors.columns,
+          ),
+        )
         .mmul(target.rightSingularVectors.transpose());
       expect(actual.to2DArray()).toBeDeepCloseTo(value.to2DArray(), 2);
     });
