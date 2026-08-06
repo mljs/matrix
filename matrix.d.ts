@@ -624,6 +624,9 @@ export abstract class AbstractMatrix {
 
   /**
    * Returns the matrix product between `this` and `other`.
+   * The number of columns of `this` has to equal the number of rows of `other`. A pair that
+   * does not line up is logged as a warning, the result of such a call being undefined:
+   * a taller `other` has its trailing rows dropped, a shorter one raises a `TypeError`.
    * @param other - Other matrix.
    */
   mmul(other: MaybeMatrix): Matrix;
