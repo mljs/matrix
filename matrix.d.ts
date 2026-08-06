@@ -1584,18 +1584,44 @@ export class LuDecomposition {
 
 export { LuDecomposition as LU };
 
+export interface IQROptions {
+  /**
+   * Move the column carrying the largest remaining norm into place at each step, which
+   * makes the diagonal of R non increasing and reveals the rank of the input.
+   * Needed to solve a least squares problem whose matrix is not of full rank.
+   * @default `false`
+   */
+  pivoting?: boolean;
+}
+
 /**
  * @link https://github.com/lutzroeder/Mapack/blob/master/Source/QrDecomposition.cs
  */
 export class QrDecomposition {
-  constructor(value: MaybeMatrix);
+  constructor(value: MaybeMatrix, options?: IQROptions);
   isFullRank(): boolean;
 
   /**
-   * Solve a problem of least square (Ax=b) by using the QR decomposition. Useful when A is rectangular, but not working when A is singular.
+   * The number of diagonal entries of R that stay above a relative tolerance.
+   * Reliable when the decomposition was built with `pivoting`, since the pivoting is
+   * what pushes the negligible entries to the end of the diagonal.
+   */
+  readonly rank: number;
+
+  /**
+   * The column of the input sitting at each position of the decomposition, so that
+   * `A[:, columnPermutationVector] = Q R`. The identity without `pivoting`.
+   */
+  readonly columnPermutationVector: number[];
+
+  /**
+   * Solve a problem of least square (Ax=b) by using the QR decomposition. Useful when A is rectangular.
    * Example : We search to approximate x, with A matrix shape m*n, x vector size n, b vector size m (m > n). We will use :
    * var qr = QrDecomposition(A);
    * var x = qr.solve(b);
+   * Without `pivoting` a matrix that is not of full rank is refused.
+   * With `pivoting` such a matrix gives the basic solution, the one holding at most `rank`
+   * non zero components, the rest pinned to zero.
    * @param value - Matrix 1D which is the vector b (in the equation Ax = b).
    * @returns - The vector x.
    */
