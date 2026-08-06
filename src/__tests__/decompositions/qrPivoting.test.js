@@ -50,11 +50,15 @@ describe('QR with column pivoting', () => {
   });
 
   it('reports the rank of a deficient matrix', () => {
-    expect(new QrDecomposition(rankDeficient, { pivoting: true }).rank).toBe(2);
+    const qr = new QrDecomposition(rankDeficient, { pivoting: true });
+    expect(qr.rank).toBe(2);
+    expect(qr.isFullRank()).toBe(false);
   });
 
   it('reports the rank of a full rank matrix', () => {
-    expect(new QrDecomposition(fullRank, { pivoting: true }).rank).toBe(2);
+    const qr = new QrDecomposition(fullRank, { pivoting: true });
+    expect(qr.rank).toBe(2);
+    expect(qr.isFullRank()).toBe(true);
   });
 
   it('reports a rank of zero for a matrix of zeros', () => {
@@ -80,6 +84,19 @@ describe('QR with column pivoting', () => {
     const first = qr.columnPermutationVector;
     first[0] = 99;
     expect(qr.columnPermutationVector[0]).not.toBe(99);
+  });
+
+  it('rejects a wide matrix instead of indexing past its rows', () => {
+    expect(
+      () =>
+        new QrDecomposition(
+          [
+            [1, 2, 3],
+            [4, 5, 6],
+          ],
+          { pivoting: true },
+        ),
+    ).toThrow(/^Matrix must have at least as many rows as columns$/);
   });
 });
 

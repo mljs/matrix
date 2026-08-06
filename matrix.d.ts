@@ -1589,6 +1589,7 @@ export interface IQROptions {
    * Move the column carrying the largest remaining norm into place at each step, which
    * makes the diagonal of R non increasing and reveals the rank of the input.
    * Needed to solve a least squares problem whose matrix is not of full rank.
+   * Requires a matrix with at least as many rows as columns.
    * @default `false`
    */
   pivoting?: boolean;

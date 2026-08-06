@@ -10,6 +10,9 @@ export default class QrDecomposition {
       throw new TypeError('pivoting must be a boolean');
     }
     value = WrapperMatrix2D.checkMatrix(value);
+    if (pivoting && value.rows < value.columns) {
+      throw new RangeError('Matrix must have at least as many rows as columns');
+    }
 
     let qr = value.clone();
     let m = value.rows;
@@ -167,6 +170,9 @@ export default class QrDecomposition {
 
   isFullRank() {
     let columns = this.QR.columns;
+    if (this.pivoting) {
+      return this.rank === columns;
+    }
     for (let i = 0; i < columns; i++) {
       if (this.Rdiag[i] === 0) {
         return false;
