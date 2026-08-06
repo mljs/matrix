@@ -307,6 +307,15 @@ export default class SingularValueDecomposition {
           break;
         }
         case 3: {
+          // iter resets when the current singular value settles. Refuse the
+          // next sweep once this value has consumed its full allowance.
+          if (iter >= maxIterations) {
+            const iterationWord =
+              maxIterations === 1 ? 'iteration' : 'iterations';
+            throw new Error(
+              `SVD did not converge after ${maxIterations} ${iterationWord} on a single singular value`,
+            );
+          }
           const scale = Math.max(
             Math.abs(s[p - 1]),
             Math.abs(s[p - 2]),
@@ -370,14 +379,6 @@ export default class SingularValueDecomposition {
           }
           e[p - 2] = f;
           iter = iter + 1;
-          // iter counts the sweeps spent on the singular value currently being
-          // split off, and resets once that value settles. an input the sweep
-          // cannot settle would otherwise keep this loop going forever
-          if (iter > maxIterations) {
-            throw new Error(
-              `SVD did not converge after ${maxIterations} iterations on a single singular value`,
-            );
-          }
           break;
         }
         case 4: {

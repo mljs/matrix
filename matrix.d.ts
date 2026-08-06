@@ -1480,10 +1480,8 @@ export interface ISVDOptions {
   autoTranspose?: boolean;
 
   /**
-   * Ceiling on the number of sweeps spent settling any single singular value. Reaching it
-   * throws rather than letting the sweep run on. A decomposition that converges takes a
-   * handful of sweeps per value regardless of the size of the input, so the default leaves
-   * a wide margin. Raise it only after seeing the error.
+   * Maximum number of sweeps spent settling any single singular value. If another sweep
+   * would exceed the limit, the decomposition throws instead of continuing without a bound.
    * @default `100`
    */
   maxIterations?: number;

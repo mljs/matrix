@@ -300,7 +300,7 @@ var s = svd.diagonal;
 var V = svd.rightSingularVectors;
 // U * diag(s) * V.transpose() gives A back
 ```
-The decomposition settles one singular value at a time through repeated sweeps. `maxIterations`, 100 by default, caps how many sweeps any one value gets. A decomposition that converges takes a handful per value whatever the size of the input, so reaching the cap means the sweep is stuck on that input, and it is reported rather than left running.
+The decomposition settles one singular value at a time through repeated sweeps. `maxIterations`, 100 by default, caps how many sweeps any one value gets. If another sweep would exceed the cap, the decomposition reports that it did not converge instead of continuing without a bound.
 
 #### Linear dependencies
 ```js

@@ -1,3 +1,4 @@
+import { XSadd } from 'ml-xsadd';
 import { describe, it, expect } from 'vitest';
 
 import { Matrix, SingularValueDecomposition } from '../..';
@@ -8,6 +9,10 @@ const wellBehaved = new Matrix([
   [7, 8, 10],
   [2, 9, 4],
 ]);
+
+function randomMatrix(rows, columns, seed) {
+  return Matrix.rand(rows, columns, { random: new XSadd(seed).random });
+}
 
 describe('SVD sweep ceiling', () => {
   it('a decomposition that converges is untouched by the default', () => {
@@ -25,20 +30,18 @@ describe('SVD sweep ceiling', () => {
   it('a ceiling of one sweep is reported rather than passed over', () => {
     expect(
       () =>
-        new SingularValueDecomposition(Matrix.rand(40, 25), {
+        new SingularValueDecomposition(randomMatrix(40, 25, 42), {
           maxIterations: 1,
         }),
     ).toThrow(
-      /^SVD did not converge after 1 iterations on a single singular value$/,
+      /^SVD did not converge after 1 iteration on a single singular value$/,
     );
   });
 
   it('the ceiling is counted per singular value, not over the whole run', () => {
-    // a handful of sweeps settles a value whatever the size of the input, so a
-    // larger matrix does not need a larger ceiling
     expect(
       () =>
-        new SingularValueDecomposition(Matrix.rand(200, 150), {
+        new SingularValueDecomposition(randomMatrix(200, 150, 43), {
           maxIterations: 20,
         }),
     ).not.toThrow();
