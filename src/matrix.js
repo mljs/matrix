@@ -1139,6 +1139,14 @@ export class AbstractMatrix {
       return new Matrix(r1, c2);
     }
 
+    // Padding a rectangular product into a square whose side is the largest
+    // dimension can turn a cheap multiplication into an enormous allocation.
+    // The recursive implementation is only useful for equally sized square
+    // operands; mmul already handles every other compatible shape directly.
+    if (c1 === r2 && (r1 !== c1 || r2 !== c2 || r1 !== r2)) {
+      return x.mmul(y);
+    }
+
     // Put a matrix into the top left of a matrix of zeros.
     // `rows` and `cols` are the dimensions of the output matrix.
     function embed(mat, rows, cols) {

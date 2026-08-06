@@ -1,6 +1,10 @@
-import { describe, it, expect } from 'vitest';
+import { afterEach, describe, it, expect, vi } from 'vitest';
 
-import { Matrix } from '../..';
+import { AbstractMatrix, Matrix } from '../..';
+
+afterEach(() => {
+  vi.restoreAllMocks();
+});
 
 // https://github.com/mljs/matrix/issues/114
 describe('mmulStrassen agrees with mmul', () => {
@@ -68,7 +72,7 @@ describe('mmulStrassen above the recursion threshold', () => {
   // small integers keep every intermediate exact in a float64.
   const cases = [
     { r1: 513, c1: 513, c2: 513 },
-    { r1: 514, c1: 520, c2: 516 },
+    { r1: 514, c1: 514, c2: 514 },
   ];
 
   for (const { r1, c1, c2 } of cases) {
@@ -88,6 +92,25 @@ describe('mmulStrassen above the recursion threshold', () => {
       }
       expect(differing).toBe(0);
     }, 120000);
+  }
+
+  const rectangularCases = [
+    { r1: 1, c1: 513, c2: 1 },
+    { r1: 10, c1: 600, c2: 10 },
+  ];
+
+  for (const { r1, c1, c2 } of rectangularCases) {
+    it(`${r1}x${c1} by ${c1}x${c2} delegates to mmul`, () => {
+      const a = Matrix.randInt(r1, c1, { min: 0, max: 3 });
+      const b = Matrix.randInt(c1, c2, { min: 0, max: 3 });
+      const expected = a.mmul(b);
+      const multiply = vi.spyOn(AbstractMatrix.prototype, 'mmul');
+
+      const result = a.mmulStrassen(b);
+
+      expect(multiply).toHaveBeenCalledTimes(1);
+      expect(result.to2DArray()).toStrictEqual(expected.to2DArray());
+    });
   }
 });
 
