@@ -878,6 +878,13 @@ export class AbstractMatrix {
     let n = this.columns;
     let p = other.columns;
 
+    if (n !== other.rows) {
+      // eslint-disable-next-line no-console
+      console.warn(
+        `Multiplying ${m} x ${n} and ${other.rows} x ${p} matrix: dimensions do not match.`,
+      );
+    }
+
     let result = new Matrix(m, p);
 
     let Bcolj = new Float64Array(n);
