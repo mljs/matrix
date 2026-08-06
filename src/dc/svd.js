@@ -18,7 +18,12 @@ export default class SingularValueDecomposition {
       computeLeftSingularVectors = true,
       computeRightSingularVectors = true,
       autoTranspose = false,
+      maxIterations = 100,
     } = options;
+
+    if (!Number.isInteger(maxIterations) || maxIterations < 1) {
+      throw new RangeError('maxIterations must be a positive integer');
+    }
 
     let wantu = Boolean(computeLeftSingularVectors);
     let wantv = Boolean(computeRightSingularVectors);
@@ -365,6 +370,14 @@ export default class SingularValueDecomposition {
           }
           e[p - 2] = f;
           iter = iter + 1;
+          // iter counts the sweeps spent on the singular value currently being
+          // split off, and resets once that value settles. an input the sweep
+          // cannot settle would otherwise keep this loop going forever
+          if (iter > maxIterations) {
+            throw new Error(
+              `SVD did not converge after ${maxIterations} iterations on a single singular value`,
+            );
+          }
           break;
         }
         case 4: {
