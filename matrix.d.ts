@@ -1475,21 +1475,12 @@ export interface ISVDOptions {
   computeRightSingularVectors?: boolean;
 
   /**
-   * Decompose the transpose when the matrix carries more columns than rows, then swap the
-   * singular vectors back. Leaving this off on such a matrix logs a warning and yields a
-   * decomposition padded to the number of columns.
    * @default `false`
    */
   autoTranspose?: boolean;
 }
 
 /**
- * The economy singular value decomposition of a matrix.
- * For a matrix of shape m by n with m at least n, the left singular vectors are m by n,
- * the right singular vectors are n by n, and n singular values are reported. The null
- * space of a wide matrix is therefore not spanned by the returned vectors.
- * Set `autoTranspose` to decompose a matrix carrying more columns than rows.
- *
  * @see https://github.com/accord-net/framework/blob/development/Sources/Accord.Math/Decompositions/SingularValueDecomposition.cs
  */
 export class SingularValueDecomposition {

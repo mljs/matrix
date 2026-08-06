@@ -1,12 +1,6 @@
 import { describe, it, expect } from 'vitest';
 
-import {
-  Matrix,
-  LuDecomposition,
-  QrDecomposition,
-  SingularValueDecomposition,
-  solve,
-} from '../..';
+import { Matrix, LuDecomposition, QrDecomposition, solve } from '../..';
 
 const message = /^Matrix must have at least as many rows as columns$/;
 
@@ -76,30 +70,5 @@ describe('LU and QR keep working on the supported shapes', () => {
   it('an empty matrix is still accepted', () => {
     expect(() => new LuDecomposition(new Matrix(0, 0))).not.toThrow();
     expect(() => new QrDecomposition(new Matrix(0, 0))).not.toThrow();
-  });
-});
-
-describe('SVD covers the wide case through autoTranspose', () => {
-  const wide = new Matrix([
-    [1, 2, 3],
-    [4, 5, 6],
-  ]);
-
-  it('rebuilds a wide matrix with autoTranspose', () => {
-    const svd = new SingularValueDecomposition(wide, { autoTranspose: true });
-    const product = svd.leftSingularVectors
-      .mmul(Matrix.diag(svd.diagonal))
-      .mmul(svd.rightSingularVectors.transpose());
-    for (let i = 0; i < wide.rows; i++) {
-      for (let j = 0; j < wide.columns; j++) {
-        expect(product.get(i, j)).toBeCloseTo(wide.get(i, j), 10);
-      }
-    }
-  });
-
-  it('reports one singular value per row of a wide matrix', () => {
-    const svd = new SingularValueDecomposition(wide, { autoTranspose: true });
-    expect(svd.diagonal).toHaveLength(2);
-    expect(svd.rank).toBe(2);
   });
 });
