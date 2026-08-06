@@ -168,6 +168,7 @@ const {
   LuDecomposition,
   CholeskyDecomposition,
   EigenvalueDecomposition,
+  SingularValueDecomposition,
 } = require('ml-matrix');
 ```
 #### Inverse and Pseudo-inverse
@@ -285,6 +286,22 @@ var real = e.realEigenvalues;
 var imaginary = e.imaginaryEigenvalues;
 var vectors = e.eigenvectorMatrix;
 ```
+##### Singular Value Decomposition
+```js
+var A = new Matrix([
+  [2, 3, 5],
+  [4, 1, 6],
+  [1, 3, 0],
+]);
+
+var svd = new SingularValueDecomposition(A);
+var U = svd.leftSingularVectors;
+var s = svd.diagonal;
+var V = svd.rightSingularVectors;
+// U * diag(s) * V.transpose() gives A back
+```
+The decomposition settles one singular value at a time through repeated sweeps. `maxIterations`, 100 by default, caps how many sweeps any one value gets. A decomposition that converges takes a handful per value whatever the size of the input, so reaching the cap means the sweep is stuck on that input, and it is reported rather than left running.
+
 #### Linear dependencies
 ```js
 var A = new Matrix([
