@@ -4,7 +4,11 @@ import WrapperMatrix2D from '../wrap/WrapperMatrix2D';
 import { hypotenuse } from './util';
 
 export default class QrDecomposition {
-  constructor(value) {
+  constructor(value, options = {}) {
+    const { pivoting = false } = options;
+    if (typeof pivoting !== 'boolean') {
+      throw new TypeError('pivoting must be a boolean');
+    }
     value = WrapperMatrix2D.checkMatrix(value);
 
     let qr = value.clone();
@@ -13,7 +17,37 @@ export default class QrDecomposition {
     let rdiag = new Float64Array(n);
     let i, j, k, s;
 
+    // columnPermutation[j] holds the column of the input sitting at position j
+    let columnPermutation = new Array(n);
     for (k = 0; k < n; k++) {
+      columnPermutation[k] = k;
+    }
+
+    for (k = 0; k < n; k++) {
+      if (pivoting) {
+        // move the column with the largest remaining norm into position k, so
+        // that the diagonal of R comes out non increasing and a rank deficient
+        // input pushes its negligible values to the end
+        let best = k;
+        let bestNorm = -1;
+        for (j = k; j < n; j++) {
+          let candidate = 0;
+          for (i = k; i < m; i++) {
+            candidate = hypotenuse(candidate, qr.get(i, j));
+          }
+          if (candidate > bestNorm) {
+            bestNorm = candidate;
+            best = j;
+          }
+        }
+        if (best !== k) {
+          qr.swapColumns(k, best);
+          const swap = columnPermutation[k];
+          columnPermutation[k] = columnPermutation[best];
+          columnPermutation[best] = swap;
+        }
+      }
+
       let nrm = 0;
       for (i = k; i < m; i++) {
         nrm = hypotenuse(nrm, qr.get(i, k));
@@ -42,6 +76,27 @@ export default class QrDecomposition {
 
     this.QR = qr;
     this.Rdiag = rdiag;
+    this.pivoting = pivoting;
+    this.columnPermutation = columnPermutation;
+  }
+
+  get columnPermutationVector() {
+    return this.columnPermutation.slice();
+  }
+
+  get rank() {
+    const n = this.QR.columns;
+    let largest = 0;
+    for (let i = 0; i < n; i++) {
+      largest = Math.max(largest, Math.abs(this.Rdiag[i]));
+    }
+    if (largest === 0) return 0;
+    const tolerance = Math.max(this.QR.rows, n) * largest * Number.EPSILON;
+    let rank = 0;
+    for (let i = 0; i < n; i++) {
+      if (Math.abs(this.Rdiag[i]) > tolerance) rank++;
+    }
+    return rank;
   }
 
   solve(value) {
@@ -53,14 +108,18 @@ export default class QrDecomposition {
     if (value.rows !== m) {
       throw new Error('Matrix row dimensions must agree');
     }
-    if (!this.isFullRank()) {
-      throw new Error('Matrix is rank deficient');
-    }
 
     let count = value.columns;
     let X = value.clone();
     let n = qr.columns;
     let i, j, k, s;
+
+    // without pivoting a rank deficient input has nowhere to put its negligible
+    // columns, so the old refusal stands
+    const rank = this.pivoting ? this.rank : n;
+    if (!this.pivoting && !this.isFullRank()) {
+      throw new Error('Matrix is rank deficient');
+    }
 
     for (k = 0; k < n; k++) {
       for (j = 0; j < count; j++) {
@@ -74,7 +133,14 @@ export default class QrDecomposition {
         }
       }
     }
-    for (k = n - 1; k >= 0; k--) {
+    // the trailing columns are dropped, which gives the basic solution: the
+    // components they carry are pinned to zero
+    for (k = rank; k < n; k++) {
+      for (j = 0; j < count; j++) {
+        X.set(k, j, 0);
+      }
+    }
+    for (k = rank - 1; k >= 0; k--) {
       for (j = 0; j < count; j++) {
         X.set(k, j, X.get(k, j) / this.Rdiag[k]);
       }
@@ -85,7 +151,18 @@ export default class QrDecomposition {
       }
     }
 
-    return X.subMatrix(0, n - 1, 0, count - 1);
+    const solution = X.subMatrix(0, n - 1, 0, count - 1);
+    if (!this.pivoting) {
+      return solution;
+    }
+    // undo the column swaps so the rows line up with the input columns again
+    const unpermuted = new Matrix(n, count);
+    for (k = 0; k < n; k++) {
+      for (j = 0; j < count; j++) {
+        unpermuted.set(this.columnPermutation[k], j, solution.get(k, j));
+      }
+    }
+    return unpermuted;
   }
 
   isFullRank() {
