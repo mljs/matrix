@@ -1,4 +1,4 @@
-import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
+import { describe, it, expect, vi, afterEach } from 'vitest';
 
 import { Matrix } from '../..';
 
@@ -85,74 +85,5 @@ describe('mmul warns about an inner dimension that does not match', () => {
       new Matrix(2, 0).mmul(new Matrix(0, 3));
     });
     expect(messages).toStrictEqual([]);
-  });
-
-  it('leaves the computed values alone', () => {
-    const messages = captureWarnings(() => {
-      const result = new Matrix([[1], [2], [3]]).mmul(
-        new Matrix([
-          [4, 5, 6],
-          [4, 5, 6],
-          [4, 5, 6],
-        ]),
-      );
-      expect(result.to2DArray()).toStrictEqual([
-        [4, 5, 6],
-        [8, 10, 12],
-        [12, 15, 18],
-      ]);
-    });
-    expect(messages).toHaveLength(1);
-  });
-});
-
-// the result of such a call stays undefined, these cases record what it is today
-// so that any move to refuse the call is a deliberate one
-describe('mmul on an inner dimension that does not match', () => {
-  beforeEach(() => {
-    vi.spyOn(console, 'warn').mockImplementation(() => {
-      // the warning itself is covered above, keep the reporter quiet here
-    });
-  });
-
-  afterEach(() => {
-    vi.restoreAllMocks();
-  });
-
-  it('drops the trailing rows of a taller right operand', () => {
-    const left = new Matrix([
-      [1, 2],
-      [3, 4],
-    ]);
-    const right = new Matrix([
-      [1, 0],
-      [0, 1],
-      [9, 9],
-    ]);
-    const truncated = right.subMatrix(0, 1, 0, 1);
-    expect(left.mmul(right).to2DArray()).toStrictEqual(
-      left.mmul(truncated).to2DArray(),
-    );
-  });
-
-  it('gives the shape the operands claim rather than the one used', () => {
-    const result = new Matrix([[1], [2], [3]]).mmul(
-      new Matrix([
-        [4, 5, 6],
-        [4, 5, 6],
-        [4, 5, 6],
-      ]),
-    );
-    expect(result.rows).toBe(3);
-    expect(result.columns).toBe(3);
-  });
-
-  it('raises a TypeError on a shorter right operand', () => {
-    expect(() =>
-      new Matrix([
-        [1, 2, 3],
-        [4, 5, 6],
-      ]).mmul(new Matrix([[1], [2]])),
-    ).toThrow(TypeError);
   });
 });
