@@ -247,6 +247,21 @@ var Q = QR.orthogonalMatrix;
 var R = QR.upperTriangularMatrix;
 // So you have the QR decomposition. If you multiply Q by R, you'll see that A = Q.R, with Q orthogonal and R upper triangular
 ```
+Pass `pivoting` to move the column carrying the largest remaining norm into place at each step. The diagonal of `R` then comes out non increasing, `rank` becomes reliable, and a least square problem whose matrix is not of full rank can be solved.
+```js
+var A = new Matrix([
+  [1, 2, 3],
+  [2, 4, 6],
+  [1, 1, 1],
+  [3, 5, 7],
+]); // the third column is 2 * second - first, so the rank is 2
+
+var QR = new QrDecomposition(A, { pivoting: true });
+var rank = QR.rank;                     // rank = 2
+var permutation = QR.columnPermutationVector; // the column of A sitting at each position, so A[:, permutation] = Q.R
+var x = QR.solve(Matrix.columnVector([1, 2, 3, 4]));
+// x holds at most `rank` non zero components, the ones the pivoting dropped are pinned to zero
+```
 ##### LU Decomposition
 ```js
 var A = new Matrix([
