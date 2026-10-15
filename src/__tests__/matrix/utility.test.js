@@ -170,6 +170,19 @@ describe('utility methods', () => {
     expect(new Matrix(0, 0).norm('max')).toBeNaN();
   });
 
+  it('norm max with negative entries', () => {
+    let m1 = new Matrix([
+      [1, -4],
+      [-2, 3],
+    ]);
+    expect(new Matrix([[-2, -1]]).norm('max')).toBe(2);
+    expect(m1.norm('max')).toBe(4);
+    expect(m1.to2DArray()).toStrictEqual([
+      [1, -4],
+      [-2, 3],
+    ]);
+  });
+
   it('transpose rectangular', () => {
     let matrix = new Matrix([
       [0, 1, 2],

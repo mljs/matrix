@@ -839,7 +839,7 @@ export class AbstractMatrix {
   norm(type = 'frobenius') {
     switch (type) {
       case 'max':
-        return this.max();
+        return Matrix.abs(this).max();
       case 'frobenius':
         return Math.sqrt(this.dot(this));
       default:
