@@ -1,5 +1,12 @@
 # Changelog
 
+## [6.15.1](https://github.com/mljs/matrix/compare/v6.15.0...v6.15.1) (2026-10-19)
+
+
+### Bug Fixes
+
+* use absolute values for max norm ([#223](https://github.com/mljs/matrix/issues/223)) ([b64306c](https://github.com/mljs/matrix/commit/b64306cabbe1a542be1b86ce2c372eae4b375556))
+
 ## [6.15.0](https://github.com/mljs/matrix/compare/v6.14.0...v6.15.0) (2026-08-05)
 
 
