@@ -59,9 +59,9 @@ export default class nipals {
     if (Y) {
       let p = X.transpose().mmul(t).div(t.transpose().mmul(t).get(0, 0));
       p = p.div(p.norm());
-      let xResidual = X.clone().sub(t.clone().mmul(p.transpose()));
+      let xResidual = new Matrix(X).sub(t.clone().mmul(p.transpose()));
       let residual = u.transpose().mmul(t).div(t.transpose().mmul(t).get(0, 0));
-      let yResidual = Y.clone().sub(
+      let yResidual = new Matrix(Y).sub(
         t.clone().mulS(residual.get(0, 0)).mmul(q.transpose()),
       );
 

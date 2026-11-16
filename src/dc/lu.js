@@ -5,7 +5,7 @@ export default class LuDecomposition {
   constructor(matrix) {
     matrix = WrapperMatrix2D.checkMatrix(matrix);
 
-    let lu = matrix.clone();
+    let lu = new Matrix(matrix);
     let rows = lu.rows;
     let columns = lu.columns;
     let pivotVector = new Float64Array(rows);
