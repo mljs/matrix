@@ -57,7 +57,7 @@ export default class CholeskyDecomposition {
     }
 
     let count = value.columns;
-    let B = value.clone();
+    let B = new Matrix(value);
     let i, j, k;
 
     for (k = 0; k < dimension; k++) {
